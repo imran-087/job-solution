@@ -59,8 +59,9 @@
 					<!--begin::Brand-->
 					<div class="aside-logo flex-column-auto" id="kt_aside_logo">
 						<!--begin::Logo-->
-						<a href="/metronic8/demo1/../demo1/index.html">
-							<img alt="Logo" src="{{ asset('assets') }}/media/logos/satt-logo.png" class="h-25px logo" />
+						<a href="/metronic8/demo1/../demo1/index.html" 
+						style="text-decoration: none; color:#FFF; font-size:1.2rem; ">
+							<img alt="Logo" src="{{ asset('assets') }}/media/logos/satt-logo.png" class="h-25px logo" /> <strong> SATT ACADEMY</strong>
 						</a>
 						<!--end::Logo-->
 						<!--begin::Aside toggler-->
