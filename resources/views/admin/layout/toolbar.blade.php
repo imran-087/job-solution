@@ -623,9 +623,9 @@
                     <!--end::Avatar-->
                     <!--begin::Username-->
                     <div class="d-flex flex-column">
-                        <div class="fw-bolder d-flex align-items-center fs-5">Max Smith
+                        <div class="fw-bolder d-flex align-items-center fs-5">{{Auth::guard('admin')->user()->name}}
                             <span class="badge badge-light-success fw-bolder fs-8 px-2 py-1 ms-2">Pro</span></div>
-                        <a href="#" class="fw-bold text-muted text-hover-primary fs-7">max@kt.com</a>
+                        <a href="#" class="fw-bold text-muted text-hover-primary fs-7">{{Auth::guard('admin')->user()->email}}</a>
                     </div>
                     <!--end::Username-->
                 </div>
@@ -660,36 +660,13 @@
                             </span>English</a>
                     </div>
                     <!--end::Menu item-->
-                    <!--begin::Menu item-->
-                    <div class="menu-item px-3">
-                        <a href="/metronic8/demo1/../demo1/account/settings.html" class="menu-link d-flex px-5">
-                            <span class="symbol symbol-20px me-4">
-                                <img class="rounded-1" src="{{ asset('assets') }}/media/flags/spain.svg" alt="" />
-                            </span>Spanish</a>
-                    </div>
-                    <!--end::Menu item-->
+                    
                     <!--begin::Menu item-->
                     <div class="menu-item px-3">
                         <a href="/metronic8/demo1/../demo1/account/settings.html" class="menu-link d-flex px-5">
                             <span class="symbol symbol-20px me-4">
                                 <img class="rounded-1" src="{{ asset('assets') }}/media/flags/germany.svg" alt="" />
-                            </span>German</a>
-                    </div>
-                    <!--end::Menu item-->
-                    <!--begin::Menu item-->
-                    <div class="menu-item px-3">
-                        <a href="/metronic8/demo1/../demo1/account/settings.html" class="menu-link d-flex px-5">
-                            <span class="symbol symbol-20px me-4">
-                                <img class="rounded-1" src="{{ asset('assets') }}/media/flags/japan.svg" alt="" />
-                            </span>Japanese</a>
-                    </div>
-                    <!--end::Menu item-->
-                    <!--begin::Menu item-->
-                    <div class="menu-item px-3">
-                        <a href="/metronic8/demo1/../demo1/account/settings.html" class="menu-link d-flex px-5">
-                            <span class="symbol symbol-20px me-4">
-                                <img class="rounded-1" src="{{ asset('assets') }}/media/flags/france.svg" alt="" />
-                            </span>French</a>
+                            </span>বাংলা</a>
                     </div>
                     <!--end::Menu item-->
                 </div>
@@ -706,8 +683,14 @@
             <!--end::Menu separator-->
             <!--begin::Menu item-->
             <div class="menu-item px-5">
-                <a href="/metronic8/demo1/../demo1/authentication/flows/basic/sign-in.html" class="menu-link px-5">Sign
-                    Out</a>
+                <a  class="menu-link px-5" href="{{ route('admin.logout') }}" onclick="event.preventDefault();
+                                                    document.getElementById('logout-form').submit();">
+                    {{ __('Sign Out') }}
+                </a>
+
+                <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
+                    @csrf
+                </form>
             </div>
             <!--end::Menu item-->
            

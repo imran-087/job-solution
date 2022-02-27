@@ -59,7 +59,7 @@
 					<!--begin::Brand-->
 					<div class="aside-logo flex-column-auto" id="kt_aside_logo">
 						<!--begin::Logo-->
-						<a href="/metronic8/demo1/../demo1/index.html" 
+						<a href="{{ route('admin.dashboard') }}" 
 						style="text-decoration: none; color:#FFF; font-size:1.2rem; ">
 							<img alt="Logo" src="{{ asset('assets') }}/media/logos/satt-logo.png" class="h-25px logo" /> <strong> SATT ACADEMY</strong>
 						</a>
@@ -201,6 +201,10 @@
 		<script src="{{ asset('assets') }}/js/custom/utilities/modals/create-app.js"></script>
 		<script src="{{ asset('assets') }}/js/custom/utilities/modals/users-search.js"></script>
 		<!--end::Page Custom Javascript-->
+
+		<!---- own js ---->
+		<script src="{{ asset('js/custom.js') }}"></script>
+
 
 		@stack('script')
 		<!--end::Javascript-->
