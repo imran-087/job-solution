@@ -349,6 +349,12 @@
           });
         }
 
+        //cancel button
+        $('#kk_modal_new_service_cancel').on('click', function(){
+            $('#kk_modal_new_category_form')[0].reset();
+            $("#kk_modal_new_category").modal('hide');
+        })
+
         //new category save
         $('#kk_modal_new_category_form').on('submit',function(e){
             e.preventDefault()

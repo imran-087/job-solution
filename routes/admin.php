@@ -19,6 +19,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::get('login', 'Auth\LoginController@showLoginForm')->name('login');
     Route::post('login', 'Auth\LoginController@login')->name('login');
 
+    ########## Password Reset #########
+    Route::get('password/reset', 'Auth\ForgetPasswordController@showLinkRequestForm')->name('password.request');
+    Route::post('password/email', 'Auth\ForgetPasswordController@sendResetLinkEmail')->name('password.email');
+    Route::get('password/reset/{token}', 'Auth\ResetPasswordController@showResetForm')->name('password.reset');
+    Route::post('password/reset', 'Auth\ResetPasswordController@resetPassword')->name('password.update');
+
     ############ Route For Authenticate User #############
     Route::middleware('auth:admin')->group(function () {
         Route::post('logout', 'Auth\LoginController@logout')->name('logout');
@@ -44,11 +50,19 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/category/sub-category/get/{id}', 'SubCategoryController@getCategory')->name('sub-category.get');
         Route::get('/category/sub-category/delete/{id}', 'SubCategoryController@deleteCategory')->name('sub-category.delete');
 
+        ############ Subject Route #############
+        Route::get('/category/subject', 'SubjectController@index')->name('subject.index');
+        Route::post('/category/subject/store', 'SubjectController@store')->name('subject.store');
+        Route::get('/category/subject/get/{id}', 'SubjectController@getSubject')->name('subject.get');
+        Route::get('/category/subject/delete/{id}', 'SubjectController@deleteSubject')->name('subject.delete');
+
+        ############ Year Route #############
+        Route::get('/year/index', 'YearController@index')->name('year.index');
+        Route::post('/year/store', 'YearController@store')->name('year.store');
+        Route::get('/year/get/{id}', 'YearController@getYear')->name('year.get');
+        Route::get('/year/delete/{id}', 'YearController@deleteYear')->name('year.delete');
 
 
-        Route::get('/category/subject', function () {
-            return view('admin.category.subject');
-        });
 
         ############ Dependable setect route ###############
         Route::get('/get-category/{id}', 'GetAllCategoryController@getCategory');

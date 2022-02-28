@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
+use App\Models\Subject;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Support\Str;
@@ -13,12 +14,12 @@ use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
-class SubCategoryController extends Controller
+class SubjectController extends Controller
 {
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = SubCategory::select();
+            $data = Subject::select();
 
             //filter
             if (isset($request->status) && $request->status != "all") {
@@ -71,7 +72,8 @@ class SubCategoryController extends Controller
 
         //get all main category
         $main_categories = MainCategory::all();
-        return view('admin.category.sub_category', compact('main_categories'));
+        $parent_subjects = Subject::where('parent_id', 0)->get();
+        return view('admin.category.subject', compact(['main_categories', 'parent_subjects']));
     }
 
     //create or update main category
@@ -82,7 +84,7 @@ class SubCategoryController extends Controller
             'name' => ['required'],
             'title' => ['required'],
             'status' => ['required'],
-            'category' => ['required'],
+            'sub_category' => ['required'],
         ]);
 
         if ($validator->fails()) {
@@ -92,22 +94,24 @@ class SubCategoryController extends Controller
             ], 200);
         } else {
 
-            if (isset($request->sub_category_id) &&  $sub_category = SubCategory::find($request->sub_category_id)) { //update
-                //dd($request->sub_category_id);
-                $sub_category->name = $request->name;
-                $sub_category->title = $request->title;
-                $sub_category->status =  $request->status;
-                $sub_category->category_id =  $request->category;
-                $sub_category->slug =  Str::slug($request->name);
-                $sub_category->updated_user_id =  Auth::guard('admin')->user()->id;
+            if (isset($request->subject_id) &&  $subject = Subject::find($request->subject_id)) { //update
+                //dd($request->subject_id);
+                $subject->name = $request->name;
+                $subject->title = $request->title;
+                $subject->description = $request->description;
+                $subject->parent_id = $request->parent ?? 0;
+                $subject->status =  $request->status;
+                $subject->sub_category_id =  $request->sub_category;
+                $subject->slug =  Str::slug($request->name);
+                $subject->updated_user_id =  Auth::guard('admin')->user()->id;
 
-                $sub_category->updated_at = Carbon::now();
+                $subject->updated_at = Carbon::now();
 
 
-                if ($sub_category->update()) {
+                if ($subject->update()) {
                     return response()->json([
                         'success' => true,
-                        'message' => __('Category updated successfully!')
+                        'message' => __('Subject updated successfully!')
                     ], 200);
                 } else {
                     return response()->json([
@@ -117,22 +121,24 @@ class SubCategoryController extends Controller
                 }
             } else { //create new category
 
-                $sub_category = new SubCategory();
+                $subject = new Subject();
 
-                $sub_category->name = $request->name;
-                $sub_category->title = $request->title;
-                $sub_category->category_id =  $request->category;
-                $sub_category->slug =  Str::slug($request->name);
-                $sub_category->created_user_id =  Auth::guard('admin')->user()->id;
-                $sub_category->status =  $request->status;
+                $subject->name = $request->name;
+                $subject->title = $request->title;
+                $subject->parent_id = $request->parent ?? 0;
+                $subject->description = $request->description;
+                $subject->status =  $request->status;
+                $subject->sub_category_id =  $request->sub_category;
+                $subject->slug =  Str::slug($request->name);
+                $subject->created_user_id =  Auth::guard('admin')->user()->id;
 
-                $sub_category->created_at = Carbon::now();
+                $subject->created_at = Carbon::now();
 
 
-                if ($sub_category->save()) {
+                if ($subject->save()) {
                     return response()->json([
                         'success' => true,
-                        'message' => 'Category saved successfully!'
+                        'message' => 'Subject saved successfully!'
                     ], 200);
                 } else {
                     return response()->json([
@@ -145,14 +151,15 @@ class SubCategoryController extends Controller
     }
 
     //getCategory
-    public function getCategory($id)
+    public function getSubject($id)
     {
         //dd($id);
-        $sub_category = SubCategory::find($id);
+        $subject = Subject::find($id);
+        $sub_category = SubCategory::where('id', $subject->sub_category_id)->first();
         $category = Category::where('id', $sub_category->category_id)->first();
         $main_category = MainCategory::where('id', $category->main_category_id)->first();
-
         $data = [
+            'subject' => $subject,
             'sub_category' => $sub_category,
             'category' => $category,
             'main_category' => $main_category,
@@ -161,15 +168,15 @@ class SubCategoryController extends Controller
     }
 
     //deleteCategory
-    public function deleteCategory($id)
+    public function deleteSubject($id)
     {
-        $sub_category = SubCategory::find($id);
+        $subject = Subject::find($id);
 
-        $sub_category->delete();
+        $subject->delete();
 
         return response()->json([
             'success' => true,
-            'message' => 'Category deleted successfully!'
+            'message' => 'Subject deleted successfully!'
         ], 200);
     }
 }

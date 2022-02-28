@@ -665,7 +665,7 @@
                     <div class="menu-item px-3">
                         <a href="/metronic8/demo1/../demo1/account/settings.html" class="menu-link d-flex px-5">
                             <span class="symbol symbol-20px me-4">
-                                <img class="rounded-1" src="{{ asset('assets') }}/media/flags/germany.svg" alt="" />
+                                <img class="rounded-1" src="{{ asset('assets') }}/media/flags/bangladesh.svg" alt="" />
                             </span>বাংলা</a>
                     </div>
                     <!--end::Menu item-->

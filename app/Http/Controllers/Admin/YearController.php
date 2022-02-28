@@ -3,27 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
-use App\Models\Category;
-use App\Models\SubCategory;
-use Illuminate\Support\Str;
-use App\Models\MainCategory;
+use App\Models\Year;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
-class SubCategoryController extends Controller
+class YearController extends Controller
 {
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = SubCategory::select();
+            $data = Year::select();
 
-            //filter
-            if (isset($request->status) && $request->status != "all") {
-                $data->where('status', $request->status);
-            }
 
             return DataTables::of($data)
                 ->addIndexColumn()
@@ -31,14 +23,7 @@ class SubCategoryController extends Controller
                 ->editColumn('created_at', function ($row) {
                     return $row->created_at->diffForHumans();
                 })
-                ->editColumn('status', function ($row) {
-                    if ($row->status == "active") {
-                        $btn = '<div class="badge badge-light-success fw-bolder">Active</div>';
-                    } else {
-                        $btn = '<div class="badge badge-light-danger fw-bolder">Deactive</div>';
-                    }
-                    return $btn;
-                })
+
                 ->addColumn('action', function ($row) {
                     $btn = '<div class="d-flex justify-content-start flex-shrink-0">
                         <a href="javascript:;" onclick="edit(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
@@ -51,7 +36,7 @@ class SubCategoryController extends Controller
                             </span>
                             <!--end::Svg Icon-->
                         </a>
-                        <a href="javascript:;" onclick="deleteCategory(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                        <a href="javascript:;" onclick="deleteYear(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                             <span class="svg-icon svg-icon-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -65,13 +50,10 @@ class SubCategoryController extends Controller
                     </div>';
                     return $btn;
                 })
-                ->rawColumns(['action', 'status', 'created_at'])
+                ->rawColumns(['action', 'created_at'])
                 ->make(true);
         }
-
-        //get all main category
-        $main_categories = MainCategory::all();
-        return view('admin.category.sub_category', compact('main_categories'));
+        return view('admin.year.year_index');
     }
 
     //create or update main category
@@ -79,10 +61,7 @@ class SubCategoryController extends Controller
     {
         //dd($request->all());
         $validator = Validator::make($request->all(), [
-            'name' => ['required'],
-            'title' => ['required'],
-            'status' => ['required'],
-            'category' => ['required'],
+            'year' => ['required'],
         ]);
 
         if ($validator->fails()) {
@@ -92,22 +71,16 @@ class SubCategoryController extends Controller
             ], 200);
         } else {
 
-            if (isset($request->sub_category_id) &&  $sub_category = SubCategory::find($request->sub_category_id)) { //update
-                //dd($request->sub_category_id);
-                $sub_category->name = $request->name;
-                $sub_category->title = $request->title;
-                $sub_category->status =  $request->status;
-                $sub_category->category_id =  $request->category;
-                $sub_category->slug =  Str::slug($request->name);
-                $sub_category->updated_user_id =  Auth::guard('admin')->user()->id;
-
-                $sub_category->updated_at = Carbon::now();
+            if (isset($request->year_id) &&  $year = Year::find($request->year_id)) { //update
+                //dd($request->year_id);
+                $year->year = $request->year;
+                $year->updated_at = Carbon::now();
 
 
-                if ($sub_category->update()) {
+                if ($year->update()) {
                     return response()->json([
                         'success' => true,
-                        'message' => __('Category updated successfully!')
+                        'message' => __('Year updated successfully!')
                     ], 200);
                 } else {
                     return response()->json([
@@ -117,22 +90,19 @@ class SubCategoryController extends Controller
                 }
             } else { //create new category
 
-                $sub_category = new SubCategory();
+                $year = new Year();
 
-                $sub_category->name = $request->name;
-                $sub_category->title = $request->title;
-                $sub_category->category_id =  $request->category;
-                $sub_category->slug =  Str::slug($request->name);
-                $sub_category->created_user_id =  Auth::guard('admin')->user()->id;
-                $sub_category->status =  $request->status;
+                $year->year = $request->year;
 
-                $sub_category->created_at = Carbon::now();
+                //$year->created_user_id =  Auth::guard('admin')->user()->id;
+
+                $year->created_at = Carbon::now();
 
 
-                if ($sub_category->save()) {
+                if ($year->save()) {
                     return response()->json([
                         'success' => true,
-                        'message' => 'Category saved successfully!'
+                        'message' => 'Year saved successfully!'
                     ], 200);
                 } else {
                     return response()->json([
@@ -145,31 +115,23 @@ class SubCategoryController extends Controller
     }
 
     //getCategory
-    public function getCategory($id)
+    public function getYear($id)
     {
         //dd($id);
-        $sub_category = SubCategory::find($id);
-        $category = Category::where('id', $sub_category->category_id)->first();
-        $main_category = MainCategory::where('id', $category->main_category_id)->first();
-
-        $data = [
-            'sub_category' => $sub_category,
-            'category' => $category,
-            'main_category' => $main_category,
-        ];
+        $data = Year::find($id);
         return response($data);
     }
 
     //deleteCategory
-    public function deleteCategory($id)
+    public function deleteYear($id)
     {
-        $sub_category = SubCategory::find($id);
+        $year = Year::find($id);
 
-        $sub_category->delete();
+        $year->delete();
 
         return response()->json([
             'success' => true,
-            'message' => 'Category deleted successfully!'
+            'message' => 'Year deleted successfully!'
         ], 200);
     }
 }

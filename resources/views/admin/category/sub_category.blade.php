@@ -374,15 +374,24 @@
                 url: "{{ url('admin/category/sub-category/get')}}"+'/'+id,
                 dataType: 'json',
                 success:function(data){
-                   $('input[name="sub_category_id"]').val(data.id)
-                   $('input[name="name"]').val(data.name)
-                   $('input[name="title"]').val(data.title)
-                   $('select[name="status"]').val(data.status).change()
-                   $('select[name="category"]').val(data.category_id).change()
+                   
+                   $('input[name="sub_category_id"]').val(data.sub_category.id)
+                   $('input[name="name"]').val(data.sub_category.name)
+                   $('input[name="title"]').val(data.sub_category.title)
+                   $('select[name="status"]').val(data.sub_category.status).change()
+                   $('select[name="main_category"]').html('<option ">' + data.main_category.name + '</option>');
+                   $('select[name="category"]').append('<option value="' + data.category.id + '">' + data.category.name + '</option>');
+                  
                    $("#kk_modal_new_category").modal('show');
                 }
           });
         }
+
+        //cancel button
+        $('#kk_modal_new_service_cancel').on('click', function(){
+            $('#kk_modal_new_category_form')[0].reset();
+            $("#kk_modal_new_category").modal('hide');
+        })
 
         //new category save
         $('#kk_modal_new_category_form').on('submit',function(e){

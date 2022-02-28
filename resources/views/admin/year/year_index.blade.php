@@ -1,5 +1,5 @@
 @extends('admin.layout.app')
-@section('title', 'Category')
+@section('title', 'Year')
 
 @section('content')
 
@@ -13,7 +13,7 @@
                 data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
                 class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                 <!--begin::Title-->
-                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Category</h1>
+                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Year</h1>
                 <!--end::Title-->
                 <!--begin::Separator-->
                 <span class="h-20px border-gray-200 border-start mx-4"></span>
@@ -31,7 +31,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Category Management</li>
+                    <li class="breadcrumb-item text-muted">Year Management</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -39,7 +39,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-dark">Category List</li>
+                    <li class="breadcrumb-item text-dark">Year List</li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -84,7 +84,7 @@
                             </span>
                             <!--end::Svg Icon-->
                             <input type="text" data-kk-product-table-filter="search"
-                                class="form-control form-control-solid w-250px ps-14" placeholder="Search ctaegory">
+                                class="form-control form-control-solid w-250px ps-14" placeholder="Search year">
                         </div>
                         <!--end::Search-->
                     </div>
@@ -92,22 +92,8 @@
 
                     <div class="card-toolbar flex-row-fluid justify-content-end gap-5"
                         data-select2-id="select2-data-123-0tix">
-                        <div class="w-100 mw-150px" data-select2-id="select2-data-122-mhmq">
-                            <!--begin::Select2-->
-                            <select class="form-select form-select-solid select2-hidden-accessible kk-datatable-filter"
-                                data-control="select2" data-hide-search="true" data-placeholder="Status"
-                                data-kt-ecommerce-product-filter="status" data-select2-id="select2-data-10-i8aq"
-                                tabindex="-1" aria-hidden="true">
-                                <option data-select2-id="select2-data-12-ibou"></option>
-                                <option value="all" data-select2-id="select2-data-128-oc9k">All</option>
-                                <option value="active" data-select2-id="select2-data-129-5n39">Active</option>
-                                <option value="deactive" data-select2-id="select2-data-131-pohp">Deactive</option>
-
-                            </select>
-                            <!--end::Select2-->
-                        </div>
                         <!--begin::Add product-->
-                        <a href="javascript:;" class="btn btn-sm btn-primary me-3" onclick="addNew()">Add Category</a>
+                        <a href="javascript:;" class="btn btn-sm btn-primary me-3" onclick="addNew()">Add Year</a>
                         <!--end::Add product-->
                     </div>
 
@@ -126,9 +112,7 @@
                                     <!--begin::Table row-->
                                     <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                         <th class="min-w-20px">#</th>
-                                        <th class="min-w-150px">Category Name</th>
-                                        <th class=" min-w-150px">Title</th>
-                                        <th class=" min-w-100px">Status</th>
+                                        <th class="min-w-150px">Year</th>
                                         <th class=" min-w-100px">Created at</th>
                                         <th class=" min-w-70px">Actions</th>
                                     </tr>
@@ -188,12 +172,12 @@
                     <div class="messages"></div>
                     {{-- csrf token  --}}
                     @csrf
-                    <input type="hidden" name="category_id">
+                    <input type="hidden" name="year_id">
 
                     <!--begin::Heading-->
                     <div class="mb-13 text-center">
                         <!--begin::Title-->
-                        <h1 class="mb-3">Add New Category</h1>
+                        <h1 class="mb-3">Add New Year</h1>
                         <!--end::Title-->
                         <!--begin::Description-->
                         <div class="text-muted fw-bold fs-5">Fill up the form and submit
@@ -202,67 +186,18 @@
                     </div>
                     <!--end::Heading-->
                     <!--begin::Input group-->
-                    <div class="row g-9 mb-8">
-                        <!--begin::Col-->
-                        <div class="col-md-12 fv-row">
-                            <label class="required fs-6 fw-bold mb-2">Select Main Category</label>
-                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                data-placeholder="Select main category" name="main_category" id="main_category">
-                                <option value="">Choose ...</option>
-                                @foreach ($main_categories as $main_category)
-                                    <option value="{{ $main_category->id }}">{{ $main_category->name }}</option>
-                                @endforeach
-                               
-                                {{-- <option value="deactive">Deactive</option> --}}
-                            </select>
-                            <div class="help-block with-errors status-error"></div>
-                        </div>
-                        <!--end::Col-->
-                    </div>
-                    <!--end::Input group-->
-                    <!--begin::Input group-->
                     <div class="d-flex flex-column mb-8 fv-row">
                         <!--begin::Label-->
                         <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="required">Category Name</span>
+                            <span class="required">Year</span>
                         </label>
                         <!--end::Label-->
-                        <input type="text" class="form-control form-control-solid" placeholder="Enter Service Name"
-                            name="name" />
-                        <div class="help-block with-errors name-error"></div>
+                        <input type="text" class="form-control form-control-solid" placeholder="1947"
+                            name="year" />
+                        <div class="help-block with-errors year-error"></div>
                     </div>
                     <!--end::Input group-->
-                    <!--begin::Input group-->
-                    <div class="d-flex flex-column mb-8 fv-row">
-                        <!--begin::Label-->
-                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="required">Category Title</span>
-                        </label>
-                        <!--end::Label-->
-                        <input type="text" class="form-control form-control-solid" placeholder="Enter Title"
-                            name="title" />
-                        <div class="help-block with-errors title-error"></div>
-                    </div>
-                    <!--end::Input group-->
-
-
                     
-                    <!--begin::Input group-->
-                    <div class="row g-9 mb-8">
-                        <!--begin::Col-->
-                        <div class="col-md-12 fv-row">
-                            <label class="required fs-6 fw-bold mb-2">Status</label>
-                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                data-placeholder="Select status" name="status">
-                                <option value="active" selected>Active</option>
-                                <option value="deactive">Deactive</option>
-                            </select>
-                            <div class="help-block with-errors status-error"></div>
-                        </div>
-                        <!--end::Col-->
-                    </div>
-                    <!--end::Input group-->
-
                     <!--begin::Actions-->
                     <div class="text-center">
                         <button type="reset" id="kk_modal_new_service_cancel" class="btn btn-light me-3">Cancel</button>
@@ -295,7 +230,7 @@
                 processing: true,
                 responsive: true,
                 serverSide: true,
-                ajax: "{{ url('admin/category/category-index') }}",
+                ajax: "{{ url('admin/year/index') }}",
                 columns: [
                     {
                         data: 'DT_RowIndex',
@@ -304,18 +239,10 @@
                         searchable: false
                     },
                     {
-                        data: 'name',
-                        name: 'name'
+                        data: 'year',
+                        name: 'year'
                     },
-                    {
-                        data: 'title',
-                        name: 'title'
-                    },
-
-                    {
-                        data: 'status',
-                        name: 'status'
-                    },
+                   
                     {
                         data: 'created_at',
                         name: 'created_at'
@@ -329,7 +256,7 @@
 
                 ],
                 "order": [
-                    [4, 'desc']
+                    [2, 'desc']
                 ] //created at desc
 
             })
@@ -339,16 +266,13 @@
                 table.search(t.target.value).draw()
             }))
 
-            $('.kk-datatable-filter').on('change',function(){
-                console.log(this.value)
-                table.ajax.url( "{{ url('admin/category/category-index?status=') }}"+this.value ).load();
-            })
+           
 
         })
 
         // add new
         function addNew(){
-            $('input[name="category_id"]').val('')
+            $('input[name="year_id"]').val('')
             $('.with-errors').text('')
             $('#kk_modal_new_category_form')[0].reset();
             $('#kk_modal_new_category').modal('show')
@@ -358,14 +282,11 @@
         function edit(id){
             $.ajax({
                 type:"GET",
-                url: "{{ url('admin/category/category/get')}}"+'/'+id,
+                url: "{{ url('admin/year/get')}}"+'/'+id,
                 dataType: 'json',
                 success:function(data){
-                   $('input[name="category_id"]').val(data.id)
-                   $('input[name="name"]').val(data.name)
-                   $('input[name="title"]').val(data.title)
-                   $('select[name="status"]').val(data.status).change()
-                   $('select[name="main_category"]').val(data.main_category_id).change()
+                   $('input[name="year_id"]').val(data.id)
+                   $('input[name="year"]').val(data.year)
                    $("#kk_modal_new_category").modal('show');
                 }
           });
@@ -388,7 +309,7 @@
             var formData = new FormData(this);
             $.ajax({
                 type:"POST",
-                url: "{{ url('admin/category/category/store')}}",
+                url: "{{ url('admin/year/store')}}",
                 data:formData,
                 cache:false,
                 contentType: false,
@@ -432,7 +353,7 @@
         })
 
     //deleteCategory
-    function deleteCategory(id){
+    function deleteYear(id){
         Swal.fire({
             text: "Are you sure you want delete this?",
             icon: "warning",
@@ -448,7 +369,7 @@
             if(o.value){ //if agree
                 $.ajax({
                     type: "GET",
-                    url: "{{ url('admin/category/category/delete') }}"+'/'+id,
+                    url: "{{ url('admin/year/delete') }}"+'/'+id,
                     data: {},
                     success: function (res)
                     {
