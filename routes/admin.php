@@ -63,8 +63,31 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/year/delete/{id}', 'YearController@deleteYear')->name('year.delete');
 
 
+        ############ Passage Route #############
+        Route::get('/passage/index', 'PassageController@index')->name('passage.index');
+        Route::post('/passage/store', 'PassageController@store')->name('passage.store');
+        Route::get('/passage/get/{id}', 'PassageController@getPassage')->name('passage.get');
+        Route::get('/passage/delete/{id}', 'PassageController@deletePassage')->name('passage.delete');
 
-        ############ Dependable setect route ###############
+        ############ Question Route #############
+        Route::get('/question/question-index', 'QuestionController@index')->name('question.index');
+        Route::get('/question/create', 'QuestionController@create')->name('question.create');
+        Route::post('/question/question-input', 'QuestionController@createQuestionInput')->name('question.question-input');
+        Route::post('/question/store', 'QuestionController@store')->name('question.store');
+        Route::get('/question/get/{id}', 'QuestionController@getQuestion')->name('question.get');
+        Route::get('/question/delete/{id}', 'QuestionController@deleteQuestion')->name('question.delete');
+
+
+        ############ Description Route #############
+
+        //Question Description
+        Route::get('/description/question-description', 'QuestionDescriptionController@index')->name('question-description.index');
+        Route::post('/description/question-description/store', 'QuestionDescriptionController@store')->name('question-description.store');
+        Route::get('/description/question-description/get/{id}', 'QuestionDescriptionController@getQuestionDes')->name('question-description.get');
+        Route::get('/description/question-description/delete/{id}', 'QuestionDescriptionController@deleteQuestionDes')->name('question-description.delete');
+
+
+        ############ Dependable setect input route ###############
         Route::get('/get-category/{id}', 'GetAllCategoryController@getCategory');
         Route::get('/get-sub-category/{id}', 'GetAllCategoryController@getSubCategory');
         Route::get('/get-subject/{id}', 'GetAllCategoryController@getSubject');
