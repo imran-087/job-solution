@@ -107,6 +107,23 @@ class SubjectController extends Controller
 
                 $subject->updated_at = Carbon::now();
 
+                //track edited category
+                $subject->edited_categories()->create([
+                    'category' => $request->name,
+                    'editor_id' => Auth::guard('admin')->user()->id,
+                    'status' => $request->status
+                ]);
+
+                //edited description tracker
+                if (strlen($subject->description != strlen($request->description))) {
+                    $subject->edited_descriptions()->create([
+                        'description' => $request->description,
+                        'editor_id' => Auth::guard('admin')->user()->id,
+                        'status' => 'active'
+                    ]);
+                }
+
+
 
                 if ($subject->update()) {
                     return response()->json([

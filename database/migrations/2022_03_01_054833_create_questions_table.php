@@ -22,7 +22,7 @@ class CreateQuestionsTable extends Migration
             $table->tinyInteger('question_type');
             $table->text('question');
             $table->integer('mark');
-            $table->tinyInteger('hard_level');
+            $table->enum('hard_level', ['easy', 'medium', 'hard'])->default('easy');
             $table->text('slug')->nullable();
             $table->integer('created_user_id');
             $table->integer('updated_user_id')->nullable();

@@ -103,6 +103,13 @@ class CategoryController extends Controller
 
                 $category->updated_at = Carbon::now();
 
+                // edited category tracker 
+                $category->edited_categories()->create([
+                    'category' => $request->name,
+                    'editor_id' => Auth::guard('admin')->user()->id,
+                    'status' => $request->status
+                ]);
+
 
                 if ($category->update()) {
                     return response()->json([

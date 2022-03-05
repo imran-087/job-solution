@@ -92,6 +92,13 @@ class QuestionDescriptionController extends Controller
 
                 $question_des->updated_at = Carbon::now();
 
+                // edited question description tracker 
+                $question_des->edited_descriptions()->create([
+                    'description' => $request->description,
+                    'editor_id' => Auth::guard('admin')->user()->id,
+                    'status' => 'active'
+                ]);
+
 
                 if ($question_des->update()) {
                     return response()->json([

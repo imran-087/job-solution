@@ -13,7 +13,7 @@
                 data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
                 class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                 <!--begin::Title-->
-                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">MCQ Question</h1>
+                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Question </h1>
                 <!--end::Title-->
                 <!--begin::Separator-->
                 <span class="h-20px border-gray-200 border-start mx-4"></span>
@@ -154,91 +154,32 @@
                             <!--end::Col-->
                         </div>
                         <!--end::Input group-->
-                        @if(isset($question))
-                        @for($i = 0; $i < $question; $i++)
-                        <div style="border:1px solid green; border-radius:5px; padding: 20px" class="mb-5"> 
-                        <!--begin::Input group-->
-                            <div class="d-flex flex-column mb-8 fv-row">
-                                <!--begin::Label-->
-                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="required">Question : {{ $i+1 }} </span>
-                                </label>
-                                <input type="hidden" name="type" value="{{ $type }}">
-                                <!--end::Label-->
-                                <input type="text" class="form-control form-control-solid" placeholder="Enter Question"
-                                    name="question[]" />
-                                <div class="help-block with-errors title-error"></div>
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="row g-9 mb-8">
-                                <!--begin::Col-->
-                                <div class="col-md-6 fv-row">
-                                    <!--begin::Label-->
-                                    <label class="required fs-6 fw-bold mb-2">Answer</label>
-                                    <select class="form-select form-select-solid" data-control="select2"
-                                        data-hide-search="true" data-placeholder="Select correct answer"
-                                        name="answer[]">
-                                        @for($o = 0; $o < $option; $o++) <option value="{{$o+1}}"> Option {{$o+1}}
-                                            </option>
-                                            @endfor
-                                    </select>
-                                    @error('answer')
-                                    <div class="text-danger">{{ $message }}</div>
-                                    @enderror
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-md-6 fv-row">
-                                    <!--begin::Label-->
 
-                                </div>
-                                <!--end::Col-->
-                            </div>
-                           
-                            <!--begin::Input group-->
-                            <div class="row g-9 mb-8">
-                                <!--begin::Col-->
-                                @for($o = 0; $o < $option; $o++) 
-                                    <div class="col-md-6 fv-row">
-                                    <!--begin::Label-->
-                                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                        <span class="required">Option : {{ $o+1 }} </span>
-                                    </label>
-                                    <!--end::Label-->
-                                    <input type="text" class="form-control form-control-solid"
-                                        placeholder="Enter option" name="option_{{$o+1}}[]" />
-                                    <div class="help-block with-errors title-error"></div>
-                                       
-                                    </div>
-                                @endfor
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Input group-->
-                            
-                      
-            </div>
-                        @endfor
+                        <!--begin::Include-->
+                        @if($type == 'written')
+                            @include('admin.question.written_layout')
+                        @else
+                            @include('admin.question.mcq_layout')
                         @endif
-      
-
-                    <!--begin::Actions-->
-                    <div class="text-center">
-                        <button type="submit" class="btn btn-primary">
-                            <span class="indicator-label">Submit</span>
-                        </button>
-                    </div>
-                    <!--end::Actions-->
-                </form>
-                <!--end:Form-->
+                        <!--end::Include-->
+                       
+                        <!--begin::Actions-->
+                        <div class="text-center">
+                            <button type="submit" class="btn btn-primary">
+                                <span class="indicator-label">Submit</span>
+                            </button>
+                        </div>
+                        <!--end::Actions-->
+                    </form>
+                    <!--end:Form-->
+                </div>
+                <!--end::Card body-->
             </div>
-            <!--end::Card body-->
+            <!--end::Card-->
         </div>
-        <!--end::Card-->
+        <!--end::Container-->
     </div>
-    <!--end::Container-->
-</div>
-<!--end::Post-->
+    <!--end::Post-->
 </div>
 
 

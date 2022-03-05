@@ -14,4 +14,9 @@ class QuestionDescription extends Model
     {
         return $this->belongsTo(Question::class);
     }
+
+    public function edited_descriptions()
+    {
+        return $this->morphMany(EditedDescription::class, 'descriptionable');
+    }
 }

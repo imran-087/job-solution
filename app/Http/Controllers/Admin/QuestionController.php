@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Tag;
 use App\Models\Year;
 use App\Models\Passage;
+use App\Models\Subject;
 use App\Models\Question;
+use App\Models\SubCategory;
 use Illuminate\Support\Str;
 use App\Models\MainCategory;
 use Illuminate\Http\Request;
@@ -48,7 +51,7 @@ class QuestionController extends Controller
                 })
                 ->addColumn('action', function ($row) {
                     $btn = '<div class="d-flex justify-content-start flex-shrink-0">
-                        <a href="javascript:;" onclick="edit(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                        <a href="edit-question/' . $row->id . '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                             <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                             <span class="svg-icon svg-icon-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -100,26 +103,59 @@ class QuestionController extends Controller
         $years = Year::all();
         $passages = Passage::get(['id', 'title']);
 
+        return view('admin.question.question_input', compact(['question', 'option', 'type', 'main_categories', 'years', 'passages']));
 
-        if ($type == 'mcq') {
-            return view('admin.question.mcq_question', compact(['question', 'option', 'type', 'main_categories', 'years', 'passages']));
-        } elseif ($type == 'written') {
-            return view('admin.question.written_question', compact(['question', 'option', 'type', 'main_categories', 'years']));
-        } elseif ($type == 'image') {
-            return view('admin.question.image_question', compact(['question', 'option', 'type', 'main_categories', 'years']));
-        }
+        // if ($type == 'mcq') {
+        //     return view('admin.question.mcq_question', compact(['question', 'option', 'type', 'main_categories', 'years', 'passages']));
+        // } elseif ($type == 'written') {
+        //     return view('admin.question.written_question', compact(['question', 'option', 'type', 'main_categories', 'years']));
+        // } elseif ($type == 'image') {
+        //     return view('admin.question.mcq_question', compact(['question', 'option', 'type', 'main_categories', 'years']));
+        // }
     }
 
     public function store(Request $request)
     {
         //dd($request->all());
+        //multiple image question
+        if ($request->hasfile('image')) {
+            //dd('ok');
+            foreach ($request->file('image') as $key => $file) {
+                //dd('option_'.$key);
+                //    dump($file);
+                //    echo "<br>";
+                $name = uniqid() . '_' . time() . '.' . $file->getClientOriginalExtension();
+                // dump($name);
+                // echo "<br>";
+                $path = public_path() . '/uploads/Img/QuestionImage/';
+                $file->move($path, $name);
+                $image_path = 'uploads/Img/QuestionImage/' . $name;
+                $Imgdata[] = [
+                    'option_' . $key => $image_path
+                ];
+                //dump($Imgdata);
+                if (count($request->question) > 1) {
+                    $chunk_image = array_chunk($Imgdata, ceil(count($Imgdata) / 2));
+                }
+
+                //dump($chunk_image);
+                //dump($chunk_image[1]);
+            }
+        } //else {
+        //     //dd('not ok');
+        //     $chunk_image = 'NULL';
+        // }
+
+        //dd(json_encode($chunk_image));
+
+        //question save
         foreach ($request->question as $key => $value) {
             if (\strlen($value) > 1) {
                 //question save
                 $question = new Question;
                 $question->subject_id = $request->subject;
                 $question->sub_category_id = $request->sub_category;
-                $question->year_id = 2021;
+                $question->year_id = 1;
                 $question->passage_id = $request->passage;
                 $question->question_type = $request->type;
                 $question->hard_level = 1;
@@ -136,28 +172,33 @@ class QuestionController extends Controller
 
                 //question option and answer save
                 $question_option = new QuestionOption();
-                $question_option->question_id = $question->id;
-                $question_option->option_1 = $request->option_1[$key] ?? '';
-                $question_option->option_2 = $request->option_2[$key] ?? '';
-                $question_option->option_3 = $request->option_3[$key] ?? '';
-                $question_option->option_4 = $request->option_4[$key] ?? '';
-                $question_option->option_5 = $request->option_5[$key] ?? '';
-                $question_option->answer = $request->answer[$key] ?? '';
-                $question_option->written_answer = $request->written_answer[$key] ?? '';
 
-                // if (isset($chunk_image)) {
-                //     $question_option->image_option =  json_encode($chunk_image[$key]);
-                // } else {
-                //     $question_option->image_option =  json_encode($Imgdata);
-                // }
+                $question_option->question_id = $question->id;
+
+                if ($request->type == 'written') {
+                    $question_option->written_answer = $request->written_answer[$key];
+                } else {
+                    $question_option->option_1 = $request->option_1[$key] ?? '';
+                    $question_option->option_2 = $request->option_2[$key] ?? '';
+                    $question_option->option_3 = $request->option_3[$key] ?? '';
+                    $question_option->option_4 = $request->option_4[$key] ?? '';
+                    $question_option->option_5 = $request->option_5[$key] ?? '';
+                    $question_option->answer = $request->answer[$key];
+
+                    if (isset($chunk_image)) {
+                        $question_option->image_option =  json_encode($chunk_image[$key]);
+                    } else if (isset($Imgdata)) {
+                        $question_option->image_option =  json_encode($Imgdata);
+                    }
+                }
 
                 $question_option->save();
 
                 //tag
-                // $tag = Tag::create([
-                //     'subject_id' => $request->subject,
-                //     'question_id' => $question->id,
-                // ]);
+                $tag = Tag::create([
+                    'subject_id' => $request->subject,
+                    'question_id' => $question->id,
+                ]);
             }
         }
 
@@ -165,6 +206,20 @@ class QuestionController extends Controller
 
         //Session::flash('success', 'Question created successfully');
         return redirect()->route('admin.question.index');
+    }
+
+    //edit question
+    public function editQuestion($id)
+    {
+
+        $years = Year::all();
+        $question = Question::find($id);
+        //dd($question->ToArray());
+        $question_option = QuestionOption::where('question_id', $id)->first();
+        $sub_category = SubCategory::where('id', $question->sub_category_id)->first();
+        $subjects = Subject::where('sub_category_id', $question->sub_category_id)->get();
+        //dd($question_options->toArray());
+        return view('admin.question.edit_question', compact(['subjects', 'question', 'years', 'question_option', 'sub_category']));
     }
 
     //deleteQuestion

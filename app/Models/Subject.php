@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Subject extends Model
 {
     use HasFactory;
+
+    //ploymorphic relation
+    public function edited_categories()
+    {
+        return $this->morphMany(EditedCategory::class, 'categoriable');
+    }
+
+    public function edited_descriptions()
+    {
+        return $this->morphMany(EditedDescription::class, 'descriptionable');
+    }
 }

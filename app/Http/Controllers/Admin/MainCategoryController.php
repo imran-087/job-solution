@@ -97,6 +97,13 @@ class MainCategoryController extends Controller
 
                 $main_category->updated_at = Carbon::now();
 
+                //track edited category
+                $main_category->edited_categories()->create([
+                    'category' => $request->name,
+                    'editor_id' => Auth::guard('admin')->user()->id,
+                    'status' => $request->status
+                ]);
+
 
                 if ($main_category->update()) {
                     return response()->json([

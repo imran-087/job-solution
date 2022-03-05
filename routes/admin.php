@@ -73,7 +73,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/question/question-index', 'QuestionController@index')->name('question.index');
         Route::get('/question/create', 'QuestionController@create')->name('question.create');
         Route::post('/question/question-input', 'QuestionController@createQuestionInput')->name('question.question-input');
+        Route::get('/question/edit-question/{id}', 'QuestionController@editQuestion')->name('question.question-edit');
         Route::post('/question/store', 'QuestionController@store')->name('question.store');
+        Route::post('/question/update', 'QuestionController@update')->name('question.update');
         Route::get('/question/get/{id}', 'QuestionController@getQuestion')->name('question.get');
         Route::get('/question/delete/{id}', 'QuestionController@deleteQuestion')->name('question.delete');
 

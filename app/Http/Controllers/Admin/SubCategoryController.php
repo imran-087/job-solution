@@ -103,6 +103,13 @@ class SubCategoryController extends Controller
 
                 $sub_category->updated_at = Carbon::now();
 
+                //track edited cateogry
+                $sub_category->edited_categories()->create([
+                    'category' => $request->name,
+                    'editor_id' => Auth::guard('admin')->user()->id,
+                    'status' => $request->status
+                ]);
+
 
                 if ($sub_category->update()) {
                     return response()->json([
