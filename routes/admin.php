@@ -81,13 +81,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
 
         ############ Description Route #############
-
         //Question Description
         Route::get('/description/question-description', 'QuestionDescriptionController@index')->name('question-description.index');
         Route::post('/description/question-description/store', 'QuestionDescriptionController@store')->name('question-description.store');
         Route::get('/description/question-description/get/{id}', 'QuestionDescriptionController@getQuestionDes')->name('question-description.get');
         Route::get('/description/question-description/delete/{id}', 'QuestionDescriptionController@deleteQuestionDes')->name('question-description.delete');
-
 
         ############ Dependable setect input route ###############
         Route::get('/get-category/{id}', 'GetAllCategoryController@getCategory');
@@ -95,5 +93,18 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/get-subject/{id}', 'GetAllCategoryController@getSubject');
         Route::get('/get-question/{subject_id}', 'GetAllCategoryController@getQuestion');
         Route::get('/get-parent-subject/{parent_id}', 'GetAllCategoryController@getParentSubject');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Discussion Forum
+        |--------------------------------------------------------------------------
+        */
+
+        ############ Channel Route #############
+        Route::get('/forum/channel/index', 'ChannelController@index')->name('channel.index');
+        Route::post('/forum/channel/store', 'ChannelController@store')->name('channel.store');
+        Route::get('/forum/channel/get/{id}', 'ChannelController@getChannel')->name('channel.get');
+        Route::get('/forum/channel/delete/{id}', 'ChannelController@deleteChannel')->name('channel.delete');
     });
 });

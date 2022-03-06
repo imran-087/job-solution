@@ -1,0 +1,17 @@
+.new-discussion a{
+    padding: 10px 20px !important;
+    border-radius: 30px;
+    font-weight: 800;
+}
+
+.nav ul li {
+    text-decoration: none;
+    background: #fff;
+    border-radius: 30px;
+    padding: 10px 30px; 
+    margin: 5px 0px;
+}
+.nav-link {
+    text-decoration: none;
+    font-weight: bold;
+}

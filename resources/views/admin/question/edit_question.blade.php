@@ -97,7 +97,7 @@
                         <!--begin::Input group-->
                         <div class="row g-9 mb-8">
                             <!--begin::Col-->
-                            <div class="col-md-5 fv-row">
+                            <div class="col-md-4 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Sub Ctargory</label>
                                 <select class="form-select form-select-solid" data-control="select2"
                                     data-hide-search="true" data-placeholder="" name="sub_category"
@@ -113,7 +113,7 @@
                             </div>
                             <!--end::Col-->
                             <!--begin::Col-->
-                            <div class="col-md-5 fv-row">
+                            <div class="col-md-4 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Subject</label>
                                 <select class="form-select form-select-solid" data-control="select2"
                                     data-hide-search="true" data-placeholder="" name="subject"
@@ -146,12 +146,47 @@
                                             @endif
                                         @endif
                                         >
-                                        {{ $year->name }}
+                                        {{ $year->year }}
                                     </option>
                                     @endforeach
 
                                 </select>
                                 <div class="help-block with-errors category-error"></div>
+                            </div>
+                            <!--end::Col-->
+                             <!--begin::Col-->
+                            <div class="col-md-2 fv-row">
+                                <label class="required fs-6 fw-bold mb-2">Passage</label>
+                                <select class="form-select form-select-solid" data-control="select2"
+                                    data-hide-search="true" data-placeholder="Select passage" name="passage"
+                                    id="passage">
+                                    @if($question->passage_id != '')
+                                    @foreach($passages as $passage)
+                                    <option  value="{{ $passage->id }}"
+                                        @if(isset($question))
+                                            @if($passage->id == $question->passage_id) selected
+                                            @endif
+                                        @endif
+                                        >
+                                        {{ $passage->title }}
+                                    </option>
+                                    @endforeach
+                                    @else
+                                    <option value=""></option>
+                                    @foreach($passages as $passage)
+                                    <option  value="{{ $passage->id }}"
+                                        @if(isset($question))
+                                            @if($passage->id == $question->passage_id) selected
+                                            @endif
+                                        @endif
+                                        >
+                                        {{ $passage->title }}
+                                    </option>
+                                    @endforeach
+                                    @endif
+
+                                </select>
+                                <div class="help-block with-errors subject-error"></div>
                             </div>
                             <!--end::Col-->
                         </div>
@@ -163,7 +198,7 @@
                             <div class="col-md-2 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Question Type</label>
                                 <select class="form-select form-select-solid" data-control="select2"
-                                    data-hide-search="true" data-placeholder="Select sub category" name="type"
+                                    data-hide-search="true" data-placeholder="Select sub category" name="question_type"
                                     id="type">
                                      <option value="mcq"
                                     @if(isset($question))
@@ -190,9 +225,20 @@
                             <!--end::Col-->
                             <!--begin::Col-->
                             <div class="col-md-2 fv-row">
+                               <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                <span class="required">Mark </span>
+                                </label>
+                                <!--end::Label-->
+                                <input type="text" class="form-control form-control-solid" placeholder="Enter mark"
+                                    name="mark" value="{{ $question->mark }}" />
+                                <div class="help-block with-errors title-error"></div>
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col-md-2 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Hard Level</label>
                                 <select class="form-select form-select-solid" data-control="select2"
-                                    data-hide-search="true" data-placeholder="Select sub category" name="lard_level"
+                                    data-hide-search="true" data-placeholder="Select sub category" name="hard_level"
                                     id="lard_level">
                                     <option value="easy"
                                     @if(isset($question))
@@ -217,6 +263,7 @@
                                 <div class="help-block with-errors subject-error"></div>
                             </div>
                             <!--end::Col-->
+
                             <!--begin::Col-->
                             <div class="col-md-2 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Editable</label>
@@ -244,7 +291,7 @@
                             <div class="col-md-2 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">lock</label>
                                 <select class="form-select form-select-solid" data-control="select2"
-                                    data-hide-search="true" data-placeholder="Select sub category" name="lock"
+                                    data-hide-search="true" data-placeholder="Select sub category" name="lock_status"
                                     id="lock">
                                     <option value="lock"
                                     @if(isset($question))
@@ -263,6 +310,7 @@
                                 <div class="help-block with-errors subject-error"></div>
                             </div>
                             <!--end::Col-->
+                            
                             <!--begin::Col-->
                             <div class="col-md-2 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Status</label>
@@ -301,6 +349,7 @@
                                 <span class="required">Question </span>
                             </label>
                             <!--end::Label-->
+                            <input type="hidden" name="id" value="{{ $question->id }}" />
                             <input type="text" class="form-control form-control-solid" placeholder="Enter Question"
                                 name="question" value="{{ $question->question }}" />
                             <div class="help-block with-errors title-error"></div>

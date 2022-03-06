@@ -205,7 +205,7 @@
             </div>
 
             <div class="menu-item">
-                <a class="menu-link {{ request()->is('admin/forum/channel*') ? 'active' : '' }}" href="#" >
+                <a class="menu-link {{ request()->is('admin/forum/channel*') ? 'active' : '' }}" href="{{ route('admin.channel.index') }}" >
                     <span class="menu-icon">
                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
                         <span class="svg-icon svg-icon-2">

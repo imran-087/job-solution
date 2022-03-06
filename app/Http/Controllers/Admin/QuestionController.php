@@ -14,6 +14,7 @@ use Illuminate\Http\Request;
 use App\Models\QuestionOption;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Facades\DataTables;
 
 class QuestionController extends Controller
@@ -204,7 +205,7 @@ class QuestionController extends Controller
 
 
 
-        //Session::flash('success', 'Question created successfully');
+        Session::flash('success', 'Question created successfully');
         return redirect()->route('admin.question.index');
     }
 
@@ -213,13 +214,58 @@ class QuestionController extends Controller
     {
 
         $years = Year::all();
+        $passages = Passage::all();
         $question = Question::find($id);
-        //dd($question->ToArray());
+        //dd($question->toArray());
         $question_option = QuestionOption::where('question_id', $id)->first();
         $sub_category = SubCategory::where('id', $question->sub_category_id)->first();
         $subjects = Subject::where('sub_category_id', $question->sub_category_id)->get();
         //dd($question_options->toArray());
-        return view('admin.question.edit_question', compact(['subjects', 'question', 'years', 'question_option', 'sub_category']));
+        return view('admin.question.edit_question', compact(['subjects', 'question', 'years', 'passages', 'question_option', 'sub_category']));
+    }
+
+    //update question
+    public function update(Request $request)
+    {
+        //dd($request->all());
+        $question = Question::where('id', $request->id)->update([
+            'subject_id' => $request->subject,
+            'sub_category_id' => $request->sub_category,
+            'year_id' => $request->year,
+            'passage_id' => $request->passage,
+            'question_type' => $request->question_type,
+            'hard_level' => $request->hard_level,
+            'mark' => $request->mark,
+            'question' => $request->question,
+            'future_editable' => $request->future_editable,
+            'lock_status' => $request->lock_status,
+            'status' => $request->status,
+            'updated_user_id' => Auth::guard('admin')->user()->id,
+        ]);
+
+        $question_option_data = [
+            'option_1' => $request->option_1,
+            'option_2' => $request->option_2,
+            'option_3' => $request->option_3,
+            'option_4' => $request->option_4,
+            'option_5' => $request->option_5,
+            'answer' => $request->mcq_answer,
+            'written_answer' => $request->written_answer,
+        ];
+
+        $question_option = QuestionOption::where('question_id', $request->id)
+            ->update($question_option_data);
+
+        if ($question) {
+            Session::flash('success', 'Question updated successfull');
+            return redirect()->route('admin.question.index');
+        } else {
+            Session::flash('error', 'Question updated successfull');
+            return redirect()->back();
+        }
+
+        // Session::flash('success', 'Question updated successfull');
+        // return redirect()->route('admin.question.index');
     }
 
     //deleteQuestion

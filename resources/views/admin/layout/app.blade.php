@@ -32,6 +32,10 @@
 		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-5FS8GGP');</script>
 		<!--End::Google Tag Manager -->
 
+		<!--Toastr Notification -->
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+
 		<!--Custom error style -->
 		<style>
 			.help-block.with-errors {
@@ -201,6 +205,10 @@
 		<script src="{{ asset('assets') }}/js/custom/utilities/modals/create-app.js"></script>
 		<script src="{{ asset('assets') }}/js/custom/utilities/modals/users-search.js"></script>
 		<!--end::Page Custom Javascript-->
+
+		<!--Toastr Notification -->
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+		@include('admin.include.toastr')
 
 		<!---- own js ---->
 		<script src="{{ asset('js/custom.js') }}"></script>
