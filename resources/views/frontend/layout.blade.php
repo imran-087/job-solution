@@ -31,6 +31,8 @@
 		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-5FS8GGP');</script>
 		<!--End::Google Tag Manager -->
 
+		<!-- Toastr -->
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
         <!-- Custom css -->
         <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 	</head>
@@ -7847,7 +7849,46 @@
 		<script src="{{ asset('assets') }}/js/custom/utilities/modals/create-app.js"></script>
 		<script src="{{ asset('assets') }}/js/custom/utilities/modals/users-search.js"></script>
 		<!--end::Page Custom Javascript-->
+
+		<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 		<!--end::Javascript-->
+		<script>
+			 @if(Session::has('success'))
+				toastr.options =
+				{
+					"closeButton" : true,
+					"progressBar" : true
+				}
+						toastr.success("{{ session('success') }}");
+				@endif
+
+				@if(Session::has('error'))
+				toastr.options =
+				{
+					"closeButton" : true,
+					"progressBar" : true
+				}
+						toastr.error("{{ session('error') }}");
+				@endif
+
+				@if(Session::has('info'))
+				toastr.options =
+				{
+					"closeButton" : true,
+					"progressBar" : true
+				}
+						toastr.info("{{ session('info') }}");
+				@endif
+
+				@if(Session::has('warning'))
+				toastr.options =
+				{
+					"closeButton" : true,
+					"progressBar" : true
+				}
+						toastr.warning("{{ session('warning') }}");
+				@endif
+		</script>
 
 		@stack('script')
 	</body>

@@ -1,17 +1,67 @@
+a{
+    color: inherit;
+}
+
 .new-discussion a{
-    padding: 10px 20px !important;
+    padding: 10px 35px !important;
     border-radius: 30px;
     font-weight: 800;
+    font-size: 12px;
+}
+.nav ul {
+    list-style-type: none;
+    text-align: center;
 }
 
 .nav ul li {
     text-decoration: none;
     background: #fff;
     border-radius: 30px;
-    padding: 10px 30px; 
     margin: 5px 0px;
+}
+.nav ul a li{
+    
+    padding: 10px 45px!important;
 }
 .nav-link {
     text-decoration: none;
     font-weight: bold;
+    padding: 0px !important;
+    
 }
+.nav-item{
+    padding: 0px !important;
+}
+.channel-badge a{
+    color: inherit;
+}
+
+.channel-badge  {
+    border: 2px solid #F56857;
+    border-radius: 30px;
+    padding: 4px 23px;
+    font-weight: 600;
+    text-transform: lowercase;
+    color: #F56857;
+}
+.channel-badge:hover{
+    background: #F56857;
+    color: #FFF;
+    cursor: pointer;
+}
+.submit{
+    border: 2px solid #F56857;
+    border-radius: 30px;
+    padding: 4px 23px;
+    font-weight: 600;
+    color: #F56857;
+    background: inherit;
+}
+.submit:hover {
+    background: #F56857;
+    color: #FFF;
+    cursor: pointer;
+}
+
+
+

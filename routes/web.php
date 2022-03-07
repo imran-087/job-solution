@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Forum\DiscussionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,8 +21,13 @@ Route::get('/', function () {
 });
 
 Auth::routes();
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/discussion', [DiscussionController::class, 'index'])->name('discussion.index');
+Route::get('/discussion/{id}/show', [DiscussionController::class, 'show'])->name('discussion.show');
+Route::get('/discussion/channel/{channel}', [DiscussionController::class, 'channelDiscussion'])->name('discussion.channel');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
-Route::get('/discussion', [App\Http\Controllers\Forum\DiscussionController::class, 'index'])->name('discussion.index');
-Route::post('/discussion/store', [App\Http\Controllers\Forum\DiscussionController::class, 'store'])->name('discussion.store');
+Route::middleware('auth')->group(function () {
+    Route::post('/discussion/store', [DiscussionController::class, 'store'])->name('discussion.store');
+    Route::post('/discussion/reply', [DiscussionController::class, 'reply'])->name('discussion.reply');
+    Route::get('/discussions/{discussion}/replies/{reply}/mark-as-best-reply', [DiscussionController::class, 'bestreply'])->name('discussions.best-reply');
+});
