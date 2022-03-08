@@ -10,7 +10,13 @@
         <div class="row gy-5 g-xl-8">
             <!--begin::Col-->
             <div class="col-xl-2">
-            @include('discussion.aside')
+                <div class="nav">
+                    <ul class="nav-item">
+                        @foreach($channels as $channel)
+                        <a class="nav-link" href="{{ route('discussion.channel', $channel->id) }}"><li class="mb-3">{{$channel->name}}</li></a>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
             <!--end::Col-->
 
@@ -84,7 +90,7 @@
                             
                             <!--begin::Toolbar-->
                             <div class="d-flex align-items-center mb-5">
-                                <a href="#" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4">
+                                <a href="{{ route('discussion.show', $discussion->id) }}" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4">
                                 <!--begin::Svg Icon | path: icons/duotune/communication/com012.svg-->
                                 <span class="svg-icon svg-icon-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -93,15 +99,15 @@
                                         <rect x="6" y="7" width="12" height="2" rx="1" fill="black" />
                                     </svg>
                                 </span>
-                                <!--end::Svg Icon-->12</a>
-                                <a href="#" class="btn btn-sm btn-light btn-color-muted btn-active-light-danger px-4 py-2">
+                                <!--end::Svg Icon-->{{$discussion->replies->count()}}</a>
+                                <a href="javascript:;" class="btn btn-sm btn-light btn-color-muted btn-active-light-danger px-4 py-2  vote"  data-id="{{ $discussion->id }}">
                                 <!--begin::Svg Icon | path: icons/duotune/general/gen030.svg-->
                                 <span class="svg-icon svg-icon-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                         <path d="M18.3721 4.65439C17.6415 4.23815 16.8052 4 15.9142 4C14.3444 4 12.9339 4.73924 12.003 5.89633C11.0657 4.73913 9.66 4 8.08626 4C7.19611 4 6.35789 4.23746 5.62804 4.65439C4.06148 5.54462 3 7.26056 3 9.24232C3 9.81001 3.08941 10.3491 3.25153 10.8593C4.12155 14.9013 9.69287 20 12.0034 20C14.2502 20 19.875 14.9013 20.7488 10.8593C20.9109 10.3491 21 9.81001 21 9.24232C21.0007 7.26056 19.9383 5.54462 18.3721 4.65439Z" fill="black" />
                                     </svg>
                                 </span>
-                                <!--end::Svg Icon-->150</a>
+                                <!--end::Svg Icon-->{{$discussion->vote}}</a>
                             </div>
                             <!--end::Toolbar-->
                            
@@ -393,6 +399,27 @@
           });
 
         })
+        //vote
+        $('.vote').on('click', function(){
+            var id = $(this).data('id')
+            //alert(id)
+            $.ajax({
+                type:"GET",
+                url: "{{ url('discussion/vote')}}"+'/'+id,
+                dataType: 'json',
+                success:function(data){
+                    Swal.fire({
+                        text: data.message,
+                        icon: "success",
+                        showConfirmButton: false
+                        
+                    })
+                    setTimeout(function() {
+                        location.reload();  //Refresh page
+                    }, 1000);
+                }
+            })
+        });
 
     </script>
 @endpush

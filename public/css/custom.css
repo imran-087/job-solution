@@ -54,14 +54,16 @@ a{
     border-radius: 30px;
     padding: 4px 23px;
     font-weight: 600;
-    color: #F56857;
-    background: inherit;
+    color: #FFF;
+    background: #F56857;
 }
-.submit:hover {
+/* .submit:hover {
     background: #F56857;
     color: #FFF;
     cursor: pointer;
+} */
+
+a.btn.btn-primary.me-3.text-uppercase {
+    border-radius: 30px;
+    padding: 10px 35px !important;
 }
-
-
-

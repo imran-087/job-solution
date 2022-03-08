@@ -15,10 +15,33 @@ use Illuminate\Support\Facades\Validator;
 
 class DiscussionController extends Controller
 {
-    public function index()
+    public function index($status = 'latest')
     {
+        //dd($status);
         $channels = Channel::where('status', 'active')->get();
-        $discussions = Discussion::with(['user', 'channel'])->orderBy('id', 'desc')->paginate(10);
+        if ($status == 'weekago') {
+            $discussions = Discussion::with(['user', 'channel'])
+                ->whereBetween(
+                    'created_at',
+                    [Carbon::now()->subWeek()->startOfWeek(), Carbon::now()->subWeek()->endOfWeek()]
+                )
+                ->orderBy('id', 'desc')
+                ->paginate(10);
+        } else if ($status == 'latest') {
+            $discussions = Discussion::with(['user', 'channel'])
+                ->orderBy('id', 'desc')
+                ->paginate(10);
+        } else if ($status == 'popular') {
+            $discussions = Discussion::with(['user', 'channel'])
+                ->orderBy('id', 'desc')->where('vote', '>', 1)
+                ->paginate(2);
+        } else {
+            $discussions = Discussion::with(['user', 'channel'])
+                ->orderBy('id', 'desc')
+                ->paginate(10);
+        }
+        //dd($discussions);
+
         return view('discussion.discussion_index', compact(['channels', 'discussions',]));
     }
 
@@ -109,5 +132,56 @@ class DiscussionController extends Controller
         $channels = Channel::where('status', 'active')->get();
         $discussions = Discussion::with(['user', 'channel'])->where('channel_id', $channel)->orderBy('id', 'desc')->paginate(10);
         return view('discussion.discussion_index', compact(['channels', 'discussions']));
+    }
+
+    //like dicsussion
+    public function vote($id)
+    {
+        $discussion = Discussion::find($id);
+        $discussion->vote = $discussion->vote + 1;
+
+        if ($discussion->save()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'You liked this discussion!'
+            ], 200);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Failed!.'
+            ]);
+        }
+    }
+    public function search(Request $request)
+    {
+        // $term = $request->search;
+        // $discussions = Discussion::where('title', 'LIKE', "%$term%")->get('title');
+
+        // return response($discussions);
+
+        if ($request->ajax()) {
+
+            $data = Discussion::where('title', 'LIKE', '%' . $request->search . '%')
+                ->get();
+
+            $output = '';
+
+            if (count($data) > 0) {
+
+                $output = '<ul class="list-group" style="display: block; position: relative; z-index: 1">';
+
+                foreach ($data as $row) {
+
+                    $output .= '<a href="discussion/' . $row->id . '/show"><li class="list-group-item">' . $row->title . '</li></a>';
+                }
+
+                $output .= '</ul>';
+            } else {
+
+                $output .= '<li class="list-group-item">' . 'No results' . '</li>';
+            }
+
+            return $output;
+        }
     }
 }

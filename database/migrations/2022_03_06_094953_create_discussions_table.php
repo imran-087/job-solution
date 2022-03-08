@@ -21,6 +21,7 @@ class CreateDiscussionsTable extends Migration
             $table->text('content');
             $table->string('slug');
             $table->integer('reply_id')->nullable();
+            $table->unsignedBigInteger('vote')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });
