@@ -17,7 +17,7 @@
             <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
                 <!--begin::Item-->
                 <li class="breadcrumb-item text-muted">
-                    <a href="{{ url('discussion/latest') }}" class="text-muted text-hover-primary">Home</a>
+                    <a href="{{ url('discussion') }}" class="text-muted text-hover-primary">Home</a>
                 </li>
                 <!--end::Item-->
                 <!--begin::Item-->
@@ -185,6 +185,7 @@
                             data-select2-id="select2-data-123-0tixx">
                             <div class="w-100 mw-150px" data-select2-id="select2-data-122-mhmqq">
                                 <!--begin::Select2-->
+                                
                                 <select class="form-select form-select-solid select2-hidden-accessible kk-discussion-filter"
                                     data-control="select2" data-hide-search="true" data-placeholder="Filter by ..."
                                     data-kt-ecommerce-product-filter="status" data-select2-id="select2-data-10-i8aqq"
@@ -386,7 +387,7 @@
                             <span class="required">Discussion Content</span>
                         </label>
                         <!--end::Label-->
-                        <textarea name="content" class="form-control form-control-solid h-100px "></textarea>
+                        <textarea name="content" class="form-control form-control-solid h-100px ckeditor"></textarea>
                         <div class="help-block with-errors content-error"></div>
                     </div>
                     <!--end::Input group-->
@@ -489,7 +490,7 @@
                 timeout = setTimeout(() => {
                     var val = $('#search').val();
                     if (val == "") {
-                    $("#display").html("");
+                     $('#result').html('');
                 }
                 //If val is not empty.
                 else {
@@ -517,13 +518,15 @@
 
         $(document).ready(function(){
             $('.kk-discussion-filter').on('change',function(){
-                //var val = (this.value)
+                alert('ok')
+                var val = (this.value)
+                console.log(val)
                 //table.ajax.url( "{{ url('admin/category/category-index?status=') }}"+this.value ).load();
                  $.ajax({
                 type:"GET",
-                url: "{{ url('discussion?status=')}}"+this.value,
+                url: "{{ url('discussion')}}"+'/'+this.value,
                 success:function(data){
-                    location.reload();  //Refresh page
+                    //location.reload();  //Refresh page
                     // setTimeout(function() {
                     //     location.reload();  //Refresh page
                     // }, 1000);
@@ -624,6 +627,11 @@
                 }
             })
         });
+
+        //ck-editor
+jQuery(function () {
+    $('.ckeditor').ckeditor();
+});
 
     </script>
 @endpush

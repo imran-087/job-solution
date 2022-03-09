@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Forum\DiscussionController;
+use App\Http\Controllers\QuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,6 +28,13 @@ Route::get('/discussion/{status?}', [DiscussionController::class, 'index'])->nam
 Route::get('/discussion/{id}/show', [DiscussionController::class, 'show'])->name('discussion.show');
 Route::get('/discussion/channel/{channel}', [DiscussionController::class, 'channelDiscussion'])->name('discussion.channel');
 Route::post('/discussion/search', [DiscussionController::class, 'search'])->name('discussion.search');
+
+//question route
+Route::get('/question/all-question', [QuestionController::class, 'index'])->name('question.index');
+Route::get('/question/vote/{id}', [QuestionController::class, 'vote'])->name('question.vote');
+//question bookmark
+Route::get('/question/bookmark/{id}', [QuestionController::class, 'bookmark'])->name('question.bookmark');
+
 
 // filter 
 //Route::get('/discussion/{status}', [DiscussionController::class, 'discussionFilter'])->name('discussion.filter-discussion');

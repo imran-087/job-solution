@@ -15,9 +15,10 @@ use Illuminate\Support\Facades\Validator;
 
 class DiscussionController extends Controller
 {
-    public function index($status = 'latest')
+    public function index($status = null)
     {
         //dd($status);
+        //dump($status);
         $channels = Channel::where('status', 'active')->get();
         if ($status == 'weekago') {
             $discussions = Discussion::with(['user', 'channel'])
@@ -154,10 +155,6 @@ class DiscussionController extends Controller
     }
     public function search(Request $request)
     {
-        // $term = $request->search;
-        // $discussions = Discussion::where('title', 'LIKE', "%$term%")->get('title');
-
-        // return response($discussions);
 
         if ($request->ajax()) {
 
@@ -180,6 +177,7 @@ class DiscussionController extends Controller
 
                 $output .= '<li class="list-group-item">' . 'No results' . '</li>';
             }
+
 
             return $output;
         }

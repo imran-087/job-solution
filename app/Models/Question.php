@@ -19,4 +19,9 @@ class Question extends Model
     {
         return $this->belongsTo(Subject::class);
     }
+
+    public function question_option()
+    {
+        return $this->hasOne(QuestionOption::class);
+    }
 }
