@@ -15,33 +15,48 @@ use Illuminate\Support\Facades\Validator;
 
 class DiscussionController extends Controller
 {
-    public function index($status = null)
+    public function index(Request $request, $status = null)
     {
         //dd($status);
         //dump($status);
-        $channels = Channel::where('status', 'active')->get();
-        if ($status == 'weekago') {
-            $discussions = Discussion::with(['user', 'channel'])
-                ->whereBetween(
-                    'created_at',
-                    [Carbon::now()->subWeek()->startOfWeek(), Carbon::now()->subWeek()->endOfWeek()]
-                )
-                ->orderBy('id', 'desc')
-                ->paginate(10);
-        } else if ($status == 'latest') {
-            $discussions = Discussion::with(['user', 'channel'])
-                ->orderBy('id', 'desc')
-                ->paginate(10);
-        } else if ($status == 'popular') {
-            $discussions = Discussion::with(['user', 'channel'])
-                ->orderBy('id', 'desc')->where('vote', '>', 1)
-                ->paginate(2);
+        if ($request->ajax()) {
+            $channels = Channel::where('status', 'active')->get();
+            if ($status == 'weekago') {
+                $discussions = Discussion::with(['user', 'channel'])
+                    ->whereBetween(
+                        'created_at',
+                        [Carbon::now()->subWeek()->startOfWeek(), Carbon::now()->subWeek()->endOfWeek()]
+                    )
+                    ->orderBy('id', 'desc')
+                    ->paginate(10);
+                //dd($discussions);
+            } else if ($status == 'latest') {
+                $discussions = Discussion::with(['user', 'channel'])
+                    ->orderBy('id', 'desc')
+                    ->paginate(10);
+            } else if ($status == 'popular') {
+                $discussions = Discussion::with(['user', 'channel'])
+                    ->orderBy('vote', 'desc')->where('vote', '>', 1)
+                    ->paginate(10);
+            }
+            $view = view('discussion.discussion_filter', [
+                'discussions' => $discussions,
+                'channels' => $channels
+            ])->render();
+
+            return response([
+                'html' => $view,
+            ]);
         } else {
+            $channels = Channel::where('status', 'active')->get();
+
             $discussions = Discussion::with(['user', 'channel'])
                 ->orderBy('id', 'desc')
                 ->paginate(10);
+
+            //dd($discussions);
         }
-        //dd($discussions);
+
 
         return view('discussion.discussion_index', compact(['channels', 'discussions',]));
     }
@@ -165,21 +180,46 @@ class DiscussionController extends Controller
 
             if (count($data) > 0) {
 
-                $output = '<ul class="list-group" style="display: block; position: relative; z-index: 1">';
+                //$output = '<ul class="list-group" style="display: block; position: relative; z-index: 1;">';
+
 
                 foreach ($data as $row) {
+                    $output .= '<div class="d-flex align-items-center mb-5"
+                    style="margin:0px 30px 20px 30px; background-color:#F5F8FA; padding:10px;">
+                    <div class="symbol symbol-40px me-4 ">
+                    </div>
+                                <!--begin::Title-->
+                                <div class="d-flex flex-column">
+                                    <a href="discussion/' . $row->id . '/show" class="fs-6 text-gray-800 text-hover-primary fw-bold" >' . $row->title . '</a>
+                                    <span class="fs-7 text-muted fw-bold ">' . $row->created_at->diffForHumans() . '</span>
+                                </div>
+                                <!--end::Title-->
+                                </div>
+                                ';
 
-                    $output .= '<a href="discussion/' . $row->id . '/show"><li class="list-group-item">' . $row->title . '</li></a>';
+
+                    //$output .= '<a href="discussion/' . $row->id . '/show"><li class="list-group-item" style=" border-radious:10px">' . $row->title . '</li></a>';
                 }
 
-                $output .= '</ul>';
+                //$output .= '</ul>';
             } else {
 
-                $output .= '<li class="list-group-item">' . 'No results' . '</li>';
+                $output .= ' <p  class="fs-6 text-800  fw-bold" 
+                style="color:red; margin:0px 30px 20px 30px; background-color:#F5F8FA; padding:10px; border-radious:30px;"> '
+                    . 'No Result' .
+                    '</p>';
             }
 
 
             return $output;
         }
+    }
+    public function viewCount($id)
+    {
+        //dump($id);
+        $discussion = Discussion::find($id);
+        $discussion->view = $discussion->view + 1;
+
+        $discussion->save();
     }
 }

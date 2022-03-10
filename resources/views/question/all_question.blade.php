@@ -168,7 +168,7 @@
                                 <!--begin::Menu-->
                                 <div class="my-0 d-flex">
                                     <a href="javascript:;" class="bookmark" data-id="{{ $question->id }}">
-                                        <span class="svg-icon svg-icon-primary svg-icon-2x">
+                                        <span class="svg-icon  svg-icon-2x" >
                                         <!--begin::Svg Icon | path:/var/www/preview.keenthemes.com/metronic/releases/2021-05-14-112058/theme/html/demo1/dist/../src/media/svg/icons/General/Star.svg-->
                                         <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="24px" height="24px" viewBox="0 0 24 24" version="1.1">
                                             <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
@@ -344,6 +344,7 @@
         //bookmarks
         $('.bookmark').on('click', function(){
             var id = $(this).data('id')
+            $(this).children().addClass('svg-icon-primary');
             //alert(id)
             $.ajax({
                 type:"GET",
@@ -361,8 +362,9 @@
                         text: data.message,
                         icon: "error",
                         
-                    })
+                        })
                     }
+                   
                     
                 }
             })

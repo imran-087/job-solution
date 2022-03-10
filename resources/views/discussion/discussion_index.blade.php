@@ -141,18 +141,30 @@
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <!--begin::Container-->
     <div id="kt_content_container" class="container-xxl">
+        
         <!--begin::Row-->
-        <div class="row gy-5 g-xl-8 mb-5">
+        <div class="row gy-5 g-xl-8">
+            <!--begin::Col-->
             <div class="col-xl-2">
                 <!--begin::Add Discussion-->
-                <div class="new-discussion">
+                <div class="new-discussion mb-5">
                     <a href="javascript:;" class="btn btn-primary me-3 text-uppercase" onclick="addNew()">New Discussion</a>
                 </div>
                 <!--end::Add Discussion-->
+                <div class="nav">
+                    <ul class="nav-item">
+                        @foreach($channels as $channel)
+                        <a class="nav-link" href="{{ route('discussion.channel', $channel->id) }}"><li class="mb-3">{{$channel->name}}</li></a>
+                        @endforeach
+                    </ul>
+                </div>
             </div>
+            <!--end::Col-->
+
+            <!--begin::Col-->
             <div class="col-xl-8">
-                 <!--begin::Card-->
-                <div class="card">
+                <!--begin::Card-->
+                <div class="card mb-5">
                     <!--begin::Card header-->
                     <div class="card-header border-0 ">
                         <!--begin::Card title-->
@@ -172,11 +184,12 @@
                                 </span>
                                 <!--end::Svg Icon-->
                                 <input type="text" data-kk-product-table-filter="search"
-                                    class="form-control form-control-solid w-250px ps-14" id="search" placeholder="Search discussion">
+                                    class="form-control form-control-solid w-350px ps-14" id="search" placeholder="Search discussion">
                                 {{-- <div id="display"></div> --}}
                                    
                             </div>
                             <!--end::Search-->
+                          
                             
                         </div>
                         <!--begin::Card title-->
@@ -190,56 +203,27 @@
                                     data-control="select2" data-hide-search="true" data-placeholder="Filter by ..."
                                     data-kt-ecommerce-product-filter="status" data-select2-id="select2-data-10-i8aqq"
                                     tabindex="-1" aria-hidden="true" >
+                                    <option></option>
                                     <option value="latest">Latest</option>
                                     <option value="popular">Most Popular</option>
                                     <option value="weekago">Last Week</option>
                                 </select>
                                 <!--end::Select2-->
                             </div> 
-                            {{-- <div class="w-100 mw-150px" data-select2-id="select2-data-122-mhmq">
-                                <!--begin::Select2-->
-                                <select class="form-select form-select-solid select2-hidden-accessible kk-status-filter"
-                                    data-control="select2" data-hide-search="true" data-placeholder="Status"
-                                    data-kt-ecommerce-product-filter="status" data-select2-id="select2-data-10-i8aq"
-                                    tabindex="-1" aria-hidden="true">
-                                    <option data-select2-id="select2-data-12-ibou"></option>
-                                    <option value="all" data-select2-id="select2-data-128-oc9k">All</option>
-                                    <option value="active" data-select2-id="select2-data-129-5n39">Active</option>
-                                    <option value="deactive" data-select2-id="select2-data-131-pohp">Deactive</option>
-
-                                </select>
-                                <!--end::Select2-->
-                            </div>  --}}
+                            
                         </div>
 
                     </div>
                     <!--end::Card header-->
-                     <div id="result"></div>
+                    <div id="result"></div>
                 </div>
-                
                 <!--end::Card-->
-                
-            </div>
-        </div>
-        <!--end::Row-->
-        <!--begin::Row-->
-        <div class="row gy-5 g-xl-8">
-            <!--begin::Col-->
-            <div class="col-xl-2">
-                <div class="nav">
-                    <ul class="nav-item">
-                        @foreach($channels as $channel)
-                        <a class="nav-link" href="{{ route('discussion.channel', $channel->id) }}"><li class="mb-3">{{$channel->name}}</li></a>
-                        @endforeach
-                    </ul>
-                </div>
-            </div>
-            <!--end::Col-->
 
-            <!--begin::Col-->
-            <div class="col-xl-8">
                 
-                @foreach($discussions as $discussion)
+                 
+                
+                <div id="main">
+                    @foreach($discussions as $discussion)
                     <!--begin::Feeds Widget 2-->
                     <div class="card mb-5 mb-xl-8">
                         <!--begin::Body-->
@@ -256,7 +240,7 @@
                                     <!--end::Avatar-->
                                     <!--begin::Info-->
                                     <div class="d-flex flex-column">
-                                        <a href="{{ route('discussion.show', $discussion->id) }}" class="text-gray-900 text-hover-primary fs-6 fw-bolder">{{ Str::limit($discussion->title, 50, $end='...') }}</a>
+                                        <a href="{{ route('discussion.show', $discussion->id) }}" class="text-gray-900 text-hover-primary fs-6 fw-bolder view" data-id="{{ $discussion->id }}" style="font-size: 20px !important;">{{ Str::limit($discussion->title, 50, $end='...') }}</a>
                                         <span class="text-gray-400 fw-bold">{{$discussion->created_at->diffForHumans()}}</span>
                                     </div>
                                     <!--end::Info-->
@@ -277,13 +261,14 @@
                             <!--begin::Post-->
                             <div class="mb-5">
                                 <!--begin::Text-->
-                                <a href="{{ route('discussion.show', $discussion->id) }}">
-                                    <p class="text-gray-800 fw-normal mb-5">{{$discussion->content}}</p>
+                                <a href="{{ route('discussion.show', $discussion->id) }}" class="view" data-id="{{ $discussion->id }}">
+                                    <p class="text-gray-800 fw-normal mb-5">{{ Str::limit($discussion->content, 250, $end='...') }}</p>
                                 </a>
                                 <!--end::Text-->
                                 <!--begin::Toolbar-->
                                 <div class="d-flex align-items-center mb-5">
-                                    <a href="{{ route('discussion.show', $discussion->id) }}" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4">
+
+                                    <a href="{{ route('discussion.show', $discussion->id) }}" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4 view" data-id="{{ $discussion->id }}">
                                     <!--begin::Svg Icon | path: icons/duotune/communication/com012.svg-->
                                     <span class="svg-icon svg-icon-3">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -293,7 +278,7 @@
                                         </svg>
                                     </span>
                                     <!--end::Svg Icon-->{{$discussion->replies->count()}}</a>
-                                    <a href="javascript:;" class="btn btn-sm btn-light btn-color-muted btn-active-light-danger px-4 py-2 vote"  data-id="{{ $discussion->id }}">
+                                    <a href="javascript:;" class="btn btn-sm btn-light btn-color-muted btn-active-light-danger px-4 py-2 vote me-4"  data-id="{{ $discussion->id }}">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen030.svg-->
                                     <span class="svg-icon svg-icon-2">
                                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -301,6 +286,10 @@
                                         </svg>
                                     </span>
                                     <!--end::Svg Icon-->{{$discussion->vote}}</a>
+
+                                    <a href="" style="cursor:default" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4">
+                                      <i class="fas fa-eye fa-xl"></i> {{$discussion->view}} </a>
+                                    
                                 </div>
                                 <!--end::Toolbar-->
                             </div>
@@ -311,10 +300,13 @@
                         <!--end::Body-->
                     </div>
                     <!--end::Feeds Widget 2-->
-                @endforeach
-                <div class="d-flex justify-content-end">
-                    {{ $discussions->links() }}
+                    @endforeach
+                    <div class="d-flex justify-content-end">
+                        {{ $discussions->links() }}
+                    </div>
                 </div>
+                <div id="render"></div>
+                
             </div>
             <!--end::Col-->
            
@@ -387,7 +379,7 @@
                             <span class="required">Discussion Content</span>
                         </label>
                         <!--end::Label-->
-                        <textarea name="content" class="form-control form-control-solid h-100px ckeditor"></textarea>
+                        <textarea name="content" class="form-control form-control-solid h-100px "></textarea>
                         <div class="help-block with-errors content-error"></div>
                     </div>
                     <!--end::Input group-->
@@ -483,6 +475,7 @@
 
         })
 
+        //search
         $(document).ready(function() {
             var timeout = null
             $("#search").keyup(function() {
@@ -507,6 +500,7 @@
                         success: function(data) {
                             //console.log(data)
                           $('#result').html(data);
+                          
                            
                         }
                     });
@@ -516,22 +510,26 @@
             });
         })
 
+        //filter
         $(document).ready(function(){
             $('.kk-discussion-filter').on('change',function(){
-                alert('ok')
-                var val = (this.value)
-                console.log(val)
+                //var val = (this.value)
                 //table.ajax.url( "{{ url('admin/category/category-index?status=') }}"+this.value ).load();
-                 $.ajax({
-                type:"GET",
-                url: "{{ url('discussion')}}"+'/'+this.value,
-                success:function(data){
-                    //location.reload();  //Refresh page
-                    // setTimeout(function() {
-                    //     location.reload();  //Refresh page
-                    // }, 1000);
-                }
-            })
+                $.ajax({
+                    type:"GET",
+                    url: "{{ url('discussion')}}"+'/'+this.value,
+                    success:function(data){
+                        if(data){
+                            $("#render").html(data.html)
+                            $("#main").hide()
+                        }
+                        else{
+                            $("#main").hide()
+                        }
+                       
+                        
+                    }
+                })
             })
         });
 
@@ -628,10 +626,22 @@
             })
         });
 
-        //ck-editor
-jQuery(function () {
-    $('.ckeditor').ckeditor();
-});
+        //view
+        $('.view').on('click', function(){
+            var id = $(this).data('id')
+            //alert(id)
+            $.ajax({
+                type:"GET",
+                url: "{{ url('discussion/view-count')}}"+'/'+id,
+                dataType: 'json',
+                success:function(data){
+                    
+                }
+            })
+        });
+
+        
+
 
     </script>
 @endpush
