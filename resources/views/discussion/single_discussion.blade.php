@@ -1,5 +1,5 @@
 
-@extends('frontend.layout')
+@extends('layouts.app')
 
 @section('toolbar')
 <div class="toolbar" id="kt_toolbar">
@@ -153,10 +153,14 @@
         <div class="row gy-5 g-xl-8">
             <!--begin::Col-->
             <div class="col-xl-2">
+                <div class="new-discussion mb-5">
+                    <a href="javascript:;" class="btn btn-primary me-3 text-uppercase" onclick="addNew()">New Discussion</a>
+                </div>
+                <!--end::Add Discussion-->
                 <div class="nav">
                     <ul class="nav-item">
                         @foreach($channels as $channel)
-                        <a class="nav-link" href="{{ route('discussion.channel', $channel->id) }}"><li class="mb-3">{{$channel->name}}</li></a>
+                            <a class="nav-link" href="{{ route('discussion.channel', $channel->id) }}"><li class="mb-3">{{$channel->name}}</li></a>
                         @endforeach
                     </ul>
                 </div>

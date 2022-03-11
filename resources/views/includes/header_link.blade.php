@@ -1,12 +1,6 @@
-
-<!DOCTYPE html>
-
-<html lang="en">
-	<!--begin::Head-->
-	<head>
-		<title>Satt Academy - Admin</title>
+<head>
+		<title>SATTAcademy - @yield('title')</title>
 		<meta charset="utf-8" />
-		 <!-- CSRF Token -->
     	<meta name="csrf-token" content="{{ csrf_token() }}">
 		<meta name="description" content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 94,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue &amp; Laravel versions. Grab your copy now and get life-time updates for free." />
 		<meta name="keywords" content="Metronic, bootstrap, bootstrap 5, Angular, VueJs, React, Laravel, admin themes, web design, figma, web development, free templates, free admin themes, bootstrap theme, bootstrap template, bootstrap dashboard, bootstrap dak mode, bootstrap button, bootstrap datepicker, bootstrap timepicker, fullcalendar, datatables, flaticon" />
@@ -21,6 +15,10 @@
 		<!--begin::Fonts-->
 		<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" />
 		<!--end::Fonts-->
+		<!--begin::Page Vendor Stylesheets(used by this page)-->
+		<link href="{{ asset('assets') }}/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
+		<link href="{{ asset('assets') }}/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
+		<!--end::Page Vendor Stylesheets-->
 		<!--begin::Global Stylesheets Bundle(used by all pages)-->
 		<link href="{{ asset('assets') }}/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('assets') }}/css/style.bundle.css" rel="stylesheet" type="text/css" />
@@ -28,27 +26,21 @@
 		<!--Begin::Google Tag Manager -->
 		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-5FS8GGP');</script>
 		<!--End::Google Tag Manager -->
+
+		<!--Toastr Notification -->
+		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
+
+        <!-- Toastr -->
+		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
+        <!-- Custom css -->
+        <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+
+		<!--Custom error style -->
+		<style>
+			.help-block.with-errors {
+				color: #f51515;
+				font-size: 12px;
+				padding: 5px 0px;
+			}
+    	</style>
 	</head>
-	<!--end::Head-->
-	<!--begin::Body-->
-	<body id="kt_body" class="bg-body">
-		<!--Begin::Google Tag Manager (noscript) -->
-		<noscript>
-			<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-5FS8GGP" height="0" width="0" style="display:none;visibility:hidden"></iframe>
-		</noscript>
-		<!--End::Google Tag Manager (noscript) -->
-		<!--begin::Main-->
-		@yield('content')
-		<!--end::Main-->
-		<!--begin::Javascript-->
-		<!--begin::Global Javascript Bundle(used by all pages)-->
-		<script src="{{ asset('assets') }}/plugins/global/plugins.bundle.js"></script>
-		<script src="{{ asset('assets') }}/js/scripts.bundle.js"></script>
-		<!--end::Global Javascript Bundle-->
-		<!--begin::Page Custom Javascript(used by this page)-->
-		<script src="{{ asset('assets') }}/js/custom/authentication/sign-in/general.js"></script>
-		<!--end::Page Custom Javascript-->
-		<!--end::Javascript-->
-	</body>
-	<!--end::Body-->
-</html>

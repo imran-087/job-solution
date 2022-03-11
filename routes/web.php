@@ -34,6 +34,7 @@ Route::get('/discussion/view-count/{id}', [DiscussionController::class, 'viewCou
 Route::get('/question/all-question', [QuestionController::class, 'index'])->name('question.index');
 Route::get('/question/vote/{id}', [QuestionController::class, 'vote'])->name('question.vote');
 
+
 //question bookmark
 Route::get('/question/bookmark/{id}', [QuestionController::class, 'bookmark'])->name('question.bookmark');
 

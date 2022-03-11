@@ -1,4 +1,4 @@
-@extends('frontend.layout')
+@extends('layouts.app')
 @section('title', 'Forum')
 
 @section('toolbar')
@@ -145,10 +145,10 @@
         <!--begin::Row-->
         <div class="row gy-5 g-xl-8">
             <!--begin::Col-->
-            <div class="col-xl-2">
+            <div class="col-xl-3">
                 <!--begin::Add Discussion-->
                 <div class="new-discussion mb-5">
-                    <a href="javascript:;" class="btn btn-primary me-3 text-uppercase" onclick="addNew()">New Discussion</a>
+                <a href="javascript:;" class="btn btn-primary me-3 text-uppercase" onclick="addNew()">New Discussion</a>
                 </div>
                 <!--end::Add Discussion-->
                 <div class="nav">
@@ -311,7 +311,7 @@
             <!--end::Col-->
            
             <!--begin::Col-->
-            <div class="col-xl-2">
+            <div class="col-xl-1">
                 
             </div>
         </div>

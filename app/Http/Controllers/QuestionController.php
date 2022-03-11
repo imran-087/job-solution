@@ -40,6 +40,7 @@ class QuestionController extends Controller
 
     public function bookmark($id)
     {
+        //dump($id);
         if (!Auth::check()) {
             //dd('ok');
             return response()->json([
