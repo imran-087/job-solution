@@ -174,6 +174,15 @@
                             <span class="menu-title">Question Description</span>
                         </a>
                     </div>
+
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/description/pending-question-description*') ? 'active' : '' }}" href="{{ route('admin.question-description.pending') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Pending Description</span>
+                        </a>
+                    </div>
                     
                     
                 </div>

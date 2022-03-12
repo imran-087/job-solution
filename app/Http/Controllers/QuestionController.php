@@ -70,4 +70,18 @@ class QuestionController extends Controller
             }
         }
     }
+
+    //subject wise question
+    public function subjectWiseQuestion($main_category, $category, $sub_category, $subject)
+    {
+        // dump($main_category);
+        // dump($category);
+        // dump($sub_category);
+        // dump($subject);
+        $questions  = Question::where(['subject_id' => $subject, 'sub_category_id' => $sub_category])
+            ->with('question_option', 'subject', 'sub_category', 'descriptions')->paginate(2);
+
+        //dd($questions);
+        return view('question.subject_wise_question', compact('questions'));
+    }
 }

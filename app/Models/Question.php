@@ -24,4 +24,9 @@ class Question extends Model
     {
         return $this->hasOne(QuestionOption::class);
     }
+
+    public function descriptions()
+    {
+        return $this->hasMany(QuestionDescription::class);
+    }
 }

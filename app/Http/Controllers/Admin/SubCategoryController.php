@@ -70,7 +70,7 @@ class SubCategoryController extends Controller
         }
 
         //get all main category
-        $main_categories = MainCategory::all();
+        $main_categories = MainCategory::where('status', 'active')->get();
         return view('admin.category.sub_category', compact('main_categories'));
     }
 

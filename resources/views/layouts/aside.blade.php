@@ -1,3 +1,5 @@
+
+
 <div class="aside-menu flex-column-fluid">
     <!--begin::Aside Menu-->
     <div class="hover-scroll-overlay-y my-5 my-lg-5" id="kt_aside_menu_wrapper" data-kt-scroll="true"
@@ -29,12 +31,74 @@
                 
             
             <div class="menu-item">
-            <div class="menu-content pt-8 pb-2">
-                <span class="menu-section text-muted text-uppercase fs-8 ls-1">Job Solution</span>
+                <div class="menu-content pt-8 pb-2">
+                    <span class="menu-section text-muted text-uppercase fs-8 ls-1">Job Solution</span>
+                </div>
             </div>
+            @foreach(App\Models\MainCategory::with('categories')->where('status', 'active')->get() as $main_category)
+            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/art/art009.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path opacity="0.3" d="M21 18.3V4H20H5C4.4 4 4 4.4 4 5V20C10.9 20 16.7 15.6 19 9.5V18.3C18.4 18.6 18 19.3 18 20C18 21.1 18.9 22 20 22C21.1 22 22 21.1 22 20C22 19.3 21.6 18.6 21 18.3Z" fill="black"></path>
+                                <path d="M22 4C22 2.9 21.1 2 20 2C18.9 2 18 2.9 18 4C18 4.7 18.4 5.29995 18.9 5.69995C18.1 12.6 12.6 18.2 5.70001 18.9C5.30001 18.4 4.7 18 4 18C2.9 18 2 18.9 2 20C2 21.1 2.9 22 4 22C4.8 22 5.39999 21.6 5.79999 20.9C13.8 20.1 20.1 13.7 20.9 5.80005C21.6 5.40005 22 4.8 22 4Z" fill="black"></path>
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">{{$main_category->name}}</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion menu-active-bg" kt-hidden-height="117" style="display: none; overflow: hidden;">
+                    
+                    @foreach($main_category->categories as $category)
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">{{$category->name}}</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+                         @foreach(App\Models\SubCategory::where(['category_id' => $category->id, 'status' => 'active'])->with('subject')->get() as $sub_category)
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                                <span class="menu-link">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">{{$sub_category->name}}</span>
+                                    <span class="menu-arrow"></span>
+                                </span>
+                                
+                                <div class="menu-sub menu-sub-accordion menu-active-bg">
+                                     @foreach($sub_category->subject as $subject)
+                                    <div class="menu-item">
+                                        <a class="menu-link" href="{{ route('question.subject-wise-question', 
+                                                                    [$main_category->id, $category->id, $sub_category->id, $subject->id]) }}"
+                                        >
+                                            <span class="menu-bullet">
+                                                <span class="bullet bullet-dot"></span>
+                                            </span>
+                                            <span class="menu-title">{{ $subject->name }}</span>
+                                        </a>
+                                    </div>
+                                    @endforeach
+                                </div>
+                                
+                            </div>  
+                        </div>
+                        @endforeach
+                    </div>
+                    @endforeach 
+                </div>
             </div>
-         
+            @endforeach
+
             
+   
         </div>
         <!--end::Menu-->
     </div>
@@ -77,3 +141,18 @@
     
 </div>
 <!--end::Footer-->
+
+
+@push('script')
+
+   <script type="text/javascript">
+     $(document).ready(function(){
+        $('.category').on('click', function(e){
+            e.preventDefault()
+            var id = $(this).data('id')
+            alert(id)
+        })
+    })
+
+   </script>
+@endpush

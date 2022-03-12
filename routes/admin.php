@@ -87,6 +87,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/description/question-description/get/{id}', 'QuestionDescriptionController@getQuestionDes')->name('question-description.get');
         Route::get('/description/question-description/delete/{id}', 'QuestionDescriptionController@deleteQuestionDes')->name('question-description.delete');
 
+        Route::get('/description/pending-question-description', 'QuestionDescriptionController@pending')->name('question-description.pending');
+        Route::get('/description/pending-question-description/status/{id}', 'QuestionDescriptionController@chnageStatus')->name('question-description.pending-status');
+
+
         ############ Dependable setect input route ###############
         Route::get('/get-category/{id}', 'GetAllCategoryController@getCategory');
         Route::get('/get-sub-category/{id}', 'GetAllCategoryController@getSubCategory');

@@ -69,7 +69,7 @@ class CategoryController extends Controller
         }
 
         //get all min category
-        $main_categories = MainCategory::all();
+        $main_categories = MainCategory::where('status', 'active')->get();
 
         return view('admin.category.category', compact('main_categories'));
     }

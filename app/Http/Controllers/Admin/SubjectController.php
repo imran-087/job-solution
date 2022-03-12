@@ -71,7 +71,7 @@ class SubjectController extends Controller
         }
 
         //get all main category
-        $main_categories = MainCategory::all();
+        $main_categories = MainCategory::where('status', 'active')->get();
         $parent_subjects = Subject::where('parent_id', 0)->get();
         return view('admin.category.subject', compact(['main_categories', 'parent_subjects']));
     }

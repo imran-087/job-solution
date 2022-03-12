@@ -19,4 +19,9 @@ class QuestionDescription extends Model
     {
         return $this->morphMany(EditedDescription::class, 'descriptionable');
     }
+
+    public function user()
+    {
+        return $this->belongsTo(Admin::class, 'created_user_id', 'id');
+    }
 }

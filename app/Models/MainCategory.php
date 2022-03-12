@@ -14,4 +14,10 @@ class MainCategory extends Model
     {
         return $this->morphMany(EditedCategory::class, 'categoriable');
     }
+
+    //category
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
 }

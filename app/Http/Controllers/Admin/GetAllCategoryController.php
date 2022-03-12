@@ -13,7 +13,7 @@ class GetAllCategoryController extends Controller
 {
     public function getCategory($id)
     {
-        $category = Category::where('main_category_id', $id)->get();
+        $category = Category::where(['main_category_id' => $id, 'status' => 'active'])->get();
 
         return response()->json($category);
     }
@@ -21,15 +21,15 @@ class GetAllCategoryController extends Controller
     public function getSubCategory($id)
     {
 
-        $sub_category = SubCategory::where('category_id', $id)->get();
+        $sub_category = SubCategory::where(['category_id' => $id, 'status' => 'active'])->get();
 
         return response()->json($sub_category);
     }
 
-     public function getSubject($id)
+    public function getSubject($id)
     {
-        
-        $subject = Subject::where('sub_category_id', $id)->get();
+
+        $subject = Subject::where(['sub_category_id' => $id, 'status' => 'active'])->get();
         //dd($question);
         return response()->json($subject);
     }
@@ -45,12 +45,9 @@ class GetAllCategoryController extends Controller
 
     public function getQuestion($subject_id)
     {
-        
+
         $question = Question::where('subject_id', $subject_id)->get();
         //dd($question);
         return response()->json($question);
     }
-
-    
-
 }
