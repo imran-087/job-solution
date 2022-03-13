@@ -19,4 +19,9 @@ class Subject extends Model
     {
         return $this->morphMany(EditedDescription::class, 'descriptionable');
     }
+
+    public function question()
+    {
+        return $this->hasMany(Question::class);
+    }
 }

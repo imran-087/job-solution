@@ -26,4 +26,10 @@ class SubCategory extends Model
     {
         return $this->hasMany(Subject::class);
     }
+
+    //subject
+    public function question()
+    {
+        return $this->hasMany(Question::class);
+    }
 }

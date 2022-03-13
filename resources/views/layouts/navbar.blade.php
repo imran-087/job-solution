@@ -10,78 +10,12 @@
         <!--begin::Menu-->
         <div class="menu menu-lg-rounded menu-column menu-lg-row menu-state-bg menu-title-gray-700 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-400 fw-bold my-5 my-lg-0 align-items-stretch"
             id="#kt_header_menu" data-kt-menu="true">
-            <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start"
-                class="menu-item here show menu-lg-down-accordion me-lg-1">
+            <div class="menu-item here menu-lg-down-accordion me-lg-1 {{ request()->is('/home') ? 'show' : '' }}">
                 <span class="menu-link py-3">
-                    <span class="menu-title">Dashboards</span>
+                    <a href="{{ url('/home') }}"><span class="menu-title">Home</span></a>
                     <span class="menu-arrow d-lg-none"></span>
                 </span>
-                <div class="menu-sub menu-sub-lg-down-accordion menu-sub-lg-dropdown menu-rounded-0 py-lg-4 w-lg-225px">
-                    <div class="menu-item">
-                        <a class="menu-link active py-3" href="/metronic8/demo1/../demo1/index.html">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Multipurpose</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link py-3" href="/metronic8/demo1/../demo1/dashboards/ecommerce.html">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">eCommerce</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link py-3" href="/metronic8/demo1/../demo1/dashboards/store-analytics.html">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Store Analytics</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link py-3" href="/metronic8/demo1/../demo1/dashboards/logistics.html">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Logistics</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link py-3" href="/metronic8/demo1/../demo1/dashboards/delivery.html">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Delivery</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link py-3" href="/metronic8/demo1/../demo1/dashboards/marketing.html">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Marketing</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link py-3" href="/metronic8/demo1/../demo1/dashboards/online-courses.html">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Online Courses</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link py-3" href="/metronic8/demo1/../demo1/landing.html">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Landing</span>
-                        </a>
-                    </div>
-                </div>
+               
             </div>
             <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start"
                 class="menu-item menu-lg-down-accordion me-lg-1">
@@ -159,6 +93,13 @@
                     @endforeach
                    
                 </div>
+            </div>
+            <div class="menu-item here  menu-lg-down-accordion me-lg-1 {{ request()->is('/discussion') ? 'show' : '' }}">
+                <span class="menu-link py-3">
+                    <a href="{{ url('/discussion') }}"><span class="menu-title">Forum</span></a>
+                    <span class="menu-arrow d-lg-none"></span>
+                </span>
+               
             </div>
             <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start"
                 class="menu-item menu-lg-down-accordion me-lg-1">

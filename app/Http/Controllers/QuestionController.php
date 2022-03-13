@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Subject;
 use App\Models\Bookmark;
-use App\Models\MainCategory;
 use App\Models\Question;
+use App\Models\SubCategory;
+use App\Models\MainCategory;
 use Illuminate\Http\Request;
 use App\Models\QuestionOption;
 use Illuminate\Support\Facades\Auth;
@@ -78,7 +80,9 @@ class QuestionController extends Controller
         // dump($category);
         // dump($sub_category);
         // dump($subject);
-        $questions  = Question::where(['subject_id' => $subject, 'sub_category_id' => $sub_category])
+        $sub_category = SubCategory::where('slug', $sub_category)->first();
+        $subject = Subject::where('slug', $subject)->first();
+        $questions  = Question::where(['subject_id' => $subject->id, 'sub_category_id' => $sub_category->id])
             ->with('question_option', 'subject', 'sub_category', 'descriptions')->paginate(2);
 
         //dd($questions);

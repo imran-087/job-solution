@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\DescriptionController;
 use App\Http\Controllers\Forum\DiscussionController;
@@ -43,6 +44,17 @@ Route::get(
     '/question/{main_category}/{category}/{sub_category}/{subject}',
     [QuestionController::class, 'subjectWiseQuestion']
 )->name('question.subject-wise-question');
+
+/*
+  Category route
+*/
+/* get sub category */
+Route::get('/jobs/{category}', [CategoryController::class, 'getSubCategory'])->name('jobs.category.sub-category');
+/** get subject with question */
+Route::get('/jobs/{category}/{sub_category}/all-question', [CategoryController::class, 'getSubjectWithAllQuestion'])->name('jobs.sub-category.subject.all-question');
+/** get subject wise question */
+Route::get('/jobs/{category}/{sub_category}/{subject}', [CategoryController::class, 'getSubjectWiseQuestion'])->name('jobs.category.sub-category.subject.question');
+
 
 
 //question bookmark
