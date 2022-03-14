@@ -38,7 +38,7 @@ class CategoryController extends Controller
 
     public function getSubjectWiseQuestion($category, $sub_category, $subject)
     {
-        // dump($category);
+        //dump($category);
         //dump($sub_category);
         //dd('ok');
         $category = Category::where('slug', $category)->first();

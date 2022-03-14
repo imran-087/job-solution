@@ -78,3 +78,8 @@ a.btn.btn-primary.me-3.text-uppercase {
 .float-right{
     margin-left: 400px !important;
 }
+
+.right-answer{
+    color:green !important;
+    font-weight:bolder !important;
+}

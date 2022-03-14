@@ -6,6 +6,8 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\DescriptionController;
+use App\Http\Controllers\UserDashboardController;
+use App\Http\Controllers\ProfileSettingsController;
 use App\Http\Controllers\Forum\DiscussionController;
 
 /*
@@ -20,7 +22,7 @@ use App\Http\Controllers\Forum\DiscussionController;
 */
 
 Route::get('/', function () {
-    return view('index');
+  return view('index');
 });
 
 Auth::routes();
@@ -41,20 +43,17 @@ Route::get('/question/vote/{id}', [QuestionController::class, 'vote'])->name('qu
   subject wise Question
 */
 Route::get(
-    '/question/{main_category}/{category}/{sub_category}/{subject}',
-    [QuestionController::class, 'subjectWiseQuestion']
+  '/question/{main_category}/{category}/{sub_category}/{subject}',
+  [QuestionController::class, 'subjectWiseQuestion']
 )->name('question.subject-wise-question');
 
-/*
-  Category route
-*/
-/* get sub category */
-Route::get('/jobs/{category}', [CategoryController::class, 'getSubCategory'])->name('jobs.category.sub-category');
-/** get subject with question */
-Route::get('/jobs/{category}/{sub_category}/all-question', [CategoryController::class, 'getSubjectWithAllQuestion'])->name('jobs.sub-category.subject.all-question');
-/** get subject wise question */
-Route::get('/jobs/{category}/{sub_category}/{subject}', [CategoryController::class, 'getSubjectWiseQuestion'])->name('jobs.category.sub-category.subject.question');
 
+/*############## get sub category ###############*/
+Route::get('/jobs/{category}', [CategoryController::class, 'getSubCategory'])->name('jobs.category.sub-category');
+/**########## get subject with question ########*/
+Route::get('/jobs/{category}/{sub_category}/all-question', [CategoryController::class, 'getSubjectWithAllQuestion'])->name('jobs.sub-category.subject.all-question');
+/**########## get subject wise question ############*/
+Route::get('/jobs/{category}/{sub_category}/{subject}', [CategoryController::class, 'getSubjectWiseQuestion'])->name('jobs.category.sub-category.subject.question');
 
 
 //question bookmark
@@ -64,13 +63,25 @@ Route::get('/question/bookmark/{id}', [QuestionController::class, 'bookmark'])->
    Question Description
 */
 Route::post('/description/question-description/store', [DescriptionController::class, 'store'])->name('description.question-description');
+Route::get('/question/edit-question/{id}', [QuestionController::class, 'edit'])->name('question.edit-question');
+Route::post('/question/update-question', [QuestionController::class, 'update'])->name('question.update-question');
 
 // filter 
 //Route::get('/discussion/{status}', [DiscussionController::class, 'discussionFilter'])->name('discussion.filter-discussion');
 
 Route::middleware('auth')->group(function () {
-    Route::post('/discussion/store', [DiscussionController::class, 'store'])->name('discussion.store');
-    Route::post('/discussion/reply', [DiscussionController::class, 'reply'])->name('discussion.reply');
-    Route::get('/discussion/vote/{id}', [DiscussionController::class, 'vote'])->name('discussion.vote');
-    Route::get('/discussions/{discussion}/replies/{reply}/mark-as-best-reply', [DiscussionController::class, 'bestreply'])->name('discussions.best-reply');
+  Route::post('/discussion/store', [DiscussionController::class, 'store'])->name('discussion.store');
+  Route::post('/discussion/reply', [DiscussionController::class, 'reply'])->name('discussion.reply');
+  Route::get('/discussion/vote/{id}', [DiscussionController::class, 'vote'])->name('discussion.vote');
+  Route::get('/discussions/{discussion}/replies/{reply}/mark-as-best-reply', [DiscussionController::class, 'bestreply'])->name('discussions.best-reply');
+});
+
+
+####### User dashboard route #######
+Route::middleware('auth')->name('user-dashboard.')->group(function () {
+  Route::get('/my-dashboard/{user}', [UserDashboardController::class, 'index'])->name('index');
+  Route::get('/my-dashboard/{user}/my-bookmark', [UserDashboardController::class, 'bookmark'])->name('bookmark');
+  Route::get('/my-dashboard/{user}/profile-settings', [UserDashboardController::class, 'profileSettings'])->name('profile-settings');
+  Route::post('/my-dashboard/profile-settings/chnage-password', [UserDashboardController::class, 'chnagePassword'])->name('chnage-password');
+  Route::post('/my-dashboard/profile-settings/update-profile', [UserDashboardController::class, 'updateProfile'])->name('update-profile');
 });

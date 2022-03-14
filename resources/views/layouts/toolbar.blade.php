@@ -636,7 +636,7 @@
             <!--end::Menu separator-->
             <!--begin::Menu item-->
             <div class="menu-item px-5">
-                <a href="/metronic8/demo1/../demo1/account/overview.html" class="menu-link px-5">My Profile</a>
+                <a href="{{route('user-dashboard.index', [Auth::user()->id])}}" class="menu-link px-5">My Profile</a>
             </div>
             <!--end::Menu item-->
            

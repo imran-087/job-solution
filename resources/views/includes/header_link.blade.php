@@ -30,8 +30,6 @@
 		<!--Toastr Notification -->
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
-        <!-- Toastr -->
-		<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css">
         <!-- Custom css -->
         <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
 

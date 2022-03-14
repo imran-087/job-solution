@@ -15,6 +15,16 @@ class CreateEditedQuestionsTable extends Migration
     {
         Schema::create('edited_questions', function (Blueprint $table) {
             $table->id();
+            $table->integer('user_id');
+            $table->integer('question_id');
+            $table->text('question');
+            $table->string('option_1')->nullable();
+            $table->string('option_2')->nullable();
+            $table->string('option_3')->nullable();
+            $table->string('option_4')->nullable();
+            $table->string('option_5')->nullable();
+            $table->string('answer')->nullable();
+            $table->text('written_answer')->nullable();
             $table->timestamps();
         });
     }
