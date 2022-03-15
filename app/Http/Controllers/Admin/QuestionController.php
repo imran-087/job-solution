@@ -13,6 +13,7 @@ use App\Models\MainCategory;
 use Illuminate\Http\Request;
 use App\Models\QuestionOption;
 use App\Http\Controllers\Controller;
+use App\Models\EditedQuestion;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Facades\DataTables;

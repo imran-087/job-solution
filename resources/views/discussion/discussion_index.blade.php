@@ -262,7 +262,8 @@
                             <div class="mb-5">
                                 <!--begin::Text-->
                                 <a href="{{ route('discussion.show', $discussion->id) }}" class="view" data-id="{{ $discussion->id }}">
-                                    <p class="text-gray-800 fw-normal mb-5">{{ Str::limit($discussion->content, 250, $end='...') }}</p>
+                                    
+                                    <p class="text-gray-800 fw-normal mb-5">{!! $discussion->content !!}</p>
                                 </a>
                                 <!--end::Text-->
                                 <!--begin::Toolbar-->
@@ -379,7 +380,10 @@
                             <span class="required">Discussion Content</span>
                         </label>
                         <!--end::Label-->
-                        <textarea name="content" class="form-control form-control-solid h-100px "></textarea>
+                        {{-- <textarea name="content" class="form-control form-control-solid h-100px "></textarea> --}}
+                        <input name="content" type="hidden">
+                        <div id="kt_docs_quill_basic" class="form-control form-control-solid h-300px"  >
+                        </div>
                         <div class="help-block with-errors content-error"></div>
                     </div>
                     <!--end::Input group-->
@@ -549,60 +553,7 @@
             $("#kk_modal_new_passage").modal('hide');
         })
 
-        //new category save
-        $('#kk_modal_new_passage_form').on('submit',function(e){
-            e.preventDefault()
-            $('.with-errors').text('')
-            $('.indicator-label').hide()
-            $('.indicator-progress').show()
-            $('#kk_modal_new_service_submit').attr('disabled','true')
-
-            var formData = new FormData(this);
-            $.ajax({
-                type:"POST",
-                url: "{{ url('discussion/store')}}",
-                data:formData,
-                cache:false,
-                contentType: false,
-                processData: false,
-                success:function(data){
-                     
-                    if(data.success ==  false || data.success ==  "false"){
-                        var arr = Object.keys(data.errors);
-                        var arr_val = Object.values(data.errors);
-                        for(var i= 0;i < arr.length;i++){
-                        $('.'+arr[i]+'-error').text(arr_val[i][0])
-                        }
-                    }else if(data.error || data.error == 'true'){
-                        var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
-                        $('#kk_modal_new_passage_form').find('.messages').html(alertBox).show();
-                    }else{
-                        // empty the form
-                        $('#kk_modal_new_passage_form')[0].reset();
-                        $("#kk_modal_new_passage").modal('hide');
-                       
-                        Swal.fire({
-                                text: data.message,
-                                icon: "success",
-                                showConfirmButton: false
-                                
-                            }).then((function () {
-                                //refresh datatable
-                                $('#dataTable').DataTable().ajax.reload();
-                            }))
-                    }
-
-                    $('.indicator-label').show()
-                    $('.indicator-progress').hide()
-                    $('#kk_modal_new_service_submit').removeAttr('disabled')
-                    setTimeout(function() {
-                        location.reload();  //Refresh page
-                    }, 1000);
-
-                }
-          });
-
-        })
+       
 
         //vote
         $('.vote').on('click', function(){
@@ -626,7 +577,7 @@
             })
         });
 
-        //view
+        //view count
         $('.view').on('click', function(){
             var id = $(this).data('id')
             //alert(id)
@@ -640,8 +591,84 @@
             })
         });
 
-        
 
+        //Quill Editor
+        $(document).ready(function(){
+            var quill = new Quill('#kt_docs_quill_basic', {
+                modules: {
+                    toolbar: [
+                        [{
+                            header: [1, 2, false]
+                        }],
+                        ['bold', 'italic', 'underline'],
+                        ['image', 'code-block']
+                    ],
+                    
+                },
+                placeholder: 'Type your text here...',
+                theme: 'snow' // or 'bubble'
+            });
+
+            //new discussion save
+            $('#kk_modal_new_passage_form').on('submit',function(e){
+                e.preventDefault()
+                $('.with-errors').text('')
+                $('.indicator-label').hide()
+                $('.indicator-progress').show()
+                $('#kk_modal_new_service_submit').attr('disabled','true')
+
+                var content = document.querySelector('input[name=content]');
+                    content.value = quill.root.innerHTML;
+
+                var formData = new FormData(this);
+            
+                $.ajax({
+                    type:"POST",
+                    url: "{{ url('discussion/store')}}",
+                    data:formData,
+                    cache:false,
+                    contentType: false,
+                    processData: false,
+                    success:function(data){
+                        
+                        if(data.success ==  false || data.success ==  "false"){
+                            var arr = Object.keys(data.errors);
+                            var arr_val = Object.values(data.errors);
+                            for(var i= 0;i < arr.length;i++){
+                            $('.'+arr[i]+'-error').text(arr_val[i][0])
+                            }
+                        }else if(data.error || data.error == 'true'){
+                            var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                            $('#kk_modal_new_passage_form').find('.messages').html(alertBox).show();
+                        }else{
+                            // empty the form
+                            $('#kk_modal_new_passage_form')[0].reset();
+                            $("#kk_modal_new_passage").modal('hide');
+                        
+                            Swal.fire({
+                                    text: data.message,
+                                    icon: "success",
+                                    showConfirmButton: false
+                                    
+                                }).then((function () {
+                                    //refresh datatable
+                                    $('#dataTable').DataTable().ajax.reload();
+                                }))
+                        }
+
+                        $('.indicator-label').show()
+                        $('.indicator-progress').hide()
+                        $('#kk_modal_new_service_submit').removeAttr('disabled')
+                        setTimeout(function() {
+                            location.reload();  //Refresh page
+                        }, 1000);
+
+                    }
+            });
+
+            })
+        })
+        
 
     </script>
 @endpush

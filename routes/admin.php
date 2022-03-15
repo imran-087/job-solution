@@ -29,8 +29,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('auth:admin')->group(function () {
         Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
+        ############ Admin Profile ##############
+        Route::get('/profile-settings', 'ProfileSettingsController@index')->name('profile');
+        Route::post('/profile-settings/update-profile', 'ProfileSettingsController@updateProfile')->name('update-profile');
+        Route::post('/profile-settings/change-password', 'ProfileSettingsController@chnagePassword')->name('change-password');
+
         ############ Dashboard Route #############
         Route::get('/dashboard', 'DashboardController@index')->name('dashboard');
+
 
         ############ Main Category Route #############
         Route::get('/category/main-category', 'MainCategoryController@index')->name('main-category.index');
@@ -78,6 +84,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/question/update', 'QuestionController@update')->name('question.update');
         Route::get('/question/get/{id}', 'QuestionController@getQuestion')->name('question.get');
         Route::get('/question/delete/{id}', 'QuestionController@deleteQuestion')->name('question.delete');
+        //edited question
+        Route::get('/question/edited-question/index', 'EditedQuestionController@index')->name('question.edited-question');
+        Route::get('question/edited-question/delete/{id}', 'EditedQuestionController@delete')->name('question.edited-question.delete');
+        Route::get('question/edited-question/accept/{id}', 'EditedQuestionController@acceptQiestion')->name('question.edited-question.accept');
+        Route::get('question/edited-question/show/{id}', 'EditedQuestionController@showQiestion')->name('question.edited-question.show');
 
 
         ############ Description Route #############

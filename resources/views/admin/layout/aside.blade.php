@@ -142,6 +142,14 @@
                             <span class="menu-title">All Question</span>
                         </a>
                     </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/question/edited-question*') ? 'active' : '' }}" href="{{ route('admin.question.edited-question') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Edited Question</span>
+                        </a>
+                    </div>
                     
                     
                 </div>

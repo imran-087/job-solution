@@ -202,7 +202,7 @@
                         <!--begin::Post-->
                         <div class="mb-7">
                             <!--begin::Text-->
-                            <div class="text-gray-800 mb-5">{{ $discussion->content }}</div>
+                            <div class="text-gray-800 mb-5">{!! $discussion->content !!}</div>
                             <!--end::Text-->
                              <!--begin::Separator-->
                             <div class="separator mb-4"></div>

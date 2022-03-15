@@ -1,61 +1,69 @@
-@extends('layouts.app')
-@section('title', 'Profile')
-
-@section('toolbar')
-<div class="toolbar" id="kt_toolbar">
-    <!--begin::Container-->
-    <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack">
-        <!--begin::Page title-->
-        <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
-            <!--begin::Title-->
-            <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">User Dashboard</h1>
-            <!--end::Title-->
-            <!--begin::Separator-->
-            <span class="h-20px border-gray-300 border-start mx-4"></span>
-            <!--end::Separator-->
-            <!--begin::Breadcrumb-->
-            <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
-                <!--begin::Item-->
-                <li class="breadcrumb-item text-muted">
-                    <a href="{{ url('question/all-question') }}" class="text-muted text-hover-primary">Home</a>
-                </li>
-                <!--end::Item-->
-                <!--begin::Item-->
-                <li class="breadcrumb-item">
-                    <span class="bullet bg-gray-300 w-5px h-2px"></span>
-                </li>
-                <!--end::Item-->
-                <!--begin::Item-->
-                <li class="breadcrumb-item text-dark">Profile</li>
-                <!--end::Item-->
-                <!--begin::Item-->
-                <li class="breadcrumb-item">
-                    <span class="bullet bg-gray-300 w-5px h-2px"></span>
-                </li>
-                <!--end::Item-->
-                <!--begin::Item-->
-                <li class="breadcrumb-item text-dark">Profile Overview</li>
-                <!--end::Item-->
-            </ul>
-            <!--end::Breadcrumb-->
-        </div>
-        <!--end::Page title-->
-     
-    </div>
-    <!--end::Container-->
-</div>
-@endsection
+@extends('admin.layout.app')
+@section('title', 'Profile settings')
 
 @section('content')
-<!--begin:Post -->
-<div class="post d-flex flex-column-fluid" id="kt_post">
-    <!--begin::Container-->
-    <div id="kt_content_container" class="container-xxl">
-        <!--begin::Navbar-->
-        @include('user.navbar')
-        <!--end::Navbar-->
-        
-        <!--begin::details View-->
+
+<div class="content d-flex flex-column flex-column-fluid" id="kt_content">
+    <!--begin::Toolbar-->
+    <div class="toolbar" id="kt_toolbar">
+        <!--begin::Container-->
+        <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
+            <!--begin::Page title-->
+            <div data-kt-swapper="true" data-kt-swapper-mode="prepend"
+                data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
+                class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+                <!--begin::Title-->
+                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Profile Settings</h1>
+                <!--end::Title-->
+                <!--begin::Separator-->
+                <span class="h-20px border-gray-200 border-start mx-4"></span>
+                <!--end::Separator-->
+                <!--begin::Breadcrumb-->
+                <ul class="breadcrumb breadcrumb-separatorless fw-bold fs-7 my-1">
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">
+                        <a href="{{ url('admin/dashboard') }}" class="text-muted text-hover-primary">Dashboard</a>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-200 w-5px h-2px"></span>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-muted">Profile</li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item">
+                        <span class="bullet bg-gray-200 w-5px h-2px"></span>
+                    </li>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <li class="breadcrumb-item text-dark">Profile settings</li>
+                    <!--end::Item-->
+                </ul>
+                <!--end::Breadcrumb-->
+            </div>
+            <!--end::Page title-->
+            <!--begin::Actions-->
+            <div class="d-flex align-items-center py-1">
+                <!--begin::Button-->
+                <a href="{{ url()->previous() }}" class="btn btn-sm btn-primary">Back</a>
+                <!--end::Button-->
+            </div>
+            <!--end::Actions-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Toolbar-->
+
+
+
+    <!--begin::Post-->
+    <div class="post d-flex flex-column-fluid" id="kt_post">
+        <!--begin::Container-->
+        <div id="kt_content_container" class="container-xxl">
+            <!--begin::details View-->
         <div class="card mb-5 mb-xl-10">
             <!--begin::Card header-->
             <div class="card-header border-0 cursor-pointer" role="button" data-bs-toggle="collapse" data-bs-target="#kt_account_profile_details" aria-expanded="true" aria-controls="kt_account_profile_details">
@@ -69,7 +77,7 @@
             <!--begin::Content-->
             <div id="kt_account_settings_profile_details" class="collapse show">
                 <!--begin::Form-->
-                <form method="POST" action="{{ route('user-dashboard.update-profile') }}" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('admin.update-profile') }}" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate" enctype="multipart/form-data">
                     @csrf
                     <!--begin::Card body-->
                     <div class="card-body border-top p-9">
@@ -86,10 +94,10 @@
                                 <!--begin::Image input-->
                                 <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('{{asset('assets')}}/media/svg/avatars/blank.svg')">
                                     <!--begin::Preview existing avatar-->
-                                    @if(Auth::user()->avatar == '')
+                                    @if(Auth::guard('admin')->user()->avatar == '')
                                     <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{asset('assets')}}/media/avatars/300-1.jpg)"></div>
                                     @else
-                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{ Auth::user()->avatar }})"></div>
+                                    <div class="image-input-wrapper w-125px h-125px" style="background-image: url({{ Auth::guard('admin')->user()->avatar }})"></div>
                                     @endif
                                     <!--end::Preview existing avatar-->
                                     <!--begin::Label-->
@@ -200,14 +208,12 @@
             <!--begin::Content-->
             <div id="kt_account_settings_profile_details" class="collapse show">
                 <!--begin::Form-->
-                <form method="POST" action="{{ route('user-dashboard.chnage-password') }}" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
+                <form method="POST" action="{{ route('admin.change-password') }}" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
                     @csrf
                         
                     <!--begin::Card body-->
                     <div class="card-body border-top p-9"> 
-                        <div class="row mb-8 offset-4"> 
-                            @include('includes.session_alert')
-                        </div>
+                        
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->
@@ -237,7 +243,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                                <input type="password" name="new_password" class="form-control form-control-lg form-control-solid required @error('new_password') is-invalid @enderror"" placeholder="Enter new password" >
+                                <input type="password" name="new_password" class="form-control form-control-lg form-control-solid required @error('new_password') is-invalid @enderror" placeholder="Enter new password" >
                                 @error('new_password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -254,7 +260,7 @@
                             <!--end::Label-->
                             <!--begin::Col-->
                             <div class="col-lg-8 fv-row">
-                                <input type="password" name="new_password_confirmation" class="form-control form-control-lg form-control-solid @error('new_password_confirmation') is-invalid @enderror"" placeholder="Confirm new password" >
+                                <input type="password" name="new_password_confirmation" class="form-control form-control-lg form-control-solid @error('new_password_confirmation') is-invalid @enderror " placeholder="Confirm new password" >
                                 @error('new_password_confirmation')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -278,11 +284,13 @@
             <!--end::Content-->
         </div>
         <!--end::details View-->
-        
+        </div>
+        <!--end::Container-->
     </div>
-    <!--end::Container-->
+    <!--end::Post-->
 </div>
-<!--end:Post -->
+
+
 @endsection
 
 

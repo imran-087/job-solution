@@ -25,6 +25,7 @@ class CreateEditedQuestionsTable extends Migration
             $table->string('option_5')->nullable();
             $table->string('answer')->nullable();
             $table->text('written_answer')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }
