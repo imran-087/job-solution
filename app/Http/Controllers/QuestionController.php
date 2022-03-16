@@ -44,7 +44,7 @@ class QuestionController extends Controller
         }
     }
 
-    public function bookmark($id)
+    public function bookmark($id, $catid)
     {
         //dump($id);
         if (!Auth::check()) {
@@ -58,6 +58,7 @@ class QuestionController extends Controller
             if ($bookmark === null) {
                 $bookmark = new Bookmark();
                 $bookmark->question_id = $id;
+                $bookmark->category_id = $catid;
                 $bookmark->user_id = Auth::user()->id;
 
                 if ($bookmark->save()) {

@@ -102,6 +102,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/description/pending-question-description/status/{id}', 'QuestionDescriptionController@chnageStatus')->name('question-description.pending-status');
 
 
+        ########## User Management ###########
+        Route::get('/user-management/user-list', 'UserController@index')->name('user-management.index');
+        Route::get('/user-management/user/change-status/{id}', 'UserController@chnageStatus')->name('user-management.chnage-status');
+
         ############ Dependable setect input route ###############
         Route::get('/get-category/{id}', 'GetAllCategoryController@getCategory');
         Route::get('/get-sub-category/{id}', 'GetAllCategoryController@getSubCategory');

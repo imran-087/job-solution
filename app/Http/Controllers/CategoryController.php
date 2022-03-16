@@ -20,11 +20,12 @@ class CategoryController extends Controller
 
     public function getSubjectWithAllQuestion($category, $sub_category)
     {
-        // dump($category);
-        // dump($sub_category);
-        // dd('ok');
+        //dump($category);
+        //dump($sub_category);
+        //dd('ok');
         $category = Category::where('slug', $category)->first();
         $sub_category = SubCategory::where('slug', $sub_category)->first();
+        //dd($sub_category);
         $subjects = Subject::where('sub_category_id', $sub_category->id)->get();
         $questions = Question::where('sub_category_id', $sub_category->id)->paginate(5);
 

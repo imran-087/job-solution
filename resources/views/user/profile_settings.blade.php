@@ -205,9 +205,7 @@
                         
                     <!--begin::Card body-->
                     <div class="card-body border-top p-9"> 
-                        <div class="row mb-8 offset-4"> 
-                            @include('includes.session_alert')
-                        </div>
+                       
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->

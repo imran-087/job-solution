@@ -151,7 +151,6 @@
                         </a>
                     </div>
                     
-                    
                 </div>
             </div>
             <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/description*') ? 'show menu-accordion' : '' }}">
@@ -193,6 +192,37 @@
                     </div>
                     
                     
+                </div>
+            </div>
+            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/description*') ? 'show menu-accordion' : '' }}">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">User Management</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion  menu-active-bg">
+        
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/description/question-description*') ? 'active' : '' }}" href="{{ route('admin.user-management.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">User List</span>
+                        </a>
+                    </div>
+ 
                 </div>
             </div>
 

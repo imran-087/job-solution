@@ -58,7 +58,7 @@
         <div class="row gy-5 g-xl-8">
            
             <!--begin::Col-->
-            <div class="col-8" id="question">
+            <div class="col-8 offset-2" id="question">
               
                 @foreach($bookmarks as $bookmark)
                 <!--begin::Feeds Widget 2-->
@@ -362,6 +362,10 @@
                 </div>
             </div>
             <!--end::Col-->
+
+            
+           
+
            
         </div>
         

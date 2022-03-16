@@ -54,53 +54,21 @@
                 <div class="menu-sub menu-sub-accordion menu-active-bg" kt-hidden-height="117" style="display: none; overflow: hidden;">
                     
                     @foreach($main_category->categories as $category)
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                    <div  class="menu-item menu-accordion">
                         <a href="{{ url('/jobs', $category->slug) }}">
                             <span class="menu-link">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
                                 </span>
                                 <span class="menu-title">{{$category->name}}</span>
-                                <span class="menu-arrow"></span>
                             </span>
-                        </a>
-                        @foreach(App\Models\SubCategory::where(['category_id' => $category->id, 'status' => 'active'])->with('subject')->get() as $sub_category)
-                        <div class="menu-sub menu-sub-accordion menu-active-bg">
-                            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                                <span class="menu-link">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">{{$sub_category->name}}</span>
-                                    <span class="menu-arrow"></span>
-                                </span>
-                                
-                                <div class="menu-sub menu-sub-accordion menu-active-bg">
-                                     @foreach($sub_category->subject as $subject)
-                                    <div class="menu-item">
-                                        <a class="menu-link" href="{{ route('question.subject-wise-question', 
-                                                                    [$main_category->slug, $category->slug, $sub_category->slug, $subject->slug]) }}"
-                                        >
-                                            <span class="menu-bullet">
-                                                <span class="bullet bullet-dot"></span>
-                                            </span>
-                                            <span class="menu-title">{{ $subject->name }}</span>
-                                        </a>
-                                    </div>
-                                    @endforeach
-                                </div>
-                                
-                            </div>  
-                        </div>
-                        @endforeach
+                        </a>  
                     </div>
                     @endforeach 
                 </div>
             </div>
             @endforeach
-
-            
-   
+ 
         </div>
         <!--end::Menu-->
     </div>

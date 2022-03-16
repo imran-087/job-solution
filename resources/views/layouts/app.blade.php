@@ -107,7 +107,7 @@
 					<!--begin::Brand-->
 					<div class="aside-logo flex-column-auto" id="kt_aside_logo">
 						<!--begin::Logo-->
-						<a href="{{ route('admin.dashboard') }}" 
+						<a href="{{ url('/home') }}" 
 						style="text-decoration: none;  font-size:1.2rem; ">
 							<img alt="Logo" src="{{ asset('assets') }}/media/logos/satt-logo.png" class="h-25px logo" /> <strong> SATT ACADEMY</strong>
 						</a>

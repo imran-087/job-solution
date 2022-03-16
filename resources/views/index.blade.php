@@ -95,7 +95,7 @@
                                     <!--begin::Menu item-->
                                     <div class="menu-item">
                                         <!--begin::Menu link-->
-                                        <a class="menu-link nav-link active py-3 px-4 px-xxl-6" href="#kt_body"
+                                        <a class="menu-link nav-link active py-3 px-4 px-xxl-6" href="url('/home')"
                                             data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Home</a>
                                         <!--end::Menu link-->
                                     </div>
@@ -112,14 +112,14 @@
                                     <div class="menu-item">
                                         <!--begin::Menu link-->
                                         <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="{{ url('/discussion') }}"
-                                            data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Discussion</a>
+                                            data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Forum</a>
                                         <!--end::Menu link-->
                                     </div>
                                     <!--end::Menu item-->
                                     <!--begin::Menu item-->
                                     <div class="menu-item">
                                         <!--begin::Menu link-->
-                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#team"
+                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="" 
                                             data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Team</a>
                                         <!--end::Menu link-->
                                     </div>

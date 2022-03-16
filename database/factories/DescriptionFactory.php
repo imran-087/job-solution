@@ -4,11 +4,10 @@ namespace Database\Factories;
 
 use Carbon\Carbon;
 use App\Models\Admin;
-use Illuminate\Support\Str;
-use Illuminate\Support\Facades\Auth;
+use App\Models\Question;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-class MainCategoryFactory extends Factory
+class DescriptionFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -18,11 +17,10 @@ class MainCategoryFactory extends Factory
     public function definition()
     {
         return [
-            //'id' => Str::random(30),
-            'name' => $this->faker->lastName(),
-            'title' => $this->faker->sentence(3),
-            'slug' => Str::slug($this->faker->lastName()),
+            'question_id' => Question::all()->random()->id,
+            'description' => $this->faker->sentences(6),
             'created_user_id' => Admin::all()->random()->id,
+            'status' => 'active',
             'created_at' => Carbon::now(),
         ];
     }

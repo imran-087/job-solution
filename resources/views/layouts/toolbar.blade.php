@@ -608,7 +608,11 @@
         <!--begin::Menu wrapper-->
         <div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click"
             data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
+            @if(Auth::user()->avatar == '')
             <img src="{{ asset('assets') }}/media/avatars/300-1.jpg" alt="user" />
+            @else
+            <img src="{{Auth::user()->avatar }}" alt="user" />
+            @endif
         </div>
         <!--begin::User account menu-->
         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px"
@@ -617,9 +621,15 @@
             <div class="menu-item px-3">
                 <div class="menu-content d-flex align-items-center px-3">
                     <!--begin::Avatar-->
+                    @if(Auth::user()->avatar == '')
                     <div class="symbol symbol-50px me-5">
                         <img alt="Logo" src="{{ asset('assets') }}/media/avatars/300-1.jpg" />
                     </div>
+                    @else
+                    <div class="symbol symbol-50px me-5">
+                        <img alt="Logo" src="{{ Auth::user()->avatar }}" />
+                    </div>
+                    @endif
                     <!--end::Avatar-->
                     <!--begin::Username-->
                     <div class="d-flex flex-column">
@@ -675,7 +685,7 @@
             <!--end::Menu item-->
             <!--begin::Menu item-->
             <div class="menu-item px-5 my-1">
-                <a href="/metronic8/demo1/../demo1/account/settings.html" class="menu-link px-5">Account Settings</a>
+                <a href="{{ route('user-dashboard.profile-settings', Auth::user()->name) }}" class="menu-link px-5">Account Settings</a>
             </div>
             <!--end::Menu item-->
             <!--begin::Menu separator-->

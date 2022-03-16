@@ -18,7 +18,7 @@ class UserDashboardController extends Controller
 
     public function bookmark($id)
     {
-        $bookmarks = Bookmark::with('question')->where('user_id', $id)->paginate(5);
+        $bookmarks = Bookmark::with(['question'])->where('user_id', Auth::user()->id)->paginate(5);
         return view('user.bookmark_question', compact('bookmarks'));
     }
 

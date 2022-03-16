@@ -3,7 +3,7 @@ a{
 }
 
 .new-discussion a{
-    padding: 10px 35px !important;
+    padding: 10px 32px !important;
     border-radius: 30px;
     font-weight: 800;
     font-size: 12px;
@@ -82,4 +82,10 @@ a.btn.btn-primary.me-3.text-uppercase {
 .right-answer{
     color:green !important;
     font-weight:bolder !important;
+}
+
+.menu-item .menu-link:hover{
+    background-color: #F5F8FA;
+    color: #0095E8;
+    border-radius: 5px;
 }

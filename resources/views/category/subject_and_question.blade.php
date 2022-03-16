@@ -91,7 +91,7 @@
                             <!--end::Icon-->
                             <!--begin::Title-->
                             <div class="flex-grow-1 me-2">
-                                <a href="{{ route('jobs.sub-category.subject.all-question', [$sub_category->slug, $category->slug]) }}" class="fw-bolder text-gray-800 text-hover-primary fs-6">All Question</a>
+                                <a href="{{ route('jobs.sub-category.subject.all-question', [ $category->slug, $sub_category->slug]) }}" class="fw-bolder text-gray-800 text-hover-primary fs-6">All Question</a>
                                 <span class="text-muted fw-bold d-block">{{ $sub_category->name }}</span>
                             </div>
                             <!--end::Title-->
@@ -146,7 +146,7 @@
                     
                 <div class="card card-bordered mb-5">
                     <div class="card-header">
-                        <h3 class="card-title text-gray-700 fw-bolder cursor-pointer mb-0">
+                        <h3 class="card-title text-gray-700 fw-bolder cursor-pointer mb-0" style="max-width: 650px !important;">
                            {{$question->question}}
                         </h3>
                         <div class="card-toolbar">
@@ -163,8 +163,7 @@
                                         </g>
                                     </svg>
                                 </span>
-                                <!--end::Svg Icon-->
-                                
+                                <!--end::Svg Icon-->     
                             </button>
                             <!--begin::Menu 3-->
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true">
@@ -183,57 +182,7 @@
                                     <a href="javascript:;" class="btn btn-sm btn-primary me-3" onclick="addNew()">Add Description</a>
                                 </div>
                                 <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3">Generate Bill</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3" data-kt-menu-trigger="hover" data-kt-menu-placement="right-end">
-                                    <a href="#" class="menu-link px-3">
-                                        <span class="menu-title">Subscription</span>
-                                        <span class="menu-arrow"></span>
-                                    </a>
-                                    <!--begin::Menu sub-->
-                                    <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3">Plans</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3">Billing</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3">Statements</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu separator-->
-                                        <div class="separator my-2"></div>
-                                        <!--end::Menu separator-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <div class="menu-content px-3">
-                                                <!--begin::Switch-->
-                                                <label class="form-check form-switch form-check-custom form-check-solid">
-                                                    <!--begin::Input-->
-                                                    <input class="form-check-input w-30px h-20px" type="checkbox" value="1" checked="checked" name="notifications" />
-                                                    <!--end::Input-->
-                                                    <!--end::Label-->
-                                                    <span class="form-check-label text-muted fs-6">Recuring</span>
-                                                    <!--end::Label-->
-                                                </label>
-                                                <!--end::Switch-->
-                                            </div>
-                                        </div>
-                                        <!--end::Menu item-->
-                                    </div>
-                                    <!--end::Menu sub-->
-                                </div>
-                                <!--end::Menu item-->
+                                
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3 my-1">
                                     <a href="#" class="menu-link px-3">Settings</a>
@@ -275,16 +224,18 @@
                         </div>
                         <div class="d-flex justify-content-start mt-2">
                             <button type="button" class="btn btn-sm  btn-light me-3">
-                                <a href="">{{$question->subject->name}}</a>
+                                <a href="{{ url('jobs',
+                                    [$question->sub_category->category->slug, $question->sub_category->slug, $question->subject->slug]
+                                ) }}">{{$question->subject->name}}</a>
                             </button>              
                             <button type="button" class="btn btn-sm  btn-light me-3">
                                 <a href="">{{$question->sub_category->name}}</a>
                             </button>  
                             <button type="button" class="btn btn-sm  btn-light me-3">
-                                <a href="{{ url('job-solution/', $question->sub_category->category->main_category->slug) }}">{{$question->sub_category->category->name}}</a>
+                                <a href="{{ url('jobs', $question->sub_category->category->slug) }}">{{$question->sub_category->category->name}}</a>
                             </button>            
                             <button type="button" class="btn btn-sm  btn-light me-3">
-                                <a href="{{ url('job-solution', $question->sub_category->category->main_category->slug) }}">{{$question->sub_category->category->main_category->name}}</a>
+                                <a href="">{{$question->sub_category->category->main_category->name}}</a>
                             </button>            
                         </div>
                     </div>
@@ -292,7 +243,7 @@
 
                         <div class="d-flex justify-content-end mt-2" style="margin-bottom: -40px !important;">
                                     <a href="javascript:;" class="bookmark me-2 btn btn-sm btn-light btn-color-muted btn-active-light-primary px-4 py-2"  
-                                    data-id="{{ $question->id }}" title="bookmark">
+                                    data-id="{{ $question->id }}" data-catid="{{ $question->sub_category->category->id }}" title="bookmark">
                                     <i class="fas fa-bookmark"></i>
                                 </a>
                                 <a href="" style="cursor:default" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4">
@@ -340,15 +291,16 @@
                             <!--end::Heading-->
                             <!--begin::Body-->
                             <div id="kt_job_4_1_{{$question->id}}" class="fs-6 ms-1 collapse" style="">
+    
                                 @foreach($question->descriptions as $description)
                                 <!--begin::Text-->
                                 {{-- <div> <span class="text-gray-500 fw-bolder cursor-pointer mb-0">Added by</span>  <span class="badge badge-light-success fw-bolder">{{ $creator->name }}</span></div> --}}
                                 <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10 mt-2">
                                     @if($description->status == 'active')
-                                        {{ $description->description }}
+                                        {{ $description->description  }}
                                     @endif
                                 </div>
-                                 @endforeach
+                                @endforeach
                                 <!--end::Text-->
                             </div>
                             <!--end::Content-->
@@ -552,11 +504,13 @@
         //bookmarks
         $('.bookmark').on('click', function(){
             var id = $(this).data('id')
+            var catid = $(this).data('catid')
+           
             $(this).children().addClass('svg-icon-primary');
             //alert(id)
             $.ajax({
                 type:"GET",
-                url: "{{ url('question/bookmark')}}"+'/'+id,
+                url: "{{ url('question/bookmark')}}"+'/'+id+'/'+catid,
                 dataType: 'json',
                 success:function(data){
                     if(data.success){

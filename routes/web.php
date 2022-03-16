@@ -57,7 +57,7 @@ Route::get('/jobs/{category}/{sub_category}/{subject}', [CategoryController::cla
 
 
 //question bookmark
-Route::get('/question/bookmark/{id}', [QuestionController::class, 'bookmark'])->name('question.bookmark');
+Route::get('/question/bookmark/{id}/{catid}', [QuestionController::class, 'bookmark'])->name('question.bookmark');
 
 /*
    Question Description

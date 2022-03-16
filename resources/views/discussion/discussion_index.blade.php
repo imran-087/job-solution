@@ -145,10 +145,10 @@
         <!--begin::Row-->
         <div class="row gy-5 g-xl-8">
             <!--begin::Col-->
-            <div class="col-xl-3">
+            <div class="col-xl-2">
                 <!--begin::Add Discussion-->
                 <div class="new-discussion mb-5">
-                <a href="javascript:;" class="btn btn-primary me-3 text-uppercase" onclick="addNew()">New Discussion</a>
+                <a href="javascript:;" class="btn btn-primary text-uppercase" onclick="addNew()">New Discussion</a>
                 </div>
                 <!--end::Add Discussion-->
                 <div class="nav">
@@ -196,20 +196,49 @@
 
                         <div class="card-toolbar flex-row-fluid justify-content-end gap-5"
                             data-select2-id="select2-data-123-0tixx">
-                            <div class="w-100 mw-150px" data-select2-id="select2-data-122-mhmqq">
-                                <!--begin::Select2-->
+                            
+                            <div class="m-0">
+                                <!--begin::Menu toggle-->
+                                <a href="#" class="btn btn-sm btn-flex btn-light btn-active-primary fw-bolder" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
+                                <span class="svg-icon svg-icon-5 svg-icon-gray-500 me-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="black"></path>
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->Filter</a>
+                                <!--end::Menu toggle-->
+                                <!--begin::Menu 1-->
+                                <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_623176a83b3cd">
+                                    <!--begin::Header-->
+                                    <div class="px-7 py-5">
+                                        <div class="fs-5 text-dark fw-bolder">Filter Options</div>
+                                    </div>
+                                    <!--end::Header-->
+                                    <!--begin::Menu separator-->
+                                    <div class="separator border-gray-200"></div>
+                                    <!--end::Menu separator-->
+
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item px-3 pt-1">
+                                        <a href="{{ url('discussion', 'latest')}}" class="menu-link px-3">Latest</a>
+                                    </div>
+                                    <!--end::Menu item-->
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item px-3">
+                                        <a href="{{ url('discussion', 'popular')}}" class="menu-link px-3" >Most Popular</a>
+                                    </div>
+                                    <!--end::Menu item-->
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item px-3 pb-2">
+                                        <a href="{{ url('discussion', 'weekago')}}" class="menu-link px-3" >Last Week</a>
+                                    </div>
+                                    <!--end::Menu item-->
                                 
-                                <select class="form-select form-select-solid select2-hidden-accessible kk-discussion-filter"
-                                    data-control="select2" data-hide-search="true" data-placeholder="Filter by ..."
-                                    data-kt-ecommerce-product-filter="status" data-select2-id="select2-data-10-i8aqq"
-                                    tabindex="-1" aria-hidden="true" >
-                                    <option></option>
-                                    <option value="latest">Latest</option>
-                                    <option value="popular">Most Popular</option>
-                                    <option value="weekago">Last Week</option>
-                                </select>
-                                <!--end::Select2-->
-                            </div> 
+                                </div>
+                                <!--end::Menu 1-->
+                            </div>
+                            
                             
                         </div>
 
@@ -382,7 +411,7 @@
                         <!--end::Label-->
                         {{-- <textarea name="content" class="form-control form-control-solid h-100px "></textarea> --}}
                         <input name="content" type="hidden">
-                        <div id="kt_docs_quill_basic" class="form-control form-control-solid h-300px"  >
+                        <div id="kt_docs_quill_basic" class="form-control form-control-solid h-100px"  >
                         </div>
                         <div class="help-block with-errors content-error"></div>
                     </div>
@@ -514,28 +543,6 @@
             });
         })
 
-        //filter
-        $(document).ready(function(){
-            $('.kk-discussion-filter').on('change',function(){
-                //var val = (this.value)
-                //table.ajax.url( "{{ url('admin/category/category-index?status=') }}"+this.value ).load();
-                $.ajax({
-                    type:"GET",
-                    url: "{{ url('discussion')}}"+'/'+this.value,
-                    success:function(data){
-                        if(data){
-                            $("#render").html(data.html)
-                            $("#main").hide()
-                        }
-                        else{
-                            $("#main").hide()
-                        }
-                       
-                        
-                    }
-                })
-            })
-        });
 
         // add new
         function addNew(){
