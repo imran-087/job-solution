@@ -132,4 +132,11 @@ class QuestionController extends Controller
             return redirect()->back();
         }
     }
+
+    public function singleQuestion(Request $request)
+    {
+        dd($request);
+        $question = Question::find($id);
+        return view('question.single_question', compact('question'));
+    }
 }

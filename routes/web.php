@@ -28,16 +28,29 @@ Route::get('/', function () {
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 
-/*********  Discussion ************/
+######*********  Discussion ******########
+
 Route::get('/discussion/{status?}', [DiscussionController::class, 'index'])->name('discussion.index');
 Route::get('/discussion/{id}/show', [DiscussionController::class, 'show'])->name('discussion.show');
 Route::get('/discussion/channel/{channel}', [DiscussionController::class, 'channelDiscussion'])->name('discussion.channel');
 Route::post('/discussion/search', [DiscussionController::class, 'search'])->name('discussion.search');
 Route::get('/discussion/view-count/{id}', [DiscussionController::class, 'viewCount'])->name('discussion.view');
 
+
+Route::middleware('auth')->group(function () {
+  Route::post('/discussion/store', [DiscussionController::class, 'store'])->name('discussion.store');
+  Route::post('/discussion/reply', [DiscussionController::class, 'reply'])->name('discussion.reply');
+  Route::get('/discussion/vote/{id}', [DiscussionController::class, 'vote'])->name('discussion.vote');
+  Route::get('/discussions/{discussion}/replies/{reply}/mark-as-best-reply', [DiscussionController::class, 'bestreply'])->name('discussions.best-reply');
+});
+
+
 /*********  Question ************/
 Route::get('/question/all-question', [QuestionController::class, 'index'])->name('question.index');
 Route::get('/question/vote/{id}', [QuestionController::class, 'vote'])->name('question.vote');
+
+//single question
+Route::get('/single-question/ques_id={id}', [QuestionController::class, 'singleQuestion'])->name('question.single-question');
 
 /*
   subject wise Question
@@ -69,12 +82,6 @@ Route::post('/question/update-question', [QuestionController::class, 'update'])-
 // filter 
 //Route::get('/discussion/{status}', [DiscussionController::class, 'discussionFilter'])->name('discussion.filter-discussion');
 
-Route::middleware('auth')->group(function () {
-  Route::post('/discussion/store', [DiscussionController::class, 'store'])->name('discussion.store');
-  Route::post('/discussion/reply', [DiscussionController::class, 'reply'])->name('discussion.reply');
-  Route::get('/discussion/vote/{id}', [DiscussionController::class, 'vote'])->name('discussion.vote');
-  Route::get('/discussions/{discussion}/replies/{reply}/mark-as-best-reply', [DiscussionController::class, 'bestreply'])->name('discussions.best-reply');
-});
 
 
 ####### User dashboard route #######

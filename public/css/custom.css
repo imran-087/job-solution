@@ -89,3 +89,15 @@ a.btn.btn-primary.me-3.text-uppercase {
     color: #0095E8;
     border-radius: 5px;
 }
+
+.fa-2xl{
+    font-size: 15px !important;
+    margin-right: 2px !important;
+}
+
+i.fas.fa-times.fa-2xl {
+    color: red;
+}
+i.fas.fa-check.fa-2xl {
+    color: green;
+}
