@@ -153,7 +153,7 @@
                 <div class="card card-bordered mb-5">
                     <div class="card-header">
                         <a href="{{ route('question.single-question', $question->id) }}">
-                            <h3 class="card-title text-gray-700 fw-bolder cursor-pointer mb-0" style="max-width: 600px !important;">
+                            <h3 class="card-title text-gray-700 fw-bolder cursor-pointer mb-0 view" data-id="{{ $question->id }}" style="max-width: 600px !important;">
                                 {{$question->question}}
                             </h3>
                         </a>
@@ -307,6 +307,7 @@
                                 <!--end::Icon-->
                                 <!--begin::Title-->
                                 <h5 class="text-gray-700 fw-bolder cursor-pointer mb-0">Description</h5>
+                                <p class="badge badge-light-success fw-bolder">{{ $question->descriptions->count() }}</p>
                                 <!--end::Title-->
                                 
                             </div>
@@ -521,7 +522,19 @@
             })
         });
 
-        
+        //view count
+        $('.view').on('click', function(){
+            var id = $(this).data('id')
+            alert(id)
+            $.ajax({
+                type:"GET",
+                url: "{{ url('question/view-count')}}"+'/'+id,
+                dataType: 'json',
+                success:function(data){
+                    
+                }
+            })
+        });
 
         //bookmarks
         $('.bookmark').on('click', function(){

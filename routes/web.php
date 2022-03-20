@@ -48,6 +48,7 @@ Route::middleware('auth')->group(function () {
 /*********  Question ************/
 Route::get('/question/all-question', [QuestionController::class, 'index'])->name('question.index');
 Route::get('/question/vote/{id}', [QuestionController::class, 'vote'])->name('question.vote');
+Route::get('/question/view-count/{id}', [QuestionController::class, 'viewCount'])->name('question.view-count');
 
 //single question
 Route::get('/single-question/ques_id={id}', [QuestionController::class, 'singleQuestion'])->name('question.single-question');

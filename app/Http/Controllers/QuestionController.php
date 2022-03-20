@@ -133,10 +133,18 @@ class QuestionController extends Controller
         }
     }
 
-    public function singleQuestion(Request $request)
+    public function singleQuestion($id)
     {
-        dd($request);
+        //dd($id);
         $question = Question::find($id);
         return view('question.single_question', compact('question'));
+    }
+
+    public function viewCount($id)
+    {
+        $question = Question::find($id);
+        $question->view_count = $question->view_count + 1;
+
+        $question->save();
     }
 }
