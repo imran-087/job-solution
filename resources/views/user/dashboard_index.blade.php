@@ -51,9 +51,7 @@
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <!--begin::Container-->
     <div id="kt_content_container" class="container-xxl">
-        <!--begin::Navbar-->
-        @include('user.navbar')
-        <!--end::Navbar-->
+        
         <!--begin::Overview-->
         <div class="card mb-5 mb-xl-10">
             <div class="card-body pt-9 pb-0">
@@ -63,7 +61,11 @@
                     <!--begin: Pic-->
                     <div class="me-7 mb-4">
                         <div class="symbol symbol-100px symbol-lg-160px symbol-fixed position-relative">
-                            <img src="/metronic8/demo1/assets/media/avatars/300-1.jpg" alt="image">
+                            @if(Auth::user()->avatar == '')
+                            <img src="{{asset('assets')}}/media/avatars/300-1.jpg" alt="image">
+                            @else
+                            <img src="{{ Auth::user()->avatar }}" alt="image">
+                            @endif
                             <div class="position-absolute translate-middle bottom-0 start-100 mb-6 bg-success rounded-circle border border-4 border-white h-20px w-20px"></div>
                         </div>
                     </div>
@@ -226,7 +228,7 @@
                 </div>
                 <!--end::Card title-->
                 <!--begin::Action-->
-                <a href="/metronic8/demo1/../demo1/account/settings.html" class="btn btn-primary align-self-center">Edit Profile</a>
+                <a href="{{ route('user-dashboard.profile-settings', [Auth::user()->name]) }}" class="btn btn-primary align-self-center">Edit Profile</a>
                 <!--end::Action-->
             </div>
             <!--begin::Card header-->

@@ -1,5 +1,10 @@
+@php
+    $bookmark_categories = App\Models\Bookmark::with(['question'])->where('user_id', Auth::user()->id)
+                    ->groupBy('category_id')->get();
+@endphp
+
 @extends('layouts.app')
-@section('title', 'Profile')
+@section('title', 'Bookmark')
 
 @section('toolbar')
 <div class="toolbar" id="kt_toolbar">
@@ -8,7 +13,7 @@
         <!--begin::Page title-->
         <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
             <!--begin::Title-->
-            <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">User Dashboard</h1>
+            <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">Bookmark</h1>
             <!--end::Title-->
             <!--begin::Separator-->
             <span class="h-20px border-gray-300 border-start mx-4"></span>
@@ -26,7 +31,7 @@
                 </li>
                 <!--end::Item-->
                 <!--begin::Item-->
-                <li class="breadcrumb-item text-dark">Profile</li>
+                <li class="breadcrumb-item text-dark">Bokkmark</li>
                 <!--end::Item-->
                 <!--begin::Item-->
                 <li class="breadcrumb-item">
@@ -34,12 +39,20 @@
                 </li>
                 <!--end::Item-->
                 <!--begin::Item-->
-                <li class="breadcrumb-item text-dark">Profile Overview</li>
+                <li class="breadcrumb-item text-dark">Bookmark list</li>
                 <!--end::Item-->
             </ul>
             <!--end::Breadcrumb-->
+            
         </div>
         <!--end::Page title-->
+        
+        <div class="d-flex align-items-center gap-2 gap-lg-3">
+            <!--begin::Primary button-->
+            <button class="btn btn-sm btn-primary" id="readingMode" >Reading Mode</button>
+            <button class="btn btn-sm btn-danger d-none" id="testMode">Self Test Mode</button>
+            <!--end::Primary button-->
+        </div>
      
     </div>
     <!--end::Container-->
@@ -51,40 +64,74 @@
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <!--begin::Container-->
     <div id="kt_content_container" class="container-xxl">
-        <!--begin::Navbar-->
-        @include('user.navbar')
-        <!--end::Navbar-->
+        
        <!--begin::Row-->
         <div class="row gy-5 g-xl-8">
+             <!--begin::Col-->
+            <div class="col-4" style="max-height: 80vh !important;">
+                <!--begin::List Widget 6-->
+                <div class="card card-xl-stretch mb-xl-8">
+                    <!--begin::Header-->
+                    <div class="card-header border-0">
+                        <h3 class="card-title fw-bolder text-dark">Category</h3>
+                        
+                    </div>
+                    <!--end::Header-->
+                    <!--begin::Body-->
+                    <div class="card-body pt-0">
+                        @foreach($bookmark_categories as $category)
+                        <!--begin::Item-->
+                           <a href="{{ route('user-dashboard.bookmark.category', [Auth::user()->id, $category->category_id])  }}" class="cursor-pointer">
+                            <div class="d-flex align-items-center bg-light-success rounded p-5 mb-7">
+                            <!--begin::Icon-->
+                            <span class="svg-icon svg-icon-success me-5">
+                                <!--begin::Svg Icon | path: icons/duotune/abstract/abs027.svg-->
+                                <span class="svg-icon svg-icon-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path opacity="0.3" d="M21.25 18.525L13.05 21.825C12.35 22.125 11.65 22.125 10.95 21.825L2.75 18.525C1.75 18.125 1.75 16.725 2.75 16.325L4.04999 15.825L10.25 18.325C10.85 18.525 11.45 18.625 12.05 18.625C12.65 18.625 13.25 18.525 13.85 18.325L20.05 15.825L21.35 16.325C22.35 16.725 22.35 18.125 21.25 18.525ZM13.05 16.425L21.25 13.125C22.25 12.725 22.25 11.325 21.25 10.925L13.05 7.62502C12.35 7.32502 11.65 7.32502 10.95 7.62502L2.75 10.925C1.75 11.325 1.75 12.725 2.75 13.125L10.95 16.425C11.65 16.725 12.45 16.725 13.05 16.425Z" fill="black"></path>
+                                        <path d="M11.05 11.025L2.84998 7.725C1.84998 7.325 1.84998 5.925 2.84998 5.525L11.05 2.225C11.75 1.925 12.45 1.925 13.15 2.225L21.35 5.525C22.35 5.925 22.35 7.325 21.35 7.725L13.05 11.025C12.45 11.325 11.65 11.325 11.05 11.025Z" fill="black"></path>
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                            </span>
+                            <!--end::Icon-->
+                            <!--begin::Title-->
+                            <div class="flex-grow-1 me-2">
+                                <a href="{{ route('user-dashboard.bookmark.category', [Auth::user()->id, $category->category_id])  }}">{{ $category->category->name }}</a>
+                                {{-- <span class="text-muted fw-bold d-block">Due in 2 Days</span> --}}
+                            </div>
+                            <!--end::Title-->
+                            <!--begin::Lable-->
+                            <span class="fw-bolder text-info py-1"></span>
+                            <!--end::Lable-->
+                            </div>
+                        </a>
+                     
+                        @endforeach
+                        <!--end::Item-->
+                        
+                    </div>
+                    <!--end::Body-->
+                </div>
+                <!--end::List Widget 6-->
+            </div>
+            <!--end::Col-->
            
             <!--begin::Col-->
-            <div class="col-8 offset-2" id="question">
+            <div class="col-8" id="question">
               
                 @foreach($bookmarks as $bookmark)
                 <!--begin::Feeds Widget 2-->
                     
                 <div class="card card-bordered mb-5">
                     <div class="card-header">
-                        <h3 class="card-title text-gray-700 fw-bolder cursor-pointer mb-0">
-                           {{$bookmark->question->question}}
+                        <h3 class="card-title text-gray-700 fw-bolder cursor-pointer mb-0" style="max-width: 600px !important;">
+                           <a href="{{ route('question.single-question', $bookmark->question->id) }}">{{$bookmark->question->question}}</a>
+                          
                         </h3>
                         <div class="card-toolbar">
                            <!--begin::Menu-->
-                            <button type="button" title="Action"  class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                <!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
-                                <span class="svg-icon svg-icon-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect x="5" y="5" width="5" height="5" rx="1" fill="#000000" />
-                                            <rect x="14" y="5" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
-                                            <rect x="5" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
-                                            <rect x="14" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
-                                        </g>
-                                    </svg>
-                                </span>
-                                <!--end::Svg Icon-->
-                                
-                            </button>
+                            <button type="button" class="btn btn-sm btn-light btn-active-light-primary fw-bold" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Action</button>
                             <!--begin::Menu 3-->
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true">
                                 <!--begin::Heading-->
@@ -97,67 +144,7 @@
                                     <a href="#" class="menu-link px-3">Edit Question</a>
                                 </div>
                                 <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="javascript:;" class="btn btn-sm btn-primary me-3" onclick="addNew()">Add Description</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3">
-                                    <a href="#" class="menu-link px-3">Generate Bill</a>
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3" data-kt-menu-trigger="hover" data-kt-menu-placement="right-end">
-                                    <a href="#" class="menu-link px-3">
-                                        <span class="menu-title">Subscription</span>
-                                        <span class="menu-arrow"></span>
-                                    </a>
-                                    <!--begin::Menu sub-->
-                                    <div class="menu-sub menu-sub-dropdown w-175px py-4">
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3">Plans</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3">Billing</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <a href="#" class="menu-link px-3">Statements</a>
-                                        </div>
-                                        <!--end::Menu item-->
-                                        <!--begin::Menu separator-->
-                                        <div class="separator my-2"></div>
-                                        <!--end::Menu separator-->
-                                        <!--begin::Menu item-->
-                                        <div class="menu-item px-3">
-                                            <div class="menu-content px-3">
-                                                <!--begin::Switch-->
-                                                <label class="form-check form-switch form-check-custom form-check-solid">
-                                                    <!--begin::Input-->
-                                                    <input class="form-check-input w-30px h-20px" type="checkbox" value="1" checked="checked" name="notifications" />
-                                                    <!--end::Input-->
-                                                    <!--end::Label-->
-                                                    <span class="form-check-label text-muted fs-6">Recuring</span>
-                                                    <!--end::Label-->
-                                                </label>
-                                                <!--end::Switch-->
-                                            </div>
-                                        </div>
-                                        <!--end::Menu item-->
-                                    </div>
-                                    <!--end::Menu sub-->
-                                </div>
-                                <!--end::Menu item-->
-                                <!--begin::Menu item-->
-                                <div class="menu-item px-3 my-1">
-                                    <a href="#" class="menu-link px-3">Settings</a>
-                                </div>
-                                <!--end::Menu item-->
+                                
                             </div>
                             <!--end::Menu 3-->
                             <!--end::Menu--> 
@@ -166,25 +153,55 @@
                     <div class="card-body">
                         {{-- <h3 class="card-title text-black-700 fw-bolder cursor-pointer mb-5">{{$bookmark->question->question}}</h3> --}}
                         <!--end::Text-->
-                        <div class="row" style="font-size: 16px">
+                         <div class="row"  style="font-size: 16px">
                             @if(isset($bookmark->question->question_option->option_1 ))
-                            <div class="col-md-6">
-                                <p class="text-gray-800 fw-normal mb-5"> <b>&#9398</b> {{$bookmark->question->question_option->option_1 }}</p>
+                            <div class="col-md-6 test">
+                                <p class="text-gray-800 fw-normal mb-5 " > 
+                                   <i class="fas fa-eye fa-2xl"></i> {{$bookmark->question->question_option->option_1 }}</p>
+                            </div>
+                            <div class="col-md-6 reading d-none">
+                                <p class="text-gray-800 fw-normal mb-5 {{ ($bookmark->question->question_option->answer == '1') ? 'right-answer' : ''}}" > 
+                                   <i class="fas fa-{{ ($bookmark->question->question_option->answer == '1') ? 'check' : 'times'}} fa-2xl"></i> {{$bookmark->question->question_option->option_1 }}</p>
                             </div>
                             @endif
                             @if(isset($bookmark->question->question_option->option_2))
-                            <div class="col-md-6">
-                                <p class="text-gray-800 fw-normal mb-5"> <b>&#9399</b> {{$bookmark->question->question_option->option_2 }}</p>
+                            <div class="col-md-6 test">
+                                <p class="text-gray-800 fw-normal mb-5  "> 
+                                    <i class="fas fa-eye fa-2xl"></i> {{$bookmark->question->question_option->option_2 }}</p>
+                            </div>
+                            <div class="col-md-6 reading d-none">
+                                <p class="text-gray-800 fw-normal mb-5  {{ ($bookmark->question->question_option->answer == '2') ? 'right-answer' : ''}} "> 
+                                    <i class="fas fa-{{ ($bookmark->question->question_option->answer == '2') ? 'check' : 'times'}} fa-2xl"></i> {{$bookmark->question->question_option->option_2 }}</p>
                             </div>
                             @endif
                             @if(isset($bookmark->question->question_option->option_3))
-                            <div class="col-md-6">
-                                <p class="text-gray-800 fw-normal mb-5"> <b>&#9400</b> {{$bookmark->question->question_option->option_3}}</p>
+                            <div class="col-md-6 test">
+                                <p class="text-gray-800 fw-normal mb-5  "> 
+                                    <i class="fas fa-eye fa-2xl"></i> {{$bookmark->question->question_option->option_3}}</p>
+                            </div>
+                            <div class="col-md-6 reading d-none">
+                                <p class="text-gray-800 fw-normal mb-5  {{ ($bookmark->question->question_option->answer == '3') ? 'right-answer' : ''}}"> 
+                                    <i class="fas fa-{{ ($bookmark->question->question_option->answer == '3') ? 'check' : 'times'}} fa-2xl"></i> {{$bookmark->question->question_option->option_3}}</p>
                             </div>
                             @endif
                             @if(isset($bookmark->question->question_option->option_4 ))
-                            <div class="col-md-6">
-                                <p class="text-gray-800 fw-normal mb-5"> <b>&#9401</b> {{$bookmark->question->question_option->option_4}}</p>
+                            <div class="col-md-6 test">
+                                <p class="text-gray-800 fw-normal mb-5  "> 
+                                    <i class="fas fa-eye fa-2xl" ></i> {{$bookmark->question->question_option->option_4}}</p>
+                            </div>
+                            <div class="col-md-6 reading d-none">
+                                <p class="text-gray-800 fw-normal mb-5  {{ ($bookmark->question->question_option->answer == '4') ? 'right-answer' : ''}}"> 
+                                    <i class="fas fa-{{ ($bookmark->question->question_option->answer == '4') ? 'check' : 'times'}} fa-2xl" ></i> {{$bookmark->question->question_option->option_4}}</p>
+                            </div>
+                            @endif
+                            @if(isset($bookmark->question->question_option->option_5 ))
+                            <div class="col-md-6 test">
+                                <p class="text-gray-800 fw-normal mb-5  "> 
+                                    <i class="fas fa-eye fa-2xl" ></i> {{$bookmark->question->question_option->option_5}}</p>
+                            </div>
+                            <div class="col-md-6 reading d-none">
+                                <p class="text-gray-800 fw-normal mb-5  {{ ($bookmark->question->question_option->answer == '5') ? 'right-answer' : ''}}"> 
+                                    <i class="fas fa-{{ ($bookmark->question->question_option->answer == '5') ? 'check' : 'times'}} fa-2xl" ></i> {{$bookmark->question->question_option->option_5}}</p>
                             </div>
                             @endif
                         </div>
@@ -204,7 +221,20 @@
                         </div>
                     </div>
                     <div class="card-footer" style="padding-top:0px !important; padding-bottom:0px !important;">
-                        
+                        <div class="d-flex justify-content-end mt-2" style="margin-bottom: -40px !important;">
+                                    <a href="javascript:;" class="bookmark  me-2 btn btn-sm btn-light btn-color-muted btn-active-light-primary px-4 py-2"  
+                                    data-id="{{ $bookmark->question->id }}"  title="bookmark">
+                                    <i class="fas fa-bookmark svg-icon-primary"></i>
+                                </a>
+                                <a href="" style="cursor:default" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4">
+                                    <i class="fas fa-eye fa-xl"></i> {{$bookmark->question->view_count}}
+                                </a>
+
+                                <a href="javascript:;" class=" btn btn-sm btn-light btn-color-muted btn-active-light-danger px-4 py-2 vote me-2"  data-id="{{ $bookmark->question_id }}" title="like">
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen030.svg-->
+                                <i class="fas fa-heart"></i>
+                                <!--end::Svg Icon-->{{$bookmark->question->vote}}</a>
+                        </div>
                         <!--begin::Accordion-->
                         <!--begin::Section-->
                         <div class="m-0">
@@ -235,21 +265,9 @@
                                 <!--end::Icon-->
                                 <!--begin::Title-->
                                 <h5 class="text-gray-700 fw-bolder cursor-pointer mb-0">Description</h5>
+                                <p class="badge badge-circle badge-success">{{ $bookmark->question->descriptions->count() }}</p>
                                 <!--end::Title-->
-                                <div class="float-right">
-                                     <a href="javascript:;" class="bookmark me-2 btn btn-sm btn-light btn-color-muted btn-active-light-primary px-4 py-2"  
-                                     data-id="{{ $bookmark->question->id }}" title="bookmark">
-                                        <i class="fas fa-bookmark"></i>
-                                    </a>
-                                    <a href="" style="cursor:default" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4">
-                                        <i class="fas fa-eye fa-xl"></i> {{$bookmark->question->view_count}} 
-                                    </a>
-
-                                    <a href="javascript:;" class=" btn btn-sm btn-light btn-color-muted btn-active-light-danger px-4 py-2 vote me-2"  data-id="{{ $bookmark->question->id }}" title="like">
-                                    <!--begin::Svg Icon | path: icons/duotune/general/gen030.svg-->
-                                    <i class="fas fa-heart"></i>
-                                    <!--end::Svg Icon-->{{$bookmark->question->vote}}</a>
-                                </div>
+                                
                                 
                             </div>
                             <!--end::Heading-->
@@ -376,3 +394,159 @@
 @endsection
 
 
+@push('script')
+    <script type="text/javascript">
+        
+        // add new
+        function addNew(){
+            $('input[name="question_des_id"]').val('')
+            $('.with-errors').text('')
+            $('#kk_modal_new_question_des_form')[0].reset();
+            $('#kk_modal_new_question_des').modal('show')
+        }
+        
+        
+        //new category save
+        $('#kk_modal_new_question_des_form').on('submit',function(e){
+            e.preventDefault()
+            $('.with-errors').text('')
+            $('.indicator-label').hide()
+            $('.indicator-progress').show()
+            $('#kk_modal_new_service_submit').attr('disabled','true')
+
+            var formData = new FormData(this);
+            $.ajax({
+                type:"POST",
+                url: "{{ url('description/question-description/store')}}",
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    if(data.success ==  false || data.success ==  "false"){
+                        var arr = Object.keys(data.errors);
+                        var arr_val = Object.values(data.errors);
+                        for(var i= 0;i < arr.length;i++){
+                        $('.'+arr[i]+'-error').text(arr_val[i][0])
+                        }
+                    }else if(data.error || data.error == 'true'){
+                        var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                        $('#kk_modal_new_question_des_form').find('.messages').html(alertBox).show();
+                    }else{
+                        // empty the form
+                        $('#kk_modal_new_question_des_form')[0].reset();
+                        $("#kk_modal_new_question_des").modal('hide');
+
+                        Swal.fire({
+                                text: data.message,
+                                icon: "success",
+                                buttonsStyling: !1,
+                                confirmButtonText: "{{__('Ok, got it!')}}",
+                                customClass: {
+                                    confirmButton: "btn fw-bold btn-primary"
+                                }
+                            }).then((function () {
+                                //refresh datatable
+                                $('#dataTable').DataTable().ajax.reload();
+                            }))
+                    }
+
+                $('.indicator-label').show()
+                $('.indicator-progress').hide()
+                $('#kk_modal_new_service_submit').removeAttr('disabled')
+
+                }
+          });
+
+        })
+            
+        //vote
+        $('.vote').on('click', function(){
+            var id = $(this).data('id')
+            //alert(id)
+            $.ajax({
+                type:"GET",
+                url: "{{ url('question/vote')}}"+'/'+id,
+                dataType: 'json',
+                success:function(data){
+                    Swal.fire({
+                        text: data.message,
+                        icon: "success",
+                        showConfirmButton: false
+                        
+                    })
+                    setTimeout(function() {
+                        location.reload();  //Refresh page
+                    }, 1000);
+                }
+            })
+        });
+
+        //view count
+        $('.view').on('click', function(){
+            var id = $(this).data('id')
+            //alert(id)
+            $.ajax({
+                type:"GET",
+                url: "{{ url('question/view-count')}}"+'/'+id,
+                dataType: 'json',
+                success:function(data){
+                    
+                }
+            })
+        });
+
+        //bookmarks
+        $('.bookmark').on('click', function(){
+            var id = $(this).data('id')
+            var catid = $(this).data('catid')
+           
+            $(this).children().addClass('svg-icon-primary');
+            //alert(id)
+            $.ajax({
+                type:"GET",
+                url: "{{ url('question/bookmark')}}"+'/'+id+'/'+catid,
+                dataType: 'json',
+                success:function(data){
+                    if(data.success){
+                        Swal.fire({
+                        text: data.message,
+                        icon: "success",
+                        
+                    })
+                    }else{
+                        Swal.fire({
+                        text: data.message,
+                        icon: "error",
+                        
+                        })
+                    }
+                   
+                    
+                }
+            })
+        });
+
+        //reading mode
+        $(document).ready(function(){
+            $('#readingMode').on('click', function(e){
+                e.preventDefault();
+                $('.test').addClass('d-none')
+                $('.reading').removeClass('d-none')
+                $(this).addClass('d-none')
+                $('#testMode').removeClass('d-none')
+        
+            })
+            $('#testMode').on('click', function(e){
+                e.preventDefault();
+                $('.test').removeClass('d-none')
+                $('.reading').addClass('d-none')
+                $('#readingMode').removeClass('d-none')
+                $(this).addClass('d-none')
+               
+            })
+        })
+
+
+    </script>
+@endpush

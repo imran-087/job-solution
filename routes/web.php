@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookmarkController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
@@ -88,8 +89,12 @@ Route::post('/question/update-question', [QuestionController::class, 'update'])-
 ####### User dashboard route #######
 Route::middleware('auth')->name('user-dashboard.')->group(function () {
   Route::get('/my-dashboard/{user}', [UserDashboardController::class, 'index'])->name('index');
-  Route::get('/my-dashboard/{user}/my-bookmark', [UserDashboardController::class, 'bookmark'])->name('bookmark');
+
   Route::get('/my-dashboard/{user}/profile-settings', [UserDashboardController::class, 'profileSettings'])->name('profile-settings');
   Route::post('/my-dashboard/profile-settings/chnage-password', [UserDashboardController::class, 'chnagePassword'])->name('chnage-password');
   Route::post('/my-dashboard/profile-settings/update-profile', [UserDashboardController::class, 'updateProfile'])->name('update-profile');
+
+  ###**  Bookmark **###
+  Route::get('/my-bookmark/user={user}', [BookmarkController::class, 'getBookmark'])->name('bookmark');
+  Route::get('/my-bookmark/user={user}/category={category}', [BookmarkController::class, 'getBookmarkByCategory'])->name('bookmark.category');
 });

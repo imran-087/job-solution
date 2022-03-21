@@ -106,14 +106,6 @@ class QuestionController extends Controller
         $passages = Passage::get(['id', 'title']);
 
         return view('admin.question.question_input', compact(['question', 'option', 'type', 'main_categories', 'years', 'passages']));
-
-        // if ($type == 'mcq') {
-        //     return view('admin.question.mcq_question', compact(['question', 'option', 'type', 'main_categories', 'years', 'passages']));
-        // } elseif ($type == 'written') {
-        //     return view('admin.question.written_question', compact(['question', 'option', 'type', 'main_categories', 'years']));
-        // } elseif ($type == 'image') {
-        //     return view('admin.question.mcq_question', compact(['question', 'option', 'type', 'main_categories', 'years']));
-        // }
     }
 
     public function store(Request $request)
@@ -203,8 +195,6 @@ class QuestionController extends Controller
                 ]);
             }
         }
-
-
 
         Session::flash('success', 'Question created successfully');
         return redirect()->route('admin.question.index');

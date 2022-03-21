@@ -65,27 +65,14 @@
                     
                 <div class="card card-bordered mb-5">
                     <div class="card-header">
-                        <a href="{{ route('question.single-question', $question->id) }}">
-                            <h3 class="card-title text-gray-700 fw-bolder cursor-pointer mb-0" style="max-width: 650px !important;">
-                                {{$question->question}}
-                            </h3>
-                        </a>
+                       
+                        <h3 class="card-title text-gray-700 fw-bolder cursor-pointer mb-0" style="max-width: 650px !important;">
+                            <a href="{{ route('question.single-question', $question->id) }}"> {{$question->question}}  </a>
+                        </h3>
+                       
                         <div class="card-toolbar">
                            <!--begin::Menu-->
-                            <button type="button" title="Action"  class="btn btn-sm btn-icon btn-color-primary btn-active-light-primary" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                <!--begin::Svg Icon | path: icons/duotune/general/gen024.svg-->
-                                <span class="svg-icon svg-icon-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24px" height="24px" viewBox="0 0 24 24">
-                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
-                                            <rect x="5" y="5" width="5" height="5" rx="1" fill="#000000" />
-                                            <rect x="14" y="5" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
-                                            <rect x="5" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
-                                            <rect x="14" y="14" width="5" height="5" rx="1" fill="#000000" opacity="0.3" />
-                                        </g>
-                                    </svg>
-                                </span>
-                                <!--end::Svg Icon-->     
-                            </button>
+                            <button type="button" class="btn btn-sm btn-light btn-active-light-primary fw-bold" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Action</button>
                             <!--begin::Menu 3-->
                             <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg-light-primary fw-bold w-200px py-3" data-kt-menu="true">
                                 <!--begin::Heading-->

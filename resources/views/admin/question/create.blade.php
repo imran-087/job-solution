@@ -94,7 +94,7 @@
                         </div>
                         <!--end::Heading-->
                         <!--begin::Input group-->
-                    <div class="row g-9 mb-8">
+                        <div class="row g-9 mb-8">
                         <!--begin::Col-->
                         <div class="col-md-6 fv-row">
                            <!--begin::Label-->
@@ -123,15 +123,15 @@
                             @enderror
                         </div>
                         <!--end::Col-->
-                    </div>
-                    <!--end::Input group-->
+                        </div>
+                        <!--end::Input group-->
                         <!--begin::Input group-->
                         <div class="d-flex flex-column mb-8 fv-row">
                             
                         </div>
                         <!--end::Input group-->
                        <!--begin::Input group-->
-                    <div class="row g-9 mb-8">
+                        <div class="row g-9 mb-8">
                         <!--begin::Col-->
                         <div class="col-md-12 fv-row">
                             <label class="required fs-6 fw-bold mb-2">Question Type</label>
@@ -146,8 +146,8 @@
                             @enderror
                         </div>
                         <!--end::Col-->
-                    </div>
-                    <!--end::Input group-->
+                        </div>
+                        <!--end::Input group-->
 
                         <!--begin::Actions-->
                         <div class="text-center">
@@ -158,6 +158,7 @@
                         <!--end::Actions-->
                     </form>
                     <!--end:Form-->
+                    
                 </div>
                 <!--end::Card body-->
             </div>

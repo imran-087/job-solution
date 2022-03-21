@@ -51,9 +51,6 @@
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <!--begin::Container-->
     <div id="kt_content_container" class="container-xxl">
-        <!--begin::Navbar-->
-        @include('user.navbar')
-        <!--end::Navbar-->
         
         <!--begin::details View-->
         <div class="card mb-5 mb-xl-10">

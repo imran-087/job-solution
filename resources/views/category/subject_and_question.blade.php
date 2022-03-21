@@ -148,15 +148,15 @@
             <!--begin::Col-->
             <div class="col-8" id="question">
               
-                @foreach($questions as $question)
+                @foreach($questions as $key => $question)
                 <!--begin::Feeds Widget 2-->    
                 <div class="card card-bordered mb-5">
                     <div class="card-header">
-                        <a href="{{ route('question.single-question', $question->id) }}">
-                            <h3 class="card-title text-gray-700 fw-bolder cursor-pointer mb-0 view" data-id="{{ $question->id }}" style="max-width: 600px !important;">
-                                {{$question->question}}
-                            </h3>
-                        </a>
+                       
+                        <h3 class="card-title text-gray-700 fw-bolder cursor-pointer mb-0 view" data-id="{{ $question->id }}" style="max-width: 600px !important;">
+                                <a href="{{ route('question.single-question', $question->id) }}"> {{ $key+1 }}. {{$question->question}} </a>
+                        </h3>
+                       
                         <div class="card-toolbar">
                            <!--begin::Menu-->
                            <button type="button" class="btn btn-sm btn-light btn-active-light-primary fw-bold" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Action</button>
@@ -175,7 +175,7 @@
                                 <!--end::Menu item-->
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="javascript:;"  onclick="addNew()" >Add Description</a>
+                                    <a href="javascript:;" class="menu-link px-3" onclick="addNew()" >Add Description</a>
                                 </div>
                                 <!--end::Menu item-->
                                 
@@ -259,6 +259,9 @@
                             <button type="button" class="btn btn-sm  btn-light me-3">
                                 <a href="">{{$question->sub_category->category->main_category->name}}</a>
                             </button>            
+                        </div>
+                        <div class="d-flex justify-content-end "> 
+                            <a href="javascript:;" class="btn btn-sm  btn-success me-3 view-ans" id="" data-id="{{ $question->id }}">view ans</a>
                         </div>
                     </div>
                     <div class="card-footer" style="padding-top:0px !important; padding-bottom:0px !important;">
@@ -431,12 +434,7 @@
 
 @push('script')
     <script type="text/javascript">
-        $(document).ready(function() {
-
-           
-            
-        })
-
+        
         // add new
         function addNew(){
             $('input[name="question_des_id"]').val('')
@@ -525,7 +523,7 @@
         //view count
         $('.view').on('click', function(){
             var id = $(this).data('id')
-            alert(id)
+            //alert(id)
             $.ajax({
                 type:"GET",
                 url: "{{ url('question/view-count')}}"+'/'+id,
@@ -587,6 +585,14 @@
             })
         })
 
+        $(document).ready(function(){
+            $('.view-ans').on('click', function(e){
+                e.preventDefault()
+                var id = $(this).data('id')
+                console.log(id)
+                $(this).closest('.card-body').find('reading').removeClass('d-none');
+            })
+        })
 
     </script>
 @endpush
