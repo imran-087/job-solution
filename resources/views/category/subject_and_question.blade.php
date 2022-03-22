@@ -4,7 +4,7 @@
 @section('toolbar')
 <div class="toolbar" id="kt_toolbar">
     <!--begin::Container-->
-    <div id="kt_toolbar_container" class="container-xxl d-flex flex-stack">
+    <div id="kt_toolbar_container" class="container-xxl d-flex  flex-stack">
         <!--begin::Page title-->
         <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
             <!--begin::Title-->
@@ -66,94 +66,49 @@
     <!--begin::Container-->
     <div id="kt_content_container" class="container-xxl">
         
-        
+        <!--begin::Row-->
+        <div class="row gy-5 g-xl-8" >
+            <div class="col-12 ">
+            <!--begin::Mixed Widget 14-->
+            <div class="card card-xxl-stretch mb-5 mb-xl-8 " >
+                <!--begin::Body-->
+                <div class="card-body d-flex flex-column ">
+                    <!--begin::Row-->
+                    <div class="row g-0 d-flex justify-content-center">
+                        <!--begin::Col-->
+                        <div class="col-12 ">
+                            <ul class="pagination pagination-outline">
+                                <li class="page-item previous disabled m-1"><a href="#" class="page-link"><i class="previous"></i></a></li>
+                                @foreach($subjects as $subject)
+                                    <li class="page-item m-1 ">
+                                        <a href="{{ route('jobs.category.sub-category.subject.question', [$category->slug, $sub_category->slug, $subject->slug]) }}" class="cursor-pointer page-link btn btn-success">{{$subject->name}} &nbsp<sup class="badge badge-circle badge-danger">{{$subject->question->count()}}</sup></a>
+                                    </li>
+                                @endforeach
+                                <li class="page-item next disabled m-1"><a href="#"  class="page-link"><i class="next"></i></a></li>
+                            </ul>
+                        </div>
+                        <!--end::Col-->
+                         
+                    </div>
+                    <!--end::Row-->
+                </div>
+            </div>
+            <!--end::Mixed Widget 14-->
+        </div>
+        </div>
         <!--begin::Row-->
         <div class="row gy-5 g-xl-8">
-            <!--begin::Col-->
-            <div class="col-4" style="max-height: 80vh !important;">
-                <!--begin::List Widget 6-->
-                <div class="card card-xl-stretch mb-xl-8">
-                    <!--begin::Header-->
-                    <div class="card-header border-0">
-                        <h3 class="card-title fw-bolder text-dark">Subjects</h3>
-                        
-                    </div>
-                    <!--end::Header-->
-                    <!--begin::Body-->
-                    <div class="card-body pt-0">
-                        <!--begin::Item-->
-                        <a href="{{ route('jobs.sub-category.subject.all-question', [$sub_category->slug, $category->slug]) }}" class="cursor-pointer">
-                            <div class="d-flex align-items-center bg-light-warning rounded p-5 mb-7">
-                            <!--begin::Icon-->
-                            <span class="svg-icon svg-icon-warning me-5">
-                                <!--begin::Svg Icon | path: icons/duotune/abstract/abs027.svg-->
-                                <span class="svg-icon svg-icon-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path opacity="0.3" d="M21.25 18.525L13.05 21.825C12.35 22.125 11.65 22.125 10.95 21.825L2.75 18.525C1.75 18.125 1.75 16.725 2.75 16.325L4.04999 15.825L10.25 18.325C10.85 18.525 11.45 18.625 12.05 18.625C12.65 18.625 13.25 18.525 13.85 18.325L20.05 15.825L21.35 16.325C22.35 16.725 22.35 18.125 21.25 18.525ZM13.05 16.425L21.25 13.125C22.25 12.725 22.25 11.325 21.25 10.925L13.05 7.62502C12.35 7.32502 11.65 7.32502 10.95 7.62502L2.75 10.925C1.75 11.325 1.75 12.725 2.75 13.125L10.95 16.425C11.65 16.725 12.45 16.725 13.05 16.425Z" fill="black"></path>
-                                        <path d="M11.05 11.025L2.84998 7.725C1.84998 7.325 1.84998 5.925 2.84998 5.525L11.05 2.225C11.75 1.925 12.45 1.925 13.15 2.225L21.35 5.525C22.35 5.925 22.35 7.325 21.35 7.725L13.05 11.025C12.45 11.325 11.65 11.325 11.05 11.025Z" fill="black"></path>
-                                    </svg>
-                                </span>
-                                <!--end::Svg Icon-->
-                            </span>
-                            <!--end::Icon-->
-                            <!--begin::Title-->
-                            <div class="flex-grow-1 me-2">
-                                <a href="{{ route('jobs.sub-category.subject.all-question', [ $category->slug, $sub_category->slug]) }}" class="fw-bolder text-gray-800 text-hover-primary fs-6">All Question</a>
-                                <span class="text-muted fw-bold d-block">{{ $sub_category->name }}</span>
-                            </div>
-                            <!--end::Title-->
-                            <!--begin::Lable-->
-                            <span class="fw-bolder text-danger py-1">{{ $sub_category->question->count() }}</span>
-                            <!--end::Lable-->
-                            </div>
-                        </a>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        @foreach($subjects as $subject)
-                        <a href="{{ route('jobs.category.sub-category.subject.question', [$category->slug, $sub_category->slug, $subject->slug]) }}" class="cursor-pointer">
-                            <div class="d-flex align-items-center bg-light-success rounded p-5 mb-7">
-                            <!--begin::Icon-->
-                            <span class="svg-icon svg-icon-success me-5">
-                                <!--begin::Svg Icon | path: icons/duotune/abstract/abs027.svg-->
-                                <span class="svg-icon svg-icon-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path opacity="0.3" d="M21.25 18.525L13.05 21.825C12.35 22.125 11.65 22.125 10.95 21.825L2.75 18.525C1.75 18.125 1.75 16.725 2.75 16.325L4.04999 15.825L10.25 18.325C10.85 18.525 11.45 18.625 12.05 18.625C12.65 18.625 13.25 18.525 13.85 18.325L20.05 15.825L21.35 16.325C22.35 16.725 22.35 18.125 21.25 18.525ZM13.05 16.425L21.25 13.125C22.25 12.725 22.25 11.325 21.25 10.925L13.05 7.62502C12.35 7.32502 11.65 7.32502 10.95 7.62502L2.75 10.925C1.75 11.325 1.75 12.725 2.75 13.125L10.95 16.425C11.65 16.725 12.45 16.725 13.05 16.425Z" fill="black"></path>
-                                        <path d="M11.05 11.025L2.84998 7.725C1.84998 7.325 1.84998 5.925 2.84998 5.525L11.05 2.225C11.75 1.925 12.45 1.925 13.15 2.225L21.35 5.525C22.35 5.925 22.35 7.325 21.35 7.725L13.05 11.025C12.45 11.325 11.65 11.325 11.05 11.025Z" fill="black"></path>
-                                    </svg>
-                                </span>
-                                <!--end::Svg Icon-->
-                            </span>
-                            <!--end::Icon-->
-                            <!--begin::Title-->
-                            <div class="flex-grow-1 me-2">
-                                <a href="{{ route('jobs.category.sub-category.subject.question', [$category->slug, $sub_category->slug, $subject->slug]) }}" class="fw-bolder text-gray-800 text-hover-primary fs-6">{{ $subject->name }}</a>
-                                {{-- <span class="text-muted fw-bold d-block">Due in 2 Days</span> --}}
-                            </div>
-                            <!--end::Title-->
-                            <!--begin::Lable-->
-                            <span class="fw-bolder text-info py-1">{{$subject->question->count()}}</span>
-                            <!--end::Lable-->
-                            </div>
-                        </a>
-                        @endforeach
-                        <!--end::Item-->
-                        
-                    </div>
-                    <!--end::Body-->
-                </div>
-                <!--end::List Widget 6-->
-            </div>
-            <!--end::Col-->
+           
 
             <!--begin::Col-->
-            <div class="col-8" id="question">
+            <div class="col-12" id="question">
               
                 @foreach($questions as $key => $question)
                 <!--begin::Feeds Widget 2-->    
                 <div class="card card-bordered mb-5">
                     <div class="card-header">
                        
-                        <h3 class="card-title text-gray-700 fw-bolder cursor-pointer mb-0 view" data-id="{{ $question->id }}" style="max-width: 600px !important;">
+                        <h3 class="card-title text-gray-700 fw-bolder cursor-pointer mb-0 view" data-id="{{ $question->id }}" style="max-width: 1100px !important;">
                                 <a href="{{ route('question.single-question', $question->id) }}"> {{ $key+1 }}. {{$question->question}} </a>
                         </h3>
                        
@@ -260,9 +215,9 @@
                                 <a href="">{{$question->sub_category->category->main_category->name}}</a>
                             </button>            
                         </div>
-                        <div class="d-flex justify-content-end "> 
+                        {{-- <div class="d-flex justify-content-end "> 
                             <a href="javascript:;" class="btn btn-sm  btn-success me-3 view-ans" id="" data-id="{{ $question->id }}">view ans</a>
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="card-footer" style="padding-top:0px !important; padding-bottom:0px !important;">
 
@@ -271,7 +226,7 @@
                                     data-id="{{ $question->id }}" data-catid="{{ $question->sub_category->category->id }}" title="bookmark">
                                     <i class="fas fa-bookmark"></i>
                                 </a>
-                                <a href="" style="cursor:default" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4">
+                                <a href="" style="cursor:default" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-2">
                                     <i class="fas fa-eye fa-xl"></i> {{$question->view_count}} 
                                 </a>
 
@@ -287,22 +242,15 @@
                             <!--begin::Heading-->
                             <div class="d-flex align-items-center  collapsible py-3 toggle mb-0 collapsed" data-bs-toggle="collapse" data-bs-target="#kt_job_4_1_{{$question->id}}" aria-expanded="false">
                                 <!--begin::Icon-->
-                                <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                                <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-1">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
                                     <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black"></rect>
-                                            <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="black"></rect>
-                                        </svg>
+                                        <i class="fas fa-caret-up fa-2xl"></i>
                                     </span>
                                     <!--end::Svg Icon-->
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
                                     <span class="svg-icon toggle-off svg-icon-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="black"></rect>
-                                            <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="black"></rect>
-                                            <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="black"></rect>
-                                        </svg>
+                                        <i class="fas fa-caret-down fa-2xl"></i>
                                     </span>
                                     <!--end::Svg Icon-->
                                    
@@ -588,7 +536,7 @@
         $(document).ready(function(){
             $('.view-ans').on('click', function(e){
                 e.preventDefault()
-                var id = $(this).data('id')
+                var id = "$(this).data('id')"
                 console.log(id)
                 $(this).closest('.card-body').find('reading').removeClass('d-none');
             })

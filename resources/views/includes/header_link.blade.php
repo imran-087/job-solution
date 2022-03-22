@@ -32,6 +32,8 @@
 
         <!-- Custom css -->
         <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
+		
 
 		<!--Custom error style -->
 		<style>

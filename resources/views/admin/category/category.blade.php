@@ -215,7 +215,7 @@
                                
                                 {{-- <option value="deactive">Deactive</option> --}}
                             </select>
-                            <div class="help-block with-errors status-error"></div>
+                            <div class="help-block with-errors main_category-error"></div>
                         </div>
                         <!--end::Col-->
                     </div>

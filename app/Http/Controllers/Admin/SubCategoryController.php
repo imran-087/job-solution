@@ -28,6 +28,9 @@ class SubCategoryController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
 
+                ->editColumn('category_id', function ($row) {
+                    return $row->category->name;
+                })
                 ->editColumn('created_at', function ($row) {
                     return $row->created_at->diffForHumans();
                 })

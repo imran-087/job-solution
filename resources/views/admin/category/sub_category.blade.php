@@ -107,7 +107,7 @@
                             <!--end::Select2-->
                         </div>
                         <!--begin::Add product-->
-                        <a href="javascript:;" class="btn btn-sm btn-primary me-3" onclick="addNew()">Add Category</a>
+                        <a href="javascript:;" class="btn btn-sm btn-primary me-3" onclick="addNew()">Add Sub Category</a>
                         <!--end::Add product-->
                     </div>
 
@@ -126,8 +126,9 @@
                                     <!--begin::Table row-->
                                     <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                         <th class="min-w-20px">#</th>
-                                        <th class="min-w-150px">Category Name</th>
+                                        <th class="min-w-150px">Sub Category Name</th>
                                         <th class=" min-w-150px">Title</th>
+                                        <th class=" min-w-100px">Category Name</th>
                                         <th class=" min-w-100px">Status</th>
                                         <th class=" min-w-100px">Created at</th>
                                         <th class=" min-w-70px">Actions</th>
@@ -193,7 +194,7 @@
                     <!--begin::Heading-->
                     <div class="mb-13 text-center">
                         <!--begin::Title-->
-                        <h1 class="mb-3">Add New Category</h1>
+                        <h1 class="mb-3">Add New Sub Category</h1>
                         <!--end::Title-->
                         <!--begin::Description-->
                         <div class="text-muted fw-bold fs-5">Fill up the form and submit
@@ -239,7 +240,7 @@
                     <div class="d-flex flex-column mb-8 fv-row">
                         <!--begin::Label-->
                         <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="required">Category Name</span>
+                            <span class="required">Sub Category Name</span>
                         </label>
                         <!--end::Label-->
                         <input type="text" class="form-control form-control-solid" placeholder="Enter Service Name"
@@ -251,7 +252,7 @@
                     <div class="d-flex flex-column mb-8 fv-row">
                         <!--begin::Label-->
                         <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="required">Category Title</span>
+                            <span class="required">Sub Category Title</span>
                         </label>
                         <!--end::Label-->
                         <input type="text" class="form-control form-control-solid" placeholder="Enter Title"
@@ -324,11 +325,16 @@
                         data: 'title',
                         name: 'title'
                     },
+                    {
+                        data: 'category_id',
+                        name: 'category_id'
+                    },
 
                     {
                         data: 'status',
                         name: 'status'
                     },
+                   
                     {
                         data: 'created_at',
                         name: 'created_at'
@@ -342,7 +348,7 @@
 
                 ],
                 "order": [
-                    [4, 'desc']
+                    [5, 'desc']
                 ] //created at desc
 
             })

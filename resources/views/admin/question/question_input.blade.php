@@ -97,7 +97,7 @@
                         <!--begin::Input group-->
                         <div class="row g-9 mb-8">
                             <!--begin::Col-->
-                            <div class="col-md-6 fv-row">
+                            <div class="col-md-3 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Main Category</label>
                                 <select class="form-select form-select-solid" data-control="select2"
                                     data-hide-search="true" data-placeholder="Select main category" name="main_category"
@@ -112,7 +112,7 @@
                             </div>
                             <!--end::Col-->
                             <!--begin::Col-->
-                            <div class="col-md-6 fv-row">
+                            <div class="col-md-3 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Category</label>
                                 <select class="form-select form-select-solid" data-control="select2"
                                     data-hide-search="true" data-placeholder="Select category" name="category"
@@ -123,13 +123,8 @@
                                 <div class="help-block with-errors category-error"></div>
                             </div>
                             <!--end::Col-->
-                        </div>
-                        <!--end::Input group-->
-
-                        <!--begin::Input group-->
-                        <div class="row g-9 mb-8">
                             <!--begin::Col-->
-                            <div class="col-md-6 fv-row">
+                            <div class="col-md-3 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Sub Category</label>
                                 <select class="form-select form-select-solid" data-control="select2"
                                     data-hide-search="true" data-placeholder="Select sub category" name="sub_category"
@@ -141,10 +136,10 @@
                             </div>
                             <!--end::Col-->
                             <!--begin::Col-->
-                            <div class="col-md-6 fv-row">
+                            <div class="col-md-3 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Subject</label>
                                 <select class="form-select form-select-solid" data-control="select2"
-                                    data-hide-search="true" data-placeholder="Select sub category" name="subject"
+                                    data-hide-search="true" data-placeholder="Select subject" name="subject"
                                     id="subject">
 
 
@@ -152,6 +147,27 @@
                                 <div class="help-block with-errors subject-error"></div>
                             </div>
                             <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="row g-9 mb-8">
+                            <!--begin::Col-->
+                            <div class="col-md-3 fv-row">
+                                <label class="required fs-6 fw-bold mb-2">Select Year</label>
+                                <select class="form-select form-select-solid" data-control="select2"
+                                    data-hide-search="true" data-placeholder="Select year" name="year"
+                                    id="year">
+                                    <option value="">Choose ...</option>
+                                    @foreach ($years as $year)
+                                    <option value="{{ $year->id }}">{{ $year->year }}</option>
+                                    @endforeach
+
+                                </select>
+                                <div class="help-block with-errors year-error"></div>
+                            </div>
+                            <!--end::Col-->
+                            
                         </div>
                         <!--end::Input group-->
 
@@ -184,3 +200,15 @@
 
 
 @endsection
+
+
+@push('script')
+    <script type="text/javascript">
+        $(document).ready(function(){
+            $('.answer').on('chnage', function(){
+                $(this).closest("div").find("input[type='text']").removeAttr('disabled')
+                //$(this).colsest('input[type="text"]').
+            })
+        })
+    </script>
+@endpush

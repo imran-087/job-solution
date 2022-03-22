@@ -29,6 +29,9 @@ class SubjectController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
 
+                ->editColumn('sub_category_id', function ($row) {
+                    return $row->sub_category->name;
+                })
                 ->editColumn('created_at', function ($row) {
                     return $row->created_at->diffForHumans();
                 })
@@ -66,7 +69,7 @@ class SubjectController extends Controller
                     </div>';
                     return $btn;
                 })
-                ->rawColumns(['action', 'status', 'created_at'])
+                ->rawColumns(['action', 'status', 'created_at', 'sub_category_id'])
                 ->make(true);
         }
 

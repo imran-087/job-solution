@@ -85,7 +85,16 @@ class QuestionController extends Controller
 
     public function create()
     {
-        return view('admin.question.create');
+        $question = 1;
+        $option = 4;
+        $type = 'mcq';
+
+        $main_categories = MainCategory::all();
+        $years = Year::all();
+        $passages = Passage::get(['id', 'title']);
+
+        return view('admin.question.create', compact(['question', 'option', 'type', 'main_categories', 'years', 'passages']));
+        //return view('admin.question.create');
     }
 
     public function createQuestionInput(Request $request)

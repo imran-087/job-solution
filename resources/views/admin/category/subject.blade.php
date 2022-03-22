@@ -128,6 +128,7 @@
                                         <th class="min-w-20px">#</th>
                                         <th class="min-w-150px">Subject Name</th>
                                         <th class=" min-w-150px">Title</th>
+                                        <th class=" min-w-150px">Sub Category</th>
                                         <th class=" min-w-100px">Status</th>
                                         <th class=" min-w-100px">Created at</th>
                                         <th class=" min-w-70px">Actions</th>
@@ -363,6 +364,10 @@
                         data: 'title',
                         name: 'title'
                     },
+                    {
+                        data: 'sub_category_id',
+                        name: 'sub_category_id'
+                    },
 
                     {
                         data: 'status',
@@ -381,7 +386,7 @@
 
                 ],
                 "order": [
-                    [4, 'desc']
+                    [5, 'desc']
                 ] //created at desc
 
             })

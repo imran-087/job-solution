@@ -155,6 +155,7 @@ class CategoryController extends Controller
     public function getCategory($id)
     {
         //dd($id);
+
         $data = Category::find($id);
         return response($data);
     }

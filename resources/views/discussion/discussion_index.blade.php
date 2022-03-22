@@ -409,10 +409,12 @@
                             <span class="required">Discussion Content</span>
                         </label>
                         <!--end::Label-->
-                        {{-- <textarea name="content" class="form-control form-control-solid h-100px "></textarea> --}}
-                        <input name="content" type="hidden">
+                        <textarea cols="10" name="kt_docs_ckeditor_classic" id="kt_docs_ckeditor_classic"  class="form-control form-control-solid h-100px " rows="10" ></textarea>
+
+                        {{-- <textarea name="content" id="" class="form-control form-control-solid h-100px "></textarea> --}}
+                        {{-- <input name="content" type="hidden">
                         <div id="kt_docs_quill_basic" class="form-control form-control-solid h-100px"  >
-                        </div>
+                        </div> --}}
                         <div class="help-block with-errors content-error"></div>
                     </div>
                     <!--end::Input group-->
@@ -678,4 +680,16 @@
         
 
     </script>
+
+    <script>
+    ClassicEditor
+    .create(document.querySelector('#kt_docs_ckeditor_classic'))
+    .then(editor => {
+        console.log(editor);
+    })
+    .catch(error => {
+        console.error(error);
+    });
+    
+  </script>
 @endpush

@@ -16,14 +16,15 @@
         <!--begin::Input group-->
         <div class="row g-9 mb-8">
             <!--begin::Col-->
-            <div class="col-md-6 fv-row">
+            <div class="col-md-3 fv-row">
                 <!--begin::Label-->
                 <label class="required fs-6 fw-bold mb-2">Answer</label>
-                <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                    data-placeholder="Select correct answer" name="answer[]">
-                    @for($o = 0; $o < $option; $o++) <option value="{{$o+1}}"> Option {{$o+1}}
-                        </option>
-                        @endfor
+                <select class="form-select form-select-solid answer" data-control="select2" data-hide-search="true"
+                    data-placeholder="Select correct answer" name="answer[]" >
+                    <option value=""></option>
+                    @for($o = 0; $o < $option; $o++)
+                    <option value="{{$o+1}}"> Option {{$o+1}}</option>
+                    @endfor
                 </select>
                 @error('answer')
                 <div class="text-danger">{{ $message }}</div>
@@ -39,16 +40,17 @@
         </div>
          <!--begin::Input group-->
         <div class="row g-9 mb-8">
+            
             <!--begin::Col-->
             @for($o = 0; $o < $option; $o++) 
-            <div class="col-md-6 fv-row">
+            <div class="col-md-3 fv-row">
                 <!--begin::Label-->
                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                     <span class="required">Option : {{ $o+1 }} </span>
                 </label>
                 <!--end::Label-->
                 <input type="text" class="form-control form-control-solid" placeholder="Enter option"
-                    name="option_{{$o+1}}[]" />
+                    name="option_{{$o+1}}[]"  />
                 <div class="help-block with-errors title-error"></div>
                 @if($type == 'image')
                 <input type="file" class="form-control-file" id="exampleInputFile" name="image[]" multiple>
