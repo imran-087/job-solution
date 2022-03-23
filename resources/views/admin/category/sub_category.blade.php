@@ -129,7 +129,8 @@
                                         <th class="min-w-150px">Sub Category Name</th>
                                         <th class=" min-w-150px">Title</th>
                                         <th class=" min-w-100px">Category Name</th>
-                                        <th class=" min-w-100px">Status</th>
+                                        <th class=" min-w-70px">Year</th>
+                                        <th class=" min-w-70px">Status</th>
                                         <th class=" min-w-100px">Created at</th>
                                         <th class=" min-w-70px">Actions</th>
                                     </tr>
@@ -205,7 +206,7 @@
                     <!--begin::Input group-->
                     <div class="row g-9 mb-8">
                         <!--begin::Col-->
-                        <div class="col-md-12 fv-row">
+                        <div class="col-md-6 fv-row">
                             <label class="required fs-6 fw-bold mb-2">Select Main Category</label>
                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                 data-placeholder="Select main category" name="main_category" id="main_category">
@@ -219,15 +220,11 @@
                             <div class="help-block with-errors main_category-error"></div>
                         </div>
                         <!--end::Col-->
-                    </div>
-                    <!--end::Input group-->
-                    <!--begin::Input group-->
-                    <div class="row g-9 mb-8">
                         <!--begin::Col-->
-                        <div class="col-md-12 fv-row">
+                        <div class="col-md-6 fv-row">
                             <label class="required fs-6 fw-bold mb-2">Select Category</label>
                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                data-placeholder="Select main category" name="category" id="category">
+                                data-placeholder="Select  category" name="category" id="category">
                                 
                         
                             </select>
@@ -236,6 +233,7 @@
                         <!--end::Col-->
                     </div>
                     <!--end::Input group-->
+                    
                     <!--begin::Input group-->
                     <div class="d-flex flex-column mb-8 fv-row">
                         <!--begin::Label-->
@@ -264,12 +262,26 @@
                     <!--begin::Input group-->
                     <div class="row g-9 mb-8">
                         <!--begin::Col-->
-                        <div class="col-md-12 fv-row">
+                        <div class="col-md-6 fv-row">
                             <label class="required fs-6 fw-bold mb-2">Status</label>
                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                 data-placeholder="Select status" name="status">
                                 <option value="active" selected>Active</option>
                                 <option value="deactive">Deactive</option>
+                            </select>
+                            <div class="help-block with-errors status-error"></div>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-md-6 fv-row">
+                            <label class="required fs-6 fw-bold mb-2">Year</label>
+                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                data-placeholder="Select exam year" name="year" id="year">
+                                <option value="">Choose ...</option>
+                                @foreach ($years as $year)
+                                    <option value="{{ $year->id }}">{{ $year->year }}</option>
+                                @endforeach
+                               
                             </select>
                             <div class="help-block with-errors status-error"></div>
                         </div>
@@ -328,6 +340,10 @@
                     {
                         data: 'category_id',
                         name: 'category_id'
+                    },
+                    {
+                        data: 'year_id',
+                        name: 'year_id'
                     },
 
                     {

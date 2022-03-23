@@ -19,6 +19,7 @@ class CreateSubCategoriesTable extends Migration
             $table->string('name');
             $table->string('title');
             $table->string('slug');
+            $table->integer('year_id')->nullable();
             $table->integer('created_user_id');
             $table->integer('updated_user_id')->nullable();
             $table->enum('status', ['active', 'deactive'])->default('active');

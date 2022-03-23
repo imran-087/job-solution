@@ -52,7 +52,7 @@ Route::get('/question/vote/{id}', [QuestionController::class, 'vote'])->name('qu
 Route::get('/question/view-count/{id}', [QuestionController::class, 'viewCount'])->name('question.view-count');
 
 //single question
-Route::get('/single-question/ques_id={id}', [QuestionController::class, 'singleQuestion'])->name('question.single-question');
+Route::get('/single-question', [QuestionController::class, 'singleQuestion'])->name('question.single-question');
 
 /*
   subject wise Question
@@ -62,14 +62,17 @@ Route::get(
   [QuestionController::class, 'subjectWiseQuestion']
 )->name('question.subject-wise-question');
 
-
+############*** Get Category ***############
+Route::get('/job-solution/{main_category}', [CategoryController::class, 'getCategory']);
 /*############## get sub category ###############*/
-Route::get('/jobs/{category}', [CategoryController::class, 'getSubCategory'])->name('jobs.category.sub-category');
+Route::get('/job-solution/{main_category}/{category}', [CategoryController::class, 'getSubCategory'])->name('jobs.category.sub-category');
 /**########## get subject with question ########*/
 Route::get('/jobs/{category}/{sub_category}/all-question', [CategoryController::class, 'getSubjectWithAllQuestion'])->name('jobs.sub-category.subject.all-question');
 /**########## get subject wise question ############*/
 Route::get('/jobs/{category}/{sub_category}/{subject}', [CategoryController::class, 'getSubjectWiseQuestion'])->name('jobs.category.sub-category.subject.question');
 
+####***Get year wise sub category****#########
+Route::get('job-solutions/year={year}', [CategoryController::class, 'getSubCategoryByYear'])->name('job-solution.year');
 
 //question bookmark
 Route::get('/question/bookmark/{id}/{catid}', [QuestionController::class, 'bookmark'])->name('question.bookmark');

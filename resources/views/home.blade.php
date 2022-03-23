@@ -88,7 +88,7 @@
                                         </svg>
                                     </span>
                                     <!--end::Svg Icon-->
-                                    <a href="#" class="text-primary fw-bold fs-6">{{$main_category->name}}</a>
+                                    <a href="{{ url('job-solution', $main_category->slug) }}" class="text-primary fw-bold fs-6">{{$main_category->name}}</a>
                                 </div>
                                 <!--end::Col-->
                                 @endforeach

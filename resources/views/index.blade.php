@@ -103,8 +103,8 @@
                                     <!--begin::Menu item-->
                                     <div class="menu-item">
                                         <!--begin::Menu link-->
-                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="#how-it-works"
-                                            data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">How it Works</a>
+                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="{{ '/home' }}"
+                                            data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Job Solution</a>
                                         <!--end::Menu link-->
                                     </div>
                                     <!--end::Menu item-->

@@ -55,7 +55,7 @@
                     
                     @foreach($main_category->categories as $category)
                     <div  class="menu-item menu-accordion">
-                        <a href="{{ url('/jobs', $category->slug) }}">
+                        <a href="{{ url('job-solution',[$main_category->slug, $category->slug] ) }}">
                             <span class="menu-link">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>

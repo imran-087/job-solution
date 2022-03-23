@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use App\Models\MainCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Year;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -30,6 +31,14 @@ class SubCategoryController extends Controller
 
                 ->editColumn('category_id', function ($row) {
                     return $row->category->name;
+                })
+                ->editColumn('year_id', function ($row) {
+                    if ($row->year_id == 0 || $row->year_id == " ") {
+                        $btn = '<div class="badge badge-light-danger fw-bolder">Null</div>';
+                    } else {
+                        $btn = '<div class="badge badge-light-danger fw-bolder">' . $row->year->year . '</div>';
+                    }
+                    return $btn;
                 })
                 ->editColumn('created_at', function ($row) {
                     return $row->created_at->diffForHumans();
@@ -68,13 +77,14 @@ class SubCategoryController extends Controller
                     </div>';
                     return $btn;
                 })
-                ->rawColumns(['action', 'status', 'created_at'])
+                ->rawColumns(['action', 'status', 'created_at', 'year_id'])
                 ->make(true);
         }
 
         //get all main category
         $main_categories = MainCategory::where('status', 'active')->get();
-        return view('admin.category.sub_category', compact('main_categories'));
+        $years = Year::all();
+        return view('admin.category.sub_category', compact('main_categories', 'years'));
     }
 
     //create or update main category
@@ -86,6 +96,7 @@ class SubCategoryController extends Controller
             'title' => ['required'],
             'status' => ['required'],
             'category' => ['required'],
+            'year' => ['required'],
         ]);
 
         if ($validator->fails()) {
@@ -101,6 +112,7 @@ class SubCategoryController extends Controller
                 $sub_category->title = $request->title;
                 $sub_category->status =  $request->status;
                 $sub_category->category_id =  $request->category;
+                $sub_category->year_id = $request->year;
                 $sub_category->slug =  Str::slug($request->name);
                 $sub_category->updated_user_id =  Auth::guard('admin')->user()->id;
 
@@ -132,6 +144,7 @@ class SubCategoryController extends Controller
                 $sub_category->name = $request->name;
                 $sub_category->title = $request->title;
                 $sub_category->category_id =  $request->category;
+                $sub_category->year_id = $request->year;
                 $sub_category->slug =  Str::slug($request->name);
                 $sub_category->created_user_id =  Auth::guard('admin')->user()->id;
                 $sub_category->status =  $request->status;

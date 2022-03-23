@@ -61,41 +61,75 @@
 @endsection
 
 @section('content')
+
 <!--begin::Post-->
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <!--begin::Container-->
     <div id="kt_content_container" class="container-xxl">
-        
+         
+        <!--begin::Row-->
+        <div class="row gy-5 g-xl-8" >
+            <div class="col-12 mb-xl-10">
+                <!--begin::Engage widget 1-->
+                <div class="card h-md-100">
+                    <!--begin::Body-->
+                    <div class="card-body d-flex flex-column flex-center">
+                        <!--begin::Heading-->
+                        <div class="mb-2">
+                            <!--begin::Title-->
+                            <h1 class="fw-bold text-gray-800 text-center lh-lg">{{$category->name}}
+                            <br><span class="fw-boldest">{{$sub_category->name}}</span></h1>
+                            <!--end::Title-->
+                            
+                        </div>
+                        <!--end::Heading-->
+                       
+                    </div>
+                    <!--end::Body-->
+                </div>
+                <!--end::Engage widget 1-->
+            </div>
+        </div>
+        <!--end::Row-->
+        @if($subjects->count() > 0)
         <!--begin::Row-->
         <div class="row gy-5 g-xl-8" >
             <div class="col-12 ">
-            <!--begin::Mixed Widget 14-->
-            <div class="card card-xxl-stretch mb-5 mb-xl-8 " >
-                <!--begin::Body-->
-                <div class="card-body d-flex flex-column ">
-                    <!--begin::Row-->
-                    <div class="row g-0 d-flex justify-content-center">
-                        <!--begin::Col-->
-                        <div class="col-12 ">
-                            <ul class="pagination pagination-outline">
-                                <li class="page-item previous disabled m-1"><a href="#" class="page-link"><i class="previous"></i></a></li>
-                                @foreach($subjects as $subject)
-                                    <li class="page-item m-1 ">
-                                        <a href="{{ route('jobs.category.sub-category.subject.question', [$category->slug, $sub_category->slug, $subject->slug]) }}" class="cursor-pointer page-link btn btn-success">{{$subject->name}} &nbsp<sup class="badge badge-circle badge-danger">{{$subject->question->count()}}</sup></a>
-                                    </li>
-                                @endforeach
-                                <li class="page-item next disabled m-1"><a href="#"  class="page-link"><i class="next"></i></a></li>
-                            </ul>
+                <!--begin::Mixed Widget 14-->
+                <div class="card card-xxl-stretch mb-5 mb-xl-8 " >
+                    <!--begin::Body-->
+                    <div class="card-body d-flex flex-column ">
+                        <!--begin::Row-->
+                        <div class="row g-0 d-flex justify-content-center">
+                            <!--begin::Col-->
+                            <div class="col-12 ">
+                                <div class="swiper">
+                                    <div class="swiper-wrapper">
+                                        @foreach($subjects as $subject)
+                                        <div class="swiper-slide"> <a href="{{ route('jobs.category.sub-category.subject.question', [$category->slug, $sub_category->slug, $subject->slug]) }}" class="cursor-pointer page-link btn btn-success">{{$subject->name}} &nbsp<span class="badge badge-circle badge-danger">{{$subject->question->count()}}</span></a></div>
+                                        @endforeach
+                                    </div>
+                                    
+                                    <div class="swiper-button-prev" style="font-size: 25px !important;
+                                    font-weight: 800;">
+                                    </div>
+                                    <div class="swiper-button-next" style="font-size: 25px !important;
+                                    font-weight: 800;">
+                                    </div>
+
+                                </div>
+                                
+                            </div>
+                            <!--end::Col-->
+                            
                         </div>
-                        <!--end::Col-->
-                         
+                        <!--end::Row-->
                     </div>
-                    <!--end::Row-->
                 </div>
+                <!--end::Mixed Widget 14-->
             </div>
-            <!--end::Mixed Widget 14-->
         </div>
-        </div>
+        @endif
         <!--begin::Row-->
         <div class="row gy-5 g-xl-8">
            
@@ -109,7 +143,7 @@
                     <div class="card-header">
                        
                         <h3 class="card-title text-gray-700 fw-bolder cursor-pointer mb-0 view" data-id="{{ $question->id }}" style="max-width: 1100px !important;">
-                                <a href="{{ route('question.single-question', $question->id) }}"> {{ $key+1 }}. {{$question->question}} </a>
+                                <a href="{{ route('question.single-question', ['ques_id' => $question->id]) }}"> {{ $key+1 }}. {{$question->question}} </a>
                         </h3>
                        
                         <div class="card-toolbar">
@@ -148,7 +182,7 @@
                         {{-- <h3 class="card-title text-black-700 fw-bolder cursor-pointer mb-5">{{$question->question}}</h3> --}}
                         <!--end::Text-->
                         <div class="row"  style="font-size: 16px">
-                            @if(isset($question->question_option->option_1 ))
+                            @if($question->question_option->option_1 != '' )
                             <div class="col-md-6 test">
                                 <p class="text-gray-800 fw-normal mb-5 " > 
                                    <i class="fas fa-eye fa-2xl"></i> {{$question->question_option->option_1 }}</p>
@@ -158,7 +192,7 @@
                                    <i class="fas fa-{{ ($question->question_option->answer == '1') ? 'check' : 'times'}} fa-2xl"></i> {{$question->question_option->option_1 }}</p>
                             </div>
                             @endif
-                            @if(isset($question->question_option->option_2))
+                            @if($question->question_option->option_2 != '')
                             <div class="col-md-6 test">
                                 <p class="text-gray-800 fw-normal mb-5  "> 
                                     <i class="fas fa-eye fa-2xl"></i> {{$question->question_option->option_2 }}</p>
@@ -168,7 +202,7 @@
                                     <i class="fas fa-{{ ($question->question_option->answer == '2') ? 'check' : 'times'}} fa-2xl"></i> {{$question->question_option->option_2 }}</p>
                             </div>
                             @endif
-                            @if(isset($question->question_option->option_3))
+                            @if($question->question_option->option_3 != '')
                             <div class="col-md-6 test">
                                 <p class="text-gray-800 fw-normal mb-5  "> 
                                     <i class="fas fa-eye fa-2xl"></i> {{$question->question_option->option_3}}</p>
@@ -178,7 +212,7 @@
                                     <i class="fas fa-{{ ($question->question_option->answer == '3') ? 'check' : 'times'}} fa-2xl"></i> {{$question->question_option->option_3}}</p>
                             </div>
                             @endif
-                            @if(isset($question->question_option->option_4 ))
+                            @if($question->question_option->option_4 != '' )
                             <div class="col-md-6 test">
                                 <p class="text-gray-800 fw-normal mb-5  "> 
                                     <i class="fas fa-eye fa-2xl" ></i> {{$question->question_option->option_4}}</p>
@@ -188,7 +222,7 @@
                                     <i class="fas fa-{{ ($question->question_option->answer == '4') ? 'check' : 'times'}} fa-2xl" ></i> {{$question->question_option->option_4}}</p>
                             </div>
                             @endif
-                            @if(isset($question->question_option->option_5 ))
+                            @if($question->question_option->option_5 != '')
                             <div class="col-md-6 test">
                                 <p class="text-gray-800 fw-normal mb-5  "> 
                                     <i class="fas fa-eye fa-2xl" ></i> {{$question->question_option->option_5}}</p>
@@ -541,6 +575,53 @@
                 $(this).closest('.card-body').find('reading').removeClass('d-none');
             })
         })
+
+        const swiper = new Swiper('.swiper', {
+            pagination: {
+                el: '.swiper-pagination',
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            scrollbar: {
+                el: '.swiper-scrollbar',
+            },
+             breakpoints: {
+                // when window width is >= 320px
+                320: {
+
+                slidesPerView: 2,
+
+                spaceBetween: 20
+
+                },
+
+                // when window width is >= 480px
+
+                480: {
+
+                slidesPerView: 3,
+
+                spaceBetween: 30
+
+                },
+
+                // when window width is >= 640px
+
+                640: {
+
+                slidesPerView: 4,
+
+                spaceBetween: 40
+
+                }
+
+                
+
+            }
+
+        });
 
     </script>
 @endpush

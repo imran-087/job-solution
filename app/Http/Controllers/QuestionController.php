@@ -133,10 +133,10 @@ class QuestionController extends Controller
         }
     }
 
-    public function singleQuestion($id)
+    public function singleQuestion(Request $request)
     {
         //dd($id);
-        $question = Question::find($id);
+        $question = Question::find($request->ques_id);
         return view('question.single_question', compact('question'));
     }
 

@@ -101,3 +101,15 @@ i.fas.fa-times.fa-2xl {
 i.fas.fa-check.fa-2xl {
     color: green;
 }
+
+.swiper-button-next:after,
+.swiper-button-prev:after {
+    font-size: 25px !important;
+}
+
+@media screen and (max-width: 690px) {
+   .swiper-button-next:after,
+   .swiper-button-prev:after{
+       margin-bottom: 20px;
+   }
+}

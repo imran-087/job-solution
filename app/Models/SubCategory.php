@@ -21,6 +21,12 @@ class SubCategory extends Model
         return $this->belongsTo(Category::class);
     }
 
+    //year
+    public function year()
+    {
+        return $this->belongsTo(Year::class);
+    }
+
     //subject
     public function subject()
     {
