@@ -6,25 +6,53 @@ use App\Models\Year;
 use App\Models\Passage;
 use App\Models\Subject;
 use App\Models\Bookmark;
-use App\Models\EditedQuestion;
+use App\Models\Category;
 use App\Models\Question;
 use App\Models\SubCategory;
 use App\Models\MainCategory;
 use Illuminate\Http\Request;
+use App\Models\EditedQuestion;
 use App\Models\QuestionOption;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class QuestionController extends Controller
 {
-    public function index()
+
+    public function getSubjectWithAllQuestion($category, $sub_category)
     {
-        $questions = Question::with('question_option')->paginate(10);
+        //dump($category);
+        //dump($sub_category);
+        //dd('ok');
+        $category = Category::where('slug', $category)->first();
+        $sub_category = SubCategory::where('slug', $sub_category)->first();
+        //dd($sub_category);
+        $subjects = Subject::where('sub_category_id', $sub_category->id)->get();
+        $questions = Question::where('sub_category_id', $sub_category->id)->paginate(5);
 
-        $main_categories = MainCategory::all();
-
-        return view('question.all_question', compact(['questions', 'main_categories']));
+        return view('category.subject_and_question', compact(
+            'questions',
+            'sub_category',
+            'subjects',
+            'category'
+        ));
     }
+
+    public function getSubjectWiseQuestion($category, $sub_category, $subject)
+    {
+        //dump($category);
+        //dump($sub_category);
+        //dd('ok');
+        $category = Category::where('slug', $category)->first();
+        $sub_category = SubCategory::where('slug', $sub_category)->first();
+        $subject = Subject::where('slug', $subject)->first();
+        $subjects = Subject::where('sub_category_id', $sub_category->id)->get();
+        //dd($subject->id);
+        $questions = Question::where('subject_id', $subject->id)->paginate(5);
+
+        return view('category.subject_and_question', compact('questions', 'sub_category', 'subjects', 'category'));
+    }
+
 
     public function vote($id)
     {
@@ -78,21 +106,6 @@ class QuestionController extends Controller
         }
     }
 
-    //subject wise question
-    public function subjectWiseQuestion($main_category, $category, $sub_category, $subject)
-    {
-        // dump($main_category);
-        // dump($category);
-        // dump($sub_category);
-        // dump($subject);
-        $sub_category = SubCategory::where('slug', $sub_category)->first();
-        $subject = Subject::where('slug', $subject)->first();
-        $questions  = Question::where(['subject_id' => $subject->id, 'sub_category_id' => $sub_category->id])
-            ->with('question_option', 'subject', 'sub_category', 'descriptions')->paginate(2);
-
-        //dd($questions);
-        return view('question.subject_wise_question', compact('questions'));
-    }
 
     public function edit($id)
     {

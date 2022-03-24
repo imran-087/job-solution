@@ -58,7 +58,7 @@
             
 
             <!--begin::Col-->
-            <div class="col-8" id="question">
+            <div class="col-10" id="question">
               
               
                 <!--begin::Feeds Widget 2-->
@@ -87,14 +87,14 @@
                                 <!--end::Menu item-->
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="javascript:;" class="btn btn-sm btn-primary me-3" onclick="addNew()">Add Description</a>
+                                    <a href="javascript:;" class="menu-link px-3" onclick="addNew()">Add Description</a>
                                 </div>
                                 <!--end::Menu item-->
                                 
                                 <!--begin::Menu item-->
-                                <div class="menu-item px-3 my-1">
+                                {{-- <div class="menu-item px-3 my-1">
                                     <a href="#" class="menu-link px-3">Settings</a>
-                                </div>
+                                </div> --}}
                                 <!--end::Menu item-->
                             </div>
                             <!--end::Menu 3-->
@@ -105,28 +105,40 @@
                         {{-- <h3 class="card-title text-black-700 fw-bolder cursor-pointer mb-5">{{$question->question}}</h3> --}}
                         <!--end::Text-->
                         <div class="row" style="font-size: 16px">
-                            @if(isset($question->question_option->option_1 ))
+                            @if($question->question_option->option_1 != '')
                             <div class="col-md-6">
                                 <p class="text-gray-800 fw-normal mb-5 {{ ($question->question_option->answer == '1') ? 'right-answer' : ''}}" > 
-                                    <b>&#9398</b> {{$question->question_option->option_1 }}</p>
+                                    <i class="fas fa-{{ ($question->question_option->answer == '1') ? 'check' : 'times'}} fa-2xl"></i> {{$question->question_option->option_1 }}
+                                </p>
+
                             </div>
                             @endif
-                            @if(isset($question->question_option->option_2))
+                            @if($question->question_option->option_2 != '')
                             <div class="col-md-6">
                                 <p class="text-gray-800 fw-normal mb-5 {{ ($question->question_option->answer == '2') ? 'right-answer' : ''}}"> 
-                                    <b>&#9399</b> {{$question->question_option->option_2 }}</p>
+                                    <i class="fas fa-{{ ($question->question_option->answer == '2') ? 'check' : 'times'}} fa-2xl"></i> {{$question->question_option->option_2 }}
+                                </p>
                             </div>
                             @endif
-                            @if(isset($question->question_option->option_3))
+                            @if($question->question_option->option_3 != '')
                             <div class="col-md-6">
                                 <p class="text-gray-800 fw-normal mb-5 {{ ($question->question_option->answer == '3') ? 'right-answer' : ''}}"> 
-                                    <b>&#9400</b> {{$question->question_option->option_3}}</p>
+                                    <i class="fas fa-{{ ($question->question_option->answer == '3') ? 'check' : 'times'}} fa-2xl"></i> {{$question->question_option->option_3 }}
+                                </p>
                             </div>
                             @endif
-                            @if(isset($question->question_option->option_4 ))
+                            @if($question->question_option->option_4 != '')
                             <div class="col-md-6">
                                 <p class="text-gray-800 fw-normal mb-5 {{ ($question->question_option->answer == '4') ? 'right-answer' : ''}}"> 
-                                    <b>&#9401</b> {{$question->question_option->option_4}}</p>
+                                    <i class="fas fa-{{ ($question->question_option->answer == '4') ? 'check' : 'times'}} fa-2xl"></i> {{$question->question_option->option_4 }}
+                                </p>
+                            </div>
+                            @endif
+                            @if($question->question_option->option_5 != '')
+                            <div class="col-md-6">
+                                <p class="text-gray-800 fw-normal mb-5 {{ ($question->question_option->answer == '5') ? 'right-answer' : ''}}"> 
+                                    <i class="fas fa-{{ ($question->question_option->answer == '5') ? 'check' : 'times'}} fa-2xl"></i> {{$question->question_option->option_4 }}
+                                </p>
                             </div>
                             @endif
                         </div>
@@ -150,7 +162,11 @@
                     <div class="card-footer" style="padding-top:0px !important; padding-bottom:0px !important;">
 
                         <div class="d-flex justify-content-end mt-2" style="margin-bottom: -40px !important;">
-                                    <a href="javascript:;" class="bookmark me-2 btn btn-sm btn-light btn-color-muted btn-active-light-primary px-4 py-2"  
+                                <a href="javascript:;" class="comment me-2 btn btn-sm btn-light btn-color-muted btn-active-light-info px-4 py-2"  
+                                data-text="comment"  title="Comment">
+                                <i class="fas fa-comment"></i>{{$question->comments->count()}}
+                                </a>
+                                <a href="javascript:;" class="bookmark me-2 btn btn-sm btn-light btn-color-muted btn-active-light-primary px-4 py-2"  
                                     data-id="{{ $question->id }}" data-catid="{{ $question->sub_category->category->id }}" title="bookmark">
                                     <i class="fas fa-bookmark"></i>
                                 </a>
@@ -193,6 +209,7 @@
                                 <!--end::Icon-->
                                 <!--begin::Title-->
                                 <h5 class="text-gray-700 fw-bolder cursor-pointer mb-0">Description</h5>
+                                <p class="badge badge-light-success fw-bolder">{{ $question->descriptions->count() }}</p>
                                 <!--end::Title-->
                                 
                             </div>
@@ -202,14 +219,55 @@
     
                                 @foreach($question->descriptions as $description)
                                 <!--begin::Text-->
-                                {{-- <div> <span class="text-gray-500 fw-bolder cursor-pointer mb-0">Added by</span>  <span class="badge badge-light-success fw-bolder">{{ $creator->name }}</span></div> --}}
-                                <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10 mt-2">
-                                    @if($description->status == 'active')
-                                        {{ $description->description  }}
-                                    @endif
+                                <div class="card mb-5 mb-xl-8">
+                                    <!--begin::Body-->
+                                    <div class="card-body pb-0">
+                                        <!--begin::Header-->
+                                        <div class="d-flex align-items-center mb-2">
+                                            <!--begin::User-->
+                                            <div class="d-flex align-items-center flex-grow-1">
+                                                <!--begin::Avatar-->
+                                                <div class="symbol symbol-45px me-5">
+                                                    <img src="/metronic8/demo1/assets/media/avatars/300-7.jpg" alt="">
+                                                </div>
+                                                <!--end::Avatar-->
+                                                <!--begin::Info-->
+                                                <div class="d-flex flex-column">
+                                                    @if($description->approval_id == Null)
+                                                    <a href="#" class="text-gray-900 text-hover-primary fs-6 fw-bolder">{{ $description->admin->name }}</a>
+                                                    @else
+                                                    <a href="#" class="text-gray-900 text-hover-primary fs-6 fw-bolder">{{ $description->user->name }}</a>
+                                                    @endif
+                                                    <span class="text-gray-400 fw-bold">{{$description->created_at->diffForhumans()}}</span>
+                                                </div>
+                                                <!--end::Info-->
+                                            </div>
+                                            <!--end::User-->
+                                            
+                                        </div>
+                                        <!--end::Header-->
+                                        <!--begin::Post-->
+                                        <div class="mb-3">
+                                            <!--begin::Text-->
+                                            <div class="text-gray-800 mb-5">
+                                                @if($description->status == 'active')
+                                                    {{ $description->description  }}
+                                                @endif
+                                            </div>
+                                            <!--end::Text-->
+                                          
+                                        </div>
+                                        <!--end::Post-->
+                                        <!--begin::Separator-->
+                                        <div class="separator "></div>
+                                        <!--end::Separator-->
+                                      
+                                    </div>
+                                    <!--end::Body-->
                                 </div>
-                                @endforeach
+                                
                                 <!--end::Text-->
+                                @endforeach
                             </div>
                             <!--end::Content-->
                             <!--begin::Separator-->
@@ -222,6 +280,57 @@
                     </div>
                 </div>
                 <!--end::Feeds Widget 2-->
+               <div class="card mb-5 mb-xl-8">
+                    <!--begin::Body-->
+                    <div class="card-body pb-0">
+                        <div class="mb-7 d-flex justify-content-between">
+                            <!--begin::Text-->
+                            <div class="text-gray-800 mb-5" style="font-size: 20px"><b>Comments</b></div>
+                            <!--end::Text-->
+                            <div class="my-0">
+                                <a type="button" class=" comment btn btn-sm btn-primary " >
+                                   Add Comment
+                                </a>
+                                
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="mb-7 ps-10">
+                            @foreach($question->comments as $comment)
+                            <!--begin::Reply-->
+                            <div class="d-flex mb-5">
+                                <!--begin::Avatar-->
+                                <div class="symbol symbol-45px me-5">
+                                    <img src="/metronic8/demo1/assets/media/avatars/300-14.jpg" alt="">
+                                </div>
+                                <!--end::Avatar-->
+                                <!--begin::Info-->
+                                <div class="d-flex flex-column flex-row-fluid">
+                                    <!--begin::Info-->
+                                    <div class="d-flex align-items-center flex-wrap mb-1">
+                                        <a href="#" class="text-gray-800 text-hover-primary fw-bolder me-2">{{$comment->user->name}}</a>
+                                        <span class="text-gray-400 fw-bold fs-7">{{$comment->created_at->diffForHumans()}}</span>
+                                        
+                                    </div>
+                                    <!--end::Info-->
+                                    <!--begin::Post-->
+                                    <span class="text-gray-800 fs-7 fw-normal pt-1">{{ $comment->comment }}</span>
+                                    <!--end::Post-->
+                                </div>
+                                <!--end::Info-->
+                            </div>
+                            <!--end::Reply-->
+                            @endforeach
+                        </div>
+                      
+                        <!--begin::Separator-->
+                        {{-- <div class="separator mb-4"></div> --}}
+                        <!--end::Separator-->
+                        
+                    </div>
+                    <!--end::Body-->
+                </div>
 
                 <!--begin::Modal - New Product/Service-->
                 <div class="modal fade" id="kk_modal_new_question_des" tabindex="-1" aria-hidden="true">
@@ -301,6 +410,84 @@
                 </div>
                 <!--end::Modal - New Product/Service-->
 
+                <!--begin::Modal - New Product/Service-->
+                <div class="modal fade" id="kk_modal_new_comment" tabindex="-1" aria-hidden="true">
+                    <!--begin::Modal dialog-->
+                    <div class="modal-dialog modal-dialog-centered mw-650px">
+                        <!--begin::Modal content-->
+                        <div class="modal-content rounded">
+                            <!--begin::Modal header-->
+                            <div class="modal-header pb-0 border-0 justify-content-end">
+                                <!--begin::Close-->
+                                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                    <span class="svg-icon svg-icon-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                                transform="rotate(-45 6 17.3137)" fill="black" />
+                                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)"
+                                                fill="black" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </div>
+                                <!--end::Close-->
+                            </div>
+                            <!--begin::Modal header-->
+                            <!--begin::Modal body-->
+                            <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+                                <!--begin:Form-->
+                                <form id="kk_modal_new_comment_form" class="form" enctype="multipart/form-data">
+                                    <div class="messages"></div>
+                                    {{-- csrf token  --}}
+                                    @csrf
+                                    <input type="hidden" name="question_id" value="{{ $question->id }}">
+
+                                    <!--begin::Heading-->
+                                    <div class="mb-13 text-center">
+                                        <!--begin::Title-->
+                                        <h1 class="mb-3">Add New Comment</h1>
+                                        <!--end::Title-->
+                                        <!--begin::Description-->
+                                        <div class="text-muted fw-bold fs-5">Fill up the form and submit
+                                        </div>
+                                        <!--end::Description-->
+                                    </div>
+                                    <!--end::Heading-->
+                                
+                                    <!--begin::Input group-->
+                                    <div class="d-flex flex-column mb-8 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                            <span class="required">Comment</span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <textarea name="comment" class="form-control form-control-solid h-100px"></textarea>
+                                        <div class="help-block with-errors comment-error"></div>
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Actions-->
+                                    <div class="text-center">
+                                        <button type="reset" id="kk_modal_new_service_cancel" class="btn btn-light me-3">Cancel</button>
+                                        <button type="submit" id="kk_modal_new_comment_submit" class="btn btn-primary">
+                                            <span class="indicator-label">Submit</span>
+                                            <span class="indicator-progress">Please wait...
+                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                        </button>
+                                    </div>
+                                    <!--end::Actions-->
+                                </form>
+                                <!--end:Form-->
+                            </div>
+                            <!--end::Modal body-->
+                        </div>
+                        <!--end::Modal content-->
+                    </div>
+                    <!--end::Modal dialog-->
+                </div>
+                <!--end::Modal - New Product/Service-->
+
                
             </div>
             <!--end::Col-->
@@ -313,10 +500,67 @@
 
 @push('script')
     <script type="text/javascript">
-        $(document).ready(function() {
+          //add comment
+        $(document).ready(function(){
+            $('.comment').on('click', function(){
+                $('.with-errors').text('')
+                $('#kk_modal_new_comment_form')[0].reset();
+                $('#kk_modal_new_comment').modal('show')
+            })
+        })
 
-           
-            
+         //new comment save
+        $('#kk_modal_new_comment_form').on('submit',function(e){
+            e.preventDefault()
+            $('.with-errors').text('')
+            $('.indicator-label').hide()
+            $('.indicator-progress').show()
+            $('#kk_modal_new_comment_submit').attr('disabled','true')
+
+            var formData = new FormData(this);
+            $.ajax({
+                type:"POST",
+                url: "{{ url('question/comment/store')}}",
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    if(data.success ==  false || data.success ==  "false"){
+                        var arr = Object.keys(data.errors);
+                        var arr_val = Object.values(data.errors);
+                        for(var i= 0;i < arr.length;i++){
+                        $('.'+arr[i]+'-error').text(arr_val[i][0])
+                        }
+                    }else if(data.error || data.error == 'true'){
+                        var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                        $('#kk_modal_new_comment_form').find('.messages').html(alertBox).show();
+                    }else{
+                        // empty the form
+                        $('#kk_modal_new_comment_form')[0].reset();
+                        $("#kk_modal_new_comment").modal('hide');
+
+                        Swal.fire({
+                                text: data.message,
+                                icon: "success",
+                                buttonsStyling: !1,
+                                confirmButtonText: "{{__('Ok, got it!')}}",
+                                customClass: {
+                                    confirmButton: "btn fw-bold btn-primary"
+                                }
+                            }).then((function () {
+                                //refresh datatable
+                               location.reload()
+                            }))
+                    }
+
+                    $('.indicator-label').show()
+                    $('.indicator-progress').hide()
+                    $('#kk_modal_new_comment_submit').removeAttr('disabled')
+
+                }
+          });
+
         })
 
         // add new

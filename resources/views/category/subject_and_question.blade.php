@@ -94,7 +94,7 @@
         @if($subjects->count() > 0)
         <!--begin::Row-->
         <div class="row gy-5 g-xl-8" >
-            <div class="col-12 ">
+            <div class="col-xl-10 col-md-10 col-sm-12 col-xs-12">
                 <!--begin::Mixed Widget 14-->
                 <div class="card card-xxl-stretch mb-5 mb-xl-8 " >
                     <!--begin::Body-->
@@ -130,12 +130,13 @@
             </div>
         </div>
         @endif
+        <!--end::Row-->
         <!--begin::Row-->
         <div class="row gy-5 g-xl-8">
            
 
             <!--begin::Col-->
-            <div class="col-12" id="question">
+            <div class="col-xl-10 col-md-10 col-sm-12 col-xs-12" id="question">
               
                 @foreach($questions as $key => $question)
                 <!--begin::Feeds Widget 2-->    
@@ -169,9 +170,9 @@
                                 <!--end::Menu item-->
                                 
                                 <!--begin::Menu item-->
-                                {{-- <div class="menu-item px-3 my-1">
-                                    <a href="#" class="menu-link px-3">Settings</a>
-                                </div> --}}
+                                <div class="menu-item px-3 my-1">
+                                    <a href="{{ route('question.single-question', ['ques_id' => $question->id]) }}" class="menu-link px-3">View Comment</a>
+                                </div>
                                 <!--end::Menu item-->
                             </div>
                             <!--end::Menu 3-->
@@ -256,18 +257,21 @@
                     <div class="card-footer" style="padding-top:0px !important; padding-bottom:0px !important;">
 
                         <div class="d-flex justify-content-end mt-2" style="margin-bottom: -40px !important;">
-                                    <a href="javascript:;" class="bookmark me-2 btn btn-sm btn-light btn-color-muted btn-active-light-primary px-4 py-2"  
-                                    data-id="{{ $question->id }}" data-catid="{{ $question->sub_category->category->id }}" title="bookmark">
-                                    <i class="fas fa-bookmark"></i>
-                                </a>
-                                <a href="" style="cursor:default" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-2">
-                                    <i class="fas fa-eye fa-xl"></i> {{$question->view_count}} 
-                                </a>
-
-                                <a href="javascript:;" class=" btn btn-sm btn-light btn-color-muted btn-active-light-danger px-4 py-2 vote me-2"  data-id="{{ $question->id }}" title="like">
-                                <!--begin::Svg Icon | path: icons/duotune/general/gen030.svg-->
-                                <i class="fas fa-heart"></i>
-                                <!--end::Svg Icon-->{{$question->vote}}</a>
+                            <a href="javascript:;" class="comment me-2 btn btn-sm btn-light btn-color-muted btn-active-light-info px-4 py-2"  
+                            data-text="comment"  title="Comment">
+                            <i class="fas fa-comment"></i>
+                            </a>
+                            <a href="javascript:;" class="bookmark me-2 btn btn-sm btn-light btn-color-muted btn-active-light-primary px-4 py-2"  
+                            data-id="{{ $question->id }}" data-catid="{{ $question->sub_category->category->id }}" title="Bookmark">
+                            <i class="fas fa-bookmark"></i>
+                            </a>
+                            <a href="javascript:;" class=" btn btn-sm btn-light btn-color-muted btn-active-light-danger px-4 py-2 vote me-2"  data-id="{{ $question->id }}" title="like">
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen030.svg-->
+                            <i class="fas fa-heart"></i>
+                            <!--end::Svg Icon-->{{$question->vote}}</a>
+                            <a href="" style="cursor:default" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-2">
+                                <i class="fas fa-eye fa-xl"></i> {{$question->view_count}} 
+                            </a>
                         </div>
                         <!--begin::Accordion-->
                         <!--begin::Section-->
@@ -299,25 +303,59 @@
                             <!--end::Heading-->
                             <!--begin::Body-->
                             <div id="kt_job_4_1_{{$question->id}}" class="fs-6 ms-1 collapse" style="">
-    
+                               <!--begin::Text-->
                                 @foreach($question->descriptions as $description)
-                                <!--begin::Text-->
-                                {{-- <div> <span class="text-gray-500 fw-bolder cursor-pointer mb-0">Added by</span>  <span class="badge badge-light-success fw-bolder">{{ $creator->name }}</span></div> --}}
-                                <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10 mt-2">
-                                    @if($description->status == 'active')
-                                        {{ $description->description  }}
-                                    @endif
+                               
+                                <div class="card mb-5 mb-xl-8">
+                                    <!--begin::Body-->
+                                    <div class="card-body pb-0">
+                                        <!--begin::Header-->
+                                        <div class="d-flex align-items-center mb-2">
+                                            <!--begin::User-->
+                                            <div class="d-flex align-items-center flex-grow-1">
+                                                <!--begin::Avatar-->
+                                                <div class="symbol symbol-45px me-5">
+                                                    <img src="/metronic8/demo1/assets/media/avatars/300-7.jpg" alt="">
+                                                </div>
+                                                <!--end::Avatar-->
+                                                <!--begin::Info-->
+                                                <div class="d-flex flex-column">
+                                                    <a href="#" class="text-gray-900 text-hover-primary fs-6 fw-bolder">{{ $description->user->name }}</a>
+                                                    <span class="text-gray-400 fw-bold">{{$description->created_at->diffForhumans()}}</span>
+                                                </div>
+                                                <!--end::Info-->
+                                            </div>
+                                            <!--end::User-->
+                                            
+                                        </div>
+                                        <!--end::Header-->
+                                        <!--begin::Post-->
+                                        <div class="mb-3">
+                                            <!--begin::Text-->
+                                            <div class="text-gray-800 mb-5">
+                                                @if($description->status == 'active')
+                                                    {{ $description->description  }}
+                                                @endif
+                                            </div>
+                                            <!--end::Text-->
+                                          
+                                        </div>
+                                        <!--end::Post-->
+                                        <!--begin::Separator-->
+                                        <div class="separator "></div>
+                                        <!--end::Separator-->
+                                      
+                                    </div>
+                                    <!--end::Body-->
                                 </div>
                                 @endforeach
                                 <!--end::Text-->
                             </div>
                             <!--end::Content-->
-                            <!--begin::Separator-->
-                            {{-- <div class="separator separator-dashed"></div> --}}
-                            <!--end::Separator-->
+                            
                         </div>
                         <!--end::Section-->
-                         <!--end::Accordion-->
+                        <!--end::Accordion-->
                             
                     </div>
                 </div>
@@ -401,6 +439,84 @@
                 </div>
                 <!--end::Modal - New Product/Service-->
 
+                <!--begin::Modal - New Product/Service-->
+                <div class="modal fade" id="kk_modal_new_comment" tabindex="-1" aria-hidden="true">
+                    <!--begin::Modal dialog-->
+                    <div class="modal-dialog modal-dialog-centered mw-650px">
+                        <!--begin::Modal content-->
+                        <div class="modal-content rounded">
+                            <!--begin::Modal header-->
+                            <div class="modal-header pb-0 border-0 justify-content-end">
+                                <!--begin::Close-->
+                                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                                    <span class="svg-icon svg-icon-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                                transform="rotate(-45 6 17.3137)" fill="black" />
+                                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)"
+                                                fill="black" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->
+                                </div>
+                                <!--end::Close-->
+                            </div>
+                            <!--begin::Modal header-->
+                            <!--begin::Modal body-->
+                            <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+                                <!--begin:Form-->
+                                <form id="kk_modal_new_comment_form" class="form" enctype="multipart/form-data">
+                                    <div class="messages"></div>
+                                    {{-- csrf token  --}}
+                                    @csrf
+                                    <input type="hidden" name="question_id" value="{{ $question->id }}">
+
+                                    <!--begin::Heading-->
+                                    <div class="mb-13 text-center">
+                                        <!--begin::Title-->
+                                        <h1 class="mb-3">Add New Comment</h1>
+                                        <!--end::Title-->
+                                        <!--begin::Description-->
+                                        <div class="text-muted fw-bold fs-5">Fill up the form and submit
+                                        </div>
+                                        <!--end::Description-->
+                                    </div>
+                                    <!--end::Heading-->
+                                
+                                    <!--begin::Input group-->
+                                    <div class="d-flex flex-column mb-8 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                            <span class="required">Comment</span>
+                                        </label>
+                                        <!--end::Label-->
+                                        <textarea name="comment" class="form-control form-control-solid h-100px"></textarea>
+                                        <div class="help-block with-errors comment-error"></div>
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Actions-->
+                                    <div class="text-center">
+                                        <button type="reset" id="kk_modal_new_service_cancel" class="btn btn-light me-3">Cancel</button>
+                                        <button type="submit" id="kk_modal_new_comment_submit" class="btn btn-primary">
+                                            <span class="indicator-label">Submit</span>
+                                            <span class="indicator-progress">Please wait...
+                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                        </button>
+                                    </div>
+                                    <!--end::Actions-->
+                                </form>
+                                <!--end:Form-->
+                            </div>
+                            <!--end::Modal body-->
+                        </div>
+                        <!--end::Modal content-->
+                    </div>
+                    <!--end::Modal dialog-->
+                </div>
+                <!--end::Modal - New Product/Service-->
+
                 @endforeach
                 <div class="d-flex justify-content-end">
                     {{ $questions->links() }}
@@ -416,6 +532,69 @@
 
 @push('script')
     <script type="text/javascript">
+
+        //add comment
+        $(document).ready(function(){
+            $('.comment').on('click', function(){
+                $('.with-errors').text('')
+                $('#kk_modal_new_comment_form')[0].reset();
+                $('#kk_modal_new_comment').modal('show')
+            })
+        })
+
+         //new comment save
+        $('#kk_modal_new_comment_form').on('submit',function(e){
+            e.preventDefault()
+            $('.with-errors').text('')
+            $('.indicator-label').hide()
+            $('.indicator-progress').show()
+            $('#kk_modal_new_comment_submit').attr('disabled','true')
+
+            var formData = new FormData(this);
+            $.ajax({
+                type:"POST",
+                url: "{{ url('question/comment/store')}}",
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    if(data.success ==  false || data.success ==  "false"){
+                        var arr = Object.keys(data.errors);
+                        var arr_val = Object.values(data.errors);
+                        for(var i= 0;i < arr.length;i++){
+                        $('.'+arr[i]+'-error').text(arr_val[i][0])
+                        }
+                    }else if(data.error || data.error == 'true'){
+                        var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                        $('#kk_modal_new_comment_form').find('.messages').html(alertBox).show();
+                    }else{
+                        // empty the form
+                        $('#kk_modal_new_comment_form')[0].reset();
+                        $("#kk_modal_new_comment").modal('hide');
+
+                        Swal.fire({
+                                text: data.message,
+                                icon: "success",
+                                buttonsStyling: !1,
+                                confirmButtonText: "{{__('Ok, got it!')}}",
+                                customClass: {
+                                    confirmButton: "btn fw-bold btn-primary"
+                                }
+                            }).then((function () {
+                                //refresh datatable
+                                $('#dataTable').DataTable().ajax.reload();
+                            }))
+                    }
+
+                    $('.indicator-label').show()
+                    $('.indicator-progress').hide()
+                    $('#kk_modal_new_comment_submit').removeAttr('disabled')
+
+                }
+          });
+
+        })
         
         // add new
         function addNew(){
@@ -426,7 +605,7 @@
         }
         
         
-        //new category save
+        //new description save
         $('#kk_modal_new_question_des_form').on('submit',function(e){
             e.preventDefault()
             $('.with-errors').text('')

@@ -107,9 +107,10 @@ i.fas.fa-check.fa-2xl {
     font-size: 25px !important;
 }
 
-@media screen and (max-width: 690px) {
+@media screen and (min-width: 378px) {
    .swiper-button-next:after,
    .swiper-button-prev:after{
        margin-bottom: 20px;
    }
 }
+

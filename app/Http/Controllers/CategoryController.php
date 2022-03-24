@@ -22,39 +22,7 @@ class CategoryController extends Controller
         return view('category.sub_category', compact('sub_categories', 'category', 'main_category'));
     }
 
-    public function getSubjectWithAllQuestion($category, $sub_category)
-    {
-        //dump($category);
-        //dump($sub_category);
-        //dd('ok');
-        $category = Category::where('slug', $category)->first();
-        $sub_category = SubCategory::where('slug', $sub_category)->first();
-        //dd($sub_category);
-        $subjects = Subject::where('sub_category_id', $sub_category->id)->get();
-        $questions = Question::where('sub_category_id', $sub_category->id)->paginate(5);
 
-        return view('category.subject_and_question', compact(
-            'questions',
-            'sub_category',
-            'subjects',
-            'category'
-        ));
-    }
-
-    public function getSubjectWiseQuestion($category, $sub_category, $subject)
-    {
-        //dump($category);
-        //dump($sub_category);
-        //dd('ok');
-        $category = Category::where('slug', $category)->first();
-        $sub_category = SubCategory::where('slug', $sub_category)->first();
-        $subject = Subject::where('slug', $subject)->first();
-        $subjects = Subject::where('sub_category_id', $sub_category->id)->get();
-        //dd($subject->id);
-        $questions = Question::where('subject_id', $subject->id)->paginate(5);
-
-        return view('category.subject_and_question', compact('questions', 'sub_category', 'subjects', 'category'));
-    }
 
     public function getCategory($slug)
     {

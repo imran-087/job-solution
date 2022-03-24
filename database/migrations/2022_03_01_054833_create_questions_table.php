@@ -19,7 +19,7 @@ class CreateQuestionsTable extends Migration
             $table->integer('subject_id');
             $table->foreignId('year_id')->constrained('years');
             $table->integer('passage_id')->nullable();
-            $table->tinyInteger('question_type');
+            $table->enum('question_type', ['mcq', 'written', 'image', 'samprotik'])->default('mcq');
             $table->text('question');
             $table->integer('mark');
             $table->enum('hard_level', ['easy', 'medium', 'hard'])->default('easy');

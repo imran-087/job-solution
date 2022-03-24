@@ -608,12 +608,17 @@
         <!--begin::Menu wrapper-->
         <div class="cursor-pointer symbol symbol-30px symbol-md-40px" data-kt-menu-trigger="click"
             data-kt-menu-attach="parent" data-kt-menu-placement="bottom-end">
+            @auth
             @if(Auth::user()->avatar == '')
             <img src="{{ asset('assets') }}/media/avatars/300-1.jpg" alt="user" />
             @else
             <img src="{{Auth::user()->avatar }}" alt="user" />
             @endif
+            @else
+            <img src="{{ asset('assets') }}/media/avatars/300-1.jpg" alt="user" />
+            @endauth
         </div>
+        
         <!--begin::User account menu-->
         <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-800 menu-state-bg menu-state-primary fw-bold py-4 fs-6 w-275px"
             data-kt-menu="true">
@@ -621,6 +626,7 @@
             <div class="menu-item px-3">
                 <div class="menu-content d-flex align-items-center px-3">
                     <!--begin::Avatar-->
+                    @auth
                     @if(Auth::user()->avatar == '')
                     <div class="symbol symbol-50px me-5">
                         <img alt="Logo" src="{{ asset('assets') }}/media/avatars/300-1.jpg" />
@@ -630,6 +636,8 @@
                         <img alt="Logo" src="{{ Auth::user()->avatar }}" />
                     </div>
                     @endif
+                    
+                    @endauth
                     <!--end::Avatar-->
                     <!--begin::Username-->
                     <div class="d-flex flex-column">
@@ -644,12 +652,13 @@
             <!--begin::Menu separator-->
             <div class="separator my-2"></div>
             <!--end::Menu separator-->
+            @auth
             <!--begin::Menu item-->
             <div class="menu-item px-5">
                 <a href="{{route('user-dashboard.index', [Auth::user()->id])}}" class="menu-link px-5">My Profile</a>
             </div>
             <!--end::Menu item-->
-           
+           @endauth
             <!--begin::Menu item-->
             <div class="menu-item px-5" data-kt-menu-trigger="hover" data-kt-menu-placement="left-start">
                 <a href="#" class="menu-link px-5">
@@ -683,11 +692,13 @@
                 <!--end::Menu sub-->
             </div>
             <!--end::Menu item-->
+            @auth
             <!--begin::Menu item-->
             <div class="menu-item px-5 my-1">
                 <a href="{{ route('user-dashboard.profile-settings', Auth::user()->name) }}" class="menu-link px-5">Account Settings</a>
             </div>
             <!--end::Menu item-->
+           
             <!--begin::Menu separator-->
             <div class="separator my-2"></div>
             <!--end::Menu separator-->
@@ -703,12 +714,21 @@
                 </form>
             </div>
             <!--end::Menu item-->
-           
+            
+            @else
+            <!--begin::Menu item-->
+            <div class="menu-item px-5 my-1">
+                <a href="{{ route('login') }}" class="menu-link px-5">Login</a>
+            </div>
+            <!--end::Menu item-->
+            @endauth
         </div>
         <!--end::User account menu-->
+       
         <!--end::Menu wrapper-->
     </div>
     <!--end::User menu-->
+   
     <!--begin::Header menu toggle-->
     <div class="d-flex align-items-center d-lg-none ms-2 me-n3" title="Show header menu">
         <div class="btn btn-icon btn-active-light-primary w-30px h-30px w-md-40px h-md-40px"

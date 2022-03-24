@@ -63,10 +63,10 @@
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
             <!--begin::Card-->
-            <div class="card ">
+            <div class="card">
                 
                 <!--begin::Card body-->
-                <div class="card-body pt-4 d-flex justify-content-around" style="padding-bottom: 0px !important">
+                <div class="card-body pt-4  " style="padding-bottom: 0px !important">
                     <!--begin:Form-->
                     <form id="kk_modal_new_passage_form" class="form" method="POST" action="{{ route('admin.question.question-input') }}" enctype="multipart/form-data">
                         <div class="messages"></div>
@@ -75,58 +75,58 @@
                        
                         <!--begin::Input group-->
                         <div class="row g-9 ">
-                        <!--begin::Col-->
-                        <div class="col-md-3 fv-row">
-                           <!--begin::Label-->
-                            {{-- <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                <span class="required">Number of Question</span>
-                            </label> --}}
-                            <!--end::Label-->
-                            <input type="text" class="form-control form-control-solid" placeholder="Number of Question"
-                                name="question" />
-                            @error('question')
+                            <!--begin::Col-->
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 fv-row">
+                                <!--begin::Label-->
+                                {{-- <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span class="required">Number of Question</span>
+                                </label> --}}
+                                <!--end::Label-->
+                                <input type="text" class="form-control form-control-solid" placeholder="Number of Question"
+                                    name="question" />
+                                @error('question')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 fv-row">
+                                <!--begin::Label-->
+                                {{-- <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span class="required">Number of Option</span>
+                                </label> --}}
+                                <!--end::Label-->
+                                <input type="text" class="form-control form-control-solid" placeholder="Number of Option [1 - 5]"
+                                    name="option" />
+                                @error('option')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-6 fv-row">
+                                {{-- <label class="required fs-6 fw-bold mb-2">Question Type</label> --}}
+                                <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                    data-placeholder="Select question type" name="type">
+                                    
+                                    <option value="mcq" selected>MCQ Question</option>
+                                    <option value="written">Written Question</option>
+                                    <option value="image">Image Question</option>
+                                    <option value="samprotik">Samprotik Question</option>
+                                </select>
+                                @error('type')
                                 <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <!--end::Col-->
-                        <!--begin::Col-->
-                        <div class="col-md-3 fv-row">
-                            <!--begin::Label-->
-                            {{-- <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                <span class="required">Number of Option</span>
-                            </label> --}}
-                            <!--end::Label-->
-                            <input type="text" class="form-control form-control-solid" placeholder="Number of Option [1 - 5]"
-                                name="option" />
-                            @error('option')
-                                <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <!--end::Col-->
-                         <!--begin::Col-->
-                        <div class="col-md-3 fv-row">
-                            {{-- <label class="required fs-6 fw-bold mb-2">Question Type</label> --}}
-                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                data-placeholder="Select question type" name="type">
-                                
-                                <option value="mcq" selected>MCQ Question</option>
-                                <option value="written">Written Question</option>
-                                <option value="image">Image Question</option>
-                            </select>
-                            @error('type')
-                            <div class="text-danger">{{ $message }}</div>
-                            @enderror
-                        </div>
-                        <div class="col-md-3 fv-row">
-                            <!--begin::Actions-->
-                            <label class="fs-6 fw-bold mb-2"></label>
-                            <button type="submit"  class="btn btn-primary">
-                                <span class="indicator-label">Submit</span>
-                            </button>
-                       
-                        <!--end::Actions-->
-                        </div>
-                        <!--end::Col-->
+                                @enderror
+                            </div>
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-6 col-xs-6 fv-row">
+                                <!--begin::Actions-->
+                                <label class="fs-6 fw-bold mb-2"></label>
+                                <button type="submit"  class="btn btn-primary">
+                                    <span class="indicator-label">Submit</span>
+                                </button>
+                                <!--end::Actions-->
+                            </div>
+                            <!--end::Col-->
                         </div>
                         <!--end::Input group-->
                         <!--begin::Input group-->

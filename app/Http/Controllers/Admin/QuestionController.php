@@ -41,6 +41,16 @@ class QuestionController extends Controller
                 ->editColumn('created_at', function ($row) {
                     return $row->created_at->diffForHumans();
                 })
+                ->editColumn('question_type', function ($row) {
+                    if ($row->question_type == "mcq") {
+                        $btn = '<div class="badge badge-light-primary fw-bolder">MCQ</div>';
+                    } else if ($row->question_type == "samprotik") {
+                        $btn = '<div class="badge badge-light-info fw-bolder">Current</div>';
+                    } else {
+                        $btn = '<div class="badge badge-light-warning fw-bolder">Writting</div>';
+                    }
+                    return $btn;
+                })
                 ->editColumn('status', function ($row) {
                     if ($row->status == "active") {
                         $btn = '<div class="badge badge-light-success fw-bolder">Active</div>';
@@ -77,7 +87,7 @@ class QuestionController extends Controller
                     </div>';
                     return $btn;
                 })
-                ->rawColumns(['action', 'status', 'sub_category_id', 'subject_id', 'created_at'])
+                ->rawColumns(['action', 'status', 'sub_category_id', 'subject_id', 'created_at', 'question_type'])
                 ->make(true);
         }
         return view('admin.question.question_index');

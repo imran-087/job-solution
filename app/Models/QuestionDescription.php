@@ -22,6 +22,10 @@ class QuestionDescription extends Model
 
     public function user()
     {
+        return $this->belongsTo(User::class, 'created_user_id', 'id');
+    }
+    public function admin()
+    {
         return $this->belongsTo(Admin::class, 'created_user_id', 'id');
     }
 }

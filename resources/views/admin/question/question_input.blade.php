@@ -174,14 +174,16 @@
                         <!--begin::Include-->
                         @if($type == 'written')
                             @include('admin.question.written_layout')
+                        @elseif($type == 'samprotik')
+                        @include('admin.question.samprotik_layout')
                         @else
                             @include('admin.question.mcq_layout')
                         @endif
                         <!--end::Include-->
                        
                         <!--begin::Actions-->
-                        <div class="text-center">
-                            <button type="submit" class="btn btn-primary">
+                        <div class="text-center d-flex justify-content-end">
+                            <button type="submit" class="btn btn-primary" style="padding: 10px 70px">
                                 <span class="indicator-label">Submit</span>
                             </button>
                         </div>

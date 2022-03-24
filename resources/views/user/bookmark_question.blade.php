@@ -64,69 +64,59 @@
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <!--begin::Container-->
     <div id="kt_content_container" class="container-xxl">
+        <!--begin::Row-->
+        <div class="row gy-5 g-xl-8" >
+            <div class="col-xl-10 col-md-10 col-sm-12 col-xs-12 ">
+                <!--begin::Mixed Widget 14-->
+                <div class="card card-xxl-stretch mb-5 mb-xl-8 " >
+                    <!--begin::Body-->
+                    <div class="card-body d-flex flex-column ">
+                        <!--begin::Row-->
+                        <div class="row g-0 d-flex justify-content-center">
+                            <!--begin::Col-->
+                            <div class="col-12 ">
+                                <div class="swiper">
+                                    <div class="swiper-wrapper">
+                                        @foreach($bookmark_categories as $category)
+                                        <div class="swiper-slide"> <a href="{{ route('user-dashboard.bookmark.category', [Auth::user()->id, $category->category_id])  }}" class="cursor-pointer page-link btn btn-success">{{ $category->category->name }} </a></div>
+                                        @endforeach
+                                    </div>
+                                    
+                                    <div class="swiper-button-prev" style="font-size: 25px !important;
+                                    font-weight: 800;">
+                                    </div>
+                                    <div class="swiper-button-next" style="font-size: 25px !important;
+                                    font-weight: 800;">
+                                    </div>
+
+                                </div>
+                                
+                            </div>
+                            <!--end::Col-->
+                            
+                        </div>
+                        <!--end::Row-->
+                    </div>
+                </div>
+                <!--end::Mixed Widget 14-->
+            </div>
+        </div>
+       
+        <!--end::Row-->
         
        <!--begin::Row-->
         <div class="row gy-5 g-xl-8">
-             <!--begin::Col-->
-            <div class="col-4" style="max-height: 80vh !important;">
-                <!--begin::List Widget 6-->
-                <div class="card card-xl-stretch mb-xl-8">
-                    <!--begin::Header-->
-                    <div class="card-header border-0">
-                        <h3 class="card-title fw-bolder text-dark">Category</h3>
-                        
-                    </div>
-                    <!--end::Header-->
-                    <!--begin::Body-->
-                    <div class="card-body pt-0">
-                        @foreach($bookmark_categories as $category)
-                        <!--begin::Item-->
-                           <a href="{{ route('user-dashboard.bookmark.category', [Auth::user()->id, $category->category_id])  }}" class="cursor-pointer">
-                            <div class="d-flex align-items-center bg-light-success rounded p-5 mb-7">
-                            <!--begin::Icon-->
-                            <span class="svg-icon svg-icon-success me-5">
-                                <!--begin::Svg Icon | path: icons/duotune/abstract/abs027.svg-->
-                                <span class="svg-icon svg-icon-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path opacity="0.3" d="M21.25 18.525L13.05 21.825C12.35 22.125 11.65 22.125 10.95 21.825L2.75 18.525C1.75 18.125 1.75 16.725 2.75 16.325L4.04999 15.825L10.25 18.325C10.85 18.525 11.45 18.625 12.05 18.625C12.65 18.625 13.25 18.525 13.85 18.325L20.05 15.825L21.35 16.325C22.35 16.725 22.35 18.125 21.25 18.525ZM13.05 16.425L21.25 13.125C22.25 12.725 22.25 11.325 21.25 10.925L13.05 7.62502C12.35 7.32502 11.65 7.32502 10.95 7.62502L2.75 10.925C1.75 11.325 1.75 12.725 2.75 13.125L10.95 16.425C11.65 16.725 12.45 16.725 13.05 16.425Z" fill="black"></path>
-                                        <path d="M11.05 11.025L2.84998 7.725C1.84998 7.325 1.84998 5.925 2.84998 5.525L11.05 2.225C11.75 1.925 12.45 1.925 13.15 2.225L21.35 5.525C22.35 5.925 22.35 7.325 21.35 7.725L13.05 11.025C12.45 11.325 11.65 11.325 11.05 11.025Z" fill="black"></path>
-                                    </svg>
-                                </span>
-                                <!--end::Svg Icon-->
-                            </span>
-                            <!--end::Icon-->
-                            <!--begin::Title-->
-                            <div class="flex-grow-1 me-2">
-                                <a href="{{ route('user-dashboard.bookmark.category', [Auth::user()->id, $category->category_id])  }}">{{ $category->category->name }}</a>
-                                {{-- <span class="text-muted fw-bold d-block">Due in 2 Days</span> --}}
-                            </div>
-                            <!--end::Title-->
-                            <!--begin::Lable-->
-                            <span class="fw-bolder text-info py-1"></span>
-                            <!--end::Lable-->
-                            </div>
-                        </a>
-                     
-                        @endforeach
-                        <!--end::Item-->
-                        
-                    </div>
-                    <!--end::Body-->
-                </div>
-                <!--end::List Widget 6-->
-            </div>
-            <!--end::Col-->
-           
+            
             <!--begin::Col-->
-            <div class="col-8" id="question">
+            <div class="col-xl-10 col-md-10 col-sm-12 col-xs-12" id="question">
               
-                @foreach($bookmarks as $bookmark)
+                @foreach($bookmarks as $key => $bookmark)
                 <!--begin::Feeds Widget 2-->
                     
                 <div class="card card-bordered mb-5">
                     <div class="card-header">
                         <h3 class="card-title text-gray-700 fw-bolder cursor-pointer mb-0" style="max-width: 600px !important;">
-                           <a href="{{ route('question.single-question', $bookmark->question->id) }}">{{$bookmark->question->question}}</a>
+                           <a href="{{ route('question.single-question', ['ques_id' => $bookmark->question->id]) }}"> {{ $key+1 }}. {{$bookmark->question->question}}</a>
                           
                         </h3>
                         <div class="card-toolbar">
@@ -154,7 +144,7 @@
                         {{-- <h3 class="card-title text-black-700 fw-bolder cursor-pointer mb-5">{{$bookmark->question->question}}</h3> --}}
                         <!--end::Text-->
                          <div class="row"  style="font-size: 16px">
-                            @if(isset($bookmark->question->question_option->option_1 ))
+                            @if($bookmark->question->question_option->option_1 != '' )
                             <div class="col-md-6 test">
                                 <p class="text-gray-800 fw-normal mb-5 " > 
                                    <i class="fas fa-eye fa-2xl"></i> {{$bookmark->question->question_option->option_1 }}</p>
@@ -164,7 +154,7 @@
                                    <i class="fas fa-{{ ($bookmark->question->question_option->answer == '1') ? 'check' : 'times'}} fa-2xl"></i> {{$bookmark->question->question_option->option_1 }}</p>
                             </div>
                             @endif
-                            @if(isset($bookmark->question->question_option->option_2))
+                           @if($bookmark->question->question_option->option_2 != '' )
                             <div class="col-md-6 test">
                                 <p class="text-gray-800 fw-normal mb-5  "> 
                                     <i class="fas fa-eye fa-2xl"></i> {{$bookmark->question->question_option->option_2 }}</p>
@@ -174,7 +164,7 @@
                                     <i class="fas fa-{{ ($bookmark->question->question_option->answer == '2') ? 'check' : 'times'}} fa-2xl"></i> {{$bookmark->question->question_option->option_2 }}</p>
                             </div>
                             @endif
-                            @if(isset($bookmark->question->question_option->option_3))
+                           @if($bookmark->question->question_option->option_3 != '' )
                             <div class="col-md-6 test">
                                 <p class="text-gray-800 fw-normal mb-5  "> 
                                     <i class="fas fa-eye fa-2xl"></i> {{$bookmark->question->question_option->option_3}}</p>
@@ -184,7 +174,7 @@
                                     <i class="fas fa-{{ ($bookmark->question->question_option->answer == '3') ? 'check' : 'times'}} fa-2xl"></i> {{$bookmark->question->question_option->option_3}}</p>
                             </div>
                             @endif
-                            @if(isset($bookmark->question->question_option->option_4 ))
+                           @if($bookmark->question->question_option->option_4 != '' )
                             <div class="col-md-6 test">
                                 <p class="text-gray-800 fw-normal mb-5  "> 
                                     <i class="fas fa-eye fa-2xl" ></i> {{$bookmark->question->question_option->option_4}}</p>
@@ -194,7 +184,7 @@
                                     <i class="fas fa-{{ ($bookmark->question->question_option->answer == '4') ? 'check' : 'times'}} fa-2xl" ></i> {{$bookmark->question->question_option->option_4}}</p>
                             </div>
                             @endif
-                            @if(isset($bookmark->question->question_option->option_5 ))
+                            @if($bookmark->question->question_option->option_5 != '' )
                             <div class="col-md-6 test">
                                 <p class="text-gray-800 fw-normal mb-5  "> 
                                     <i class="fas fa-eye fa-2xl" ></i> {{$bookmark->question->question_option->option_5}}</p>
@@ -546,6 +536,54 @@
                
             })
         })
+
+        //swipe slider
+         const swiper = new Swiper('.swiper', {
+            pagination: {
+                el: '.swiper-pagination',
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            scrollbar: {
+                el: '.swiper-scrollbar',
+            },
+             breakpoints: {
+                // when window width is >= 320px
+                320: {
+
+                slidesPerView: 2,
+
+                spaceBetween: 20
+
+                },
+
+                // when window width is >= 480px
+
+                480: {
+
+                slidesPerView: 3,
+
+                spaceBetween: 30
+
+                },
+
+                // when window width is >= 640px
+
+                640: {
+
+                slidesPerView: 4,
+
+                spaceBetween: 40
+
+                }
+
+                
+
+            }
+
+        });
 
 
     </script>

@@ -130,6 +130,7 @@
                                         <th class="min-w-100px">Sub Category</th>
                                         <th class="min-w-100px">Subject</th>
                                         <th class=" min-w-300px">Question</th>
+                                        <th class=" min-w-50px">Type</th>
                                         <th class=" min-w-50px">Status</th>
                                         <th class=" min-w-100px">Created at</th>
                                         <th class=" min-w-70px">Actions</th>
@@ -189,6 +190,10 @@
                     {
                         data: 'question',
                         name: 'question'
+                    },
+                    {
+                        data: 'question_type',
+                        name: 'question_type'
                     },
                     {
                         data: 'status',
