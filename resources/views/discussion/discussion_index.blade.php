@@ -141,7 +141,7 @@
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <!--begin::Container-->
     <div id="kt_content_container" class="container-xxl">
-        
+
         <!--begin::Row-->
         <div class="row gy-5 g-xl-8">
             <!--begin::Col-->
@@ -186,17 +186,17 @@
                                 <input type="text" data-kk-product-table-filter="search"
                                     class="form-control form-control-solid w-350px ps-14" id="search" placeholder="Search discussion">
                                 {{-- <div id="display"></div> --}}
-                                   
+
                             </div>
                             <!--end::Search-->
-                          
-                            
+
+
                         </div>
                         <!--begin::Card title-->
 
                         <div class="card-toolbar flex-row-fluid justify-content-end gap-5"
                             data-select2-id="select2-data-123-0tixx">
-                            
+
                             <div class="m-0">
                                 <!--begin::Menu toggle-->
                                 <a href="#" class="btn btn-sm btn-flex btn-light btn-active-primary fw-bolder" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
@@ -234,12 +234,12 @@
                                         <a href="{{ url('discussion', 'weekago')}}" class="menu-link px-3" >Last Week</a>
                                     </div>
                                     <!--end::Menu item-->
-                                
+
                                 </div>
                                 <!--end::Menu 1-->
                             </div>
-                            
-                            
+
+
                         </div>
 
                     </div>
@@ -248,9 +248,9 @@
                 </div>
                 <!--end::Card-->
 
-                
-                 
-                
+
+
+
                 <div id="main">
                     @foreach($discussions as $discussion)
                     <!--begin::Feeds Widget 2-->
@@ -264,7 +264,7 @@
                                     <!--begin::Avatar-->
                                     <div class="symbol symbol-45px me-5">
                                         <img src="{{ asset('assets') }}/media/avatars/300-23.jpg" alt="" />
-                                        
+
                                     </div>
                                     <!--end::Avatar-->
                                     <!--begin::Info-->
@@ -280,18 +280,18 @@
                                     <div class="channel-badge">
                                     <a href="{{ route('discussion.channel', $channel->id) }}">{{$discussion->channel->name}}</a>
                                     </div>
-                                    
+
                                 </div>
                                 <!--end::Menu-->
                             </div>
                             <!--end::Header-->
 
-                        
+
                             <!--begin::Post-->
                             <div class="mb-5">
                                 <!--begin::Text-->
                                 <a href="{{ route('discussion.show', $discussion->id) }}" class="view" data-id="{{ $discussion->id }}">
-                                    
+
                                     <p class="text-gray-800 fw-normal mb-5">{!! $discussion->content !!}</p>
                                 </a>
                                 <!--end::Text-->
@@ -319,13 +319,13 @@
 
                                     <a href="" style="cursor:default" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4">
                                       <i class="fas fa-eye fa-xl"></i> {{$discussion->view}} </a>
-                                    
+
                                 </div>
                                 <!--end::Toolbar-->
                             </div>
                             <!--end::Post-->
-                        
-                            
+
+
                         </div>
                         <!--end::Body-->
                     </div>
@@ -336,13 +336,13 @@
                     </div>
                 </div>
                 <div id="render"></div>
-                
+
             </div>
             <!--end::Col-->
-           
+
             <!--begin::Col-->
             <div class="col-xl-1">
-                
+
             </div>
         </div>
     </div>
@@ -535,13 +535,13 @@
                         success: function(data) {
                             //console.log(data)
                           $('#result').html(data);
-                          
-                           
+
+
                         }
                     });
                 }
                 }, 1000);
-                
+
             });
         })
 
@@ -554,7 +554,7 @@
             $('#kk_modal_new_passage').modal('show')
         }
 
-       
+
 
         //cancel button
         $('#kk_modal_new_service_cancel').on('click', function(){
@@ -562,7 +562,7 @@
             $("#kk_modal_new_passage").modal('hide');
         })
 
-       
+
 
         //vote
         $('.vote').on('click', function(){
@@ -577,7 +577,7 @@
                         text: data.message,
                         icon: "success",
                         showConfirmButton: false
-                        
+
                     })
                     setTimeout(function() {
                         location.reload();  //Refresh page
@@ -595,7 +595,7 @@
                 url: "{{ url('discussion/view-count')}}"+'/'+id,
                 dataType: 'json',
                 success:function(data){
-                    
+
                 }
             })
         });
@@ -612,7 +612,7 @@
                         ['bold', 'italic', 'underline'],
                         ['image', 'code-block']
                     ],
-                    
+
                 },
                 placeholder: 'Type your text here...',
                 theme: 'snow' // or 'bubble'
@@ -630,7 +630,7 @@
                     content.value = quill.root.innerHTML;
 
                 var formData = new FormData(this);
-            
+
                 $.ajax({
                     type:"POST",
                     url: "{{ url('discussion/store')}}",
@@ -639,7 +639,7 @@
                     contentType: false,
                     processData: false,
                     success:function(data){
-                        
+
                         if(data.success ==  false || data.success ==  "false"){
                             var arr = Object.keys(data.errors);
                             var arr_val = Object.values(data.errors);
@@ -653,12 +653,12 @@
                             // empty the form
                             $('#kk_modal_new_passage_form')[0].reset();
                             $("#kk_modal_new_passage").modal('hide');
-                        
+
                             Swal.fire({
                                     text: data.message,
                                     icon: "success",
                                     showConfirmButton: false
-                                    
+
                                 }).then((function () {
                                     //refresh datatable
                                     $('#dataTable').DataTable().ajax.reload();
@@ -677,19 +677,23 @@
 
             })
         })
-        
+
 
     </script>
 
     <script>
     ClassicEditor
-    .create(document.querySelector('#kt_docs_ckeditor_classic'))
+    .create(document.querySelector('#kt_docs_ckeditor_classic'),{
+        ckfinder:{
+            uploadUrl: "{{ route('ckeditor.upload').'?_token='.csrf_token() }}"
+        }
+    })
     .then(editor => {
         console.log(editor);
     })
     .catch(error => {
         console.error(error);
     });
-    
+
   </script>
 @endpush

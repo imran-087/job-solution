@@ -190,7 +190,7 @@ class DiscussionController extends Controller
                 //$output .= '</ul>';
             } else {
 
-                $output .= ' <p  class="fs-6 text-800  fw-bold" 
+                $output .= ' <p  class="fs-6 text-800  fw-bold"
                 style="color:red; margin:0px 30px 20px 30px; background-color:#F5F8FA; padding:10px; border-radious:30px;"> '
                     . 'No Result' .
                     '</p>';
@@ -207,5 +207,31 @@ class DiscussionController extends Controller
         $discussion->view = $discussion->view + 1;
 
         $discussion->save();
+    }
+
+    public function uploadImage(Request $request)
+    {
+         //image upload
+         if($request->hasFile('upload')) {
+            $originName = $request->file('upload')->getClientOriginalName();
+            $fileName = pathinfo($originName, PATHINFO_FILENAME);
+            $extension = $request->file('upload')->getClientOriginalExtension();
+            $fileName = $fileName.'_'.time().'.'.$extension;
+
+            $request->file('upload')->move(public_path('discussion/images'), $fileName);
+
+            $CKEditorFuncNum = $request->input('CKEditorFuncNum');
+            $url = asset('discussion/images/'.$fileName);
+            return response()->json([
+                'fileName' => $fileName,
+                'uploaded' => 1,
+                'url' => $url
+            ]);
+            // $msg = 'Image uploaded successfully';
+            // $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
+
+            // @header('Content-type: text/html; charset=utf-8');
+            // echo $response;
+        }
     }
 }

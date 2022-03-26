@@ -37,7 +37,7 @@ Route::get('/discussion/{id}/show', [DiscussionController::class, 'show'])->name
 Route::get('/discussion/channel/{channel}', [DiscussionController::class, 'channelDiscussion'])->name('discussion.channel');
 Route::post('/discussion/search', [DiscussionController::class, 'search'])->name('discussion.search');
 Route::get('/discussion/view-count/{id}', [DiscussionController::class, 'viewCount'])->name('discussion.view');
-
+Route::post('/discussion/ckeditor-image-upload', [DiscussionController::class, 'uploadImage'])->name('ckeditor.upload');
 
 Route::middleware('auth')->group(function () {
   Route::post('/discussion/store', [DiscussionController::class, 'store'])->name('discussion.store');
@@ -49,9 +49,9 @@ Route::middleware('auth')->group(function () {
 /*****************
   Category Route
  ********************/
-//get category 
+//get category
 Route::get('/job-solution/{main_category}', [CategoryController::class, 'getCategory']);
-//get sub category 
+//get sub category
 Route::get('/job-solution/{main_category}/{category}', [CategoryController::class, 'getSubCategory'])->name('jobs.category.sub-category');
 //*Get year wise sub category
 Route::get('job-solutions/year={year}', [CategoryController::class, 'getSubCategoryByYear'])->name('job-solution.year');
@@ -60,7 +60,7 @@ Route::get('job-solutions/year={year}', [CategoryController::class, 'getSubCateg
 /*****************
   Question Route
  ********************/
-//get subject and all question 
+//get subject and all question
 Route::get('/jobs/{category}/{sub_category}/all-question', [QuestionController::class, 'getSubjectWithAllQuestion'])->name('jobs.sub-category.subject.all-question');
 //vote
 Route::get('/question/vote/{id}', [QuestionController::class, 'vote'])->name('question.vote');
@@ -78,7 +78,7 @@ Route::get('/question/bookmark/{id}/{catid}', [QuestionController::class, 'bookm
 Route::post('question/comment/store', [CommentController::class, 'store'])->name('question.comment-store');
 
 
-/********************* 
+/*********************
    Question Description
  ****************************/
 Route::post('/description/question-description/store', [DescriptionController::class, 'store'])->name('description.question-description');
