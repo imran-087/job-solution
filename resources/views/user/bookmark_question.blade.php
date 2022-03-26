@@ -78,7 +78,7 @@
                                 <div class="swiper">
                                     <div class="swiper-wrapper">
                                         @foreach($bookmark_categories as $category)
-                                        <div class="swiper-slide"> <a href="{{ route('user-dashboard.bookmark.category', [Auth::user()->id, $category->category_id])  }}" class="cursor-pointer page-link btn btn-success">{{ $category->category->name }} </a></div>
+                                        <div class="swiper-slide"> <a href="{{ route('user.bookmark.category', [Auth::user()->id, $category->category_id])  }}" class="cursor-pointer page-link btn btn-success">{{ $category->category->name }} </a></div>
                                         @endforeach
                                     </div>
                                     
@@ -264,20 +264,11 @@
                             <!--begin::Body-->
                             <div id="kt_job_4_1_{{$bookmark->question->id}}" class="fs-6 ms-1 collapse" style="">
                                 @foreach($bookmark->question->descriptions as $description)
-                                <!--begin::Text-->
-                                {{-- <div> <span class="text-gray-500 fw-bolder cursor-pointer mb-0">Added by</span>  <span class="badge badge-light-success fw-bolder">{{ $creator->name }}</span></div> --}}
-                                <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10 mt-2">
-                                    @if($description->status == 'active')
-                                        {{ $description->description }}
-                                    @endif
-                                </div>
-                                 @endforeach
-                                <!--end::Text-->
+                                    @include('question.description')
+                                @endforeach
                             </div>
                             <!--end::Content-->
-                            <!--begin::Separator-->
-                            {{-- <div class="separator separator-dashed"></div> --}}
-                            <!--end::Separator-->
+                            
                         </div>
                         <!--end::Section-->
                          <!--end::Accordion-->

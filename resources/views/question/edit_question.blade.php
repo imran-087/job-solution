@@ -155,7 +155,7 @@
                     
                     <div class="row g-9 mb-8">
                         <!--begin::Col-->
-                        <div class="col-md-5 fv-row">
+                        <div class="col-md-3 fv-row">
                             <label class="required fs-6 fw-bold mb-2">Answer</label>
                             <select class="form-select form-select-solid" data-control="select2"
                                 data-hide-search="true" data-placeholder="" name="answer"

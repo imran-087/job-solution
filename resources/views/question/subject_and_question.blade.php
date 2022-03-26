@@ -69,7 +69,7 @@
          
         <!--begin::Row-->
         <div class="row gy-5 g-xl-8" >
-            <div class="col-12 mb-xl-10">
+            <div class="col-10 mb-xl-10">
                 <!--begin::Engage widget 1-->
                 <div class="card h-md-100">
                     <!--begin::Body-->
@@ -234,7 +234,7 @@
                             </div>
                             @endif
                         </div>
-                        <div class="d-flex justify-content-start mt-2">
+                        {{-- <div class="d-flex justify-content-start mt-2">
                             <button type="button" class="btn btn-sm  btn-light me-3">
                                 <a href="{{ url('jobs',
                                     [$question->sub_category->category->slug, $question->sub_category->slug, $question->subject->slug]
@@ -249,7 +249,7 @@
                             <button type="button" class="btn btn-sm  btn-light me-3">
                                 <a href="">{{$question->sub_category->category->main_category->name}}</a>
                             </button>            
-                        </div>
+                        </div> --}}
                         {{-- <div class="d-flex justify-content-end "> 
                             <a href="javascript:;" class="btn btn-sm  btn-success me-3 view-ans" id="" data-id="{{ $question->id }}">view ans</a>
                         </div> --}}
@@ -305,49 +305,7 @@
                             <div id="kt_job_4_1_{{$question->id}}" class="fs-6 ms-1 collapse" style="">
                                <!--begin::Text-->
                                 @foreach($question->descriptions as $description)
-                               
-                                <div class="card mb-5 mb-xl-8">
-                                    <!--begin::Body-->
-                                    <div class="card-body pb-0">
-                                        <!--begin::Header-->
-                                        <div class="d-flex align-items-center mb-2">
-                                            <!--begin::User-->
-                                            <div class="d-flex align-items-center flex-grow-1">
-                                                <!--begin::Avatar-->
-                                                <div class="symbol symbol-45px me-5">
-                                                    <img src="/metronic8/demo1/assets/media/avatars/300-7.jpg" alt="">
-                                                </div>
-                                                <!--end::Avatar-->
-                                                <!--begin::Info-->
-                                                <div class="d-flex flex-column">
-                                                    <a href="#" class="text-gray-900 text-hover-primary fs-6 fw-bolder">{{ $description->user->name }}</a>
-                                                    <span class="text-gray-400 fw-bold">{{$description->created_at->diffForhumans()}}</span>
-                                                </div>
-                                                <!--end::Info-->
-                                            </div>
-                                            <!--end::User-->
-                                            
-                                        </div>
-                                        <!--end::Header-->
-                                        <!--begin::Post-->
-                                        <div class="mb-3">
-                                            <!--begin::Text-->
-                                            <div class="text-gray-800 mb-5">
-                                                @if($description->status == 'active')
-                                                    {{ $description->description  }}
-                                                @endif
-                                            </div>
-                                            <!--end::Text-->
-                                          
-                                        </div>
-                                        <!--end::Post-->
-                                        <!--begin::Separator-->
-                                        <div class="separator "></div>
-                                        <!--end::Separator-->
-                                      
-                                    </div>
-                                    <!--end::Body-->
-                                </div>
+                                    @include('question.description')
                                 @endforeach
                                 <!--end::Text-->
                             </div>

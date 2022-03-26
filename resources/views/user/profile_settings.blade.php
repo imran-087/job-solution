@@ -40,7 +40,11 @@
             <!--end::Breadcrumb-->
         </div>
         <!--end::Page title-->
-     
+        <div class="d-flex align-items-center py-1">
+            <!--begin::Button-->
+            <a href="{{ url()->previous() }}" class="btn btn-sm btn-primary">Back</a>
+            <!--end::Button-->
+        </div>
     </div>
     <!--end::Container-->
 </div>
@@ -66,7 +70,7 @@
             <!--begin::Content-->
             <div id="kt_account_settings_profile_details" class="collapse show">
                 <!--begin::Form-->
-                <form method="POST" action="{{ route('user-dashboard.update-profile') }}" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate" enctype="multipart/form-data">
+                <form method="POST" action="{{ route('user.update-profile') }}" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate" enctype="multipart/form-data">
                     @csrf
                     <!--begin::Card body-->
                     <div class="card-body border-top p-9">
@@ -197,7 +201,7 @@
             <!--begin::Content-->
             <div id="kt_account_settings_profile_details" class="collapse show">
                 <!--begin::Form-->
-                <form method="POST" action="{{ route('user-dashboard.chnage-password') }}" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
+                <form method="POST" action="{{ route('user.chnage-password') }}" class="form fv-plugins-bootstrap5 fv-plugins-framework" novalidate="novalidate">
                     @csrf
                         
                     <!--begin::Card body-->

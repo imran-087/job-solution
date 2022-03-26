@@ -220,3 +220,56 @@
                 <!--end::List Widget 6-->
             </div>
             <!--end::Col-->
+
+
+ //comments body   
+ 
+ <!--begin::Body-->
+                    <div class="card-body pb-0">
+                        <div class="mb-7 d-flex justify-content-between">
+                            <!--begin::Text-->
+                            <div class="text-gray-800 mb-5" style="font-size: 20px"><b>Comments</b></div>
+                            <!--end::Text-->
+                            <div class="my-0">
+                                <a type="button" class=" comment btn btn-sm btn-primary " >
+                                   Add Comment
+                                </a>
+                                
+                            </div>
+                            
+                        </div>
+                        
+                        <div class="mb-7 ps-10">
+                            @foreach($question->comments as $comment)
+                            <!--begin::Reply-->
+                            <div class="d-flex mb-5">
+                                <!--begin::Avatar-->
+                                <div class="symbol symbol-45px me-5">
+                                    <img src="/metronic8/demo1/assets/media/avatars/300-14.jpg" alt="">
+                                </div>
+                                <!--end::Avatar-->
+                                <!--begin::Info-->
+                                <div class="d-flex flex-column flex-row-fluid">
+                                    <!--begin::Info-->
+                                    <div class="d-flex align-items-center flex-wrap mb-1">
+                                        <a href="#" class="text-gray-800 text-hover-primary fw-bolder me-2">{{$comment->user->name}}</a>
+                                        <span class="text-gray-400 fw-bold fs-7">{{$comment->created_at->diffForHumans()}}</span>
+                                        
+                                    </div>
+                                    <!--end::Info-->
+                                    <!--begin::Post-->
+                                    <span class="text-gray-800 fs-7 fw-normal pt-1">{{ $comment->comment }}</span>
+                                    <!--end::Post-->
+                                </div>
+                                <!--end::Info-->
+                            </div>
+                            <!--end::Reply-->
+                            @endforeach
+                        </div>
+                      
+                        <!--begin::Separator-->
+                        {{-- <div class="separator mb-4"></div> --}}
+                        <!--end::Separator-->
+                        
+                    </div>
+                    <!--end::Body-->

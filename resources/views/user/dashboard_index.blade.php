@@ -228,7 +228,7 @@
                 </div>
                 <!--end::Card title-->
                 <!--begin::Action-->
-                <a href="{{ route('user-dashboard.profile-settings', [Auth::user()->name]) }}" class="btn btn-primary align-self-center">Edit Profile</a>
+                <a href="{{ route('user.profile-settings', [Auth::user()->name]) }}" class="btn btn-primary align-self-center">Edit Profile</a>
                 <!--end::Action-->
             </div>
             <!--begin::Card header-->

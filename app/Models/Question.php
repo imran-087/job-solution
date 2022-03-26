@@ -30,6 +30,7 @@ class Question extends Model
         return $this->hasMany(QuestionDescription::class);
     }
 
+
     public function comments()
 
     {

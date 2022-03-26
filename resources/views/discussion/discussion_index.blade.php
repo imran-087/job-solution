@@ -32,105 +32,7 @@
             <!--end::Breadcrumb-->
         </div>
         <!--end::Page title-->
-        <!--begin::Actions-->
-        {{-- <div class="d-flex align-items-center gap-2 gap-lg-3">
-            <!--begin::Filter menu-->
-            <div class="m-0">
-                <!--begin::Menu toggle-->
-                <a href="#" class="btn btn-sm btn-flex btn-light btn-active-primary fw-bolder" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
-                <span class="svg-icon svg-icon-5 svg-icon-gray-500 me-1">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="black" />
-                    </svg>
-                </span>
-                <!--end::Svg Icon-->Filter</a>
-                <!--end::Menu toggle-->
-                <!--begin::Menu 1-->
-                <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_622497f4e1893">
-                    <!--begin::Header-->
-                    <div class="px-7 py-5">
-                        <div class="fs-5 text-dark fw-bolder">Filter Options</div>
-                    </div>
-                    <!--end::Header-->
-                    <!--begin::Menu separator-->
-                    <div class="separator border-gray-200"></div>
-                    <!--end::Menu separator-->
-                    <!--begin::Form-->
-                    <div class="px-7 py-5">
-                        <!--begin::Input group-->
-                        <div class="mb-10">
-                            <!--begin::Label-->
-                            <label class="form-label fw-bold">Status:</label>
-                            <!--end::Label-->
-                            <!--begin::Input-->
-                            <div>
-                                <select class="form-select form-select-solid" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_622497f4e1893" data-allow-clear="true">
-                                    <option></option>
-                                    <option value="1">Approved</option>
-                                    <option value="2">Pending</option>
-                                    <option value="2">In Process</option>
-                                    <option value="2">Rejected</option>
-                                </select>
-                            </div>
-                            <!--end::Input-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div class="mb-10">
-                            <!--begin::Label-->
-                            <label class="form-label fw-bold">Member Type:</label>
-                            <!--end::Label-->
-                            <!--begin::Options-->
-                            <div class="d-flex">
-                                <!--begin::Options-->
-                                <label class="form-check form-check-sm form-check-custom form-check-solid me-5">
-                                    <input class="form-check-input" type="checkbox" value="1" />
-                                    <span class="form-check-label">Author</span>
-                                </label>
-                                <!--end::Options-->
-                                <!--begin::Options-->
-                                <label class="form-check form-check-sm form-check-custom form-check-solid">
-                                    <input class="form-check-input" type="checkbox" value="2" checked="checked" />
-                                    <span class="form-check-label">Customer</span>
-                                </label>
-                                <!--end::Options-->
-                            </div>
-                            <!--end::Options-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div class="mb-10">
-                            <!--begin::Label-->
-                            <label class="form-label fw-bold">Notifications:</label>
-                            <!--end::Label-->
-                            <!--begin::Switch-->
-                            <div class="form-check form-switch form-switch-sm form-check-custom form-check-solid">
-                                <input class="form-check-input" type="checkbox" value="" name="notifications" checked="checked" />
-                                <label class="form-check-label">Enabled</label>
-                            </div>
-                            <!--end::Switch-->
-                        </div>
-                        <!--end::Input group-->
-                        <!--begin::Actions-->
-                        <div class="d-flex justify-content-end">
-                            <button type="reset" class="btn btn-sm btn-light btn-active-light-primary me-2" data-kt-menu-dismiss="true">Reset</button>
-                            <button type="submit" class="btn btn-sm btn-primary" data-kt-menu-dismiss="true">Apply</button>
-                        </div>
-                        <!--end::Actions-->
-                    </div>
-                    <!--end::Form-->
-                </div>
-                <!--end::Menu 1-->
-            </div>
-            <!--end::Filter menu-->
-            <!--begin::Secondary button-->
-            <!--end::Secondary button-->
-            <!--begin::Primary button-->
-            <a href="/metronic8/demo1/../demo1/.html" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Create</a>
-            <!--end::Primary button-->
-        </div> --}}
-        <!--end::Actions-->
+        
     </div>
     <!--end::Container-->
 </div>
@@ -409,7 +311,7 @@
                             <span class="required">Discussion Content</span>
                         </label>
                         <!--end::Label-->
-                        <textarea cols="10" name="kt_docs_ckeditor_classic" id="kt_docs_ckeditor_classic"  class="form-control form-control-solid h-100px " rows="10" ></textarea>
+                        <textarea cols="10" name="content" id="kt_docs_ckeditor_classic"  class="form-control form-control-solid h-100px " rows="10" ></textarea>
 
                         {{-- <textarea name="content" id="" class="form-control form-control-solid h-100px "></textarea> --}}
                         {{-- <input name="content" type="hidden">
@@ -602,32 +504,109 @@
 
 
         //Quill Editor
-        $(document).ready(function(){
-            var quill = new Quill('#kt_docs_quill_basic', {
-                modules: {
-                    toolbar: [
-                        [{
-                            header: [1, 2, false]
-                        }],
-                        ['bold', 'italic', 'underline'],
-                        ['image', 'code-block']
-                    ],
+        // $(document).ready(function(){
+        //     var quill = new Quill('#kt_docs_quill_basic', {
+        //         modules: {
+        //             toolbar: [
+        //                 [{
+        //                     header: [1, 2, false]
+        //                 }],
+        //                 ['bold', 'italic', 'underline'],
+        //                 ['image', 'code-block']
+        //             ],
 
-                },
-                placeholder: 'Type your text here...',
-                theme: 'snow' // or 'bubble'
-            });
+        //         },
+        //         placeholder: 'Type your text here...',
+        //         theme: 'snow' // or 'bubble'
+        //     });
 
-            //new discussion save
-            $('#kk_modal_new_passage_form').on('submit',function(e){
+        //     //new discussion save
+        //     $('#kk_modal_new_passage_form').on('submit',function(e){
+        //         e.preventDefault()
+        //         $('.with-errors').text('')
+        //         $('.indicator-label').hide()
+        //         $('.indicator-progress').show()
+        //         $('#kk_modal_new_service_submit').attr('disabled','true')
+
+        //         var content = document.querySelector('input[name=content]');
+        //             content.value = quill.root.innerHTML;
+
+        //         var formData = new FormData(this);
+
+        //         $.ajax({
+        //             type:"POST",
+        //             url: "{{ url('discussion/store')}}",
+        //             data:formData,
+        //             cache:false,
+        //             contentType: false,
+        //             processData: false,
+        //             success:function(data){
+
+        //                 if(data.success ==  false || data.success ==  "false"){
+        //                     var arr = Object.keys(data.errors);
+        //                     var arr_val = Object.values(data.errors);
+        //                     for(var i= 0;i < arr.length;i++){
+        //                     $('.'+arr[i]+'-error').text(arr_val[i][0])
+        //                     }
+        //                 }else if(data.error || data.error == 'true'){
+        //                     var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+        //                     $('#kk_modal_new_passage_form').find('.messages').html(alertBox).show();
+        //                 }else{
+        //                     // empty the form
+        //                     $('#kk_modal_new_passage_form')[0].reset();
+        //                     $("#kk_modal_new_passage").modal('hide');
+
+        //                     Swal.fire({
+        //                             text: data.message,
+        //                             icon: "success",
+        //                             showConfirmButton: false
+
+        //                         }).then((function () {
+        //                             //refresh datatable
+        //                             $('#dataTable').DataTable().ajax.reload();
+        //                         }))
+        //                 }
+
+        //                 $('.indicator-label').show()
+        //                 $('.indicator-progress').hide()
+        //                 $('#kk_modal_new_service_submit').removeAttr('disabled')
+        //                 setTimeout(function() {
+        //                     location.reload();  //Refresh page
+        //                 }, 1000);
+
+        //             }
+        //     });
+
+        //     })
+        // })
+
+
+    </script>
+
+    <script type="text/javascript"> 
+    ClassicEditor
+    .create(document.querySelector('#kt_docs_ckeditor_classic'),{
+        ckfinder:{
+            uploadUrl: "{{ route('ckeditor.upload').'?_token='.csrf_token() }}"
+        },
+        image: {
+            toolbar: [ 'toggleImageCaption', 'imageTextAlternative' ]
+        }
+    })
+    .then(editor => {
+        console.log(editor);
+    })
+    .catch(error => {
+        console.error(error);
+    });
+
+    //save discussion
+     $('#kk_modal_new_passage_form').on('submit',function(e){
                 e.preventDefault()
                 $('.with-errors').text('')
                 $('.indicator-label').hide()
                 $('.indicator-progress').show()
                 $('#kk_modal_new_service_submit').attr('disabled','true')
-
-                var content = document.querySelector('input[name=content]');
-                    content.value = quill.root.innerHTML;
 
                 var formData = new FormData(this);
 
@@ -674,26 +653,7 @@
 
                     }
             });
-
-            })
-        })
-
-
-    </script>
-
-    <script>
-    ClassicEditor
-    .create(document.querySelector('#kt_docs_ckeditor_classic'),{
-        ckfinder:{
-            uploadUrl: "{{ route('ckeditor.upload').'?_token='.csrf_token() }}"
-        }
-    })
-    .then(editor => {
-        console.log(editor);
-    })
-    .catch(error => {
-        console.error(error);
-    });
+        });
 
   </script>
 @endpush

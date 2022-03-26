@@ -127,7 +127,7 @@
                                     <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                         <th class="min-w-20px">#</th>
                                         <th class="min-w-150px">Subject Name</th>
-                                        <th class=" min-w-150px">Title</th>
+                                        <th class=" min-w-150px">Category</th>
                                         <th class=" min-w-150px">Sub Category</th>
                                         <th class=" min-w-100px">Status</th>
                                         <th class=" min-w-100px">Created at</th>
@@ -361,8 +361,8 @@
                         name: 'name'
                     },
                     {
-                        data: 'title',
-                        name: 'title'
+                        data: 'main_category_id',
+                        name: 'main_category_id'
                     },
                     {
                         data: 'sub_category_id',

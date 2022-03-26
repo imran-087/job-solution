@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\DiscussionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -125,5 +126,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/forum/channel/store', 'ChannelController@store')->name('channel.store');
         Route::get('/forum/channel/get/{id}', 'ChannelController@getChannel')->name('channel.get');
         Route::get('/forum/channel/delete/{id}', 'ChannelController@deleteChannel')->name('channel.delete');
+
+        ############ Discussion Route #############
+        Route::get('/forum/discussion/index', 'DiscussionController@index')->name('discussion.index');
+        Route::get('/forum/discussion/delete/{id}', 'DiscussionController@delete')->name('discussion.delete');
     });
 });

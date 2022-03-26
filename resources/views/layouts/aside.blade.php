@@ -55,7 +55,7 @@
                     
                     @foreach($main_category->categories as $category)
                     <div  class="menu-item menu-accordion">
-                        <a href="{{ url('job-solution/main-category/category',[$main_category->slug, $category->slug] ) }}">
+                        <a href="{{ url('job-solution',[$main_category->slug, $category->slug] ) }}">
                             <span class="menu-link">
                                 <span class="menu-bullet">
                                     <span class="bullet bullet-dot"></span>
@@ -77,7 +77,7 @@
 
             @auth
             <div class="menu-item">
-                <a class="menu-link {{ request()->is('/my-bookmark/user*') ? 'active' : '' }}" href="{{ route('user-dashboard.bookmark', Auth::user()->id) }}"  >
+                <a class="menu-link {{ request()->is('/my-bookmark/user*') ? 'active' : '' }}" href="{{ route('user.bookmark', Auth::user()->id) }}"  >
                     <span class="menu-icon">
                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
                         <span class="svg-icon svg-icon-2">

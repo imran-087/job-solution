@@ -30,7 +30,14 @@ class SubjectController extends Controller
                 ->addIndexColumn()
 
                 ->editColumn('sub_category_id', function ($row) {
+                    if ($row->sub_category == '') {
+                        return '<div class="badge badge-light-info fw-bolder">Null</div>';
+                    }
                     return $row->sub_category->name;
+                })
+                ->editColumn('main_category_id', function ($row) {
+
+                    return $row->main_category->name;
                 })
                 ->editColumn('created_at', function ($row) {
                     return $row->created_at->diffForHumans();
@@ -69,7 +76,7 @@ class SubjectController extends Controller
                     </div>';
                     return $btn;
                 })
-                ->rawColumns(['action', 'status', 'created_at', 'sub_category_id'])
+                ->rawColumns(['action', 'status', 'created_at', 'sub_category_id', 'main_category_id'])
                 ->make(true);
         }
 
@@ -87,7 +94,7 @@ class SubjectController extends Controller
             'name' => ['required'],
             'title' => ['required'],
             'status' => ['required'],
-            'sub_category' => ['required'],
+            'main_category' => ['required'],
         ]);
 
         if ($validator->fails()) {
@@ -105,6 +112,7 @@ class SubjectController extends Controller
                 $subject->parent_id = $request->parent ?? 0;
                 $subject->status =  $request->status;
                 $subject->sub_category_id =  $request->sub_category;
+                $subject->main_category_id =  $request->main_category;
                 $subject->slug =  Str::slug($request->name);
                 $subject->updated_user_id =  Auth::guard('admin')->user()->id;
 
@@ -149,6 +157,7 @@ class SubjectController extends Controller
                 $subject->description = $request->description;
                 $subject->status =  $request->status;
                 $subject->sub_category_id =  $request->sub_category;
+                $subject->main_category_id =  $request->main_category;
                 $subject->slug =  Str::slug($request->name);
                 $subject->created_user_id =  Auth::guard('admin')->user()->id;
 

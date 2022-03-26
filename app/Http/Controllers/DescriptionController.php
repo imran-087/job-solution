@@ -49,4 +49,22 @@ class DescriptionController extends Controller
             }
         }
     }
+
+    public function like($id)
+    {
+        $description = QuestionDescription::find($id);
+        $description->vote = $description->vote + 1;
+
+        if ($description->save()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'You liked this Description!'
+            ], 200);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Failed!.'
+            ]);
+        }
+    }
 }

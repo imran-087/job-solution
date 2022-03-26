@@ -18,7 +18,8 @@ class CreateSubjectsTable extends Migration
             $table->integer('parent_id')->nullable()->default(0);
             $table->string('name');
             $table->string('title');
-            $table->foreignId('sub_category_id')->constrained('sub_categories');
+            $table->foreignId('sub_category_id')->constrained('sub_categories')->nullable();
+            $table->foreignId('main_category_id')->constrained('main_categories');
             $table->string('description')->nullable();
             $table->string('slug');
             $table->tinyInteger('future_editable')->nullable();

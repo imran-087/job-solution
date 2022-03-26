@@ -655,7 +655,7 @@
             @auth
             <!--begin::Menu item-->
             <div class="menu-item px-5">
-                <a href="{{route('user-dashboard.index', [Auth::user()->id])}}" class="menu-link px-5">My Profile</a>
+                <a href="{{route('user.index', [Auth::user()->id])}}" class="menu-link px-5">My Profile</a>
             </div>
             <!--end::Menu item-->
            @endauth
@@ -695,7 +695,7 @@
             @auth
             <!--begin::Menu item-->
             <div class="menu-item px-5 my-1">
-                <a href="{{ route('user-dashboard.profile-settings', Auth::user()->name) }}" class="menu-link px-5">Account Settings</a>
+                <a href="{{ route('user.profile-settings', Auth::user()->name) }}" class="menu-link px-5">Account Settings</a>
             </div>
             <!--end::Menu item-->
            

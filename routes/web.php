@@ -35,15 +35,17 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/discussion/{status?}', [DiscussionController::class, 'index'])->name('discussion.index');
 Route::get('/discussion/{id}/show', [DiscussionController::class, 'show'])->name('discussion.show');
 Route::get('/discussion/channel/{channel}', [DiscussionController::class, 'channelDiscussion'])->name('discussion.channel');
+Route::get('/discussion/channel/discussion/{id}/show', [DiscussionController::class, 'show']);
 Route::post('/discussion/search', [DiscussionController::class, 'search'])->name('discussion.search');
 Route::get('/discussion/view-count/{id}', [DiscussionController::class, 'viewCount'])->name('discussion.view');
 Route::post('/discussion/ckeditor-image-upload', [DiscussionController::class, 'uploadImage'])->name('ckeditor.upload');
 
 Route::middleware('auth')->group(function () {
   Route::post('/discussion/store', [DiscussionController::class, 'store'])->name('discussion.store');
-  Route::post('/discussion/reply', [DiscussionController::class, 'reply'])->name('discussion.reply');
   Route::get('/discussion/vote/{id}', [DiscussionController::class, 'vote'])->name('discussion.vote');
-  Route::get('/discussions/{discussion}/replies/{reply}/mark-as-best-reply', [DiscussionController::class, 'bestreply'])->name('discussions.best-reply');
+
+  Route::post('/discussion/reply', [ReplyController::class, 'reply'])->name('discussion.reply');
+  Route::get('/discussions/{discussion}/replies/{reply}/mark-as-best-reply', [ReplyController::class, 'bestreply'])->name('discussions.best-reply');
 });
 
 /*****************
@@ -62,13 +64,8 @@ Route::get('job-solutions/year={year}', [CategoryController::class, 'getSubCateg
  ********************/
 //get subject and all question
 Route::get('/jobs/{category}/{sub_category}/all-question', [QuestionController::class, 'getSubjectWithAllQuestion'])->name('jobs.sub-category.subject.all-question');
-//vote
-Route::get('/question/vote/{id}', [QuestionController::class, 'vote'])->name('question.vote');
-//view count
-Route::get('/question/view-count/{id}', [QuestionController::class, 'viewCount'])->name('question.view-count');
 //single question
 Route::get('/single-question', [QuestionController::class, 'singleQuestion'])->name('question.single-question');
-
 /** get subject wise question */
 Route::get('/jobs/{category}/{sub_category}/{subject}', [QuestionController::class, 'getSubjectWiseQuestion'])->name('jobs.category.sub-category.subject.question');
 
@@ -76,18 +73,25 @@ Route::get('/jobs/{category}/{sub_category}/{subject}', [QuestionController::cla
 Route::get('/question/bookmark/{id}/{catid}', [QuestionController::class, 'bookmark'])->name('question.bookmark');
 //question comment
 Route::post('question/comment/store', [CommentController::class, 'store'])->name('question.comment-store');
+//edit question
+Route::get('/question/edit-question/{id}', [QuestionController::class, 'edit'])->name('question.edit-question');
+Route::post('/question/update-question', [QuestionController::class, 'update'])->name('question.update-question');
+
+
+//vote
+Route::get('/question/vote/{id}', [QuestionController::class, 'vote'])->name('question.vote');
+//view count
+Route::get('/question/view-count/{id}', [QuestionController::class, 'viewCount'])->name('question.view-count');
 
 
 /*********************
    Question Description
  ****************************/
 Route::post('/description/question-description/store', [DescriptionController::class, 'store'])->name('description.question-description');
-Route::get('/question/edit-question/{id}', [QuestionController::class, 'edit'])->name('question.edit-question');
-Route::post('/question/update-question', [QuestionController::class, 'update'])->name('question.update-question');
-
+Route::get('/description/vote/{id}', [DescriptionController::class, 'like'])->name('description.like');
 
 ####### User  route #######
-Route::middleware('auth')->name('user-dashboard.')->group(function () {
+Route::middleware('auth')->name('user.')->group(function () {
   Route::get('/my-dashboard/{user}', [UserDashboardController::class, 'index'])->name('index');
 
   Route::get('/my-dashboard/{user}/profile-settings', [UserDashboardController::class, 'profileSettings'])->name('profile-settings');

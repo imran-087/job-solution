@@ -50,6 +50,7 @@ class DiscussionController extends Controller
     //create discussion
     public function store(Request $request)
     {
+
         //dd($request->all());
         $validator = Validator::make($request->all(), [
             'content' => ['required'],
@@ -63,27 +64,33 @@ class DiscussionController extends Controller
                 'errors' => $validator->errors()
             ], 200);
         } else {
+            if (Auth::check()) {
+                $discussion = new Discussion();
 
-            $discussion = new Discussion();
+                $discussion->content = $request->content;
+                $discussion->title = $request->title;
+                $discussion->channel_id = $request->channel;
+                $discussion->slug =  Str::slug($request->title);
+                $discussion->user_id =  Auth::user()->id;
 
-            $discussion->content = $request->content;
-            $discussion->title = $request->title;
-            $discussion->channel_id = $request->channel;
-            $discussion->slug =  Str::slug($request->title);
-            $discussion->user_id =  Auth::user()->id;
-
-            $discussion->created_at = Carbon::now();
+                $discussion->created_at = Carbon::now();
 
 
-            if ($discussion->save()) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Discussion  create successfully!'
-                ], 200);
+                if ($discussion->save()) {
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Discussion  create successfully!'
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'error' => true,
+                        'message' => 'Failed!.'
+                    ]);
+                }
             } else {
                 return response()->json([
                     'error' => true,
-                    'message' => 'Failed!.'
+                    'message' => 'Please, login to create a new discussion'
                 ]);
             }
         }
@@ -98,35 +105,7 @@ class DiscussionController extends Controller
         return view('discussion.single_discussion', compact('discussion', 'channels', 'replies'));
     }
 
-    //reply store
-    public function reply(Request $request)
-    {
 
-        $request->validate([
-            'reply' => 'required'
-        ]);
-
-        Reply::create([
-            'user_id' => Auth::user()->id,
-            'discussion_id' => $request->discussion,
-            'reply' => $request->reply,
-            'created_at' => Carbon::now()
-        ]);
-
-        Session::flash('success', 'Reply added');
-        return redirect()->back();
-    }
-
-    public function bestreply($discussion, $reply)
-    {
-        $discussion = Discussion::find($discussion);
-
-        $discussion->reply_id = $reply;
-        $discussion->save();
-
-        Session::flash('success', 'Marked as best');
-        return redirect()->back();
-    }
 
     //chaneel all discussion
     public function channelDiscussion($channel)
@@ -154,6 +133,8 @@ class DiscussionController extends Controller
             ]);
         }
     }
+
+    // discussion live search
     public function search(Request $request)
     {
 
@@ -200,6 +181,8 @@ class DiscussionController extends Controller
             return $output;
         }
     }
+
+    //dicussion view count
     public function viewCount($id)
     {
         //dump($id);
@@ -209,29 +192,25 @@ class DiscussionController extends Controller
         $discussion->save();
     }
 
+    //ckeditor image upload
     public function uploadImage(Request $request)
     {
-         //image upload
-         if($request->hasFile('upload')) {
+        //image upload
+        if ($request->hasFile('upload')) {
             $originName = $request->file('upload')->getClientOriginalName();
             $fileName = pathinfo($originName, PATHINFO_FILENAME);
             $extension = $request->file('upload')->getClientOriginalExtension();
-            $fileName = $fileName.'_'.time().'.'.$extension;
+            $fileName = $fileName . '_' . time() . '.' . $extension;
 
-            $request->file('upload')->move(public_path('discussion/images'), $fileName);
+            $request->file('upload')->move(public_path('discussion-forum/images'), $fileName);
 
             $CKEditorFuncNum = $request->input('CKEditorFuncNum');
-            $url = asset('discussion/images/'.$fileName);
+            $url = asset('discussion-forum/images/' . $fileName);
             return response()->json([
                 'fileName' => $fileName,
                 'uploaded' => 1,
                 'url' => $url
             ]);
-            // $msg = 'Image uploaded successfully';
-            // $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
-
-            // @header('Content-type: text/html; charset=utf-8');
-            // echo $response;
         }
     }
 }
