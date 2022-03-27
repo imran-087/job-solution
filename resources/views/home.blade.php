@@ -43,9 +43,11 @@
         </div>
         <!--end::Page title-->
          <div class="d-flex align-items-center gap-2 gap-lg-3">
+            @guest
             <!--begin::Primary button-->
             <a href="{{ route('login') }}" class="btn btn-sm btn-primary" id="readingMode" >Login</a>
             <!--end::Primary button-->
+            @endguest
         </div>
     
      

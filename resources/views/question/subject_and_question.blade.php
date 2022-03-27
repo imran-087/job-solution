@@ -234,7 +234,7 @@
                             </div>
                             @endif
                         </div>
-                        {{-- <div class="d-flex justify-content-start mt-2">
+                        <div class="d-flex justify-content-start mt-2">
                             <button type="button" class="btn btn-sm  btn-light me-3">
                                 <a href="{{ url('jobs',
                                     [$question->sub_category->category->slug, $question->sub_category->slug, $question->subject->slug]
@@ -249,7 +249,7 @@
                             <button type="button" class="btn btn-sm  btn-light me-3">
                                 <a href="">{{$question->sub_category->category->main_category->name}}</a>
                             </button>            
-                        </div> --}}
+                        </div>
                         {{-- <div class="d-flex justify-content-end "> 
                             <a href="javascript:;" class="btn btn-sm  btn-success me-3 view-ans" id="" data-id="{{ $question->id }}">view ans</a>
                         </div> --}}

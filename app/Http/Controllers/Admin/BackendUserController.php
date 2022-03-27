@@ -2,24 +2,31 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\User;
+use Carbon\Carbon;
+use App\Models\Role;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Validator;
 
-class UserController extends Controller
+class BackendUserController extends Controller
 {
     public function index(Request $request)
     {
         //dd('ok');
         if ($request->ajax()) {
-            $data = User::select();
+            $data = Admin::select();
 
             return DataTables::of($data)
                 ->addIndexColumn()
 
                 ->editColumn('created_at', function ($row) {
                     return $row->created_at->diffForHumans();
+                })
+                ->editColumn('role_id', function ($row) {
+                    return $row->role->name;
                 })
 
                 ->editColumn('status', function ($row) {
@@ -49,22 +56,65 @@ class UserController extends Controller
                     </div>';
                     return $btn;
                 })
-                ->rawColumns(['action', 'created_at', 'status'])
+                ->rawColumns(['action', 'created_at', 'status', 'role_id'])
                 ->make(true);
         }
 
-        return view('admin.users.user-list');
+        $roles = Role::all();
+        return view('admin.users.backend-user-list', compact('roles'));
+    }
+
+    //create new user
+    public function store(Request $request)
+    {
+        //dd($request->all());
+        $validator = Validator::make($request->all(), [
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'role' => ['required'],
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 200);
+        } else {
+
+            $user = new Admin();
+
+            $user->name = $request->name;
+            $user->email = $request->email;
+            $user->password = Hash::make($request->password);
+            $user->role_id = $request->role;
+            $user->created_at = Carbon::now();
+
+
+            if ($user->save()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'User created successfully!'
+                ], 200);
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Failed!.'
+                ]);
+            }
+        }
     }
 
     public function chnageStatus($id)
     {
-        $user = User::find($id);
+        $user = Admin::find($id);
 
         if ($user->status == 'ban') {
             $user->status = 'active';
         } else {
             $user->status = 'ban';
         }
+
         $user->save();
 
         return response()->json([

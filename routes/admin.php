@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DiscussionController;
+use App\Http\Controllers\Admin\BackendUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -106,6 +107,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         ########## User Management ###########
         Route::get('/user-management/user-list', 'UserController@index')->name('user-management.index');
         Route::get('/user-management/user/change-status/{id}', 'UserController@chnageStatus')->name('user-management.chnage-status');
+        ##backend-users
+        Route::get('/user-management/backend-user-list', 'BackendUserController@index')->name('user-management.backend.index');
+        Route::post('/user-management/backend-user/store', 'BackendUserController@store')->name('user-management.backend.store');
+        Route::get('/user-management/backend-user/change-status/{id}', 'BackendUserController@chnageStatus')->name('user-management.chnage-status');
 
         ############ Dependable setect input route ###############
         Route::get('/get-category/{id}', 'GetAllCategoryController@getCategory');

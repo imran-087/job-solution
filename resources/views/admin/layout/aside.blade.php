@@ -215,11 +215,19 @@
                 <div class="menu-sub menu-sub-accordion  menu-active-bg">
         
                     <div class="menu-item">
-                        <a class="menu-link {{ request()->is('admin/description/question-description*') ? 'active' : '' }}" href="{{ route('admin.user-management.index') }}">
+                        <a class="menu-link {{ request()->is('admin/user-management/user-list*') ? 'active' : '' }}" href="{{ route('admin.user-management.index') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
-                            <span class="menu-title">User List</span>
+                            <span class="menu-title">Frontend Users</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/duser-management/backend-user-list*') ? 'active' : '' }}" href="{{ route('admin.user-management.backend.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Backend Users</span>
                         </a>
                     </div>
  

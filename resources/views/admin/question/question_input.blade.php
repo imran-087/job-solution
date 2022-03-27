@@ -141,7 +141,7 @@
                                 <select class="form-select form-select-solid" data-control="select2"
                                     data-hide-search="true" data-placeholder="Select subject" name="subject"
                                     id="subject">
-
+                                    
 
                                 </select>
                                 <div class="help-block with-errors subject-error"></div>

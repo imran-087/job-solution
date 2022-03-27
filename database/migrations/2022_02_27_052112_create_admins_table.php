@@ -22,6 +22,8 @@ class CreateAdminsTable extends Migration
             $table->string('address')->nullable();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('status', ['active', 'deactive', 'ban'])->default('active');
+            $table->integer('role_id');
             $table->rememberToken();
             $table->timestamps();
         });

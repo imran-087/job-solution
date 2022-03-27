@@ -122,27 +122,33 @@ class QuestionController extends Controller
 
     public function update(Request $request)
     {
-        //dd($request->all());
-        $question = EditedQuestion::create([
-            'question_id' => $request->id,
-            'question' => $request->question,
-            'option_1' => $request->option_1,
-            'option_2' => $request->option_2,
-            'option_3' => $request->option_3,
-            'option_4' => $request->option_4,
-            'option_5' => $request->option_5,
-            'answer' => $request->answer,
-            'written_answer' => $request->written_answer,
-            'user_id' => Auth::user()->id,
-        ]);
 
-
-        if ($question) {
-            Session::flash('success', 'Question updated!! Please wait for approval');
+        if (!Auth::check()) {
+            Session::flash('error', 'You have to login first');
             return redirect()->back();
         } else {
-            Session::flash('error', 'Somethings Went wrong');
-            return redirect()->back();
+            //dd($request->all());
+            $question = EditedQuestion::create([
+                'question_id' => $request->id,
+                'question' => $request->question,
+                'option_1' => $request->option_1,
+                'option_2' => $request->option_2,
+                'option_3' => $request->option_3,
+                'option_4' => $request->option_4,
+                'option_5' => $request->option_5,
+                'answer' => $request->answer,
+                'written_answer' => $request->written_answer,
+                'user_id' => Auth::user()->id,
+            ]);
+
+
+            if ($question) {
+                Session::flash('success', 'Question updated!! Please wait for approval');
+                return redirect()->back();
+            } else {
+                Session::flash('error', 'Somethings Went wrong');
+                return redirect()->back();
+            }
         }
     }
 

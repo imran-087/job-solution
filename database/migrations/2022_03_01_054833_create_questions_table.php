@@ -15,6 +15,7 @@ class CreateQuestionsTable extends Migration
     {
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
+            $table->integer('main_category');
             $table->integer('sub_category_id');
             $table->integer('subject_id');
             $table->foreignId('year_id')->constrained('years');

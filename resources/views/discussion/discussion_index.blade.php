@@ -591,7 +591,8 @@
         },
         image: {
             toolbar: [ 'toggleImageCaption', 'imageTextAlternative' ]
-        }
+        },
+        
     })
     .then(editor => {
         console.log(editor);

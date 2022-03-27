@@ -127,6 +127,8 @@ class QuestionController extends Controller
         return view('admin.question.question_input', compact(['question', 'option', 'type', 'main_categories', 'years', 'passages']));
     }
 
+
+
     public function store(Request $request)
     {
         //dd($request->all());
@@ -168,6 +170,7 @@ class QuestionController extends Controller
                 $question = new Question;
                 $question->subject_id = $request->subject;
                 $question->sub_category_id = $request->sub_category;
+                $question->main_category_id = $request->main_category;
                 $question->year_id = 1;
                 $question->passage_id = $request->passage;
                 $question->question_type = $request->type;
