@@ -82,6 +82,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/question/create', 'QuestionController@create')->name('question.create');
         Route::post('/question/question-input', 'QuestionController@createQuestionInput')->name('question.question-input');
         Route::get('/question/edit-question/{id}', 'QuestionController@editQuestion')->name('question.question-edit');
+
+        Route::post('/question/preview-question', 'QuestionController@preview')->name('question.preview-store');
+        Route::get('/question/preview-question', 'QuestionController@previewQuestion')->name('question.preview');
+        Route::get('/question/edit-question/modal/{id}', 'QuestionController@editPreviewQuestion')->name('question.preview-edit');
+        Route::post('/question/edit-question/update', 'QuestionController@updatePreviewQuestion')->name('question.preview-update');
+
+        Route::get('/question/store/{val}', 'QuestionController@storeQuestion')->name('question.store-question');
+
         Route::post('/question/store', 'QuestionController@store')->name('question.store');
         Route::post('/question/update', 'QuestionController@update')->name('question.update');
         Route::get('/question/get/{id}', 'QuestionController@getQuestion')->name('question.get');

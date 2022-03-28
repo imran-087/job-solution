@@ -417,9 +417,9 @@
                                             data-id="{{ $r_question->id }}" data-catid="{{ $r_question->sub_category->category->id }}" title="bookmark">
                                             <i class="fas fa-bookmark"></i>
                                         </a>
-                                        <a href="" style="cursor:default" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4">
+                                        <span style="cursor:default" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4">
                                             <i class="fas fa-eye fa-xl"></i> {{$r_question->view_count}} 
-                                        </a>
+                                        </span>
 
                                         <a href="javascript:;" class=" btn btn-sm btn-light btn-color-muted btn-active-light-danger px-4 py-2 vote me-2"  data-id="{{ $r_question->id }}" title="like">
                                             <i class="fas fa-heart"></i>

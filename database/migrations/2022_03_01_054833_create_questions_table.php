@@ -18,7 +18,7 @@ class CreateQuestionsTable extends Migration
             $table->integer('main_category');
             $table->integer('sub_category_id');
             $table->integer('subject_id');
-            $table->foreignId('year_id')->constrained('years');
+            $table->integer('year_id');
             $table->integer('passage_id')->nullable();
             $table->enum('question_type', ['mcq', 'written', 'image', 'samprotik'])->default('mcq');
             $table->text('question');

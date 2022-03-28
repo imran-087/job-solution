@@ -269,9 +269,9 @@
                             <!--begin::Svg Icon | path: icons/duotune/general/gen030.svg-->
                             <i class="fas fa-heart"></i>
                             <!--end::Svg Icon-->{{$question->vote}}</a>
-                            <a href="" style="cursor:default" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-2">
+                            <span style="cursor:default" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-2">
                                 <i class="fas fa-eye fa-xl"></i> {{$question->view_count}} 
-                            </a>
+                            </span>
                         </div>
                         <!--begin::Accordion-->
                         <!--begin::Section-->

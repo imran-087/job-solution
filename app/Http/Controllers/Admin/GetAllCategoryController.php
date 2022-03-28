@@ -29,7 +29,9 @@ class GetAllCategoryController extends Controller
     public function getSubject($id)
     {
 
-        $subject = Subject::where(['sub_category_id' => $id, 'status' => 'active'])->get();
+        $subject = Subject::where(['sub_category_id' => $id, 'status' => 'active'])
+            ->orWhere(['sub_category_id' => 'NULL', 'status' => 'active'])
+            ->get();
         //dd($question);
         return response()->json($subject);
     }

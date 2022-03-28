@@ -106,12 +106,18 @@ class SubjectController extends Controller
 
             if (isset($request->subject_id) &&  $subject = Subject::find($request->subject_id)) { //update
                 //dd($request->subject_id);
+                if ($request->main_category == 1) {
+                    $sub_category = 'NULL';
+                } else {
+                    $sub_category = $request->sub_category;
+                }
+
                 $subject->name = $request->name;
                 $subject->title = $request->title;
                 $subject->description = $request->description;
                 $subject->parent_id = $request->parent ?? 0;
                 $subject->status =  $request->status;
-                $subject->sub_category_id =  $request->sub_category;
+                $subject->sub_category_id =  $sub_category;
                 $subject->main_category_id =  $request->main_category;
                 $subject->slug =  Str::slug($request->name);
                 $subject->updated_user_id =  Auth::guard('admin')->user()->id;
@@ -151,12 +157,18 @@ class SubjectController extends Controller
 
                 $subject = new Subject();
 
+                if ($request->main_category == 1) {
+                    $sub_category = 'NULL';
+                } else {
+                    $sub_category = $request->sub_category;
+                }
+
                 $subject->name = $request->name;
                 $subject->title = $request->title;
                 $subject->parent_id = $request->parent ?? 0;
                 $subject->description = $request->description;
                 $subject->status =  $request->status;
-                $subject->sub_category_id =  $request->sub_category;
+                $subject->sub_category_id =  $sub_category;
                 $subject->main_category_id =  $request->main_category;
                 $subject->slug =  Str::slug($request->name);
                 $subject->created_user_id =  Auth::guard('admin')->user()->id;

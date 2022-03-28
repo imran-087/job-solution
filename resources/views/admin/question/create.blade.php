@@ -164,7 +164,7 @@
                 <div class="card-body pt-0">
                     <!--begin:Form-->
                     <form id="kk_modal_new_passage_form" class="form" method="POST"
-                        action="{{ route('admin.question.store') }}" enctype="multipart/form-data">
+                        action="{{ route('admin.question.preview-store') }}" enctype="multipart/form-data">
                         <div class="messages"></div>
                         {{-- csrf token  --}}
                         @csrf

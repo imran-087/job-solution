@@ -108,7 +108,9 @@
                             <!--end::Select2-->
                         </div>
                         <!--begin::Add product-->
+                        <a href="{{route('admin.question.preview')}}" class="btn btn-sm btn-primary me-3" >Preview</a>
                         <a href="{{route('admin.question.create')}}" class="btn btn-sm btn-primary me-3" >Add Question</a>
+                        
                         <!--end::Add product-->
                     </div>
 
@@ -213,7 +215,7 @@
 
                 ],
                 "order": [
-                    [5, 'desc']
+                    [6, 'desc']
                 ] //created at desc
 
             })
