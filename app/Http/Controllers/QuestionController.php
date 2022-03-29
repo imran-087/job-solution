@@ -28,6 +28,9 @@ class QuestionController extends Controller
         $sub_category = SubCategory::where('slug', $sub_category)->first();
         //dd($sub_category);
         $subjects = Subject::where('sub_category_id', $sub_category->id)->get();
+        if ($subjects->count() == 0) {
+            $subjects = Subject::where('sub_category_id', 0)->get();
+        }
         $questions = Question::where('sub_category_id', $sub_category->id)->paginate(10);
 
         return view('question.subject_and_question', compact(
@@ -47,8 +50,11 @@ class QuestionController extends Controller
         $sub_category = SubCategory::where('slug', $sub_category)->first();
         $subject = Subject::where('slug', $subject)->first();
         $subjects = Subject::where('sub_category_id', $sub_category->id)->get();
+        if ($subjects->count() == 0) {
+            $subjects = Subject::where('sub_category_id', 0)->get();
+        }
         //dd($subject->id);
-        $questions = Question::where('subject_id', $subject->id)->paginate(5);
+        $questions = Question::where(['subject_id' => $subject->id, 'sub_category_id' => $sub_category->id])->paginate(10);
 
         return view('question.subject_and_question', compact('questions', 'sub_category', 'subjects', 'category'));
     }

@@ -280,7 +280,7 @@
                     <div class="d-flex flex-column mb-8 fv-row">
                         <!--begin::Label-->
                         <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="required">Subject Title</span>
+                            <span class="">Subject Title (optional)</span>
                         </label>
                         <!--end::Label-->
                         <input type="text" class="form-control form-control-solid" placeholder="Enter Title"
@@ -292,7 +292,7 @@
                     <div class="d-flex flex-column mb-8 fv-row">
                         <!--begin::Label-->
                         <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="required">Subject Description</span>
+                            <span class="">Subject Description (optional)</span>
                         </label>
                         <!--end::Label-->
                         <textarea name="description" class="form-control form-control-solid h-100px"></textarea>

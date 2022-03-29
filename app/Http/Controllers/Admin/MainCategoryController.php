@@ -30,6 +30,14 @@ class MainCategoryController extends Controller
                 ->editColumn('created_at', function ($row) {
                     return $row->created_at->diffForHumans();
                 })
+                ->editColumn('title', function ($row) {
+                    if ($row->title == '') {
+                        $btn = '<div class="badge badge-light-info fw-bolder">No title available</div>';
+                        return $btn;
+                    } else {
+                        return $row->title;
+                    }
+                })
                 ->editColumn('status', function ($row) {
                     if ($row->status == "active") {
                         $btn = '<div class="badge badge-light-success fw-bolder">Active</div>';
@@ -64,7 +72,7 @@ class MainCategoryController extends Controller
                     </div>';
                     return $btn;
                 })
-                ->rawColumns(['action', 'status', 'created_at'])
+                ->rawColumns(['action', 'status', 'created_at', 'title'])
                 ->make(true);
         }
         return view('admin.category.main_category');
@@ -76,7 +84,6 @@ class MainCategoryController extends Controller
         //dd($request->all());
         $validator = Validator::make($request->all(), [
             'name' => ['required'],
-            'title' => ['required'],
             'status' => ['required'],
         ]);
 

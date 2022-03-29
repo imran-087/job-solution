@@ -108,12 +108,20 @@
                                                     <span class="text-muted fw-bold d-block">{{ $sub_category->title }}</span>
                                                 </td>
                                                 <td class="text-end text-muted fw-bold">
-                                                    @foreach($sub_category->subject as $subject)
+                                                    @php
+                                                        if($sub_category->subject->count() == 0){
+                                                            $subjects = App\Models\Subject::where(['sub_category_id' => 0, 'main_category_id' => 1])->get();
+                                                        }
+                                                        else {
+                                                            $subjects = $sub_category->subject;
+                                                        }
+                                                    @endphp
+                                                    @foreach($subjects as $subject)
                                                         {{ $subject->name  }}, 
                                                     @endforeach
                                                 </td>
                                                 <td class="text-end">
-                                                    <span class="badge badge-light-success">Subject {{$sub_category->subject->count()}}</span>
+                                                    <span class="badge badge-light-success">Subject {{$subjects->count()}}</span>
                                                     <span class="badge badge-light-info">Question {{$sub_category->question->count()}}</span>
                                                 </td>
                                                 <td class="text-end">

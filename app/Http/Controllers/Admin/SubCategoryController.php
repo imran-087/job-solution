@@ -34,11 +34,19 @@ class SubCategoryController extends Controller
                 })
                 ->editColumn('year_id', function ($row) {
                     if ($row->year_id == 0 || $row->year_id == " ") {
-                        $btn = '<div class="badge badge-light-danger fw-bolder">Null</div>';
+                        $btn = '<div class="badge badge-light-warning fw-bolder">Null</div>';
                     } else {
-                        $btn = '<div class="badge badge-light-danger fw-bolder">' . $row->year->year . '</div>';
+                        $btn = '<div class="badge badge-light-primary fw-bolder">' . $row->year->year . '</div>';
                     }
                     return $btn;
+                })
+                ->editColumn('title', function ($row) {
+                    if ($row->title == '') {
+                        $btn = '<div class="badge badge-light-info fw-bolder">No title available</div>';
+                        return $btn;
+                    } else {
+                        return $row->title;
+                    }
                 })
                 ->editColumn('created_at', function ($row) {
                     return $row->created_at->diffForHumans();
@@ -77,7 +85,7 @@ class SubCategoryController extends Controller
                     </div>';
                     return $btn;
                 })
-                ->rawColumns(['action', 'status', 'created_at', 'year_id'])
+                ->rawColumns(['action', 'status', 'created_at', 'year_id', 'title'])
                 ->make(true);
         }
 
@@ -93,10 +101,9 @@ class SubCategoryController extends Controller
         //dd($request->all());
         $validator = Validator::make($request->all(), [
             'name' => ['required'],
-            'title' => ['required'],
             'status' => ['required'],
             'category' => ['required'],
-            'year' => ['required'],
+
         ]);
 
         if ($validator->fails()) {

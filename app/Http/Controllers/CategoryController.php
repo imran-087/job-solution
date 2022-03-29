@@ -18,7 +18,7 @@ class CategoryController extends Controller
         $main_category = MainCategory::where('slug', $main_category)->first();
         $category = Category::where('slug', $category)->first();
         $sub_categories = SubCategory::where('category_id', $category->id)->paginate(10);
-
+        //dd($sub_categories->all());
         return view('category.sub_category', compact('sub_categories', 'category', 'main_category'));
     }
 

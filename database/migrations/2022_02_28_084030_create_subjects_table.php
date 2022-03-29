@@ -17,7 +17,7 @@ class CreateSubjectsTable extends Migration
             $table->id();
             $table->integer('parent_id')->nullable()->default(0);
             $table->string('name');
-            $table->string('title');
+            $table->string('title')->nullable();
             $table->integer('sub_category_id')->nullable();
             $table->integer('main_category_id');
             $table->string('description')->nullable();

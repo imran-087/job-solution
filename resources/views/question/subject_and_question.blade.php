@@ -1,3 +1,4 @@
+
 @extends('layouts.app')
 @section('title', 'Question')
 
@@ -106,7 +107,7 @@
                                 <div class="swiper">
                                     <div class="swiper-wrapper">
                                         @foreach($subjects as $subject)
-                                        <div class="swiper-slide"> <a href="{{ route('jobs.category.sub-category.subject.question', [$category->slug, $sub_category->slug, $subject->slug]) }}" class="cursor-pointer page-link btn btn-success">{{$subject->name}} &nbsp<span class="badge badge-circle badge-danger">{{$subject->question->count()}}</span></a></div>
+                                        <div class="swiper-slide"> <a href="{{ route('jobs.category.sub-category.subject.question', [$category->slug, $sub_category->slug, $subject->slug]) }}" class="cursor-pointer page-link btn btn-success">{{$subject->name}} &nbsp</a></div>
                                         @endforeach
                                     </div>
                                     

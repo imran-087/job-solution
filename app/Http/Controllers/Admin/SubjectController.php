@@ -92,9 +92,9 @@ class SubjectController extends Controller
         //dd($request->all());
         $validator = Validator::make($request->all(), [
             'name' => ['required'],
-            'title' => ['required'],
             'status' => ['required'],
             'main_category' => ['required'],
+            'sub_category' => [$request->main_category == 1 ? 'nullable' : 'required'],
         ]);
 
         if ($validator->fails()) {
@@ -107,7 +107,7 @@ class SubjectController extends Controller
             if (isset($request->subject_id) &&  $subject = Subject::find($request->subject_id)) { //update
                 //dd($request->subject_id);
                 if ($request->main_category == 1) {
-                    $sub_category = 'NULL';
+                    $sub_category = 0;
                 } else {
                     $sub_category = $request->sub_category;
                 }
@@ -158,7 +158,7 @@ class SubjectController extends Controller
                 $subject = new Subject();
 
                 if ($request->main_category == 1) {
-                    $sub_category = 'NULL';
+                    $sub_category = '0';
                 } else {
                     $sub_category = $request->sub_category;
                 }

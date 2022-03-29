@@ -650,7 +650,7 @@
 
 @push('script')
     <script type="text/javascript">
-          //add comment
+        //add comment
         $(document).ready(function(){
             $('.comment').on('click', function(){
                 $('.with-errors').text('')
@@ -659,7 +659,7 @@
             })
         })
 
-         //new comment save
+        //new comment save
         $('#kk_modal_new_comment_form').on('submit',function(e){
             e.preventDefault()
             $('.with-errors').text('')

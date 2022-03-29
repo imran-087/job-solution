@@ -219,8 +219,8 @@
                                     </span>
                                     <!--end::Svg Icon-->{{$discussion->vote}}</a>
 
-                                    <a href="" style="cursor:default" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4">
-                                      <i class="fas fa-eye fa-xl"></i> {{$discussion->view}} </a>
+                                    <span style="cursor:default" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4">
+                                      <i class="fas fa-eye fa-xl"></i> {{$discussion->view}} </span>
 
                                 </div>
                                 <!--end::Toolbar-->
@@ -251,7 +251,7 @@
 </div>
 
 <!--begin::Modal - New Product/Service-->
-<div class="modal fade" id="kk_modal_new_passage" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="kk_modal_new_discussion" tabindex="-1" aria-hidden="true">
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-750px">
         <!--begin::Modal content-->
@@ -277,7 +277,7 @@
             <!--begin::Modal body-->
             <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
                 <!--begin:Form-->
-                <form id="kk_modal_new_passage_form" class="form" enctype="multipart/form-data">
+                <form id="kk_modal_new_discussion_form" class="form" enctype="multipart/form-data">
                     <div class="messages"></div>
                     {{-- csrf token  --}}
                     @csrf
@@ -364,54 +364,7 @@
 
 @push('script')
     <script type="text/javascript">
-        $(document).ready(function() {
-
-            var table = $('#dataTable').DataTable({
-                processing: true,
-                responsive: true,
-                serverSide: true,
-                ajax: "{{ url('admin/passage/index') }}",
-                columns: [
-                    {
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex',
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: 'title',
-                        name: 'title'
-                    },
-                    {
-                        data: 'passage',
-                        name: 'passage'
-                    },
-                    {
-                        data: 'created_at',
-                        name: 'created_at'
-                    },
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false,
-                        searchable: false
-                    },
-
-                ],
-                "order": [
-                    [3, 'desc']
-                ] //created at desc
-
-            })
-
-            // document.querySelector('[data-kk-product-table-filter="search"]').addEventListener("keyup", (function(
-            //     t) {
-            //     table.search(t.target.value).draw()
-            // }))
-
-
-        })
-
+        
         //search
         $(document).ready(function() {
             var timeout = null
@@ -450,18 +403,17 @@
 
         // add new
         function addNew(){
-            $('input[name="passage_id"]').val('')
             $('.with-errors').text('')
-            $('#kk_modal_new_passage_form')[0].reset();
-            $('#kk_modal_new_passage').modal('show')
+            $('#kk_modal_new_discussion_form')[0].reset();
+            $('#kk_modal_new_discussion').modal('show')
         }
 
 
 
         //cancel button
         $('#kk_modal_new_service_cancel').on('click', function(){
-            $('#kk_modal_new_passage_form')[0].reset();
-            $("#kk_modal_new_passage").modal('hide');
+            $('#kk_modal_new_discussion_form')[0].reset();
+            $("#kk_modal_new_discussion").modal('hide');
         })
 
 
@@ -521,7 +473,7 @@
         //     });
 
         //     //new discussion save
-        //     $('#kk_modal_new_passage_form').on('submit',function(e){
+        //     $('#kk_modal_new_discussion_form').on('submit',function(e){
         //         e.preventDefault()
         //         $('.with-errors').text('')
         //         $('.indicator-label').hide()
@@ -550,11 +502,11 @@
         //                     }
         //                 }else if(data.error || data.error == 'true'){
         //                     var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
-        //                     $('#kk_modal_new_passage_form').find('.messages').html(alertBox).show();
+        //                     $('#kk_modal_new_discussion_form').find('.messages').html(alertBox).show();
         //                 }else{
         //                     // empty the form
-        //                     $('#kk_modal_new_passage_form')[0].reset();
-        //                     $("#kk_modal_new_passage").modal('hide');
+        //                     $('#kk_modal_new_discussion_form')[0].reset();
+        //                     $("#kk_modal_new_discussion").modal('hide');
 
         //                     Swal.fire({
         //                             text: data.message,
@@ -602,7 +554,7 @@
     });
 
     //save discussion
-     $('#kk_modal_new_passage_form').on('submit',function(e){
+     $('#kk_modal_new_discussion_form').on('submit',function(e){
                 e.preventDefault()
                 $('.with-errors').text('')
                 $('.indicator-label').hide()
@@ -628,29 +580,29 @@
                             }
                         }else if(data.error || data.error == 'true'){
                             var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
-                            $('#kk_modal_new_passage_form').find('.messages').html(alertBox).show();
+                            $('#kk_modal_new_discussion_form').find('.messages').html(alertBox).show();
                         }else{
                             // empty the form
-                            $('#kk_modal_new_passage_form')[0].reset();
-                            $("#kk_modal_new_passage").modal('hide');
+                            $('#kk_modal_new_discussion_form')[0].reset();
+                            $("#kk_modal_new_discussion").modal('hide');
 
                             Swal.fire({
                                     text: data.message,
                                     icon: "success",
-                                    showConfirmButton: false
+                                    showConfirmButton: true
 
                                 }).then((function () {
                                     //refresh datatable
-                                    $('#dataTable').DataTable().ajax.reload();
+                                    // setTimeout(function() {
+                                        location.reload();  //Refresh page
+                                    // }, 1000);
                                 }))
                         }
 
                         $('.indicator-label').show()
                         $('.indicator-progress').hide()
                         $('#kk_modal_new_service_submit').removeAttr('disabled')
-                        setTimeout(function() {
-                            location.reload();  //Refresh page
-                        }, 1000);
+                       
 
                     }
             });

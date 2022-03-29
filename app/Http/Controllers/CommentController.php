@@ -50,7 +50,7 @@ class CommentController extends Controller
             } else {
                 return response()->json([
                     'error' => true,
-                    'message' => 'You have to login first!.'
+                    'message' => 'Please, login to add a comment'
                 ]);
             }
         }

@@ -15,7 +15,7 @@ jQuery(function () {
                 success: function (data) {
                     if (data) {
                         $('#category').empty();
-                        $('#category').append('<option hidden>Choose...</option>');
+                        $('#category').append('<option value="">Choose...</option>');
                         $.each(data, function (key, category) {
                             $('select[name="category"]').append(
                                 '<option value="' + category
@@ -46,7 +46,7 @@ jQuery(function () {
                 success: function (data) {
                     if (data) {
                         $('#sub_category').empty();
-                        $('#sub_category').append('<option hidden >Choose...</option>');
+                        $('#sub_category').append('<option value="">Choose...</option>');
                         $.each(data, function (key, sub_category) {
                             $('select[name="sub_category"]').append(
                                 '<option value="' + sub_category.id + '">' + sub_category.name + '</option>');
@@ -76,10 +76,10 @@ jQuery(function () {
                 success: function (data) {
                     if (data) {
                         $('#subject').empty();
-                        $('#subject').append('<option hidden >Choose...</option>');
+                        $('#subject').append('<option value="">Choose...</option>');
                         $.each(data, function (key, subject) {
                             $('select[name="subject"]').append(
-                                '<option value="' + subject.id + '">' + subject.name + '</option>');
+                                '<option value="' + subject.id + '">' + subject.name   + '</option>');
                         });
                     }
                         else {

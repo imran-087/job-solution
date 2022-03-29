@@ -250,7 +250,7 @@
                     <div class="d-flex flex-column mb-8 fv-row">
                         <!--begin::Label-->
                         <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="required">Sub Category Title</span>
+                            <span class="">Sub Category Title (optional)</span>
                         </label>
                         <!--end::Label-->
                         <input type="text" class="form-control form-control-solid" placeholder="Enter Title"
@@ -274,10 +274,11 @@
                         <!--end::Col-->
                         <!--begin::Col-->
                         <div class="col-md-6 fv-row">
-                            <label class="required fs-6 fw-bold mb-2">Year</label>
+                            <label class=" fs-6 fw-bold mb-2">Year (optional)</label>
                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                 data-placeholder="Select exam year" name="year" id="year">
                                 <option value="">Choose ...</option>
+                                <option value="NULL">NULL</option>
                                 @foreach ($years as $year)
                                     <option value="{{ $year->id }}">{{ $year->year }}</option>
                                 @endforeach
@@ -401,6 +402,7 @@
                    $('input[name="name"]').val(data.sub_category.name)
                    $('input[name="title"]').val(data.sub_category.title)
                    $('select[name="status"]').val(data.sub_category.status).change()
+                   $('select[name="year"]').val(data.sub_category.year_id).change()
                    $('select[name="main_category"]').html('<option ">' + data.main_category.name + '</option>');
                    $('select[name="category"]').append('<option value="' + data.category.id + '">' + data.category.name + '</option>');
                   
