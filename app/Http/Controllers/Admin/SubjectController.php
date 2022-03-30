@@ -29,6 +29,14 @@ class SubjectController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
 
+                ->editColumn('parent', function ($row) {
+                    if ($row->parent == $row->id) {
+                        $btn = '<div class="badge badge-light-success fw-bolder">' . $row->name . '</div>';
+                    } else {
+                        $btn = '<div class="badge badge-light-danger fw-bolder">NULL</div>';
+                    }
+                    return $btn;
+                })
                 ->editColumn('sub_category_id', function ($row) {
                     if ($row->sub_category == '') {
                         return '<div class="badge badge-light-info fw-bolder">Null</div>';
@@ -76,7 +84,7 @@ class SubjectController extends Controller
                     </div>';
                     return $btn;
                 })
-                ->rawColumns(['action', 'status', 'created_at', 'sub_category_id', 'main_category_id'])
+                ->rawColumns(['action', 'status', 'created_at', 'sub_category_id', 'main_category_id', 'parent'])
                 ->make(true);
         }
 
@@ -103,14 +111,14 @@ class SubjectController extends Controller
                 'errors' => $validator->errors()
             ], 200);
         } else {
+            if ($request->main_category == 1) {
+                $sub_category = 0;
+            } else {
+                $sub_category = $request->sub_category;
+            }
 
             if (isset($request->subject_id) &&  $subject = Subject::find($request->subject_id)) { //update
                 //dd($request->subject_id);
-                if ($request->main_category == 1) {
-                    $sub_category = 0;
-                } else {
-                    $sub_category = $request->sub_category;
-                }
 
                 $subject->name = $request->name;
                 $subject->title = $request->title;
@@ -156,12 +164,6 @@ class SubjectController extends Controller
             } else { //create new category
 
                 $subject = new Subject();
-
-                if ($request->main_category == 1) {
-                    $sub_category = '0';
-                } else {
-                    $sub_category = $request->sub_category;
-                }
 
                 $subject->name = $request->name;
                 $subject->title = $request->title;

@@ -1,5 +1,5 @@
 @extends('admin.layout.app')
-@section('title', 'Category')
+@section('title', 'Sub-Category')
 
 @section('content')
 
@@ -13,7 +13,7 @@
                 data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
                 class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                 <!--begin::Title-->
-                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Main Category</h1>
+                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Sub Category</h1>
                 <!--end::Title-->
                 <!--begin::Separator-->
                 <span class="h-20px border-gray-200 border-start mx-4"></span>
@@ -39,7 +39,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-dark">Main Category List</li>
+                    <li class="breadcrumb-item text-dark">Sub Category List</li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -84,7 +84,7 @@
                             </span>
                             <!--end::Svg Icon-->
                             <input type="text" data-kk-product-table-filter="search"
-                                class="form-control form-control-solid w-250px ps-14" placeholder="Search ctaegory">
+                                class="form-control form-control-solid w-250px ps-14" placeholder="Search category">
                         </div>
                         <!--end::Search-->
                     </div>
@@ -278,7 +278,6 @@
                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                 data-placeholder="Select exam year" name="year" id="year">
                                 <option value="">Choose ...</option>
-                                <option value="NULL">NULL</option>
                                 @foreach ($years as $year)
                                     <option value="{{ $year->id }}">{{ $year->year }}</option>
                                 @endforeach
@@ -365,7 +364,7 @@
 
                 ],
                 "order": [
-                    [5, 'desc']
+                    [6, 'desc']
                 ] //created at desc
 
             })
@@ -403,7 +402,7 @@
                    $('input[name="title"]').val(data.sub_category.title)
                    $('select[name="status"]').val(data.sub_category.status).change()
                    $('select[name="year"]').val(data.sub_category.year_id).change()
-                   $('select[name="main_category"]').html('<option ">' + data.main_category.name + '</option>');
+                   $('select[name="main_category"]').html('<option value="' + data.main_category.id + '">' + data.main_category.name + '</option>');
                    $('select[name="category"]').append('<option value="' + data.category.id + '">' + data.category.name + '</option>');
                   
                    $("#kk_modal_new_category").modal('show');

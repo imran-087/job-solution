@@ -1,5 +1,5 @@
 @extends('admin.layout.app')
-@section('title', 'Category')
+@section('title', 'Subject')
 
 @section('content')
 
@@ -31,7 +31,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Category Management</li>
+                    <li class="breadcrumb-item text-muted">Subject Management</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -126,9 +126,10 @@
                                     <!--begin::Table row-->
                                     <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                         <th class="min-w-20px">#</th>
-                                        <th class="min-w-150px">Subject Name</th>
-                                        <th class=" min-w-150px">Category</th>
-                                        <th class=" min-w-150px">Sub Category</th>
+                                        <th class="min-w-100px">Subject Name</th>
+                                        <th class="min-w-100px">Parent</th>
+                                        <th class=" min-w-100px">Category</th>
+                                        <th class=" min-w-100px">Sub Category</th>
                                         <th class=" min-w-100px">Status</th>
                                         <th class=" min-w-100px">Created at</th>
                                         <th class=" min-w-70px">Actions</th>
@@ -361,6 +362,10 @@
                         name: 'name'
                     },
                     {
+                        data: 'parent',
+                        name: 'parent'
+                    },
+                    {
                         data: 'main_category_id',
                         name: 'main_category_id'
                     },
@@ -386,7 +391,7 @@
 
                 ],
                 "order": [
-                    [5, 'desc']
+                    [6, 'desc']
                 ] //created at desc
 
             })
@@ -424,8 +429,8 @@
                     $('textarea[name="description"]').val(data.subject.description)
                     $('select[name="parent"]').val(data.subject.parent_id).change()
                     $('select[name="status"]').val(data.subject.status).change()
-                    $('select[name="main_category"]').html('<option ">' + data.main_category.name + '</option>');
-                    $('select[name="category"]').html('<option ">' + data.category.name + '</option>');
+                    $('select[name="main_category"]').html('<option value="' + data.main_category.id + '">' + data.main_category.name + '</option>');
+                    $('select[name="category"]').html('<option value="' + data.category.id + '">' + data.category.name + '</option>');
                     $('select[name="sub_category"]').append('<option value="' + data.sub_category.id + '">' + data.sub_category.name + '</option>');
                     $("#kk_modal_new_category").modal('show');
                 }

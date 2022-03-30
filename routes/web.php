@@ -102,3 +102,8 @@ Route::middleware('auth')->name('user.')->group(function () {
   Route::get('/my-bookmark/user={user}', [BookmarkController::class, 'getBookmark'])->name('bookmark');
   Route::get('/my-bookmark/user={user}/category={category}', [BookmarkController::class, 'getBookmarkByCategory'])->name('bookmark.category');
 });
+
+
+Route::get('/test/matjx', function () {
+  return view('category.test-mathjx');
+});

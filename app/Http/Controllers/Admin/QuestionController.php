@@ -131,8 +131,19 @@ class QuestionController extends Controller
     //preview question
     public function preview(Request $request)
     {
-
         //dd($request->all());
+        $request->validate([
+            'main_category' => ['required'],
+            'sub_category' => ['required'],
+            'subject' => ['required'],
+            'year' => [$request->main_category == 3 ? 'nullable' : 'required'],
+            'question.*' => ['required'],
+            'answer.*' => [$request->type == 'written' ? 'nullable' : 'required'],
+            'written_answer.*' => [$request->type == 'written' ? 'required' : 'nullable'],
+
+        ]);
+
+
         //multiple image question
         if ($request->hasfile('image')) {
             //dd('ok');
@@ -167,12 +178,17 @@ class QuestionController extends Controller
         //question save
         foreach ($request->question as $key => $value) {
             if (\strlen($value) > 1) {
+                if ($request->main_category == 3) {
+                    $year = 'NULL';
+                } else {
+                    $year = $request->year;
+                }
                 //question save
                 $question = new PreviewQuestion();
                 $question->subject_id = $request->subject;
                 $question->sub_category_id = $request->sub_category;
                 $question->main_category_id = $request->main_category;
-                $question->year_id = 1;
+                $question->year_id = $year;
                 $question->passage_id = $request->passage;
                 $question->question_type = $request->type;
                 $question->hard_level = 1;

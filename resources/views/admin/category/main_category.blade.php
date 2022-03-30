@@ -1,5 +1,5 @@
 @extends('admin.layout.app')
-@section('title', 'Category')
+@section('title', 'Main-Category')
 
 @section('content')
 
@@ -84,7 +84,7 @@
                             </span>
                             <!--end::Svg Icon-->
                             <input type="text" data-kk-product-table-filter="search"
-                                class="form-control form-control-solid w-250px ps-14" placeholder="Search ctaegory">
+                                class="form-control form-control-solid w-250px ps-14" placeholder="Search category">
                         </div>
                         <!--end::Search-->
                     </div>
@@ -107,7 +107,7 @@
                             <!--end::Select2-->
                         </div>
                         <!--begin::Add product-->
-                        <a href="javascript:;" class="btn btn-sm btn-primary me-3" onclick="addNew()">Add Category</a>
+                        <a href="javascript:;" class="btn btn-sm btn-primary me-3" onclick="addNew()">Add Main Category</a>
                         <!--end::Add product-->
                     </div>
 
@@ -193,7 +193,7 @@
                     <!--begin::Heading-->
                     <div class="mb-13 text-center">
                         <!--begin::Title-->
-                        <h1 class="mb-3">Add New Category</h1>
+                        <h1 class="mb-3">Add New Main Category</h1>
                         <!--end::Title-->
                         <!--begin::Description-->
                         <div class="text-muted fw-bold fs-5">Fill up the form and submit
@@ -208,7 +208,7 @@
                             <span class="required">Category Name</span>
                         </label>
                         <!--end::Label-->
-                        <input type="text" class="form-control form-control-solid" placeholder="Enter Service Name"
+                        <input type="text" class="form-control form-control-solid" placeholder="Enter Category Name"
                             name="name" />
                         <div class="help-block with-errors name-error"></div>
                     </div>
@@ -352,6 +352,7 @@
         //cancel button
         $('#kk_modal_new_service_cancel').on('click', function(){
             $('#kk_modal_new_category_form')[0].reset();
+            $("#kk_modal_new_category_form").find('h1').text('');
             $("#kk_modal_new_category").modal('hide');
         })
 

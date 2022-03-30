@@ -46,7 +46,7 @@
         
         <!--begin::Row-->
         <div class="row gy-5 g-xl-8">
-            
+
             <!--begin::Col-->
             <div class="col-12">
                 <!--begin::Tables Widget 5-->
@@ -57,19 +57,7 @@
                             <span class="card-label fw-bolder fs-3 mb-1">Jobs - <span style="text-transform: capitalize">{{$category->name}}</span> </span>
                             <span class="text-muted mt-1 fw-bold fs-7">More than 700 new questions</span>
                         </h3>
-                        <div class="card-toolbar">
-                            {{-- <ul class="nav">
-                                <li class="nav-item">
-                                    <a class="nav-link btn btn-sm btn-color-muted btn-active btn-active-secondary fw-bolder px-4 me-1 active" data-bs-toggle="tab" href="#kt_table_widget_5_tab_1">Month</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link btn btn-sm btn-color-muted btn-active btn-active-secondary fw-bolder px-4 me-1" data-bs-toggle="tab" href="#kt_table_widget_5_tab_2">Week</a>
-                                </li>
-                                <li class="nav-item">
-                                    <a class="nav-link btn btn-sm btn-color-muted btn-active btn-active-secondary fw-bolder px-4" data-bs-toggle="tab" href="#kt_table_widget_5_tab_3">Day</a>
-                                </li>
-                            </ul> --}}
-                        </div>
+                       
                     </div>
                     <!--end::Header-->
                     <!--begin::Body-->
@@ -103,31 +91,31 @@
                                                         </span>
                                                     </div>
                                                 </td>
-                                                <td>
+                                                <td >
                                                     <a href="{{ route('jobs.sub-category.subject.all-question', [$category->slug, $sub_category->slug]) }}" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">{{ $sub_category->name }}</a>
                                                     <span class="text-muted fw-bold d-block">{{ $sub_category->title }}</span>
                                                 </td>
                                                 <td class="text-end text-muted fw-bold">
                                                     @php
-                                                        if($sub_category->subject->count() == 0){
-                                                            $subjects = App\Models\Subject::where(['sub_category_id' => 0, 'main_category_id' => 1])->get();
+                                                        if($sub_category->category->main_category->id == 1){
+                                                            $subjects = App\Models\Subject::where(['sub_category_id' => 0, 'main_category_id' => 1, ])->get();
                                                         }
                                                         else {
                                                             $subjects = $sub_category->subject;
                                                         }
                                                     @endphp
                                                     @foreach($subjects as $subject)
-                                                        {{ $subject->name  }}, 
+                                                        <span class="badge badge-dark">{{ $subject->name  }} </span>
                                                     @endforeach
                                                 </td>
                                                 <td class="text-end">
-                                                    <span class="badge badge-light-success">Subject {{$subjects->count()}}</span>
-                                                    <span class="badge badge-light-info">Question {{$sub_category->question->count()}}</span>
+                                                    <span class="badge badge-success">Subject {{$subjects->count()}}</span>
+                                                    <span class="badge badge-info">Question {{$sub_category->question->count()}}</span>
                                                 </td>
                                                 <td class="text-end">
-                                                    <a href="{{ route('jobs.sub-category.subject.all-question', [$category->slug, $sub_category->slug]) }}" class="btn btn-sm btn-icon btn-bg-light btn-active-color-primary">
+                                                    <a href="{{ route('jobs.sub-category.subject.all-question', [$category->slug, $sub_category->slug]) }}" class="btn btn-sm btn-icon btn-primary ">
                                                         <!--begin::Svg Icon | path: icons/duotune/arrows/arr064.svg-->
-                                                        <span class="svg-icon svg-icon-2">
+                                                        <span class="svg-icon svg-icon-3">
                                                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                                                 <rect opacity="0.5" x="18" y="13" width="13" height="2" rx="1" transform="rotate(-180 18 13)" fill="black"></rect>
                                                                 <path d="M15.4343 12.5657L11.25 16.75C10.8358 17.1642 10.8358 17.8358 11.25 18.25C11.6642 18.6642 12.3358 18.6642 12.75 18.25L18.2929 12.7071C18.6834 12.3166 18.6834 11.6834 18.2929 11.2929L12.75 5.75C12.3358 5.33579 11.6642 5.33579 11.25 5.75C10.8358 6.16421 10.8358 6.83579 11.25 7.25L15.4343 11.4343C15.7467 11.7467 15.7467 12.2533 15.4343 12.5657Z" fill="black"></path>

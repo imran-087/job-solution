@@ -84,7 +84,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/question/edit-question/{id}', 'QuestionController@editQuestion')->name('question.question-edit');
 
         Route::post('/question/preview-question', 'QuestionController@preview')->name('question.preview-store');
-        Route::get('/question/preview-question', 'QuestionController@previewQuestion')->name('question.preview');
+        Route::get('/question/preview-question/show', 'QuestionController@previewQuestion')->name('question.preview');
         Route::get('/question/edit-question/modal/{id}', 'QuestionController@editPreviewQuestion')->name('question.preview-edit');
         Route::post('/question/edit-question/update', 'QuestionController@updatePreviewQuestion')->name('question.preview-update');
 

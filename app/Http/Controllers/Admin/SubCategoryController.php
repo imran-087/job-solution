@@ -103,6 +103,7 @@ class SubCategoryController extends Controller
             'name' => ['required'],
             'status' => ['required'],
             'category' => ['required'],
+            'year' => [$request->main_category == 3 ? 'nullable' : 'required'],
 
         ]);
 
@@ -113,13 +114,20 @@ class SubCategoryController extends Controller
             ], 200);
         } else {
 
+            if ($request->main_category == 3) {
+                $year = 'NULL';
+            } else {
+                $year = $request->year;
+            }
+
             if (isset($request->sub_category_id) &&  $sub_category = SubCategory::find($request->sub_category_id)) { //update
                 //dd($request->sub_category_id);
+
                 $sub_category->name = $request->name;
                 $sub_category->title = $request->title;
                 $sub_category->status =  $request->status;
                 $sub_category->category_id =  $request->category;
-                $sub_category->year_id = $request->year;
+                $sub_category->year_id = $year;
                 $sub_category->slug =  Str::slug($request->name);
                 $sub_category->updated_user_id =  Auth::guard('admin')->user()->id;
 
@@ -151,7 +159,7 @@ class SubCategoryController extends Controller
                 $sub_category->name = $request->name;
                 $sub_category->title = $request->title;
                 $sub_category->category_id =  $request->category;
-                $sub_category->year_id = $request->year;
+                $sub_category->year_id =  $year;
                 $sub_category->slug =  Str::slug($request->name);
                 $sub_category->created_user_id =  Auth::guard('admin')->user()->id;
                 $sub_category->status =  $request->status;

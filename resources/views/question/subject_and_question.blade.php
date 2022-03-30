@@ -103,11 +103,19 @@
                         <!--begin::Row-->
                         <div class="row g-0 d-flex justify-content-center">
                             <!--begin::Col-->
+                           
                             <div class="col-12 ">
                                 <div class="swiper">
                                     <div class="swiper-wrapper">
                                         @foreach($subjects as $subject)
-                                        <div class="swiper-slide"> <a href="{{ route('jobs.category.sub-category.subject.question', [$category->slug, $sub_category->slug, $subject->slug]) }}" class="cursor-pointer page-link btn btn-success">{{$subject->name}} &nbsp</a></div>
+                                        @php
+                                            $subject_total_ques = App\Models\Question::where(['sub_category_id' => $sub_category->id, 'subject_id' => $subject->id])->get();
+                                        @endphp
+                                        <div class="swiper-slide"> 
+                                            <a href="{{ route('jobs.category.sub-category.subject.question', [$category->slug, $sub_category->slug, $subject->slug]) }}" class="cursor-pointer page-link btn btn-success">
+                                                {{$subject->name}}  <span class="badge badge-circle badge-danger ms-2">{{ $subject_total_ques->count() }}</span>
+                                            </a>
+                                        </div>
                                         @endforeach
                                     </div>
                                     
@@ -562,6 +570,8 @@
             $('#kk_modal_new_question_des_form')[0].reset();
             $('#kk_modal_new_question_des').modal('show')
         }
+
+        
         
         
         //new description save

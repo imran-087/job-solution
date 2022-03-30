@@ -37,6 +37,7 @@
             </div>
             @foreach(App\Models\MainCategory::with('categories')->where('status', 'active')->get() as $main_category)
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                <a href="{{ url('job-solution', $main_category->slug) }}">
                 <span class="menu-link">
                     <span class="menu-icon">
                         <!--begin::Svg Icon | path: icons/duotune/art/art009.svg-->
@@ -49,9 +50,10 @@
                         <!--end::Svg Icon-->
                     </span>
                     <span class="menu-title">{{$main_category->name}}</span>
-                    <span class="menu-arrow"></span>
+                    {{-- <span class="menu-arrow"></span> --}}
                 </span>
-                <div class="menu-sub menu-sub-accordion menu-active-bg" kt-hidden-height="117" style="display: none; overflow: hidden;">
+                </a>
+                {{-- <div class="menu-sub menu-sub-accordion menu-active-bg" kt-hidden-height="117" style="display: none; overflow: hidden;">
                     
                     @foreach($main_category->categories as $category)
                     <div  class="menu-item menu-accordion">
@@ -65,7 +67,7 @@
                         </a>  
                     </div>
                     @endforeach 
-                </div>
+                </div> --}}
             </div>
             @endforeach
 

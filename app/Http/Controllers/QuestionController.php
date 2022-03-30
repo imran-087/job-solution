@@ -27,10 +27,12 @@ class QuestionController extends Controller
         $category = Category::where('slug', $category)->first();
         $sub_category = SubCategory::where('slug', $sub_category)->first();
         //dd($sub_category);
-        $subjects = Subject::where('sub_category_id', $sub_category->id)->get();
-        if ($subjects->count() == 0) {
+        if ($sub_category->category->main_category->id == 1) {
             $subjects = Subject::where('sub_category_id', 0)->get();
+        } else {
+            $subjects = Subject::where('sub_category_id', $sub_category->id)->get();
         }
+
         $questions = Question::where('sub_category_id', $sub_category->id)->paginate(10);
 
         return view('question.subject_and_question', compact(

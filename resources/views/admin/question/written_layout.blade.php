@@ -10,9 +10,13 @@
         </label>
         <input type="hidden" name="type" value="{{ $type }}">
         <!--end::Label-->
-        <input type="text" class="form-control form-control-solid" placeholder="Enter Question"
+        <input type="text" class="form-control form-control-solid @error('question.*') is-invalid @enderror" placeholder="Enter Question"
             name="question[]" />
-        <div class="help-block with-errors title-error"></div>
+        @error('question')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
     </div>
     <!--end::Input group-->
 
@@ -23,8 +27,12 @@
             <span class="required">Answer</span>
         </label>
         <!--end::Label-->
-        <textarea name="written_answer[]" class="form-control form-control-solid h-100px"></textarea>
-        <div class="help-block with-errors description-error"></div>
+        <textarea name="written_answer[]" class="form-control form-control-solid h-100px @error('written_answer.*') is-invalid @enderror"></textarea>
+        @error('written_answer.*')
+            <span class="invalid-feedback" role="alert">
+                <strong>{{ $message }}</strong>
+            </span>
+        @enderror
     </div>
     <!--end::Input group-->
     

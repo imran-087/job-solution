@@ -47,7 +47,7 @@
         <!--begin::Row-->
         <div class="row">
             @foreach($categories as $category)
-            <div class="col-4 card pt-5 me-4 mb-4 pb-0">
+            <div class="col-4 card pt-5 me-4 mb-4 pb-0" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;">
                 <div class="d-flex align-items-center bg-light-success rounded p-5 mb-7">
                     <!--begin::Icon-->
                     <span class="svg-icon svg-icon-success me-5">

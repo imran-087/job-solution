@@ -28,17 +28,23 @@ class GetAllCategoryController extends Controller
 
     public function getSubject($id)
     {
+        $sub_category = SubCategory::find($id);
+
         $subject = Subject::with('sub_category')
             ->where(['sub_category_id' => $id, 'status' => 'active'])
             ->get();
-
         if ($subject->count() > 0) {
             return response()->json($subject);
         } else {
-            $subject = Subject::with('main_category')
-                ->where(['sub_category_id' => 0, 'status' => 'active'])
-                ->get();
-            return response()->json($subject);
+            if ($sub_category->category->main_category->id == 1) {
+                $subject = Subject::with('main_category')
+                    ->where(['status' => 'active', 'main_category_id' => 1, 'sub_category_id' => 0])
+                    ->get();
+                return response()->json($subject);
+            } else {
+                $subject = '';
+                return response()->json($subject);
+            }
         }
     }
 

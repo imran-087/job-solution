@@ -84,7 +84,7 @@
                             </span>
                             <!--end::Svg Icon-->
                             <input type="text" data-kk-product-table-filter="search"
-                                class="form-control form-control-solid w-250px ps-14" placeholder="Search ctaegory">
+                                class="form-control form-control-solid w-250px ps-14" placeholder="Search category">
                         </div>
                         <!--end::Search-->
                     </div>
@@ -421,9 +421,9 @@
                             }))
                     }
 
-                $('.indicator-label').show()
-                $('.indicator-progress').hide()
-                $('#kk_modal_new_service_submit').removeAttr('disabled')
+                    $('.indicator-label').show()
+                    $('.indicator-progress').hide()
+                    $('#kk_modal_new_service_submit').removeAttr('disabled')
 
                 }
           });

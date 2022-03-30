@@ -18,7 +18,7 @@ class CreatePreviewQuestionsTable extends Migration
             $table->integer('main_category_id');
             $table->integer('sub_category_id');
             $table->integer('subject_id');
-            $table->integer('year_id');
+            $table->integer('year_id')->nullable();
             $table->integer('passage_id')->nullable();
             $table->enum('question_type', ['mcq', 'written', 'image', 'samprotik'])->default('mcq');
             $table->text('question');
