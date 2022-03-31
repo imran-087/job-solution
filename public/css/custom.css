@@ -90,6 +90,10 @@ a.btn.btn-primary.me-3.text-uppercase {
     border-radius: 5px;
 }
 
+.font-size {
+    font-size: 12px;
+}
+
 .fa-2xl{
     font-size: 15px !important;
     margin-right: 2px !important;
@@ -105,12 +109,15 @@ i.fas.fa-check.fa-2xl {
 .swiper-button-next:after,
 .swiper-button-prev:after {
     font-size: 25px !important;
+    margin-top: 40px;
 }
 
 @media screen and (min-width: 378px) {
    .swiper-button-next:after,
    .swiper-button-prev:after{
-       margin-bottom: 20px;
+       margin-bottom: 40px;
    }
 }
+
+
 

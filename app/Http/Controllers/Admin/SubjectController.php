@@ -198,9 +198,16 @@ class SubjectController extends Controller
     {
         //dd($id);
         $subject = Subject::find($id);
-        $sub_category = SubCategory::where('id', $subject->sub_category_id)->first();
-        $category = Category::where('id', $sub_category->category_id)->first();
-        $main_category = MainCategory::where('id', $category->main_category_id)->first();
+        if ($subject->sub_category_id == 0) {
+            $main_category = MainCategory::where('id', $subject->main_category_id)->first();
+        } else {
+            //dd('here');
+            $sub_category = SubCategory::where('id', $subject->sub_category_id)->first();
+            //dd($sub_category);
+            $category = Category::where('id', $sub_category->category_id)->first();
+            $main_category = MainCategory::where('id', $category->main_category_id)->first();
+        }
+
         $data = [
             'subject' => $subject,
             'sub_category' => $sub_category,

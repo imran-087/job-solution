@@ -174,4 +174,28 @@ class QuestionController extends Controller
 
         $question->save();
     }
+
+    public function checkAnswer($id, $option)
+    {
+        $question_option = QuestionOption::find($id);
+        if ($question_option->answer == $option) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Wrignt Answer'
+            ], 200);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Wrong Answer'
+            ], 200);
+        }
+    }
+
+    //recent question
+    public function recentQuestion()
+    {
+        $questions = Question::with('question_option')->where('question_type', 'samprotik')->paginate(15);
+        //dd($questions);
+        return view('question.samprotik-question', compact('questions'));
+    }
 }

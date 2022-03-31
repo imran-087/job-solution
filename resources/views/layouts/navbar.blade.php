@@ -142,6 +142,13 @@
                 </div>
             </div>
 
+            <div class="menu-item  menu-lg-down-accordion me-lg-1 {{ request()->is('/job/question/recent-question') ? 'here show' : '' }}">
+                <span class="menu-link py-3">
+                    <a href="{{ route('question.recent-question') }}"><span class="menu-title">Current Question</span></a>
+                    <span class="menu-arrow d-lg-none"></span>
+                </span>
+               
+            </div>
             <div class="menu-item  menu-lg-down-accordion me-lg-1 {{ request()->is('/discussion') ? 'here show' : '' }}">
                 <span class="menu-link py-3">
                     <a href="{{ url('/discussion') }}"><span class="menu-title">Forum</span></a>

@@ -77,12 +77,15 @@ Route::post('question/comment/store', [CommentController::class, 'store'])->name
 Route::get('/question/edit-question/{id}', [QuestionController::class, 'edit'])->name('question.edit-question');
 Route::post('/question/update-question', [QuestionController::class, 'update'])->name('question.update-question');
 
-
+//answer-check
+Route::get('question/answer-check/{id}/{option}', [QuestionController::class, 'checkAnswer'])->name('question.answer-check');
 //vote
 Route::get('/question/vote/{id}', [QuestionController::class, 'vote'])->name('question.vote');
 //view count
 Route::get('/question/view-count/{id}', [QuestionController::class, 'viewCount'])->name('question.view-count');
 
+//recent question
+Route::get('job/question/recent-question', [QuestionController::class, 'recentQuestion'])->name('question.recent-question');
 
 /*********************
    Question Description

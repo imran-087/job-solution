@@ -113,7 +113,18 @@
                         <div class="help-block with-errors description-error"></div>
                     </div>
                     <!--end::Input group-->
-
+                    @elseif($question->question_type == 'samprotik')
+                    <!--begin::Input group-->
+                    <div class="d-flex flex-column mb-8 fv-row">
+                        <!--begin::Label-->
+                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                            <span class="required">Answer</span>
+                        </label>
+                        <!--end::Label-->
+                        <input name="answer" class="form-control form-control-solid " value="{{ $question_option->answer }}">
+                        <div class="help-block with-errors description-error"></div>
+                    </div>
+                    <!--end::Input group-->
                     @else
                     <!--begin::Input group-->
                     <div class="row g-9 mb-8">

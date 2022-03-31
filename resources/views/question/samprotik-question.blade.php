@@ -1,6 +1,6 @@
 
 @extends('layouts.app')
-@section('title', 'Question')
+@section('title', 'Current Question')
 
 @section('toolbar')
 <div class="toolbar" id="kt_toolbar">
@@ -9,7 +9,7 @@
         <!--begin::Page title-->
         <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
             <!--begin::Title-->
-            <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">Question</h1>
+            <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">Current Question</h1>
             <!--end::Title-->
             <!--begin::Separator-->
             <span class="h-20px border-gray-300 border-start mx-4"></span>
@@ -27,34 +27,23 @@
                 </li>
                 <!--end::Item-->
                 <!--begin::Item-->
-                <li class="breadcrumb-item text-dark">Category</li>
-                <!--end::Item-->
-                <!--begin::Item-->
-                <li class="breadcrumb-item">
-                    <span class="bullet bg-gray-300 w-5px h-2px"></span>
-                </li>
-                <!--end::Item-->
-                <!--begin::Item-->
-                <li class="breadcrumb-item text-dark">Subject</li>
-                <!--end::Item-->
-                <!--begin::Item-->
-                <li class="breadcrumb-item">
-                    <span class="bullet bg-gray-300 w-5px h-2px"></span>
-                </li>
-                <!--end::Item-->
-                <!--begin::Item-->
                 <li class="breadcrumb-item text-dark">Question</li>
                 <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item">
+                    <span class="bullet bg-gray-300 w-5px h-2px"></span>
+                </li>
+                <!--end::Item-->
+                <!--begin::Item-->
+                <li class="breadcrumb-item text-dark">Recent Question</li>
+                <!--end::Item-->
+                <!--begin::Item-->
+               
             </ul>
             <!--end::Breadcrumb-->
         </div>
         <!--end::Page title-->
-        <div class="d-flex align-items-center gap-2 gap-lg-3">
-            <!--begin::Primary button-->
-            <button class="btn btn-sm btn-success" id="readingMode" >Reading Mode</button>
-            <button class="btn btn-sm btn-danger d-none" id="testMode">Self Test Mode</button>
-            <!--end::Primary button-->
-        </div>
+       
      
     </div>
     <!--end::Container-->
@@ -69,83 +58,7 @@
     <div id="kt_content_container" class="container-xxl">
          
         <!--begin::Row-->
-        <div class="row gy-5 g-xl-8" >
-            <div class="col-xxl-10 mb-xl-10 col-md-10 col-sm-12 col-xs-12">
-                <!--begin::Engage widget 1-->
-                <div class="card h-md-100">
-                    <!--begin::Body-->
-                    <div class="card-body d-flex flex-column flex-center">
-                        <!--begin::Heading-->
-                        <div class="mb-2">
-                            <!--begin::Title-->
-                          
-                            <h1 class="fw-bold text-gray-800 text-center lh-lg">{{$category->name}}
-                            <br><span class="fw-boldest">{{$sub_category->name}}</span></h1>
-                            <!--end::Title-->
-                            
-                        </div>
-                        <!--end::Heading-->
-                       
-                    </div>
-                    <!--end::Body-->
-                </div>
-                <!--end::Engage widget 1-->
-            </div>
-        </div>
-        <!--end::Row-->
-        @if($subjects->count() > 0)
-        <!--begin::Row-->
-        <div class="row gy-5 g-xl-8 mt-3" >
-            <div class="col-xl-10 col-md-10 col-sm-12 col-xs-12">
-                <!--begin::Mixed Widget 14-->
-                <div class="card card-xxl-stretch mb-5 mb-xl-8 " >
-                    <!--begin::Body-->
-                    <div class="card-body d-flex flex-column ">
-                        <!--begin::Row-->
-                        <div class="row g-0 d-flex justify-content-center">
-                            <!--begin::Col-->
-                           
-                            <div class="col-12 ">
-                                <div class="swiper">
-                                    <div class="swiper-wrapper">
-                                        @foreach($subjects as $subject)
-                                        @php
-                                            $subject_total_ques = App\Models\Question::where(['sub_category_id' => $sub_category->id, 'subject_id' => $subject->id])->get();
-                                        @endphp
-                                        <div class="swiper-slide"> 
-                                            <a href="{{ route('jobs.category.sub-category.subject.question', [$category->slug, $sub_category->slug, $subject->slug]) }}" 
-                                                class="cursor-pointer page-link btn btn-success {{ strlen($subject->name) > 15 ? 'font-size' : '' }}">
-                                                {{$subject->name}}  <span class="badge badge-circle badge-danger ms-2">{{ $subject_total_ques->count() }}</span>
-                                            </a>
-                                        </div>
-                                        @endforeach
-                                    </div>
-                                    
-                                    <div class="swiper-button-prev" style="font-size: 25px !important;
-                                    font-weight: 800;">
-                                    </div>
-                                    <div class="swiper-button-next" style="font-size: 25px !important;
-                                    font-weight: 800;">
-                                    </div>
-
-                                </div>
-                                
-                            </div>
-                            <!--end::Col-->
-                            
-                        </div>
-                        <!--end::Row-->
-                    </div>
-                </div>
-                <!--end::Mixed Widget 14-->
-            </div>
-        </div>
-        @endif
-        <!--end::Row-->
-        <!--begin::Row-->
         <div class="row gy-5 g-xl-8">
-           
-
             <!--begin::Col-->
             <div class="col-xl-10 col-md-10 col-sm-12 col-xs-12" id="question">
               
@@ -181,9 +94,9 @@
                                 <!--end::Menu item-->
                                 
                                 <!--begin::Menu item-->
-                                <div class="menu-item px-3 my-1">
+                                {{-- <div class="menu-item px-3 my-1">
                                     <a href="{{ route('question.single-question', ['ques_id' => $question->id]) }}" class="menu-link px-3">View Comment</a>
-                                </div>
+                                </div> --}}
                                 <!--end::Menu item-->
                             </div>
                             <!--end::Menu 3-->
@@ -192,89 +105,23 @@
                     </div>
                     <div class="card-body">
                         <div class="row"  style="font-size: 16px">
-                            @if($question->question_option->option_1 != '' )
-                            <div class="col-md-6 test">
-                                <p class="text-gray-800 fw-normal mb-5 cursor-pointer option" data-id="{{ $question->id }}" data-option="1"> 
-                                   <i class="fas fa-eye fa-2xl"></i> {{$question->question_option->option_1 }}
-                                </p>
+    
+                            <div class="col-md-6">
+                                <p class="text-gray-800 fw-bold mb-5 " > 
+                                  <span style="color:green">Ans:</span> {{$question->question_option->answer }}</p>
                             </div>
-                            <div class="col-md-6 reading d-none">
-                                <p class="text-gray-800 fw-normal mb-5 {{ ($question->question_option->answer == '1') ? 'right-answer' : ''}}" > 
-                                   <i class="fas fa-{{ ($question->question_option->answer == '1') ? 'check' : 'times'}} fa-2xl"></i> {{$question->question_option->option_1 }}</p>
-                            </div>
-                            @endif
-                            @if($question->question_option->option_2 != '')
-                            <div class="col-md-6 test">
-                                <p class="text-gray-800 fw-normal mb-5 cursor-pointer option" data-id="{{ $question->id }}" data-option="2"> 
-                                    <i class="fas fa-eye fa-2xl"></i> {{$question->question_option->option_2 }}</p>
-                            </div>
-                            <div class="col-md-6 reading d-none">
-                                <p class="text-gray-800 fw-normal mb-5  {{ ($question->question_option->answer == '2') ? 'right-answer' : ''}} "> 
-                                    <i class="fas fa-{{ ($question->question_option->answer == '2') ? 'check' : 'times'}} fa-2xl"></i> {{$question->question_option->option_2 }}</p>
-                            </div>
-                            @endif
-                            @if($question->question_option->option_3 != '')
-                            <div class="col-md-6 test">
-                                <p class="text-gray-800 fw-normal mb-5 cursor-pointer option" data-id="{{ $question->id }}" data-option="3"> 
-                                    <i class="fas fa-eye fa-2xl"></i> {{$question->question_option->option_3}}</p>
-                            </div>
-                            <div class="col-md-6 reading d-none">
-                                <p class="text-gray-800 fw-normal mb-5  {{ ($question->question_option->answer == '3') ? 'right-answer' : ''}}"> 
-                                    <i class="fas fa-{{ ($question->question_option->answer == '3') ? 'check' : 'times'}} fa-2xl"></i> {{$question->question_option->option_3}}</p>
-                            </div>
-                            @endif
-                            @if($question->question_option->option_4 != '' )
-                            <div class="col-md-6 test">
-                                <p class="text-gray-800 fw-normal mb-5 cursor-pointer option" data-id="{{ $question->id }}" data-option="4"> 
-                                    <i class="fas fa-eye fa-2xl" ></i> {{$question->question_option->option_4}}</p>
-                            </div>
-                            <div class="col-md-6 reading d-none">
-                                <p class="text-gray-800 fw-normal mb-5  {{ ($question->question_option->answer == '4') ? 'right-answer' : ''}}"> 
-                                    <i class="fas fa-{{ ($question->question_option->answer == '4') ? 'check' : 'times'}} fa-2xl" ></i> {{$question->question_option->option_4}}</p>
-                            </div>
-                            @endif
-                            @if($question->question_option->option_5 != '')
-                            <div class="col-md-6 test">
-                                <p class="text-gray-800 fw-normal mb-5 cursor-pointer option" data-id="{{ $question->id }}" data-option="5"> 
-                                    <i class="fas fa-eye fa-2xl" ></i> {{$question->question_option->option_5}}</p>
-                            </div>
-                            <div class="col-md-6 reading d-none">
-                                <p class="text-gray-800 fw-normal mb-5  {{ ($question->question_option->answer == '5') ? 'right-answer' : ''}}"> 
-                                    <i class="fas fa-{{ ($question->question_option->answer == '5') ? 'check' : 'times'}} fa-2xl" ></i> {{$question->question_option->option_5}}</p>
-                            </div>
-                            @endif
+                           
                         </div>
-                        <div class="d-flex justify-content-between">
-                            <div class="d-flex justify-content-start mt-2">
-                                <button type="button" class="btn btn-sm  btn-light me-3">
-                                    <a href="{{ url('jobs',
-                                        [$question->sub_category->category->slug, $question->sub_category->slug, $question->subject->slug]
-                                    ) }}">{{$question->subject->name}}</a>
-                                </button>              
-                                <button type="button" class="btn btn-sm  btn-light me-3">
-                                    <a href="{{ route('jobs.sub-category.subject.all-question', [$question->sub_category->category->slug, $question->sub_category->slug]) }}">{{$question->sub_category->name}}</a>
-                                </button>  
-                                <button type="button" class="btn btn-sm  btn-light me-3">
-                                    <a href="{{ url('job-solution', [$question->sub_category->category->main_category->slug, $question->sub_category->category->slug]) }}">{{$question->sub_category->category->name}}</a>
-                                </button>            
-                                <button type="button" class="btn btn-sm  btn-light me-3">
-                                    <a href="{{ url('job-solution', $question->sub_category->category->main_category->slug) }}">{{$question->sub_category->category->main_category->name}}</a>
-                                </button>            
-                                       
-                            </div>
-                            <div class=""> 
-                                <a href="javascript:;" class="btn btn-sm  btn-success me-3 view-answer"  data-id="{{ $question->id }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-dark" title="View Answer"><i class="fas fa-eye fa-xl" ></i></a>
-                            </div> 
-                        </div>
+                        
                        
                     </div>
                     <div class="card-footer" style="padding-top:0px !important; padding-bottom:0px !important;">
 
                         <div class="d-flex justify-content-end mt-2" style="margin-bottom: -40px !important;">
-                            <a href="javascript:;" class="comment me-2 btn btn-sm btn-light btn-color-muted btn-active-light-info px-4 py-2"  
+                            {{-- <a href="javascript:;" class="comment me-2 btn btn-sm btn-light btn-color-muted btn-active-light-info px-4 py-2"  
                             data-text="comment"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-dark" title="Add Comment">
                             <i class="fas fa-comment"></i>
-                            </a>
+                            </a> --}}
                             <a href="javascript:;" class="bookmark me-2 btn btn-sm btn-light btn-color-muted btn-active-light-primary px-4 py-2"  
                             data-id="{{ $question->id }}" data-catid="{{ $question->sub_category->category->id }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-dark" title="Bookmark">
                             <i class="fas fa-bookmark"></i>
@@ -411,84 +258,6 @@
                 </div>
                 <!--end::Modal - New Product/Service-->
 
-                <!--begin::Modal - New Product/Service-->
-                <div class="modal fade" id="kk_modal_new_comment" tabindex="-1" aria-hidden="true">
-                    <!--begin::Modal dialog-->
-                    <div class="modal-dialog modal-dialog-centered mw-650px">
-                        <!--begin::Modal content-->
-                        <div class="modal-content rounded">
-                            <!--begin::Modal header-->
-                            <div class="modal-header pb-0 border-0 justify-content-end">
-                                <!--begin::Close-->
-                                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-                                    <span class="svg-icon svg-icon-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
-                                                transform="rotate(-45 6 17.3137)" fill="black" />
-                                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)"
-                                                fill="black" />
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon-->
-                                </div>
-                                <!--end::Close-->
-                            </div>
-                            <!--begin::Modal header-->
-                            <!--begin::Modal body-->
-                            <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
-                                <!--begin:Form-->
-                                <form id="kk_modal_new_comment_form" class="form" enctype="multipart/form-data">
-                                    <div class="messages"></div>
-                                    {{-- csrf token  --}}
-                                    @csrf
-                                    <input type="hidden" name="question_id" value="{{ $question->id }}">
-
-                                    <!--begin::Heading-->
-                                    <div class="mb-13 text-center">
-                                        <!--begin::Title-->
-                                        <h1 class="mb-3">Add New Comment</h1>
-                                        <!--end::Title-->
-                                        <!--begin::Description-->
-                                        <div class="text-muted fw-bold fs-5">Fill up the form and submit
-                                        </div>
-                                        <!--end::Description-->
-                                    </div>
-                                    <!--end::Heading-->
-                                
-                                    <!--begin::Input group-->
-                                    <div class="d-flex flex-column mb-8 fv-row">
-                                        <!--begin::Label-->
-                                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                            <span class="required">Comment</span>
-                                        </label>
-                                        <!--end::Label-->
-                                        <textarea name="comment" class="form-control form-control-solid h-100px"></textarea>
-                                        <div class="help-block with-errors comment-error"></div>
-                                    </div>
-                                    <!--end::Input group-->
-
-                                    <!--begin::Actions-->
-                                    <div class="text-center">
-                                        <button type="reset" id="kk_modal_new_service_cancel" class="btn btn-light me-3">Cancel</button>
-                                        <button type="submit" id="kk_modal_new_comment_submit" class="btn btn-primary">
-                                            <span class="indicator-label">Submit</span>
-                                            <span class="indicator-progress">Please wait...
-                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                        </button>
-                                    </div>
-                                    <!--end::Actions-->
-                                </form>
-                                <!--end:Form-->
-                            </div>
-                            <!--end::Modal body-->
-                        </div>
-                        <!--end::Modal content-->
-                    </div>
-                    <!--end::Modal dialog-->
-                </div>
-                <!--end::Modal - New Product/Service-->
-
                 @endforeach
                 <div class="d-flex justify-content-end">
                     {{ $questions->links() }}
@@ -522,7 +291,7 @@
                             text: data.message,
                             icon: "success",
                             buttonsStyling: !1,
-                            confirmButtonText: "{{__('Well Done!')}}",
+                            confirmButtonText: "{{__('Ok, got it!')}}",
                             customClass: {
                                 confirmButton: "btn fw-bold btn-primary"
                             }
@@ -533,7 +302,7 @@
                             text: data.message,
                             icon: "error",
                             buttonsStyling: !1,
-                            confirmButtonText: "{{__('OPPS, try again!')}}",
+                            confirmButtonText: "{{__('Ok, got it!')}}",
                             customClass: {
                                 confirmButton: "btn fw-bold btn-primary"
                             }
@@ -544,24 +313,9 @@
             })
         })
 
-        //view-specific answer
-        $(document).ready(function(){
-            $('.view-answer').on('click', function(){
-                $(this).closest('.card-body').find('.reading').toggleClass('d-none');
-                $(this).closest('.card-body').find('.test').toggleClass('d-none');
-            })
-        })
-
-        //add comment
-        $(document).ready(function(){
-            $('.comment').on('click', function(){
-                $('.with-errors').text('')
-                $('#kk_modal_new_comment_form')[0].reset();
-                $('#kk_modal_new_comment').modal('show')
-            })
-        })
-
-         //new comment save
+       
+       
+        //new comment save
         $('#kk_modal_new_comment_form').on('submit',function(e){
             e.preventDefault()
             $('.with-errors').text('')
@@ -622,6 +376,12 @@
             $('#kk_modal_new_question_des_form')[0].reset();
             $('#kk_modal_new_question_des').modal('show')
         }
+
+        //cancel button
+        $('#kk_modal_new_service_cancel').on('click', function(){
+            $('#kk_modal_new_question_des_form')[0].reset();
+            $('#kk_modal_new_question_des').modal('hide')
+        })
 
             
         //new description save

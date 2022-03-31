@@ -33,11 +33,20 @@ class QuestionController extends Controller
 
             return DataTables::of($data)
                 ->addIndexColumn()
+
                 ->editColumn('sub_category_id', function ($row) {
-                    return $row->sub_category->name;
+                    if ($row->sub_category_id == '') {
+                        return '<div class="badge badge-light-info fw-bolder">Current Ques.</div>';
+                    } else {
+                        return $row->sub_category->name;
+                    }
                 })
                 ->editColumn('subject_id', function ($row) {
-                    return $row->subject->name;
+                    if ($row->subject == '') {
+                        return '<div class="badge badge-light-info fw-bolder">Current Ques.</div>';
+                    } else {
+                        return $row->subject->name;
+                    }
                 })
                 ->editColumn('created_at', function ($row) {
                     return $row->created_at->diffForHumans();
@@ -133,9 +142,9 @@ class QuestionController extends Controller
     {
         //dd($request->all());
         $request->validate([
-            'main_category' => ['required'],
-            'sub_category' => ['required'],
-            'subject' => ['required'],
+            'main_category' => [$request->main_category == 'samprotik' ? 'nullable' : 'required'],
+            'sub_category' => [$request->main_category == 'samprotik' ? 'nullable' : 'required'],
+            'subject' => [$request->main_category == 'samprotik' ? 'nullable' : 'required'],
             'year' => [$request->main_category == 3 ? 'nullable' : 'required'],
             'question.*' => ['required'],
             'answer.*' => [$request->type == 'written' ? 'nullable' : 'required'],
@@ -143,7 +152,7 @@ class QuestionController extends Controller
 
         ]);
 
-
+        //dd('validation ok');
         //multiple image question
         if ($request->hasfile('image')) {
             //dd('ok');
@@ -346,10 +355,12 @@ class QuestionController extends Controller
                 $question_option->save();
 
                 //tag
-                $tag = Tag::create([
-                    'subject_id' => $request->subject_id,
-                    'question_id' => $question->id,
-                ]);
+                if ($request->main_category_id != '') {
+                    $tag = Tag::create([
+                        'subject_id' => $request->subject_id,
+                        'question_id' => $question->id,
+                    ]);
+                }
             }
 
             PreviewQuestion::truncate();

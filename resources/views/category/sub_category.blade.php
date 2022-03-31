@@ -73,9 +73,9 @@
                                         <thead>
                                             <tr class="border-0">
                                                 <th class="p-0 w-50px"></th>
-                                                <th class="p-0 min-w-150px"></th>
-                                                <th class="p-0 min-w-140px"></th>
-                                                <th class="p-0 min-w-110px"></th>
+                                                <th class="p-0 min-w-300px"></th>
+                                                <th class="p-0 min-w-10px"></th>
+                                                <th class="p-0 min-w-50px"></th>
                                                 <th class="p-0 min-w-50px"></th>
                                             </tr>
                                         </thead>
@@ -92,7 +92,9 @@
                                                     </div>
                                                 </td>
                                                 <td >
-                                                    <a href="{{ route('jobs.sub-category.subject.all-question', [$category->slug, $sub_category->slug]) }}" class="text-dark fw-bolder text-hover-primary mb-1 fs-6">{{ $sub_category->name }}</a>
+                                                    <a href="{{ route('jobs.sub-category.subject.all-question', [$category->slug, $sub_category->slug]) }}" 
+                                                        class="text-dark fw-bolder text-hover-primary mb-1 fs-6 btn btn-sm btn-success" 
+                                                        style="color: #FFF !important; padding: 10px 300px;">{{ $sub_category->name }}</a>
                                                     <span class="text-muted fw-bold d-block">{{ $sub_category->title }}</span>
                                                 </td>
                                                 <td class="text-end text-muted fw-bold">
@@ -104,13 +106,13 @@
                                                             $subjects = $sub_category->subject;
                                                         }
                                                     @endphp
-                                                    @foreach($subjects as $subject)
+                                                    {{-- @foreach($subjects as $subject)
                                                         <span class="badge badge-dark">{{ $subject->name  }} </span>
-                                                    @endforeach
+                                                    @endforeach --}}
                                                 </td>
                                                 <td class="text-end">
-                                                    <span class="badge badge-success">Subject {{$subjects->count()}}</span>
-                                                    <span class="badge badge-info">Question {{$sub_category->question->count()}}</span>
+                                                    <span class="badge badge-info">Subject {{$subjects->count()}}</span>
+                                                    <span class="badge badge-danger">Question {{$sub_category->question->count()}}</span>
                                                 </td>
                                                 <td class="text-end">
                                                     <a href="{{ route('jobs.sub-category.subject.all-question', [$category->slug, $sub_category->slug]) }}" class="btn btn-sm btn-icon btn-primary ">

@@ -245,7 +245,7 @@
                     {{ $questions->links() }}
                 </div> --}}
                 <div class="d-flex justify-content-end mb-4 mt-4">
-                <button type="submit" class="btn btn-primary" id="confirm_submission" data-text="confirm">Confirm Submit</button>
+                <button type="submit" class="btn btn-primary" id="confirm_submission" data-text="confirm">Confirm Submission</button>
                 </div>
                
                 @endif

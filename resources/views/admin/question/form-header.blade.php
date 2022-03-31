@@ -18,9 +18,11 @@
             data-hide-search="true" data-placeholder="Select main category" name="main_category"
             id="main_category">
             <option value="">Choose ...</option>
+            
             @foreach ($main_categories as $main_category)
             <option value="{{ $main_category->id }}">{{ $main_category->name }}</option>
             @endforeach
+            <option value="samprotik">Samprotik Question</option>
 
         </select>
         @error('main_category')
