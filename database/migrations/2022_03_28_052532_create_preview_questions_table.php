@@ -27,7 +27,7 @@ class CreatePreviewQuestionsTable extends Migration
             $table->string('option_3')->nullable();
             $table->string('option_4')->nullable();
             $table->string('option_5')->nullable();
-            $table->longText('image_option')->nullable();
+            $table->json('image_option')->nullable();
             $table->string('answer')->nullable();
             $table->longText('written_answer')->nullable();
             $table->integer('mark');

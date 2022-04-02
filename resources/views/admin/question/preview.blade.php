@@ -97,7 +97,16 @@
                 <!--begin::Feeds Widget 2-->    
                 <div class="card card-bordered mb-5">
                     <div class="card-header">
-                       
+                        @if($question->passage_id != '')
+                        <h5 class="mt-5">
+                            <div class="col-md-12 ">
+                                <p class="text-gray-800 fw-normal" style="line-height: 22px">
+                                    <span style="color: black; font-weight:600">Read the following passage and answer this Question :</span> <br>
+                                    {{ $question->passage->passage }}
+                                </p>
+                            </div>
+                        </h5>
+                        @endif
                         <h3 class="card-title text-gray-700 fw-bolder cursor-pointer mb-0 view"  style="max-width: 1100px !important;">
                                  {{ $key+1 }}. {{$question->question}} 
                         </h3>
@@ -144,7 +153,7 @@
                             @endif
                         </div>
                         @elseif($question->question_type == 'samprotik')
-                         <div class="row"  style="font-size: 16px">
+                        <div class="row"  style="font-size: 16px">
                             @if($question->answer != '' )
                             <div class="col-md-12 reading">
                                 <p class="text-gray-800 fw-normal mb-5 " > 
@@ -154,7 +163,7 @@
                             @endif 
                         </div>
                         @elseif($question->question_type == 'written')
-                            <div class="row"  style="font-size: 16px">
+                        <div class="row"  style="font-size: 16px">
                             @if($question->written_answer != '' )
                             <div class="col-md-12 reading">
                                 <p class="text-gray-800 fw-normal mb-5 " > 
@@ -162,10 +171,78 @@
                             </div>
                             @endif 
                         </div>
+                        @else
+                        @php
+                        var_dump($question->image_option);
+                            //$images['data'] = json_decode($question->image_option, true);
+                            // //var_dump( $images['data'] );
+                            // foreach($images['data'] as  $image){
+                            //     //var_dump($image);
+                            //    foreach ($image as $image_option) {
+                            //       var_dump($image_option);
+                            //    }
+                            // }
+                        @endphp
+                        <div class="row"  style="font-size: 16px">
+                            @if($question->option_1 != '' )
+                            <div class="col-md-6 reading">
+                                <p class="text-gray-800 fw-normal mb-3 {{ ($question->answer == '1') ? 'right-answer' : ''}}" > 
+                                   <i class="fas fa-{{ ($question->answer == '1') ? 'check' : 'times'}} fa-2xl"></i> {{$question->option_1 }}</p>
+                                    <div class="symbol symbol-45px me-2 mb-5">
+                                        <span class="symbol-label">
+                                            {{-- <img src="{{ asset($question->image_option[0]['option_0']) }}" class="h-50 align-self-center" alt=""> --}}
+                                        </span>
+                                    </div>
+                            </div>
+                            @endif
+                            @if($question->option_2 != '')
+                            <div class="col-md-6 reading">
+                                <p class="text-gray-800 fw-normal mb-3  {{ ($question->answer == '2') ? 'right-answer' : ''}} "> 
+                                    <i class="fas fa-{{ ($question->answer == '2') ? 'check' : 'times'}} fa-2xl"></i> {{$question->option_2 }}</p>
+                                    <div class="symbol symbol-45px me-2 mb-5">
+                                        <span class="symbol-label">
+                                            {{-- <img src="{{ asset($question->image_option[1]['option_1']) }}" class="h-50 align-self-center" alt=""> --}}
+                                        </span>
+                                    </div>
+                            </div>
+                            @endif
+                            @if($question->option_3 != '')
+                            <div class="col-md-6 reading">
+                                <p class="text-gray-800 fw-normal mb-3  {{ ($question->answer == '3') ? 'right-answer' : ''}}"> 
+                                    <i class="fas fa-{{ ($question->answer == '3') ? 'check' : 'times'}} fa-2xl"></i> {{$question->option_3}}</p>
+                                    <div class="symbol symbol-45px me-2 mb-5">
+                                        <span class="symbol-label">
+                                            {{-- <img src="{{ asset($question->image_option[2]['option_2']) }}" class="h-50 align-self-center" alt=""> --}}
+                                        </span>
+                                    </div>
+                            </div>
+                            @endif
+                            @if($question->option_4 != '' )
+                            <div class="col-md-6 reading">
+                                <p class="text-gray-800 fw-normal mb-3  {{ ($question->answer == '4') ? 'right-answer' : ''}}"> 
+                                    <i class="fas fa-{{ ($question->answer == '4') ? 'check' : 'times'}} fa-2xl" ></i> {{$question->option_4}}</p>
+                                    <div class="symbol symbol-45px me-2 mb-5">
+                                        <span class="symbol-label">
+                                            {{-- <img src="{{ asset($question->image_option[3]['option_3']) }}" class="h-50 align-self-center" alt=""> --}}
+                                        </span>
+                                    </div>
+                            </div>
+                            @endif
+                            @if($question->option_5 != '')
+                            <div class="col-md-6 reading">
+                                <p class="text-gray-800 fw-normal mb-3  {{ ($question->answer == '5') ? 'right-answer' : ''}}"> 
+                                    <i class="fas fa-{{ ($question->answer == '5') ? 'check' : 'times'}} fa-2xl" ></i> {{$question->option_5}}</p>
+                                    <div class="symbol symbol-45px me-2 mb-5">
+                                        <span class="symbol-label">
+                                            {{-- <img src="/metronic8/demo1/assets/media/svg/brand-logos/plurk.svg" class="h-50 align-self-center" alt=""> --}}
+                                        </span>
+                                    </div>
+                            </div>
+                            @endif
+                        </div>
+                        
                         @endif
 
-                       
-                      
                     </div>
                     <div class="card-footer" style="padding-top:0px !important; padding-bottom:0px !important;">
 

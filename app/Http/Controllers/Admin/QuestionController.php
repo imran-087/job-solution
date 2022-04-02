@@ -23,12 +23,13 @@ class QuestionController extends Controller
 {
     public function index(Request $request)
     {
+
         if ($request->ajax()) {
             $data = Question::select();
 
             //filter
-            if (isset($request->status) && $request->status != "all") {
-                $data->where('status', $request->status);
+            if (isset($request->category) && $request->category != "all") {
+                $data->where('sub_category_id', $request->category);
             }
 
             return DataTables::of($data)
@@ -100,7 +101,8 @@ class QuestionController extends Controller
                 ->rawColumns(['action', 'status', 'sub_category_id', 'subject_id', 'created_at', 'question_type'])
                 ->make(true);
         }
-        return view('admin.question.question_index');
+        $sub_categories = SubCategory::all();
+        return view('admin.question.question_index', compact('sub_categories'));
     }
 
     public function create()
@@ -170,8 +172,9 @@ class QuestionController extends Controller
                     'option_' . $key => $image_path
                 ];
                 //dump($Imgdata);
-                if (count($request->question) > 1) {
-                    $chunk_image = array_chunk($Imgdata, ceil(count($Imgdata) / 2));
+                $total_question = count($request->question);
+                if ($total_question > 1) {
+                    $chunk_image = array_chunk($Imgdata, ceil(count($Imgdata) / $total_question));
                 }
 
                 //dump($chunk_image);
@@ -222,9 +225,9 @@ class QuestionController extends Controller
                     $question->answer = $request->answer[$key];
 
                     if (isset($chunk_image)) {
-                        $question->image_option =  json_encode($chunk_image[$key]);
+                        $question->image_option =  $chunk_image[$key];
                     } else if (isset($Imgdata)) {
-                        $question->image_option =  json_encode($Imgdata);
+                        $question->image_option =  $Imgdata;
                     }
                 }
 
@@ -244,8 +247,9 @@ class QuestionController extends Controller
     public function editPreviewQuestion($id)
     {
         $question = PreviewQuestion::find($id);
+        $passages = Passage::all();
         //dd($question);
-        $view = view('admin.question.edit_question_modal', compact('question'))->render();
+        $view = view('admin.question.edit_question_modal', compact('question', 'passages'))->render();
 
         return response([
             'html' => $view
@@ -262,7 +266,7 @@ class QuestionController extends Controller
         // $question->sub_category_id = $request->sub_category;
         // $question->main_category_id = $request->main_category;
         // $question->year_id = 1;
-        // $question->passage_id = $request->passage;
+        $question->passage_id = $request->passage ?? '';
         // $question->question_type = $request->type;
         // $question->hard_level = 1;
         // $question->mark = 1;

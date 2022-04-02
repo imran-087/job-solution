@@ -84,7 +84,7 @@
                             </span>
                             <!--end::Svg Icon-->
                             <input type="text" data-kk-product-table-filter="search"
-                                class="form-control form-control-solid w-250px ps-14" placeholder="Search passage">
+                                class="form-control form-control-solid w-250px ps-14" placeholder="Search Question">
                         </div>
                         <!--end::Search-->
                     </div>
@@ -92,7 +92,7 @@
 
                     <div class="card-toolbar flex-row-fluid justify-content-end gap-5"
                         data-select2-id="select2-data-123-0tix">
-                        <div class="w-100 mw-150px" data-select2-id="select2-data-122-mhmq">
+                        {{-- <div class="w-100 mw-150px" data-select2-id="select2-data-122-mhmq">
                             <!--begin::Select2-->
                             <select class="form-select form-select-solid select2-hidden-accessible kk-datatable-filter"
                                 data-control="select2" data-hide-search="true" data-placeholder="Status"
@@ -103,6 +103,22 @@
                                 <option value="active" data-select2-id="select2-data-129-5n39">Active</option>
                                 <option value="deactive" data-select2-id="select2-data-131-pohp">Deactive</option>
                                 <option value="pending" data-select2-id="select2-data-131-pohp">Pending</option>
+
+                            </select>
+                            <!--end::Select2-->
+                        </div> --}}
+                        <div class="w-100 mw-150px" data-select2-id="select2-data-122-mhmq">
+                            <!--begin::Select2-->
+                            <select class="form-select form-select-solid select2-hidden-accessible kk-datatable-filter"
+                                data-control="select2" data-hide-search="true" data-placeholder="Category"
+                                data-kt-ecommerce-product-filter="status" data-select2-id="select2-data-10-i8aq"
+                                tabindex="-1" aria-hidden="true">
+                                <option data-select2-id="select2-data-12-ibou"></option>
+                                <option value="all" data-select2-id="select2-data-128-oc9k">All</option>
+                                @foreach($sub_categories as $sub_category)
+                                <option value="{{$sub_category->id}}" >{{$sub_category->name}}</option>
+                                @endforeach
+                              
 
                             </select>
                             <!--end::Select2-->
@@ -227,7 +243,7 @@
 
              $('.kk-datatable-filter').on('change',function(){
                 console.log(this.value)
-                table.ajax.url( "{{ url('admin/question/question-index?status=') }}"+this.value ).load();
+                table.ajax.url( "{{ url('admin/question/question-index?category=') }}"+this.value ).load();
             })
 
         })

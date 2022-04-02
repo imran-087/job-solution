@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Session;
 class QuestionController extends Controller
 {
 
-    public function getSubjectWithAllQuestion($category, $sub_category)
+    public function getSubjectWithAllQuestion(Request $request, $category, $sub_category)
     {
         //dump($category);
         //dump($sub_category);
@@ -32,8 +32,19 @@ class QuestionController extends Controller
         } else {
             $subjects = Subject::where('sub_category_id', $sub_category->id)->get();
         }
+        if ($request->type == 'written') {
+            //dd('here');
+            $questions = Question::where(['sub_category_id' => $sub_category->id, 'question_type' => 'written'])->paginate(10);
+        } elseif ($request->type == 'passage') {
+            //dd('ok');
+            $questions = Question::with('passage')->where('sub_category_id', $sub_category->id)
+                ->where('passage_id', '!=', '')->paginate(10);
+            //dd($questions);
+        } else {
+            //dd('not');
+            $questions = Question::where(['sub_category_id' => $sub_category->id, 'question_type' => 'mcq'])->paginate(10);
+        }
 
-        $questions = Question::where('sub_category_id', $sub_category->id)->paginate(10);
 
         return view('question.subject_and_question', compact(
             'questions',

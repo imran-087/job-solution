@@ -362,7 +362,7 @@
             $('#kk_modal_new_question_des').modal('show')
         }
 
-        //edit category modal
+        //edit description modal
         function edit(id){
             $.ajax({
                 type:"GET",
@@ -387,7 +387,7 @@
             $("#kk_modal_new_question_des").modal('hide');
         })
 
-        //new category save
+        //new descrption save
         $('#kk_modal_new_question_des_form').on('submit',function(e){
             e.preventDefault()
             $('.with-errors').text('')

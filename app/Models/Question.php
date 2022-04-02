@@ -10,6 +10,10 @@ class Question extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $casts = [
+        'image_option' => 'array'
+    ];
+
     public function sub_category()
     {
         return $this->belongsTo(SubCategory::class);
@@ -32,8 +36,12 @@ class Question extends Model
 
 
     public function comments()
-
     {
         return $this->hasMany(Comment::class);
+    }
+
+    public function passage()
+    {
+        return $this->belongsTo(Passage::class);
     }
 }

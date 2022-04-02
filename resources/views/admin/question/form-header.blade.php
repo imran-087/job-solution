@@ -108,7 +108,7 @@
             id="passage">
             <option value="">Choose ...</option>
             @foreach ($passages as $passage)
-            <option value="{{ $passage->id }}">{{ $passage->passage }}</option>
+            <option value="{{ $passage->id }}">{{ $passage->title }}</option>
             @endforeach
 
         </select>

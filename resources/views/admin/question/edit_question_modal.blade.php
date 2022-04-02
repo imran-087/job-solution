@@ -120,7 +120,7 @@
                             <div class="help-block with-errors title-error"></div>
                         </div>
                         @endif
-                        <div class="col-md-3" style="color: green; font-weight:bold">
+                        <div class="col-md-2" style="color: green; font-weight:bold">
                             <!--begin::Label-->
                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                 <span class="required">Answer</span>
@@ -130,6 +130,24 @@
                                 name="answer" value="{{ $question->answer }}" />
                             <div class="help-block with-errors title-error"></div>
                         </div>
+                        @if($question->passage_id != '')
+                        <!--begin::Col-->
+                        <div class="col-md-3 fv-row">
+                            <label class="required fs-6 fw-bold mb-2">Passage (optional)</label>
+                            <select class="form-select form-select-solid" data-control="select2"
+                                data-hide-search="true" data-placeholder="Select passage" name="passage"
+                                id="passage">
+                                @foreach ($passages as $passage)
+                                <option value="{{ $passage->id }} 
+                                    @if($passage->id == $question->passage_id) selected @endif">
+                                    {{ $passage->title }}</option>
+                                @endforeach
+
+                            </select>
+                            <div class="help-block with-errors passage-error"></div>
+                        </div>
+                        <!--end::Col-->
+                        @endif
                         
                     </div>
                 </div>

@@ -82,7 +82,10 @@
                             <h1 class="fw-bold text-gray-800 text-center lh-lg">{{$category->name}}
                             <br><span class="fw-boldest">{{$sub_category->name}}</span></h1>
                             <!--end::Title-->
-                            
+                            <a href="{{ route('jobs.sub-category.subject.all-question', [$category->slug, $sub_category->slug]) }}" class="btn btn-sm btn-light btn-active-color-primary">MCQ</a>
+                            <a href="{{ route('jobs.sub-category.subject.all-question', [$category->slug, $sub_category->slug, 'type' => 'written']) }}" class="btn btn-sm btn-light btn-active-color-primary">Written Question</a>
+                            <a href="{{ route('jobs.sub-category.subject.all-question', [$category->slug, $sub_category->slug, 'type' => 'passage']) }}" class="btn btn-sm btn-light btn-active-color-primary">Passage Question</a>
+                            <a href="#" class="btn btn-sm btn-light btn-active-color-primary">Image Question</a>
                         </div>
                         <!--end::Heading-->
                        
@@ -153,7 +156,16 @@
                 <!--begin::Feeds Widget 2-->    
                 <div class="card card-bordered mb-5">
                     <div class="card-header">
-                       
+                        @if($question->passage_id != '')
+                        <h5 class="mt-5">
+                            <div class="col-md-12 ">
+                                <p class="text-gray-800 fw-normal" style="line-height: 22px">
+                                    <span style="color: black; font-weight:600">Read the following passage and answer this Question :</span> <br>
+                                    {{ $question->passage->passage }}
+                                </p>
+                            </div>
+                        </h5>
+                        @endif
                         <h3 class="card-title text-gray-700 fw-bolder cursor-pointer mb-0 view" data-id="{{ $question->id }}" style="max-width: 1100px !important; color:#0095E8 !important">
                                 <a href="{{ route('question.single-question', ['ques_id' => $question->id]) }}"> {{ $key+1 }}. {{$question->question}} </a>
                         </h3>
@@ -191,7 +203,26 @@
                         </div>
                     </div>
                     <div class="card-body">
+                        @if($question->question_type == 'written')
                         <div class="row"  style="font-size: 16px">
+                            @if($question->question_option->written_answer != '' )
+                            <div class="col-md-12 test">
+                                <p class="text-gray-800 fw-normal mb-5 "> 
+                                   <span style="color: #47BE7D; font-weight:600">ANS</span> <i class="fas fa-angle-double-right fa-2xl"></i> {{$question->question_option->written_answer }}
+                                </p>
+                            </div>
+                            @else
+                            <div class="col-md-6 test">
+                                <p class="text-gray-800 fw-normal mb-5 "> 
+                                   <i class="fas fa-eye fa-2xl"></i> NO ANSWER YET
+                                </p>
+                            </div>
+                            @endif  
+                        </div>
+                        @else
+                       
+                        <div class="row"  style="font-size: 16px">
+                           
                             @if($question->question_option->option_1 != '' )
                             <div class="col-md-6 test">
                                 <p class="text-gray-800 fw-normal mb-5 cursor-pointer option" data-id="{{ $question->id }}" data-option="1"> 
@@ -244,6 +275,7 @@
                             </div>
                             @endif
                         </div>
+                        @endif
                         <div class="d-flex justify-content-between">
                             <div class="d-flex justify-content-start mt-2">
                                 <button type="button" class="btn btn-sm  btn-light me-3">
