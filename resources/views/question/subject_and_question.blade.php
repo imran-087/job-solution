@@ -49,6 +49,7 @@
             <!--end::Breadcrumb-->
         </div>
         <!--end::Page title-->
+       
         <div class="d-flex align-items-center gap-2 gap-lg-3">
             <!--begin::Primary button-->
             <button class="btn btn-sm btn-success" id="readingMode" >Reading Mode</button>
@@ -85,7 +86,7 @@
                             <a href="{{ route('jobs.sub-category.subject.all-question', [$category->slug, $sub_category->slug]) }}" class="btn btn-sm btn-light btn-active-color-primary">MCQ</a>
                             <a href="{{ route('jobs.sub-category.subject.all-question', [$category->slug, $sub_category->slug, 'type' => 'written']) }}" class="btn btn-sm btn-light btn-active-color-primary">Written Question</a>
                             <a href="{{ route('jobs.sub-category.subject.all-question', [$category->slug, $sub_category->slug, 'type' => 'passage']) }}" class="btn btn-sm btn-light btn-active-color-primary">Passage Question</a>
-                            <a href="#" class="btn btn-sm btn-light btn-active-color-primary">Image Question</a>
+                            <a href="{{ route('jobs.sub-category.subject.all-question', [$category->slug, $sub_category->slug, 'type' => 'image']) }}" class="btn btn-sm btn-light btn-active-color-primary">Image Question</a>
                         </div>
                         <!--end::Heading-->
                        
@@ -219,8 +220,9 @@
                             </div>
                             @endif  
                         </div>
+                        @elseif($question->question_type == 'image')
+                        {{ $question->question_option->image_option[10] }}
                         @else
-                       
                         <div class="row"  style="font-size: 16px">
                            
                             @if($question->question_option->option_1 != '' )
@@ -228,11 +230,14 @@
                                 <p class="text-gray-800 fw-normal mb-5 cursor-pointer option" data-id="{{ $question->id }}" data-option="1"> 
                                    <i class="fas fa-eye fa-2xl"></i> {{$question->question_option->option_1 }}
                                 </p>
+                                
+                                
                             </div>
                             <div class="col-md-6 reading d-none">
                                 <p class="text-gray-800 fw-normal mb-5 {{ ($question->question_option->answer == '1') ? 'right-answer' : ''}}" > 
                                    <i class="fas fa-{{ ($question->question_option->answer == '1') ? 'check' : 'times'}} fa-2xl"></i> {{$question->question_option->option_1 }}</p>
                             </div>
+                            
                             @endif
                             @if($question->question_option->option_2 != '')
                             <div class="col-md-6 test">
@@ -295,7 +300,7 @@
                                        
                             </div>
                             <div class=""> 
-                                <a href="javascript:;" class="btn btn-sm  btn-success me-3 view-answer"  data-id="{{ $question->id }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-dark" title="View Answer"><i class="fas fa-eye fa-xl" ></i></a>
+                                <a href="javascript:;" class="btn btn-sm  btn-success me-3 view-answer "  data-id="{{ $question->id }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-dark" title="View Answer"><i class="fas fa-eye fa-xl" ></i></a>
                             </div> 
                         </div>
                        
@@ -529,7 +534,9 @@
             <!--end::Col-->
            
         </div>
+        
     </div>
+    
 </div>
 <!---end::Post -->
 @endsection
@@ -559,6 +566,7 @@
                                 confirmButton: "btn fw-bold btn-primary"
                             }
                         })
+                        
                     }
                     if(data.error == true){
                         Swal.fire({
@@ -570,6 +578,7 @@
                                 confirmButton: "btn fw-bold btn-primary"
                             }
                         })
+                       //$(this).closest('.card-body').find('.view-answer').removeClass('d-none');
                     }
                 }
             })

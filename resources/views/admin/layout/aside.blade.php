@@ -174,11 +174,19 @@
                 <div class="menu-sub menu-sub-accordion  menu-active-bg">
         
                     <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/description/add-question-description*') ? 'active' : '' }}" href="{{ route('admin.question-description.create') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Add Description</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
                         <a class="menu-link {{ request()->is('admin/description/question-description*') ? 'active' : '' }}" href="{{ route('admin.question-description.index') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
-                            <span class="menu-title">Question Description</span>
+                            <span class="menu-title">All Description</span>
                         </a>
                     </div>
 

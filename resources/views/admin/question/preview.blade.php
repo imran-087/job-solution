@@ -173,15 +173,15 @@
                         </div>
                         @else
                         @php
-                        var_dump($question->image_option);
-                            //$images['data'] = json_decode($question->image_option, true);
-                            // //var_dump( $images['data'] );
-                            // foreach($images['data'] as  $image){
-                            //     //var_dump($image);
-                            //    foreach ($image as $image_option) {
-                            //       var_dump($image_option);
-                            //    }
-                            // }
+                        // var_dump($question->image_option);
+                        //     //$images['data'] = json_decode($question->image_option, true);
+                        //     // //var_dump( $images['data'] );
+                        //     foreach($question->image_option as  $image){
+                        //         var_dump($image);
+                        //     //    foreach ($image as $image_option) {
+                        //     //       var_dump($image_option);
+                        //     //    }
+                        //     }
                         @endphp
                         <div class="row"  style="font-size: 16px">
                             @if($question->option_1 != '' )
@@ -190,7 +190,7 @@
                                    <i class="fas fa-{{ ($question->answer == '1') ? 'check' : 'times'}} fa-2xl"></i> {{$question->option_1 }}</p>
                                     <div class="symbol symbol-45px me-2 mb-5">
                                         <span class="symbol-label">
-                                            {{-- <img src="{{ asset($question->image_option[0]['option_0']) }}" class="h-50 align-self-center" alt=""> --}}
+                                            <img src="{{ asset($question->image_option[0]) }}" class="h-50 align-self-center" alt="">
                                         </span>
                                     </div>
                             </div>
@@ -201,7 +201,7 @@
                                     <i class="fas fa-{{ ($question->answer == '2') ? 'check' : 'times'}} fa-2xl"></i> {{$question->option_2 }}</p>
                                     <div class="symbol symbol-45px me-2 mb-5">
                                         <span class="symbol-label">
-                                            {{-- <img src="{{ asset($question->image_option[1]['option_1']) }}" class="h-50 align-self-center" alt=""> --}}
+                                            <img src="{{ asset($question->image_option[1]) }}" class="h-50 align-self-center" alt="">
                                         </span>
                                     </div>
                             </div>
@@ -212,7 +212,7 @@
                                     <i class="fas fa-{{ ($question->answer == '3') ? 'check' : 'times'}} fa-2xl"></i> {{$question->option_3}}</p>
                                     <div class="symbol symbol-45px me-2 mb-5">
                                         <span class="symbol-label">
-                                            {{-- <img src="{{ asset($question->image_option[2]['option_2']) }}" class="h-50 align-self-center" alt=""> --}}
+                                            <img src="{{ asset($question->image_option[2]) }}" class="h-50 align-self-center" alt="">
                                         </span>
                                     </div>
                             </div>
@@ -223,7 +223,7 @@
                                     <i class="fas fa-{{ ($question->answer == '4') ? 'check' : 'times'}} fa-2xl" ></i> {{$question->option_4}}</p>
                                     <div class="symbol symbol-45px me-2 mb-5">
                                         <span class="symbol-label">
-                                            {{-- <img src="{{ asset($question->image_option[3]['option_3']) }}" class="h-50 align-self-center" alt=""> --}}
+                                            <img src="{{ asset($question->image_option[3]) }}" class="h-50 align-self-center" alt="">
                                         </span>
                                     </div>
                             </div>
@@ -234,7 +234,7 @@
                                     <i class="fas fa-{{ ($question->answer == '5') ? 'check' : 'times'}} fa-2xl" ></i> {{$question->option_5}}</p>
                                     <div class="symbol symbol-45px me-2 mb-5">
                                         <span class="symbol-label">
-                                            {{-- <img src="/metronic8/demo1/assets/media/svg/brand-logos/plurk.svg" class="h-50 align-self-center" alt=""> --}}
+                                            <img src="{{ asset($question->image_option[4]) }}" class="h-50 align-self-center" alt="">
                                         </span>
                                     </div>
                             </div>

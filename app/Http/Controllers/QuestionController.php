@@ -40,6 +40,11 @@ class QuestionController extends Controller
             $questions = Question::with('passage')->where('sub_category_id', $sub_category->id)
                 ->where('passage_id', '!=', '')->paginate(10);
             //dd($questions);
+        } elseif ($request->type == 'image') {
+            //dd('ok');
+            $questions = Question::with(['passage', 'question_option'])->where(['sub_category_id' => $sub_category->id, 'question_type' => 'image'])
+                ->paginate(10);
+            //dd($questions);
         } else {
             //dd('not');
             $questions = Question::where(['sub_category_id' => $sub_category->id, 'question_type' => 'mcq'])->paginate(10);

@@ -60,8 +60,13 @@ class GetAllCategoryController extends Controller
     public function getQuestion($subject_id)
     {
 
-        $question = Question::where('subject_id', $subject_id)->get();
+        $questions = Question::where('subject_id', $subject_id)->get();
+
+        $view = view('admin.description.all_question', compact('questions'))->render();
+
+        return response([
+            'html' => $view
+        ]);
         //dd($question);
-        return response()->json($question);
     }
 }

@@ -102,6 +102,7 @@
                         data-select2-id="select2-data-123-0tix">
                         <div class="w-100 mw-150px" data-select2-id="select2-data-122-mhmq">
                             
+                            
                         </div>
                         <!--begin::Add product-->
                         <a href="javascript:;" class="btn btn-sm btn-primary me-3" onclick="addNew()">Add Description</a>

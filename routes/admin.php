@@ -105,6 +105,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         //Question Description
         Route::get('/description/question-description', 'QuestionDescriptionController@index')->name('question-description.index');
         Route::post('/description/question-description/store', 'QuestionDescriptionController@store')->name('question-description.store');
+        Route::get('/description/question-description/create', 'QuestionDescriptionController@create')->name('question-description.create');
         Route::get('/description/question-description/get/{id}', 'QuestionDescriptionController@getQuestionDes')->name('question-description.get');
         Route::get('/description/question-description/delete/{id}', 'QuestionDescriptionController@deleteQuestionDes')->name('question-description.delete');
 

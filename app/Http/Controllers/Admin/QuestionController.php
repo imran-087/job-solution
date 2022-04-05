@@ -57,6 +57,8 @@ class QuestionController extends Controller
                         $btn = '<div class="badge badge-light-primary fw-bolder">MCQ</div>';
                     } else if ($row->question_type == "samprotik") {
                         $btn = '<div class="badge badge-light-info fw-bolder">Current</div>';
+                    } else if ($row->question_type == "image") {
+                        $btn = '<div class="badge badge-light-dark fw-bolder">Image</div>';
                     } else {
                         $btn = '<div class="badge badge-light-warning fw-bolder">Writting</div>';
                     }
@@ -139,7 +141,7 @@ class QuestionController extends Controller
         return view('admin.question.question_input', compact(['question', 'option', 'type', 'main_categories', 'years', 'passages']));
     }
 
-    //preview question
+    //preview question store
     public function preview(Request $request)
     {
         //dd($request->all());
@@ -159,18 +161,13 @@ class QuestionController extends Controller
         if ($request->hasfile('image')) {
             //dd('ok');
             foreach ($request->file('image') as $key => $file) {
-                //dd('option_'.$key);
                 //    dump($file);
-                //    echo "<br>";
                 $name = uniqid() . '_' . time() . '.' . $file->getClientOriginalExtension();
                 // dump($name);
-                // echo "<br>";
                 $path = public_path() . '/uploads/Img/QuestionImage/';
                 $file->move($path, $name);
                 $image_path = 'uploads/Img/QuestionImage/' . $name;
-                $Imgdata[] = [
-                    'option_' . $key => $image_path
-                ];
+                $Imgdata[] = $image_path;
                 //dump($Imgdata);
                 $total_question = count($request->question);
                 if ($total_question > 1) {
@@ -178,14 +175,8 @@ class QuestionController extends Controller
                 }
 
                 //dump($chunk_image);
-                //dump($chunk_image[1]);
             }
-        } //else {
-        //     //dd('not ok');
-        //     $chunk_image = 'NULL';
-        // }
-
-        //dd(json_encode($chunk_image));
+        }
 
         //question save
         foreach ($request->question as $key => $value) {
@@ -316,7 +307,9 @@ class QuestionController extends Controller
             $previewQuestions = PreviewQuestion::all();
             //dd($previewQuestions->count());
             foreach ($previewQuestions as $request) {
-                //dd($request->main_category_id);
+                // $hello = (json_encode($request->image_option));
+                // dump($hello);
+                // dd(json_decode($hello));
                 $question = new Question;
                 $question->subject_id = $request->subject_id;
                 $question->sub_category_id = $request->sub_category_id;
@@ -341,6 +334,8 @@ class QuestionController extends Controller
 
                 if ($request->question_type == 'written') {
                     $question_option->written_answer = $request->written_answer;
+                } elseif ($request->question_type == 'samprotik') {
+                    $question_option->answer = $request->answer;
                 } else {
                     $question_option->option_1 = $request->option_1 ?? '';
                     $question_option->option_2 = $request->option_2 ?? '';
@@ -348,12 +343,7 @@ class QuestionController extends Controller
                     $question_option->option_4 = $request->option_4 ?? '';
                     $question_option->option_5 = $request->option_5 ?? '';
                     $question_option->answer = $request->answer;
-
-                    // if (isset($chunk_image)) {
-                    //     $question_option->image_option =  json_encode($chunk_image);
-                    // } else if (isset($Imgdata)) {
-                    //     $question_option->image_option =  json_encode($Imgdata);
-                    // }
+                    $question_option->image_option[] = $request->image_option ?? '';
                 }
 
                 $question_option->save();
@@ -380,98 +370,98 @@ class QuestionController extends Controller
         }
     }
 
-    public function store(Request $request)
-    {
-        //dd($request->all());
-        //multiple image question
-        if ($request->hasfile('image')) {
-            //dd('ok');
-            foreach ($request->file('image') as $key => $file) {
-                //dd('option_'.$key);
-                //    dump($file);
-                //    echo "<br>";
-                $name = uniqid() . '_' . time() . '.' . $file->getClientOriginalExtension();
-                // dump($name);
-                // echo "<br>";
-                $path = public_path() . '/uploads/Img/QuestionImage/';
-                $file->move($path, $name);
-                $image_path = 'uploads/Img/QuestionImage/' . $name;
-                $Imgdata[] = [
-                    'option_' . $key => $image_path
-                ];
-                //dump($Imgdata);
-                if (count($request->question) > 1) {
-                    $chunk_image = array_chunk($Imgdata, ceil(count($Imgdata) / 2));
-                }
+    // public function store(Request $request)
+    // {
+    //     //dd($request->all());
+    //     //multiple image question
+    //     if ($request->hasfile('image')) {
+    //         //dd('ok');
+    //         foreach ($request->file('image') as $key => $file) {
+    //             //dd('option_'.$key);
+    //             //    dump($file);
+    //             //    echo "<br>";
+    //             $name = uniqid() . '_' . time() . '.' . $file->getClientOriginalExtension();
+    //             // dump($name);
+    //             // echo "<br>";
+    //             $path = public_path() . '/uploads/Img/QuestionImage/';
+    //             $file->move($path, $name);
+    //             $image_path = 'uploads/Img/QuestionImage/' . $name;
+    //             $Imgdata[] = [
+    //                 'option_' . $key => $image_path
+    //             ];
+    //             //dump($Imgdata);
+    //             if (count($request->question) > 1) {
+    //                 $chunk_image = array_chunk($Imgdata, ceil(count($Imgdata) / 2));
+    //             }
 
-                //dump($chunk_image);
-                //dump($chunk_image[1]);
-            }
-        } //else {
-        //     //dd('not ok');
-        //     $chunk_image = 'NULL';
-        // }
+    //             //dump($chunk_image);
+    //             //dump($chunk_image[1]);
+    //         }
+    //     } //else {
+    //     //     //dd('not ok');
+    //     //     $chunk_image = 'NULL';
+    //     // }
 
-        //dd(json_encode($chunk_image));
+    //     //dd(json_encode($chunk_image));
 
-        //question save
-        foreach ($request->question as $key => $value) {
-            if (\strlen($value) > 1) {
-                //question save
-                $question = new Question;
-                $question->subject_id = $request->subject;
-                $question->sub_category_id = $request->sub_category;
-                $question->main_category_id = $request->main_category;
-                $question->year_id = 1;
-                $question->passage_id = $request->passage;
-                $question->question_type = $request->type;
-                $question->hard_level = 1;
-                $question->mark = 1;
-                $question->question = $request->question[$key];
-                $question->future_editable = 1;
-                $question->lock_status = 'lock';
-                $question->status = 1;
-                $question->created_user_id = Auth::guard('admin')->user()->id;
-                $question->slug = Str::slug($request->question[$key]);
+    //     //question save
+    //     foreach ($request->question as $key => $value) {
+    //         if (\strlen($value) > 1) {
+    //             //question save
+    //             $question = new Question;
+    //             $question->subject_id = $request->subject;
+    //             $question->sub_category_id = $request->sub_category;
+    //             $question->main_category_id = $request->main_category;
+    //             $question->year_id = 1;
+    //             $question->passage_id = $request->passage;
+    //             $question->question_type = $request->type;
+    //             $question->hard_level = 1;
+    //             $question->mark = 1;
+    //             $question->question = $request->question[$key];
+    //             $question->future_editable = 1;
+    //             $question->lock_status = 'lock';
+    //             $question->status = 1;
+    //             $question->created_user_id = Auth::guard('admin')->user()->id;
+    //             $question->slug = Str::slug($request->question[$key]);
 
-                $question->save();
+    //             $question->save();
 
 
-                //question option and answer save
-                $question_option = new QuestionOption();
+    //             //question option and answer save
+    //             $question_option = new QuestionOption();
 
-                $question_option->question_id = $question->id;
+    //             $question_option->question_id = $question->id;
 
-                if ($request->type == 'written') {
-                    $question_option->written_answer = $request->written_answer[$key];
-                } else {
-                    $question_option->option_1 = $request->option_1[$key] ?? '';
-                    $question_option->option_2 = $request->option_2[$key] ?? '';
-                    $question_option->option_3 = $request->option_3[$key] ?? '';
-                    $question_option->option_4 = $request->option_4[$key] ?? '';
-                    $question_option->option_5 = $request->option_5[$key] ?? '';
-                    $question_option->answer = $request->answer[$key];
+    //             if ($request->type == 'written') {
+    //                 $question_option->written_answer = $request->written_answer[$key];
+    //             } else {
+    //                 $question_option->option_1 = $request->option_1[$key] ?? '';
+    //                 $question_option->option_2 = $request->option_2[$key] ?? '';
+    //                 $question_option->option_3 = $request->option_3[$key] ?? '';
+    //                 $question_option->option_4 = $request->option_4[$key] ?? '';
+    //                 $question_option->option_5 = $request->option_5[$key] ?? '';
+    //                 $question_option->answer = $request->answer[$key];
 
-                    if (isset($chunk_image)) {
-                        $question_option->image_option =  json_encode($chunk_image[$key]);
-                    } else if (isset($Imgdata)) {
-                        $question_option->image_option =  json_encode($Imgdata);
-                    }
-                }
+    //                 if (isset($chunk_image)) {
+    //                     $question_option->image_option =  json_encode($chunk_image[$key]);
+    //                 } else if (isset($Imgdata)) {
+    //                     $question_option->image_option =  json_encode($Imgdata);
+    //                 }
+    //             }
 
-                $question_option->save();
+    //             $question_option->save();
 
-                //tag
-                $tag = Tag::create([
-                    'subject_id' => $request->subject,
-                    'question_id' => $question->id,
-                ]);
-            }
-        }
+    //             //tag
+    //             $tag = Tag::create([
+    //                 'subject_id' => $request->subject,
+    //                 'question_id' => $question->id,
+    //             ]);
+    //         }
+    //     }
 
-        Session::flash('success', 'Question created successfully');
-        return redirect()->route('admin.question.index');
-    }
+    //     Session::flash('success', 'Question created successfully');
+    //     return redirect()->route('admin.question.index');
+    // }
 
     //edit question
     public function editQuestion($id)

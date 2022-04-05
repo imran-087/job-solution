@@ -105,15 +105,16 @@ jQuery(function () {
                     dataType: "json",
                     success: function (data) {
                         if (data) {
-                            $('#question').empty();
-                            $('#question').append('<option hidden>Choose...</option>');
-                            $.each(data, function (key, question) {
-                                $('select[name="question"]').append(
-                                    '<option value="' + question.id + '">' + question.question + '</option>');
-                            });
+                            // $('#question').empty();
+                            // $('#question').append('<option hidden>Choose...</option>');
+                            // $.each(data, function (key, question) {
+                            //     $('select[name="question"]').append(
+                            //         '<option value="' + question.id + '">' + question.question + '</option>');
+                            // });
+                            $('#question').html(data.html)
                         }
                          else {
-                            $('#question').empty(); 
+                            $('#question').html(data.html) 
                         }
                     }
                 });

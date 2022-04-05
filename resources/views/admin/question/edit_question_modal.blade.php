@@ -52,7 +52,7 @@
                     <div class="help-block with-errors title-error"></div>
                 </div>
                 <!--end::Input group-->
-                @if($question->question_type == 'mcq')
+                @if($question->question_type == 'mcq' || $question->question_type == 'image')
                 <!--begin::Input group-->
                 <div class="d-flex flex-column mb-8 fv-row">
                     <div class="row">
@@ -65,6 +65,7 @@
                             <input type="text" class="form-control form-control-solid" placeholder="Enter Title"
                                 name="option_1" value="{{ $question->option_1 }}"/>
                             <div class="help-block with-errors title-error"></div>
+                            
                         </div>
                         <div class="col-md-6">
                             <!--begin::Label-->

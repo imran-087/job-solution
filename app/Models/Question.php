@@ -11,7 +11,7 @@ class Question extends Model
     use HasFactory, SoftDeletes;
 
     protected $casts = [
-        'image_option' => 'array'
+        'image_option' => 'json'
     ];
 
     public function sub_category()

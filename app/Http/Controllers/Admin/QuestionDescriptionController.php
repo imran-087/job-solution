@@ -23,6 +23,8 @@ class QuestionDescriptionController extends Controller
         if ($request->ajax()) {
             $data = QuestionDescription::where('status', ['active', 'deactive'])->select();
 
+
+
             return DataTables::of($data)
                 ->addIndexColumn()
 
@@ -65,14 +67,15 @@ class QuestionDescriptionController extends Controller
 
         //main category
         $main_categories = MainCategory::all();
+        $sub_categories = SubCategory::all();
 
-        return view('admin.description.question_des_index', compact('main_categories'));
+        return view('admin.description.question_des_index', compact('main_categories', 'sub_categories'));
     }
 
     //create or update main category
     public function store(Request $request)
     {
-        // dd($request->all());
+        //dd($request->all());
         $validator = Validator::make($request->all(), [
             'description' => ['required'],
             'question' => ['required'],
@@ -235,5 +238,11 @@ class QuestionDescriptionController extends Controller
             'success' => true,
             'message' => 'Description Approved successfully!'
         ], 200);
+    }
+
+    public function create()
+    {
+        $main_categories = MainCategory::all();
+        return view('admin.description.create', compact('main_categories'));
     }
 }
