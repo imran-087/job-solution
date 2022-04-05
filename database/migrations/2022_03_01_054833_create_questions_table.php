@@ -29,7 +29,7 @@ class CreateQuestionsTable extends Migration
             $table->integer('updated_user_id')->nullable();
             $table->integer('approval_id')->nullable();
             $table->unsignedBigInteger('view_count')->nullable();
-            $table->unsignedBigInteger('vote')->nullable();
+            $table->unsignedBigInteger('vote')->default(0);
             $table->enum('lock_status', ['lock', 'unlock'])->default('unlock');
             $table->enum('future_editable', ['editable', 'noteditable'])->default('noteditable');
             $table->enum('status', ['active', 'deactive', 'pending'])->default('active');

@@ -441,21 +441,15 @@
         //vote
         $('.vote').on('click', function(){
             var id = $(this).data('id')
+            var val = $(this).text()
+            $(this).html(`<i class="fas fa-heart"></i>`+(parseInt(val)+1))
             //alert(id)
             $.ajax({
                 type:"GET",
                 url: "{{ url('question/vote')}}"+'/'+id,
                 dataType: 'json',
                 success:function(data){
-                    Swal.fire({
-                        text: data.message,
-                        icon: "success",
-                        showConfirmButton: false
-                        
-                    })
-                    setTimeout(function() {
-                        location.reload();  //Refresh page
-                    }, 1000);
+                     toastr.success(data.message);
                 }
             })
         });

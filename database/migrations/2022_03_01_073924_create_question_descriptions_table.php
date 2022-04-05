@@ -18,7 +18,7 @@ class CreateQuestionDescriptionsTable extends Migration
             $table->integer('question_id');
             $table->longText('description');
             $table->integer('best_description')->nullable();
-            $table->unsignedBigInteger('vote')->nullable();
+            $table->unsignedBigInteger('vote')->default(0);
             $table->integer('created_user_id');
             $table->integer('approval_id')->nullable();
             $table->enum('status', ['active', 'pending', 'deactive'])->default('active');

@@ -55,11 +55,9 @@
         
         <!--begin::Row-->
         <div class="row gy-5 g-xl-8">
-            
-
+        
             <!--begin::Col-->
             <div class="col-xl-10 col-lg-10 col-md-12 col-sm-12 col-xs-12" id="question">
-              
               
                 <!--begin::Feeds Widget 2-->
                 <div class="card card-bordered mb-5">
@@ -86,7 +84,7 @@
                                 <!--end::Menu item-->
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="javascript:;" class="menu-link px-3" onclick="addNew()">Add Description</a>
+                                    <a href="javascript:;" class="menu-link px-3 addDescription" data-id="{{ $question->id }}">Add Description</a>
                                 </div>
                                 <!--end::Menu item-->
                                 
@@ -141,7 +139,7 @@
                             </div>
                             @endif
                         </div>
-                        {{-- <div class="d-flex justify-content-start mt-2">
+                        <div class="d-flex justify-content-start mt-2">
                             <button type="button" class="btn btn-sm  btn-light me-3">
                                 <a href="{{ url('jobs',
                                     [$question->sub_category->category->slug, $question->sub_category->slug, $question->subject->slug]
@@ -156,7 +154,7 @@
                             <button type="button" class="btn btn-sm  btn-light me-3">
                                 <a href="">{{$question->sub_category->category->main_category->name}}</a>
                             </button>            
-                        </div> --}}
+                        </div>
                         
                     </div>
                     <div class="card-footer" style="padding-top:0px !important; padding-bottom:0px !important;">
@@ -216,7 +214,9 @@
                             <!--end::Heading-->
                             <!--begin::Body-->
                             <div id="kt_job_4_1_{{$question->id}}" class="fs-6 ms-1 collapse show" style="">
-    
+                                @if($question->descriptions->count() > 0)
+                                    @include('question.best_description')
+                                @endif
                                 @foreach($question->descriptions as $description)
                                     @include('question.description')
                                 @endforeach
@@ -234,9 +234,9 @@
                    <!--begin::Accordion-->
                     <div class="accordion" id="kt_accordion_1">
                         <div class="accordion-item">
-                            <h2 class="accordion-header" id="kt_accordion_1_header_1">
-                                <button class="accordion-button fs-4 fw-bold text-gray-800 mb-5" style="font-size: 20px" type="button" data-bs-toggle="collapse" data-bs-target="#kt_accordion_1_body_1" aria-expanded="true" aria-controls="kt_accordion_1_body_1">
-                                    <b>Comments</b>
+                            <h2 class="accordion-header" id="kt_accordion_1_header_1" style="background: inherit !important">
+                               <button class="accordion-button fs-4 fw-bold text-gray-800 mb-5 collapsed" style="font-size: 20px" type="button" data-bs-toggle="collapse" data-bs-target="#kt_accordion_1_body_1" aria-expanded="false" aria-controls="kt_accordion_1_body_1">
+                                    <b>Comments <sup class="badge badge-success">{{$question->comments->count()}}</sup></b>
                                 </button>
                                
                             </h2>
@@ -333,7 +333,7 @@
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="javascript:;" class="menu-link px-3" onclick="addNew()">Add Description</a>
+                                            <a href="javascript:;" class="menu-link px-3 addDescription" data-id="{{ $question->id }}">Add Description</a>
                                         </div>
                                         <!--end::Menu item-->
                                         
@@ -431,9 +431,10 @@
                                 <div class="m-0">
                                 
                                     <!--begin::Heading-->
-                                    <div class="d-flex align-items-center collapsible py-3 toggle mb-0 active" data-bs-toggle="collapse" data-bs-target="#kt_job_4_1_{{$question->id}}" aria-expanded="false">
+                                    <div class="d-flex align-items-center collapsible py-3 toggle mb-0 collapsed" data-bs-toggle="collapse" data-bs-target="#kt_job_4_1_1_{{$r_question->id}}" aria-expanded="false">
                                         <!--begin::Icon-->
                                         <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                                             
                                             <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
                                             <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
                                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -451,6 +452,7 @@
                                                 </svg>
                                             </span>
                                             <!--end::Svg Icon-->
+                                           
                                         
                                         </div>
                                         <!--end::Icon-->
@@ -462,8 +464,10 @@
                                     </div>
                                     <!--end::Heading-->
                                     <!--begin::Body-->
-                                    <div id="kt_job_4_1_{{$question->id}}" class="fs-6 ms-1 collapse" style="">
-            
+                                    <div id="kt_job_4_1_1_{{$r_question->id}}" class="fs-6 ms-1 collapse" style="">
+                                        @if($r_question->descriptions->count() > 0)
+                                            @include('question.best_description')
+                                        @endif
                                         @foreach($r_question->descriptions as $description)
                                             @include('question.description')
                                         @endforeach
@@ -482,163 +486,14 @@
                     </div>
                 </div>
 
-                <!--begin::Modal - New Product/Service-->
-                <div class="modal fade" id="kk_modal_new_question_des" tabindex="-1" aria-hidden="true">
-                    <!--begin::Modal dialog-->
-                    <div class="modal-dialog modal-dialog-centered mw-650px">
-                        <!--begin::Modal content-->
-                        <div class="modal-content rounded">
-                            <!--begin::Modal header-->
-                            <div class="modal-header pb-0 border-0 justify-content-end">
-                                <!--begin::Close-->
-                                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-                                    <span class="svg-icon svg-icon-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
-                                                transform="rotate(-45 6 17.3137)" fill="black" />
-                                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)"
-                                                fill="black" />
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon-->
-                                </div>
-                                <!--end::Close-->
-                            </div>
-                            <!--begin::Modal header-->
-                            <!--begin::Modal body-->
-                            <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
-                                <!--begin:Form-->
-                                <form id="kk_modal_new_question_des_form" class="form" enctype="multipart/form-data">
-                                    <div class="messages"></div>
-                                    {{-- csrf token  --}}
-                                    @csrf
-                                    <input type="hidden" name="question_id" value="{{ $question->id }}">
+                <!--begin::Modal - New Description-->
+                @include('question.include.add_description_modal')
+                <!--end::Modal - New Description-->
 
-                                    <!--begin::Heading-->
-                                    <div class="mb-13 text-center">
-                                        <!--begin::Title-->
-                                        <h1 class="mb-3">Add New Question Description</h1>
-                                        <!--end::Title-->
-                                        <!--begin::Description-->
-                                        <div class="text-muted fw-bold fs-5">Fill up the form and submit
-                                        </div>
-                                        <!--end::Description-->
-                                    </div>
-                                    <!--end::Heading-->
-                                
-                                    <!--begin::Input group-->
-                                    <div class="d-flex flex-column mb-8 fv-row">
-                                        <!--begin::Label-->
-                                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                            <span class="required">Question Descrption</span>
-                                        </label>
-                                        <!--end::Label-->
-                                        <textarea name="description" class="form-control form-control-solid h-100px"></textarea>
-                                        <div class="help-block with-errors description-error"></div>
-                                    </div>
-                                    <!--end::Input group-->
+                <!--begin::Modal - New Comment-->
+                @include('question.include.add_comment_modal')
+                <!--end::Modal - New Comment-->
 
-                                    <!--begin::Actions-->
-                                    <div class="text-center">
-                                        <button type="reset" id="kk_modal_new_service_cancel" class="btn btn-light me-3">Cancel</button>
-                                        <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary">
-                                            <span class="indicator-label">Submit</span>
-                                            <span class="indicator-progress">Please wait...
-                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                        </button>
-                                    </div>
-                                    <!--end::Actions-->
-                                </form>
-                                <!--end:Form-->
-                            </div>
-                            <!--end::Modal body-->
-                        </div>
-                        <!--end::Modal content-->
-                    </div>
-                    <!--end::Modal dialog-->
-                </div>
-                <!--end::Modal - New Product/Service-->
-
-                <!--begin::Modal - New Product/Service-->
-                <div class="modal fade" id="kk_modal_new_comment" tabindex="-1" aria-hidden="true">
-                    <!--begin::Modal dialog-->
-                    <div class="modal-dialog modal-dialog-centered mw-650px">
-                        <!--begin::Modal content-->
-                        <div class="modal-content rounded">
-                            <!--begin::Modal header-->
-                            <div class="modal-header pb-0 border-0 justify-content-end">
-                                <!--begin::Close-->
-                                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-                                    <span class="svg-icon svg-icon-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
-                                                transform="rotate(-45 6 17.3137)" fill="black" />
-                                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)"
-                                                fill="black" />
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon-->
-                                </div>
-                                <!--end::Close-->
-                            </div>
-                            <!--begin::Modal header-->
-                            <!--begin::Modal body-->
-                            <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
-                                <!--begin:Form-->
-                                <form id="kk_modal_new_comment_form" class="form" enctype="multipart/form-data">
-                                    <div class="messages"></div>
-                                    {{-- csrf token  --}}
-                                    @csrf
-                                    <input type="hidden" name="question_id" value="{{ $question->id }}">
-
-                                    <!--begin::Heading-->
-                                    <div class="mb-13 text-center">
-                                        <!--begin::Title-->
-                                        <h1 class="mb-3">Add New Comment</h1>
-                                        <!--end::Title-->
-                                        <!--begin::Description-->
-                                        <div class="text-muted fw-bold fs-5">Fill up the form and submit
-                                        </div>
-                                        <!--end::Description-->
-                                    </div>
-                                    <!--end::Heading-->
-                                
-                                    <!--begin::Input group-->
-                                    <div class="d-flex flex-column mb-8 fv-row">
-                                        <!--begin::Label-->
-                                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                            <span class="required">Comment</span>
-                                        </label>
-                                        <!--end::Label-->
-                                        <textarea name="comment" class="form-control form-control-solid h-100px"></textarea>
-                                        <div class="help-block with-errors comment-error"></div>
-                                    </div>
-                                    <!--end::Input group-->
-
-                                    <!--begin::Actions-->
-                                    <div class="text-center">
-                                        <button type="reset" id="kk_modal_new_service_cancel" class="btn btn-light me-3">Cancel</button>
-                                        <button type="submit" id="kk_modal_new_comment_submit" class="btn btn-primary">
-                                            <span class="indicator-label">Submit</span>
-                                            <span class="indicator-progress">Please wait...
-                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                        </button>
-                                    </div>
-                                    <!--end::Actions-->
-                                </form>
-                                <!--end:Form-->
-                            </div>
-                            <!--end::Modal body-->
-                        </div>
-                        <!--end::Modal content-->
-                    </div>
-                    <!--end::Modal dialog-->
-                </div>
-                <!--end::Modal - New Product/Service-->
-
-               
             </div>
             <!--end::Col-->
            
@@ -713,16 +568,27 @@
 
         })
 
-        // add new
-        function addNew(){
-            $('input[name="question_des_id"]').val('')
+        //cancel button
+        $('#kk_modal_new_service_cancel').on('click', function(){
+            $('#kk_modal_new_question_des_form')[0].reset();
+            $("#kk_modal_new_question_des").modal('hide');
+            $('.indicator-label').show()
+            $('.indicator-progress').hide()
+            $('#kk_modal_new_service_submit').removeAttr('disabled')
+        })
+
+        //decription modal show
+        $('.addDescription').on('click', function() {
+            var id = $(this).data(id)
+            //console.log(id.id)
+            $('input[name="question_id"]').val(id.id)
             $('.with-errors').text('')
             $('#kk_modal_new_question_des_form')[0].reset();
             $('#kk_modal_new_question_des').modal('show')
-        }
+        });
         
         
-        //new category save
+        //new description save
         $('#kk_modal_new_question_des_form').on('submit',function(e){
             e.preventDefault()
             $('.with-errors').text('')
@@ -794,21 +660,15 @@
         //vote
         $('.vote').on('click', function(){
             var id = $(this).data('id')
+            var val = $(this).text()
+            $(this).html(`<i class="fas fa-heart"></i>`+(parseInt(val)+1))
             //alert(id)
             $.ajax({
                 type:"GET",
                 url: "{{ url('question/vote')}}"+'/'+id,
                 dataType: 'json',
                 success:function(data){
-                    Swal.fire({
-                        text: data.message,
-                        icon: "success",
-                        showConfirmButton: false
-                        
-                    })
-                    setTimeout(function() {
-                        location.reload();  //Refresh page
-                    }, 1000);
+                      toastr.success(data.message);
                 }
             })
         });
@@ -816,22 +676,19 @@
         //like description
         $('.like').on('click', function(){
             var id = $(this).data('id')
-            // alert(id)
-            // console.log('here')
+             var val = $(this).text()
+            //console.log(val)
+            $(this).html(`<i class="fas fa-thumbs-up"></i>`+(parseInt(val)+1))
             $.ajax({
                 type:"GET",
                 url: "{{ url('description/vote')}}"+'/'+id,
                 dataType: 'json',
                 success:function(data){
-                    Swal.fire({
-                        text: data.message,
-                        icon: "success",
-                        showConfirmButton: false
-                        
-                    })
-                    setTimeout(function() {
-                        location.reload();  //Refresh page
-                    }, 1000);
+                    if(data.success){
+                        toastr.success(data.message)
+                    }else{
+                        toastr.error(data.message)
+                    }
                 }
             })
         });

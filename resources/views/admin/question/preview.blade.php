@@ -172,17 +172,7 @@
                             @endif 
                         </div>
                         @else
-                        @php
-                        // var_dump($question->image_option);
-                        //     //$images['data'] = json_decode($question->image_option, true);
-                        //     // //var_dump( $images['data'] );
-                        //     foreach($question->image_option as  $image){
-                        //         var_dump($image);
-                        //     //    foreach ($image as $image_option) {
-                        //     //       var_dump($image_option);
-                        //     //    }
-                        //     }
-                        @endphp
+                      
                         <div class="row"  style="font-size: 16px">
                             @if($question->option_1 != '' )
                             <div class="col-md-6 reading">

@@ -343,7 +343,8 @@ class QuestionController extends Controller
                     $question_option->option_4 = $request->option_4 ?? '';
                     $question_option->option_5 = $request->option_5 ?? '';
                     $question_option->answer = $request->answer;
-                    $question_option->image_option[] = $request->image_option ?? '';
+                    //dd(($request->image_option));
+                    $question_option->image_option = $request->image_option ?? '';
                 }
 
                 $question_option->save();

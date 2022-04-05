@@ -42,7 +42,7 @@ class QuestionController extends Controller
             //dd($questions);
         } elseif ($request->type == 'image') {
             //dd('ok');
-            $questions = Question::with(['passage', 'question_option'])->where(['sub_category_id' => $sub_category->id, 'question_type' => 'image'])
+            $questions = Question::where(['sub_category_id' => $sub_category->id, 'question_type' => 'image'])
                 ->paginate(10);
             //dd($questions);
         } else {
@@ -75,59 +75,6 @@ class QuestionController extends Controller
         $questions = Question::where(['subject_id' => $subject->id, 'sub_category_id' => $sub_category->id])->paginate(10);
 
         return view('question.subject_and_question', compact('questions', 'sub_category', 'subjects', 'category'));
-    }
-
-
-    public function vote($id)
-    {
-        $question = Question::find($id);
-        $question->vote = $question->vote + 1;
-
-        if ($question->save()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'You liked this Question!'
-            ], 200);
-        } else {
-            return response()->json([
-                'error' => true,
-                'message' => 'Failed!.'
-            ]);
-        }
-    }
-
-    public function bookmark($id, $catid)
-    {
-        //dump($id);
-        if (!Auth::check()) {
-            //dd('ok');
-            return response()->json([
-                'error' => true,
-                'message' => 'Please login in first.'
-            ]);
-        } else {
-            $bookmark = Bookmark::where('question_id', $id)->first();
-            if ($bookmark === null) {
-                $bookmark = new Bookmark();
-                $bookmark->question_id = $id;
-                $bookmark->category_id = $catid;
-                $bookmark->user_id = Auth::user()->id;
-
-                if ($bookmark->save()) {
-                    return response()->json([
-                        'success' => true,
-                        'message' => 'Bookmarked Added!'
-                    ], 200);
-                }
-            } else {
-                if ($bookmark->question_id == $id && $bookmark->user_id == Auth::user()->id) {
-                    return response()->json([
-                        'error' => true,
-                        'message' => 'You alreday bookmarked this question!.'
-                    ]);
-                }
-            }
-        }
     }
 
 
@@ -181,37 +128,5 @@ class QuestionController extends Controller
         //dd($id);
         $question = Question::find($request->ques_id);
         return view('question.single_question', compact('question'));
-    }
-
-    public function viewCount($id)
-    {
-        $question = Question::find($id);
-        $question->view_count = $question->view_count + 1;
-
-        $question->save();
-    }
-
-    public function checkAnswer($id, $option)
-    {
-        $question_option = QuestionOption::find($id);
-        if ($question_option->answer == $option) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Wrignt Answer'
-            ], 200);
-        } else {
-            return response()->json([
-                'error' => true,
-                'message' => 'Wrong Answer'
-            ], 200);
-        }
-    }
-
-    //recent question
-    public function recentQuestion()
-    {
-        $questions = Question::with('question_option')->where('question_type', 'samprotik')->paginate(15);
-        //dd($questions);
-        return view('question.samprotik-question', compact('questions'));
     }
 }

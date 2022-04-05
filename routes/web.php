@@ -11,6 +11,8 @@ use App\Http\Controllers\DescriptionController;
 use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\ProfileSettingsController;
 use App\Http\Controllers\Forum\DiscussionController;
+use App\Http\Controllers\QuestionActivityController;
+use App\Http\Controllers\RecentQuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,23 +71,24 @@ Route::get('/single-question', [QuestionController::class, 'singleQuestion'])->n
 /** get subject wise question */
 Route::get('/jobs/{category}/{sub_category}/{subject}', [QuestionController::class, 'getSubjectWiseQuestion'])->name('jobs.category.sub-category.subject.question');
 
-//question bookmark
-Route::get('/question/bookmark/{id}/{catid}', [QuestionController::class, 'bookmark'])->name('question.bookmark');
-//question comment
-Route::post('question/comment/store', [CommentController::class, 'store'])->name('question.comment-store');
 //edit question
 Route::get('/question/edit-question/{id}', [QuestionController::class, 'edit'])->name('question.edit-question');
 Route::post('/question/update-question', [QuestionController::class, 'update'])->name('question.update-question');
 
-//answer-check
-Route::get('question/answer-check/{id}/{option}', [QuestionController::class, 'checkAnswer'])->name('question.answer-check');
-//vote
-Route::get('/question/vote/{id}', [QuestionController::class, 'vote'])->name('question.vote');
-//view count
-Route::get('/question/view-count/{id}', [QuestionController::class, 'viewCount'])->name('question.view-count');
+/******************
+   Question Activity
+ * *****************/
+Route::get('question/answer-check/{id}/{option}', [QuestionActivityController::class, 'checkAnswer'])->name('question.answer-check');
+Route::get('/question/vote/{id}', [QuestionActivityController::class, 'vote'])->name('question.vote');
+Route::get('/question/view-count/{id}', [QuestionActivityController::class, 'viewCount'])->name('question.view-count');
+Route::get('/question/bookmark/{id}/{catid}', [QuestionActivityController::class, 'bookmark'])->name('question.bookmark');
+//comment
+Route::post('question/comment/store', [CommentController::class, 'store'])->name('question.comment-store');
 
-//recent question
-Route::get('job/question/recent-question', [QuestionController::class, 'recentQuestion'])->name('question.recent-question');
+/******************
+   Recent/Samprotik Question
+ * *****************/
+Route::get('job/question/recent-question', [RecentQuestionController::class, 'recentQuestion'])->name('question.recent-question');
 
 /*********************
    Question Description

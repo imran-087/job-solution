@@ -9,4 +9,8 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class QuestionOption extends Model
 {
     use HasFactory, SoftDeletes;
+
+    protected $casts = [
+        'image_option' => 'json'
+    ];
 }
