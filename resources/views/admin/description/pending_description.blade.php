@@ -150,7 +150,11 @@
     <!--end::Post-->
 </div>
 
-
+<!--begin::Modal - Edit Question view modal-->
+<div class="modal fade" id="kk_modal_show_description" tabindex="-1" aria-hidden="true">
+<div id="description_view_modal"></div>
+</div>
+<!--end::Modal - Edit Question view modal-->
 
 
 @endsection
@@ -206,111 +210,124 @@
 
         })
 
+    
+        //view description
+        function view(id){
+            $.ajax({
+                type:"GET",
+                url: "{{ url('admin/description/question-description/show')}}"+'/'+id,
+                dataType: 'json',
+                success:function(data){
+                    $("#description_view_modal").html(data.html);
+                    $("#kk_modal_show_description").modal('show');
+                }
+            });
+        }
 
-    //chnageStatus
-    function changeStatus(id){
-        Swal.fire({
-            text: "Are you sure you want approve this?",
-            icon: "warning",
-            showCancelButton: !0,
-            buttonsStyling: !1,
-            confirmButtonText: "Confirm",
-            cancelButtonText: "No, cancel",
-            customClass: {
-                confirmButton: "btn fw-bold btn-danger",
-                cancelButton: "btn fw-bold btn-active-light-primary"
-            }
-        }).then((function (o) {
-            if(o.value){ //if agree
-                $.ajax({
-                    type: "GET",
-                    url: "{{ url('admin/description/pending-question-description/status') }}"+'/'+id,
-                    data: {},
-                    success: function (res)
-                    {
-                        if(res.success){
-                            Swal.fire({
-                                text: res.message,
-                                icon: "success",
-                                buttonsStyling: !1,
-                                confirmButtonText: "Ok, got it!",
-                                customClass: {
-                                    confirmButton: "btn fw-bold btn-primary"
-                                }
-                            }).then((function () {
-                                //refresh datatable
-                                $('#dataTable').DataTable().ajax.reload();
-                            }))
+        //chnageStatus
+        function changeStatus(id){
+            Swal.fire({
+                text: "Are you sure you want approve this?",
+                icon: "warning",
+                showCancelButton: !0,
+                buttonsStyling: !1,
+                confirmButtonText: "Confirm",
+                cancelButtonText: "No, cancel",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-danger",
+                    cancelButton: "btn fw-bold btn-active-light-primary"
+                }
+            }).then((function (o) {
+                if(o.value){ //if agree
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ url('admin/description/pending-question-description/status') }}"+'/'+id,
+                        data: {},
+                        success: function (res)
+                        {
+                            if(res.success){
+                                Swal.fire({
+                                    text: res.message,
+                                    icon: "success",
+                                    buttonsStyling: !1,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-primary"
+                                    }
+                                }).then((function () {
+                                    //refresh datatable
+                                    $('#dataTable').DataTable().ajax.reload();
+                                }))
+                            }
                         }
-                    }
-                });
+                    });
 
-            }else{ //if cancel
-                Swal.fire({
-                    text: "Status has not been changed",
-                    icon: "error",
-                    buttonsStyling: !1,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn fw-bold btn-primary"
-                    }
-                })
-            }
-
-        }))
-    }
-    //deleteCategory
-    function deleteDescription(id){
-        Swal.fire({
-            text: "Are you sure you want delete this?",
-            icon: "warning",
-            showCancelButton: !0,
-            buttonsStyling: !1,
-            confirmButtonText: "Confirm",
-            cancelButtonText: "No, cancel",
-            customClass: {
-                confirmButton: "btn fw-bold btn-danger",
-                cancelButton: "btn fw-bold btn-active-light-primary"
-            }
-        }).then((function (o) {
-            if(o.value){ //if agree
-                $.ajax({
-                    type: "GET",
-                    url: "{{ url('admin/description/question-description/delete') }}"+'/'+id,
-                    data: {},
-                    success: function (res)
-                    {
-                        if(res.success){
-                            Swal.fire({
-                                text: res.message,
-                                icon: "success",
-                                buttonsStyling: !1,
-                                confirmButtonText: "Ok, got it!",
-                                customClass: {
-                                    confirmButton: "btn fw-bold btn-primary"
-                                }
-                            }).then((function () {
-                                //refresh datatable
-                                $('#dataTable').DataTable().ajax.reload();
-                            }))
+                }else{ //if cancel
+                    Swal.fire({
+                        text: "Status has not been changed",
+                        icon: "error",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary"
                         }
-                    }
-                });
+                    })
+                }
 
-            }else{ //if cancel
-                Swal.fire({
-                    text: "Item has not been deleted",
-                    icon: "error",
-                    buttonsStyling: !1,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn fw-bold btn-primary"
-                    }
-                })
-            }
+            }))
+        }
+        //deleteCategory
+        function deleteDescription(id){
+            Swal.fire({
+                text: "Are you sure you want delete this?",
+                icon: "warning",
+                showCancelButton: !0,
+                buttonsStyling: !1,
+                confirmButtonText: "Confirm",
+                cancelButtonText: "No, cancel",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-danger",
+                    cancelButton: "btn fw-bold btn-active-light-primary"
+                }
+            }).then((function (o) {
+                if(o.value){ //if agree
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ url('admin/description/question-description/delete') }}"+'/'+id,
+                        data: {},
+                        success: function (res)
+                        {
+                            if(res.success){
+                                Swal.fire({
+                                    text: res.message,
+                                    icon: "success",
+                                    buttonsStyling: !1,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-primary"
+                                    }
+                                }).then((function () {
+                                    //refresh datatable
+                                    $('#dataTable').DataTable().ajax.reload();
+                                }))
+                            }
+                        }
+                    });
 
-        }))
-    }
+                }else{ //if cancel
+                    Swal.fire({
+                        text: "Item has not been deleted",
+                        icon: "error",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary"
+                        }
+                    })
+                }
+
+            }))
+        }
 
     </script>
 @endpush

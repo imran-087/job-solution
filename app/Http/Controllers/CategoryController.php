@@ -42,7 +42,6 @@ class CategoryController extends Controller
             $sub_categories = SubCategory::where('year_id', $year->id)->paginate(10);
         }
 
-
         return view('category.year_index', compact('sub_categories', 'year'));
     }
 }

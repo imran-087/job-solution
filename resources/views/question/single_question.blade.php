@@ -79,7 +79,7 @@
                                 <!--end::Heading-->
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="{{ route('question.edit-question', $question->id) }}" class="menu-link px-3">Edit Question</a>
+                                    <a href="javascript:;" class="menu-link px-3 editQuestion" data-id="{{ $question->id }}">Edit Question</a>
                                 </div>
                                 <!--end::Menu item-->
                                 <!--begin::Menu item-->
@@ -101,6 +101,7 @@
                     <div class="card-body">
                         {{-- <h3 class="card-title text-black-700 fw-bolder cursor-pointer mb-5">{{$question->question}}</h3> --}}
                         <!--end::Text-->
+                        @if($question->question_type == 'mcq')
                         <div class="row" style="font-size: 16px">
                             @if($question->question_option->option_1 != '')
                             <div class="col-md-6">
@@ -139,44 +140,155 @@
                             </div>
                             @endif
                         </div>
+                        @elseif($question->question_type == 'samprotik')
+                        <div class="row"  style="font-size: 16px">
+                            <div class="col-md-12">
+                                <p class="text-gray-800 fw-bold mb-5 " > 
+                                  <span style="color:green; font-weight:bold">answer:</span> {{$question->question_option->answer }}</p>
+                            </div>
+                        </div>
+                        @elseif($question->question_type == 'written')
+                        <div class="row"  style="font-size: 16px">
+                            @if($question->question_option->written_answer != '' )
+                            <div class="col-md-12 test">
+                                <p class="text-gray-800 fw-normal mb-5 "> 
+                                <span style="color: #47BE7D; font-weight:600">ANS</span> <i class="fas fa-angle-double-right fa-2xl"></i> {{$question->question_option->written_answer }}
+                                </p>
+                            </div>
+                            @else
+                            <div class="col-md-6 test">
+                                <p class="text-gray-800 fw-normal mb-5 "> 
+                                <i class="fas fa-eye fa-2xl"></i> NO ANSWER YET
+                                </p>
+                            </div>
+                            @endif  
+                        </div>
+                        @else
+                        <div class="row"  style="font-size: 16px">
+                            @if($question->question_option->option_1 != '' )
+                            <div class="col-md-6 test">
+                                <p class="text-gray-800 fw-normal mb-5 cursor-pointer option" data-id="{{ $question->id }}" data-option="1"> 
+                                   <i class="fas fa-eye fa-2xl"></i> {{$question->question_option->option_1 }}
+                                </p>
+                                <div class="symbol symbol-45px me-2 mb-5">
+                                    <span class="symbol-label">
+                                        <img src="{{ asset($question->question_option->image_option[0]) }}" class="h-50 align-self-center" alt="">
+                                    </span>
+                                </div>
+                                
+                            </div>
+                            <div class="col-md-6 reading d-none">
+                                <p class="text-gray-800 fw-normal mb-5 {{ ($question->question_option->answer == '1') ? 'right-answer' : ''}}" > 
+                                   <i class="fas fa-{{ ($question->question_option->answer == '1') ? 'check' : 'times'}} fa-2xl"></i> {{$question->question_option->option_1 }}
+                                </p>
+                                <div class="symbol symbol-45px me-2 mb-5">
+                                    <span class="symbol-label">
+                                        <img src="{{ asset($question->question_option->image_option[0]) }}" class="h-50 align-self-center" alt="">
+                                    </span>
+                                </div>
+                            </div>
+                            
+                            @endif
+                            @if($question->question_option->option_2 != '')
+                            <div class="col-md-6 test">
+                                <p class="text-gray-800 fw-normal mb-5 cursor-pointer option" data-id="{{ $question->id }}" data-option="2"> 
+                                    <i class="fas fa-eye fa-2xl"></i> {{$question->question_option->option_2 }}
+                                </p>
+                                <div class="symbol symbol-45px me-2 mb-5">
+                                    <span class="symbol-label">
+                                        <img src="{{ asset($question->question_option->image_option[1]) }}" class="h-50 align-self-center" alt="">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 reading d-none">
+                                <p class="text-gray-800 fw-normal mb-5  {{ ($question->question_option->answer == '2') ? 'right-answer' : ''}} "> 
+                                    <i class="fas fa-{{ ($question->question_option->answer == '2') ? 'check' : 'times'}} fa-2xl"></i> {{$question->question_option->option_2 }}
+                                </p>
+                                <div class="symbol symbol-45px me-2 mb-5">
+                                    <span class="symbol-label">
+                                        <img src="{{ asset($question->question_option->image_option[1]) }}" class="h-50 align-self-center" alt="">
+                                    </span>
+                                </div>
+                            </div>
+                            @endif
+                            @if($question->question_option->option_3 != '')
+                            <div class="col-md-6 test">
+                                <p class="text-gray-800 fw-normal mb-5 cursor-pointer option" data-id="{{ $question->id }}" data-option="3"> 
+                                    <i class="fas fa-eye fa-2xl"></i> {{$question->question_option->option_3}}
+                                </p>
+                                <div class="symbol symbol-45px me-2 mb-5">
+                                    <span class="symbol-label">
+                                        <img src="{{ asset($question->question_option->image_option[2]) }}" class="h-50 align-self-center" alt="">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 reading d-none">
+                                <p class="text-gray-800 fw-normal mb-5  {{ ($question->question_option->answer == '3') ? 'right-answer' : ''}}"> 
+                                    <i class="fas fa-{{ ($question->question_option->answer == '3') ? 'check' : 'times'}} fa-2xl"></i> {{$question->question_option->option_3}}
+                                </p>
+                                <div class="symbol symbol-45px me-2 mb-5">
+                                    <span class="symbol-label">
+                                        <img src="{{ asset($question->question_option->image_option[2]) }}" class="h-50 align-self-center" alt="">
+                                    </span>
+                                </div>
+                            </div>
+                            @endif
+                            @if($question->question_option->option_4 != '' )
+                            <div class="col-md-6 test">
+                                <p class="text-gray-800 fw-normal mb-5 cursor-pointer option" data-id="{{ $question->id }}" data-option="4"> 
+                                    <i class="fas fa-eye fa-2xl" ></i> {{$question->question_option->option_4}}
+                                </p>
+                                <div class="symbol symbol-45px me-2 mb-5">
+                                    <span class="symbol-label">
+                                        <img src="{{ asset($question->question_option->image_option[3]) }}" class="h-50 align-self-center" alt="">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 reading d-none">
+                                <p class="text-gray-800 fw-normal mb-5  {{ ($question->question_option->answer == '4') ? 'right-answer' : ''}}"> 
+                                    <i class="fas fa-{{ ($question->question_option->answer == '4') ? 'check' : 'times'}} fa-2xl" ></i> {{$question->question_option->option_4}}
+                                </p>
+                                <div class="symbol symbol-45px me-2 mb-5">
+                                    <span class="symbol-label">
+                                        <img src="{{ asset($question->question_option->image_option[3]) }}" class="h-50 align-self-center" alt="">
+                                    </span>
+                                </div>
+                            </div>
+                            @endif
+                            @if($question->question_option->option_5 != '')
+                            <div class="col-md-6 test">
+                                <p class="text-gray-800 fw-normal mb-5 cursor-pointer option" data-id="{{ $question->id }}" data-option="5"> 
+                                    <i class="fas fa-eye fa-2xl" ></i> {{$question->question_option->option_5}}
+                                </p>
+                                <div class="symbol symbol-45px me-2 mb-5">
+                                    <span class="symbol-label">
+                                        <img src="{{ asset($question->question_option->image_option[4]) }}" class="h-50 align-self-center" alt="">
+                                    </span>
+                                </div>
+                            </div>
+                            <div class="col-md-6 reading d-none">
+                                <p class="text-gray-800 fw-normal mb-5  {{ ($question->question_option->answer == '5') ? 'right-answer' : ''}}"> 
+                                    <i class="fas fa-{{ ($question->question_option->answer == '5') ? 'check' : 'times'}} fa-2xl" ></i> {{$question->question_option->option_5}}
+                                </p>
+                                <div class="symbol symbol-45px me-2 mb-5">
+                                    <span class="symbol-label">
+                                        <img src="{{ asset($question->question_option->image_option[4]) }}" class="h-50 align-self-center" alt="">
+                                    </span>
+                                </div>
+                            </div>
+                            @endif
+                        </div>
+                        @endif
                         <div class="d-flex justify-content-start mt-2">
-                            <button type="button" class="btn btn-sm  btn-light me-3">
-                                <a href="{{ url('jobs',
-                                    [$question->sub_category->category->slug, $question->sub_category->slug, $question->subject->slug]
-                                ) }}">{{$question->subject->name}}</a>
-                            </button>              
-                            <button type="button" class="btn btn-sm  btn-light me-3">
-                                <a href="">{{$question->sub_category->name}}</a>
-                            </button>  
-                            <button type="button" class="btn btn-sm  btn-light me-3">
-                                <a href="{{ url('jobs', $question->sub_category->category->slug) }}">{{$question->sub_category->category->name}}</a>
-                            </button>            
-                            <button type="button" class="btn btn-sm  btn-light me-3">
-                                <a href="">{{$question->sub_category->category->main_category->name}}</a>
-                            </button>            
+                            @include('question.include.tag')     
                         </div>
                         
                     </div>
                     <div class="card-footer" style="padding-top:0px !important; padding-bottom:0px !important;">
+                        <!--begin::Question Activity-->
+                        @include('question.include.activity')
+                        <!--end::Question Activity-->
 
-                        <div class="d-flex justify-content-end mt-2" style="margin-bottom: -40px !important;">
-                                <a href="javascript:;" class="comment me-2 btn btn-sm btn-light btn-color-muted btn-active-light-info px-4 py-2"  
-                                data-text="comment"  title="Comment">
-                                <i class="fas fa-comment"></i>{{$question->comments->count()}}
-                                </a>
-                                <a href="javascript:;" class="bookmark me-2 btn btn-sm btn-light btn-color-muted btn-active-light-primary px-4 py-2"  
-                                    data-id="{{ $question->id }}" data-catid="{{ $question->sub_category->category->id }}" title="bookmark">
-                                    <i class="fas fa-bookmark"></i>
-                                </a>
-                                <a href="" style="cursor:default" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4">
-                                    <i class="fas fa-eye fa-xl"></i> {{$question->view_count}} 
-                                </a>
-
-                                <a href="javascript:;" class=" btn btn-sm btn-light btn-color-muted btn-active-light-danger px-4 py-2 vote me-2"  data-id="{{ $question->id }}" title="like">
-                                    <i class="fas fa-heart"></i>
-                                    {{$question->vote}}
-                                </a>
-                        </div>
                         <!--begin::Accordion-->
                         <!--begin::Section-->
                         <div class="m-0">
@@ -328,7 +440,7 @@
                                         <!--end::Heading-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="{{ route('question.edit-question', $r_question->id) }}" class="menu-link px-3">Edit Question</a>
+                                            <a href="javascript:;" class="menu-link px-3 editQuestion" data-id="{{ $r_question->id }}">Edit Question</a>
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
@@ -350,6 +462,7 @@
                             <div class="card-body">
                                 {{-- <h3 class="card-title text-black-700 fw-bolder cursor-pointer mb-5">{{$question->question}}</h3> --}}
                                 <!--end::Text-->
+                                @if($r_question->question_type == 'mcq')
                                 <div class="row" style="font-size: 16px">
                                     @if($r_question->question_option->option_1 != '')
                                     <div class="col-md-6">
@@ -388,6 +501,145 @@
                                     </div>
                                     @endif
                                 </div>
+                                @elseif($r_question->question_type == 'samprotik')
+                                <div class="row"  style="font-size: 16px">
+                                    <div class="col-md-12">
+                                        <p class="text-gray-800 fw-bold mb-5 " > 
+                                        <span style="color:green; font-weight:bold">answer:</span> {{$question->question_option->answer }}</p>
+                                    </div>
+                                </div>
+                                @elseif($r_question->question_type == 'written')
+                                <div class="row"  style="font-size: 16px">
+                                    @if($r_question->question_option->written_answer != '' )
+                                    <div class="col-md-12 test">
+                                        <p class="text-gray-800 fw-normal mb-5 "> 
+                                        <span style="color: #47BE7D; font-weight:600">ANS</span> <i class="fas fa-angle-double-right fa-2xl"></i> {{$question->question_option->written_answer }}
+                                        </p>
+                                    </div>
+                                    @else
+                                    <div class="col-md-6 test">
+                                        <p class="text-gray-800 fw-normal mb-5 "> 
+                                        <i class="fas fa-eye fa-2xl"></i> NO ANSWER YET
+                                        </p>
+                                    </div>
+                                    @endif  
+                                </div>
+                                @else
+                                <div class="row"  style="font-size: 16px">
+                                    @if($r_question->question_option->option_1 != '' )
+                                    <div class="col-md-6 test">
+                                        <p class="text-gray-800 fw-normal mb-5 cursor-pointer option" data-id="{{ $r_question->id }}" data-option="1"> 
+                                        <i class="fas fa-eye fa-2xl"></i> {{$r_question->question_option->option_1 }}
+                                        </p>
+                                        <div class="symbol symbol-45px me-2 mb-5">
+                                            <span class="symbol-label">
+                                                <img src="{{ asset($r_question->question_option->image_option[0]) }}" class="h-50 align-self-center" alt="">
+                                            </span>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="col-md-6 reading d-none">
+                                        <p class="text-gray-800 fw-normal mb-5 {{ ($r_question->question_option->answer == '1') ? 'right-answer' : ''}}" > 
+                                        <i class="fas fa-{{ ($r_question->question_option->answer == '1') ? 'check' : 'times'}} fa-2xl"></i> {{$r_question->question_option->option_1 }}
+                                        </p>
+                                        <div class="symbol symbol-45px me-2 mb-5">
+                                            <span class="symbol-label">
+                                                <img src="{{ asset($r_question->question_option->image_option[0]) }}" class="h-50 align-self-center" alt="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    
+                                    @endif
+                                    @if($r_question->question_option->option_2 != '')
+                                    <div class="col-md-6 test">
+                                        <p class="text-gray-800 fw-normal mb-5 cursor-pointer option" data-id="{{ $r_question->id }}" data-option="2"> 
+                                            <i class="fas fa-eye fa-2xl"></i> {{$r_question->question_option->option_2 }}
+                                        </p>
+                                        <div class="symbol symbol-45px me-2 mb-5">
+                                            <span class="symbol-label">
+                                                <img src="{{ asset($r_question->question_option->image_option[1]) }}" class="h-50 align-self-center" alt="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 reading d-none">
+                                        <p class="text-gray-800 fw-normal mb-5  {{ ($r_question->question_option->answer == '2') ? 'right-answer' : ''}} "> 
+                                            <i class="fas fa-{{ ($r_question->question_option->answer == '2') ? 'check' : 'times'}} fa-2xl"></i> {{$r_question->question_option->option_2 }}
+                                        </p>
+                                        <div class="symbol symbol-45px me-2 mb-5">
+                                            <span class="symbol-label">
+                                                <img src="{{ asset($r_question->question_option->image_option[1]) }}" class="h-50 align-self-center" alt="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    @endif
+                                    @if($r_question->question_option->option_3 != '')
+                                    <div class="col-md-6 test">
+                                        <p class="text-gray-800 fw-normal mb-5 cursor-pointer option" data-id="{{ $r_question->id }}" data-option="3"> 
+                                            <i class="fas fa-eye fa-2xl"></i> {{$r_question->question_option->option_3}}
+                                        </p>
+                                        <div class="symbol symbol-45px me-2 mb-5">
+                                            <span class="symbol-label">
+                                                <img src="{{ asset($r_question->question_option->image_option[2]) }}" class="h-50 align-self-center" alt="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 reading d-none">
+                                        <p class="text-gray-800 fw-normal mb-5  {{ ($r_question->question_option->answer == '3') ? 'right-answer' : ''}}"> 
+                                            <i class="fas fa-{{ ($r_question->question_option->answer == '3') ? 'check' : 'times'}} fa-2xl"></i> {{$r_question->question_option->option_3}}
+                                        </p>
+                                        <div class="symbol symbol-45px me-2 mb-5">
+                                            <span class="symbol-label">
+                                                <img src="{{ asset($r_question->question_option->image_option[2]) }}" class="h-50 align-self-center" alt="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    @endif
+                                    @if($r_question->question_option->option_4 != '' )
+                                    <div class="col-md-6 test">
+                                        <p class="text-gray-800 fw-normal mb-5 cursor-pointer option" data-id="{{ $r_question->id }}" data-option="4"> 
+                                            <i class="fas fa-eye fa-2xl" ></i> {{$r_question->question_option->option_4}}
+                                        </p>
+                                        <div class="symbol symbol-45px me-2 mb-5">
+                                            <span class="symbol-label">
+                                                <img src="{{ asset($r_question->question_option->image_option[3]) }}" class="h-50 align-self-center" alt="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 reading d-none">
+                                        <p class="text-gray-800 fw-normal mb-5  {{ ($r_question->question_option->answer == '4') ? 'right-answer' : ''}}"> 
+                                            <i class="fas fa-{{ ($r_question->question_option->answer == '4') ? 'check' : 'times'}} fa-2xl" ></i> {{$r_question->question_option->option_4}}
+                                        </p>
+                                        <div class="symbol symbol-45px me-2 mb-5">
+                                            <span class="symbol-label">
+                                                <img src="{{ asset($r_question->question_option->image_option[3]) }}" class="h-50 align-self-center" alt="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    @endif
+                                    @if($r_question->question_option->option_5 != '')
+                                    <div class="col-md-6 test">
+                                        <p class="text-gray-800 fw-normal mb-5 cursor-pointer option" data-id="{{ $r_question->id }}" data-option="5"> 
+                                            <i class="fas fa-eye fa-2xl" ></i> {{$r_question->question_option->option_5}}
+                                        </p>
+                                        <div class="symbol symbol-45px me-2 mb-5">
+                                            <span class="symbol-label">
+                                                <img src="{{ asset($r_question->question_option->image_option[4]) }}" class="h-50 align-self-center" alt="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 reading d-none">
+                                        <p class="text-gray-800 fw-normal mb-5  {{ ($r_question->question_option->answer == '5') ? 'right-answer' : ''}}"> 
+                                            <i class="fas fa-{{ ($r_question->question_option->answer == '5') ? 'check' : 'times'}} fa-2xl" ></i> {{$r_question->question_option->option_5}}
+                                        </p>
+                                        <div class="symbol symbol-45px me-2 mb-5">
+                                            <span class="symbol-label">
+                                                <img src="{{ asset($r_question->question_option->image_option[4]) }}" class="h-50 align-self-center" alt="">
+                                            </span>
+                                        </div>
+                                    </div>
+                                    @endif
+                                </div>
+                                @endif
                                 <div class="d-flex justify-content-start mt-2">
                                     <button type="button" class="btn btn-sm  btn-light me-3">
                                         <a href="{{ url('jobs',
@@ -395,14 +647,14 @@
                                         ) }}">{{$question->subject->name}}</a>
                                     </button>              
                                     <button type="button" class="btn btn-sm  btn-light me-3">
-                                        <a href="">{{$question->sub_category->name}}</a>
+                                        <a href="{{ route('jobs.sub-category.subject.all-question', [$question->sub_category->category->slug, $question->sub_category->slug]) }}">{{$question->sub_category->name}}</a>
                                     </button>  
                                     <button type="button" class="btn btn-sm  btn-light me-3">
-                                        <a href="{{ url('jobs', $question->sub_category->category->slug) }}">{{$question->sub_category->category->name}}</a>
+                                        <a href="{{ url('job-solution', [$question->sub_category->category->main_category->slug, $question->sub_category->category->slug]) }}">{{$question->sub_category->category->name}}</a>
                                     </button>            
                                     <button type="button" class="btn btn-sm  btn-light me-3">
-                                        <a href="">{{$question->sub_category->category->main_category->name}}</a>
-                                    </button>            
+                                        <a href="{{ url('job-solution', $question->sub_category->category->main_category->slug) }}">{{$question->sub_category->category->main_category->name}}</a>
+                                    </button>           
                                 </div>
                                 
                             </div>
@@ -410,7 +662,7 @@
 
                                 <div class="d-flex justify-content-end mt-2" style="margin-bottom: -40px !important;">
                                         <a href="javascript:;" class="comment me-2 btn btn-sm btn-light btn-color-muted btn-active-light-info px-4 py-2"  
-                                        data-text="comment"  title="Comment">
+                                        data-text="comment"  data-id="{{ $r_question->id }}"  title="Comment">
                                         <i class="fas fa-comment"></i>{{$r_question->comments->count()}}
                                         </a>
                                         <a href="javascript:;" class="bookmark me-2 btn btn-sm btn-light btn-color-muted btn-active-light-primary px-4 py-2"  
@@ -494,6 +746,12 @@
                 @include('question.include.add_comment_modal')
                 <!--end::Modal - New Comment-->
 
+                <!--begin::Modal - Edit Question-->
+                <div class="modal fade" id="kk_modal_show_question" tabindex="-1" aria-hidden="true">
+                    <div id="edited_question_view_modal"></div>
+                </div>
+                <!--end::Modal - Edit Question-->
+
             </div>
             <!--end::Col-->
            
@@ -508,6 +766,9 @@
         //add comment
         $(document).ready(function(){
             $('.comment').on('click', function(){
+                var id = $(this).data(id)
+                //console.log(id.id)
+                $('input[name="question_id"]').val(id.id)
                 $('.with-errors').text('')
                 $('#kk_modal_new_comment_form')[0].reset();
                 $('#kk_modal_new_comment').modal('show')
@@ -555,7 +816,7 @@
                                 }
                             }).then((function () {
                                 //refresh datatable
-                               location.reload()
+                                $('#dataTable').DataTable().ajax.reload();
                             }))
                     }
 
@@ -576,6 +837,79 @@
             $('.indicator-progress').hide()
             $('#kk_modal_new_service_submit').removeAttr('disabled')
         })
+
+        //edit Question
+        $('.editQuestion').on('click', function() {
+            var id = $(this).data(id)
+            //console.log(id)
+            $.ajax({
+                type:"GET",
+                url: "{{ url('/question/edit-question')}}"+'/'+id.id,
+                dataType: 'json',
+                success:function(data){
+                    $("#edited_question_view_modal").html(data.html);
+                    $("#kk_modal_show_question").modal('show');
+                }
+            });
+        });
+
+        //cancel button
+        $(document).on('click', '#kk_modal_new_service_cancel', function(){
+            
+            $("#kk_modal_show_question").modal('hide');
+        })
+
+        //update
+        $(document).on('submit', '#kk_modal_new_question_form', function(e){
+            e.preventDefault()
+            //console.log('here')
+            $('.with-errors').text('')
+            $('.indicator-label').hide()
+            $('.indicator-progress').show()
+            $('#kk_modal_new_service_submit').attr('disabled','true')
+
+            var formData = new FormData(this);
+            $.ajax({
+                type:"POST",
+                url: "{{ url('/question/edit-question/update')}}",
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    if(data.success ==  false || data.success ==  "false"){
+                        var arr = Object.keys(data.errors);
+                        var arr_val = Object.values(data.errors);
+                        for(var i= 0;i < arr.length;i++){
+                        $('.'+arr[i]+'-error').text(arr_val[i][0])
+                        }
+                    }else if(data.error || data.error == 'true'){
+                        var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                        $('#kk_modal_new_question_form').find('.messages').html(alertBox).show();
+                    }else{
+                        // empty the form
+                        $('#kk_modal_new_question_form')[0].reset();
+                        $("#kk_modal_show_question").modal('hide');
+
+                        Swal.fire({
+                            text: data.message,
+                            icon: "success",
+                            buttonsStyling: !1,
+                            confirmButtonText: "{{__('Ok, got it!')}}",
+                            customClass: {
+                                confirmButton: "btn fw-bold btn-primary"
+                            }
+                        })
+                    }
+
+                    $('.indicator-label').show()
+                    $('.indicator-progress').hide()
+                    $('#kk_modal_new_service_submit').removeAttr('disabled')
+
+                }
+            });
+        })
+       
 
         //decription modal show
         $('.addDescription').on('click', function() {
@@ -676,7 +1010,7 @@
         //like description
         $('.like').on('click', function(){
             var id = $(this).data('id')
-             var val = $(this).text()
+            var val = $(this).text()
             //console.log(val)
             $(this).html(`<i class="fas fa-thumbs-up"></i>`+(parseInt(val)+1))
             $.ajax({

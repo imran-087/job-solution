@@ -105,15 +105,12 @@
                     </div>
                     <div class="card-body">
                         <div class="row"  style="font-size: 16px">
-    
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <p class="text-gray-800 fw-bold mb-5 " > 
                                   <span style="color:green">Ans:</span> {{$question->question_option->answer }}</p>
                             </div>
-                           
                         </div>
                         
-                       
                     </div>
                     <div class="card-footer" style="padding-top:0px !important; padding-bottom:0px !important;">
 

@@ -191,7 +191,7 @@
                                 <!--end::Heading-->
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="{{ route('question.edit-question', $question->id) }}" class="menu-link px-3">Edit Question</a>
+                                    <a href="javascript:;" class="menu-link px-3 editQuestion" data-id="{{ $question->id }}">Edit Question</a>
                                 </div>
                                 <!--end::Menu item-->
                                 <!--begin::Menu item-->
@@ -402,23 +402,7 @@
                         </div>
                         @endif
                         <div class="d-flex justify-content-between">
-                            <div class="d-flex justify-content-start mt-2">
-                                <button type="button" class="btn btn-sm  btn-light me-3">
-                                    <a href="{{ url('jobs',
-                                        [$question->sub_category->category->slug, $question->sub_category->slug, $question->subject->slug]
-                                    ) }}">{{$question->subject->name}}</a>
-                                </button>              
-                                <button type="button" class="btn btn-sm  btn-light me-3">
-                                    <a href="{{ route('jobs.sub-category.subject.all-question', [$question->sub_category->category->slug, $question->sub_category->slug]) }}">{{$question->sub_category->name}}</a>
-                                </button>  
-                                <button type="button" class="btn btn-sm  btn-light me-3">
-                                    <a href="{{ url('job-solution', [$question->sub_category->category->main_category->slug, $question->sub_category->category->slug]) }}">{{$question->sub_category->category->name}}</a>
-                                </button>            
-                                <button type="button" class="btn btn-sm  btn-light me-3">
-                                    <a href="{{ url('job-solution', $question->sub_category->category->main_category->slug) }}">{{$question->sub_category->category->main_category->name}}</a>
-                                </button>            
-                                       
-                            </div>
+                           @include('question.include.tag')
                             <div class=""> 
                                 <a href="javascript:;" class="btn btn-sm  btn-success me-3 view-answer "  data-id="{{ $question->id }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-dark" title="View Answer"><i class="fas fa-eye fa-xl" ></i></a>
                             </div> 
@@ -426,24 +410,10 @@
                        
                     </div>
                     <div class="card-footer" style="padding-top:0px !important; padding-bottom:0px !important;">
-
-                        <div class="d-flex justify-content-end mt-2" style="margin-bottom: -40px !important;">
-                            <a href="javascript:;" class="comment me-2 btn btn-sm btn-light btn-color-muted btn-active-light-info px-4 py-2"  
-                            data-text="comment" data-id="{{ $question->id }}"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-dark" title="Add Comment">
-                            <i class="fas fa-comment"></i> {{$question->comments->count()}}
-                            </a>
-                            <a href="javascript:;" class="bookmark me-2 btn btn-sm btn-light btn-color-muted btn-active-light-primary px-4 py-2"  
-                            data-id="{{ $question->id }}" data-catid="{{ $question->sub_category->category->id }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-dark" title="Bookmark">
-                            <i class="fas fa-bookmark"></i>
-                            </a>
-                            <a href="javascript:;" class=" btn btn-sm btn-light btn-color-muted btn-active-light-danger px-4 py-2 vote me-2"  data-id="{{ $question->id }}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="tooltip-dark" title="Like">
-                            <!--begin::Svg Icon | path: icons/duotune/general/gen030.svg-->
-                            <i class="fas fa-heart"></i>
-                            <!--end::Svg Icon-->{{$question->vote}}</a>
-                            <span style="cursor:default" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="tooltip-dark" title="Total view">
-                                <i class="fas fa-eye fa-xl"></i> {{$question->view_count}} 
-                            </span>
-                        </div>
+                        <!--begin::Question Activity-->
+                        @include('question.include.activity')
+                        <!--end::Question Activity-->
+                        
                         <!--begin::Accordion-->
                         <!--begin::Section-->
                         <div class="m-0">
@@ -500,6 +470,12 @@
                  <!--begin::Modal - New Comment-->
                 @include('question.include.add_comment_modal')
                 <!--end::Modal - New Comment-->
+
+                <!--begin::Modal - Edit Question-->
+                <div class="modal fade" id="kk_modal_show_question" tabindex="-1" aria-hidden="true">
+                    <div id="edited_question_view_modal"></div>
+                </div>
+                <!--end::Modal - Edit Question-->
                 
                 @endforeach
                 <div class="d-flex justify-content-end">
@@ -627,7 +603,79 @@
 
         })
         
-       
+       //edit Question
+        $('.editQuestion').on('click', function() {
+            var id = $(this).data(id)
+            //console.log(id)
+            $.ajax({
+                type:"GET",
+                url: "{{ url('/question/edit-question')}}"+'/'+id.id,
+                dataType: 'json',
+                success:function(data){
+                    $("#edited_question_view_modal").html(data.html);
+                    $("#kk_modal_show_question").modal('show');
+                }
+            });
+        });
+
+        //cancel button
+        $(document).on('click', '#kk_modal_new_service_cancel', function(){
+            
+            $("#kk_modal_show_question").modal('hide');
+        })
+
+        //update
+        $(document).on('submit', '#kk_modal_new_question_form', function(e){
+            e.preventDefault()
+            //console.log('here')
+            $('.with-errors').text('')
+            $('.indicator-label').hide()
+            $('.indicator-progress').show()
+            $('#kk_modal_new_service_submit').attr('disabled','true')
+
+            var formData = new FormData(this);
+            $.ajax({
+                type:"POST",
+                url: "{{ url('/question/edit-question/update')}}",
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    if(data.success ==  false || data.success ==  "false"){
+                        var arr = Object.keys(data.errors);
+                        var arr_val = Object.values(data.errors);
+                        for(var i= 0;i < arr.length;i++){
+                        $('.'+arr[i]+'-error').text(arr_val[i][0])
+                        }
+                    }else if(data.error || data.error == 'true'){
+                        var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                        $('#kk_modal_new_question_form').find('.messages').html(alertBox).show();
+                    }else{
+                        // empty the form
+                        $('#kk_modal_new_question_form')[0].reset();
+                        $("#kk_modal_show_question").modal('hide');
+
+                        Swal.fire({
+                            text: data.message,
+                            icon: "success",
+                            buttonsStyling: !1,
+                            confirmButtonText: "{{__('Ok, got it!')}}",
+                            customClass: {
+                                confirmButton: "btn fw-bold btn-primary"
+                            }
+                        })
+                    }
+
+                    $('.indicator-label').show()
+                    $('.indicator-progress').hide()
+                    $('#kk_modal_new_service_submit').removeAttr('disabled')
+
+                }
+            });
+        })
+
+       //add description
         $('.addDescription').on('click', function() {
             var id = $(this).data(id)
             //console.log(id.id)
@@ -807,7 +855,7 @@
             })
         })
 
-
+        //swiper for subject
         const swiper = new Swiper('.swiper', {
             pagination: {
                 el: '.swiper-pagination',

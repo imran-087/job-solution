@@ -72,7 +72,14 @@ class QuestionDescriptionController extends Controller
         return view('admin.description.question_des_index', compact('main_categories', 'sub_categories'));
     }
 
-    //create or update main category
+    //create description
+    public function create()
+    {
+        $main_categories = MainCategory::all();
+        return view('admin.description.create', compact('main_categories'));
+    }
+
+    //store or update main category
     public function store(Request $request)
     {
         //dd($request->all());
@@ -175,7 +182,6 @@ class QuestionDescriptionController extends Controller
     }
 
     //pending description
-
     public function pending(Request $request)
     {
         if ($request->ajax()) {
@@ -193,9 +199,12 @@ class QuestionDescriptionController extends Controller
 
                 ->addColumn('action', function ($row) {
                     $btn = '<div class="d-flex justify-content-start flex-shrink-0">
-                        <a href="javascript:;" onclick="changeStatus(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                        <a href="javascript:;" onclick="view(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-warning btn-sm me-1">
+                            <i class="fas fa-eye"></i>
+                        </a>
+                        <a href="javascript:;" onclick="changeStatus(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" >
                             <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
-                            <span class="svg-icon svg-icon-3">
+                            <span class="svg-icon svg-icon-3" >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                     <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black"></path>
                                     <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="black"></path>
@@ -240,9 +249,29 @@ class QuestionDescriptionController extends Controller
         ], 200);
     }
 
-    public function create()
+
+
+    //show single question
+    public function showDescription($id)
     {
-        $main_categories = MainCategory::all();
-        return view('admin.description.create', compact('main_categories'));
+        $description = QuestionDescription::with('question')->where('id', $id)->first();
+        //dd($question);
+        $view = view('admin.description.view_description_modal', compact('description'))->render();
+
+        return response([
+            'html' => $view
+        ]);
+    }
+
+    //show question
+    public function getAllDescription($id)
+    {
+        $question = Question::with('descriptions')->where('id', $id)->first();
+        //dd($question);
+        $view = view('admin.description.view_all_description_modal', compact('question'))->render();
+
+        return response([
+            'html' => $view
+        ]);
     }
 }

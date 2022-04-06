@@ -66,14 +66,14 @@ Route::get('job-solutions/year={year}', [CategoryController::class, 'getSubCateg
  ********************/
 //get subject and all question
 Route::get('/jobs/{category}/{sub_category}/all-question', [QuestionController::class, 'getSubjectWithAllQuestion'])->name('jobs.sub-category.subject.all-question');
-//single question
-Route::get('/single-question', [QuestionController::class, 'singleQuestion'])->name('question.single-question');
 /** get subject wise question */
 Route::get('/jobs/{category}/{sub_category}/{subject}', [QuestionController::class, 'getSubjectWiseQuestion'])->name('jobs.category.sub-category.subject.question');
+//single question
+Route::get('/single-question', [QuestionController::class, 'singleQuestion'])->name('question.single-question');
 
 //edit question
 Route::get('/question/edit-question/{id}', [QuestionController::class, 'edit'])->name('question.edit-question');
-Route::post('/question/update-question', [QuestionController::class, 'update'])->name('question.update-question');
+Route::post('/question/edit-question/update', [QuestionController::class, 'update'])->name('question.update-question');
 
 /******************
    Question Activity

@@ -112,6 +112,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/description/pending-question-description', 'QuestionDescriptionController@pending')->name('question-description.pending');
         Route::get('/description/pending-question-description/status/{id}', 'QuestionDescriptionController@chnageStatus')->name('question-description.pending-status');
 
+        //show description
+        Route::get('/description/question-description/show/{id}', 'QuestionDescriptionController@showDescription')->name('question-description.show');
+        Route::get('/description/question-all-description/show/{id}', 'QuestionDescriptionController@getAllDescription')->name('question-all-description.show');
+
 
         ########## User Management ###########
         Route::get('/user-management/user-list', 'UserController@index')->name('user-management.index');

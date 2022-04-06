@@ -11,6 +11,7 @@
             
             <td>
                 <span class="badge badge-success">{{ $question->descriptions->count() }}</span>
+                <span class="btn btn-sm btn-active-danger  btn-light getDescription" data-id="{{ $question->id }}">View</span>
             </td>
             <!--begin::Action=-->
             <td class="">

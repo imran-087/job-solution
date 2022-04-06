@@ -68,7 +68,7 @@
                     </div>
                     <!--end::Title-->
                     <!--begin::Lable-->
-                    <span class="fw-bolder text-success py-1">{{$category->sub_categories->count()}}</span>
+                    <span class="fw-bolder badge badge-circle badge-danger py-1">{{$category->sub_categories->count()}}</span>
                     <!--end::Lable-->
                 </div>
             </div>

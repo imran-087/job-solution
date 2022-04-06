@@ -1,4 +1,4 @@
-  <div class="modal fade" id="kk_modal_new_question_des" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="kk_modal_new_question_des" tabindex="-1" aria-hidden="true">
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <!--begin::Modal content-->

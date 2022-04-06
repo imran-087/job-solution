@@ -302,8 +302,7 @@
             
                 <!--begin::Modal - New Product/Service-->
                 <div class="modal fade" id="kk_modal_show_question" tabindex="-1" aria-hidden="true">
-                {{-- @include('admin.question.view_question_modal') --}}
-                <div id="edited_question_view_modal"></div>
+                    <div id="edited_question_view_modal"></div>
                 </div>
                 <!--end::Modal - New Product/Service-->
                 

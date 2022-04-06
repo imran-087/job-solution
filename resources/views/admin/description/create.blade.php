@@ -260,13 +260,35 @@
 </div>
 <!--end::Modal - New Product/Service-->
 
+<!--begin::Modal - Description view modal-->
+<div class="modal fade" id="kk_modal_show_description" tabindex="-1" aria-hidden="true">
+<div id="description_view_modal"></div>
+</div>
+<!--end::Modal - Description view modal-->
+
 @endsection
 
 
 @push('script')
     <script type="text/javascript">
        
+       //get description
+        $('body').on('click', '.getDescription', function() {
+            var id = $(this).data(id)
+            //console.log(id.id)
+            $.ajax({
+                type:"GET",
+                url: "{{ url('admin/description/question-all-description/show')}}"+'/'+id.id,
+                dataType: 'json',
+                success:function(data){
+                    $("#description_view_modal").html(data.html);
+                    $("#kk_modal_show_description").modal('show');
+                }
+            });
+           
+        });
        
+        //add deescription
         $('body').on('click', '.addDescription', function() {
             var id = $(this).data(id)
             //console.log(id.id)

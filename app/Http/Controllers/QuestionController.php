@@ -80,46 +80,88 @@ class QuestionController extends Controller
 
     public function edit($id)
     {
-        $years = Year::all();
-        $passages = Passage::all();
+        //dd($id);
         $question = Question::find($id);
-        //dd($question->toArray());
+        //dd($question);
         $question_option = QuestionOption::where('question_id', $id)->first();
-        $sub_category = SubCategory::where('id', $question->sub_category_id)->first();
-        $subjects = Subject::where('sub_category_id', $question->sub_category_id)->get();
-        //dd($question_options->toArray());
-        return view('question.edit_question', compact(['subjects', 'question', 'years', 'passages', 'question_option', 'sub_category']));
+        $view = view('question.include.edit_question_modal', compact('question', 'question_option'))->render();
+
+        return response([
+            'html' => $view
+        ]);
+        // $years = Year::all();
+        // $passages = Passage::all();
+        // $question = Question::find($id);
+        // //dd($question->toArray());
+        // $question_option = QuestionOption::where('question_id', $id)->first();
+        // $sub_category = SubCategory::where('id', $question->sub_category_id)->first();
+        // $subjects = Subject::where('sub_category_id', $question->sub_category_id)->get();
+        // //dd($question_options->toArray());
+        // return view('question.edit_question', compact(['subjects', 'question', 'years', 'passages', 'question_option', 'sub_category']));
     }
 
     public function update(Request $request)
     {
-
+        //dd($request->all());
         if (!Auth::check()) {
-            Session::flash('error', 'You have to login first');
-            return redirect()->back();
+            //dd('unthenticate');
+            return response()->json([
+                'error' => true,
+                'message' => __('To edit a question you have to login')
+            ]);
         } else {
             //dd($request->all());
-            $question = EditedQuestion::create([
-                'question_id' => $request->id,
-                'question' => $request->question,
-                'option_1' => $request->option_1,
-                'option_2' => $request->option_2,
-                'option_3' => $request->option_3,
-                'option_4' => $request->option_4,
-                'option_5' => $request->option_5,
-                'answer' => $request->answer,
-                'written_answer' => $request->written_answer,
-                'user_id' => Auth::user()->id,
-            ]);
+            $question = new EditedQuestion();
+            $question->question_id = $request->question_id;
+            $question->question = $request->question;
+            $question->user_id = Auth::user()->id;
 
-
-            if ($question) {
-                Session::flash('success', 'Question updated!! Please wait for approval');
-                return redirect()->back();
-            } else {
-                Session::flash('error', 'Somethings Went wrong');
-                return redirect()->back();
+            if ($request->type == 'written') {
+                $question->written_answer = $request->written_answer;
+            } elseif ($request->type == 'mcq') {
+                $question->option_1 = $request->option_1;
+                $question->option_2 = $request->option_2;
+                $question->option_3 = $request->option_3;
+                $question->option_4 = $request->option_4;
+                $question->option_5 = $request->option_5;
+                $question->answer = $request->answer;
+            } elseif ($request->type == 'samprotik') {
+                $question->answer = $request->answer;
             }
+
+            if ($question->save()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => __('Question update request has been sent! Thanks for helping us...')
+                ], 200);
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => __('Failed!.')
+                ]);
+            }
+            // $question = EditedQuestion::create([
+            //     'question_id' => $request->id,
+            //     'question' => $request->question,
+            //     'option_1' => $request->option_1,
+            //     'option_2' => $request->option_2,
+            //     'option_3' => $request->option_3,
+            //     'option_4' => $request->option_4,
+            //     'option_5' => $request->option_5,
+            //     'answer' => $request->answer,
+            //     'written_answer' => $request->written_answer,
+            //     'user_id' => Auth::user()->id,
+            // ]);
+
+
+
+            // if ($question) {
+            //     Session::flash('success', 'Question updated!! Please wait for approval');
+            //     return redirect()->back();
+            // } else {
+            //     Session::flash('error', 'Somethings Went wrong');
+            //     return redirect()->back();
+            // }
         }
     }
 
