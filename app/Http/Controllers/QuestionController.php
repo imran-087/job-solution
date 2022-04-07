@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Year;
+use App\Models\Admin;
 use App\Models\Passage;
 use App\Models\Subject;
 use App\Models\Bookmark;
@@ -13,6 +14,7 @@ use App\Models\MainCategory;
 use Illuminate\Http\Request;
 use App\Models\EditedQuestion;
 use App\Models\QuestionOption;
+use App\Notifications\EditQuestionNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -130,38 +132,23 @@ class QuestionController extends Controller
             }
 
             if ($question->save()) {
+                //notification
+                $admin = Admin::where('id', 1)->first();
+                // dd($admin);
+                $admin->notify(new EditQuestionNotification($question));
+
                 return response()->json([
                     'success' => true,
                     'message' => __('Question update request has been sent! Thanks for helping us...')
                 ], 200);
+                //dd($question);
+
             } else {
                 return response()->json([
                     'error' => true,
                     'message' => __('Failed!.')
                 ]);
             }
-            // $question = EditedQuestion::create([
-            //     'question_id' => $request->id,
-            //     'question' => $request->question,
-            //     'option_1' => $request->option_1,
-            //     'option_2' => $request->option_2,
-            //     'option_3' => $request->option_3,
-            //     'option_4' => $request->option_4,
-            //     'option_5' => $request->option_5,
-            //     'answer' => $request->answer,
-            //     'written_answer' => $request->written_answer,
-            //     'user_id' => Auth::user()->id,
-            // ]);
-
-
-
-            // if ($question) {
-            //     Session::flash('success', 'Question updated!! Please wait for approval');
-            //     return redirect()->back();
-            // } else {
-            //     Session::flash('error', 'Somethings Went wrong');
-            //     return redirect()->back();
-            // }
         }
     }
 
@@ -169,6 +156,10 @@ class QuestionController extends Controller
     {
         //dd($id);
         $question = Question::find($request->ques_id);
+
+        $question->view_count = $question->view_count + 1;
+        $question->save();
+
         return view('question.single_question', compact('question'));
     }
 }

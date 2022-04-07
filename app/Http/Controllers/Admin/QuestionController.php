@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\Tag;
+use App\Models\User;
 use App\Models\Year;
 use App\Models\Passage;
 use App\Models\Subject;
@@ -11,13 +12,15 @@ use App\Models\SubCategory;
 use Illuminate\Support\Str;
 use App\Models\MainCategory;
 use Illuminate\Http\Request;
-use App\Models\QuestionOption;
-use App\Http\Controllers\Controller;
 use App\Models\EditedQuestion;
+use App\Models\QuestionOption;
 use App\Models\PreviewQuestion;
+use App\Http\Controllers\Controller;
+use App\Notifications\QuestionAddNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Facades\DataTables;
+use Illuminate\Support\Facades\Notification;
 
 class QuestionController extends Controller
 {
@@ -368,6 +371,9 @@ class QuestionController extends Controller
                 ],
                 200
             );
+
+            $users = User::all();
+            Notification::send($users, new QuestionAddNotification());
         }
     }
 

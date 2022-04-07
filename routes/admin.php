@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DiscussionController;
 use App\Http\Controllers\Admin\BackendUserController;
+use App\Http\Controllers\Admin\NotificationController;
 
 /*
 |--------------------------------------------------------------------------
@@ -148,5 +149,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         ############ Discussion Route #############
         Route::get('/forum/discussion/index', 'DiscussionController@index')->name('discussion.index');
         Route::get('/forum/discussion/delete/{id}', 'DiscussionController@delete')->name('discussion.delete');
+
+        ########### Mark as read Notification ################
+        Route::get('/notification/mark-as-read/{id}', 'NotificationController@markAsRead')->name('notification.mark-as-read');
     });
 });

@@ -67,10 +67,10 @@ class ProfileSettingsController extends Controller
 
 
             // unlink old image
-            $photo_path = \base_path() . '/public' . $user->avatar;
-            if (File::exists($photo_path)) {
-                unlink($photo_path);
-            }
+            // $photo_path = \base_path() . '/public' . $user->avatar;
+            // if (File::exists($photo_path)) {
+            //     unlink($photo_path);
+            // }
 
             $user->avatar = '/uploads/avatar/' . $image_name;
         }

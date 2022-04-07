@@ -7,9 +7,15 @@
             <div class="d-flex align-items-center justify-content-between flex-grow-1">
                 <div class="d-flex">
                     <!--begin::Avatar-->
+                    @if($description->approval_id == Null)
                     <div class="symbol symbol-45px me-5">
-                        <img src="/metronic8/demo1/assets/media/avatars/300-7.jpg" alt="">
+                        <img src="{{ $description->admin->avatar }}" alt="">
                     </div>
+                    @else
+                    <div class="symbol symbol-45px me-5">
+                        <img src="{{ $description->user->avatar }}" alt="">
+                    </div>
+                    @endif
                     <!--end::Avatar-->
                     <!--begin::Info-->
                     <div class="d-flex flex-column">

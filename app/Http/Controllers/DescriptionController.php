@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Models\QuestionDescription;
+use App\Notifications\AddDescriptionNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -42,6 +44,11 @@ class DescriptionController extends Controller
 
 
                 if ($question_des->save()) {
+                    //notification
+                    $admin = Admin::where('id', 1)->first();
+                    // dd($admin);
+                    $admin->notify(new AddDescriptionNotification($question_des));
+
                     return response()->json([
                         'success' => true,
                         'message' => 'Description added successfully! Please wait for Admin Approval...'

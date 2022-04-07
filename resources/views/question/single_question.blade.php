@@ -1002,7 +1002,7 @@
                 url: "{{ url('question/vote')}}"+'/'+id,
                 dataType: 'json',
                 success:function(data){
-                      toastr.success(data.message);
+                    toastr.success(data.message);
                 }
             })
         });
@@ -1033,7 +1033,6 @@
         $('.bookmark').on('click', function(){
             var id = $(this).data('id')
             var catid = $(this).data('catid')
-           
             $(this).children().addClass('svg-icon-primary');
             //alert(id)
             $.ajax({
@@ -1054,8 +1053,7 @@
                         
                         })
                     }
-                   
-                    
+                           
                 }
             })
         });
