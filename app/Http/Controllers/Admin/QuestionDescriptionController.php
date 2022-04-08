@@ -29,7 +29,13 @@ class QuestionDescriptionController extends Controller
                 ->addIndexColumn()
 
                 ->editColumn('question_id', function ($row) {
-                    return Str::limit($row->question->question, 15);
+
+                    //return ;
+                    $val = '<div>
+                            <span class="text-dark fw-bolder text-hover-primary d-block fs-6">' . Str::limit($row->question->question, 25) . '</span>
+                            <span class="text-muted fw-bold text-muted d-block fs-7">' . $row->question->sub_category->name . '</span>
+                        </div>';
+                    return $val;
                 })
                 ->editColumn('created_at', function ($row) {
                     return $row->created_at->diffForHumans();
@@ -153,17 +159,10 @@ class QuestionDescriptionController extends Controller
         //dd($id);
         $question_des = QuestionDescription::find($id);
         $question = Question::where('id', $question_des->question_id)->first();
-        $subject = Subject::where('id', $question->subject_id)->first();
-        $sub_category = SubCategory::where('id', $subject->sub_category_id)->first();
-        $category = Category::where('id', $sub_category->category_id)->first();
-        $main_category = MainCategory::where('id', $category->main_category_id)->first();
+
         $data = [
             'question_des' => $question_des,
             'question' => $question,
-            'subject' => $subject,
-            'sub_category' => $sub_category,
-            'category' => $category,
-            'main_category' => $main_category,
         ];
         return response($data);
     }

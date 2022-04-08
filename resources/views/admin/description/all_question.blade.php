@@ -16,7 +16,6 @@
             <!--begin::Action=-->
             <td class="">
                 <a href="javascript:;" class="btn btn-sm btn-light btn-active-color-primary me-3 addDescription" data-id="{{ $question->id }}" >Add Description</a>
-                
             </td>
             <!--end::Action=-->
         </tr>

@@ -47,7 +47,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-dark">Descriptio list</li>
+                    <li class="breadcrumb-item text-dark">Add Description</li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -287,7 +287,8 @@
             });
            
         });
-       
+
+
         //add deescription
         $('body').on('click', '.addDescription', function() {
             var id = $(this).data(id)
@@ -358,58 +359,6 @@
 
         })
 
-    //deleteCategory
-    function deleteDescription(id){
-        Swal.fire({
-            text: "Are you sure you want delete this?",
-            icon: "warning",
-            showCancelButton: !0,
-            buttonsStyling: !1,
-            confirmButtonText: "Confirm",
-            cancelButtonText: "No, cancel",
-            customClass: {
-                confirmButton: "btn fw-bold btn-danger",
-                cancelButton: "btn fw-bold btn-active-light-primary"
-            }
-        }).then((function (o) {
-            if(o.value){ //if agree
-                $.ajax({
-                    type: "GET",
-                    url: "{{ url('admin/description/question-description/delete') }}"+'/'+id,
-                    data: {},
-                    success: function (res)
-                    {
-                        if(res.success){
-                            Swal.fire({
-                                text: res.message,
-                                icon: "success",
-                                buttonsStyling: !1,
-                                confirmButtonText: "Ok, got it!",
-                                customClass: {
-                                    confirmButton: "btn fw-bold btn-primary"
-                                }
-                            }).then((function () {
-                                //refresh datatable
-                                $('#dataTable').DataTable().ajax.reload();
-                            }))
-                        }
-                    }
-                });
-
-            }else{ //if cancel
-                Swal.fire({
-                    text: "Item has not been deleted",
-                    icon: "error",
-                    buttonsStyling: !1,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn fw-bold btn-primary"
-                    }
-                })
-            }
-
-        }))
-    }
-
+   
     </script>
 @endpush

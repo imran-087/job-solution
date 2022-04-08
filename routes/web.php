@@ -8,11 +8,12 @@ use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\DescriptionController;
+use App\Http\Controllers\Forum\ReplyController;
 use App\Http\Controllers\UserDashboardController;
+use App\Http\Controllers\RecentQuestionController;
 use App\Http\Controllers\ProfileSettingsController;
 use App\Http\Controllers\Forum\DiscussionController;
 use App\Http\Controllers\QuestionActivityController;
-use App\Http\Controllers\RecentQuestionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,6 +104,10 @@ Route::middleware('auth')->name('user.')->group(function () {
   Route::get('/my-dashboard/{user}/profile-settings', [UserDashboardController::class, 'profileSettings'])->name('profile-settings');
   Route::post('/my-dashboard/profile-settings/chnage-password', [UserDashboardController::class, 'chnagePassword'])->name('chnage-password');
   Route::post('/my-dashboard/profile-settings/update-profile', [UserDashboardController::class, 'updateProfile'])->name('update-profile');
+
+  //activity
+  Route::get('user-activities', [UserDashboardController::class, 'userActivity'])->name('activity');
+  Route::get('user-resume-create', [UserDashboardController::class, 'userResume'])->name('resume');
 
   ###**  Bookmark **###
   Route::get('/my-bookmark/user={user}', [BookmarkController::class, 'getBookmark'])->name('bookmark');

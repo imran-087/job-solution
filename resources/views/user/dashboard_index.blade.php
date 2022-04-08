@@ -92,7 +92,7 @@
                                     @if(Auth::user()->email_verified_at == '')
                                     <a href="#" class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3">Not verified </a>
                                     @else
-                                    <a href="#" class="btn btn-sm btn-light-danger fw-bolder ms-2 fs-8 py-1 px-3">Verified </a>
+                                    <a href="#" class="btn btn-sm btn-light-success fw-bolder ms-2 fs-8 py-1 px-3">Verified </a>
                                     @endif
                                 </div>
                                 <!--end::Name-->
@@ -106,7 +106,7 @@
                                             <path d="M12 22C14.6 22 17 21 18.7 19.4C17.9 16.9 15.2 15 12 15C8.8 15 6.09999 16.9 5.29999 19.4C6.99999 21 9.4 22 12 22Z" fill="black"></path>
                                         </svg>
                                     </span>
-                                    <!--end::Svg Icon-->Developer</a>
+                                    <!--end::Svg Icon-->User</a>
                                     @if(Auth::user()->address)
                                     <a href="#" class="d-flex align-items-center text-gray-400 text-hover-primary me-5 mb-2">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen018.svg-->
@@ -139,76 +139,25 @@
                         </div>
                         <!--end::Title-->
                         <!--begin::Stats-->
-                        <div class="d-flex flex-wrap flex-stack">
-                            <!--begin::Wrapper-->
-                            <div class="d-flex flex-column flex-grow-1 pe-8">
-                                <!--begin::Stats-->
-                                <div class="d-flex flex-wrap">
-                                    <!--begin::Stat-->
-                                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
-                                        <!--begin::Number-->
-                                        <div class="d-flex align-items-center">
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
-                                            <span class="svg-icon svg-icon-3 svg-icon-success me-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="black"></rect>
-                                                    <path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="black"></path>
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon-->
-                                            <div class="fs-2 fw-bolder counted" data-kt-countup="true" data-kt-countup-value="4500" data-kt-countup-prefix="$">$4,500</div>
-                                        </div>
-                                        <!--end::Number-->
-                                        <!--begin::Label-->
-                                        <div class="fw-bold fs-6 text-gray-400">Earnings</div>
-                                        <!--end::Label-->
-                                    </div>
-                                    <!--end::Stat-->
-                                    <!--begin::Stat-->
-                                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
-                                        <!--begin::Number-->
-                                        <div class="d-flex align-items-center">
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr065.svg-->
-                                            <span class="svg-icon svg-icon-3 svg-icon-danger me-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.5" x="11" y="18" width="13" height="2" rx="1" transform="rotate(-90 11 18)" fill="black"></rect>
-                                                    <path d="M11.4343 15.4343L7.25 11.25C6.83579 10.8358 6.16421 10.8358 5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75L11.2929 18.2929C11.6834 18.6834 12.3166 18.6834 12.7071 18.2929L18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25C17.8358 10.8358 17.1642 10.8358 16.75 11.25L12.5657 15.4343C12.2533 15.7467 11.7467 15.7467 11.4343 15.4343Z" fill="black"></path>
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon-->
-                                            <div class="fs-2 fw-bolder counted" data-kt-countup="true" data-kt-countup-value="75">75</div>
-                                        </div>
-                                        <!--end::Number-->
-                                        <!--begin::Label-->
-                                        <div class="fw-bold fs-6 text-gray-400">Projects</div>
-                                        <!--end::Label-->
-                                    </div>
-                                    <!--end::Stat-->
-                                    <!--begin::Stat-->
-                                    <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
-                                        <!--begin::Number-->
-                                        <div class="d-flex align-items-center">
-                                            <!--begin::Svg Icon | path: icons/duotune/arrows/arr066.svg-->
-                                            <span class="svg-icon svg-icon-3 svg-icon-success me-2">
-                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                    <rect opacity="0.5" x="13" y="6" width="13" height="2" rx="1" transform="rotate(90 13 6)" fill="black"></rect>
-                                                    <path d="M12.5657 8.56569L16.75 12.75C17.1642 13.1642 17.8358 13.1642 18.25 12.75C18.6642 12.3358 18.6642 11.6642 18.25 11.25L12.7071 5.70711C12.3166 5.31658 11.6834 5.31658 11.2929 5.70711L5.75 11.25C5.33579 11.6642 5.33579 12.3358 5.75 12.75C6.16421 13.1642 6.83579 13.1642 7.25 12.75L11.4343 8.56569C11.7467 8.25327 12.2533 8.25327 12.5657 8.56569Z" fill="black"></path>
-                                                </svg>
-                                            </span>
-                                            <!--end::Svg Icon-->
-                                            <div class="fs-2 fw-bolder counted" data-kt-countup="true" data-kt-countup-value="60" data-kt-countup-prefix="%">%60</div>
-                                        </div>
-                                        <!--end::Number-->
-                                        <!--begin::Label-->
-                                        <div class="fw-bold fs-6 text-gray-400">Success Rate</div>
-                                        <!--end::Label-->
-                                    </div>
-                                    <!--end::Stat-->
+                        <div class="d-flex justify-content-start">
+                           <div class="border border-gray-300 border-dashed border-active-primary rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                <!--begin::Number-->
+                                <div class="d-flex align-items-center">
+                                    <!--begin::Label-->
+                                    <a href="{{ route('user.activity', ['user'=> Auth::user()->id]) }}" class="fw-bold fs-6 text-gray-400">Activity</a>
+                                    <!--end::Label-->
                                 </div>
-                                <!--end::Stats-->
+                                <!--end::Number-->
                             </div>
-                            <!--end::Wrapper-->
-                            
+                           <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
+                                <!--begin::Number-->
+                                <div class="d-flex align-items-center">
+                                    <!--begin::Label-->
+                                    <a href="{{ route('user.resume', ['user'=> Auth::user()->id]) }}" class="fw-bold fs-6 text-gray-400">Resume</a>
+                                    <!--end::Label-->
+                                </div>
+                                <!--end::Number-->
+                            </div>
                         </div>
                         <!--end::Stats-->
                     </div>

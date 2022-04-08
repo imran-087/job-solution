@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Bookmark;
+use App\Models\Comment;
+use App\Models\Discussion;
+use App\Models\EditedQuestion;
+use App\Models\QuestionDescription;
+use App\Models\Reply;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -15,8 +20,6 @@ class UserDashboardController extends Controller
     {
         return view('user.dashboard_index');
     }
-
-
 
     public function profileSettings($id)
     {
@@ -82,10 +85,34 @@ class UserDashboardController extends Controller
             $user->avatar = '/uploads/avatar/' . $image_name;
         }
 
-
-
         $user->save();
         Session::flash('success', 'Profile updated successfullt');
         return redirect()->back();
+    }
+
+    public function userActivity(Request $request)
+    {
+        $edit_questions = EditedQuestion::where('user_id', $request->user)->get();
+        //dd($edit_questions->count());
+        $add_descriptions = QuestionDescription::where('created_user_id', $request->user)->get();
+        //dd($add_descriptions->count());
+        $comments = Comment::where('user_id', $request->user)->get();
+        //dd($comments->count());
+        $bookmarks = Bookmark::where('user_id', $request->user)->get();
+        //dd($bookmarks->count());
+        $discussions = Discussion::where('user_id', $request->user)->get();
+        // dd($discussions->count());
+        $replies = Reply::where('user_id', $request->user)->get();
+        //dd($replies->count());
+
+        return view(
+            'user.activity',
+            compact('edit_questions', 'add_descriptions', 'bookmarks', 'comments', 'discussions', 'replies')
+        );
+    }
+
+    public function userResume(Request $request)
+    {
+        return view('user.resume');
     }
 }

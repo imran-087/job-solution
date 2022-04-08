@@ -105,7 +105,7 @@
                             
                         </div>
                         <!--begin::Add product-->
-                        <a href="javascript:;" class="btn btn-sm btn-primary me-3" onclick="addNew()">Add Description</a>
+                        {{-- <a href="javascript:;" class="btn btn-sm btn-primary me-3" onclick="addNew()">Add Description</a> --}}
                         <!--end::Add product-->
                     </div>
 
@@ -124,8 +124,8 @@
                                     <!--begin::Table row-->
                                     <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                         <th class="min-w-20px">#</th>
-                                        <th class=" min-w-150px">Question</th>
-                                        <th class=" min-w-300px">Description</th>
+                                        <th class=" min-w-250px">Question</th>
+                                        <th class=" min-w-250px">Description</th>
                                         <th class=" min-w-100px">Created at</th>
                                         <th class=" min-w-70px">Actions</th>
                                     </tr>
@@ -190,7 +190,7 @@
                     <!--begin::Heading-->
                     <div class="mb-13 text-center">
                         <!--begin::Title-->
-                        <h1 class="mb-3">Add New Question Description</h1>
+                        <h1 class="mb-3">Update Question Description</h1>
                         <!--end::Title-->
                         <!--begin::Description-->
                         <div class="text-muted fw-bold fs-5">Fill up the form and submit
@@ -198,67 +198,14 @@
                         <!--end::Description-->
                     </div>
                     <!--end::Heading-->
-                    <!--begin::Input group-->
-                    <div class="row g-9 mb-8">
-                        <!--begin::Col-->
-                        <div class="col-md-6 fv-row">
-                            <label class="required fs-6 fw-bold mb-2">Select Main Category</label>
-                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                data-placeholder="Select main category" name="main_category" id="main_category">
-                                <option value="">Choose ...</option>
-                                @foreach ($main_categories as $main_category)
-                                    <option value="{{ $main_category->id }}">{{ $main_category->name }}</option>
-                                @endforeach
-                               
-                            </select>
-                            <div class="help-block with-errors main_category-error"></div>
-                        </div>
-                        <!--end::Col-->
-                        <!--begin::Col-->
-                        <div class="col-md-6 fv-row">
-                            <label class="required fs-6 fw-bold mb-2">Select Category</label>
-                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                data-placeholder="Select category" name="category" id="category">
-                                
-                        
-                            </select>
-                            <div class="help-block with-errors category-error"></div>
-                        </div>
-                        <!--end::Col-->
-                    </div>
-                    <!--end::Input group-->
                    
-                    <!--begin::Input group-->
-                    <div class="row g-9 mb-8">
-                        <!--begin::Col-->
-                        <div class="col-md-6 fv-row">
-                            <label class="required fs-6 fw-bold mb-2">Select Sub Category</label>
-                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                data-placeholder="Select sub category" name="sub_category" id="sub_category">
-                                
-                        
-                            </select>
-                            <div class="help-block with-errors sub_category-error"></div>
-                        </div>
-                        <!--end::Col-->
-                        <!--begin::Col-->
-                        <div class="col-md-6 fv-row">
-                            <label class="required fs-6 fw-bold mb-2">Select Subject</label>
-                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                data-placeholder="Select sub category" name="subject" id="subject">
-                                
-                        
-                            </select>
-                            <div class="help-block with-errors subject-error"></div>
-                        </div>
-                        <!--end::Col-->
-                    </div>
-                    <!--end::Input group-->
+                   
+                    
                     <!--begin::Input group-->
                     <div class="row g-9 mb-8">
                         <!--begin::Col-->
                         <div class="col-md-12 fv-row">
-                            <label class="required fs-6 fw-bold mb-2">Select Question</label>
+                            <label class="required fs-6 fw-bold mb-2">Question</label>
                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                 data-placeholder="Select main category" name="question" id="question">
                                 
@@ -273,7 +220,7 @@
                     <div class="d-flex flex-column mb-8 fv-row">
                         <!--begin::Label-->
                         <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="required">Question Descrption</span>
+                            <span class="required">Descrption</span>
                         </label>
                         <!--end::Label-->
                         <textarea name="description" class="form-control form-control-solid h-100px"></textarea>
@@ -370,14 +317,10 @@
                 url: "{{ url('admin/description/question-description/get')}}"+'/'+id,
                 dataType: 'json',
                 success:function(data){
-                   $('input[name="question_des_id"]').val(data.question_des.id)
-                   $('textarea[name="description"]').val(data.question_des.description)
-                    $('select[name="main_category"]').html('<option ">' + data.main_category.name + '</option>');
-                    $('select[name="category"]').html('<option ">' + data.category.name + '</option>');
-                    $('select[name="sub_category"]').html('<option ">' + data.sub_category.name + '</option>');
-                    $('select[name="subject"]').html('<option ">' + data.subject.name + '</option>');
+                    $('input[name="question_des_id"]').val(data.question_des.id)
+                    $('textarea[name="description"]').val(data.question_des.description)
                     $('select[name="question"]').append('<option value="' + data.question.id + '">' + data.question.question + '</option>');
-                   $("#kk_modal_new_question_des").modal('show');
+                    $("#kk_modal_new_question_des").modal('show');
                 }
           });
         }
