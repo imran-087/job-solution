@@ -83,6 +83,7 @@ Route::get('question/answer-check/{id}/{option}', [QuestionActivityController::c
 Route::get('/question/vote/{id}', [QuestionActivityController::class, 'vote'])->name('question.vote');
 Route::get('/question/view-count/{id}', [QuestionActivityController::class, 'viewCount'])->name('question.view-count');
 Route::get('/question/bookmark/{id}/{catid}', [QuestionActivityController::class, 'bookmark'])->name('question.bookmark');
+Route::post('/question/bookmark', [QuestionActivityController::class, 'storeBookmark']);
 //comment
 Route::post('question/comment/store', [CommentController::class, 'store'])->name('question.comment-store');
 
@@ -112,6 +113,7 @@ Route::middleware('auth')->name('user.')->group(function () {
   ###**  Bookmark **###
   Route::get('/my-bookmark/user={user}', [BookmarkController::class, 'getBookmark'])->name('bookmark');
   Route::get('/my-bookmark/user={user}/category={category}', [BookmarkController::class, 'getBookmarkByCategory'])->name('bookmark.category');
+  Route::get('/my-bookmark/bookmark-type', [BookmarkController::class, 'getBookmarkByType'])->name('bookmark.bookmark-type');
 });
 
 

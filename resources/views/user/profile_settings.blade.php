@@ -56,6 +56,8 @@
     <!--begin::Container-->
     <div id="kt_content_container" class="container-xxl">
         
+        @include('user.dashboard_header')
+
         <!--begin::details View-->
         <div class="card mb-5 mb-xl-10">
             <!--begin::Card header-->

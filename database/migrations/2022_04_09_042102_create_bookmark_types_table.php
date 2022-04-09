@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBookmarksTable extends Migration
+class CreateBookmarkTypesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateBookmarksTable extends Migration
      */
     public function up()
     {
-        Schema::create('bookmarks', function (Blueprint $table) {
+        Schema::create('bookmark_types', function (Blueprint $table) {
             $table->id();
-            $table->integer('question_id');
-            $table->integer('category_id');
-            $table->integer('user_id');
-            $table->integer('bookmark_type_id');
+            $table->string('type_name');
+            $table->integer('created_user_id')->default(0);
             $table->timestamps();
         });
     }
@@ -30,6 +28,6 @@ class CreateBookmarksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bookmarks');
+        Schema::dropIfExists('bookmark_types');
     }
 }

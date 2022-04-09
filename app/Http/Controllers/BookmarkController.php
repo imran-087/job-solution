@@ -25,4 +25,13 @@ class BookmarkController extends Controller
         //dd($bookmarks);
         return view('user.bookmark_question', compact('bookmarks'));
     }
+
+    public function getBookmarkByType(Request $request)
+    {
+        $bookmarks = Bookmark::with(['question'])
+            ->where(['user_id' => Auth::user()->id, 'bookmark_type_id' => $request->type_id])
+            ->paginate();
+
+        return view('user.bookmark_question', compact('bookmarks'));
+    }
 }

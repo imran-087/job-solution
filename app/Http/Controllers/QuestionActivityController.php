@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Bookmark;
+use App\Models\BookmarkType;
 use App\Models\Question;
 use Illuminate\Http\Request;
 use App\Models\QuestionOption;
@@ -80,6 +81,71 @@ class QuestionActivityController extends Controller
                 }
             } else {
                 if ($bookmark->question_id == $id && $bookmark->user_id == Auth::user()->id) {
+                    return response()->json([
+                        'error' => true,
+                        'message' => 'You alreday bookmarked this question!.'
+                    ]);
+                }
+            }
+        }
+    }
+
+    //store bookmark
+    public function storeBookmark(Request $request)
+    {
+
+        //dump($id);
+        if (!Auth::check()) {
+            //dd('ok');
+            return response()->json([
+                'error' => true,
+                'message' => 'Please login to add a bookmark.'
+            ]);
+        } else {
+
+            $bookmark = Bookmark::where('question_id', $request->question_id)->first();
+            if ($bookmark === null) {
+
+                //save bookmarktype
+                $bookmark_type = BookmarkType::where('type_name', $request->bookmark_type)
+                    ->whereIn('created_user_id', [Auth::user()->id, 0])
+                    ->first();
+                //dd($bookmark_type);
+                if ($bookmark_type === null) {
+
+                    $bookmark_type = BookmarkType::create([
+                        'type_name' => $request->bookmark_type,
+                        'created_user_id' => Auth::user()->id,
+                    ]);
+
+                    $bookmark = new Bookmark();
+                    $bookmark->question_id = $request->question_id;
+                    $bookmark->category_id = $request->catid;
+                    $bookmark->user_id = Auth::user()->id;
+                    $bookmark->bookmark_type_id = $bookmark_type->id;
+
+                    if ($bookmark->save()) {
+                        return response()->json([
+                            'success' => true,
+                            'message' => 'Bookmarked Added!'
+                        ], 200);
+                    }
+                } else {
+                    $bookmark = new Bookmark();
+                    $bookmark->question_id = $request->question_id;
+                    $bookmark->category_id = $request->catid;
+                    $bookmark->user_id = Auth::user()->id;
+                    $bookmark->bookmark_type_id = $bookmark_type->id;
+
+                    if ($bookmark->save()) {
+                        return response()->json([
+                            'success' => true,
+                            'message' => 'Bookmarked Added!'
+                        ], 200);
+                    }
+                }
+            } else {
+                if ($bookmark->question_id == $request->question_id && $bookmark->user_id == Auth::user()->id) {
                     return response()->json([
                         'error' => true,
                         'message' => 'You alreday bookmarked this question!.'

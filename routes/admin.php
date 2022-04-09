@@ -71,6 +71,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/year/get/{id}', 'YearController@getYear')->name('year.get');
         Route::get('/year/delete/{id}', 'YearController@deleteYear')->name('year.delete');
 
+        ############ BookmarkType Route #############
+        Route::get('/bookmark-type/index', 'BookmarkTypeController@index')->name('bookmark-type.index');
+        Route::post('/bookmark-type/store', 'BookmarkTypeController@store')->name('bookmark-type.store');
+        Route::get('/bookmark-type/get/{id}', 'BookmarkTypeController@getType')->name('bookmark-type.get');
+        Route::get('/bookmark-type/delete/{id}', 'BookmarkTypeController@deleteType')->name('bookmark-type.delete');
+
 
         ############ Passage Route #############
         Route::get('/passage/index', 'PassageController@index')->name('passage.index');
