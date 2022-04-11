@@ -952,8 +952,8 @@
         $('.bookmark').on('click', function() {
             var id = $(this).data(id)
             var catid = $(this).data(catid)
-            console.log(id.id)
-            console.log(catid.catid)
+            // console.log(id.id)
+            // console.log(catid.catid)
             $('input[name="question_id"]').val(id.id)
             $('input[name="catid"]').val(catid.catid)
             $('.with-errors').text('')

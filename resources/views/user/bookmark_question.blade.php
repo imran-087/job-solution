@@ -202,7 +202,7 @@
                         <div class="d-flex justify-content-end mt-2" style="margin-bottom: -40px !important;">
                                     <a href="javascript:;" class="bookmark  me-2 btn btn-sm btn-light btn-color-muted btn-active-light-primary px-4 py-2"  
                                     data-id="{{ $bookmark->question_id }}" data-catid="{{ $bookmark->question->sub_category->category->id }}"  title="bookmark">
-                                    <i class="fas fa-bookmark svg-icon-primary"></i>
+                                    <i class="fas fa-bookmark svg-icon-primary" style="color:#0095E8"></i>
                                 </a>
                                 <a href="" style="cursor:default" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4">
                                     <i class="fas fa-eye fa-xl"></i> {{$bookmark->question->view_count}}

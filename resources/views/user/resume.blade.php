@@ -125,7 +125,8 @@
                                 <!--begin::Card body-->
                                 <div class="card-body pt-0">
                                     <!--begin::Form-->
-                                    <form id="kt_ecommerce_settings_general_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="#">
+                                    <form id="kt_ecommerce_settings_general_form" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="{{ route('user.resume.general-info.store') }}" method="POST">
+                                        @csrf
                                         <!--begin::Input group-->
                                         <div class="row fv-row mb-7 fv-plugins-icon-container">
                                             <div class="col-md-3 text-md-end">
@@ -138,9 +139,15 @@
                                             </div>
                                             <div class="col-md-9">
                                                 <!--begin::Input-->
-                                                <input type="text" name="name" class="form-control form-control-solid"  value="">
+                                                <input type="text" name="name" class="form-control form-control-solid @error('name') is-invalid @enderror"  value="{{ old('name', $resume_info->name) }}" placeholder="Enter your full name">
                                                 <!--end::Input-->
-                                            <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                                @error('name')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                                {{-- <div class="fv-plugins-message-container invalid-feedback"></div> --}}
+                                            </div>
                                         </div>
                                         <!--end::Input group-->
                                         <!--begin::Input group-->
@@ -155,9 +162,13 @@
                                             </div>
                                             <div class="col-md-9">
                                                 <!--begin::Input-->
-                                                <input type="text" name="email" class="form-control form-control-solid"  value="">
-                                                {{-- <textarea class="form-control form-control-solid" name="meta_description"></textarea> --}}
+                                                <input type="text" name="email" class="form-control form-control-solid @error('email') is-invalid @enderror"  value="{{ old('email', $resume_info->email) }}" placeholder="Enter your email">
                                                 <!--end::Input-->
+                                                @error('email')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <!--end::Input group-->
@@ -173,8 +184,13 @@
                                             </div>
                                             <div class="col-md-9">
                                                 <!--begin::Input-->
-                                                <input type="text" class="form-control form-control-solid" name="contact" value="">
+                                                <input type="text" class="form-control form-control-solid @error('contact') is-invalid @enderror" name="contact" value="{{ old('contact', $resume_info->contact) }}" placeholder="Enter your phone no.">
                                                 <!--end::Input-->
+                                                @error('contact')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <!--end::Input group-->
@@ -191,8 +207,13 @@
                                             <div class="col-md-9">
                                                 <div class="w-100">
                                                     <!--begin::input-->
-                                                   <input type="text" class="form-control form-control-solid" name="contact" value="">
+                                                   <input type="text" class="form-control form-control-solid @error('address') is-invalid @enderror" name="address" value="{{ old('address', $resume_info->address) }}" placeholder="Enter your address">
                                                     <!--end::input-->
+                                                    @error('address')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
                                                 </div>
                                             </div>
                                         </div>
@@ -206,7 +227,7 @@
                                                 <!--end::Separator-->
                                                 <div class="d-flex justify-content-end">
                                                     <!--begin::Button-->
-                                                    <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Cancel</button>
+                                                    {{-- <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Cancel</button> --}}
                                                     <!--end::Button-->
                                                     <!--begin::Button-->
                                                     <button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">
@@ -245,7 +266,8 @@
                                 <!--begin::Card body-->
                                 <div class="card-body pt-0">
                                     <!--begin::Form-->
-                                    <form id="kt_ecommerce_settings_general_store" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="#">
+                                    <form method="POST" id="kt_ecommerce_settings_general_store" class="form fv-plugins-bootstrap5 fv-plugins-framework" action="{{ route('user.resume.educational-info.store') }}">
+                                        @csrf
                                         <!--begin::Input group-->
                                         <div class="row fv-row mb-7 fv-plugins-icon-container">
                                             <div class="col-md-3 text-md-end">
@@ -258,9 +280,15 @@
                                             </div>
                                             <div class="col-md-9">
                                                 <!--begin::Input-->
-                                                <input type="text" class="form-control form-control-solid" name="school_name" value="">
+                                                <input type="text" class="form-control form-control-solid @error('school_name') is-invalid @enderror" name="school_name" value="{{ old('school_name', $resume_info->school_name) }}" placeholder="Enter your school name">
                                                 <!--end::Input-->
-                                            <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                                @error('school_name')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                                {{-- <div class="fv-plugins-message-container invalid-feedback"></div> --}}
+                                            </div>
                                         </div>
                                         <!--end::Input group-->
                                         <!--begin::Input group-->
@@ -275,9 +303,15 @@
                                             </div>
                                             <div class="col-md-9">
                                                 <!--begin::Input-->
-                                                <input type="text" class="form-control form-control-solid" name="exam_name" value="">
+                                                <input type="text" class="form-control form-control-solid @error('s_exam_name') is-invalid @enderror" name="s_exam_name" value="{{ old('s_exam_name', $resume_info->s_exam_name) }}" placeholder="Enter your Exam Name">
                                                 <!--end::Input-->
-                                            <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                                @error('s_exam_name')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                                            </div>
                                         </div>
                                         <!--end::Input group-->
                                         <!--begin::Input group-->
@@ -292,13 +326,18 @@
                                             </div>
                                             <div class="col-md-9">
                                                  <!--begin::Select2-->
-                                                    <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                        data-placeholder="Select Group" name="school_group" >
+                                                    <select class="form-select form-select-solid @error('s_group') is-invalid @enderror" data-control="select2" data-hide-search="true"
+                                                        data-placeholder="Select Group"  name="s_group" value="{{ old('s_group', $resume_info->s_group) }}" placeholder="Enter your group">
                                                         <option value="">Choose ...</option>
                                                         <option value="science">Science</option>
                                                         <option value="arts">Arts</option>
                                                         <option value="commerce">Commerce</option>
                                                     </select>
+                                                    @error('s_group')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
                                                 <div class="fv-plugins-message-container invalid-feedback"></div>
                                             </div>
                                         </div>
@@ -315,9 +354,15 @@
                                             </div>
                                             <div class="col-md-9">
                                                 <!--begin::Input-->
-                                                <input type="text" class="form-control form-control-solid" name="school_pass_year">
+                                                <input type="text" class="form-control form-control-solid @error('s_pass_year') is-invalid @enderror" name="s_pass_year" value="{{ old('s_pass_year', $resume_info->s_pass_year) }}" placeholder="Enter your passing year">
                                                 <!--end::Input-->
-                                            <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                                @error('s_pass_year')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                                            </div>
                                         </div>
                                         <!--end::Input group-->
                                         <!--begin::Input group-->
@@ -332,8 +377,13 @@
                                             </div>
                                             <div class="col-md-9">
                                                 <!--begin::Input-->
-                                                <input type="text" class="form-control form-control-solid" name="school_gpa" value="">
+                                                <input type="text" class="form-control form-control-solid @error('s_gpa') is-invalid @enderror" name="s_gpa" value="{{ old('s_gpa', $resume_info->s_gpa) }}" placeholder="Enter your Gpa">
                                                 <!--end::Input-->
+                                                @error('s_gpa')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <!--end::Input group-->
@@ -396,9 +446,15 @@
                                             </div>
                                             <div class="col-md-9">
                                                 <!--begin::Input-->
-                                                <input type="text" class="form-control form-control-solid" name="college_name" value="">
+                                                <input type="text" class="form-control form-control-solid @error('college_name') is-invalid @enderror" name="college_name" value="{{ old('college_name', $resume_info->college_name) }}" placeholder="Enter your college name">
                                                 <!--end::Input-->
-                                            <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                                 @error('college_name')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                                            </div>
                                         </div>
                                         <!--end::Input group-->
                                         <!--begin::Input group-->
@@ -413,9 +469,15 @@
                                             </div>
                                             <div class="col-md-9">
                                                 <!--begin::Input-->
-                                                <input type="text" class="form-control form-control-solid" name="college_exam_name" value="">
+                                                <input type="text" class="form-control form-control-solid @error('c_exam_name') is-invalid @enderror" name="c_exam_name" value="{{ old('c_exam_name', $resume_info->c_exam_name) }}" placeholder="Enter your exam name">
                                                 <!--end::Input-->
-                                            <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                                @error('c_exam_name')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                                            </div>
                                         </div>
                                         <!--end::Input group-->
                                         <!--begin::Input group-->
@@ -430,13 +492,18 @@
                                             </div>
                                             <div class="col-md-9">
                                                  <!--begin::Select2-->
-                                                    <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                        data-placeholder="Select Group" name="college_group" >
+                                                    <select class="form-select form-select-solid @error('c_group') is-invalid @enderror" data-control="select2" data-hide-search="true"
+                                                        data-placeholder="Select Group"  name="c_group" value="{{ old('c_group', $resume_info->c_group) }}" placeholder="Enter your c_group" >
                                                         <option value="">Choose ...</option>
                                                         <option value="science">Science</option>
                                                         <option value="arts">Arts</option>
                                                         <option value="commerce">Commerce</option>
                                                     </select>
+                                                    @error('c_group')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                    @enderror
                                                 <div class="fv-plugins-message-container invalid-feedback"></div>
                                             </div>
                                         </div>
@@ -453,9 +520,15 @@
                                             </div>
                                             <div class="col-md-9">
                                                 <!--begin::Input-->
-                                                <input type="text" class="form-control form-control-solid" name="college_pass_year">
+                                                <input type="text" class="form-control form-control-solid  @error('c_pass_year') is-invalid @enderror" name="c_pass_year" value="{{ old('c_pass_year', $resume_info->c_pass_year) }}" placeholder="Enter your passing year">
                                                 <!--end::Input-->
-                                            <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                                @error('c_pass_year')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                                            </div>
                                         </div>
                                         <!--end::Input group-->
                                         <!--begin::Input group-->
@@ -470,8 +543,13 @@
                                             </div>
                                             <div class="col-md-9">
                                                 <!--begin::Input-->
-                                                <input type="text" class="form-control form-control-solid" name="college_gpa" value="">
+                                                <input type="text" class="form-control form-control-solid @error('c_gpa') is-invalid @enderror" name="c_gpa" value="{{ old('c_gpa', $resume_info->c_gpa) }}" placeholder="Enter your exam name">
                                                 <!--end::Input-->
+                                                @error('c_gpa')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <!--end::Input group-->
@@ -534,9 +612,15 @@
                                             </div>
                                             <div class="col-md-9">
                                                 <!--begin::Input-->
-                                                <input type="text" class="form-control form-control-solid" name="versity_name" value="">
+                                                <input type="text" class="form-control form-control-solid @error('versity_name') is-invalid @enderror" name="versity_name" value="{{ old('versity_name', $resume_info->versity_name) }}" placeholder="Enter your university name">
                                                 <!--end::Input-->
-                                            <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                                @error('versity_name')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                                            </div>
                                         </div>
                                         <!--end::Input group-->
                                         <!--begin::Input group-->
@@ -551,9 +635,15 @@
                                             </div>
                                             <div class="col-md-9">
                                                 <!--begin::Input-->
-                                                <input type="text" class="form-control form-control-solid" name="degree_name" value="">
+                                                <input type="text" class="form-control form-control-solid @error('degree') is-invalid @enderror" name="degree" value="{{ old('degree', $resume_info->degree) }}" placeholder="Enter your Degree">
                                                 <!--end::Input-->
-                                            <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                                @error('degree')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                                            </div>
                                         </div>
                                         <!--end::Input group-->
                                         <!--begin::Input group-->
@@ -568,8 +658,13 @@
                                             </div>
                                             <div class="col-md-9">
                                                   <!--begin::Input-->
-                                                <input type="text" class="form-control form-control-solid" name="subject_name">
+                                                <input type="text" class="form-control form-control-solid @error('subject') is-invalid @enderror" name="subject" value="{{ old('subject', $resume_info->subject) }}" placeholder="Enter your subject name">
                                                 <!--end::Input-->
+                                                @error('subject')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                                 <div class="fv-plugins-message-container invalid-feedback"></div>
                                             </div>
                                         </div>
@@ -586,9 +681,15 @@
                                             </div>
                                             <div class="col-md-9">
                                                 <!--begin::Input-->
-                                                <input type="text" class="form-control form-control-solid" name="versity_pass_year">
+                                                <input type="text" class="form-control form-control-solid @error('v_pass_year') is-invalid @enderror" name="v_pass_year" value="{{ old('v_pass_year', $resume_info->v_pass_year) }}" placeholder="Enter your passing year">
                                                 <!--end::Input-->
-                                            <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                                @error('v_pass_year')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
+                                                <div class="fv-plugins-message-container invalid-feedback"></div>
+                                            </div>
                                         </div>
                                         <!--end::Input group-->
                                         <!--begin::Input group-->
@@ -603,8 +704,13 @@
                                             </div>
                                             <div class="col-md-9">
                                                 <!--begin::Input-->
-                                                <input type="text" class="form-control form-control-solid" name="cgpa" value="">
+                                                <input type="text" class="form-control form-control-solid @error('v_cgpa') is-invalid @enderror" name="v_cgpa" value="{{ old('v_cgpa', $resume_info->v_cgpa) }}" placeholder="Enter your CGPA">
                                                 <!--end::Input-->
+                                                @error('v_cgpa')
+                                                    <span class="invalid-feedback" role="alert">
+                                                        <strong>{{ $message }}</strong>
+                                                    </span>
+                                                @enderror
                                             </div>
                                         </div>
                                         <!--end::Input group-->
@@ -617,7 +723,7 @@
                                                 <!--end::Separator-->
                                                 <div class="d-flex justify-content-end">
                                                     <!--begin::Button-->
-                                                    <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Cancel</button>
+                                                    {{-- <button type="reset" data-kt-ecommerce-settings-type="cancel" class="btn btn-light me-3">Cancel</button> --}}
                                                     <!--end::Button-->
                                                     <!--begin::Button-->
                                                     <button type="submit" data-kt-ecommerce-settings-type="submit" class="btn btn-primary">

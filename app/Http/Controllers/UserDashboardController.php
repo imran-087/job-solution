@@ -110,9 +110,4 @@ class UserDashboardController extends Controller
             compact('edit_questions', 'add_descriptions', 'bookmarks', 'comments', 'discussions', 'replies')
         );
     }
-
-    public function userResume(Request $request)
-    {
-        return view('user.resume');
-    }
 }

@@ -1,4 +1,3 @@
-
 @extends('layouts.app')
 
 @section('toolbar')
@@ -126,7 +125,7 @@
                                         <a href="#" class="text-gray-800 text-hover-primary fw-bolder me-2">{{ $discussion->reply->user->name }}</a>
                                         <span class="text-gray-400 fw-bold fs-7">{{ $discussion->reply->created_at->diffForHumans() }}</span>
                                         {{-- <a href="#" class="ms-auto text-gray-400 text-hover-primary fw-bold fs-7">Reply</a> --}}
-                                        <p class="ms-auto badge badge-light-success fw-bolder" >best reply</p>
+                                        <p class="ms-auto badge badge-success fw-bolder" >best reply</p>
                                     </div>
                                     <!--end::Info-->
                                     <!--begin::Post-->
@@ -180,7 +179,7 @@
                                         <a href="#" class="text-gray-800 text-hover-primary fw-bolder me-2">{{ $reply->user->name }}</a>
                                         <span class="text-gray-400 fw-bold fs-7">{{ $reply->created_at->diffForHumans() }}</span>
                                         {{-- <a href="#" class="ms-auto text-gray-400 text-hover-primary fw-bold fs-7">Reply</a> --}}
-                                        <a href="{{ route('discussions.best-reply', ['discussion' => $discussion->id, 'reply' => $reply->id]) }}" class="ms-auto text-gray-400 text-hover-primary fw-bold fs-7" id="mark-as-best">mark as best</a>
+                                        <a href="{{ route('discussions.best-reply', ['discussion' => $discussion->id, 'reply' => $reply->id]) }}" class="ms-auto  fw-bold fs-7 badge badge-primary text-white" id="mark-as-best">mark as best</a>
                                    
                                     </div>
                                     <!--end::Info-->
@@ -189,10 +188,20 @@
                                     <!--end::Post-->
                                 </div>
                                 <!--end::Info-->
+                                
                             </div>
+                            <div class="separator mb-4"></div>
+                            <!--end::Separator-->
+                            <!--begin::Reply input-->
+                            <form class="position-relative mb-6" method="POST" action="">
+                                @csrf
+                                <input type="hidden" name="discussion" value="{{ $discussion->id }}">
+                                <textarea class="form-control border-0 p-0 pe-10 resize-none min-h-25px" data-kt-autosize="true" name="reply" rows="1" placeholder="Reply.." placeholder="add reply to this answer.." style="overflow: hidden; overflow-wrap: break-word; height: 25px;"></textarea>
+                                <input type="submit" class="btn btn-sm btn-dark mt-4 mb-2" value="reply">
+                            </form>
+                            <!--edit::Reply input-->
                             @endforeach
                             <!--end::Reply-->
-                            
                         </div>
                         <!--end::Replies-->
                         <!--begin::Separator-->
@@ -202,8 +211,8 @@
                         <form class="position-relative mb-6" method="POST" action="{{ route('discussion.reply') }}">
                             @csrf
                             <input type="hidden" name="discussion" value="{{ $discussion->id }}">
-                            <textarea class="form-control border-0 p-0 pe-10 resize-none min-h-25px" name="reply" data-kt-autosize="true" rows="1" placeholder="Write Your Reply.."></textarea>
-                            <input type="submit" class=" submit mt-4 mb-2" value="Reply">
+                            <textarea class="form-control  form-control-solid border-0   h-100px" name="reply" data-kt-autosize="true" rows="1" placeholder="Write your answer.."></textarea>
+                            <input type="submit" class=" submit mt-4 mb-2" value="post answer">
                         </form>
                         <!--edit::Reply input-->
                     </div>
@@ -283,7 +292,7 @@
                             <span class="required">Discussion Content</span>
                         </label>
                         <!--end::Label-->
-                        <textarea name="content" class="form-control form-control-solid h-100px"></textarea>
+                        <textarea name="content"  class="form-control form-control-solid h-100px"></textarea>
                         <div class="help-block with-errors content-error"></div>
                     </div>
                     <!--end::Input group-->

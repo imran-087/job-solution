@@ -3,9 +3,11 @@
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\DescriptionController;
 use App\Http\Controllers\Forum\ReplyController;
@@ -108,13 +110,22 @@ Route::middleware('auth')->name('user.')->group(function () {
 
   //activity
   Route::get('user-activities', [UserDashboardController::class, 'userActivity'])->name('activity');
-  Route::get('user-resume-create', [UserDashboardController::class, 'userResume'])->name('resume');
+
+  //Resume
+  Route::get('user-resume/create', [ResumeController::class, 'create'])->name('resume');
+  Route::post('user-resume/store-general-info', [ResumeController::class, 'generalInfoStore'])->name('resume.general-info.store');
+  Route::post('user-resume/store-educational-info', [ResumeController::class, 'educationalInfoStore'])->name('resume.educational-info.store');
+
 
   ###**  Bookmark **###
   Route::get('/my-bookmark/user={user}', [BookmarkController::class, 'getBookmark'])->name('bookmark');
   Route::get('/my-bookmark/user={user}/category={category}', [BookmarkController::class, 'getBookmarkByCategory'])->name('bookmark.category');
   Route::get('/my-bookmark/bookmark-type', [BookmarkController::class, 'getBookmarkByType'])->name('bookmark.bookmark-type');
 });
+
+######***Feedback ***#######
+Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback');
+Route::middleware('auth')->post('/feedback/store', [FeedbackController::class, 'store'])->name('feedback.store');
 
 
 Route::get('/test/matjx', function () {

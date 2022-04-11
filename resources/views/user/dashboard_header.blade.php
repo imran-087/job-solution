@@ -242,7 +242,7 @@
             <!--end::Nav item-->
             <!--begin::Nav item-->
             <li class="nav-item mt-2">
-                <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('/user-activities') ? 'active' : '' }}" href="{{ route('user.activity', ['user'=> Auth::user()->id]) }}">Activity</a>
+                <a class="nav-link text-active-primary ms-0 me-10 py-5 {{ request()->is('/user-activities*') ? 'active' : '' }}" href="{{ route('user.activity', ['user'=> Auth::user()->id]) }}">Activity</a>
             </li>
             <!--end::Nav item-->
             <!--begin::Nav item-->
@@ -250,6 +250,7 @@
                 <a class="nav-link text-active-primary ms-0 me-10 py-5" href="{{ route('user.resume', ['user'=> Auth::user()->id]) }}">Resume</a>
             </li>
             <!--end::Nav item-->
+           
             
         </ul>
         </div>

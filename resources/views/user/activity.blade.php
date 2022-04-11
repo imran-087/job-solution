@@ -216,7 +216,7 @@
                 </div>
                 <!--end: List Widget 5-->
             </div>
-            <div class="col-xl-4">
+            <div class="col-xl-4 mt-5">
                 <!--begin::List Widget 5-->
                 <div class="card card-xl-stretch">
                     <!--begin::Header-->
