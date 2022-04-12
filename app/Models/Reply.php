@@ -22,4 +22,12 @@ class Reply extends Model
     {
         return $this->belongsTo(Discussion::class);
     }
+
+    /**
+     * Get all of the question's comments.
+     */
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
+    }
 }

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\FeedController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\CommentController;
@@ -51,6 +52,7 @@ Route::middleware('auth')->group(function () {
 
   Route::post('/discussion/reply', [ReplyController::class, 'reply'])->name('discussion.reply');
   Route::get('/discussions/{discussion}/replies/{reply}/mark-as-best-reply', [ReplyController::class, 'bestreply'])->name('discussions.best-reply');
+  Route::post('/discussions/answer/reply-answer', [ReplyController::class, 'replyToAanswer'])->name('duscussion.answer.reply');
 });
 
 /*****************
@@ -86,6 +88,8 @@ Route::get('/question/vote/{id}', [QuestionActivityController::class, 'vote'])->
 Route::get('/question/view-count/{id}', [QuestionActivityController::class, 'viewCount'])->name('question.view-count');
 Route::get('/question/bookmark/{id}/{catid}', [QuestionActivityController::class, 'bookmark'])->name('question.bookmark');
 Route::post('/question/bookmark', [QuestionActivityController::class, 'storeBookmark']);
+Route::get('/question/bookmark-remove/{id}', [QuestionActivityController::class, 'bookmarkRemove'])->name('question.bookmark-remove');
+
 //comment
 Route::post('question/comment/store', [CommentController::class, 'store'])->name('question.comment-store');
 
@@ -122,6 +126,12 @@ Route::middleware('auth')->name('user.')->group(function () {
   Route::get('/my-bookmark/user={user}/category={category}', [BookmarkController::class, 'getBookmarkByCategory'])->name('bookmark.category');
   Route::get('/my-bookmark/bookmark-type', [BookmarkController::class, 'getBookmarkByType'])->name('bookmark.bookmark-type');
 });
+
+######***Feed ***#######
+Route::get('/news-feed', [FeedController::class, 'index'])->name('news-feed');
+Route::middleware('auth')->post('/feed/store', [FeedController::class, 'store'])->name('feed.store');
+Route::middleware('auth')->post('/feed-reply/store', [FeedController::class, 'storeReply'])->name('feed.reply');
+
 
 ######***Feedback ***#######
 Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback');

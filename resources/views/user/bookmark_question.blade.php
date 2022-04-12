@@ -200,8 +200,8 @@
                     </div>
                     <div class="card-footer" style="padding-top:0px !important; padding-bottom:0px !important;">
                         <div class="d-flex justify-content-end mt-2" style="margin-bottom: -40px !important;">
-                                    <a href="javascript:;" class="bookmark  me-2 btn btn-sm btn-light btn-color-muted btn-active-light-primary px-4 py-2"  
-                                    data-id="{{ $bookmark->question_id }}" data-catid="{{ $bookmark->question->sub_category->category->id }}"  title="bookmark">
+                                    <a href="javascript:;" class="removebookmark  me-2 btn btn-sm btn-light btn-color-muted btn-active-light-primary px-4 py-2"  
+                                    data-id="{{ $bookmark->id }}"   title="remove bookmark">
                                     <i class="fas fa-bookmark svg-icon-primary" style="color:#0095E8"></i>
                                 </a>
                                 <a href="" style="cursor:default" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4">
@@ -283,89 +283,7 @@
 </div>
 <!--end:Post -->
 
-<!--begin::Modal - Bookmark modal-->
-<div class="modal fade" id="kk_modal_new_bookmark" tabindex="-1" aria-hidden="true">
-    <!--begin::Modal dialog-->
-    <div class="modal-dialog modal-dialog-centered mw-650px">
-        <!--begin::Modal content-->
-        <div class="modal-content rounded">
-            <!--begin::Modal header-->
-            <div class="modal-header pb-0 border-0 justify-content-end">
-                <!--begin::Close-->
-                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-                    <span class="svg-icon svg-icon-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
-                                transform="rotate(-45 6 17.3137)" fill="black" />
-                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)"
-                                fill="black" />
-                        </svg>
-                    </span>
-                    <!--end::Svg Icon-->
-                </div>
-                <!--end::Close-->
-            </div>
-            <!--begin::Modal header-->
-            <!--begin::Modal body-->
-            <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
-                <!--begin:Form-->
-                <form id="kk_modal_new_bookmark_form" class="form" enctype="multipart/form-data">
-                    <div class="messages"></div>
-                    {{-- csrf token  --}}
-                    @csrf
-                    <input type="hidden" name="question_id">
-                    <input type="hidden" name="catid">
-                    
-                    <!--begin::Heading-->
-                    <div class="mb-13 text-center">
-                        <!--begin::Title-->
-                        <h1 class="mb-3">Add New Bookmark</h1>
-                        <!--end::Title-->
-                        <!--begin::Description-->
-                        <div class="text-muted fw-bold fs-5">Fill up the form and submit
-                        </div>
-                        <!--end::Description-->
-                    </div>
-                    <!--end::Heading-->
-                    
-                    <!--begin::Input group-->
-                    <div class="d-flex flex-column mb-8 fv-row">
-                        <!--begin::Label-->
-                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="required">Create your own bookmark type or select one</span>
-                        </label>
-                        <!--end::Label-->
-                        <input type="text" class="form-control form-control-solid" name="bookmark_type" list="cityname">
-                            <datalist id="cityname">
-                                <option value="Boston">
-                                <option value="Cambridge">
-                            </datalist>
-                        {{-- <textarea name="description" class="form-control form-control-solid h-100px"></textarea> --}}
-                        <div class="help-block with-errors bookmark_type-error"></div>
-                    </div>
-                    <!--end::Input group-->
 
-                    <!--begin::Actions-->
-                    <div class="text-center">
-                        <button type="reset" id="kk_modal_new_service_cancel" class="btn btn-light me-3">Cancel</button>
-                        <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary">
-                            <span class="indicator-label">Submit</span>
-                            <span class="indicator-progress">Please wait...
-                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                        </button>
-                    </div>
-                    <!--end::Actions-->
-                </form>
-                <!--end:Form-->
-            </div>
-            <!--end::Modal body-->
-        </div>
-        <!--end::Modal content-->
-    </div>
-    <!--end::Modal dialog-->
-</div>
-<!--end::Modal - Bookmark modal-->
 
 @endsection
 
@@ -474,109 +392,66 @@
             })
         });
 
-        //cancel button
-        $(document).on('click', '#kk_modal_new_service_cancel', function(){
-            $('#kk_modal_new_bookmark_form')[0].reset();
-            $("#kk_modal_new_bookmark").modal('hide');
-        })
+       
 
-        //add bookmark
-        $('.bookmark').on('click', function() {
+        //remove bookmark
+        $('.removebookmark').on('click', function() {
             var id = $(this).data(id)
-            var catid = $(this).data(catid)
-            console.log(id.id)
-            console.log(catid.catid)
-            $('input[name="question_id"]').val(id.id)
-            $('input[name="catid"]').val(catid.catid)
-            $('.with-errors').text('')
-            $('#kk_modal_new_bookmark_form')[0].reset();
-            $('#kk_modal_new_bookmark').modal('show')
+            //console.log(id.id)
+            Swal.fire({
+                text: "Are you sure you want remove this from bookmark?",
+                icon: "warning",
+                showCancelButton: !0,
+                buttonsStyling: !1,
+                confirmButtonText: "Confirm",
+                cancelButtonText: "No, cancel",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-danger",
+                    cancelButton: "btn fw-bold btn-active-light-primary"
+                }
+            }).then((function (o) {
+                if(o.value){ //if agree
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ url('question/bookmark-remove') }}"+'/'+id.id,
+                        data: {},
+                        success: function (res)
+                        {
+                            if(res.success){
+                                Swal.fire({
+                                    text: res.message,
+                                    icon: "success",
+                                    buttonsStyling: !1,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-primary"
+                                    }
+                                }).then((function () {
+                                    //refresh page
+                                    setTimeout(function () {
+                                        location.reload(true);
+                                    }, 1000);
+                                }))
+                            }
+                        }
+                    });
+
+                }else{ //if cancel
+                    Swal.fire({
+                        text: "Item has not been removed",
+                        icon: "error",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary"
+                        }
+                    })
+                }
+
+            }))
         });
 
-        //new bookmark save
-        $('#kk_modal_new_bookmark_form').on('submit',function(e){
-            e.preventDefault()
-            $('.with-errors').text('')
-            $('.indicator-label').hide()
-            $('.indicator-progress').show()
-            $('#kk_modal_new_service_submit').attr('disabled','true')
-
-            var formData = new FormData(this);
-            $.ajax({
-                type:"POST",
-                url: "{{ url('question/bookmark')}}",
-                data:formData,
-                cache:false,
-                contentType: false,
-                processData: false,
-                success:function(data){
-                    if(data.success ==  false || data.success ==  "false"){
-                        var arr = Object.keys(data.errors);
-                        var arr_val = Object.values(data.errors);
-                        for(var i= 0;i < arr.length;i++){
-                        $('.'+arr[i]+'-error').text(arr_val[i][0])
-                        }
-                    }else if(data.error || data.error == 'true'){
-                        var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
-                        $('#kk_modal_new_bookmark_form').find('.messages').html(alertBox).show();
-                    }else{
-                        // empty the form
-                        $('#kk_modal_new_bookmark_form')[0].reset();
-                        $("#kk_modal_new_bookmark").modal('hide');
-
-                        Swal.fire({
-                                text: data.message,
-                                icon: "success",
-                                buttonsStyling: !1,
-                                confirmButtonText: "{{__('Ok, got it!')}}",
-                                customClass: {
-                                    confirmButton: "btn fw-bold btn-primary"
-                                }
-                            }).then((function () {
-                                //refresh datatable
-                                $('#dataTable').DataTable().ajax.reload();
-                            }))
-                    }
-
-                $('.indicator-label').show()
-                $('.indicator-progress').hide()
-                $('#kk_modal_new_service_submit').removeAttr('disabled')
-
-                }
-          });
-
-        })
-
-        //bookmarks
-        // $('.bookmark').on('click', function(){
-        //     var id = $(this).data('id')
-        //     var catid = $(this).data('catid')
-           
-        //     $(this).children().addClass('svg-icon-primary');
-        //     //alert(id)
-        //     $.ajax({
-        //         type:"GET",
-        //         url: "{{ url('question/bookmark')}}"+'/'+id+'/'+catid,
-        //         dataType: 'json',
-        //         success:function(data){
-        //             if(data.success){
-        //                 Swal.fire({
-        //                 text: data.message,
-        //                 icon: "success",
-                        
-        //             })
-        //             }else{
-        //                 Swal.fire({
-        //                 text: data.message,
-        //                 icon: "error",
-                        
-        //                 })
-        //             }
-                   
-                    
-        //         }
-        //     })
-        // });
+       
 
         //reading mode
         $(document).ready(function(){
@@ -598,54 +473,6 @@
             })
         })
 
-        // //swipe slider
-        //  const swiper = new Swiper('.swiper', {
-        //     pagination: {
-        //         el: '.swiper-pagination',
-        //     },
-        //     navigation: {
-        //         nextEl: '.swiper-button-next',
-        //         prevEl: '.swiper-button-prev',
-        //     },
-        //     scrollbar: {
-        //         el: '.swiper-scrollbar',
-        //     },
-        //      breakpoints: {
-        //         // when window width is >= 320px
-        //         320: {
-
-        //         slidesPerView: 2,
-
-        //         spaceBetween: 20
-
-        //         },
-
-        //         // when window width is >= 480px
-
-        //         480: {
-
-        //         slidesPerView: 3,
-
-        //         spaceBetween: 30
-
-        //         },
-
-        //         // when window width is >= 640px
-
-        //         640: {
-
-        //         slidesPerView: 4,
-
-        //         spaceBetween: 40
-
-        //         }
-
-                
-
-        //     }
-
-        // });
-
-
+       
     </script>
 @endpush

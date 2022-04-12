@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Forum;
 
 use Carbon\Carbon;
+use App\Models\Vote;
 use App\Models\Reply;
 use App\Models\Channel;
 use App\Models\Discussion;
@@ -101,7 +102,7 @@ class DiscussionController extends Controller
     {
         $discussion = Discussion::with(['user', 'channel', 'reply'])->where('id', $id)->first();
         $channels = Channel::where('status', 'active')->get();
-        $replies = Reply::with('user')->where('discussion_id', $id)->get();
+        $replies = Reply::with('user', 'comments')->where('discussion_id', $id)->orderBy('id', 'desc')->get();
         return view('discussion.single_discussion', compact('discussion', 'channels', 'replies'));
     }
 
@@ -119,18 +120,34 @@ class DiscussionController extends Controller
     public function vote($id)
     {
         $discussion = Discussion::find($id);
-        $discussion->vote = $discussion->vote + 1;
 
-        if ($discussion->save()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'You liked this discussion!'
-            ], 200);
-        } else {
+        $vote = Vote::where(['votable_id' => $id, 'user_id' => Auth::user()->id, 'votable_type' => 'App\Models\Discussion'])->first();
+        if ($vote) {
             return response()->json([
                 'error' => true,
-                'message' => 'Failed!.'
+                'message' => 'you already like this Discussion!'
             ]);
+        } else {
+            $discussion->votes()->create([
+                'user_id' => Auth::user()->id
+            ]);
+
+            $discussion->vote = $discussion->vote + 1;
+
+            if ($discussion->save()) {
+                return response()->json(
+                    [
+                        'success' => true,
+                        'message' => 'You liked this discussion!'
+                    ],
+                    200
+                );
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Failed!.'
+                ]);
+            }
         }
     }
 

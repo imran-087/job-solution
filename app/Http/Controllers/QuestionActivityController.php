@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Vote;
 use App\Models\Bookmark;
-use App\Models\BookmarkType;
 use App\Models\Question;
+use App\Models\BookmarkType;
 use Illuminate\Http\Request;
 use App\Models\QuestionOption;
 use Illuminate\Support\Facades\Auth;
@@ -23,19 +24,33 @@ class QuestionActivityController extends Controller
     //like question
     public function vote($id)
     {
+        //dd($id);
         $question = Question::find($id);
-        $question->vote = $question->vote + 1;
 
-        if ($question->save()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'You liked this Question!'
-            ], 200);
-        } else {
+        $vote = Vote::where(['votable_id' => $id, 'votable_type' => 'App\Models\Question', 'user_id' => Auth::user()->id])->first();
+        if ($vote) {
             return response()->json([
                 'error' => true,
-                'message' => 'Failed!.'
+                'message' => 'you already like this Question!'
             ]);
+        } else {
+            $question->votes()->create([
+                'user_id' => Auth::user()->id
+            ]);
+
+            $question->vote = $question->vote + 1;
+
+            if ($question->save()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'You liked this Question!'
+                ], 200);
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Failed!.'
+                ]);
+            }
         }
     }
 
@@ -152,6 +167,23 @@ class QuestionActivityController extends Controller
                     ]);
                 }
             }
+        }
+    }
+    public function bookmarkRemove($id)
+    {
+        //dd($id);
+        $bookmark = Bookmark::find($id);
+
+        if ($bookmark->delete()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Bookmarked removed successfully'
+            ]);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Failed !'
+            ]);
         }
     }
 }

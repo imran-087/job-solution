@@ -363,7 +363,7 @@
                                     <div class="d-flex mb-5 mt-5">
                                         <!--begin::Avatar-->
                                         <div class="symbol symbol-45px me-5">
-                                            <img src="/metronic8/demo1/assets/media/avatars/300-14.jpg" alt="">
+                                            <img src="assets/media/avatars/300-17.jpg" alt="">
                                         </div>
                                         <!--end::Avatar-->
                                         <!--begin::Info-->
@@ -376,7 +376,7 @@
                                             </div>
                                             <!--end::Info-->
                                             <!--begin::Post-->
-                                            <span class="text-gray-800 fs-7 fw-normal pt-1">{{ $comment->comment }}</span>
+                                            <span class="text-gray-800 fs-7 fw-normal pt-1">{{ $comment->content }}</span>
                                             <!--end::Post-->
                                         </div>
                                         <!--end::Info-->

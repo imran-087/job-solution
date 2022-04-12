@@ -85,7 +85,7 @@ class QuestionDescriptionController extends Controller
         return view('admin.description.create', compact('main_categories'));
     }
 
-    //store or update main category
+    //store or update description
     public function store(Request $request)
     {
         //dd($request->all());

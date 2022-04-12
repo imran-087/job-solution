@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Carbon\Carbon;
 use App\Models\Comment;
+use App\Models\Question;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -26,17 +27,13 @@ class CommentController extends Controller
 
             //create new category
             if (Auth::check()) {
-                $comment = new Comment();
+                $question = Question::find($request->question_id);
+                $question->comments()->create([
+                    'content' => $request->comment,
+                    'user_id' => Auth::user()->id,
+                ]);
 
-                $comment->question_id = $request->question_id;
-                $comment->comment = $request->comment;
-                $comment->user_id =  Auth::user()->id;
-                $comment->status =  'active';
-
-                $comment->created_at = Carbon::now();
-
-
-                if ($comment->save()) {
+                if ($question) {
                     return response()->json([
                         'success' => true,
                         'message' => 'Comment added successfully! Thanks for your comment....'

@@ -537,6 +537,7 @@
                     </div>
                     <!--end::Heading-->
                     
+                    @auth
                     <!--begin::Input group-->
                     <div class="d-flex flex-column mb-8 fv-row">
                         <!--begin::Label-->
@@ -557,7 +558,7 @@
                         <div class="help-block with-errors bookmark_type-error"></div>
                     </div>
                     <!--end::Input group-->
-
+                    @endauth
                     <!--begin::Actions-->
                     <div class="text-center">
                         <button type="reset" id="kk_modal_new_service_cancel" class="btn btn-light me-3">Cancel</button>
@@ -630,6 +631,9 @@
         $(document).ready(function(){
             $('.comment').on('click', function(){
                 var id = $(this).data(id)
+                var val = $(this).text()
+                console.log(val)
+                $(this).html(` <i class="fas fa-comment-alt"></i>`+(parseInt(val)+1))
                 //console.log(id.id)
                 $('input[name="question_id"]').val(id.id)
                 $('.with-errors').text('')
@@ -711,6 +715,7 @@
         $(document).on('click', '#kk_modal_new_service_cancel', function(){
             
             $("#kk_modal_show_question").modal('hide');
+            
         })
 
         //update
@@ -782,6 +787,10 @@
             $('#kk_modal_new_question_des_form')[0].reset();
             $("#kk_modal_new_question_des").modal('hide');
 
+            $('#kk_modal_new_comment_form')[0].reset();
+            $("#kk_modal_new_comment").modal('hide');
+
+           
             $('.indicator-label').show()
             $('.indicator-progress').hide()
             $('#kk_modal_new_service_submit').removeAttr('disabled')
@@ -854,9 +863,12 @@
                 url: "{{ url('question/vote')}}"+'/'+id,
                 dataType: 'json',
                 success:function(data){
-
-                    toastr.success(data.message);
-                   
+                    if(data.success){
+                        toastr.success(data.message);
+                    }else{
+                        toastr.warning(data.message);
+                    }
+                  
                 }
             })
         });

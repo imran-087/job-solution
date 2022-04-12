@@ -33,14 +33,24 @@ class Question extends Model
         return $this->hasMany(QuestionDescription::class);
     }
 
-
-    public function comments()
-    {
-        return $this->hasMany(Comment::class);
-    }
-
     public function passage()
     {
         return $this->belongsTo(Passage::class);
+    }
+
+    /**
+     * Get all of the question's votes.
+     */
+    public function votes()
+    {
+        return $this->morphMany(Vote::class, 'votable');
+    }
+
+    /**
+     * Get all of the question's comments.
+     */
+    public function comments()
+    {
+        return $this->morphMany(Comment::class, 'commentable');
     }
 }

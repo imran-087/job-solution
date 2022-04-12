@@ -1,7 +1,7 @@
 <div class="d-flex justify-content-end mt-2" style="margin-bottom: -40px !important;">
     <a href="javascript:;" class="comment me-2 btn btn-sm btn-light btn-color-muted btn-active-light-info px-4 py-2"  
     data-text="comment" data-id="{{ $question->id }}"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-dark" title="Add Comment">
-    <i class="fas fa-comment"></i> {{$question->comments->count()}}
+    <i class="fas fa-comment-alt"></i> {{$question->comments->count()}}
     </a>
     <a href="javascript:;" class="bookmark me-2 btn btn-sm btn-light btn-color-muted btn-active-light-primary px-4 py-2"  
     data-id="{{ $question->id }}" data-catid="{{ $question->sub_category->category->id }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-dark" title="Bookmark">

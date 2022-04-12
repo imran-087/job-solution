@@ -250,7 +250,7 @@
     </div>
 </div>
 
-<!--begin::Modal - New Product/Service-->
+<!--begin::Modal - New Discussion-->
 <div class="modal fade" id="kk_modal_new_discussion" tabindex="-1" aria-hidden="true">
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-750px">
@@ -357,7 +357,7 @@
     </div>
     <!--end::Modal dialog-->
 </div>
-<!--end::Modal - New Product/Service-->
+<!--end::Modal - New Discussion-->
 
 
 @endsection
@@ -421,21 +421,20 @@
         //vote
         $('.vote').on('click', function(){
             var id = $(this).data('id')
+            var val = $(this).text()
+            $(this).html(`<i class="fas fa-heart"></i>`+(parseInt(val)+1))
             //alert(id)
             $.ajax({
                 type:"GET",
                 url: "{{ url('discussion/vote')}}"+'/'+id,
                 dataType: 'json',
                 success:function(data){
-                    Swal.fire({
-                        text: data.message,
-                        icon: "success",
-                        showConfirmButton: false
-
-                    })
-                    setTimeout(function() {
-                        location.reload();  //Refresh page
-                    }, 1000);
+                   if(data.success){
+                        toastr.success(data.message);
+                    }else{
+                        toastr.warning(data.message);
+                    }
+                     
                 }
             })
         });

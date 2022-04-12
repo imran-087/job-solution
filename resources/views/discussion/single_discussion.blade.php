@@ -39,6 +39,11 @@
             <!--end::Breadcrumb-->
         </div>
         <!--end::Page title-->
+        <div class="d-flex align-items-center gap-2 gap-lg-3">
+            <!--begin::Primary button-->
+            <a href="{{route('discussion.index')}}" class="btn btn-sm btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_create_app">Back</a>
+            <!--end::Primary button-->
+        </div>
         
     </div>
     <!--end::Container-->
@@ -65,23 +70,26 @@
                             <a class="nav-link" href="{{ route('discussion.channel', $channel->id) }}"><li class="mb-3">{{$channel->name}}</li></a>
                         @endforeach
                     </ul>
+                    <ul class="nav-item ">
+                        <a class="nav-link" href="{{ route('discussion.index') }}"><li class="mb-3">All</li></a>
+                     </ul>
                 </div>
             </div>
             <!--end::Col-->
 
             <!--begin::Col-->
             <div class="col-xl-8">
-                <!--begin::Feeds Widget 3-->
+                <!--begin::Feeds Widget 4-->
                 <div class="card mb-5 mb-xl-8">
                     <!--begin::Body-->
                     <div class="card-body pb-0">
                         <!--begin::Header-->
-                        <div class="d-flex align-items-center mb-3">
+                        <div class="d-flex align-items-center mb-5">
                             <!--begin::User-->
                             <div class="d-flex align-items-center flex-grow-1">
                                 <!--begin::Avatar-->
                                 <div class="symbol symbol-45px me-5">
-                                    <img src="{{ asset('assets') }}/media/avatars/300-23.jpg" alt="" />
+                                    <img src="/metronic8/demo1/assets/media/avatars/300-7.jpg" alt="">
                                 </div>
                                 <!--end::Avatar-->
                                 <!--begin::Info-->
@@ -99,6 +107,7 @@
                                 </div>         
                             </div>
                             <!--end::Menu-->
+    
                         </div>
                         <!--end::Header-->
                         <!--begin::Post-->
@@ -106,107 +115,60 @@
                             <!--begin::Text-->
                             <div class="text-gray-800 mb-5">{!! $discussion->content !!}</div>
                             <!--end::Text-->
-                             <!--begin::Separator-->
-                            <div class="separator mb-4"></div>
-                            <!--end::Separator-->
-
-                            @if($discussion->reply_id != '')
-                            <!--begin::Best reply-->
-                            <div class="d-flex mb-5">
-                                <!--begin::Avatar-->
-                                <div class="symbol symbol-45px me-5">
-                                    <img src="{{ asset('assets') }}/media/avatars/300-15.jpg" alt="" />
-                                </div>
-                                <!--end::Avatar-->
-                                <!--begin::Info-->
-                                <div class="d-flex flex-column flex-row-fluid">
-                                    <!--begin::Info-->
-                                    <div class="d-flex align-items-center flex-wrap mb-1">
-                                        <a href="#" class="text-gray-800 text-hover-primary fw-bolder me-2">{{ $discussion->reply->user->name }}</a>
-                                        <span class="text-gray-400 fw-bold fs-7">{{ $discussion->reply->created_at->diffForHumans() }}</span>
-                                        {{-- <a href="#" class="ms-auto text-gray-400 text-hover-primary fw-bold fs-7">Reply</a> --}}
-                                        <p class="ms-auto badge badge-success fw-bolder" >best reply</p>
-                                    </div>
-                                    <!--end::Info-->
-                                    <!--begin::Post-->
-                                    <span class="text-gray-800 fs-7 fw-normal pt-1">{{ $discussion->reply->reply }}</span>
-                                    <!--end::Post-->
-                                </div>
-                                <!--end::Info-->
-                            </div>
-                            <!--end::Best reply-->
-                            @endif
-                            
                             <!--begin::Toolbar-->
                             <div class="d-flex align-items-center mb-5">
-                                <a href="{{ route('discussion.show', $discussion->id) }}" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4">
+                                <a href="#" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4">
                                 <!--begin::Svg Icon | path: icons/duotune/communication/com012.svg-->
                                 <span class="svg-icon svg-icon-3">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path opacity="0.3" d="M20 3H4C2.89543 3 2 3.89543 2 5V16C2 17.1046 2.89543 18 4 18H4.5C5.05228 18 5.5 18.4477 5.5 19V21.5052C5.5 22.1441 6.21212 22.5253 6.74376 22.1708L11.4885 19.0077C12.4741 18.3506 13.6321 18 14.8167 18H20C21.1046 18 22 17.1046 22 16V5C22 3.89543 21.1046 3 20 3Z" fill="black" />
-                                        <rect x="6" y="12" width="7" height="2" rx="1" fill="black" />
-                                        <rect x="6" y="7" width="12" height="2" rx="1" fill="black" />
+                                        <path opacity="0.3" d="M20 3H4C2.89543 3 2 3.89543 2 5V16C2 17.1046 2.89543 18 4 18H4.5C5.05228 18 5.5 18.4477 5.5 19V21.5052C5.5 22.1441 6.21212 22.5253 6.74376 22.1708L11.4885 19.0077C12.4741 18.3506 13.6321 18 14.8167 18H20C21.1046 18 22 17.1046 22 16V5C22 3.89543 21.1046 3 20 3Z" fill="currentColor"></path>
+                                        <rect x="6" y="12" width="7" height="2" rx="1" fill="currentColor"></rect>
+                                        <rect x="6" y="7" width="12" height="2" rx="1" fill="currentColor"></rect>
                                     </svg>
                                 </span>
-                                <!--end::Svg Icon-->{{$discussion->replies->count()}}</a>
-                                <a href="javascript:;" class="btn btn-sm btn-light btn-color-muted btn-active-light-danger px-4 py-2  vote"  data-id="{{ $discussion->id }}">
+                                <!--end::Svg Icon-->22</a>
+                                <a href="#" class="btn btn-sm btn-light btn-color-muted btn-active-light-danger px-4 py-2">
                                 <!--begin::Svg Icon | path: icons/duotune/general/gen030.svg-->
                                 <span class="svg-icon svg-icon-2">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M18.3721 4.65439C17.6415 4.23815 16.8052 4 15.9142 4C14.3444 4 12.9339 4.73924 12.003 5.89633C11.0657 4.73913 9.66 4 8.08626 4C7.19611 4 6.35789 4.23746 5.62804 4.65439C4.06148 5.54462 3 7.26056 3 9.24232C3 9.81001 3.08941 10.3491 3.25153 10.8593C4.12155 14.9013 9.69287 20 12.0034 20C14.2502 20 19.875 14.9013 20.7488 10.8593C20.9109 10.3491 21 9.81001 21 9.24232C21.0007 7.26056 19.9383 5.54462 18.3721 4.65439Z" fill="black" />
+                                        <path d="M18.3721 4.65439C17.6415 4.23815 16.8052 4 15.9142 4C14.3444 4 12.9339 4.73924 12.003 5.89633C11.0657 4.73913 9.66 4 8.08626 4C7.19611 4 6.35789 4.23746 5.62804 4.65439C4.06148 5.54462 3 7.26056 3 9.24232C3 9.81001 3.08941 10.3491 3.25153 10.8593C4.12155 14.9013 9.69287 20 12.0034 20C14.2502 20 19.875 14.9013 20.7488 10.8593C20.9109 10.3491 21 9.81001 21 9.24232C21.0007 7.26056 19.9383 5.54462 18.3721 4.65439Z" fill="currentColor"></path>
                                     </svg>
                                 </span>
-                                <!--end::Svg Icon-->{{$discussion->vote}}</a>
+                                <!--end::Svg Icon-->59</a>
                             </div>
                             <!--end::Toolbar-->
-                           
                         </div>
                         <!--end::Post-->
-                        <!--begin::Replies-->
-                        <div class="mb-7 ps-10">
-                            <!--begin::Reply-->
-                            @foreach($replies as $reply)
-                            <div class="d-flex mb-5">
-                                <!--begin::Avatar-->
-                                <div class="symbol symbol-45px me-5">
-                                    <img src="{{ asset('assets') }}/media/avatars/300-15.jpg" alt="" />
-                                </div>
-                                <!--end::Avatar-->
-                                <!--begin::Info-->
-                                <div class="d-flex flex-column flex-row-fluid">
-                                    <!--begin::Info-->
-                                    <div class="d-flex align-items-center flex-wrap mb-1">
-                                        <a href="#" class="text-gray-800 text-hover-primary fw-bolder me-2">{{ $reply->user->name }}</a>
-                                        <span class="text-gray-400 fw-bold fs-7">{{ $reply->created_at->diffForHumans() }}</span>
-                                        {{-- <a href="#" class="ms-auto text-gray-400 text-hover-primary fw-bold fs-7">Reply</a> --}}
-                                        <a href="{{ route('discussions.best-reply', ['discussion' => $discussion->id, 'reply' => $reply->id]) }}" class="ms-auto  fw-bold fs-7 badge badge-primary text-white" id="mark-as-best">mark as best</a>
-                                   
-                                    </div>
-                                    <!--end::Info-->
-                                    <!--begin::Post-->
-                                    <span class="text-gray-800 fs-7 fw-normal pt-1">{{ $reply->reply }}</span>
-                                    <!--end::Post-->
-                                </div>
-                                <!--end::Info-->
-                                
-                            </div>
-                            <div class="separator mb-4"></div>
-                            <!--end::Separator-->
-                            <!--begin::Reply input-->
-                            <form class="position-relative mb-6" method="POST" action="">
-                                @csrf
-                                <input type="hidden" name="discussion" value="{{ $discussion->id }}">
-                                <textarea class="form-control border-0 p-0 pe-10 resize-none min-h-25px" data-kt-autosize="true" name="reply" rows="1" placeholder="Reply.." placeholder="add reply to this answer.." style="overflow: hidden; overflow-wrap: break-word; height: 25px;"></textarea>
-                                <input type="submit" class="btn btn-sm btn-dark mt-4 mb-2" value="reply">
-                            </form>
-                            <!--edit::Reply input-->
-                            @endforeach
-                            <!--end::Reply-->
-                        </div>
-                        <!--end::Replies-->
                         <!--begin::Separator-->
                         <div class="separator mb-4"></div>
                         <!--end::Separator-->
+                        @if($discussion->reply_id != '')
+                        <!--begin::Best reply-->
+                        <div class="d-flex mb-5">
+                            <!--begin::Avatar-->
+                            <div class="symbol symbol-45px me-5">
+                                <img src="{{ asset('assets') }}/media/avatars/300-15.jpg" alt="" />
+                            </div>
+                            <!--end::Avatar-->
+                            <!--begin::Info-->
+                            <div class="d-flex flex-column flex-row-fluid">
+                                <!--begin::Info-->
+                                <div class="d-flex align-items-center flex-wrap mb-1">
+                                    <a href="#" class="text-gray-800 text-hover-primary fw-bolder me-2">{{ $discussion->reply->user->name }}</a>
+                                    <span class="text-gray-400 fw-bold fs-7">{{ $discussion->reply->created_at->diffForHumans() }}</span>
+                                    {{-- <a href="#" class="ms-auto text-gray-400 text-hover-primary fw-bold fs-7">Reply</a> --}}
+                                    <p class="ms-auto badge badge-success fw-bolder" >best reply</p>
+                                </div>
+                                <!--end::Info-->
+                                <!--begin::Post-->
+                                <span class="text-gray-800 fs-7 fw-normal pt-1">{{ $discussion->reply->reply }}</span>
+                                <!--end::Post-->
+                            </div>
+                            <!--end::Info-->
+                        </div>
+                        <!--end::Best reply-->
+                        <div class="separator mb-4"></div>
+                        @endif
                         <!--begin::Reply input-->
                         <form class="position-relative mb-6" method="POST" action="{{ route('discussion.reply') }}">
                             @csrf
@@ -218,7 +180,119 @@
                     </div>
                     <!--end::Body-->
                 </div>
+                <!--end::Feeds Widget 4-->
+
+                @foreach($replies as $reply)
+                <!--begin::Feeds Widget 3-->
+                <div class="card mb-5 mb-xl-8">
+                    <!--begin::Body-->
+                    <div class="card-body pb-0">
+                        <!--begin::Header-->
+                        <div class="d-flex align-items-center mb-3">
+                            <!--begin::User-->
+                            <div class="d-flex align-items-center flex-grow-1">
+                                <!--begin::Avatar-->
+                                <div class="symbol symbol-45px me-5">
+                                    <img src="{{ asset('assets') }}/media/avatars/300-15.jpg" alt="" />
+                                </div>
+                                <!--end::Avatar-->
+                                <!--begin::Info-->
+                                <div class="d-flex flex-column">
+                                   <a href="#" class="text-gray-800 text-hover-primary fw-bolder me-2">{{ $reply->user->name }}</a>
+                                        <span class="text-gray-400 fw-bold fs-7">{{ $reply->created_at->diffForHumans() }}</span>
+                                        {{-- <a href="#" class="ms-auto text-gray-400 text-hover-primary fw-bold fs-7">Reply</a> --}}
+                                </div>
+                                <!--end::Info-->
+                            </div>
+                            <!--end::User-->
+                            <!--begin::Menu-->
+                            <div class="my-0">
+                                <a href="{{ route('discussions.best-reply', ['discussion' => $discussion->id, 'reply' => $reply->id]) }}" class="ms-auto  fw-bold fs-7 badge badge-primary text-white" id="mark-as-best">mark as best</a>
+        
+                            </div>
+                            <!--end::Menu-->
+                            
+                        </div>
+                        <!--end::Header-->
+                        <!--begin::Post-->
+                        <div class="mb-7">
+                            <!--begin::Text-->
+                            <div class="text-gray-800 mb-5">{{ $reply->reply }}</div>
+                            <!--end::Text-->
+                            <!--begin::Toolbar-->
+                            {{-- <div class="d-flex align-items-center mb-5">
+                                <a href="#" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4">
+                                <!--begin::Svg Icon | path: icons/duotune/communication/com012.svg-->
+                                <span class="svg-icon svg-icon-3">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path opacity="0.3" d="M20 3H4C2.89543 3 2 3.89543 2 5V16C2 17.1046 2.89543 18 4 18H4.5C5.05228 18 5.5 18.4477 5.5 19V21.5052C5.5 22.1441 6.21212 22.5253 6.74376 22.1708L11.4885 19.0077C12.4741 18.3506 13.6321 18 14.8167 18H20C21.1046 18 22 17.1046 22 16V5C22 3.89543 21.1046 3 20 3Z" fill="currentColor"></path>
+                                        <rect x="6" y="12" width="7" height="2" rx="1" fill="currentColor"></rect>
+                                        <rect x="6" y="7" width="12" height="2" rx="1" fill="currentColor"></rect>
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->22</a>
+                                <a href="#" class="btn btn-sm btn-light btn-color-muted btn-active-light-danger px-4 py-2">
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen030.svg-->
+                                <span class="svg-icon svg-icon-2">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M18.3721 4.65439C17.6415 4.23815 16.8052 4 15.9142 4C14.3444 4 12.9339 4.73924 12.003 5.89633C11.0657 4.73913 9.66 4 8.08626 4C7.19611 4 6.35789 4.23746 5.62804 4.65439C4.06148 5.54462 3 7.26056 3 9.24232C3 9.81001 3.08941 10.3491 3.25153 10.8593C4.12155 14.9013 9.69287 20 12.0034 20C14.2502 20 19.875 14.9013 20.7488 10.8593C20.9109 10.3491 21 9.81001 21 9.24232C21.0007 7.26056 19.9383 5.54462 18.3721 4.65439Z" fill="currentColor"></path>
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->59</a>
+                            </div> --}}
+                            <!--end::Toolbar-->
+                        </div>
+                        <!--end::Post-->
+                        <!--begin::Separator-->
+                        <div class="separator mb-4"></div>
+                        
+                        <!--begin::Replies-->
+                        <div class="mb-7 ps-10">
+                            <!--begin::Reply-->
+                            @foreach($reply->comments as $comment)
+                            <div class="d-flex mb-5">
+                                <!--begin::Avatar-->
+                                <div class="symbol symbol-45px me-5">
+                                    <img src="{{ asset('assets') }}/media/avatars/300-16.jpg" alt="" />
+                                </div>
+                                <!--end::Avatar-->
+                                <!--begin::Info-->
+                                <div class="d-flex flex-column flex-row-fluid">
+                                    <!--begin::Info-->
+                                    <div class="d-flex align-items-center flex-wrap mb-1">
+                                        <a href="#" class="text-gray-800 text-hover-primary fw-bolder me-2">{{ $comment->user->name }}</a>
+                                        <span class="text-gray-400 fw-bold fs-7">{{ $comment->created_at->diffForHumans() }}</span>
+                                   
+                                    </div>
+                                    <!--end::Info-->
+                                    <!--begin::Post-->
+                                    <span class="text-gray-800 fs-7 fw-normal pt-1">{{ $comment->content }}</span>
+                                    <!--end::Post-->
+                                </div>
+                                <!--end::Info-->
+                                
+                            </div>
+                            <div class="separator mb-4"></div>
+                            <!--end::Separator-->
+                            
+                            @endforeach
+                            <!--end::Reply-->
+                            <!--begin::Reply input-->
+                            <form class="position-relative mb-6" method="POST" action="{{ route('duscussion.answer.reply') }}">
+                                @csrf
+                                <input type="hidden" name="reply_id" value="{{ $reply->id }}">
+                                <textarea class="form-control border-0 p-0 pe-10 resize-none min-h-25px" data-kt-autosize="true" name="comment" rows="1" placeholder="Reply.." placeholder="add reply to this answer.." style="overflow: hidden; overflow-wrap: break-word; height: 25px;"></textarea>
+                                <input type="submit" class="btn btn-sm btn-dark mt-4 mb-2" value="reply">
+                            </form>
+                            <!--edit::Reply input-->
+                        </div>
+                        <!--end::Replies-->
+                        
+                    </div>
+                    <!--end::Body-->
+                </div>
                 <!--end::Feeds Widget 3-->
+                @endforeach
             </div>
             <!--end::Col-->
            

@@ -29,4 +29,12 @@ class Discussion extends Model
     {
         return $this->hasMany(Reply::class);
     }
+
+    /**
+     * Get all of the discussions's vote.
+     */
+    public function votes()
+    {
+        return $this->morphMany(Vote::class, 'votable');
+    }
 }

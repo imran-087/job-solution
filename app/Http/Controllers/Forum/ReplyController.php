@@ -27,7 +27,7 @@ class ReplyController extends Controller
             'created_at' => Carbon::now()
         ]);
 
-        Session::flash('success', 'Reply added');
+        Session::flash('success', 'answer added for this discussion');
         return redirect()->back();
     }
 
@@ -41,5 +41,22 @@ class ReplyController extends Controller
 
         Session::flash('success', 'Marked as best');
         return redirect()->back();
+    }
+
+    //Reply to a answer
+    public function replyToAanswer(Request $request)
+    {
+        $reply = Reply::find($request->reply_id);
+
+        if (Auth::check()) {
+            $reply->comments()->create([
+                'content' => $request->comment,
+                'user_id' => Auth::user()->id
+            ]);
+
+            return redirect()->back()->with('success', 'reply added');
+        } else {
+            return redirect()->back()->with('erroe', 'login first to add a reply');
+        }
     }
 }

@@ -179,7 +179,7 @@
             @endauth
 
             <div class="menu-item">
-                <a class="menu-link {{ request()->is('/feedback') ? 'active' : '' }}" href="{{ route('feedback') }}"  >
+                <a class="menu-link {{ request()->is('/news-feed') ? 'active' : '' }}" href="{{ route('news-feed') }}"  >
                     <span class="menu-icon">
                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
                         <span class="svg-icon svg-icon-2">
@@ -193,7 +193,7 @@
                         </span>
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-title">Feedback</span>
+                    <span class="menu-title">News Feed</span>
                 </a>
             </div>
             
