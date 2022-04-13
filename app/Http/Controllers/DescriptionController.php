@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
+use App\Models\Vote;
 use App\Models\Admin;
 use Illuminate\Http\Request;
 use App\Models\QuestionDescription;
-use App\Notifications\AddDescriptionNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use App\Notifications\AddDescriptionNotification;
 
 class DescriptionController extends Controller
 {
@@ -65,18 +66,39 @@ class DescriptionController extends Controller
 
     public function like($id)
     {
-        $description = QuestionDescription::find($id);
-        $description->vote = $description->vote + 1;
+        //dd($id);
+        if (Auth::check()) {
+            $description = QuestionDescription::find($id);
 
-        if ($description->save()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'You liked this Description!'
-            ], 200);
+            $vote = Vote::where(['votable_id' => $id, 'votable_type' => 'App\Models\QuestionDescription', 'user_id' => Auth::user()->id])->first();
+            if ($vote) {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'you already like this Description!'
+                ]);
+            } else {
+                $description->votes()->create([
+                    'user_id' => Auth::user()->id
+                ]);
+
+                $description->vote = $description->vote + 1;
+
+                if ($description->save()) {
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'You liked this Description!'
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'error' => true,
+                        'message' => 'Failed!.'
+                    ]);
+                }
+            }
         } else {
             return response()->json([
                 'error' => true,
-                'message' => 'Failed!.'
+                'message' => 'You are unautheticate!.'
             ]);
         }
     }

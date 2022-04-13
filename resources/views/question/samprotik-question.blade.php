@@ -43,7 +43,86 @@
             <!--end::Breadcrumb-->
         </div>
         <!--end::Page title-->
-       
+        <div class="d-flex align-items-center gap-2 gap-lg-3">
+            <!--begin::Filter menu-->
+            <div class="m-0">
+                <!--begin::Menu toggle-->
+                <a href="#" class="btn btn-sm btn-flex btn-light btn-active-primary fw-bolder" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
+                <span class="svg-icon svg-icon-5 svg-icon-gray-500 me-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="currentColor"></path>
+                    </svg>
+                </span>
+                <!--end::Svg Icon-->Filter</a>
+                <!--end::Menu toggle-->
+                <!--begin::Menu 1-->
+                <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_625692f559661" style="">
+                    <!--begin::Header-->
+                    <div class="px-7 py-5">
+                        <div class="fs-5 text-dark fw-bolder">Filter Options</div>
+                    </div>
+                    <!--end::Header-->
+                    <!--begin::Menu separator-->
+                    <div class="separator border-gray-200"></div>
+                    <!--end::Menu separator-->
+                    <!--begin::Form-->
+                    <form action="{{ route('question.recent-question-filter') }}" method="POST">
+                        @csrf
+                        <div class="px-7 py-5">
+                            <!--begin::Input group-->
+                            <div class="mb-10" data-select2-id="select2-data-122-mdbb">
+                                <!--begin::Label-->
+                                <label class="form-label fw-bold">Select Year:</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <div>
+                                    <select class="form-select form-select-solid select2-hidden-accessible" name="year" data-kt-select2="true" data-placeholder="Select year" data-dropdown-parent="#kt_menu_625692f559661" data-allow-clear="true" data-select2-id="select2-data-7-tquun" tabindex="-1" aria-hidden="true">
+                                        <option value="" ></option>
+                                        @foreach($years as $year)
+                                        <option value="{{ $year->id }}" >{{$year->year}}</option>
+                                        @endforeach
+                                    </select>
+                                </div>
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="mb-10" data-select2-id="select2-data-122-mdbb">
+                                <!--begin::Label-->
+                                <label class="form-label fw-bold">Date Range:</label>
+                                <!--end::Label-->
+                                <!--begin::Input-->
+                                <div>
+                                    <select class="form-select form-select-solid select2-hidden-accessible" name="range" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_625692f559661" data-allow-clear="true" data-select2-id="select2-data-7-tqun" tabindex="-1" aria-hidden="true">
+                                        <option value="" ></option>
+                                        <option value="today">Today</option>
+                                        <option value="yesterday">Yestarday</option>
+                                        <option value="last_7" >Last 7 Days</option>
+                                        <option value="last_30" >Last 30 Days</option>
+                                        <option value="this_month" >This Month</option>
+                                        <option value="last_month" >Last Month</option>
+                                    </select>
+                                </div>
+                                <!--end::Input-->
+                            </div>
+                            <!--end::Input group-->
+                            
+                            <!--begin::Actions-->
+                            <div class="d-flex justify-content-end">
+                               
+                                <button type="submit" class="btn btn-sm btn-primary" data-kt-menu-dismiss="true">Apply</button>
+                            </div>
+                            <!--end::Actions-->
+                        </div>
+                    </form>
+                    <!--end::Form-->
+                </div>
+                <!--end::Menu 1-->
+            </div>
+            <!--end::Filter menu-->
+           <a href="{{route('question.recent-question')}}" class="btn btn-sm btn-primary" >All Question</a>
+        </div>
      
     </div>
     <!--end::Container-->
@@ -57,6 +136,7 @@
     <!--begin::Container-->
     <div id="kt_content_container" class="container-xxl">
          
+        
         <!--begin::Row-->
         <div class="row gy-5 g-xl-8">
             <!--begin::Col-->
@@ -84,12 +164,12 @@
                                 <!--end::Heading-->
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="{{ route('question.edit-question', $question->id) }}" class="menu-link px-3">Edit Question</a>
+                                    <a href="javascript:;" class="menu-link px-3 editQuestion" data-id="{{ $question->id }}">Edit Question</a>
                                 </div>
                                 <!--end::Menu item-->
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="javascript:;" class="menu-link px-3" onclick="addNew()" >Add Description</a>
+                                    <a href="javascript:;" class="menu-link px-3 addDescription" data-id="{{ $question->id }}" >Add Description</a>
                                 </div>
                                 <!--end::Menu item-->
                                 
@@ -106,31 +186,20 @@
                     <div class="card-body">
                         <div class="row"  style="font-size: 16px">
                             <div class="col-md-12">
-                                <p class="text-gray-800 fw-bold mb-5 " > 
-                                  <span style="color:green">Ans:</span> {{$question->question_option->answer }}</p>
+                                <p class="text-gray-800 fw-bold " > 
+                                  <span style="color:green; font-weight:bold">answer:</span> {{$question->question_option->answer }}</p>
                             </div>
                         </div>
-                        
+                        <div class="d-flex justify-content-end mt-2 text-gray-700 fw-bold ">
+                            {{$question->created_at->diffForHumans()}}
+                        </div>
                     </div>
                     <div class="card-footer" style="padding-top:0px !important; padding-bottom:0px !important;">
 
-                        <div class="d-flex justify-content-end mt-2" style="margin-bottom: -40px !important;">
-                            {{-- <a href="javascript:;" class="comment me-2 btn btn-sm btn-light btn-color-muted btn-active-light-info px-4 py-2"  
-                            data-text="comment"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-dark" title="Add Comment">
-                            <i class="fas fa-comment"></i>
-                            </a> --}}
-                            <a href="javascript:;" class="bookmark me-2 btn btn-sm btn-light btn-color-muted btn-active-light-primary px-4 py-2"  
-                            data-id="{{ $question->id }}" data-catid="{{ $question->sub_category->category->id }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-dark" title="Bookmark">
-                            <i class="fas fa-bookmark"></i>
-                            </a>
-                            <a href="javascript:;" class=" btn btn-sm btn-light btn-color-muted btn-active-light-danger px-4 py-2 vote me-2"  data-id="{{ $question->id }}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="tooltip-dark" title="Like">
-                            <!--begin::Svg Icon | path: icons/duotune/general/gen030.svg-->
-                            <i class="fas fa-heart"></i>
-                            <!--end::Svg Icon-->{{$question->vote}}</a>
-                            <span style="cursor:default" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="tooltip-dark" title="Total view">
-                                <i class="fas fa-eye fa-xl"></i> {{$question->view_count}} 
-                            </span>
-                        </div>
+                        <!--begin::Question Activity-->
+                        @include('question.include.activity')
+                        <!--end::Question Activity-->
+
                         <!--begin::Accordion-->
                         <!--begin::Section-->
                         <div class="m-0">
@@ -177,83 +246,19 @@
                 </div>
                 <!--end::Feeds Widget 2-->
 
-                <!--begin::Modal - New Product/Service-->
-                <div class="modal fade" id="kk_modal_new_question_des" tabindex="-1" aria-hidden="true">
-                    <!--begin::Modal dialog-->
-                    <div class="modal-dialog modal-dialog-centered mw-650px">
-                        <!--begin::Modal content-->
-                        <div class="modal-content rounded">
-                            <!--begin::Modal header-->
-                            <div class="modal-header pb-0 border-0 justify-content-end">
-                                <!--begin::Close-->
-                                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
-                                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
-                                    <span class="svg-icon svg-icon-1">
-                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
-                                                transform="rotate(-45 6 17.3137)" fill="black" />
-                                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)"
-                                                fill="black" />
-                                        </svg>
-                                    </span>
-                                    <!--end::Svg Icon-->
-                                </div>
-                                <!--end::Close-->
-                            </div>
-                            <!--begin::Modal header-->
-                            <!--begin::Modal body-->
-                            <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
-                                <!--begin:Form-->
-                                <form id="kk_modal_new_question_des_form" class="form" enctype="multipart/form-data">
-                                    <div class="messages"></div>
-                                    {{-- csrf token  --}}
-                                    @csrf
-                                    <input type="hidden" name="question_id" value="{{ $question->id }}">
+                 <!--begin::Modal - New Description-->
+                @include('question.include.add_description_modal')
+                <!--end::Modal - New Description-->
 
-                                    <!--begin::Heading-->
-                                    <div class="mb-13 text-center">
-                                        <!--begin::Title-->
-                                        <h1 class="mb-3">Add New Question Description</h1>
-                                        <!--end::Title-->
-                                        <!--begin::Description-->
-                                        <div class="text-muted fw-bold fs-5">Fill up the form and submit
-                                        </div>
-                                        <!--end::Description-->
-                                    </div>
-                                    <!--end::Heading-->
-                                
-                                    <!--begin::Input group-->
-                                    <div class="d-flex flex-column mb-8 fv-row">
-                                        <!--begin::Label-->
-                                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                            <span class="required">Question Descrption</span>
-                                        </label>
-                                        <!--end::Label-->
-                                        <textarea name="description" class="form-control form-control-solid h-100px"></textarea>
-                                        <div class="help-block with-errors description-error"></div>
-                                    </div>
-                                    <!--end::Input group-->
+                <!--begin::Modal - New Comment-->
+                @include('question.include.add_comment_modal')
+                <!--end::Modal - New Comment-->
 
-                                    <!--begin::Actions-->
-                                    <div class="text-center">
-                                        <button type="reset" id="kk_modal_new_service_cancel" class="btn btn-light me-3">Cancel</button>
-                                        <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary">
-                                            <span class="indicator-label">Submit</span>
-                                            <span class="indicator-progress">Please wait...
-                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                        </button>
-                                    </div>
-                                    <!--end::Actions-->
-                                </form>
-                                <!--end:Form-->
-                            </div>
-                            <!--end::Modal body-->
-                        </div>
-                        <!--end::Modal content-->
-                    </div>
-                    <!--end::Modal dialog-->
+                <!--begin::Modal - Edit Question-->
+                <div class="modal fade" id="kk_modal_show_question" tabindex="-1" aria-hidden="true">
+                    <div id="edited_question_view_modal"></div>
                 </div>
-                <!--end::Modal - New Product/Service-->
+                <!--end::Modal - Edit Question-->
 
                 @endforeach
                 <div class="d-flex justify-content-end">
@@ -263,306 +268,71 @@
             <!--end::Col-->
            
         </div>
+        <!--end::Row-->
     </div>
 </div>
 <!---end::Post -->
+
+<!---start::Bookmark modal -->
+@include('question.include.add_bookmark_modal')
+<!---end::Bookmark modal -->
+
 @endsection
 
 @push('script')
-    <script type="text/javascript">
 
-        //test
-        $(document).ready(function(){
-            $('.option').on('click', function(){
-                var id = $(this).data('id')
-                var option_no = $(this).data('option')
-                // console.log(id)
-                // console.log(option_no)
-                $.ajax({
-                type:"GET",
-                url: "{{ url('question/answer-check') }}"+'/'+id+'/'+option_no,
-                dataType: 'json',
-                success:function(data){
-                    if(data.success == true){
-                        Swal.fire({
-                            text: data.message,
-                            icon: "success",
-                            buttonsStyling: !1,
-                            confirmButtonText: "{{__('Ok, got it!')}}",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary"
-                            }
-                        })
-                    }
-                    if(data.error == true){
-                        Swal.fire({
-                            text: data.message,
-                            icon: "error",
-                            buttonsStyling: !1,
-                            confirmButtonText: "{{__('Ok, got it!')}}",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary"
-                            }
-                        })
-                    }
-                }
-            })
-            })
-        })
+    @include('common.page_script')
 
-       
-       
-        //new comment save
-        $('#kk_modal_new_comment_form').on('submit',function(e){
-            e.preventDefault()
-            $('.with-errors').text('')
-            $('.indicator-label').hide()
-            $('.indicator-progress').show()
-            $('#kk_modal_new_comment_submit').attr('disabled','true')
+    
 
-            var formData = new FormData(this);
-            $.ajax({
-                type:"POST",
-                url: "{{ url('question/comment/store')}}",
-                data:formData,
-                cache:false,
-                contentType: false,
-                processData: false,
-                success:function(data){
-                    if(data.success ==  false || data.success ==  "false"){
-                        var arr = Object.keys(data.errors);
-                        var arr_val = Object.values(data.errors);
-                        for(var i= 0;i < arr.length;i++){
-                        $('.'+arr[i]+'-error').text(arr_val[i][0])
-                        }
-                    }else if(data.error || data.error == 'true'){
-                        var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
-                        $('#kk_modal_new_comment_form').find('.messages').html(alertBox).show();
-                    }else{
-                        // empty the form
-                        $('#kk_modal_new_comment_form')[0].reset();
-                        $("#kk_modal_new_comment").modal('hide');
+    {{-- <script type="text/javascript">
 
-                        Swal.fire({
-                                text: data.message,
-                                icon: "success",
-                                buttonsStyling: !1,
-                                confirmButtonText: "{{__('Ok, got it!')}}",
-                                customClass: {
-                                    confirmButton: "btn fw-bold btn-primary"
-                                }
-                            }).then((function () {
-                                //refresh datatable
-                                $('#dataTable').DataTable().ajax.reload();
-                            }))
-                    }
+        // const swiper = new Swiper('.swiper', {
+        //     pagination: {
+        //         el: '.swiper-pagination',
+        //     },
+        //     navigation: {
+        //         nextEl: '.swiper-button-next',
+        //         prevEl: '.swiper-button-prev',
+        //     },
+        //     scrollbar: {
+        //         el: '.swiper-scrollbar',
+        //     },
+        //      breakpoints: {
+        //         // when window width is >= 320px
+        //         320: {
 
-                    $('.indicator-label').show()
-                    $('.indicator-progress').hide()
-                    $('#kk_modal_new_comment_submit').removeAttr('disabled')
+        //         slidesPerView: 2,
 
-                }
-          });
+        //         spaceBetween: 20
 
-        })
-        
-        // add new
-        function addNew(){
-            $('input[name="question_des_id"]').val('')
-            $('.with-errors').text('')
-            $('#kk_modal_new_question_des_form')[0].reset();
-            $('#kk_modal_new_question_des').modal('show')
-        }
+        //         },
 
-        //cancel button
-        $('#kk_modal_new_service_cancel').on('click', function(){
-            $('#kk_modal_new_question_des_form')[0].reset();
-            $('#kk_modal_new_question_des').modal('hide')
-        })
+        //         // when window width is >= 480px
 
-            
-        //new description save
-        $('#kk_modal_new_question_des_form').on('submit',function(e){
-            e.preventDefault()
-            $('.with-errors').text('')
-            $('.indicator-label').hide()
-            $('.indicator-progress').show()
-            $('#kk_modal_new_service_submit').attr('disabled','true')
+        //         480: {
 
-            var formData = new FormData(this);
-            $.ajax({
-                type:"POST",
-                url: "{{ url('description/question-description/store')}}",
-                data:formData,
-                cache:false,
-                contentType: false,
-                processData: false,
-                success:function(data){
-                    if(data.success ==  false || data.success ==  "false"){
-                        var arr = Object.keys(data.errors);
-                        var arr_val = Object.values(data.errors);
-                        for(var i= 0;i < arr.length;i++){
-                        $('.'+arr[i]+'-error').text(arr_val[i][0])
-                        }
-                    }else if(data.error || data.error == 'true'){
-                        var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
-                        $('#kk_modal_new_question_des_form').find('.messages').html(alertBox).show();
-                    }else{
-                        // empty the form
-                        $('#kk_modal_new_question_des_form')[0].reset();
-                        $("#kk_modal_new_question_des").modal('hide');
+        //         slidesPerView: 3,
 
-                        Swal.fire({
-                                text: data.message,
-                                icon: "success",
-                                buttonsStyling: !1,
-                                confirmButtonText: "{{__('Ok, got it!')}}",
-                                customClass: {
-                                    confirmButton: "btn fw-bold btn-primary"
-                                }
-                            }).then((function () {
-                                //refresh datatable
-                                $('#dataTable').DataTable().ajax.reload();
-                            }))
-                    }
+        //         spaceBetween: 30
 
-                $('.indicator-label').show()
-                $('.indicator-progress').hide()
-                $('#kk_modal_new_service_submit').removeAttr('disabled')
+        //         },
 
-                }
-          });
+        //         // when window width is >= 640px
 
-        })
-            
-        //vote
-        $('.vote').on('click', function(){
-            var id = $(this).data('id')
-            var val = $(this).text()
-            $(this).html(`<i class="fas fa-heart"></i>`+(parseInt(val)+1))
-            //alert(id)
-            $.ajax({
-                type:"GET",
-                url: "{{ url('question/vote')}}"+'/'+id,
-                dataType: 'json',
-                success:function(data){
-                     toastr.success(data.message);
-                }
-            })
-        });
+        //         640: {
 
-        //view count
-        $('.view').on('click', function(){
-            var id = $(this).data('id')
-            //alert(id)
-            $.ajax({
-                type:"GET",
-                url: "{{ url('question/view-count')}}"+'/'+id,
-                dataType: 'json',
-                success:function(data){
-                    
-                }
-            })
-        });
+        //         slidesPerView: 4,
 
-        //bookmarks
-        $('.bookmark').on('click', function(){
-            var id = $(this).data('id')
-            var catid = $(this).data('catid')
-           
-            $(this).children().addClass('svg-icon-primary');
-            //alert(id)
-            $.ajax({
-                type:"GET",
-                url: "{{ url('question/bookmark')}}"+'/'+id+'/'+catid,
-                dataType: 'json',
-                success:function(data){
-                    if(data.success){
-                        Swal.fire({
-                        text: data.message,
-                        icon: "success",
-                        
-                    })
-                    }else{
-                        Swal.fire({
-                        text: data.message,
-                        icon: "error",
-                        
-                        })
-                    }
-                   
-                    
-                }
-            })
-        });
+        //         spaceBetween: 40
 
-        //reading mode
-        $(document).ready(function(){
-            $('#readingMode').on('click', function(e){
-                e.preventDefault();
-                $('.test').addClass('d-none')
-                $('.reading').removeClass('d-none')
-                $(this).addClass('d-none')
-                $('#testMode').removeClass('d-none')
-        
-            })
-            $('#testMode').on('click', function(e){
-                e.preventDefault();
-                $('.test').removeClass('d-none')
-                $('.reading').addClass('d-none')
-                $('#readingMode').removeClass('d-none')
-                $(this).addClass('d-none')
-               
-            })
-        })
-
-
-        const swiper = new Swiper('.swiper', {
-            pagination: {
-                el: '.swiper-pagination',
-            },
-            navigation: {
-                nextEl: '.swiper-button-next',
-                prevEl: '.swiper-button-prev',
-            },
-            scrollbar: {
-                el: '.swiper-scrollbar',
-            },
-             breakpoints: {
-                // when window width is >= 320px
-                320: {
-
-                slidesPerView: 2,
-
-                spaceBetween: 20
-
-                },
-
-                // when window width is >= 480px
-
-                480: {
-
-                slidesPerView: 3,
-
-                spaceBetween: 30
-
-                },
-
-                // when window width is >= 640px
-
-                640: {
-
-                slidesPerView: 4,
-
-                spaceBetween: 40
-
-                }
+        //         }
 
                 
 
-            }
+        //     }
 
-        });
+        // });
 
-    </script>
+    </script> --}}
 @endpush

@@ -362,3 +362,215 @@
     <!--end::Modal dialog-->
 </div>
 <!--end::Modal - Bookmark modal-->
+
+
+{{-- //discussion index --}}
+<div class="post d-flex flex-column-fluid" id="kt_post">
+    <!--begin::Container-->
+    <div id="kt_content_container" class="container-xxl">
+
+        <!--begin::Row-->
+        <div class="row gy-5 g-xl-8">
+            <!--begin::Col-->
+            <div class="col-xl-2">
+                <!--begin::Add Discussion-->
+                <div class="new-discussion mb-5">
+                <a href="javascript:;" class="btn btn-primary text-uppercase" onclick="addNew()">New Discussion</a>
+                </div>
+                <!--end::Add Discussion-->
+                <div class="nav">
+                    <ul class="nav-item">
+                        @foreach($channels as $channel)
+                        <a class="nav-link" href="{{ route('discussion.channel', $channel->id) }}"><li class="mb-3">{{$channel->name}}</li></a>
+                        @endforeach
+                    </ul>
+                </div>
+            </div>
+            <!--end::Col-->
+
+            <!--begin::Col-->
+            <div class="col-xl-8">
+                <!--begin::Card-->
+                <div class="card mb-5">
+                    <!--begin::Card header-->
+                    <div class="card-header border-0 ">
+                        <!--begin::Card title-->
+                        <div class="card-title">
+                            <!--begin::Search-->
+                            <div class="d-flex align-items-center position-relative my-1">
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
+                                <span class="svg-icon svg-icon-1 position-absolute ms-6">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                        fill="none">
+                                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1"
+                                            transform="rotate(45 17.0365 15.1223)" fill="black"></rect>
+                                        <path
+                                            d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z"
+                                            fill="black"></path>
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->
+                                <input type="text" data-kk-product-table-filter="search"
+                                    class="form-control form-control-solid w-350px ps-14" id="search" placeholder="Search discussion">
+                                {{-- <div id="display"></div> --}}
+
+                            </div>
+                            <!--end::Search-->
+
+
+                        </div>
+                        <!--begin::Card title-->
+
+                        <div class="card-toolbar flex-row-fluid justify-content-end gap-5"
+                            data-select2-id="select2-data-123-0tixx">
+
+                            <div class="m-0">
+                                <!--begin::Menu toggle-->
+                                <a href="#" class="btn btn-sm btn-flex btn-light btn-active-primary fw-bolder" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+                                <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
+                                <span class="svg-icon svg-icon-5 svg-icon-gray-500 me-1">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                        <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="black"></path>
+                                    </svg>
+                                </span>
+                                <!--end::Svg Icon-->Filter</a>
+                                <!--end::Menu toggle-->
+                                <!--begin::Menu 1-->
+                                <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_623176a83b3cd">
+                                    <!--begin::Header-->
+                                    <div class="px-7 py-5">
+                                        <div class="fs-5 text-dark fw-bolder">Filter Options</div>
+                                    </div>
+                                    <!--end::Header-->
+                                    <!--begin::Menu separator-->
+                                    <div class="separator border-gray-200"></div>
+                                    <!--end::Menu separator-->
+
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item px-3 pt-1">
+                                        <a href="{{ url('discussion', 'latest')}}" class="menu-link px-3">Latest</a>
+                                    </div>
+                                    <!--end::Menu item-->
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item px-3">
+                                        <a href="{{ url('discussion', 'popular')}}" class="menu-link px-3" >Most Popular</a>
+                                    </div>
+                                    <!--end::Menu item-->
+                                    <!--begin::Menu item-->
+                                    <div class="menu-item px-3 pb-2">
+                                        <a href="{{ url('discussion', 'weekago')}}" class="menu-link px-3" >Last Week</a>
+                                    </div>
+                                    <!--end::Menu item-->
+
+                                </div>
+                                <!--end::Menu 1-->
+                            </div>
+
+
+                        </div>
+
+                    </div>
+                    <!--end::Card header-->
+                    <div id="result"></div>
+                </div>
+                <!--end::Card-->
+
+
+
+
+                <div id="main">
+                    @foreach($discussions as $discussion)
+                    <!--begin::Feeds Widget 2-->
+                    <div class="card mb-5 mb-xl-8">
+                        <!--begin::Body-->
+                        <div class="card-body pb-0">
+                            <!--begin::Header-->
+                            <div class="d-flex align-items-center mb-5">
+                                <!--begin::User-->
+                                <div class="d-flex align-items-center flex-grow-1">
+                                    <!--begin::Avatar-->
+                                    <div class="symbol symbol-45px me-5">
+                                        <img src="{{ asset('assets') }}/media/avatars/300-23.jpg" alt="" />
+
+                                    </div>
+                                    <!--end::Avatar-->
+                                    <!--begin::Info-->
+                                    <div class="d-flex flex-column">
+                                        <a href="{{ route('discussion.show', $discussion->id) }}" class="text-gray-900 text-hover-primary fs-6 fw-bolder view" data-id="{{ $discussion->id }}" style="font-size: 20px !important;">{{ Str::limit($discussion->title, 50, $end='...') }}</a>
+                                        <span class="text-gray-400 fw-bold">{{$discussion->created_at->diffForHumans()}}</span>
+                                    </div>
+                                    <!--end::Info-->
+                                </div>
+                                <!--end::User-->
+                                <!--begin::Menu-->
+                                <div class="my-0">
+                                    <div class="channel-badge">
+                                    <a href="{{ route('discussion.channel', $channel->id) }}">{{$discussion->channel->name}}</a>
+                                    </div>
+
+                                </div>
+                                <!--end::Menu-->
+                            </div>
+                            <!--end::Header-->
+
+
+                            <!--begin::Post-->
+                            <div class="mb-5">
+                                <!--begin::Text-->
+                                <a href="{{ route('discussion.show', $discussion->id) }}" class="view" data-id="{{ $discussion->id }}">
+
+                                    <p class="text-gray-800 fw-normal mb-5">{!! $discussion->content !!}</p>
+                                </a>
+                                <!--end::Text-->
+                                <!--begin::Toolbar-->
+                                <div class="d-flex align-items-center mb-5">
+
+                                    <a href="{{ route('discussion.show', $discussion->id) }}" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4 view" data-id="{{ $discussion->id }}">
+                                    <!--begin::Svg Icon | path: icons/duotune/communication/com012.svg-->
+                                    <span class="svg-icon svg-icon-3">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path opacity="0.3" d="M20 3H4C2.89543 3 2 3.89543 2 5V16C2 17.1046 2.89543 18 4 18H4.5C5.05228 18 5.5 18.4477 5.5 19V21.5052C5.5 22.1441 6.21212 22.5253 6.74376 22.1708L11.4885 19.0077C12.4741 18.3506 13.6321 18 14.8167 18H20C21.1046 18 22 17.1046 22 16V5C22 3.89543 21.1046 3 20 3Z" fill="black" />
+                                            <rect x="6" y="12" width="7" height="2" rx="1" fill="black" />
+                                            <rect x="6" y="7" width="12" height="2" rx="1" fill="black" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->{{$discussion->replies->count()}}</a>
+                                    <a href="javascript:;" class="btn btn-sm btn-light btn-color-muted btn-active-light-danger px-4 py-2 vote me-4"  data-id="{{ $discussion->id }}">
+                                    <!--begin::Svg Icon | path: icons/duotune/general/gen030.svg-->
+                                    <span class="svg-icon svg-icon-2">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M18.3721 4.65439C17.6415 4.23815 16.8052 4 15.9142 4C14.3444 4 12.9339 4.73924 12.003 5.89633C11.0657 4.73913 9.66 4 8.08626 4C7.19611 4 6.35789 4.23746 5.62804 4.65439C4.06148 5.54462 3 7.26056 3 9.24232C3 9.81001 3.08941 10.3491 3.25153 10.8593C4.12155 14.9013 9.69287 20 12.0034 20C14.2502 20 19.875 14.9013 20.7488 10.8593C20.9109 10.3491 21 9.81001 21 9.24232C21.0007 7.26056 19.9383 5.54462 18.3721 4.65439Z" fill="black" />
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon-->{{$discussion->vote}}</a>
+
+                                    <span style="cursor:default" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4">
+                                      <i class="fas fa-eye fa-xl"></i> {{$discussion->view}} </span>
+
+                                </div>
+                                <!--end::Toolbar-->
+                            </div>
+                            <!--end::Post-->
+
+
+                        </div>
+                        <!--end::Body-->
+                    </div>
+                    <!--end::Feeds Widget 2-->
+                    @endforeach
+                    <div class="d-flex justify-content-end">
+                        {{ $discussions->links() }}
+                    </div>
+                </div>
+                <div id="render"></div>
+
+            </div>
+            <!--end::Col-->
+
+            <!--begin::Col-->
+            <div class="col-xl-1">
+
+            </div>
+        </div>
+    </div>
+</div>

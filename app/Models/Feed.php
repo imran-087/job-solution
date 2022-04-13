@@ -23,4 +23,12 @@ class Feed extends Model
     {
         return $this->morphMany(Comment::class, 'commentable');
     }
+
+    /**
+     * Get all of the feed's votes.
+     */
+    public function votes()
+    {
+        return $this->morphMany(Vote::class, 'votable');
+    }
 }

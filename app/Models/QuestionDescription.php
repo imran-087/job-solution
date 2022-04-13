@@ -24,8 +24,17 @@ class QuestionDescription extends Model
     {
         return $this->belongsTo(User::class, 'created_user_id', 'id');
     }
+
     public function admin()
     {
         return $this->belongsTo(Admin::class, 'created_user_id', 'id');
+    }
+
+    /**
+     * Get all of the descriptions's votes.
+     */
+    public function votes()
+    {
+        return $this->morphMany(Vote::class, 'votable');
     }
 }

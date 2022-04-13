@@ -341,8 +341,9 @@
                             
                     </div>
                 </div>
+
                 <!--end::Feeds Widget 2-->
-               <div class="card mb-5 mb-xl-8">
+                <div class="card mb-5 mb-xl-8">
                    <!--begin::Accordion-->
                     <div class="accordion" id="kt_accordion_1">
                         <div class="accordion-item">
@@ -388,7 +389,6 @@
                         </div>
                     </div>
                     <!--end::Accordion-->
-                    
                 </div>
                 @php
                     $related_questions = App\Models\Question::where([
@@ -445,7 +445,7 @@
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="javascript:;" class="menu-link px-3 addDescription" data-id="{{ $question->id }}">Add Description</a>
+                                            <a href="javascript:;" class="menu-link px-3 addDescription" data-id="{{ $r_question->id }}">Add Description</a>
                                         </div>
                                         <!--end::Menu item-->
                                         
@@ -759,304 +759,311 @@
     </div>
 </div>
 <!---end::Post -->
+
+<!---start::Bookmark modal -->
+@include('question.include.add_bookmark_modal')
+<!---end::Bookmark modal -->
+
 @endsection
 
 @push('script')
-    <script type="text/javascript">
+    @include('common.page_script')
+    {{-- <script type="text/javascript">
+
         //add comment
-        $(document).ready(function(){
-            $('.comment').on('click', function(){
-                var id = $(this).data(id)
-                //console.log(id.id)
-                $('input[name="question_id"]').val(id.id)
-                $('.with-errors').text('')
-                $('#kk_modal_new_comment_form')[0].reset();
-                $('#kk_modal_new_comment').modal('show')
-            })
-        })
+        // $(document).ready(function(){
+        //     $('.comment').on('click', function(){
+        //         var id = $(this).data(id)
+        //         //console.log(id.id)
+        //         $('input[name="question_id"]').val(id.id)
+        //         $('.with-errors').text('')
+        //         $('#kk_modal_new_comment_form')[0].reset();
+        //         $('#kk_modal_new_comment').modal('show')
+        //     })
+        // })
 
         //new comment save
-        $('#kk_modal_new_comment_form').on('submit',function(e){
-            e.preventDefault()
-            $('.with-errors').text('')
-            $('.indicator-label').hide()
-            $('.indicator-progress').show()
-            $('#kk_modal_new_comment_submit').attr('disabled','true')
+        // $('#kk_modal_new_comment_form').on('submit',function(e){
+        //     e.preventDefault()
+        //     $('.with-errors').text('')
+        //     $('.indicator-label').hide()
+        //     $('.indicator-progress').show()
+        //     $('#kk_modal_new_comment_submit').attr('disabled','true')
 
-            var formData = new FormData(this);
-            $.ajax({
-                type:"POST",
-                url: "{{ url('question/comment/store')}}",
-                data:formData,
-                cache:false,
-                contentType: false,
-                processData: false,
-                success:function(data){
-                    if(data.success ==  false || data.success ==  "false"){
-                        var arr = Object.keys(data.errors);
-                        var arr_val = Object.values(data.errors);
-                        for(var i= 0;i < arr.length;i++){
-                        $('.'+arr[i]+'-error').text(arr_val[i][0])
-                        }
-                    }else if(data.error || data.error == 'true'){
-                        var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
-                        $('#kk_modal_new_comment_form').find('.messages').html(alertBox).show();
-                    }else{
-                        // empty the form
-                        $('#kk_modal_new_comment_form')[0].reset();
-                        $("#kk_modal_new_comment").modal('hide');
+        //     var formData = new FormData(this);
+        //     $.ajax({
+        //         type:"POST",
+        //         url: "{{ url('question/comment/store')}}",
+        //         data:formData,
+        //         cache:false,
+        //         contentType: false,
+        //         processData: false,
+        //         success:function(data){
+        //             if(data.success ==  false || data.success ==  "false"){
+        //                 var arr = Object.keys(data.errors);
+        //                 var arr_val = Object.values(data.errors);
+        //                 for(var i= 0;i < arr.length;i++){
+        //                 $('.'+arr[i]+'-error').text(arr_val[i][0])
+        //                 }
+        //             }else if(data.error || data.error == 'true'){
+        //                 var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+        //                 $('#kk_modal_new_comment_form').find('.messages').html(alertBox).show();
+        //             }else{
+        //                 // empty the form
+        //                 $('#kk_modal_new_comment_form')[0].reset();
+        //                 $("#kk_modal_new_comment").modal('hide');
 
-                        Swal.fire({
-                                text: data.message,
-                                icon: "success",
-                                buttonsStyling: !1,
-                                confirmButtonText: "{{__('Ok, got it!')}}",
-                                customClass: {
-                                    confirmButton: "btn fw-bold btn-primary"
-                                }
-                            }).then((function () {
-                                //refresh datatable
-                                $('#dataTable').DataTable().ajax.reload();
-                            }))
-                    }
+        //                 Swal.fire({
+        //                         text: data.message,
+        //                         icon: "success",
+        //                         buttonsStyling: !1,
+        //                         confirmButtonText: "{{__('Ok, got it!')}}",
+        //                         customClass: {
+        //                             confirmButton: "btn fw-bold btn-primary"
+        //                         }
+        //                     }).then((function () {
+        //                         //refresh datatable
+        //                         $('#dataTable').DataTable().ajax.reload();
+        //                     }))
+        //             }
 
-                    $('.indicator-label').show()
-                    $('.indicator-progress').hide()
-                    $('#kk_modal_new_comment_submit').removeAttr('disabled')
+        //             $('.indicator-label').show()
+        //             $('.indicator-progress').hide()
+        //             $('#kk_modal_new_comment_submit').removeAttr('disabled')
 
-                }
-          });
+        //         }
+        //   });
 
-        })
+        // })
 
         //cancel button
-        $('#kk_modal_new_service_cancel').on('click', function(){
-            $('#kk_modal_new_question_des_form')[0].reset();
-            $("#kk_modal_new_question_des").modal('hide');
-            $('.indicator-label').show()
-            $('.indicator-progress').hide()
-            $('#kk_modal_new_service_submit').removeAttr('disabled')
-        })
+        // $('#kk_modal_new_service_cancel').on('click', function(){
+        //     $('#kk_modal_new_question_des_form')[0].reset();
+        //     $("#kk_modal_new_question_des").modal('hide');
+        //     $('.indicator-label').show()
+        //     $('.indicator-progress').hide()
+        //     $('#kk_modal_new_service_submit').removeAttr('disabled')
+        // })
 
         //edit Question
-        $('.editQuestion').on('click', function() {
-            var id = $(this).data(id)
-            //console.log(id)
-            $.ajax({
-                type:"GET",
-                url: "{{ url('/question/edit-question')}}"+'/'+id.id,
-                dataType: 'json',
-                success:function(data){
-                    $("#edited_question_view_modal").html(data.html);
-                    $("#kk_modal_show_question").modal('show');
-                }
-            });
-        });
+        // $('.editQuestion').on('click', function() {
+        //     var id = $(this).data(id)
+        //     //console.log(id)
+        //     $.ajax({
+        //         type:"GET",
+        //         url: "{{ url('/question/edit-question')}}"+'/'+id.id,
+        //         dataType: 'json',
+        //         success:function(data){
+        //             $("#edited_question_view_modal").html(data.html);
+        //             $("#kk_modal_show_question").modal('show');
+        //         }
+        //     });
+        // });
 
         //cancel button
-        $(document).on('click', '#kk_modal_new_service_cancel', function(){
+        // $(document).on('click', '#kk_modal_new_service_cancel', function(){
             
-            $("#kk_modal_show_question").modal('hide');
-        })
+        //     $("#kk_modal_show_question").modal('hide');
+        // })
 
         //update
-        $(document).on('submit', '#kk_modal_new_question_form', function(e){
-            e.preventDefault()
-            //console.log('here')
-            $('.with-errors').text('')
-            $('.indicator-label').hide()
-            $('.indicator-progress').show()
-            $('#kk_modal_new_service_submit').attr('disabled','true')
+        // $(document).on('submit', '#kk_modal_new_question_form', function(e){
+        //     e.preventDefault()
+        //     //console.log('here')
+        //     $('.with-errors').text('')
+        //     $('.indicator-label').hide()
+        //     $('.indicator-progress').show()
+        //     $('#kk_modal_new_service_submit').attr('disabled','true')
 
-            var formData = new FormData(this);
-            $.ajax({
-                type:"POST",
-                url: "{{ url('/question/edit-question/update')}}",
-                data:formData,
-                cache:false,
-                contentType: false,
-                processData: false,
-                success:function(data){
-                    if(data.success ==  false || data.success ==  "false"){
-                        var arr = Object.keys(data.errors);
-                        var arr_val = Object.values(data.errors);
-                        for(var i= 0;i < arr.length;i++){
-                        $('.'+arr[i]+'-error').text(arr_val[i][0])
-                        }
-                    }else if(data.error || data.error == 'true'){
-                        var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
-                        $('#kk_modal_new_question_form').find('.messages').html(alertBox).show();
-                    }else{
-                        // empty the form
-                        $('#kk_modal_new_question_form')[0].reset();
-                        $("#kk_modal_show_question").modal('hide');
+        //     var formData = new FormData(this);
+        //     $.ajax({
+        //         type:"POST",
+        //         url: "{{ url('/question/edit-question/update')}}",
+        //         data:formData,
+        //         cache:false,
+        //         contentType: false,
+        //         processData: false,
+        //         success:function(data){
+        //             if(data.success ==  false || data.success ==  "false"){
+        //                 var arr = Object.keys(data.errors);
+        //                 var arr_val = Object.values(data.errors);
+        //                 for(var i= 0;i < arr.length;i++){
+        //                 $('.'+arr[i]+'-error').text(arr_val[i][0])
+        //                 }
+        //             }else if(data.error || data.error == 'true'){
+        //                 var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+        //                 $('#kk_modal_new_question_form').find('.messages').html(alertBox).show();
+        //             }else{
+        //                 // empty the form
+        //                 $('#kk_modal_new_question_form')[0].reset();
+        //                 $("#kk_modal_show_question").modal('hide');
 
-                        Swal.fire({
-                            text: data.message,
-                            icon: "success",
-                            buttonsStyling: !1,
-                            confirmButtonText: "{{__('Ok, got it!')}}",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary"
-                            }
-                        })
-                    }
+        //                 Swal.fire({
+        //                     text: data.message,
+        //                     icon: "success",
+        //                     buttonsStyling: !1,
+        //                     confirmButtonText: "{{__('Ok, got it!')}}",
+        //                     customClass: {
+        //                         confirmButton: "btn fw-bold btn-primary"
+        //                     }
+        //                 })
+        //             }
 
-                    $('.indicator-label').show()
-                    $('.indicator-progress').hide()
-                    $('#kk_modal_new_service_submit').removeAttr('disabled')
+        //             $('.indicator-label').show()
+        //             $('.indicator-progress').hide()
+        //             $('#kk_modal_new_service_submit').removeAttr('disabled')
 
-                }
-            });
-        })
+        //         }
+        //     });
+        // })
        
 
-        //decription modal show
-        $('.addDescription').on('click', function() {
-            var id = $(this).data(id)
-            //console.log(id.id)
-            $('input[name="question_id"]').val(id.id)
-            $('.with-errors').text('')
-            $('#kk_modal_new_question_des_form')[0].reset();
-            $('#kk_modal_new_question_des').modal('show')
-        });
+        //description modal show
+        // $('.addDescription').on('click', function() {
+        //     var id = $(this).data(id)
+        //     //console.log(id.id)
+        //     $('input[name="question_id"]').val(id.id)
+        //     $('.with-errors').text('')
+        //     $('#kk_modal_new_question_des_form')[0].reset();
+        //     $('#kk_modal_new_question_des').modal('show')
+        // });
         
         
         //new description save
-        $('#kk_modal_new_question_des_form').on('submit',function(e){
-            e.preventDefault()
-            $('.with-errors').text('')
-            $('.indicator-label').hide()
-            $('.indicator-progress').show()
-            $('#kk_modal_new_service_submit').attr('disabled','true')
+        // $('#kk_modal_new_question_des_form').on('submit',function(e){
+        //     e.preventDefault()
+        //     $('.with-errors').text('')
+        //     $('.indicator-label').hide()
+        //     $('.indicator-progress').show()
+        //     $('#kk_modal_new_service_submit').attr('disabled','true')
 
-            var formData = new FormData(this);
-            $.ajax({
-                type:"POST",
-                url: "{{ url('description/question-description/store')}}",
-                data:formData,
-                cache:false,
-                contentType: false,
-                processData: false,
-                success:function(data){
-                    if(data.success ==  false || data.success ==  "false"){
-                        var arr = Object.keys(data.errors);
-                        var arr_val = Object.values(data.errors);
-                        for(var i= 0;i < arr.length;i++){
-                        $('.'+arr[i]+'-error').text(arr_val[i][0])
-                        }
-                    }else if(data.error || data.error == 'true'){
-                        var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
-                        $('#kk_modal_new_question_des_form').find('.messages').html(alertBox).show();
-                    }else{
-                        // empty the form
-                        $('#kk_modal_new_question_des_form')[0].reset();
-                        $("#kk_modal_new_question_des").modal('hide');
+        //     var formData = new FormData(this);
+        //     $.ajax({
+        //         type:"POST",
+        //         url: "{{ url('description/question-description/store')}}",
+        //         data:formData,
+        //         cache:false,
+        //         contentType: false,
+        //         processData: false,
+        //         success:function(data){
+        //             if(data.success ==  false || data.success ==  "false"){
+        //                 var arr = Object.keys(data.errors);
+        //                 var arr_val = Object.values(data.errors);
+        //                 for(var i= 0;i < arr.length;i++){
+        //                 $('.'+arr[i]+'-error').text(arr_val[i][0])
+        //                 }
+        //             }else if(data.error || data.error == 'true'){
+        //                 var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+        //                 $('#kk_modal_new_question_des_form').find('.messages').html(alertBox).show();
+        //             }else{
+        //                 // empty the form
+        //                 $('#kk_modal_new_question_des_form')[0].reset();
+        //                 $("#kk_modal_new_question_des").modal('hide');
 
-                        Swal.fire({
-                                text: data.message,
-                                icon: "success",
-                                buttonsStyling: !1,
-                                confirmButtonText: "{{__('Ok, got it!')}}",
-                                customClass: {
-                                    confirmButton: "btn fw-bold btn-primary"
-                                }
-                            }).then((function () {
-                                //refresh datatable
-                                $('#dataTable').DataTable().ajax.reload();
-                            }))
-                    }
+        //                 Swal.fire({
+        //                         text: data.message,
+        //                         icon: "success",
+        //                         buttonsStyling: !1,
+        //                         confirmButtonText: "{{__('Ok, got it!')}}",
+        //                         customClass: {
+        //                             confirmButton: "btn fw-bold btn-primary"
+        //                         }
+        //                     }).then((function () {
+        //                         //refresh datatable
+        //                         $('#dataTable').DataTable().ajax.reload();
+        //                     }))
+        //             }
 
-                $('.indicator-label').show()
-                $('.indicator-progress').hide()
-                $('#kk_modal_new_service_submit').removeAttr('disabled')
+        //         $('.indicator-label').show()
+        //         $('.indicator-progress').hide()
+        //         $('#kk_modal_new_service_submit').removeAttr('disabled')
 
-                }
-          });
+        //         }
+        //   });
 
-        })
+        // })
 
         //view count
-        $('.view').on('click', function(){
-            var id = $(this).data('id')
-            //alert(id)
-            $.ajax({
-                type:"GET",
-                url: "{{ url('question/view-count')}}"+'/'+id,
-                dataType: 'json',
-                success:function(data){
+        // $('.view').on('click', function(){
+        //     var id = $(this).data('id')
+        //     //alert(id)
+        //     $.ajax({
+        //         type:"GET",
+        //         url: "{{ url('question/view-count')}}"+'/'+id,
+        //         dataType: 'json',
+        //         success:function(data){
                     
-                }
-            })
-        });
+        //         }
+        //     })
+        // });
 
             
         //vote
-        $('.vote').on('click', function(){
-            var id = $(this).data('id')
-            var val = $(this).text()
-            $(this).html(`<i class="fas fa-heart"></i>`+(parseInt(val)+1))
-            //alert(id)
-            $.ajax({
-                type:"GET",
-                url: "{{ url('question/vote')}}"+'/'+id,
-                dataType: 'json',
-                success:function(data){
-                    toastr.success(data.message);
-                }
-            })
-        });
+        // $('.vote').on('click', function(){
+        //     var id = $(this).data('id')
+        //     var val = $(this).text()
+        //     $(this).html(`<i class="fas fa-heart"></i>`+(parseInt(val)+1))
+        //     //alert(id)
+        //     $.ajax({
+        //         type:"GET",
+        //         url: "{{ url('question/vote')}}"+'/'+id,
+        //         dataType: 'json',
+        //         success:function(data){
+        //             toastr.success(data.message);
+        //         }
+        //     })
+        // });
 
         //like description
-        $('.like').on('click', function(){
-            var id = $(this).data('id')
-            var val = $(this).text()
-            //console.log(val)
-            $(this).html(`<i class="fas fa-thumbs-up"></i>`+(parseInt(val)+1))
-            $.ajax({
-                type:"GET",
-                url: "{{ url('description/vote')}}"+'/'+id,
-                dataType: 'json',
-                success:function(data){
-                    if(data.success){
-                        toastr.success(data.message)
-                    }else{
-                        toastr.error(data.message)
-                    }
-                }
-            })
-        });
+        // $('.like').on('click', function(){
+        //     var id = $(this).data('id')
+        //     var val = $(this).text()
+        //     //console.log(val)
+        //     $(this).html(`<i class="fas fa-thumbs-up"></i>`+(parseInt(val)+1))
+        //     $.ajax({
+        //         type:"GET",
+        //         url: "{{ url('description/vote')}}"+'/'+id,
+        //         dataType: 'json',
+        //         success:function(data){
+        //             if(data.success){
+        //                 toastr.success(data.message)
+        //             }else{
+        //                 toastr.error(data.message)
+        //             }
+        //         }
+        //     })
+        // });
 
         
 
         //bookmarks
-        $('.bookmark').on('click', function(){
-            var id = $(this).data('id')
-            var catid = $(this).data('catid')
-            $(this).children().addClass('svg-icon-primary');
-            //alert(id)
-            $.ajax({
-                type:"GET",
-                url: "{{ url('question/bookmark')}}"+'/'+id+'/'+catid,
-                dataType: 'json',
-                success:function(data){
-                    if(data.success){
-                        Swal.fire({
-                        text: data.message,
-                        icon: "success",
+        // $('.bookmark').on('click', function(){
+        //     var id = $(this).data('id')
+        //     var catid = $(this).data('catid')
+        //     $(this).children().addClass('svg-icon-primary');
+        //     //alert(id)
+        //     $.ajax({
+        //         type:"GET",
+        //         url: "{{ url('question/bookmark')}}"+'/'+id+'/'+catid,
+        //         dataType: 'json',
+        //         success:function(data){
+        //             if(data.success){
+        //                 Swal.fire({
+        //                 text: data.message,
+        //                 icon: "success",
                         
-                    })
-                    }else{
-                        Swal.fire({
-                        text: data.message,
-                        icon: "error",
+        //             })
+        //             }else{
+        //                 Swal.fire({
+        //                 text: data.message,
+        //                 icon: "error",
                         
-                        })
-                    }
+        //                 })
+        //             }
                            
-                }
-            })
-        });
+        //         }
+        //     })
+        // });
 
-    </script>
+    </script> --}}
 @endpush

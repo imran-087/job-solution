@@ -97,6 +97,7 @@ Route::post('question/comment/store', [CommentController::class, 'store'])->name
    Recent/Samprotik Question
  * *****************/
 Route::get('job/question/recent-question', [RecentQuestionController::class, 'recentQuestion'])->name('question.recent-question');
+Route::post('job/question/recent-question-filter', [RecentQuestionController::class, 'recentQuestionFilter'])->name('question.recent-question-filter');
 
 /*********************
    Question Description
@@ -127,14 +128,16 @@ Route::middleware('auth')->name('user.')->group(function () {
   Route::get('/my-bookmark/bookmark-type', [BookmarkController::class, 'getBookmarkByType'])->name('bookmark.bookmark-type');
 });
 
-######***Feed ***#######
+######***News Feed ***#######
 Route::get('/news-feed', [FeedController::class, 'index'])->name('news-feed');
 Route::middleware('auth')->post('/feed/store', [FeedController::class, 'store'])->name('feed.store');
 Route::middleware('auth')->post('/feed-reply/store', [FeedController::class, 'storeReply'])->name('feed.reply');
+Route::get('feed/news/like/{id}', [FeedController::class, 'like'])->name('feed.like');
 
 
 ######***Feedback ***#######
 Route::get('/feedback', [FeedbackController::class, 'index'])->name('feedback');
+Route::get('/feedback/like/{id}', [FeedbackController::class, 'like'])->name('feedback.like');
 Route::middleware('auth')->post('/feedback/store', [FeedbackController::class, 'store'])->name('feedback.store');
 
 

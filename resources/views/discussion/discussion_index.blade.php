@@ -40,31 +40,92 @@
 
 @section('content')
 <!--begin::Post-->
+
+
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <!--begin::Container-->
     <div id="kt_content_container" class="container-xxl">
-
-        <!--begin::Row-->
-        <div class="row gy-5 g-xl-8">
-            <!--begin::Col-->
-            <div class="col-xl-2">
-                <!--begin::Add Discussion-->
-                <div class="new-discussion mb-5">
-                <a href="javascript:;" class="btn btn-primary text-uppercase" onclick="addNew()">New Discussion</a>
+        <div class="row">
+            <div class="col-md-4">
+                <!--begin::FAQ card-->
+                <div class="card">
+                    <!--begin::Body-->
+                    <div class="card-body p-lg-15">
+                        <!--begin::Layout-->
+                        <div class="d-flex flex-column flex-lg-row">
+                            <!--begin::Sidebar-->
+                            <div class="flex-column flex-lg-row-auto w-100 w-lg-275px mb-10 me-lg-20">
+                                <!--begin::Search blog-->
+                                <div class="mb-16">
+                                    <!--begin::Input group-->
+                                    <div class="position-relative">
+                                        <!--begin::Add Discussion-->
+                                        <div class="new-discussion mb-5">
+                                        <a href="javascript:;" class="btn btn-primary text-uppercase" onclick="addNew()">Create New Discussion</a>
+                                        </div>
+                                        <!--end::Add Discussion-->
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                                <!--end::Search blog-->
+                                <!--begin::Catigories-->
+                                <div class="mb-15">
+                                    <h4 class="text-black mb-7">Channel</h4>
+                                    <!--begin::Menu-->
+                                    <div class="menu menu-rounded menu-column menu-title-gray-700 menu-state-title-primary menu-active-bg-light-primary fw-bold">
+                                        <!--begin::Item-->
+                                        <div class="menu-item mb-1">
+                                            <!--begin::Link-->
+                                            @foreach($channels as $channel)
+                                                <a class="menu-link py-3 active" href="{{ route('discussion.channel', $channel->id) }}">{{$channel->name}}</a>
+                                            @endforeach
+                                            {{-- <a href="#" class="menu-link py-3 active">Bootstrap Admin</a> --}}
+                                            <!--end::Link-->
+                                        </div>
+                                        <!--end::Item-->
+                                        
+                                        
+                                    </div>
+                                    <!--end::Menu-->
+                                </div>
+                                <!--end::Catigories-->
+                                
+                                <!--begin::Recent posts-->
+                                <div class="m-0">
+                                    <h4 class="text-black mb-7">Recent Posts</h4>
+                                    @foreach(App\Models\Discussion::limit(5)->orderBy('id', 'desc')->get() as $recent_discussion)
+                                    <!--begin::Item-->
+                                    <div class="d-flex flex-stack mb-7">
+                                        <!--begin::Symbol-->
+                                        <div class="symbol symbol-60px symbol-2by3 me-4">
+                                            <div class="symbol-label" style="background-image: url('/metronic8/demo1/assets/media/stock/600x400/img-1.jpg')"></div>
+                                        </div>
+                                        <!--end::Symbol-->
+                                        <!--begin::Title-->
+                                        <div class="m-0">
+                                            <a href="#" class="text-dark fw-bolder text-hover-primary fs-6">About Bootstrap Admin</a>
+                                            <span class="text-gray-600 fw-bold d-block pt-1 fs-7">We’ve been a focused on making a the sky</span>
+                                        </div>
+                                        <!--end::Title-->
+                                    </div>
+                                    <!--end::Item-->
+                                    @endforeach
+                                    
+                                </div>
+                                <!--end::Recent posts-->
+                            </div>
+                            <!--end::Sidebar-->
+                            
+                        </div>
+                        <!--end::Layout-->
+                        
+                    </div>
+                    <!--end::Body-->
                 </div>
-                <!--end::Add Discussion-->
-                <div class="nav">
-                    <ul class="nav-item">
-                        @foreach($channels as $channel)
-                        <a class="nav-link" href="{{ route('discussion.channel', $channel->id) }}"><li class="mb-3">{{$channel->name}}</li></a>
-                        @endforeach
-                    </ul>
-                </div>
+                <!--end::FAQ card-->
             </div>
-            <!--end::Col-->
 
-            <!--begin::Col-->
-            <div class="col-xl-8">
+            <div class="col-md-8">
                 <!--begin::Card-->
                 <div class="card mb-5">
                     <!--begin::Card header-->
@@ -150,10 +211,7 @@
                 </div>
                 <!--end::Card-->
 
-
-
-
-                <div id="main">
+                <div class="discussion">
                     @foreach($discussions as $discussion)
                     <!--begin::Feeds Widget 2-->
                     <div class="card mb-5 mb-xl-8">
@@ -237,17 +295,10 @@
                         {{ $discussions->links() }}
                     </div>
                 </div>
-                <div id="render"></div>
-
-            </div>
-            <!--end::Col-->
-
-            <!--begin::Col-->
-            <div class="col-xl-1">
-
-            </div>
+            </div>   
         </div>
     </div>
+    <!--end::Container-->
 </div>
 
 <!--begin::Modal - New Discussion-->

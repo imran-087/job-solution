@@ -182,7 +182,7 @@
 </div>
 
 
-<!--begin::Modal - New Product/Service-->
+<!--begin::Modal - New Description-->
 <div class="modal fade" id="kk_modal_new_question_des" tabindex="-1" aria-hidden="true">
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-650px">
@@ -258,7 +258,7 @@
     </div>
     <!--end::Modal dialog-->
 </div>
-<!--end::Modal - New Product/Service-->
+<!--end::Modal - New Description-->
 
 <!--begin::Modal - Description view modal-->
 <div class="modal fade" id="kk_modal_show_description" tabindex="-1" aria-hidden="true">

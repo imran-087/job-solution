@@ -31,7 +31,7 @@
                 <div>
                     <span class=" btn btn-sm btn-light btn-color-muted btn-active-light-primary px-4 py-2 like me-2"  data-id="{{ $description->id }}" title="like">
                         <i class="fas fa-thumbs-up like"></i>
-                        {{$description->vote ?? '0'}}
+                        {{$description->vote }}
                     </span>
                   
                 </div>

@@ -56,7 +56,7 @@
 
                     <!--begin::Actions-->
                     <div class="text-center">
-                        <button type="reset" id="kk_modal_new_service_cancel" class="btn btn-light me-3">Cancel</button>
+                        <button type="reset" id="kk_modal_new_service_cancel" class="btn btn-light me-3 kk_modal_new_service_cancel">Cancel</button>
                         <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary">
                             <span class="indicator-label">Submit</span>
                             <span class="indicator-progress">Please wait...
