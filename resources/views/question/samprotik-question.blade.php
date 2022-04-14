@@ -44,84 +44,78 @@
         </div>
         <!--end::Page title-->
         <div class="d-flex align-items-center gap-2 gap-lg-3">
-            <!--begin::Filter menu-->
-            <div class="m-0">
-                <!--begin::Menu toggle-->
-                <a href="#" class="btn btn-sm btn-flex btn-light btn-active-primary fw-bolder" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
+            <!-- start: year filter-->
+             <span class="pe-0 text-end">
+                <a href="#" class="btn btn-sm btn-light btn-active-light-primary fw-bolder" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Filter Year 
                 <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
                 <span class="svg-icon svg-icon-5 svg-icon-gray-500 me-1">
                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                         <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="currentColor"></path>
                     </svg>
                 </span>
-                <!--end::Svg Icon-->Filter</a>
-                <!--end::Menu toggle-->
-                <!--begin::Menu 1-->
-                <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_625692f559661" style="">
-                    <!--begin::Header-->
-                    <div class="px-7 py-5">
-                        <div class="fs-5 text-dark fw-bolder">Filter Options</div>
+                <!--end::Svg Icon--></a>
+                <!--begin::Menu-->
+                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true" style="">
+                    @foreach($years as $year)
+                    <!--begin::Menu item-->
+                    <div class="menu-item px-3">
+                        <a href="{{ route('question.recent-question', ['year' => $year->id]) }}" class="menu-link px-3">{{ $year->year }}</a>
                     </div>
-                    <!--end::Header-->
-                    <!--begin::Menu separator-->
-                    <div class="separator border-gray-200"></div>
-                    <!--end::Menu separator-->
-                    <!--begin::Form-->
-                    <form action="{{ route('question.recent-question-filter') }}" method="POST">
-                        @csrf
-                        <div class="px-7 py-5">
-                            <!--begin::Input group-->
-                            <div class="mb-10" data-select2-id="select2-data-122-mdbb">
-                                <!--begin::Label-->
-                                <label class="form-label fw-bold">Select Year:</label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <div>
-                                    <select class="form-select form-select-solid select2-hidden-accessible" name="year" data-kt-select2="true" data-placeholder="Select year" data-dropdown-parent="#kt_menu_625692f559661" data-allow-clear="true" data-select2-id="select2-data-7-tquun" tabindex="-1" aria-hidden="true">
-                                        <option value="" ></option>
-                                        @foreach($years as $year)
-                                        <option value="{{ $year->id }}" >{{$year->year}}</option>
-                                        @endforeach
-                                    </select>
-                                </div>
-                                <!--end::Input-->
-                            </div>
-                            <!--end::Input group-->
-                            <!--begin::Input group-->
-                            <div class="mb-10" data-select2-id="select2-data-122-mdbb">
-                                <!--begin::Label-->
-                                <label class="form-label fw-bold">Date Range:</label>
-                                <!--end::Label-->
-                                <!--begin::Input-->
-                                <div>
-                                    <select class="form-select form-select-solid select2-hidden-accessible" name="range" data-kt-select2="true" data-placeholder="Select option" data-dropdown-parent="#kt_menu_625692f559661" data-allow-clear="true" data-select2-id="select2-data-7-tqun" tabindex="-1" aria-hidden="true">
-                                        <option value="" ></option>
-                                        <option value="today">Today</option>
-                                        <option value="yesterday">Yestarday</option>
-                                        <option value="last_7" >Last 7 Days</option>
-                                        <option value="last_30" >Last 30 Days</option>
-                                        <option value="this_month" >This Month</option>
-                                        <option value="last_month" >Last Month</option>
-                                    </select>
-                                </div>
-                                <!--end::Input-->
-                            </div>
-                            <!--end::Input group-->
-                            
-                            <!--begin::Actions-->
-                            <div class="d-flex justify-content-end">
-                               
-                                <button type="submit" class="btn btn-sm btn-primary" data-kt-menu-dismiss="true">Apply</button>
-                            </div>
-                            <!--end::Actions-->
-                        </div>
-                    </form>
-                    <!--end::Form-->
+                    <!--end::Menu item-->
+                    @endforeach
                 </div>
-                <!--end::Menu 1-->
-            </div>
-            <!--end::Filter menu-->
-           <a href="{{route('question.recent-question')}}" class="btn btn-sm btn-primary" >All Question</a>
+                <!--end::Menu-->
+            </span>
+            <!-- end: search filter-->
+
+            <!-- start: date filter-->
+            <span class="pe-0 text-end">
+                <a href="#" class="btn btn-sm btn-light btn-active-light-primary fw-bolder" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Filter Options 
+                <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
+                <span class="svg-icon svg-icon-5 svg-icon-gray-500 me-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="currentColor"></path>
+                    </svg>
+                </span>
+                <!--end::Svg Icon--></a>
+                <!--begin::Menu-->
+                <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true" style="">
+                    <!--begin::Menu item-->
+                    <div class="menu-item px-3">
+                        <a href="{{ route('question.recent-question', ['today']) }}" class="menu-link px-3">Today</a>
+                    </div>
+                    <!--end::Menu item-->
+                    <!--begin::Menu item-->
+                    <div class="menu-item px-3">
+                        <a href="{{ route('question.recent-question', ['yesterday']) }}" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Yesterday</a>
+                    </div>
+                    <!--end::Menu item-->
+                    
+                    <!--begin::Menu item-->
+                    <div class="menu-item px-3">
+                        <a href="{{ route('question.recent-question', ['last_7_days']) }}" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Last 7 Days</a>
+                    </div>
+                    <!--end::Menu item-->
+                    <!--begin::Menu item-->
+                    <div class="menu-item px-3">
+                        <a href="{{ route('question.recent-question', ['last_30_days']) }}" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Last 30 Days</a>
+                    </div>
+                    <!--end::Menu item-->
+                    <!--begin::Menu item-->
+                    <div class="menu-item px-3">
+                        <a href="{{ route('question.recent-question', ['this_month']) }}" class="menu-link px-3" data-kt-customer-table-filter="delete_row">This Month</a>
+                    </div>
+                    <!--end::Menu item-->
+                    <!--begin::Menu item-->
+                    <div class="menu-item px-3">
+                        <a href="{{ route('question.recent-question', ['last_month']) }}" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Last Month</a>
+                    </div>
+                    <!--end::Menu item-->
+                </div>
+                <!--end::Menu-->
+            </span>
+             <!--end::date filter-->
+            <a href="{{route('question.recent-question')}}" class="btn btn-sm btn-primary" >Reset</a>
         </div>
      
     </div>

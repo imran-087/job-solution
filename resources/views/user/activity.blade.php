@@ -177,7 +177,7 @@
                 </div>
                 <!--end: List Widget 5-->
             </div>
-            <div class="col-xl-4">
+            <div class="col-xl-4 ">
                 <!--begin::List Widget 5-->
                 <div class="card card-xl-stretch">
                     <!--begin::Header-->
@@ -244,10 +244,10 @@
                                 <!--end::Badge-->
                                 <!--begin::Text-->
                                 <div class="fw-mormal timeline-content text-muted ps-3">
-                                    <a href="{{ route('question.single-question', ['ques_id' => $comment->question->id]) }}">
+                                    {{-- <a href="{{ route('question.single-question', ['ques_id' => $comment->question->id]) }}">
                                         {{ $comment->question->question }} <br>
                                         <span > <span style="color:#F65667; font-weight:600">Comment:</span>  {{ $comment->comment }}</span>
-                                    </a>
+                                    </a> --}}
                                 </div>
                                 <!--end::Text-->
                             </div>

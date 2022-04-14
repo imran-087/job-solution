@@ -45,7 +45,7 @@
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <!--begin::Container-->
     <div id="kt_content_container" class="container-xxl">
-        <div class="row">
+        <div class="row gy-5 g-xl-8">
             <div class="col-md-4">
                 <!--begin::FAQ card-->
                 <div class="card">
@@ -56,7 +56,7 @@
                             <!--begin::Sidebar-->
                             <div class="flex-column flex-lg-row-auto w-100 w-lg-275px mb-10 me-lg-20">
                                 <!--begin::Search blog-->
-                                <div class="mb-16">
+                                <div class="mb-10">
                                     <!--begin::Input group-->
                                     <div class="position-relative">
                                         <!--begin::Add Discussion-->
@@ -70,21 +70,20 @@
                                 <!--end::Search blog-->
                                 <!--begin::Catigories-->
                                 <div class="mb-15">
-                                    <h4 class="text-black mb-7">Channel</h4>
+                                    <h4 class="text-black mb-5">Channel</h4>
                                     <!--begin::Menu-->
                                     <div class="menu menu-rounded menu-column menu-title-gray-700 menu-state-title-primary menu-active-bg-light-primary fw-bold">
+                                        @foreach($channels as $channel)
                                         <!--begin::Item-->
-                                        <div class="menu-item mb-1">
+                                        <div class="menu-item mb-3">
                                             <!--begin::Link-->
-                                            @foreach($channels as $channel)
-                                                <a class="menu-link py-3 active" href="{{ route('discussion.channel', $channel->id) }}">{{$channel->name}}</a>
-                                            @endforeach
+                                            <a class="menu-link py-3 active" href="{{ route('discussion.channel', $channel->id) }}">{{$channel->name}}</a>
+            
                                             {{-- <a href="#" class="menu-link py-3 active">Bootstrap Admin</a> --}}
                                             <!--end::Link-->
                                         </div>
                                         <!--end::Item-->
-                                        
-                                        
+                                        @endforeach
                                     </div>
                                     <!--end::Menu-->
                                 </div>
@@ -92,19 +91,21 @@
                                 
                                 <!--begin::Recent posts-->
                                 <div class="m-0">
-                                    <h4 class="text-black mb-7">Recent Posts</h4>
+                                    <h4 class="text-black mb-7">Recent Discussion</h4>
                                     @foreach(App\Models\Discussion::limit(5)->orderBy('id', 'desc')->get() as $recent_discussion)
                                     <!--begin::Item-->
-                                    <div class="d-flex flex-stack mb-7">
+                                    <div class="d-flex flex-stack justify-content-start mb-7">
                                         <!--begin::Symbol-->
                                         <div class="symbol symbol-60px symbol-2by3 me-4">
                                             <div class="symbol-label" style="background-image: url('/metronic8/demo1/assets/media/stock/600x400/img-1.jpg')"></div>
                                         </div>
                                         <!--end::Symbol-->
                                         <!--begin::Title-->
-                                        <div class="m-0">
-                                            <a href="#" class="text-dark fw-bolder text-hover-primary fs-6">About Bootstrap Admin</a>
-                                            <span class="text-gray-600 fw-bold d-block pt-1 fs-7">We’ve been a focused on making a the sky</span>
+                                        <div class="m-0 ">
+                                            <a href="{{ route('discussion.show', $recent_discussion->id) }}">
+                                                <span href="#" class="text-dark fw-bolder text-hover-primary fs-6">{{ $recent_discussion->channel->name }}</span>
+                                                <span class="text-gray-600 fw-bold d-block pt-1 fs-7">{{ $recent_discussion->title }}</span>
+                                            </a>
                                         </div>
                                         <!--end::Title-->
                                     </div>
@@ -162,46 +163,39 @@
 
                             <div class="m-0">
                                 <!--begin::Menu toggle-->
-                                <a href="#" class="btn btn-sm btn-flex btn-light btn-active-primary fw-bolder" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
-                                <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
-                                <span class="svg-icon svg-icon-5 svg-icon-gray-500 me-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="black"></path>
-                                    </svg>
-                                </span>
-                                <!--end::Svg Icon-->Filter</a>
-                                <!--end::Menu toggle-->
-                                <!--begin::Menu 1-->
-                                <div class="menu menu-sub menu-sub-dropdown w-250px w-md-300px" data-kt-menu="true" id="kt_menu_623176a83b3cd">
-                                    <!--begin::Header-->
-                                    <div class="px-7 py-5">
-                                        <div class="fs-5 text-dark fw-bolder">Filter Options</div>
+                                <span class="pe-0 text-end">
+                                    <a href="#" class="btn btn-sm btn-light btn-active-light-primary fw-bolder" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Filter Options 
+                                    <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
+                                    <span class="svg-icon svg-icon-5 svg-icon-gray-500 me-1">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                            <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="currentColor"></path>
+                                        </svg>
+                                    </span>
+                                    <!--end::Svg Icon--></a>
+                                    <!--begin::Menu-->
+                                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true" style="">
+                                        <!--begin::Menu item-->
+                                        <div class="menu-item px-3">
+                                            <a href="{{ url('discussion', 'latest')}}" class="menu-link px-3">Latest</a>
+                                        </div>
+                                        <!--end::Menu item-->
+                                        <!--begin::Menu item-->
+                                        <div class="menu-item px-3">
+                                              <a href="{{ url('discussion', 'popular')}}" class="menu-link px-3" >Most Popular</a>
+                                        </div>
+                                        <!--end::Menu item-->
+                                        
+                                        <!--begin::Menu item-->
+                                        <div class="menu-item px-3">
+                                             <a href="{{ url('discussion', 'weekago')}}" class="menu-link px-3" >Last Week</a>
+                                        </div>
+                                        <!--end::Menu item-->
+                                       
                                     </div>
-                                    <!--end::Header-->
-                                    <!--begin::Menu separator-->
-                                    <div class="separator border-gray-200"></div>
-                                    <!--end::Menu separator-->
-
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3 pt-1">
-                                        <a href="{{ url('discussion', 'latest')}}" class="menu-link px-3">Latest</a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3">
-                                        <a href="{{ url('discussion', 'popular')}}" class="menu-link px-3" >Most Popular</a>
-                                    </div>
-                                    <!--end::Menu item-->
-                                    <!--begin::Menu item-->
-                                    <div class="menu-item px-3 pb-2">
-                                        <a href="{{ url('discussion', 'weekago')}}" class="menu-link px-3" >Last Week</a>
-                                    </div>
-                                    <!--end::Menu item-->
-
-                                </div>
-                                <!--end::Menu 1-->
+                                    <!--end::Menu-->
+                                </span> 
                             </div>
-
+                            <a href="{{route('discussion.index')}}" class="btn btn-sm btn-primary" >Reset</a>
 
                         </div>
 
@@ -414,6 +408,9 @@
 @endsection
 
 @push('script')
+
+   
+
     <script type="text/javascript">
         
         //search
@@ -604,59 +601,59 @@
     });
 
     //save discussion
-     $('#kk_modal_new_discussion_form').on('submit',function(e){
-                e.preventDefault()
-                $('.with-errors').text('')
-                $('.indicator-label').hide()
-                $('.indicator-progress').show()
-                $('#kk_modal_new_service_submit').attr('disabled','true')
+    $('#kk_modal_new_discussion_form').on('submit',function(e){
+        e.preventDefault()
+        $('.with-errors').text('')
+        $('.indicator-label').hide()
+        $('.indicator-progress').show()
+        $('#kk_modal_new_service_submit').attr('disabled','true')
 
-                var formData = new FormData(this);
+        var formData = new FormData(this);
 
-                $.ajax({
-                    type:"POST",
-                    url: "{{ url('discussion/store')}}",
-                    data:formData,
-                    cache:false,
-                    contentType: false,
-                    processData: false,
-                    success:function(data){
+        $.ajax({
+            type:"POST",
+            url: "{{ url('discussion/store')}}",
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
 
-                        if(data.success ==  false || data.success ==  "false"){
-                            var arr = Object.keys(data.errors);
-                            var arr_val = Object.values(data.errors);
-                            for(var i= 0;i < arr.length;i++){
-                            $('.'+arr[i]+'-error').text(arr_val[i][0])
-                            }
-                        }else if(data.error || data.error == 'true'){
-                            var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
-                            $('#kk_modal_new_discussion_form').find('.messages').html(alertBox).show();
-                        }else{
-                            // empty the form
-                            $('#kk_modal_new_discussion_form')[0].reset();
-                            $("#kk_modal_new_discussion").modal('hide');
-
-                            Swal.fire({
-                                    text: data.message,
-                                    icon: "success",
-                                    showConfirmButton: true
-
-                                }).then((function () {
-                                    //refresh datatable
-                                    // setTimeout(function() {
-                                        location.reload();  //Refresh page
-                                    // }, 1000);
-                                }))
-                        }
-
-                        $('.indicator-label').show()
-                        $('.indicator-progress').hide()
-                        $('#kk_modal_new_service_submit').removeAttr('disabled')
-                       
-
+                if(data.success ==  false || data.success ==  "false"){
+                    var arr = Object.keys(data.errors);
+                    var arr_val = Object.values(data.errors);
+                    for(var i= 0;i < arr.length;i++){
+                    $('.'+arr[i]+'-error').text(arr_val[i][0])
                     }
-            });
+                }else if(data.error || data.error == 'true'){
+                    var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                    $('#kk_modal_new_discussion_form').find('.messages').html(alertBox).show();
+                }else{
+                    // empty the form
+                    $('#kk_modal_new_discussion_form')[0].reset();
+                    $("#kk_modal_new_discussion").modal('hide');
+
+                    Swal.fire({
+                            text: data.message,
+                            icon: "success",
+                            showConfirmButton: true
+
+                        }).then((function () {
+                            //refresh datatable
+                            // setTimeout(function() {
+                                location.reload();  //Refresh page
+                            // }, 1000);
+                        }))
+                }
+
+                $('.indicator-label').show()
+                $('.indicator-progress').hide()
+                $('#kk_modal_new_service_submit').removeAttr('disabled')
+                
+
+            }
         });
+    });
 
   </script>
 @endpush

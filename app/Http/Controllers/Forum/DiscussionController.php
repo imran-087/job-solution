@@ -52,7 +52,7 @@ class DiscussionController extends Controller
     public function store(Request $request)
     {
 
-        //dd($request->all());
+        dd($request->all());
         $validator = Validator::make($request->all(), [
             'content' => ['required'],
             'title' => ['required'],
@@ -101,6 +101,9 @@ class DiscussionController extends Controller
     public function show($id)
     {
         $discussion = Discussion::with(['user', 'channel', 'reply'])->where('id', $id)->first();
+        $discussion->view = $discussion->view + 1;
+        $discussion->save();
+
         $channels = Channel::where('status', 'active')->get();
         $replies = Reply::with('user', 'comments')->where('discussion_id', $id)->orderBy('id', 'desc')->get();
         return view('discussion.single_discussion', compact('discussion', 'channels', 'replies'));
@@ -108,7 +111,7 @@ class DiscussionController extends Controller
 
 
 
-    //chaneel all discussion
+    //channel all discussion
     public function channelDiscussion($channel)
     {
         $channels = Channel::where('status', 'active')->get();

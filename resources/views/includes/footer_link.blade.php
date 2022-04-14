@@ -14,6 +14,7 @@
 	<script src="{{ asset('assets') }}/js/custom/utilities/modals/upgrade-plan.js"></script>
 	<script src="{{ asset('assets') }}/js/custom/utilities/modals/create-app.js"></script>
 	<script src="{{ asset('assets') }}/js/custom/utilities/modals/users-search.js"></script>
+
 	<script src="{{ asset('assets') }}/plugins/custom/ckeditor/ckeditor-classic.bundle.js"></script>
 	<!--end::Page Custom Javascript-->
 
@@ -23,6 +24,9 @@
 
 	<!--swipe slider -->
 	<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
+
+	<!--tiny mc -->
+	<script src="{{ asset('assets') }}/plugins/custom/tinymce/tinymce.bundle.js"></script>
 
 	<!---- own js ---->
 	<script src="{{ asset('js/custom.js') }}"></script>

@@ -20,6 +20,7 @@ class Discussion extends Model
         return $this->belongsTo(Channel::class);
     }
 
+    // <!--find::Best reply-->
     public function reply()
     {
         return $this->belongsTo(Reply::class);

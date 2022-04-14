@@ -58,27 +58,90 @@
         <!--begin::Row-->
         <div class="row gy-5 g-xl-8">
             <!--begin::Col-->
-            <div class="col-xl-2">
-               <!--begin::Add Discussion-->
-                <div class="new-discussion mb-5">
-                <a href="javascript:;" class="btn btn-primary text-uppercase" onclick="addNew()">New Discussion</a>
+             <div class="col-md-4">
+                <!--begin::FAQ card-->
+                <div class="card">
+                    <!--begin::Body-->
+                    <div class="card-body p-lg-15">
+                        <!--begin::Layout-->
+                        <div class="d-flex flex-column flex-lg-row">
+                            <!--begin::Sidebar-->
+                            <div class="flex-column flex-lg-row-auto w-100 w-lg-275px mb-10 me-lg-20">
+                                <!--begin::Search blog-->
+                                <div class="mb-10">
+                                    <!--begin::Input group-->
+                                    <div class="position-relative">
+                                        <!--begin::Add Discussion-->
+                                        <div class="new-discussion mb-5">
+                                        <a href="javascript:;" class="btn btn-primary text-uppercase" onclick="addNew()">Create New Discussion</a>
+                                        </div>
+                                        <!--end::Add Discussion-->
+                                    </div>
+                                    <!--end::Input group-->
+                                </div>
+                                <!--end::Search blog-->
+                                <!--begin::Catigories-->
+                                <div class="mb-15">
+                                    <h4 class="text-black mb-5">Channel</h4>
+                                    <!--begin::Menu-->
+                                    <div class="menu menu-rounded menu-column menu-title-gray-700 menu-state-title-primary menu-active-bg-light-primary fw-bold">
+                                        @foreach($channels as $channel)
+                                        <!--begin::Item-->
+                                        <div class="menu-item mb-3">
+                                            <!--begin::Link-->
+                                            <a class="menu-link py-3 active" href="{{ route('discussion.channel', $channel->id) }}">{{$channel->name}}</a>
+                                          
+                                            {{-- <a href="#" class="menu-link py-3 active">Bootstrap Admin</a> --}}
+                                            <!--end::Link-->
+                                        </div>
+                                        <!--end::Item-->
+                                        @endforeach
+                                     
+                                    </div>
+                                    <!--end::Menu-->
+                                </div>
+                                <!--end::Catigories-->
+                                
+                                <!--begin::Recent posts-->
+                                <div class="m-0">
+                                    <h4 class="text-black mb-7">Recent Discussion</h4>
+                                    @foreach(App\Models\Discussion::limit(5)->orderBy('id', 'desc')->get() as $recent_discussion)
+                                    <!--begin::Item-->
+                                    <div class="d-flex flex-stack justify-content-start mb-7">
+                                        <!--begin::Symbol-->
+                                        <div class="symbol symbol-60px symbol-2by3 me-4">
+                                            <div class="symbol-label" style="background-image: url('/metronic8/demo1/assets/media/stock/600x400/img-1.jpg')"></div>
+                                        </div>
+                                        <!--end::Symbol-->
+                                        <!--begin::Title-->
+                                        <div class="m-0 ">
+                                            <a href="{{ route('discussion.show', $recent_discussion->id) }}">
+                                                <span href="#" class="text-dark fw-bolder text-hover-primary fs-6">{{ $recent_discussion->channel->name }}</span>
+                                                <span class="text-gray-600 fw-bold d-block pt-1 fs-7">{{ $recent_discussion->title }}</span>
+                                            </a>
+                                        </div>
+                                        <!--end::Title-->
+                                    </div>
+                                    <!--end::Item-->
+                                    @endforeach
+                                    
+                                </div>
+                                <!--end::Recent posts-->
+                            </div>
+                            <!--end::Sidebar-->
+                            
+                        </div>
+                        <!--end::Layout-->
+                        
+                    </div>
+                    <!--end::Body-->
                 </div>
-                <!--end::Add Discussion-->
-                <div class="nav">
-                    <ul class="nav-item">
-                        @foreach($channels as $channel)
-                            <a class="nav-link" href="{{ route('discussion.channel', $channel->id) }}"><li class="mb-3">{{$channel->name}}</li></a>
-                        @endforeach
-                    </ul>
-                    <ul class="nav-item ">
-                        <a class="nav-link" href="{{ route('discussion.index') }}"><li class="mb-3">All</li></a>
-                     </ul>
-                </div>
+                <!--end::FAQ card-->
             </div>
             <!--end::Col-->
 
             <!--begin::Col-->
-            <div class="col-xl-8">
+            <div class="col-xl-8 col-lg-8 col-md-8">
                 <!--begin::Feeds Widget 4-->
                 <div class="card mb-5 mb-xl-8">
                     <!--begin::Body-->
@@ -126,15 +189,17 @@
                                         <rect x="6" y="7" width="12" height="2" rx="1" fill="currentColor"></rect>
                                     </svg>
                                 </span>
-                                <!--end::Svg Icon-->22</a>
-                                <a href="#" class="btn btn-sm btn-light btn-color-muted btn-active-light-danger px-4 py-2">
+                                <!--end::Svg Icon-->{{$discussion->replies->count()}}</a>
+                                <a href="#" class="btn btn-sm btn-light btn-color-muted btn-active-light-danger px-4 py-2 me-4">
                                 <!--begin::Svg Icon | path: icons/duotune/general/gen030.svg-->
-                                <span class="svg-icon svg-icon-2">
+                                <span class="svg-icon svg-icon-2 ">
                                     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
                                         <path d="M18.3721 4.65439C17.6415 4.23815 16.8052 4 15.9142 4C14.3444 4 12.9339 4.73924 12.003 5.89633C11.0657 4.73913 9.66 4 8.08626 4C7.19611 4 6.35789 4.23746 5.62804 4.65439C4.06148 5.54462 3 7.26056 3 9.24232C3 9.81001 3.08941 10.3491 3.25153 10.8593C4.12155 14.9013 9.69287 20 12.0034 20C14.2502 20 19.875 14.9013 20.7488 10.8593C20.9109 10.3491 21 9.81001 21 9.24232C21.0007 7.26056 19.9383 5.54462 18.3721 4.65439Z" fill="currentColor"></path>
                                     </svg>
                                 </span>
-                                <!--end::Svg Icon-->59</a>
+                                <!--end::Svg Icon-->{{$discussion->vote}}</a>
+                                <span style="cursor:default" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-4">
+                                      <i class="fas fa-eye fa-xl"></i> {{$discussion->view}} </span>
                             </div>
                             <!--end::Toolbar-->
                         </div>
@@ -296,10 +361,6 @@
             </div>
             <!--end::Col-->
            
-            <!--begin::Col-->
-            <div class="col-xl-2">
-                
-            </div>
         </div>
     </div>
 </div>

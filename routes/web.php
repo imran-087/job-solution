@@ -45,9 +45,9 @@ Route::get('/discussion/channel/discussion/{id}/show', [DiscussionController::cl
 Route::post('/discussion/search', [DiscussionController::class, 'search'])->name('discussion.search');
 Route::get('/discussion/view-count/{id}', [DiscussionController::class, 'viewCount'])->name('discussion.view');
 Route::post('/discussion/ckeditor-image-upload', [DiscussionController::class, 'uploadImage'])->name('ckeditor.upload');
-
+Route::post('/discussion/store', [DiscussionController::class, 'store'])->name('discussion.store');
 Route::middleware('auth')->group(function () {
-  Route::post('/discussion/store', [DiscussionController::class, 'store'])->name('discussion.store');
+
   Route::get('/discussion/vote/{id}', [DiscussionController::class, 'vote'])->name('discussion.vote');
 
   Route::post('/discussion/reply', [ReplyController::class, 'reply'])->name('discussion.reply');
@@ -97,7 +97,6 @@ Route::post('question/comment/store', [CommentController::class, 'store'])->name
    Recent/Samprotik Question
  * *****************/
 Route::get('job/question/recent-question', [RecentQuestionController::class, 'recentQuestion'])->name('question.recent-question');
-Route::post('job/question/recent-question-filter', [RecentQuestionController::class, 'recentQuestionFilter'])->name('question.recent-question-filter');
 
 /*********************
    Question Description

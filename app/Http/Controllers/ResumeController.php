@@ -11,7 +11,8 @@ class ResumeController extends Controller
     public function create(Request $request)
     {
         $resume_info = Resume::where('user_id', Auth::user()->id)->first();
-        return view('user.resume', compact('resume_info'));
+        //dd($resume_info);
+        return view('user.resume.index', compact('resume_info'));
     }
 
     public function generalInfoStore(Request $request)
@@ -27,18 +28,48 @@ class ResumeController extends Controller
 
         Resume::create($data);
         //dd($data);
-        return redirect()->back()->with('success', 'Information save successfully')->with('data', $data);
+        return redirect()->back()->with('success', 'Information save successfully');
     }
 
     public function educationalInfoStore(Request $request)
     {
         //dd($request->all());
-        foreach ($request->except('_token') as $data => $value) {
-            $valids[$data] = "required";
+        $general_info = Resume::where('user_id', Auth::user()->id)->first();
+        if ($general_info) {
+            //dd('here');
+            if ($request->academic == 'academic') {
+                //dd('here');
+                foreach ($request->except('_token', 'academic') as $data => $value) {
+                    $valids[$data] = "required";
+                }
+                //dump($data);
+                $data = $request->validate($valids);
+                if ($general_info->update($data)) {
+                    return redirect()->back()->with('success', 'Academic info updated');
+                }
+            } elseif ($request->college == 'college') {
+                //dd('here');
+                foreach ($request->except('_token', 'college') as $data => $value) {
+                    $valids[$data] = "required";
+                }
+                //dump($data);
+                $data = $request->validate($valids);
+                if ($general_info->update($data)) {
+                    return redirect()->back()->with('success', 'College info updated');
+                }
+            } elseif ($request->versity == 'versity') {
+                //dd('here');
+                foreach ($request->except('_token', 'versity') as $data => $value) {
+                    $valids[$data] = "required";
+                }
+                //dump($data);
+                $data = $request->validate($valids);
+                if ($general_info->update($data)) {
+                    return redirect()->back()->with('success', 'University info updated');
+                }
+            }
+        } else {
+            return redirect()->back()->with('error', 'Fill your general inforamtion first');
         }
-        $data = $request->validate($valids);;
-
-        Resume::where('user_id', Auth::user()->id)->update($data);
-        return redirect()->back()->with('success', 'Information save successfully')->with('data', $data);
     }
 }
