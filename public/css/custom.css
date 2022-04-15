@@ -112,10 +112,28 @@ i.fas.fa-check.fa-2xl {
     margin-top: 40px;
 }
 
-@media screen and (min-width: 378px) {
+.tag{
+    position: relative;
+}
+.answer{
+    position: absolute;
+    margin-top: 18px !important;
+    margin-left: 448px;
+}
+
+a.btn.btn-sm.btn-success.me-3.answer {
+    padding: 4px 12px !important
+   
+}
+
+@media screen and (max-width: 378px) {
    .swiper-button-next:after,
    .swiper-button-prev:after{
-       margin-bottom: 40px;
+       margin-bottom: 65px;
+   }
+   .answer{
+           margin-top: 25px !important;
+    margin-left: 135px;
    }
 }
 

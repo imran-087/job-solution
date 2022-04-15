@@ -29,17 +29,17 @@ class SubjectController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
 
-                ->editColumn('parent', function ($row) {
-                    if ($row->parent == $row->id) {
+                ->editColumn('parent_id', function ($row) {
+                    if ($row->parent_id == $row->id) {
                         $btn = '<div class="badge badge-light-success fw-bolder">' . $row->name . '</div>';
                     } else {
-                        $btn = '<div class="badge badge-light-danger fw-bolder">NULL</div>';
+                        $btn = '<div class="badge badge-light-danger fw-bolder">null</div>';
                     }
                     return $btn;
                 })
                 ->editColumn('sub_category_id', function ($row) {
                     if ($row->sub_category == '') {
-                        return '<div class="badge badge-light-info fw-bolder">Null</div>';
+                        return '<div class="badge badge-light-info fw-bolder">null</div>';
                     }
                     return $row->sub_category->name;
                 })
@@ -84,7 +84,7 @@ class SubjectController extends Controller
                     </div>';
                     return $btn;
                 })
-                ->rawColumns(['action', 'status', 'created_at', 'sub_category_id', 'main_category_id', 'parent'])
+                ->rawColumns(['action', 'status', 'created_at', 'sub_category_id', 'main_category_id', 'parent_id'])
                 ->make(true);
         }
 
@@ -199,9 +199,12 @@ class SubjectController extends Controller
         //dd($id);
         $subject = Subject::find($id);
         if ($subject->sub_category_id == 0) {
-            $main_category = MainCategory::where('id', $subject->main_category_id)->first();
-        } else {
             //dd('here');
+            $main_category = MainCategory::where('id', $subject->main_category_id)->first();
+            $sub_category = '';
+            $category = '';
+        } else {
+            //dd('sub');
             $sub_category = SubCategory::where('id', $subject->sub_category_id)->first();
             //dd($sub_category);
             $category = Category::where('id', $sub_category->category_id)->first();

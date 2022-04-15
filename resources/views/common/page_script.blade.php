@@ -7,6 +7,7 @@
             var option_no = $(this).data('option')
             // console.log(id)
             // console.log(option_no)
+            $(this).closest('.row').find('p').off('click').removeClass('cursor-pointer')
             $.ajax({
             type:"GET",
             url: "{{ url('question/answer-check') }}"+'/'+id+'/'+option_no,
@@ -14,8 +15,6 @@
             success:function(data){
                 if(data.success == true){
                     toastr.success(data.message);
-                    
-
                     var val = $('#wright').html()
                     //console.log(val)
                     $('#wright').html(parseInt(val)+1)
@@ -271,7 +270,8 @@
     $('.vote').on('click', function(){
         var id = $(this).data('id')
         var val = $(this).text()
-        $(this).html(`<i class="fas fa-heart"></i>`+(parseInt(val)+1))
+        var click_element = $(this)
+       
         //console.log(val)
         //alert(id)
         $.ajax({
@@ -280,6 +280,7 @@
             dataType: 'json',
             success:function(data){
                 if(data.success){
+                    click_element.html(`<i class="fas fa-heart"></i>`+(parseInt(val)+1))
                     toastr.success(data.message);
                 }else{
                     toastr.warning(data.message);
@@ -293,8 +294,8 @@
     $('.like').on('click', function(){
         var id = $(this).data('id')
         var val = $(this).text()
-        //console.log(val)
-        $(this).html(`<i class="fas fa-thumbs-up"></i>`+(parseInt(val)+1))
+        //console.log(id)
+        var click_element = $(this)
         $.ajax({
             type:"GET",
             url: "{{ url('description/vote')}}"+'/'+id,
@@ -302,6 +303,7 @@
             success:function(data){
 
                 if(data.success){
+                    click_element.html(`<i class="fas fa-thumbs-up"></i>`+(parseInt(val)+1))
                     toastr.success(data.message)
                 }else{
                     toastr.error(data.message)

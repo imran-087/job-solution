@@ -21,7 +21,7 @@ class CreateQuestionDescriptionsTable extends Migration
             $table->unsignedBigInteger('vote')->default(0);
             $table->integer('created_user_id');
             $table->integer('approval_id')->nullable();
-            $table->enum('status', ['active', 'pending', 'deactive'])->default('active');
+            $table->enum('status', ['active', 'pending', 'reject', 'approve'])->default('active');
             $table->softDeletes();
             $table->timestamps();
         });

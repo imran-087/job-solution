@@ -1,7 +1,7 @@
 @php
     $edit_questions = App\Models\EditedQuestion::where('user_id', Auth::user()->id)->get();
     //dd($edit_questions->count());
-    $add_descriptions = App\Models\QuestionDescription::where('created_user_id', Auth::user()->id)->get();
+    $add_descriptions = App\Models\QuestionDescription::where('created_user_id', Auth::user()->id)->whereIn('status', ['approve', 'reject', 'pending'])->get();
     //dd($add_descriptions->count());
     $comments = App\Models\Comment::where('user_id', Auth::user()->id)->get();
     //dd($comments->count());
@@ -11,7 +11,15 @@
     // dd($discussions->count());
     $replies = App\Models\Reply::where('user_id', Auth::user()->id)->get();
     //dd($replies->count());
-
+    $approve_descriptions = App\Models\QuestionDescription::where(['created_user_id' => Auth::user()->id, 'status' => 'approve'])
+                            ->whereNotNull('approval_id')->get();
+    //dump($approve_descriptions->count());
+    $reject_descriptions = App\Models\QuestionDescription::where(['created_user_id' => Auth::user()->id, 'status' => 'reject'])
+                            ->whereNull('approval_id')->get();
+    //dump($reject_descriptions->count());
+    $pending_descriptions = App\Models\QuestionDescription::where(['created_user_id' => Auth::user()->id, 'status' => 'pending'])
+                            ->whereNull('approval_id')->get();
+    //dump($pending_descriptions->count());
 @endphp
 
 <div class="card mb-5 mb-xl-10">
@@ -123,7 +131,7 @@
                         </a>
                         </div>
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-4">
                         <div class="border border-gray-300 border-dashed rounded min-w-125px py-3 px-4 me-6 mb-3">
                             <a href="{{ route('user.activity', ['user'=> Auth::user()->id]) }}">
                             <!--begin::Number-->
@@ -141,6 +149,9 @@
                             <!--end::Number-->
                             <!--begin::Label-->
                             <div class="fw-bold fs-8 text-gray-400">Description added</div>
+                            <div class="badge badge-success">Approved  <span class="badge badge-circle badge-info">{{ $approve_descriptions->count() }}</span> </div>
+                            <div class="badge badge-success mt-2">Pending  <span class="badge badge-circle badge-info">{{ $pending_descriptions->count() }}</span></div>
+                            <div class="badge badge-success mt-2">Reject  <span class="badge badge-circle badge-info">{{ $reject_descriptions->count() }}</span></div>
                             <!--end::Label-->
                             </a>
                         </div>

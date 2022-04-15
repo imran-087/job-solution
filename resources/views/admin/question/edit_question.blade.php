@@ -412,7 +412,7 @@
                        
                         <div class="row g-9 mb-8">
                             <!--begin::Col-->
-                            <div class="col-md-5 fv-row">
+                            <div class="col-md-2 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Answer</label>
                                 <select class="form-select form-select-solid" data-control="select2"
                                     data-hide-search="true" data-placeholder="" name="answer"
@@ -452,6 +452,12 @@
                                 <div class="help-block with-errors main_category-error"></div>
                             </div>
                             <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col-md-10 fv-row">
+                                <label class="required fs-6 fw-bold mb-2">Description</label>
+                                <textarea name="description" class="form-control form-control-solid h-100px" placeholder="You can add description here..."></textarea>
+                                <div class="help-block with-errors description-error"></div>
+                            </div>
                         </div>
                         <!--end::Input group-->
 

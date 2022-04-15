@@ -123,12 +123,14 @@
                                         @php
                                             $subject_total_ques = App\Models\Question::where(['sub_category_id' => $sub_category->id, 'subject_id' => $subject->id])->get();
                                         @endphp
+                                        @if($subject_total_ques->count() > 0)
                                         <div class="swiper-slide"> 
                                             <a href="{{ route('jobs.category.sub-category.subject.question', [$category->slug, $sub_category->slug, $subject->slug]) }}" 
                                                 class="cursor-pointer page-link btn btn-success {{ strlen($subject->name) > 15 ? 'font-size' : '' }}">
                                                 {{$subject->name}}  <span class="badge badge-circle badge-danger ms-2">{{ $subject_total_ques->count() }}</span>
                                             </a>
                                         </div>
+                                        @endif
                                         @endforeach
                                     </div>
                                     
@@ -228,7 +230,7 @@
                             @endif  
                         </div>
                         @elseif($question->question_type == 'mcq')
-                        <div class="row"  style="font-size: 16px">
+                        <div class="row option-disable"  style="font-size: 16px">
                            
                             @if($question->question_option->option_1 != '' )
                             <div class="col-md-6 test">
@@ -401,13 +403,13 @@
                             @endif
                         </div>
                         @endif
-                        <div class="d-flex justify-content-between">
+                        <div class="d-flex justify-content-between tag">
                             <!--begin:tag-->
                             @include('question.include.tag')
                             <!--end:tag-->
                             
-                            <div class=""> 
-                                <a href="javascript:;" class="btn btn-sm  btn-success me-3 view-answer "  data-id="{{ $question->id }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-dark" title="View Answer"><i class="fas fa-eye fa-xl" ></i></a>
+                            <div class="answer"> 
+                                <a href="javascript:;"  class="btn btn-sm answer btn-success me-3 view-answer"  data-id="{{ $question->id }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-dark" title="view answer"><i class="fas fa-eye fa-xl" ></i></a>
                             </div> 
                         </div>
                        
@@ -439,7 +441,7 @@
                                 </div>
                                 <!--end::Icon-->
                                 <!--begin::Title-->
-                                <h5 class="text-gray-700 fw-bolder cursor-pointer mb-0" style="font-size: 16px !important;" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="tooltip-dark" title="View Description">Description</h5>
+                                <h6 class="text-gray-700 fw-bolder cursor-pointer mb-0" style="font-size: 14px !important;" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="tooltip-dark" title="View Description">Description</h6>
                                 <p class="badge badge-success fw-bolder">{{ $question->descriptions->count() }}</p>
                                 <!--end::Title-->
                                 

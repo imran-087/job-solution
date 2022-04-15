@@ -362,8 +362,8 @@
                         name: 'name'
                     },
                     {
-                        data: 'parent',
-                        name: 'parent'
+                        data: 'parent_id',
+                        name: 'parent_id'
                     },
                     {
                         data: 'main_category_id',

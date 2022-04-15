@@ -238,7 +238,7 @@ class QuestionDescriptionController extends Controller
     {
         $question_des = QuestionDescription::find($id);
 
-        $question_des->status = 'active';
+        $question_des->status = 'approve';
         $question_des->approval_id = Auth::guard('admin')->user()->id;
         $question_des->save();
 

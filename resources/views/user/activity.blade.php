@@ -67,6 +67,9 @@
                             <span class="fw-bolder mb-2 text-dark">Bookmarks</span>
                             <span class="text-muted fw-bold fs-7">Total: {{ $bookmarks->count() }} Bookmark</span>
                         </h3>
+                        <div>
+                            <a href="" class="btn btn-sm btn-light btn-active-color-dark">view all</a>
+                        </div>
                     </div>
                     <!--end::Header-->
                     <!--begin::Body-->
@@ -147,6 +150,9 @@
                             <span class="fw-bolder mb-2 text-dark">Description </span>
                             <span class="text-muted fw-bold fs-7">Total: {{ $add_descriptions->count() }} Description added</span>
                         </h3>
+                        <div>
+                            <a href="{{ route('user.activity', ['description' => 'view-all']) }}" class="btn btn-sm btn-light btn-active-color-dark">view all</a>
+                        </div>
                     </div>
                     <!--end::Header-->
                     <!--begin::Body-->
@@ -186,6 +192,9 @@
                             <span class="fw-bolder mb-2 text-dark">Edit Question </span>
                             <span class="text-muted fw-bold fs-7">Total: {{ $edit_questions->count() }} Question edited</span>
                         </h3>
+                        <div>
+                            <a href="" class="btn btn-sm btn-light btn-active-color-dark">view all</a>
+                        </div>
                     </div>
                     <!--end::Header-->
                     <!--begin::Body-->
@@ -225,6 +234,9 @@
                             <span class="fw-bolder mb-2 text-dark">Comments </span>
                             <span class="text-muted fw-bold fs-7">Total: {{ $comments->count() }} Comments added</span>
                         </h3>
+                        <div>
+                            <a href="" class="btn btn-sm btn-light btn-active-color-dark">view all</a>
+                        </div>
                     </div>
                     <!--end::Header-->
                     <!--begin::Body-->
@@ -269,6 +281,9 @@
                             <span class="fw-bolder mb-2 text-dark">Discussion Create </span>
                             <span class="text-muted fw-bold fs-7">Total: {{ $discussions->count() }} Discussion added</span>
                         </h3>
+                        <div>
+                            <a href="" class="btn btn-sm btn-light btn-active-color-dark">view all</a>
+                        </div>
                     </div>
                     <!--end::Header-->
                     <!--begin::Body-->
@@ -313,6 +328,9 @@
                             <span class="fw-bolder mb-2 text-dark">Reply to a discussion</span>
                             <span class="text-muted fw-bold fs-7">Total: {{ $replies->count() }} added</span>
                         </h3>
+                        <div>
+                            <a href="" class="btn btn-sm btn-light btn-active-color-dark">view all</a>
+                        </div>
                     </div>
                     <!--end::Header-->
                     <!--begin::Body-->

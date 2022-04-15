@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
 use App\Models\Tag;
 use App\Models\User;
 use App\Models\Year;
@@ -15,12 +16,13 @@ use Illuminate\Http\Request;
 use App\Models\EditedQuestion;
 use App\Models\QuestionOption;
 use App\Models\PreviewQuestion;
+use App\Models\QuestionDescription;
 use App\Http\Controllers\Controller;
-use App\Notifications\QuestionAddNotification;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Notification;
+use App\Notifications\QuestionAddNotification;
 
 class QuestionController extends Controller
 {
@@ -480,7 +482,13 @@ class QuestionController extends Controller
         //dd($question->toArray());
         $question_option = QuestionOption::where('question_id', $id)->first();
         $sub_category = SubCategory::where('id', $question->sub_category_id)->first();
+
         $subjects = Subject::where('sub_category_id', $question->sub_category_id)->get();
+        if ($subjects->count() == 0) {
+
+            $subjects = Subject::where('sub_category_id', 0)->get();
+        }
+        //dd($subjects);
         //dd($question_options->toArray());
         return view('admin.question.edit_question', compact(['subjects', 'question', 'years', 'passages', 'question_option', 'sub_category']));
     }
@@ -517,11 +525,20 @@ class QuestionController extends Controller
         $question_option = QuestionOption::where('question_id', $request->id)
             ->update($question_option_data);
 
-        if ($question) {
+        //save question description
+        $question_des = new QuestionDescription();
+
+        $question_des->question_id = $request->id;
+        $question_des->description = $request->description;
+        $question_des->created_user_id =  Auth::guard('admin')->user()->id;
+
+        $question_des->created_at = Carbon::now();;
+
+        if ($question && $question_option && $question_des->save()) {
             Session::flash('success', 'Question updated successfull');
             return redirect()->route('admin.question.index');
         } else {
-            Session::flash('error', 'Question updated successfull');
+            Session::flash('error', 'Failed..Something went wrong !');
             return redirect()->back();
         }
 
