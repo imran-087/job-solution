@@ -68,7 +68,7 @@
                             <span class="text-muted fw-bold fs-7">Total: {{ $bookmarks->count() }} Bookmark</span>
                         </h3>
                         <div>
-                            <a href="" class="btn btn-sm btn-light btn-active-color-dark">view all</a>
+                            <a href="{{ route('user.bookmark', [Auth::user()->id]) }}" class="btn btn-sm btn-light btn-active-color-dark">view all</a>
                         </div>
                     </div>
                     <!--end::Header-->
@@ -151,7 +151,7 @@
                             <span class="text-muted fw-bold fs-7">Total: {{ $add_descriptions->count() }} Description added</span>
                         </h3>
                         <div>
-                            <a href="{{ route('user.activity', ['description' => 'view-all']) }}" class="btn btn-sm btn-light btn-active-color-dark">view all</a>
+                            <a href="{{ route('user.activity.description', [Auth::user()->name]) }}" class="btn btn-sm btn-light btn-active-color-dark">view all</a>
                         </div>
                     </div>
                     <!--end::Header-->
@@ -193,7 +193,7 @@
                             <span class="text-muted fw-bold fs-7">Total: {{ $edit_questions->count() }} Question edited</span>
                         </h3>
                         <div>
-                            <a href="" class="btn btn-sm btn-light btn-active-color-dark">view all</a>
+                            <a href="{{ route('user.activity.edited-question', [Auth::user()->name]) }}" class="btn btn-sm btn-light btn-active-color-dark">view all</a>
                         </div>
                     </div>
                     <!--end::Header-->
@@ -282,7 +282,7 @@
                             <span class="text-muted fw-bold fs-7">Total: {{ $discussions->count() }} Discussion added</span>
                         </h3>
                         <div>
-                            <a href="" class="btn btn-sm btn-light btn-active-color-dark">view all</a>
+                            <a href="{{ route('user.activity.discussion', [Auth::user()->name]) }}" class="btn btn-sm btn-light btn-active-color-dark">view all</a>
                         </div>
                     </div>
                     <!--end::Header-->

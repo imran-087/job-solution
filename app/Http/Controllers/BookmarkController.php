@@ -10,7 +10,6 @@ class BookmarkController extends Controller
 {
     public function getBookmark($id)
     {
-
         $bookmarks = Bookmark::with(['question'])->where('user_id', Auth::user()->id)
             ->paginate(5);
         //dd($bookmarks);

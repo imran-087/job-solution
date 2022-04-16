@@ -93,27 +93,22 @@ class UserDashboardController extends Controller
     public function userActivity(Request $request)
     {
 
+        $edit_questions = EditedQuestion::where('user_id', $request->user)->orderBy('created_at', 'desc')->limit(5)->get();
+        //dd($edit_questions->count());
+        $add_descriptions = QuestionDescription::where('created_user_id', $request->user)->orderBy('created_at', 'desc')->limit(5)->get();
+        //dd($add_descriptions->count());
+        $comments = Comment::where('user_id', $request->user)->orderBy('created_at', 'desc')->limit(5)->get();
+        //dd($comments->count());
+        $bookmarks = Bookmark::where('user_id', $request->user)->orderBy('created_at', 'desc')->limit(5)->get();
+        //dd($bookmarks->count());
+        $discussions = Discussion::where('user_id', $request->user)->orderBy('created_at', 'desc')->limit(5)->get();
+        // dd($discussions->count());
+        $replies = Reply::where('user_id', $request->user)->orderBy('created_at', 'desc')->limit(5)->get();
+        //dd($replies->count());
 
-        if ($request->has('description')) {
-            return view('user.activity_details.description_details');
-        } else {
-            $edit_questions = EditedQuestion::where('user_id', $request->user)->orderBy('created_at', 'desc')->limit(5)->get();
-            //dd($edit_questions->count());
-            $add_descriptions = QuestionDescription::where('created_user_id', $request->user)->orderBy('created_at', 'desc')->limit(5)->get();
-            //dd($add_descriptions->count());
-            $comments = Comment::where('user_id', $request->user)->orderBy('created_at', 'desc')->limit(5)->get();
-            //dd($comments->count());
-            $bookmarks = Bookmark::where('user_id', $request->user)->orderBy('created_at', 'desc')->limit(5)->get();
-            //dd($bookmarks->count());
-            $discussions = Discussion::where('user_id', $request->user)->orderBy('created_at', 'desc')->limit(5)->get();
-            // dd($discussions->count());
-            $replies = Reply::where('user_id', $request->user)->orderBy('created_at', 'desc')->limit(5)->get();
-            //dd($replies->count());
-
-            return view(
-                'user.activity',
-                compact('edit_questions', 'add_descriptions', 'bookmarks', 'comments', 'discussions', 'replies')
-            );
-        }
+        return view(
+            'user.activity',
+            compact('edit_questions', 'add_descriptions', 'bookmarks', 'comments', 'discussions', 'replies')
+        );
     }
 }

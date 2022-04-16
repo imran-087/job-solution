@@ -25,6 +25,9 @@ class CreateEditedQuestionsTable extends Migration
             $table->string('option_5')->nullable();
             $table->text('answer')->nullable();
             $table->longText('written_answer')->nullable();
+            $table->enum('status', ['approve', 'pending', 'reject'])->default('pending');
+            $table->integer('approval_id')->nullable();
+            $table->integer('reject_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

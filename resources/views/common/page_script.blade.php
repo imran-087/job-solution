@@ -251,7 +251,7 @@
     //cancel button
     $('.kk_modal_new_service_cancel').on('click', function(){
         $('.messages').empty();
-
+       
         $('#kk_modal_new_bookmark_form')[0].reset();
         $("#kk_modal_new_bookmark").modal('hide');
 
@@ -496,4 +496,16 @@
 
     });
 
+</script>
+
+{{-- for ckeditor  --}}
+<script type="text/javascript">
+    ClassicEditor
+    .create(document.querySelector('#kt_docs_ckeditor_classic'))
+    .then(editor => {
+        console.log(editor);
+    })
+    .catch(error => {
+        console.error(error);
+    });
 </script>

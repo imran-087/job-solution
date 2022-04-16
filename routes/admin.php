@@ -104,8 +104,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         //edited question
         Route::get('/question/edited-question/index', 'EditedQuestionController@index')->name('question.edited-question');
         Route::get('question/edited-question/delete/{id}', 'EditedQuestionController@delete')->name('question.edited-question.delete');
-        Route::get('question/edited-question/accept/{id}', 'EditedQuestionController@acceptQiestion')->name('question.edited-question.accept');
-        Route::get('question/edited-question/show/{id}', 'EditedQuestionController@showQiestion')->name('question.edited-question.show');
+        Route::get('question/edited-question/accept/{id}', 'EditedQuestionController@acceptQuestion')->name('question.edited-question.accept');
+        Route::get('question/edited-question/reject/{id}', 'EditedQuestionController@rejectQuestion')->name('question.edited-question.reject');
+        Route::get('question/edited-question/show/{id}', 'EditedQuestionController@showQuestion')->name('question.edited-question.show');
 
 
         ############ Description Route #############

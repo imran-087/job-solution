@@ -455,7 +455,7 @@
                             <!--begin::Col-->
                             <div class="col-md-10 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Description</label>
-                                <textarea name="description" class="form-control form-control-solid h-100px" placeholder="You can add description here..."></textarea>
+                                <textarea name="description" id="kt_docs_ckeditor_classic" class="form-control form-control-solid h-100px" placeholder="You can add description here..."></textarea>
                                 <div class="help-block with-errors description-error"></div>
                             </div>
                         </div>
@@ -484,5 +484,17 @@
     <!--end::Post-->
 </div>
 
-
 @endsection
+
+@push('script')
+<script type="text/javascript">
+    ClassicEditor
+    .create(document.querySelector('#kt_docs_ckeditor_classic'))
+    .then(editor => {
+        console.log(editor);
+    })
+    .catch(error => {
+        console.error(error);
+    });
+</script>
+@endpush

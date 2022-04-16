@@ -118,7 +118,7 @@
                             <div class="help-block with-errors title-error"></div>
                         </div>
                         @endif
-                        <div class="col-md-6" style="color: green; font-weight:bold">
+                        <div class="col-md-2" style="color: green; font-weight:bold">
                             <!--begin::Label-->
                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                 <span class="required">Answer</span>
@@ -134,10 +134,11 @@
                 
                 <!--begin::Actions-->
                 <div class="text-center">
-                    <button type="reset" id="kk_modal_new_service_cancel" class="btn btn-light me-3">Close</button>
+                    <a href="javascript:;" onclick="reject({{ $editedQuestion->id }})" class="btn btn-danger">
+                        <span class="indicator-label">Reject</span>
+                    </a>
                     <a href="javascript:;" onclick="accept({{ $editedQuestion->id }})" class="btn btn-primary">
                         <span class="indicator-label">Accept</span>
-                        
                     </a>
                 </div>
                 <!--end::Actions-->

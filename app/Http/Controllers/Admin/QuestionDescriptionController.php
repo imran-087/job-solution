@@ -192,6 +192,9 @@ class QuestionDescriptionController extends Controller
                 ->editColumn('question_id', function ($row) {
                     return Str::limit($row->question->question, 15);
                 })
+                ->editColumn('description', function ($row) {
+                    return  htmlspecialchars_decode($row->description);
+                })
                 ->editColumn('created_at', function ($row) {
                     return $row->created_at->diffForHumans();
                 })
@@ -225,7 +228,7 @@ class QuestionDescriptionController extends Controller
                     </div>';
                     return $btn;
                 })
-                ->rawColumns(['action', 'created_at', 'question_id'])
+                ->rawColumns(['action', 'created_at', 'question_id', 'description'])
                 ->make(true);
         }
 

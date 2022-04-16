@@ -177,7 +177,7 @@
                         data: 'user_id',
                         name: 'user_id'
                     },
-                   
+                    
                     {
                         data: 'created_at',
                         name: 'created_at'
@@ -201,132 +201,183 @@
                 table.search(t.target.value).draw()
             }))
 
-         
-
         })
 
 
-    //deleteQuestion
-    function deleteQuestion(id){
-        Swal.fire({
-            text: "Are you sure you want delete this?",
-            icon: "warning",
-            showCancelButton: !0,
-            buttonsStyling: !1,
-            confirmButtonText: "Confirm",
-            cancelButtonText: "No, cancel",
-            customClass: {
-                confirmButton: "btn fw-bold btn-danger",
-                cancelButton: "btn fw-bold btn-active-light-primary"
-            }
-        }).then((function (o) {
-            if(o.value){ //if agree
-                $.ajax({
-                    type: "GET",
-                    url: "{{ url('admin/question/edited-question/delete') }}"+'/'+id,
-                    data: {},
-                    success: function (res)
-                    {
-                        if(res.success){
-                            Swal.fire({
-                                text: res.message,
-                                icon: "success",
-                                buttonsStyling: !1,
-                                confirmButtonText: "Ok, got it!",
-                                customClass: {
-                                    confirmButton: "btn fw-bold btn-primary"
-                                }
-                            }).then((function () {
-                                //refresh datatable
-                                $('#dataTable').DataTable().ajax.reload();
-                            }))
+        //deleteQuestion
+        function deleteQuestion(id){
+            Swal.fire({
+                text: "Are you sure you want delete this?",
+                icon: "warning",
+                showCancelButton: !0,
+                buttonsStyling: !1,
+                confirmButtonText: "Confirm",
+                cancelButtonText: "No, cancel",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-danger",
+                    cancelButton: "btn fw-bold btn-active-light-primary"
+                }
+            }).then((function (o) {
+                if(o.value){ //if agree
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ url('admin/question/edited-question/delete') }}"+'/'+id,
+                        data: {},
+                        success: function (res)
+                        {
+                            if(res.success){
+                                Swal.fire({
+                                    text: res.message,
+                                    icon: "success",
+                                    buttonsStyling: !1,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-primary"
+                                    }
+                                }).then((function () {
+                                    //refresh datatable
+                                    $('#dataTable').DataTable().ajax.reload();
+                                }))
+                            }
                         }
-                    }
-                });
+                    });
 
-            }else{ //if cancel
-                Swal.fire({
-                    text: "Item has not been deleted",
-                    icon: "error",
-                    buttonsStyling: !1,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn fw-bold btn-primary"
-                    }
-                })
-            }
-
-        }))
-    }
-
-    //accept edited question
-    function accept(id){
-        Swal.fire({
-            text: "Are you sure you want accept this Edited Question?",
-            icon: "warning",
-            showCancelButton: !0,
-            buttonsStyling: !1,
-            confirmButtonText: "Confirm",
-            cancelButtonText: "No, cancel",
-            customClass: {
-                confirmButton: "btn fw-bold btn-danger",
-                cancelButton: "btn fw-bold btn-active-light-primary"
-            }
-        }).then((function (o) {
-            if(o.value){ //if agree
-                $.ajax({
-                    type: "GET",
-                    url: "{{ url('admin/question/edited-question/accept') }}"+'/'+id,
-                    data: {},
-                    success: function (res)
-                    {
-                        if(res.success){
-                            Swal.fire({
-                                text: res.message,
-                                icon: "success",
-                                buttonsStyling: !1,
-                                confirmButtonText: "Ok, got it!",
-                                customClass: {
-                                    confirmButton: "btn fw-bold btn-primary"
-                                }
-                            }).then((function () {
-                                //refresh datatable
-                                $('#dataTable').DataTable().ajax.reload();
-                                $("#kk_modal_show_question").modal('hide');
-                            }))
+                }else{ //if cancel
+                    Swal.fire({
+                        text: "Item has not been deleted",
+                        icon: "error",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary"
                         }
-                    }
-                });
+                    })
+                }
 
-            }else{ //if cancel
-                Swal.fire({
-                    text: "Item has not been accepted",
-                    icon: "error",
-                    buttonsStyling: !1,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn fw-bold btn-primary"
-                    }
-                })
-            }
+            }))
+        }
 
-        }))
-    }
+        //accept edited question
+        function accept(id){
+            Swal.fire({
+                text: "Are you sure you want accept this Edited Question?",
+                icon: "warning",
+                showCancelButton: !0,
+                buttonsStyling: !1,
+                confirmButtonText: "Confirm",
+                cancelButtonText: "No, cancel",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-danger",
+                    cancelButton: "btn fw-bold btn-active-light-primary"
+                }
+            }).then((function (o) {
+                if(o.value){ //if agree
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ url('admin/question/edited-question/accept') }}"+'/'+id,
+                        data: {},
+                        success: function (res)
+                        {
+                            if(res.success){
+                                Swal.fire({
+                                    text: res.message,
+                                    icon: "success",
+                                    buttonsStyling: !1,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-primary"
+                                    }
+                                }).then((function () {
+                                    //refresh datatable
+                                    $('#dataTable').DataTable().ajax.reload();
+                                    $("#kk_modal_show_question").modal('hide');
+                                }))
+                            }
+                        }
+                    });
 
-    //view question
-    function view(id){
-        $.ajax({
-            type:"GET",
-            url: "{{ url('admin/question/edited-question/show')}}"+'/'+id,
-            dataType: 'json',
-            success:function(data){
-                $("#edited_question_view_modal").html(data.html);
-                $("#kk_modal_show_question").modal('show');
-            }
-        });
-    }
+                }else{ //if cancel
+                    Swal.fire({
+                        text: "Item has not been accepted",
+                        icon: "error",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary"
+                        }
+                    })
+                }
 
-    //cancel button
+            }))
+        }
+        //reject edited question
+        function reject(id){
+            Swal.fire({
+                text: "Are you sure you want reject this Edited Question?",
+                icon: "warning",
+                showCancelButton: !0,
+                buttonsStyling: !1,
+                confirmButtonText: "Confirm",
+                cancelButtonText: "No, cancel",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-danger",
+                    cancelButton: "btn fw-bold btn-active-light-primary"
+                }
+            }).then((function (o) {
+                if(o.value){ //if agree
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ url('admin/question/edited-question/reject') }}"+'/'+id,
+                        data: {},
+                        success: function (res)
+                        {
+                            if(res.success){
+                                Swal.fire({
+                                    text: res.message,
+                                    icon: "success",
+                                    buttonsStyling: !1,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-primary"
+                                    }
+                                }).then((function () {
+                                    //refresh datatable
+                                    $('#dataTable').DataTable().ajax.reload();
+                                    $("#kk_modal_show_question").modal('hide');
+                                }))
+                            }
+                        }
+                    });
+
+                }else{ //if cancel
+                    Swal.fire({
+                        text: "Item has not been rejected",
+                        icon: "error",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary"
+                        }
+                    })
+                }
+
+            }))
+        }
+
+        //view question
+        function view(id){
+            $.ajax({
+                type:"GET",
+                url: "{{ url('admin/question/edited-question/show')}}"+'/'+id,
+                dataType: 'json',
+                success:function(data){
+                    $("#edited_question_view_modal").html(data.html);
+                    $("#kk_modal_show_question").modal('show');
+                }
+            });
+        }
+
+        //cancel button
         $('#kk_modal_new_service_cancel').on('click', function(){
             
             $("#kk_modal_show_question").modal('hide');

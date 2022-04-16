@@ -501,5 +501,6 @@
 @endsection
 
 @push('script')
+   
     @include('common.page_script')
 @endpush

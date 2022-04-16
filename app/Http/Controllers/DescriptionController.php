@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Vote;
 use App\Models\Admin;
+use App\Models\Question;
 use Illuminate\Http\Request;
 use App\Models\QuestionDescription;
 use Illuminate\Support\Facades\Auth;
@@ -101,5 +102,18 @@ class DescriptionController extends Controller
                 'message' => 'You are unautheticate!.'
             ]);
         }
+    }
+
+    public function getdescription($id)
+    {
+        //dd($id);
+        $question_des = QuestionDescription::find($id);
+        $question = Question::where('id', $question_des->question_id)->first();
+
+        $data = [
+            'question_des' => $question_des,
+            'question' => $question,
+        ];
+        return response($data);
     }
 }

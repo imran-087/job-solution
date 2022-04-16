@@ -330,4 +330,18 @@
         }
 
     </script>
+
+    {{-- <script type="text/javascript">
+    $('#kk_modal_show_description').on('shown.bs.modal', function (e) {
+        ClassicEditor
+        .create(document.querySelector('#kt_docs_ckeditor_classic'))
+        .then(editor => {
+            console.log(editor);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+    });
+   
+    </script> --}}
 @endpush

@@ -10,4 +10,9 @@ class BookmarkType extends Model
     use HasFactory;
 
     protected $fillable = ['type_name', 'created_user_id'];
+
+    public function bookmarks()
+    {
+        return $this->hasMany(Bookmark::class);
+    }
 }

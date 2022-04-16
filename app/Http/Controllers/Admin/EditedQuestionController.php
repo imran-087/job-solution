@@ -16,7 +16,7 @@ class EditedQuestionController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = EditedQuestion::where('deleted_at', Null)->select();
+            $data = EditedQuestion::where('status', 'pending')->select();
 
 
             return DataTables::of($data)
@@ -58,7 +58,7 @@ class EditedQuestionController extends Controller
     }
 
     //accept question
-    public function acceptQiestion($id)
+    public function acceptQuestion($id)
     {
         $editedQuestion = EditedQuestion::find($id);
 
@@ -106,21 +106,37 @@ class EditedQuestionController extends Controller
         // }
     }
 
+    //reject question
+    public function rejectQuestion($id)
+    {
+        $question = EditedQuestion::find($id);
+        $question->status = 'reject';
+        $question->reject_by = Auth::guard('admin')->user()->id;
+
+        if ($question->save()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Rejected!'
+            ], 200);
+        }
+    }
+
     //delete
     public function delete($id)
     {
-        dd($id);
+        //dd($id);
         $question = EditedQuestion::find($id);
-        $question->delete();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Deleted successfully!'
-        ], 200);
+        if ($question->delete()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Deleted successfully!'
+            ], 200);
+        }
     }
 
     //show question
-    public function showQiestion($id)
+    public function showQuestion($id)
     {
         $editedQuestion = EditedQuestion::find($id);
         //dd($editedQuestion);

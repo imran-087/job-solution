@@ -51,10 +51,20 @@
                         <span>Description</span>
                     </label>
                     <div class="col-md-12 mb-5">
-                        <textarea  class="form-control form-control-solid h-100px">{{ $description->description }}</textarea>
+                        <textarea name="description" id="kt_docs_ckeditor_classic"  class="form-control form-control-solid h-100px">{!! $description->description !!}</textarea>
                     </div>
                    
                 </div>
+                <!--begin::Actions-->
+                <div class="text-center">
+                    <button type="reset" id="kk_modal_new_service_cancel" class="btn btn-light me-3 kk_modal_new_service_cancel">Cancel</button>
+                    <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary">
+                        <span class="indicator-label">Update and Accept</span>
+                        <span class="indicator-progress">Please wait...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                    </button>
+                </div>
+                <!--end::Actions-->
             </form>
             <!--end:Form-->
         </div>

@@ -49,7 +49,7 @@
                             <span class="required">Question Descrption</span>
                         </label>
                         <!--end::Label-->
-                        <textarea name="description" class="form-control form-control-solid h-100px"></textarea>
+                        <textarea name="description" id="kt_docs_ckeditor_classic" class="form-control form-control-solid h-100px"></textarea>
                         <div class="help-block with-errors description-error"></div>
                     </div>
                     <!--end::Input group-->

@@ -17,6 +17,7 @@ use App\Http\Controllers\RecentQuestionController;
 use App\Http\Controllers\ProfileSettingsController;
 use App\Http\Controllers\Forum\DiscussionController;
 use App\Http\Controllers\QuestionActivityController;
+use App\Http\Controllers\UserActivityController;
 
 /*
 |--------------------------------------------------------------------------
@@ -103,6 +104,7 @@ Route::get('job/question/recent-question', [RecentQuestionController::class, 're
  ****************************/
 Route::post('/description/question-description/store', [DescriptionController::class, 'store'])->name('description.question-description');
 Route::get('/description/vote/{id}', [DescriptionController::class, 'like'])->name('description.like');
+Route::get('/description/question-des/get/{id}', [DescriptionController::class, 'getdescription'])->name('description.resubmit');
 
 ####### User  route #######
 Route::middleware('auth')->name('user.')->group(function () {
@@ -114,6 +116,10 @@ Route::middleware('auth')->name('user.')->group(function () {
 
   //activity
   Route::get('user-activities', [UserDashboardController::class, 'userActivity'])->name('activity');
+  // activity details 
+  Route::get('user-activity/user={user}/description-details', [UserActivityController::class, 'description'])->name('activity.description');
+  Route::get('user-activity/user={user}/edited-question-details', [UserActivityController::class, 'editedQuestion'])->name('activity.edited-question');
+  Route::get('user-activity/user={user}/discussion-details', [UserActivityController::class, 'discussion'])->name('activity.discussion');
 
   //Resume
   Route::get('user-resume/create', [ResumeController::class, 'create'])->name('resume');

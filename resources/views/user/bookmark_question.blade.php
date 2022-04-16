@@ -88,9 +88,9 @@
         
        <!--begin::Row-->
         <div class="row gy-5 g-xl-8">
-            
+             
             <!--begin::Col-->
-            <div class="col-xl-10 col-md-10 col-sm-12 col-xs-12" id="question">
+            <div class="col-xl-8 col-md-8 col-sm-12 col-xs-12" id="question">
               
                 @foreach($bookmarks as $key => $bookmark)
                 <!--begin::Feeds Widget 2-->
@@ -276,6 +276,11 @@
                 </div>
             </div>
             <!--end::Col-->    
+            <div class="col-md-4">
+                <!--begin::bookmark category card-->
+                @include('user.include.bookmark_category')
+                <!--end::bookmark category card-->
+            </div>
         </div>
         
     </div>
