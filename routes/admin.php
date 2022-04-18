@@ -104,10 +104,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         //edited question
         Route::get('/question/edited-question/index', 'EditedQuestionController@index')->name('question.edited-question');
         Route::get('question/edited-question/delete/{id}', 'EditedQuestionController@delete')->name('question.edited-question.delete');
-        Route::get('question/edited-question/accept/{id}', 'EditedQuestionController@acceptQuestion')->name('question.edited-question.accept');
+        Route::post('question/edited-question/accept', 'EditedQuestionController@acceptQuestion')->name('question.edited-question.accept');
         Route::get('question/edited-question/reject/{id}', 'EditedQuestionController@rejectQuestion')->name('question.edited-question.reject');
         Route::get('question/edited-question/show/{id}', 'EditedQuestionController@showQuestion')->name('question.edited-question.show');
 
+        // add tag 
+        Route::get('/question/add-tag-on-question', 'TagController@addTag')->name('question.add-tag');
+        Route::post('question/tag/search', 'TagController@searchTag')->name('question.search-tag');
 
         ############ Description Route #############
         //Question Description
@@ -118,6 +121,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/description/question-description/delete/{id}', 'QuestionDescriptionController@deleteQuestionDes')->name('question-description.delete');
 
         Route::get('/description/pending-question-description', 'QuestionDescriptionController@pending')->name('question-description.pending');
+        Route::post('/description/pending-description/accept', 'QuestionDescriptionController@acceptDescription')->name('question-description.accept');
+        Route::get('/description/pending-description/reject/{id}', 'QuestionDescriptionController@rejectDescription')->name('question-description.reject');
         Route::get('/description/pending-question-description/status/{id}', 'QuestionDescriptionController@chnageStatus')->name('question-description.pending-status');
 
         //show description

@@ -224,6 +224,114 @@
             });
         }
 
+        //accept description
+        $(document).on('submit', '#kk_modal_new_question_form', function(e){
+            e.preventDefault()
+            //console.log('here')
+            $('.with-errors').text('')
+            $('.indicator-label').hide()
+            $('.indicator-progress').show()
+            $('#kk_modal_new_service_submit').attr('disabled','true')
+
+            var formData = new FormData(this);
+            $.ajax({
+                type:"POST",
+                url: "{{ url('admin/description/pending-description/accept')}}",
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    if(data.success ==  false || data.success ==  "false"){
+                        var arr = Object.keys(data.errors);
+                        var arr_val = Object.values(data.errors);
+                        for(var i= 0;i < arr.length;i++){
+                        $('.'+arr[i]+'-error').text(arr_val[i][0])
+                        }
+                    }else if(data.error || data.error == 'true'){
+                        var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                        $('#kk_modal_new_question_form').find('.messages').html(alertBox).show();
+                    }else{
+                        
+                        Swal.fire({
+                            text: data.message,
+                            icon: "success",
+                            buttonsStyling: !1,
+                            confirmButtonText: "{{__('Ok, got it!')}}",
+                            customClass: {
+                                confirmButton: "btn fw-bold btn-primary"
+                            }
+                        }).then((function () {
+                            //refresh datatable
+                            $('#dataTable').DataTable().ajax.reload();
+                            // empty the form
+                            $('#kk_modal_new_question_form')[0].reset();
+                            $("#kk_modal_show_description").modal('hide');
+                        }))
+                    }
+
+                    $('.indicator-label').show()
+                    $('.indicator-progress').hide()
+                    $('#kk_modal_new_service_submit').removeAttr('disabled')
+
+                }
+            });
+        })
+
+        //reject edited question
+        function reject(id){
+            Swal.fire({
+                text: "Are you sure you want reject this Edited Question?",
+                icon: "warning",
+                showCancelButton: !0,
+                buttonsStyling: !1,
+                confirmButtonText: "Confirm",
+                cancelButtonText: "No, cancel",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-danger",
+                    cancelButton: "btn fw-bold btn-active-light-primary"
+                }
+            }).then((function (o) {
+                if(o.value){ //if agree
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ url('admin/description/pending-description/reject') }}"+'/'+id,
+                        data: {},
+                        success: function (res)
+                        {
+                            if(res.success){
+                                Swal.fire({
+                                    text: res.message,
+                                    icon: "success",
+                                    buttonsStyling: !1,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-primary"
+                                    }
+                                }).then((function () {
+                                    //refresh datatable
+                                    $('#dataTable').DataTable().ajax.reload();
+                                    $("#kk_modal_show_description").modal('hide');
+                                }))
+                            }
+                        }
+                    });
+
+                }else{ //if cancel
+                    Swal.fire({
+                        text: "Item has not been rejected",
+                        icon: "error",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary"
+                        }
+                    })
+                }
+
+            }))
+        }
+
         //chnageStatus
         function changeStatus(id){
             Swal.fire({
@@ -276,7 +384,7 @@
 
             }))
         }
-        //deleteCategory
+        //deletedescription
         function deleteDescription(id){
             Swal.fire({
                 text: "Are you sure you want delete this?",

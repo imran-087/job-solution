@@ -18,6 +18,7 @@ class CreateFeedsTable extends Migration
             $table->longText('content');
             $table->integer('user_id');
             $table->unsignedBigInteger('like');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

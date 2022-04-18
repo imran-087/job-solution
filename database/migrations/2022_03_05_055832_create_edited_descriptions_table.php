@@ -20,6 +20,7 @@ class CreateEditedDescriptionsTable extends Migration
             $table->string('descriptionable_type');
             $table->integer('editor_id');
             $table->enum('status', ['active', 'deactive'])->default('active');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

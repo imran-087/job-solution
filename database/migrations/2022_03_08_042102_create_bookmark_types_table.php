@@ -17,6 +17,7 @@ class CreateBookmarkTypesTable extends Migration
             $table->id();
             $table->string('type_name');
             $table->integer('created_user_id')->default(0);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -203,6 +203,59 @@
 
         })
 
+        //update edited question
+        $(document).on('submit', '#kk_modal_new_question_form', function(e){
+            e.preventDefault()
+            //console.log('here')
+            $('.with-errors').text('')
+            $('.indicator-label').hide()
+            $('.indicator-progress').show()
+            $('#kk_modal_new_service_submit').attr('disabled','true')
+
+            var formData = new FormData(this);
+            $.ajax({
+                type:"POST",
+                url: "{{ url('admin/question/edited-question/accept')}}",
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    if(data.success ==  false || data.success ==  "false"){
+                        var arr = Object.keys(data.errors);
+                        var arr_val = Object.values(data.errors);
+                        for(var i= 0;i < arr.length;i++){
+                        $('.'+arr[i]+'-error').text(arr_val[i][0])
+                        }
+                    }else if(data.error || data.error == 'true'){
+                        var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                        $('#kk_modal_new_question_form').find('.messages').html(alertBox).show();
+                    }else{
+                        
+                        Swal.fire({
+                            text: data.message,
+                            icon: "success",
+                            buttonsStyling: !1,
+                            confirmButtonText: "{{__('Ok, got it!')}}",
+                            customClass: {
+                                confirmButton: "btn fw-bold btn-primary"
+                            }
+                        }).then((function () {
+                            //refresh datatable
+                            $('#dataTable').DataTable().ajax.reload();
+                            // empty the form
+                            $('#kk_modal_new_question_form')[0].reset();
+                            $("#kk_modal_show_question").modal('hide');
+                        }))
+                    }
+
+                    $('.indicator-label').show()
+                    $('.indicator-progress').hide()
+                    $('#kk_modal_new_service_submit').removeAttr('disabled')
+
+                }
+            });
+        })
 
         //deleteQuestion
         function deleteQuestion(id){
@@ -310,6 +363,7 @@
 
             }))
         }
+
         //reject edited question
         function reject(id){
             Swal.fire({

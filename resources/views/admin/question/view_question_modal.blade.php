@@ -24,7 +24,7 @@
         <!--begin::Modal body-->
         <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
             <!--begin:Form-->
-            <form id="kk_modal_new_passage_form" class="form" enctype="multipart/form-data">
+           <form id="kk_modal_new_question_form" class="form" enctype="multipart/form-data">
                 <div class="messages"></div>
                 {{-- csrf token  --}}
                 @csrf
@@ -39,6 +39,9 @@
                     <!--end::Description-->
                 </div>
                 <!--end::Heading-->
+                <input type="hidden" name="question_id" value="{{ $editedQuestion->question_id }}">
+                <input type="hidden" name="user_id" value="{{ $editedQuestion->user_id }}">
+                <input type="hidden" name="edited_ques_id" value="{{ $editedQuestion->id }}">
                 <!--begin::Input group-->
                 <div class="d-flex flex-column mb-8 fv-row">
                     <!--begin::Label-->
@@ -47,8 +50,8 @@
                     </label>
                     <!--end::Label-->
                     <input type="text" class="form-control form-control-solid" placeholder="Enter Title"
-                        name="title" value="{{ $editedQuestion->question }}"/>
-                    <div class="help-block with-errors title-error"></div>
+                        name="question" value="{{ $editedQuestion->question }}" />
+                    <div class="help-block with-errors question-error"></div>
                 </div>
                 <!--end::Input group-->
                 <!--begin::Input group-->
@@ -61,8 +64,8 @@
                             </label>
                             <!--end::Label-->
                             <input type="text" class="form-control form-control-solid" placeholder="Enter Title"
-                                name="title" value="{{ $editedQuestion->option_1 }}"/>
-                            <div class="help-block with-errors title-error"></div>
+                                name="option_1" value="{{ $editedQuestion->option_1 }}"/>
+                            <div class="help-block with-errors option_1-error"></div>
                         </div>
                         <div class="col-md-6">
                             <!--begin::Label-->
@@ -71,8 +74,8 @@
                             </label>
                             <!--end::Label-->
                             <input type="text" class="form-control form-control-solid" placeholder="Enter Title"
-                                name="title" value="{{ $editedQuestion->option_2 }}" />
-                            <div class="help-block with-errors title-error"></div>
+                                name="option_2" value="{{ $editedQuestion->option_2 }}" />
+                            <div class="help-block with-errors option_2-error"></div>
                         </div>
                     </div>
                 </div>
@@ -87,8 +90,8 @@
                             </label>
                             <!--end::Label-->
                             <input type="text" class="form-control form-control-solid" placeholder="Enter Title"
-                                name="title" value="{{ $editedQuestion->option_3 }}"/>
-                            <div class="help-block with-errors title-error"></div>
+                                name="option_3" value="{{ $editedQuestion->option_3 }}"/>
+                            <div class="help-block with-errors option_3-error"></div>
                         </div>
                         <div class="col-md-6">
                             <!--begin::Label-->
@@ -97,8 +100,8 @@
                             </label>
                             <!--end::Label-->
                             <input type="text" class="form-control form-control-solid" placeholder="Enter Title"
-                                name="title" value="{{ $editedQuestion->option_4 }}" />
-                            <div class="help-block with-errors title-error"></div>
+                                name="option_4" value="{{ $editedQuestion->option_4 }}" />
+                            <div class="help-block with-errors option_4-error"></div>
                         </div>
                     </div>
                 </div>
@@ -114,8 +117,8 @@
                             </label>
                             <!--end::Label-->
                             <input type="text" class="form-control form-control-solid" placeholder="Enter Title"
-                                name="title" value="{{ $editedQuestion->option_5 }}"/>
-                            <div class="help-block with-errors title-error"></div>
+                                name="option_5" value="{{ $editedQuestion->option_5 }}"/>
+                            <div class="help-block with-errors option_5-error"></div>
                         </div>
                         @endif
                         <div class="col-md-2" style="color: green; font-weight:bold">
@@ -125,23 +128,27 @@
                             </label>
                             <!--end::Label-->
                             <input type="text" class="form-control form-control-solid" placeholder="Enter Title"
-                                name="title" value="{{ $editedQuestion->answer }}" />
-                            <div class="help-block with-errors title-error"></div>
+                                name="answer" value="{{ $editedQuestion->answer }}" />
+                            <div class="help-block with-errors answer-error"></div>
                         </div>
                     </div>
                 </div>
                 <!--end::Input group-->
                 
                 <!--begin::Actions-->
+                <!--begin::Actions-->
                 <div class="text-center">
                     <a href="javascript:;" onclick="reject({{ $editedQuestion->id }})" class="btn btn-danger">
                         <span class="indicator-label">Reject</span>
                     </a>
-                    <a href="javascript:;" onclick="accept({{ $editedQuestion->id }})" class="btn btn-primary">
+                    <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary">
                         <span class="indicator-label">Accept</span>
-                    </a>
+                        <span class="indicator-progress">Please wait...
+                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                    </button>
                 </div>
                 <!--end::Actions-->
+               
             </form>
             <!--end:Form-->
         </div>

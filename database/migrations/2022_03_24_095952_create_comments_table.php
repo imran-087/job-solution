@@ -20,6 +20,7 @@ class CreateCommentsTable extends Migration
             $table->longText('content');
             $table->integer('user_id');
             $table->enum('status', ['active', 'deactive'])->default('active');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

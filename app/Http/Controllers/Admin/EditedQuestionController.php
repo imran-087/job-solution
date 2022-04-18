@@ -58,34 +58,30 @@ class EditedQuestionController extends Controller
     }
 
     //accept question
-    public function acceptQuestion($id)
+    public function acceptQuestion(Request $request)
     {
-        $editedQuestion = EditedQuestion::find($id);
+        //dd($request->all());
 
-        //dd($editedQuestion);
-        if ($editedQuestion) {
-            $question = Question::where('id', $editedQuestion->question_id)->update([
-                'question' => $editedQuestion->question,
-                'updated_user_id' => $editedQuestion->user_id,
-                'approval_id' => Auth::guard('admin')->user()->id,
+        $question = Question::where('id', $request->question_id)->update([
+            'question' => $request->question,
+            'updated_user_id' => $request->user_id,
+            'approval_id' => Auth::guard('admin')->user()->id,
+        ]);
 
-            ]);
+        $questionOption = QuestionOption::where('question_id', $request->question_id)->update([
+            'option_1' => $request->option_1,
+            'option_2' => $request->option_2,
+            'option_3' => $request->option_3,
+            'option_4' => $request->option_4,
+            'option_5' => $request->option_5,
+            'answer' => $request->answer,
+            'written_answer' => $request->written_answer,
+        ]);
 
-
-            $questionOption = QuestionOption::where('question_id', $editedQuestion->question_id)->update([
-                'option_1' => $editedQuestion->option_1,
-                'option_2' => $editedQuestion->option_2,
-                'option_3' => $editedQuestion->option_3,
-                'option_4' => $editedQuestion->option_4,
-                'option_5' => $editedQuestion->option_5,
-                'answer' => $editedQuestion->answer,
-                'written_answer' => $editedQuestion->written_answer,
-            ]);
-
-            if ($question && $questionOption) {
-                //delete from edited
-                $editedQuestion->delete();
-
+        if ($question && $questionOption) {
+            //delete from edited
+            $editedQuestion = EditedQuestion::find($request->edited_ques_id);
+            if ($editedQuestion->delete()) {
                 return response()->json([
                     'success' => true,
                     'message' => 'Question updated successfull'
@@ -96,14 +92,15 @@ class EditedQuestionController extends Controller
                     'message' => 'Failed!'
                 ]);
             }
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Failed!'
+            ]);
         }
         //dd('ok');
 
-        // if ($question) {
-        //     Session::flash('success', 'Question updated successfull');
-        // } else {
-        //     Session::flash('error', 'Somethings went wrong');
-        // }
+
     }
 
     //reject question

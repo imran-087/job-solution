@@ -30,8 +30,8 @@ class SubjectController extends Controller
                 ->addIndexColumn()
 
                 ->editColumn('parent_id', function ($row) {
-                    if ($row->parent_id == $row->id) {
-                        $btn = '<div class="badge badge-light-success fw-bolder">' . $row->name . '</div>';
+                    if ($row->parent_id != '') {
+                        $btn = '<div class="badge badge-light-success fw-bolder">' . $row->parentsub->name . '</div>';
                     } else {
                         $btn = '<div class="badge badge-light-danger fw-bolder">null</div>';
                     }

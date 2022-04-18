@@ -205,14 +205,7 @@ class QuestionDescriptionController extends Controller
                             <i class="fas fa-eye"></i>
                         </a>
                         <a href="javascript:;" onclick="changeStatus(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" >
-                            <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
-                            <span class="svg-icon svg-icon-3" >
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M17.5 11H6.5C4 11 2 9 2 6.5C2 4 4 2 6.5 2H17.5C20 2 22 4 22 6.5C22 9 20 11 17.5 11ZM15 6.5C15 7.9 16.1 9 17.5 9C18.9 9 20 7.9 20 6.5C20 5.1 18.9 4 17.5 4C16.1 4 15 5.1 15 6.5Z" fill="black"></path>
-                                    <path opacity="0.3" d="M17.5 22H6.5C4 22 2 20 2 17.5C2 15 4 13 6.5 13H17.5C20 13 22 15 22 17.5C22 20 20 22 17.5 22ZM4 17.5C4 18.9 5.1 20 6.5 20C7.9 20 9 18.9 9 17.5C9 16.1 7.9 15 6.5 15C5.1 15 4 16.1 4 17.5Z" fill="black"></path>
-                                </svg>
-                            </span>
-                            <!--end::Svg Icon-->
+                           <i class="fas fa-check-circle"></i>
                         </a>
                         <a href="javascript:;" onclick="deleteDescription(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
@@ -243,14 +236,57 @@ class QuestionDescriptionController extends Controller
 
         $question_des->status = 'approve';
         $question_des->approval_id = Auth::guard('admin')->user()->id;
-        $question_des->save();
-
-        return response()->json([
-            'success' => true,
-            'message' => 'Description Approved successfully!'
-        ], 200);
+        if ($question_des->save()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Description Approved successfully!'
+            ], 200);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Failed!'
+            ]);
+        }
     }
 
+    public function acceptDescription(Request $request)
+    {
+        $description = QuestionDescription::find($request->description_id);
+
+        $description->description = $request->description;
+        $description->status = 'approve';
+        $description->approval_id = Auth::guard('admin')->user()->id;
+
+        if ($description->save()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Description Approved successfully!'
+            ], 200);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Failed!'
+            ]);
+        }
+    }
+
+    public function rejectDescription($id)
+    {
+        $question_des = QuestionDescription::find($id);
+
+        $question_des->status = 'reject';
+        if ($question_des->save()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Description Rejected'
+            ], 200);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Failed!'
+            ]);
+        }
+    }
 
 
     //show single question
@@ -265,7 +301,7 @@ class QuestionDescriptionController extends Controller
         ]);
     }
 
-    //show question
+    //show all question description
     public function getAllDescription($id)
     {
         $question = Question::with('descriptions')->where('id', $id)->first();

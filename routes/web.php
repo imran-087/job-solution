@@ -17,6 +17,7 @@ use App\Http\Controllers\RecentQuestionController;
 use App\Http\Controllers\ProfileSettingsController;
 use App\Http\Controllers\Forum\DiscussionController;
 use App\Http\Controllers\QuestionActivityController;
+use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserActivityController;
 
 /*
@@ -81,6 +82,10 @@ Route::get('/single-question', [QuestionController::class, 'singleQuestion'])->n
 Route::get('/question/edit-question/{id}', [QuestionController::class, 'edit'])->name('question.edit-question');
 Route::post('/question/edit-question/update', [QuestionController::class, 'update'])->name('question.update-question');
 
+//subject wise question
+Route::get('job-solutions/subject/all-subjects', [SubjectController::class, 'index'])->name('subject.all-subject');
+
+
 /******************
    Question Activity
  * *****************/
@@ -103,6 +108,7 @@ Route::get('job/question/recent-question', [RecentQuestionController::class, 're
    Question Description
  ****************************/
 Route::post('/description/question-description/store', [DescriptionController::class, 'store'])->name('description.question-description');
+Route::post('/description/question-description/resubmit', [DescriptionController::class, 'resubmit'])->name('description.resubmit');
 Route::get('/description/vote/{id}', [DescriptionController::class, 'like'])->name('description.like');
 Route::get('/description/question-des/get/{id}', [DescriptionController::class, 'getdescription'])->name('description.resubmit');
 

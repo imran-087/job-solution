@@ -21,6 +21,7 @@ class CreateMainCategoriesTable extends Migration
             $table->integer('created_user_id');
             $table->integer('updated_user_id')->nullable();
             $table->enum('status', ['deactive', 'active'])->default('active');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

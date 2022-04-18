@@ -35,6 +35,7 @@
                    
                 </div>
                 <!--end::Heading-->
+                <input type="hidden" name="description_id" value="{{ $description->id }}">
                 <!--begin::Input group-->
                 <div class="d-flex flex-column mb-8 fv-row">
                     <!--begin::Label-->
@@ -43,7 +44,7 @@
                     </label>
                     <!--end::Label-->
                     <input type="text" class="form-control form-control-solid" 
-                        name="question" value="{{ $description->question->question }}"/>
+                        name="question" value="{{ $description->question->question }}" disabled/>
                 </div>
                 <!--end::Input group-->
                 <div class="d-flex flex-column mb-8 fv-row">
@@ -51,15 +52,17 @@
                         <span>Description</span>
                     </label>
                     <div class="col-md-12 mb-5">
-                        <textarea name="description" id="kt_docs_ckeditor_classic"  class="form-control form-control-solid h-100px">{!! $description->description !!}</textarea>
+                        <textarea name="description"  class="form-control form-control-solid h-100px">{!! $description->description !!}</textarea>
                     </div>
                    
                 </div>
                 <!--begin::Actions-->
                 <div class="text-center">
-                    <button type="reset" id="kk_modal_new_service_cancel" class="btn btn-light me-3 kk_modal_new_service_cancel">Cancel</button>
+                    <a href="javascript:;" onclick="reject({{ $description->id }})" class="btn btn-danger">
+                        <span class="indicator-label">Reject</span>
+                    </a>
                     <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary">
-                        <span class="indicator-label">Update and Accept</span>
+                        <span class="indicator-label">Accept</span>
                         <span class="indicator-progress">Please wait...
                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                     </button>

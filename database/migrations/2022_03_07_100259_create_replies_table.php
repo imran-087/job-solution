@@ -18,6 +18,7 @@ class CreateRepliesTable extends Migration
             $table->integer('user_id');
             $table->integer('discussion_id');
             $table->longText('reply');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

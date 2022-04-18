@@ -75,7 +75,7 @@
                     <div class="row mb-12">
                         @foreach($descriptions as $description)
                         <!--begin::Col-->
-                        <div class="col-md-6 pe-md-10 mb-10 mb-md-0">
+                        <div class="col-md-12 pe-md-10 mb-10 mb-md-0">
                             <!--begin::Accordion-->
                             <!--begin::Section-->
                             <div class="m-0">
@@ -103,7 +103,7 @@
                                     </div>
                                     <!--end::Icon-->
                                     <!--begin::Title-->
-                                    <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">{{$description->question->question}}? <span class="badge {{ $description->status == 'approve' ? 'badge-success' : 'badge-light'}} {{ $description->status == 'reject' ? 'badge-danger' : 'badge-light'}}  float-right">{{ $description->status }}</span></h4>
+                                    <h4 class="text-gray-700 fw-bolder cursor-pointer mt- mb-0">{{$description->question->question}}? <span class="badge {{ $description->status == 'approve' ? 'badge-success' : 'badge-light'}} {{ $description->status == 'reject' ? 'badge-danger' : 'badge-light'}}  float-right">{{ $description->status }}</span></h4>
                                     <!--end::Title-->
                                     
                                 </div>
@@ -111,10 +111,10 @@
                                 <!--begin::Body-->
                                 <div id="kt_job_4_1_{{ $description->id}}" class="collapse fs-6 ms-1">
                                     <!--begin::Text-->
-                                    <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10">{{ $description->description }}
+                                    <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10">{!! $description->description !!}
                                         <br>
                                         @if($description->status == 'reject')
-                                        <span class="btn btn-sm btn-primary resubmit" data-id="{{ $description->id }}">Resubmit</span>
+                                        <span class="btn btn-sm btn-primary mt-2 resubmit" data-id="{{ $description->id }}">Resubmit</span>
                                         @endif
                                     </div>
                                     <!--end::Text-->
@@ -130,180 +130,7 @@
                         </div>
                         <!--end::Col-->
                         @endforeach
-                        <!--begin::Col-->
-                        {{-- <div class="col-md-6 ps-md-10">
-                            <!--begin::Title-->
-                            <h2 class="text-gray-800 fw-bolder mb-4">Installation</h2>
-                            <!--end::Title-->
-                            <!--begin::Accordion-->
-                            <!--begin::Section-->
-                            <div class="m-0">
-                                <!--begin::Heading-->
-                                <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_5_1">
-                                    <!--begin::Icon-->
-                                    <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
-                                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
-                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor"></rect>
-                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor"></rect>
-                                            </svg>
-                                        </span>
-                                        <!--end::Svg Icon-->
-                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
-                                        <span class="svg-icon toggle-off svg-icon-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor"></rect>
-                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor"></rect>
-                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor"></rect>
-                                            </svg>
-                                        </span>
-                                        <!--end::Svg Icon-->
-                                    </div>
-                                    <!--end::Icon-->
-                                    <!--begin::Title-->
-                                    <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">What platforms are compatible?</h4>
-                                    <!--end::Title-->
-                                </div>
-                                <!--end::Heading-->
-                                <!--begin::Body-->
-                                <div id="kt_job_5_1" class="collapse show fs-6 ms-1">
-                                    <!--begin::Text-->
-                                    <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10">First, a disclaimer – the entire process of writing a blog post often takes more than a couple of hours, even if you can type eighty words as per minute and your writing skills are sharp.</div>
-                                    <!--end::Text-->
-                                </div>
-                                <!--end::Content-->
-                                <!--begin::Separator-->
-                                <div class="separator separator-dashed"></div>
-                                <!--end::Separator-->
-                            </div>
-                            <!--end::Section-->
-                            <!--begin::Section-->
-                            <div class="m-0">
-                                <!--begin::Heading-->
-                                <div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_5_2">
-                                    <!--begin::Icon-->
-                                    <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
-                                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
-                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor"></rect>
-                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor"></rect>
-                                            </svg>
-                                        </span>
-                                        <!--end::Svg Icon-->
-                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
-                                        <span class="svg-icon toggle-off svg-icon-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor"></rect>
-                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor"></rect>
-                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor"></rect>
-                                            </svg>
-                                        </span>
-                                        <!--end::Svg Icon-->
-                                    </div>
-                                    <!--end::Icon-->
-                                    <!--begin::Title-->
-                                    <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">How many people can it support?</h4>
-                                    <!--end::Title-->
-                                </div>
-                                <!--end::Heading-->
-                                <!--begin::Body-->
-                                <div id="kt_job_5_2" class="collapse fs-6 ms-1">
-                                    <!--begin::Text-->
-                                    <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10">First, a disclaimer – the entire process of writing a blog post often takes more than a couple of hours, even if you can type eighty words as per minute and your writing skills are sharp.</div>
-                                    <!--end::Text-->
-                                </div>
-                                <!--end::Content-->
-                                <!--begin::Separator-->
-                                <div class="separator separator-dashed"></div>
-                                <!--end::Separator-->
-                            </div>
-                            <!--end::Section-->
-                            <!--begin::Section-->
-                            <div class="m-0">
-                                <!--begin::Heading-->
-                                <div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_5_3">
-                                    <!--begin::Icon-->
-                                    <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
-                                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
-                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor"></rect>
-                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor"></rect>
-                                            </svg>
-                                        </span>
-                                        <!--end::Svg Icon-->
-                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
-                                        <span class="svg-icon toggle-off svg-icon-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor"></rect>
-                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor"></rect>
-                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor"></rect>
-                                            </svg>
-                                        </span>
-                                        <!--end::Svg Icon-->
-                                    </div>
-                                    <!--end::Icon-->
-                                    <!--begin::Title-->
-                                    <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">How long is the warrianty?</h4>
-                                    <!--end::Title-->
-                                </div>
-                                <!--end::Heading-->
-                                <!--begin::Body-->
-                                <div id="kt_job_5_3" class="collapse fs-6 ms-1">
-                                    <!--begin::Text-->
-                                    <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10">First, a disclaimer – the entire process of writing a blog post often takes more than a couple of hours, even if you can type eighty words as per minute and your writing skills are sharp.</div>
-                                    <!--end::Text-->
-                                </div>
-                                <!--end::Content-->
-                                <!--begin::Separator-->
-                                <div class="separator separator-dashed"></div>
-                                <!--end::Separator-->
-                            </div>
-                            <!--end::Section-->
-                            <!--begin::Section-->
-                            <div class="m-0">
-                                <!--begin::Heading-->
-                                <div class="d-flex align-items-center collapsible py-3 toggle collapsed mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_5_4">
-                                    <!--begin::Icon-->
-                                    <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
-                                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
-                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor"></rect>
-                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor"></rect>
-                                            </svg>
-                                        </span>
-                                        <!--end::Svg Icon-->
-                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
-                                        <span class="svg-icon toggle-off svg-icon-1">
-                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor"></rect>
-                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor"></rect>
-                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor"></rect>
-                                            </svg>
-                                        </span>
-                                        <!--end::Svg Icon-->
-                                    </div>
-                                    <!--end::Icon-->
-                                    <!--begin::Title-->
-                                    <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">How fast is the installation?</h4>
-                                    <!--end::Title-->
-                                </div>
-                                <!--end::Heading-->
-                                <!--begin::Body-->
-                                <div id="kt_job_5_4" class="collapse fs-6 ms-1">
-                                    <!--begin::Text-->
-                                    <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10">First, a disclaimer – the entire process of writing a blog post often takes more than a couple of hours, even if you can type eighty words as per minute and your writing skills are sharp.</div>
-                                    <!--end::Text-->
-                                </div>
-                                <!--end::Content-->
-                            </div>
-                            <!--end::Section-->
-                            <!--end::Accordion-->
-                        </div> --}}
-                        <!--end::Col-->
+                       
                     </div>
                     <!--end::Row-->
                     
@@ -351,15 +178,16 @@
                     <div class="messages"></div>
                     {{-- csrf token  --}}
                     @csrf
+                    <input type="hidden" name="question_id">
                     <input type="hidden" name="question_des_id">
 
                     <!--begin::Heading-->
                     <div class="mb-13 text-center">
                         <!--begin::Title-->
-                        <h1 class="mb-3">Update Question Description</h1>
+                        <h1 class="mb-3">Question Description</h1>
                         <!--end::Title-->
                         <!--begin::Description-->
-                        <div class="text-muted fw-bold fs-5">Fill up the form and submit
+                        <div class="text-muted fw-bold fs-5">Edit Description and Resubmit
                         </div>
                         <!--end::Description-->
                     </div>
@@ -370,10 +198,7 @@
                         <!--begin::Col-->
                         <div class="col-md-12 fv-row">
                             <label class="required fs-6 fw-bold mb-2">Question</label>
-                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                data-placeholder="Select main category" name="question" id="question">
-                                
-                            </select>
+                            <input type="text"  class="form-control form-control-solid" name="question">
                             <div class="help-block with-errors question-error"></div>
                         </div>
                         
@@ -396,7 +221,7 @@
                     <div class="text-center">
                         <button type="reset" id="kk_modal_new_service_cancel" class="btn btn-light me-3">Cancel</button>
                         <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary">
-                            <span class="indicator-label">Submit</span>
+                            <span class="indicator-label">Resubmit</span>
                             <span class="indicator-progress">Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                         </button>
@@ -418,80 +243,85 @@
 
 @push('script')
 <script type="text/javascript">
-//edit description modal
-       $('.resubmit').on('click', function(){
-           var id = $(this).data(id)
-            $.ajax({
-                type:"GET",
-                url: "{{ url('description/question-des/get')}}"+'/'+id.id,
-                dataType: 'json',
-                success:function(data){
-                    $('textarea[name="description"]').val(data.question_des.description)
-                    $('input[name="question_id"]').append('<option value="' + data.question.id + '">' + data.question.question + '</option>');
-                    $("#kk_modal_new_question_des").modal('show');
-                }
-          });
-        })
+//resubmit description modal
+    $('.resubmit').on('click', function(){
+        var id = $(this).data(id)
+        $.ajax({
+            type:"GET",
+            url: "{{ url('description/question-des/get')}}"+'/'+id.id,
+            dataType: 'json',
+            success:function(data){
+                $('textarea[name="description"]').val(data.question_des.description)
+                $('input[name="question_id"]').val(data.question.id);
+                $('input[name="question_des_id"]').val(data.question_des.id);
+                $('input[name="question"]').val(data.question.question);
+                $("#kk_modal_new_question_des").modal('show');
+            }
+        });
+    })
 
-        //cancel button
-        $('#kk_modal_new_service_cancel').on('click', function(){
-            $('#kk_modal_new_question_des_form')[0].reset();
-            $("#kk_modal_new_question_des").modal('hide');
-        })
+    //cancel button
+    $('#kk_modal_new_service_cancel').on('click', function(){
+        $('#kk_modal_new_question_des_form')[0].reset();
+        $("#kk_modal_new_question_des").modal('hide');
+    })
 
-        //new descrption save
-        $('#kk_modal_new_question_des_form').on('submit',function(e){
-            e.preventDefault()
-            $('.with-errors').text('')
-            $('.indicator-label').hide()
-            $('.indicator-progress').show()
-            $('#kk_modal_new_service_submit').attr('disabled','true')
+    //resubmit descrption 
+    $('#kk_modal_new_question_des_form').on('submit',function(e){
+        e.preventDefault()
+        $('.with-errors').text('')
+        $('.indicator-label').hide()
+        $('.indicator-progress').show()
+        $('#kk_modal_new_service_submit').attr('disabled','true')
 
-            var formData = new FormData(this);
-            $.ajax({
-                type:"POST",
-                url: "{{ url('description/question-description/store')}}",
-                data:formData,
-                cache:false,
-                contentType: false,
-                processData: false,
-                success:function(data){
-                    if(data.success ==  false || data.success ==  "false"){
-                        var arr = Object.keys(data.errors);
-                        var arr_val = Object.values(data.errors);
-                        for(var i= 0;i < arr.length;i++){
-                        $('.'+arr[i]+'-error').text(arr_val[i][0])
-                        }
-                    }else if(data.error || data.error == 'true'){
-                        var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
-                        $('#kk_modal_new_question_des_form').find('.messages').html(alertBox).show();
-                    }else{
-                        // empty the form
-                        $('#kk_modal_new_question_des_form')[0].reset();
-                        $("#kk_modal_new_question_des").modal('hide');
-
-                        Swal.fire({
-                                text: data.message,
-                                icon: "success",
-                                buttonsStyling: !1,
-                                confirmButtonText: "{{__('Ok, got it!')}}",
-                                customClass: {
-                                    confirmButton: "btn fw-bold btn-primary"
-                                }
-                            }).then((function () {
-                                //refresh datatable
-                                $('#dataTable').DataTable().ajax.reload();
-                            }))
+        var formData = new FormData(this);
+        $.ajax({
+            type:"POST",
+            url: "{{ url('description/question-description/resubmit')}}",
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                if(data.success ==  false || data.success ==  "false"){
+                    var arr = Object.keys(data.errors);
+                    var arr_val = Object.values(data.errors);
+                    for(var i= 0;i < arr.length;i++){
+                    $('.'+arr[i]+'-error').text(arr_val[i][0])
                     }
+                }else if(data.error || data.error == 'true'){
+                    var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                    $('#kk_modal_new_question_des_form').find('.messages').html(alertBox).show();
+                }else{
+                    // empty the form
+                    $('#kk_modal_new_question_des_form')[0].reset();
+                    $("#kk_modal_new_question_des").modal('hide');
 
-                $('.indicator-label').show()
-                $('.indicator-progress').hide()
-                $('#kk_modal_new_service_submit').removeAttr('disabled')
-
+                    Swal.fire({
+                            text: data.message,
+                            icon: "success",
+                            buttonsStyling: !1,
+                            confirmButtonText: "{{__('Ok, got it!')}}",
+                            customClass: {
+                                confirmButton: "btn fw-bold btn-primary"
+                            }
+                        }).then((function () {
+                            //refresh datatable
+                            $('#dataTable').DataTable().ajax.reload();
+                        }))
                 }
-          });
 
-        })
+            $('.indicator-label').show()
+            $('.indicator-progress').hide()
+            $('#kk_modal_new_service_submit').removeAttr('disabled')
+
+            }
+        });
+
+    })
+
+    
+    
 </script>
 @endpush
 
