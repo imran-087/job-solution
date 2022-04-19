@@ -2,16 +2,17 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Tag;
+use App\Models\Subject;
 use App\Models\Question;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Subject;
 use Yajra\DataTables\Facades\DataTables;
 
 class TagController extends Controller
 {
-    public function addTag(Request $request)
+    public function index(Request $request)
     {
 
         if ($request->ajax()) {
@@ -42,22 +43,12 @@ class TagController extends Controller
 
                 ->addColumn('action', function ($row) {
                     $btn = '<div class="d-flex align-items-center position-relative my-1">
-                                <!--begin::Svg Icon | path: icons/duotune/general/gen021.svg-->
-                                <span class="svg-icon svg-icon-1 position-absolute ms-6">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.5" x="17.0365" y="15.1223" width="8.15546" height="2" rx="1" transform="rotate(45 17.0365 15.1223)" fill="black"></rect>
-                                        <path d="M11 19C6.55556 19 3 15.4444 3 11C3 6.55556 6.55556 3 11 3C15.4444 3 19 6.55556 19 11C19 15.4444 15.4444 19 11 19ZM11 5C7.53333 5 5 7.53333 5 11C5 14.4667 7.53333 17 11 17C14.4667 17 17 14.4667 17 11C17 7.53333 14.4667 5 11 5Z" fill="black"></path>
-                                    </svg>
-                                </span>
-                                <!--end::Svg Icon-->
-                                <input type="text"  class="form-control form-control-solid w-350px ps-14 search_tag" id="search_tag" placeholder="search tag">
-                                <input type="hidden" name="question_id" value=' . $row->id . '>
-                                
+                                <input type="text" data-question_id="' . $row->id . '" class="form-control form-control-solid w-350px  search_tag" id="search_tag" placeholder="Type to search">
                             </div>
-                            <div id="result"></div>';
+                           <div id="result"></div>';
                     return $btn;
                 })
-                ->rawColumns(['action', 'status', 'sub_category_id', 'subject_id', 'created_at', 'question_type'])
+                ->rawColumns(['action', 'sub_category_id', 'subject_id'])
                 ->make(true);
         }
         $sub_categories = SubCategory::all();
@@ -68,7 +59,7 @@ class TagController extends Controller
     {
         if ($request->ajax()) {
 
-            //dd('here');
+            //dd($request->all());
             $data = Subject::where('name', 'LIKE', '%' . $request->search . '%')
                 ->get();
 
@@ -78,7 +69,6 @@ class TagController extends Controller
 
                 //$output = '<ul class="list-group" style="display: block; position: relative; z-index: 1;">';
 
-
                 foreach ($data as $row) {
                     $output .=
                         '<div class="d-flex align-items-center mb-5"
@@ -86,7 +76,7 @@ class TagController extends Controller
                             <div class="symbol symbol-40px me-4 "></div>
                             <!--begin::Title-->
                             <div class="d-flex flex-column">
-                                <a href="#" class="fs-6 text-gray-800 text-hover-primary fw-bold" >' . $row->name . '</a>
+                                <a href="javascript:;" data-qid="' . $request->question_id . '"  data-sid="' . $row->id . '" class="fs-6 text-gray-800 text-hover-primary fw-bold add" >' . $row->name . '</a>
                             </div>
                             <!--end::Title-->
                         </div>';
@@ -103,6 +93,28 @@ class TagController extends Controller
             }
 
             return $output;
+        }
+    }
+
+    public function addTag(Request $request)
+    {
+        if ($request->ajax()) {
+            $tag = new Tag();
+
+            $tag->subject_id = $request->subject_id;
+            $tag->question_id = $request->question_id;
+
+            if ($tag->save()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Tag added'
+                ], 200);
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Failed'
+                ], 303);
+            }
         }
     }
 }

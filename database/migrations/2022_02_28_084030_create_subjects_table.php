@@ -16,12 +16,16 @@ class CreateSubjectsTable extends Migration
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
             $table->integer('parent_id')->nullable()->default(0);
+            $table->nestedSet();
+            $table->unsignedInteger('_lft');
+            $table->unsignedInteger('_rgt');
             $table->string('name');
             $table->string('title')->nullable();
             $table->integer('sub_category_id')->nullable();
             $table->integer('main_category_id');
             $table->string('description')->nullable();
-            $table->string('slug');
+            $table->string('slug')->unique();
+            $table->string('meta_image')->nullable();
             $table->tinyInteger('future_editable')->nullable();
             $table->unsignedBigInteger('view_count')->nullable();
             $table->unsignedBigInteger('created_user_id');

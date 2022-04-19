@@ -234,7 +234,7 @@
                             <span class="required">Question Descrption</span>
                         </label>
                         <!--end::Label-->
-                        <textarea name="description" class="form-control form-control-solid h-100px"></textarea>
+                        <textarea name="description" id="ckeditor" class="form-control form-control-solid h-100px"></textarea>
                         <div class="help-block with-errors description-error"></div>
                     </div>
                     <!--end::Input group-->
@@ -314,6 +314,7 @@
             $('#kk_modal_new_service_submit').attr('disabled','true')
 
             var formData = new FormData(this);
+            formData.append('description', CKEDITOR.instances['ckeditor'].getData());
             $.ajax({
                 type:"POST",
                 url: "{{ url('admin/description/question-description/store')}}",

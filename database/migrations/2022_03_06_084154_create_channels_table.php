@@ -16,7 +16,7 @@ class CreateChannelsTable extends Migration
         Schema::create('channels', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->integer('creator_id');
             $table->enum('status', ['deactive', 'active'])->default('active');
             $table->softDeletes();

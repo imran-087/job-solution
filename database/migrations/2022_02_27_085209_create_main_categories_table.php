@@ -17,7 +17,7 @@ class CreateMainCategoriesTable extends Migration
             $table->id();
             $table->string('name');
             $table->string('title')->nullable();
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->integer('created_user_id');
             $table->integer('updated_user_id')->nullable();
             $table->enum('status', ['deactive', 'active'])->default('active');

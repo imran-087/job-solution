@@ -19,7 +19,7 @@ class CreateDiscussionsTable extends Migration
             $table->integer('channel_id');
             $table->string('title');
             $table->text('content');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->integer('reply_id')->nullable();
             $table->unsignedBigInteger('vote')->nullable();
             $table->unsignedBigInteger('view')->nullable();

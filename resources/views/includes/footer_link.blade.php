@@ -25,55 +25,15 @@
 	<!--swipe slider -->
 	<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
 
-	<!--tiny mc -->
-	<script src="{{ asset('assets') }}/plugins/custom/tinymce/tinymce.bundle.js"></script>
 
 	<!---- own js ---->
 	<script src="{{ asset('js/custom.js') }}"></script>
 
 
 	<!--- CK Editor --->
-	<script src="//cdn.ckeditor.com/4.14.1/standard/ckeditor.js"></script>
+	<script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
+	<script type="text/javascript">
+	 CKEDITOR.replace('ckeditor');
+	</script>
 	
-
-	
-	<!--end::Javascript-->
-	{{-- <script>
-			@if(Session::has('success'))
-			toastr.options =
-			{
-				"closeButton" : true,
-				"progressBar" : true
-			}
-					toastr.success("{{ session('success') }}");
-			@endif
-
-			@if(Session::has('error'))
-			toastr.options =
-			{
-				"closeButton" : true,
-				"progressBar" : true
-			}
-					toastr.error("{{ session('error') }}");
-			@endif
-
-			@if(Session::has('info'))
-			toastr.options =
-			{
-				"closeButton" : true,
-				"progressBar" : true
-			}
-					toastr.info("{{ session('info') }}");
-			@endif
-
-			@if(Session::has('warning'))
-			toastr.options =
-			{
-				"closeButton" : true,
-				"progressBar" : true
-			}
-					toastr.warning("{{ session('warning') }}");
-			@endif
-	</script> --}}
-
 	@stack('script')

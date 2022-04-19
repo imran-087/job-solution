@@ -17,7 +17,7 @@ class CreatePassagesTable extends Migration
             $table->id();
             $table->string('title');
             $table->longText('passage');
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->integer('created_user_id');
             $table->softDeletes();
             $table->timestamps();

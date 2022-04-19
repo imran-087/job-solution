@@ -52,7 +52,7 @@
                         <span>Description</span>
                     </label>
                     <div class="col-md-12 mb-5">
-                        <textarea name="description"  class="form-control form-control-solid h-100px">{!! $description->description !!}</textarea>
+                        <textarea name="description" id="ckeditor" class="form-control form-control-solid h-100px">{!! $description->description !!}</textarea>
                     </div>
                    
                 </div>

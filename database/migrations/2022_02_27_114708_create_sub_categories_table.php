@@ -18,7 +18,7 @@ class CreateSubCategoriesTable extends Migration
             $table->foreignId('category_id')->constrained('categories');
             $table->string('name');
             $table->string('title')->nullable();
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->integer('year_id')->nullable();
             $table->integer('created_user_id');
             $table->integer('updated_user_id')->nullable();

@@ -18,7 +18,7 @@ class CreateCategoriesTable extends Migration
             $table->foreignId('main_category_id')->constrained('main_categories');
             $table->string('name');
             $table->string('title')->nullable();
-            $table->string('slug');
+            $table->string('slug')->unique();
             $table->integer('created_user_id');
             $table->integer('updated_user_id')->nullable();
             $table->enum('status', ['active', 'deactive'])->default('active');

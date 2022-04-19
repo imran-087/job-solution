@@ -104,8 +104,6 @@
                                 @foreach($sub_categories as $sub_category)
                                 <option value="{{$sub_category->id}}" >{{$sub_category->name}}</option>
                                 @endforeach
-                              
-
                             </select>
                             <!--end::Select2-->
                         </div>
@@ -137,8 +135,9 @@
                                 <!--end::Table head-->
 
                                 <tbody>
-
+                                    
                                 </tbody>
+                                
 
                             </table>
 
@@ -219,8 +218,9 @@
         $(document).ready(function() {
             var timeout = null
             $(document).on('keyup', '.search_tag', function() {
-                //var search_val = .val()
-                //console.log(search_val)
+                var question_id = $(this).data(question_id)
+                var id = question_id.question_id
+                //console.log(id)
                 clearTimeout(timeout);
                 timeout = setTimeout(() => {
                     var val = $(this).val();
@@ -236,11 +236,13 @@
                         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                         data: {
                             //Assigning value of "val" into "search" variable.
-                            search: val
+                            search: val,
+                            question_id : id,
                         },
                         //If result found, this funtion will be called.
                         success: function(data) {
                             //console.log(data)
+                            
                           $('#result').html(data);
 
                         }
@@ -250,6 +252,41 @@
 
             });
         })
+
+        //add tag
+        $(document).ready(function(){
+            $(document).on('click', '.add', function(){
+                var sid = $(this).data(sid)
+                var qid = $(this).data(qid)
+
+                console.log(sid.sid)
+                console.log(qid.qid)
+                // var subject_id = sid.sid
+                // var question_id = qid.qid
+                //AJAX is called.
+                    $.ajax({
+                        type: "POST",
+                        url: "{{ url('admin/question/tag/tag-added')}}",
+                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                        data: {
+                            //Assigning value of "val" into "search" variable.
+                            subject_id: sid.sid,
+                            question_id : qid.qid,
+                        },
+                        //If result found, this funtion will be called.
+                        success: function(data) {
+                            if(data.success){
+                                toastr.success(data.message)
+                            }
+                            else{
+                                toastr.error(data.message)
+                            }
+                         
+                        }
+                    });
+            })
+        })
+        
 
     </script>
 @endpush

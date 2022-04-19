@@ -186,7 +186,7 @@
     //add description
     $('.addDescription').on('click', function() {
         var id = $(this).data(id)
-        console.log(id.id)
+        //console.log(id.id)
         $('input[name="question_id"]').val(id.id)
         $('.with-errors').text('')
         $('#kk_modal_new_question_des_form')[0].reset();
@@ -203,6 +203,7 @@
         $('#kk_modal_new_service_submit').attr('disabled','true')
 
         var formData = new FormData(this);
+        formData.append('description', CKEDITOR.instances['ckeditor'].getData());
         $.ajax({
             type:"POST",
             url: "{{ url('description/question-description/store')}}",
@@ -499,7 +500,7 @@
 </script>
 
 {{-- for ckeditor  --}}
-<script type="text/javascript">
+{{-- <script type="text/javascript">
     ClassicEditor
     .create(document.querySelector('#kt_docs_ckeditor_classic'))
     .then(editor => {
@@ -508,4 +509,4 @@
     .catch(error => {
         console.error(error);
     });
-</script>
+</script> --}}

@@ -234,6 +234,7 @@
             $('#kk_modal_new_service_submit').attr('disabled','true')
 
             var formData = new FormData(this);
+             formData.append('description', CKEDITOR.instances['ckeditor'].getData());
             $.ajax({
                 type:"POST",
                 url: "{{ url('admin/description/pending-description/accept')}}",

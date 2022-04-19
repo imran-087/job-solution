@@ -232,4 +232,10 @@ class SubjectController extends Controller
             'message' => 'Subject deleted successfully!'
         ], 200);
     }
+
+    //tree view
+    public function treeView()
+    {
+        return view('admin.subject.tree_index');
+    }
 }

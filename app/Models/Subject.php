@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Kalnoy\Nestedset\NodeTrait;
 
 class Subject extends Model
 {
-    use HasFactory;
+    use HasFactory, NodeTrait;
 
     //ploymorphic relation
     public function edited_categories()
@@ -37,5 +38,21 @@ class Subject extends Model
     public function parentsub()
     {
         return $this->belongsTo(Subject::class, 'parent_id');
+    }
+
+    //nested set
+    public function getLftName()
+    {
+        return 'left';
+    }
+
+    public function getRgtName()
+    {
+        return 'right';
+    }
+
+    public function getParentIdName()
+    {
+        return 'parent';
     }
 }

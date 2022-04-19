@@ -65,6 +65,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/category/subject/get/{id}', 'SubjectController@getSubject')->name('subject.get');
         Route::get('/category/subject/delete/{id}', 'SubjectController@deleteSubject')->name('subject.delete');
 
+        //subject-tree
+        Route::get('/subject/subject-tree', 'SubjectController@treeView')->name('subject.tree');
+
         ############ Year Route #############
         Route::get('/year/index', 'YearController@index')->name('year.index');
         Route::post('/year/store', 'YearController@store')->name('year.store');
@@ -109,8 +112,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('question/edited-question/show/{id}', 'EditedQuestionController@showQuestion')->name('question.edited-question.show');
 
         // add tag 
-        Route::get('/question/add-tag-on-question', 'TagController@addTag')->name('question.add-tag');
+        Route::get('/question/add-tag-on-question', 'TagController@index')->name('question.tag');
         Route::post('question/tag/search', 'TagController@searchTag')->name('question.search-tag');
+        Route::post('question/tag/tag-added', 'TagController@addTag')->name('question.add-tag');
 
         ############ Description Route #############
         //Question Description
