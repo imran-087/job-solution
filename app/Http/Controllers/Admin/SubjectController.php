@@ -90,11 +90,11 @@ class SubjectController extends Controller
 
         //get all main category
         $main_categories = MainCategory::where('status', 'active')->get();
-        $parent_subjects = Subject::where('parent_id', 0)->get();
+        $parent_subjects = Subject::with('sub_category', 'main_category')->latest()->get();
         return view('admin.category.subject', compact(['main_categories', 'parent_subjects']));
     }
 
-    //create or update main category
+    //create or update subject
     public function store(Request $request)
     {
         //dd($request->all());
@@ -123,7 +123,7 @@ class SubjectController extends Controller
                 $subject->name = $request->name;
                 $subject->title = $request->title;
                 $subject->description = $request->description;
-                $subject->parent_id = $request->parent ?? 0;
+                // $subject->parent_id = $request->parent ?? 0;
                 $subject->status =  $request->status;
                 $subject->sub_category_id =  $sub_category;
                 $subject->main_category_id =  $request->main_category;
@@ -148,9 +148,11 @@ class SubjectController extends Controller
                     ]);
                 }
 
-
-
                 if ($subject->update()) {
+                    if ($request->parent && $request->parent !== '' && $request->parent !== 'none') {
+                        $parent = Subject::find($request->parent);
+                        $parent->appendNode($subject);
+                    }
                     return response()->json([
                         'success' => true,
                         'message' => __('Subject updated successfully!')
@@ -167,7 +169,7 @@ class SubjectController extends Controller
 
                 $subject->name = $request->name;
                 $subject->title = $request->title;
-                $subject->parent_id = $request->parent ?? 0;
+                // $subject->parent_id = $request->parent ?? 0;
                 $subject->description = $request->description;
                 $subject->status =  $request->status;
                 $subject->sub_category_id =  $sub_category;
@@ -177,8 +179,11 @@ class SubjectController extends Controller
 
                 $subject->created_at = Carbon::now();
 
-
                 if ($subject->save()) {
+                    if ($request->parent && $request->parent !== '' && $request->parent !== 'none') {
+                        $parent = Subject::find($request->parent);
+                        $parent->appendNode($subject);
+                    }
                     return response()->json([
                         'success' => true,
                         'message' => 'Subject saved successfully!'
@@ -193,7 +198,7 @@ class SubjectController extends Controller
         }
     }
 
-    //getCategory
+    //getsubject
     public function getSubject($id)
     {
         //dd($id);
@@ -201,8 +206,8 @@ class SubjectController extends Controller
         if ($subject->sub_category_id == 0) {
             //dd('here');
             $main_category = MainCategory::where('id', $subject->main_category_id)->first();
+            $category = Category::where('main_category_id', $main_category->id)->first();
             $sub_category = '';
-            $category = '';
         } else {
             //dd('sub');
             $sub_category = SubCategory::where('id', $subject->sub_category_id)->first();

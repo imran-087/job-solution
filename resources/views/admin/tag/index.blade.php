@@ -102,7 +102,7 @@
                                 <option data-select2-id="select2-data-12-ibou"></option>
                                 <option value="all" data-select2-id="select2-data-128-oc9k">All</option>
                                 @foreach($sub_categories as $sub_category)
-                                <option value="{{$sub_category->id}}" >{{$sub_category->name}}</option>
+                                    <option value="{{$sub_category->id}}" >{{$sub_category->name}}</option>
                                 @endforeach
                             </select>
                             <!--end::Select2-->
@@ -137,12 +137,13 @@
                                 <tbody>
                                     
                                 </tbody>
+
                                 
 
                             </table>
 
-
                         </div>
+                        
                     </div>
                     <!--end::Table-->
                 </div>
@@ -220,6 +221,7 @@
             $(document).on('keyup', '.search_tag', function() {
                 var question_id = $(this).data(question_id)
                 var id = question_id.question_id
+                var this_input = $(this)
                 //console.log(id)
                 clearTimeout(timeout);
                 timeout = setTimeout(() => {
@@ -242,8 +244,8 @@
                         //If result found, this funtion will be called.
                         success: function(data) {
                             //console.log(data)
-                            
-                          $('#result').html(data);
+                            this_input.closest('span').find('#result').html(data)
+                            //$('#result').html(data);
 
                         }
                     });

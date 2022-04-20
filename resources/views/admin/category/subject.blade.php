@@ -248,19 +248,35 @@
                         </div>
                         <!--end::Col-->
                         <!--begin::Col-->
-                        <div class="col-md-6 fv-row">
+                        {{-- <div class="col-md-6 fv-row">
                             <label class="required fs-6 fw-bold mb-2">Select Parent (optional)</label>
                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                 data-placeholder="Select parent" name="parent" id="parent">
                                 <option value="">Choose ...</option>
                                 @foreach ($parent_subjects as $parent_subject)
-                                    <option value="{{ $parent_subject->id }}">{{ $parent_subject->name }}</option>
+                                    <option value="{{ $parent_subject->id }}">{{ $parent_subject->name }} &nbsp; 
+                                        @if($parent_subject->sub_category_id == 0)
+                                            - &nbsp; {{ $parent_subject->main_category->name }}
+                                        @else
+                                            - &nbsp; {{ $parent_subject->sub_category->name }} 
+                                            -  &nbsp; {{ $parent_subject->main_category->name }}
+                                        @endif
+                                    </option>
                                 @endforeach
-                               
-                                {{-- <option value="deactive">Deactive</option> --}}
                             </select>
                             <div class="help-block with-errors parent-error"></div>
-                        </div>
+                        </div> --}}
+                        <!--begin::Col-->
+                                <div class="col-md-6 fv-row">
+                                    <label class="fs-6 fw-bold mb-2">Select Parent (optional)</label>
+                                    <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                        data-placeholder="Select parent" name="parent" id="parent">
+                                        
+                                
+                                    </select>
+                                    <div class="help-block with-errors parent-error"></div>
+                                </div>
+                                <!--end::Col-->
                         <!--end::Col-->
                     </div>
                     <!--end::Input group-->
@@ -413,6 +429,7 @@
             $('input[name="subject_id"]').val('')
             $('.with-errors').text('')
             $('#kk_modal_new_category_form')[0].reset();
+            clearAppendData();
             $('#kk_modal_new_category').modal('show')
         }
 
@@ -429,9 +446,9 @@
                     $('textarea[name="description"]').val(data.subject.description)
                     $('select[name="parent"]').val(data.subject.parent_id).change()
                     $('select[name="status"]').val(data.subject.status).change()
-                    $('select[name="main_category"]').html('<option value="' + data.main_category.id + '">' + data.main_category.name + '</option>');
+                    $('select[name="main_category"]').val(data.subject.main_category_id).change()
                     $('select[name="category"]').html('<option value="' + data.category.id + '">' + data.category.name + '</option>');
-                    $('select[name="sub_category"]').append('<option value="' + data.sub_category.id + '">' + data.sub_category.name + '</option>');
+                    $('select[name="sub_category"]').html('<option value="' + data.sub_category.id + '">' + data.sub_category.name + '</option>');
                     $("#kk_modal_new_category").modal('show');
                 }
           });
@@ -440,7 +457,9 @@
         //cancel button
         $('#kk_modal_new_service_cancel').on('click', function(){
             $('#kk_modal_new_category_form')[0].reset();
+            clearAppendData();
             $("#kk_modal_new_category").modal('hide');
+
         })
 
         //new category save
@@ -472,6 +491,7 @@
                     }else{
                         // empty the form
                         $('#kk_modal_new_category_form')[0].reset();
+                        clearAppendData()
                         $("#kk_modal_new_category").modal('hide');
 
                         Swal.fire({
@@ -497,58 +517,65 @@
 
         })
 
-    //deleteCategory
-    function deleteCategory(id){
-        Swal.fire({
-            text: "Are you sure you want delete this?",
-            icon: "warning",
-            showCancelButton: !0,
-            buttonsStyling: !1,
-            confirmButtonText: "Confirm",
-            cancelButtonText: "No, cancel",
-            customClass: {
-                confirmButton: "btn fw-bold btn-danger",
-                cancelButton: "btn fw-bold btn-active-light-primary"
-            }
-        }).then((function (o) {
-            if(o.value){ //if agree
-                $.ajax({
-                    type: "GET",
-                    url: "{{ url('admin/category/subject/delete') }}"+'/'+id,
-                    data: {},
-                    success: function (res)
-                    {
-                        if(res.success){
-                            Swal.fire({
-                                text: res.message,
-                                icon: "success",
-                                buttonsStyling: !1,
-                                confirmButtonText: "Ok, got it!",
-                                customClass: {
-                                    confirmButton: "btn fw-bold btn-primary"
-                                }
-                            }).then((function () {
-                                //refresh datatable
-                                $('#dataTable').DataTable().ajax.reload();
-                            }))
+        //deleteCategory
+        function deleteCategory(id){
+            Swal.fire({
+                text: "Are you sure you want delete this?",
+                icon: "warning",
+                showCancelButton: !0,
+                buttonsStyling: !1,
+                confirmButtonText: "Confirm",
+                cancelButtonText: "No, cancel",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-danger",
+                    cancelButton: "btn fw-bold btn-active-light-primary"
+                }
+            }).then((function (o) {
+                if(o.value){ //if agree
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ url('admin/category/subject/delete') }}"+'/'+id,
+                        data: {},
+                        success: function (res)
+                        {
+                            if(res.success){
+                                Swal.fire({
+                                    text: res.message,
+                                    icon: "success",
+                                    buttonsStyling: !1,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-primary"
+                                    }
+                                }).then((function () {
+                                    //refresh datatable
+                                    $('#dataTable').DataTable().ajax.reload();
+                                }))
+                            }
                         }
-                    }
-                });
+                    });
 
-            }else{ //if cancel
-                Swal.fire({
-                    text: "Item has not been deleted",
-                    icon: "error",
-                    buttonsStyling: !1,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn fw-bold btn-primary"
-                    }
-                })
-            }
+                }else{ //if cancel
+                    Swal.fire({
+                        text: "Item has not been deleted",
+                        icon: "error",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary"
+                        }
+                    })
+                }
 
-        }))
-    }
+            }))
+        }
+
+        //clear append data
+        function clearAppendData(){
+            $('select[name="category"]').val('').text('');
+            $('select[name="sub_category"]').val('').text('');
+            $('select[name="parent"]').val('').text('');
+        }
 
     </script>
 @endpush

@@ -39,20 +39,4 @@ class Subject extends Model
     {
         return $this->belongsTo(Subject::class, 'parent_id');
     }
-
-    //nested set
-    public function getLftName()
-    {
-        return 'left';
-    }
-
-    public function getRgtName()
-    {
-        return 'right';
-    }
-
-    public function getParentIdName()
-    {
-        return 'parent';
-    }
 }

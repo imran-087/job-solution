@@ -43,9 +43,10 @@ class TagController extends Controller
 
                 ->addColumn('action', function ($row) {
                     $btn = '<div class="d-flex align-items-center position-relative my-1">
-                                <input type="text" data-question_id="' . $row->id . '" class="form-control form-control-solid w-350px  search_tag" id="search_tag" placeholder="Type to search">
+                                <input type="text" data-question_id="' . $row->id . '" class="form-control form-control-solid w-350px  search_tag"  placeholder="Type to search">
                             </div>
-                           <div id="result"></div>';
+                            <span id="result" ></span>';
+
                     return $btn;
                 })
                 ->rawColumns(['action', 'sub_category_id', 'subject_id'])

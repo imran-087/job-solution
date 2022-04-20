@@ -30,7 +30,7 @@ class GetAllCategoryController extends Controller
     {
         $sub_category = SubCategory::find($id);
 
-        $subject = Subject::with('sub_category')
+        $subject = Subject::with('sub_category', 'main_category')
             ->where(['sub_category_id' => $id, 'status' => 'active'])
             ->get();
         if ($subject->count() > 0) {

@@ -84,6 +84,8 @@ Route::post('/question/edit-question/update', [QuestionController::class, 'updat
 
 //subject wise question
 Route::get('job-solutions/subject/all-subjects', [SubjectController::class, 'index'])->name('subject.all-subject');
+Route::get('job-solutions/subject/{subject}', [SubjectController::class, 'subjectDetails'])->name('subject.subject-details');
+Route::get('job-solutions/subject/sub-category/details', [SubjectController::class, 'subjectCategoryDetails'])->name('subject.sub-category.details');
 
 
 /******************

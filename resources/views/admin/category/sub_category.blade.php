@@ -386,6 +386,7 @@
             $('input[name="sub_category_id"]').val('')
             $('.with-errors').text('')
             $('#kk_modal_new_category_form')[0].reset();
+            clearAppendData();
             $('#kk_modal_new_category').modal('show')
         }
 
@@ -402,8 +403,8 @@
                    $('input[name="title"]').val(data.sub_category.title)
                    $('select[name="status"]').val(data.sub_category.status).change()
                    $('select[name="year"]').val(data.sub_category.year_id).change()
-                   $('select[name="main_category"]').html('<option value="' + data.main_category.id + '">' + data.main_category.name + '</option>');
-                   $('select[name="category"]').append('<option value="' + data.category.id + '">' + data.category.name + '</option>');
+                   $('select[name="main_category"]').val(data.main_category.id).change();
+                   $('select[name="category"]').html('<option value="' + data.sub_category.category_id + '">' + data.sub_category.category.name + '</option>');
                   
                    $("#kk_modal_new_category").modal('show');
                 }
@@ -413,6 +414,7 @@
         //cancel button
         $('#kk_modal_new_service_cancel').on('click', function(){
             $('#kk_modal_new_category_form')[0].reset();
+            clearAppendData();
             $("#kk_modal_new_category").modal('hide');
         })
 
@@ -445,6 +447,7 @@
                     }else{
                         // empty the form
                         $('#kk_modal_new_category_form')[0].reset();
+                        clearAppendData();
                         $("#kk_modal_new_category").modal('hide');
 
                         Swal.fire({
@@ -470,58 +473,63 @@
 
         })
 
-    //deleteCategory
-    function deleteCategory(id){
-        Swal.fire({
-            text: "Are you sure you want delete this?",
-            icon: "warning",
-            showCancelButton: !0,
-            buttonsStyling: !1,
-            confirmButtonText: "Confirm",
-            cancelButtonText: "No, cancel",
-            customClass: {
-                confirmButton: "btn fw-bold btn-danger",
-                cancelButton: "btn fw-bold btn-active-light-primary"
-            }
-        }).then((function (o) {
-            if(o.value){ //if agree
-                $.ajax({
-                    type: "GET",
-                    url: "{{ url('admin/category/sub-category/delete') }}"+'/'+id,
-                    data: {},
-                    success: function (res)
-                    {
-                        if(res.success){
-                            Swal.fire({
-                                text: res.message,
-                                icon: "success",
-                                buttonsStyling: !1,
-                                confirmButtonText: "Ok, got it!",
-                                customClass: {
-                                    confirmButton: "btn fw-bold btn-primary"
-                                }
-                            }).then((function () {
-                                //refresh datatable
-                                $('#dataTable').DataTable().ajax.reload();
-                            }))
+        //deleteCategory
+        function deleteCategory(id){
+            Swal.fire({
+                text: "Are you sure you want delete this?",
+                icon: "warning",
+                showCancelButton: !0,
+                buttonsStyling: !1,
+                confirmButtonText: "Confirm",
+                cancelButtonText: "No, cancel",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-danger",
+                    cancelButton: "btn fw-bold btn-active-light-primary"
+                }
+            }).then((function (o) {
+                if(o.value){ //if agree
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ url('admin/category/sub-category/delete') }}"+'/'+id,
+                        data: {},
+                        success: function (res)
+                        {
+                            if(res.success){
+                                Swal.fire({
+                                    text: res.message,
+                                    icon: "success",
+                                    buttonsStyling: !1,
+                                    confirmButtonText: "Ok, got it!",
+                                    customClass: {
+                                        confirmButton: "btn fw-bold btn-primary"
+                                    }
+                                }).then((function () {
+                                    //refresh datatable
+                                    $('#dataTable').DataTable().ajax.reload();
+                                }))
+                            }
                         }
-                    }
-                });
+                    });
 
-            }else{ //if cancel
-                Swal.fire({
-                    text: "Item has not been deleted",
-                    icon: "error",
-                    buttonsStyling: !1,
-                    confirmButtonText: "Ok, got it!",
-                    customClass: {
-                        confirmButton: "btn fw-bold btn-primary"
-                    }
-                })
-            }
+                }else{ //if cancel
+                    Swal.fire({
+                        text: "Item has not been deleted",
+                        icon: "error",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary"
+                        }
+                    })
+                }
 
-        }))
-    }
+            }))
+        }
+
+        //clear append data
+        function clearAppendData(){
+            $('select[name="category"]').val('').text('');
+        }
 
     </script>
 @endpush

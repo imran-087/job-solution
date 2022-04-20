@@ -15,11 +15,8 @@ class CreateSubjectsTable extends Migration
     {
         Schema::create('subjects', function (Blueprint $table) {
             $table->id();
-            $table->integer('parent_id')->nullable()->default(0);
-            $table->nestedSet();
-            $table->unsignedInteger('_lft');
-            $table->unsignedInteger('_rgt');
             $table->string('name');
+            $table->nestedSet();
             $table->string('title')->nullable();
             $table->integer('sub_category_id')->nullable();
             $table->integer('main_category_id');

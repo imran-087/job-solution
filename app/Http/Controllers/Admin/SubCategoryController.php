@@ -186,13 +186,12 @@ class SubCategoryController extends Controller
     public function getCategory($id)
     {
         //dd($id);
-        $sub_category = SubCategory::find($id);
-        $category = Category::where('id', $sub_category->category_id)->first();
-        $main_category = MainCategory::where('id', $category->main_category_id)->first();
+        $sub_category = SubCategory::with('category')->where('id', $id)->first();
+        //dd($sub_category);
+        $main_category = MainCategory::where('id', $sub_category->category->main_category_id)->first();
 
         $data = [
             'sub_category' => $sub_category,
-            'category' => $category,
             'main_category' => $main_category,
         ];
         return response($data);

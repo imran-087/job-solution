@@ -22,8 +22,8 @@
             <div class="col-md-2 fv-row" >
                 <!--begin::Label-->
                 <label class="required fs-6 fw-bold mb-2">Answer</label>
-                <select class="form-select form-select-solid answer @error('answer.*') is-invalid @enderror" data-control="select2" data-hide-search="true"
-                    data-placeholder="Select " name="answer[]" >
+                <select class="form-select form-select-solid  @error('answer.*') is-invalid @enderror" data-control="select2" 
+                    data-placeholder="select answer " name="answer[]" >
                     <option value=""></option>
                     @for($o = 0; $o < $option; $o++)
                     <option value="{{$o+1}}"> Option {{$o+1}}</option>

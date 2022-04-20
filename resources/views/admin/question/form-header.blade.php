@@ -107,6 +107,7 @@
             data-hide-search="true" data-placeholder="Select passage" name="passage"
             id="passage">
             <option value="">Choose ...</option>
+            <option value="NULL">No passage</option>
             @foreach ($passages as $passage)
             <option value="{{ $passage->id }}">{{ $passage->title }}</option>
             @endforeach
