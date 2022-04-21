@@ -158,7 +158,6 @@
         <!--begin::Row-->
         <div class="row gy-5 g-xl-8">
            
-
             <!--begin::Col-->
             <div class="col-xl-10 col-md-10 col-sm-12 col-xs-12" id="question">
               
@@ -490,9 +489,8 @@
             <!--end::Col-->
            
         </div>
-        
+        <!--end::Row-->
     </div>
-    
 </div>
 <!---end::Post -->
 

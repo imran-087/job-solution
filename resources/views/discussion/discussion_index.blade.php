@@ -469,7 +469,7 @@
         $('.vote').on('click', function(){
             var id = $(this).data('id')
             var val = $(this).text()
-            $(this).html(`<i class="fas fa-heart"></i>`+(parseInt(val)+1))
+            var this_content = $(this)
             //alert(id)
             $.ajax({
                 type:"GET",
@@ -477,6 +477,7 @@
                 dataType: 'json',
                 success:function(data){
                    if(data.success){
+                       this_content.html(`<i class="fas fa-heart"></i>`+(parseInt(val)+1))
                         toastr.success(data.message);
                     }else{
                         toastr.warning(data.message);

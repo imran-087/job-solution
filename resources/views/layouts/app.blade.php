@@ -182,6 +182,7 @@
 						<!--begin::Toolbar-->
 						@yield('toolbar')
 						<!--end::Toolbar-->
+						
 						<!--begin::Post-->
 						@yield('content')
 						<!--end::Post-->

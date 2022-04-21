@@ -66,7 +66,17 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/category/subject/delete/{id}', 'SubjectController@deleteSubject')->name('subject.delete');
 
         //subject-tree
-        Route::get('/subject/subject-tree', 'SubjectController@treeView')->name('subject.tree');
+        // Route::get('/subject/subject-tree', 'SubjectController@treeView')->name('subject.tree');
+
+        ############ Trashed Route ############
+        //question trashed
+        Route::get('/trashed/question-trashed', 'TrashedController@questionTranshed')->name('trashed.question');
+        Route::get('/trashed/restore-question/{id}', 'TrashedController@questionRestore')->name('trashed.question.restore');
+
+        //description trashed
+        Route::get('/trashed/description-trashed', 'TrashedController@descriptionTranshed')->name('trashed.description');
+        Route::get('/trashed/restore-description/{id}', 'TrashedController@descriptionRestore')->name('trashed.description.restore');
+
 
         ############ Year Route #############
         Route::get('/year/index', 'YearController@index')->name('year.index');
@@ -113,6 +123,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         // add tag 
         Route::get('/question/add-tag-on-question', 'TagController@index')->name('question.tag');
+        Route::get('/question/add-tag-on-question2', 'TagController@index2')->name('question.tag2');
         Route::post('question/tag/search', 'TagController@searchTag')->name('question.search-tag');
         Route::post('question/tag/tag-added', 'TagController@addTag')->name('question.add-tag');
 

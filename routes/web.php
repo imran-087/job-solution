@@ -83,9 +83,7 @@ Route::get('/question/edit-question/{id}', [QuestionController::class, 'edit'])-
 Route::post('/question/edit-question/update', [QuestionController::class, 'update'])->name('question.update-question');
 
 //subject wise question
-Route::get('job-solutions/subject/all-subjects', [SubjectController::class, 'index'])->name('subject.all-subject');
-Route::get('job-solutions/subject/{subject}', [SubjectController::class, 'subjectDetails'])->name('subject.subject-details');
-Route::get('job-solutions/subject/sub-category/details', [SubjectController::class, 'subjectCategoryDetails'])->name('subject.sub-category.details');
+Route::get('subjects/{subject?}', [SubjectController::class, 'index'])->name('subject.subject');
 
 
 /******************

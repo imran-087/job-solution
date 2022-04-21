@@ -1,5 +1,5 @@
 @extends('admin.layout.app')
-@section('title', 'Question')
+@section('title', 'Trashed')
 
 @section('content')
 
@@ -13,7 +13,7 @@
                 data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
                 class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                 <!--begin::Title-->
-                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Question</h1>
+                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Trashed</h1>
                 <!--end::Title-->
                 <!--begin::Separator-->
                 <span class="h-20px border-gray-200 border-start mx-4"></span>
@@ -31,7 +31,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Question Management</li>
+                    <li class="breadcrumb-item text-muted">Question</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -39,7 +39,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-dark">All Question</li>
+                    <li class="breadcrumb-item text-dark">Trashed Question list </li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -84,7 +84,7 @@
                             </span>
                             <!--end::Svg Icon-->
                             <input type="text" data-kk-product-table-filter="search"
-                                class="form-control form-control-solid w-250px ps-14" placeholder="Search Question">
+                                class="form-control form-control-solid w-250px ps-14" placeholder="Search question">
                         </div>
                         <!--end::Search-->
                     </div>
@@ -92,22 +92,21 @@
 
                     <div class="card-toolbar flex-row-fluid justify-content-end gap-5"
                         data-select2-id="select2-data-123-0tix">
-                        
-                        <div class="w-100 mw-150px" data-select2-id="select2-data-122-mhmq">
+                        {{-- <div class="w-100 mw-150px" data-select2-id="select2-data-122-mhmq">
                             <!--begin::Select2-->
                             <select class="form-select form-select-solid select2-hidden-accessible kk-datatable-filter"
-                                data-control="select2" data-hide-search="true" data-placeholder="Category"
+                                data-control="select2" data-hide-search="true" data-placeholder="Status"
                                 data-kt-ecommerce-product-filter="status" data-select2-id="select2-data-10-i8aq"
                                 tabindex="-1" aria-hidden="true">
                                 <option data-select2-id="select2-data-12-ibou"></option>
                                 <option value="all" data-select2-id="select2-data-128-oc9k">All</option>
-                                @foreach($sub_categories as $sub_category)
-                                    <option value="{{$sub_category->id}}" >{{$sub_category->name}}</option>
-                                @endforeach
+                                <option value="active" data-select2-id="select2-data-129-5n39">Active</option>
+                                <option value="deactive" data-select2-id="select2-data-131-pohp">Deactive</option>
+
                             </select>
                             <!--end::Select2-->
-                        </div>
-                       
+                        </div> --}}
+                        
                     </div>
 
                 </div>
@@ -125,25 +124,22 @@
                                     <!--begin::Table row-->
                                     <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                         <th class="min-w-20px">#</th>
-                                        <th class="min-w-100px">Sub Category</th>
-                                        <th class="min-w-100px">Subject</th>
-                                        <th class=" min-w-400px">Question</th>
-                                        <th class=" min-w-100px">Add Tag</th>
+                                        <th class="min-w-350px">Question</th>
+                                        <th class=" min-w-100px">Deleted at</th>
+                                        <th class=" min-w-70px">Actions</th>
                                     </tr>
                                     <!--end::Table row-->
                                 </thead>
                                 <!--end::Table head-->
 
                                 <tbody>
-                                    
-                                </tbody>
 
-                                
+                                </tbody>
 
                             </table>
 
+
                         </div>
-                        
                     </div>
                     <!--end::Table-->
                 </div>
@@ -157,6 +153,8 @@
 </div>
 
 
+
+
 @endsection
 
 
@@ -168,7 +166,7 @@
                 processing: true,
                 responsive: true,
                 serverSide: true,
-                ajax: "{{ url('admin/question/add-tag-on-question') }}",
+                ajax: "{{ url('admin/trashed/question-trashed') }}",
                 columns: [
                     {
                         data: 'DT_RowIndex',
@@ -177,18 +175,14 @@
                         searchable: false
                     },
                     {
-                        data: 'sub_category_id',
-                        name: 'sub_category_id'
-                    },
-                    {
-                        data: 'subject_id',
-                        name: 'subject_id'
-                    },
-                    {
                         data: 'question',
                         name: 'question'
                     },
-                  
+    
+                    {
+                        data: 'deleted_at',
+                        name: 'deleted_at'
+                    },
                     {
                         data: 'action',
                         name: 'action',
@@ -197,9 +191,9 @@
                     },
 
                 ],
-                // "order": [
-                //     [6, 'desc']
-                // ] //created at desc
+                "order": [
+                    [2, 'desc']
+                ] //created at desc
 
             })
 
@@ -208,87 +202,62 @@
                 table.search(t.target.value).draw()
             }))
 
-             $('.kk-datatable-filter').on('change',function(){
+            $('.kk-datatable-filter').on('change',function(){
                 console.log(this.value)
-                table.ajax.url( "{{ url('admin/question/question-index?category=') }}"+this.value ).load();
+                table.ajax.url( "{{ url('admin/trashed/question-trashed?status=') }}"+this.value ).load();
             })
 
         })
 
-        //search tag
-        $(document).ready(function() {
-            var timeout = null
-            $(document).on('keyup', '.search_tag', function() {
-                var question_id = $(this).data(question_id)
-                var id = question_id.question_id
-                var this_input = $(this)
-                //console.log(id)
-                clearTimeout(timeout);
-                timeout = setTimeout(() => {
-                    var val = $(this).val();
-                    if (val == "") {
-                     $('#result').html('');
-                }
-                //If val is not empty.
-                else {
-                    //AJAX is called.
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ url('admin/question/tag/search')}}",
-                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                        data: {
-                            //Assigning value of "val" into "search" variable.
-                            search: val,
-                            question_id : id,
-                        },
-                        //If result found, this funtion will be called.
-                        success: function(data) {
-                            //console.log(data)
-                            //this_input.closest('#result').hide()
-                            $('#result').html(data);
-
-                        }
-                    });
-                }
-                }, 1000);
-
-            });
-        })
-
-        //add tag
-        $(document).ready(function(){
-            $(document).on('click', '.add', function(){
-                var sid = $(this).data(sid)
-                var qid = $(this).data(qid)
-
-                console.log(sid.sid)
-                console.log(qid.qid)
-                // var subject_id = sid.sid
-                // var question_id = qid.qid
-                //AJAX is called.
-                    $.ajax({
-                        type: "POST",
-                        url: "{{ url('admin/question/tag/tag-added')}}",
-                        headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                        data: {
-                            //Assigning value of "val" into "search" variable.
-                            subject_id: sid.sid,
-                            question_id : qid.qid,
-                        },
-                        //If result found, this funtion will be called.
-                        success: function(data) {
-                            if(data.success){
-                                toastr.success(data.message)
-                            }
-                            else{
-                                toastr.error(data.message)
-                            }
-                         
-                        }
-                    });
-            })
-        })
         
+        //deleteCategory
+        function restore(id){
+            Swal.fire({
+                text: "Are you sure you want to restore this?",
+                icon: "warning",
+                showCancelButton: !0,
+                buttonsStyling: !1,
+                confirmButtonText: "Confirm",
+                cancelButtonText: "No, cancel",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-primary",
+                    cancelButton: "btn fw-bold btn-active-light-warning"
+                }
+            }).then((function (o) {
+                if(o.value){ //if agree
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ url('admin/trashed/restore-question') }}"+'/'+id,
+                        data: {},
+                        success: function (res)
+                        {
+                            if(res.success){
+                                Swal.fire({
+                                    text: res.message,
+                                    icon: "success",
+                                    showConfirmButton: false,
+                                    timer: 1500
+                                   
+                                }).then((function () {
+                                    //refresh datatable
+                                    $('#dataTable').DataTable().ajax.reload();
+                                }))
+                            }
+                        }
+                    });
 
+                }else{ //if cancel
+                    Swal.fire({
+                        text: "Item has not been restored!!",
+                        icon: "error",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary"
+                        }
+                    })
+                }
+            }))
+        }
     </script>
 @endpush

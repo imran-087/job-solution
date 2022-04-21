@@ -72,7 +72,7 @@
             @endforeach
 
             <div class="menu-item">
-                <a class="menu-link {{ request()->is('/job-solutions/subject/all-subjects*') ? 'active' : '' }}" href="{{ route('subject.all-subject') }}"  >
+                <a class="menu-link {{ request()->is('/job-solutions/subject/*') ? 'active' : '' }}" href="{{ route('subject.subject') }}"  >
                     <span class="menu-icon">
                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
                         <span class="svg-icon svg-icon-2">

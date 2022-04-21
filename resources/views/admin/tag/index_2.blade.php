@@ -93,8 +93,8 @@
                     <div class="card-toolbar flex-row-fluid justify-content-end gap-5"
                         data-select2-id="select2-data-123-0tix">
                         
-                        <div class="w-100 mw-150px" data-select2-id="select2-data-122-mhmq">
-                            <!--begin::Select2-->
+                        {{-- <div class="w-100 mw-150px" data-select2-id="select2-data-122-mhmq">
+                            
                             <select class="form-select form-select-solid select2-hidden-accessible kk-datatable-filter"
                                 data-control="select2" data-hide-search="true" data-placeholder="Category"
                                 data-kt-ecommerce-product-filter="status" data-select2-id="select2-data-10-i8aq"
@@ -105,8 +105,8 @@
                                     <option value="{{$sub_category->id}}" >{{$sub_category->name}}</option>
                                 @endforeach
                             </select>
-                            <!--end::Select2-->
-                        </div>
+                           
+                        </div> --}}
                        
                     </div>
 
@@ -135,13 +135,24 @@
                                 <!--end::Table head-->
 
                                 <tbody>
-                                    
+                                    @foreach($questions as $question)
+                                    <tr>
+                                        <td>{{ $question->id }}</td>
+                                        <td>{{ $question->sub_category->name }}</td>
+                                        <td>{{ $question->subject->name }}</td>
+                                        <td>{{ $question->question }}</td>
+                                        <td>
+                                           
+                                                <input type="text" data-question_id="{{$question->id}}" class="form-control form-control-solid w-350px  search_tag"  placeholder="Type to search">
+                                            
+                                            <div id="result" ></div>
+                                        </td>
+                                    </tr>
+                                    @endforeach
                                 </tbody>
 
-                                
-
                             </table>
-
+                            {{ $questions->links() }}
                         </div>
                         
                     </div>
@@ -162,58 +173,7 @@
 
 @push('script')
     <script type="text/javascript">
-        $(document).ready(function() {
-
-            var table = $('#dataTable').DataTable({
-                processing: true,
-                responsive: true,
-                serverSide: true,
-                ajax: "{{ url('admin/question/add-tag-on-question') }}",
-                columns: [
-                    {
-                        data: 'DT_RowIndex',
-                        name: 'DT_RowIndex',
-                        orderable: false,
-                        searchable: false
-                    },
-                    {
-                        data: 'sub_category_id',
-                        name: 'sub_category_id'
-                    },
-                    {
-                        data: 'subject_id',
-                        name: 'subject_id'
-                    },
-                    {
-                        data: 'question',
-                        name: 'question'
-                    },
-                  
-                    {
-                        data: 'action',
-                        name: 'action',
-                        orderable: false,
-                        searchable: false
-                    },
-
-                ],
-                // "order": [
-                //     [6, 'desc']
-                // ] //created at desc
-
-            })
-
-            document.querySelector('[data-kk-product-table-filter="search"]').addEventListener("keyup", (function(
-                t) {
-                table.search(t.target.value).draw()
-            }))
-
-             $('.kk-datatable-filter').on('change',function(){
-                console.log(this.value)
-                table.ajax.url( "{{ url('admin/question/question-index?category=') }}"+this.value ).load();
-            })
-
-        })
+       
 
         //search tag
         $(document).ready(function() {
@@ -244,7 +204,8 @@
                         //If result found, this funtion will be called.
                         success: function(data) {
                             //console.log(data)
-                            //this_input.closest('#result').hide()
+                            this_input.closest('div').find('#result').html(data);
+                            //this_input.closest('#result').html(data);
                             $('#result').html(data);
 
                         }

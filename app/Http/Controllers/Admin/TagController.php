@@ -118,4 +118,10 @@ class TagController extends Controller
             }
         }
     }
+
+    public function index2()
+    {
+        $questions = Question::paginate(10);
+        return view('admin.tag.index_2', compact('questions'));
+    }
 }

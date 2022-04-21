@@ -38,12 +38,14 @@
 </div>
 @endsection
 
+
+
 @section('content')
 <!--begin::Post-->
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <!--begin::Container-->
     <div id="kt_content_container" class="container-xxl">
-        
+        @include('layouts.breadcrumb')
         <!--begin::Row-->
         <div class="row">
             @foreach($subjects as $subject)
@@ -63,13 +65,13 @@
                     <!--end::Icon-->
                     <!--begin::Title-->
                     <div class="flex-grow-1 me-2">
-                        <a href="{{ route('subject.subject-details', $subject->id) }}" class="fw-bolder text-gray-800 text-hover-primary fs-6">{{$subject->name}}</a>
+                        <a href="{{ route('subject.subject', $subject->id) }}" class="fw-bolder text-gray-800 text-hover-primary fs-6">{{$subject->name}}</a>
                         <span class="text-muted fw-bold d-block">{{$subject->sub_category->name ?? 'jobs'}}</span>
                     </div>
                     <!--end::Title-->
-                    <!--begin::Lable-->
-                    <span class="fw-bolder badge badge-circle badge-danger py-1">{{$subject->question->count()}}</span>
-                    <!--end::Lable-->
+                    {{-- <!--begin::Lable-->
+                    <span class="fw-bolder badge badge-circle badge-danger py-1">{{$subject->hasChildren()->count()}}</span>
+                    <!--end::Lable--> --}}
                 </div>
             </div>
             @endforeach
