@@ -1,4 +1,5 @@
- <!--begin::Row-->
+
+<!--begin::Row-->
 <div class="row gy-5 g-xl-8" >
     <div class="col-xxl-10 mb-xl-10 col-md-10 col-sm-12 col-xs-12">
         <!--begin::Engage widget 1-->
@@ -8,15 +9,14 @@
                 <!--begin::Heading-->
                 <div class="mb-2">
                     <!--begin::Title-->
-                   <a href="/subjects">All</a> >                
-                    <?php $link = "" ?>
-                    @for($i = 1; $i <= count(Request::segments()); $i++)
-                        @if($i < count(Request::segments()) & $i > 0)
-                        <?php $link .= "/" . Request::segment($i); ?>
-                        <a href="<?= $link ?>">{{ ucwords(str_replace('-',' ',Request::segment($i)))}}</a> >
-                        @else {{ucwords(str_replace('-',' ',Request::segment($i)))}}
-                        @endif
-                    @endfor
+                  
+
+                    <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item text-info"><a href="{{url('/subject')}}">All </a></li>
+                        {{getparent($subject->id)}}
+                    </ol>
+                    </nav>
                     
                     <!--end::Title-->
                 </div>
@@ -41,7 +41,16 @@
         @endif
     @endfor
 </ol> --}}
-
+{{-- 
+ <a href="/subjects">All</a> >                
+                    <?php $link = "" ?>
+                    @for($i = 1; $i <= count(Request::segments()); $i++)
+                        @if($i < count(Request::segments()) & $i > 0)
+                        <?php $link .= "/" . Request::segment($i); ?>
+                        <a href="<?= $link ?>">{{ ucwords(str_replace('-',' ',Request::segment($i)))}}</a> >
+                        @else {{ucwords(str_replace('-',' ',Request::segment($i)))}}
+                        @endif
+                    @endfor --}}
 
 
     

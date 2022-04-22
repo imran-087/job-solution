@@ -127,8 +127,9 @@
                                         <th class="min-w-20px">#</th>
                                         <th class="min-w-100px">Sub Category</th>
                                         <th class="min-w-100px">Subject</th>
-                                        <th class=" min-w-400px">Question</th>
-                                        <th class=" min-w-100px">Add Tag</th>
+                                        <th class=" min-w-300px">Question</th>
+                                        <th class=" min-w-100px">Tag</th>
+                                        <th class=" min-w-80px">Add Tag</th>
                                     </tr>
                                     <!--end::Table row-->
                                 </thead>
@@ -188,6 +189,10 @@
                         data: 'question',
                         name: 'question'
                     },
+                    {
+                        data: 'tag',
+                        name: 'tag'
+                    },
                   
                     {
                         data: 'action',
@@ -210,7 +215,7 @@
 
              $('.kk-datatable-filter').on('change',function(){
                 console.log(this.value)
-                table.ajax.url( "{{ url('admin/question/question-index?category=') }}"+this.value ).load();
+                table.ajax.url( "{{ url('admin/question/add-tag-on-question?category=') }}"+this.value ).load();
             })
 
         })
@@ -227,7 +232,7 @@
                 timeout = setTimeout(() => {
                     var val = $(this).val();
                     if (val == "") {
-                     $('#result').html('');
+                     $('.result').html('');
                 }
                 //If val is not empty.
                 else {
@@ -244,8 +249,9 @@
                         //If result found, this funtion will be called.
                         success: function(data) {
                             //console.log(data)
+                            this_input.closest('div').find('.result').html(data);
                             //this_input.closest('#result').hide()
-                            $('#result').html(data);
+                            //$('#result').html(data);
 
                         }
                     });

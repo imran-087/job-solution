@@ -38,6 +38,12 @@ class Question extends Model
         return $this->belongsTo(Passage::class);
     }
 
+    //pivot relation
+    public function tagsubject()
+    {
+        return  $this->hasMany(Subject::class, 'question_subjects', 'subject_id', 'question_id');
+    }
+
     /**
      * Get all of the question's votes.
      */

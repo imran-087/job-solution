@@ -142,10 +142,12 @@
                                         <td>{{ $question->subject->name }}</td>
                                         <td>{{ $question->question }}</td>
                                         <td>
-                                           
-                                                <input type="text" data-question_id="{{$question->id}}" class="form-control form-control-solid w-350px  search_tag"  placeholder="Type to search">
+                                           <div>
+<input type="text" data-question_id="{{$question->id}}" class="form-control form-control-solid w-350px  search_tag"  placeholder="Type to search">
                                             
-                                            <div id="result" ></div>
+                                            <div class="result" ></div>
+                                           </div>
+                                            
                                         </td>
                                     </tr>
                                     @endforeach
@@ -187,7 +189,7 @@
                 timeout = setTimeout(() => {
                     var val = $(this).val();
                     if (val == "") {
-                     $('#result').html('');
+                     $('.result').html('');
                 }
                 //If val is not empty.
                 else {
@@ -204,9 +206,9 @@
                         //If result found, this funtion will be called.
                         success: function(data) {
                             //console.log(data)
-                            this_input.closest('div').find('#result').html(data);
-                            //this_input.closest('#result').html(data);
-                            $('#result').html(data);
+                            //this_input.hide();
+                            this_input.closest('div').find('.result').html(data);
+                            //$('#result').html(data);
 
                         }
                     });

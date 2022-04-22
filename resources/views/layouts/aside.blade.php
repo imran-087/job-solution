@@ -35,7 +35,7 @@
                     <span class="menu-section text-muted text-uppercase fs-8 ls-1">Job Solution</span>
                 </div>
             </div>
-            @foreach(App\Models\MainCategory::with('categories')->where('status', 'active')->get() as $main_category)
+            @foreach(App\Models\MainCategory::where(['status' => 'active', 'slug' => Auth::user()->user_type])->get() as $main_category)
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                 <a href="{{ url('job-solution', $main_category->slug) }}">
                 <span class="menu-link">
@@ -53,21 +53,7 @@
                     {{-- <span class="menu-arrow"></span> --}}
                 </span>
                 </a>
-                {{-- <div class="menu-sub menu-sub-accordion menu-active-bg" kt-hidden-height="117" style="display: none; overflow: hidden;">
-                    
-                    @foreach($main_category->categories as $category)
-                    <div  class="menu-item menu-accordion">
-                        <a href="{{ url('job-solution',[$main_category->slug, $category->slug] ) }}">
-                            <span class="menu-link">
-                                <span class="menu-bullet">
-                                    <span class="bullet bullet-dot"></span>
-                                </span>
-                                <span class="menu-title">{{$category->name}}</span>
-                            </span>
-                        </a>  
-                    </div>
-                    @endforeach 
-                </div> --}}
+                
             </div>
             @endforeach
 

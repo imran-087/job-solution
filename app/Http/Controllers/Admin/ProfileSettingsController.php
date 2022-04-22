@@ -66,11 +66,11 @@ class ProfileSettingsController extends Controller
             $image->move($destinationPath, $image_name);
 
 
-            // unlink old image
-            // $photo_path = \base_path() . '/public' . $user->avatar;
-            // if (File::exists($photo_path)) {
-            //     unlink($photo_path);
-            // }
+            //unlink old image
+            $photo_path = \base_path() . '/public' . $user->avatar;
+            if (File::exists($photo_path)) {
+                unlink($photo_path);
+            }
 
             $user->avatar = '/uploads/avatar/' . $image_name;
         }

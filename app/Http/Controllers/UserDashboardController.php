@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
-use App\Models\Bookmark;
+use App\Models\Reply;
 use App\Models\Comment;
+use App\Models\Bookmark;
 use App\Models\Discussion;
+use Illuminate\Http\Request;
 use App\Models\EditedQuestion;
 use App\Models\QuestionDescription;
-use App\Models\Reply;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -73,12 +74,12 @@ class UserDashboardController extends Controller
             $image_name = time() . '.' . $image->getClientOriginalExtension();
 
             $destinationPath = \public_path('/uploads/avatar');
+            //dd($image_name);
             $image->move($destinationPath, $image_name);
-
 
             // unlink old image
             $photo_path = \base_path() . '/public' . $user->avatar;
-            if (\file_exists($photo_path)) {
+            if (File::exists($photo_path)) {
                 unlink($photo_path);
             }
 
@@ -86,7 +87,7 @@ class UserDashboardController extends Controller
         }
 
         $user->save();
-        Session::flash('success', 'Profile updated successfullt');
+        Session::flash('success', 'Profile updated successfully');
         return redirect()->back();
     }
 

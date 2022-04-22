@@ -1,3 +1,24 @@
+@php 
+function getparent($subject) {
+	$find = App\Models\Subject::where('id', $subject)->first();
+
+    // var_dump($find['name']);
+    // die();
+
+	$parent_id = $find->parent_id;
+	if($parent_id != 0) {
+		$subject = $parent_id;
+		getparent($subject);
+
+	}
+
+	echo '
+	<li class="breadcrumb-item pe-3"><a class="pe-3"  href="'.$find->id.'">'.$find->name.'</a></li>
+	';
+
+}
+@endphp
+
 @extends('layouts.app')
 @section('title', 'Sub Category')
 
@@ -43,7 +64,33 @@
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <!--begin::Container-->
     <div id="kt_content_container" class="container-xxl">
-        @include('layouts.breadcrumb')
+        <!--begin::Row Breadcrumb-->
+        <div class="row gy-5 g-xl-8" >
+            <div class="col-xxl-10 mb-xl-10 col-md-10 col-sm-12 col-xs-12">
+                <!--begin::Engage widget 1-->
+                <div class="card h-md-100">
+                    <!--begin::Body-->
+                    <div class="card-body d-flex ">
+                        <!--begin::Heading-->
+                        <div class="mb-2">
+                            <!--begin::Title-->
+                            <nav aria-label="breadcrumb">
+                                <ol class="breadcrumb text-muted fs-6 fw-bold">
+                                    <li class="breadcrumb-item pe-3"><a href="{{route('subject.subject')}}" class="pe-3">All </a></li>
+                                    {{getparent($subject->id)}}
+                                </ol>
+                            </nav>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Heading-->
+                    </div>
+                    <!--end::Body-->
+                </div>
+                <!--end::Engage widget 1-->
+            </div>
+        </div>
+        <!--end::Row Breadcrumb-->
+
         <!--begin::Row-->
         <div class="row gy-5 g-xl-8" >
             <div class="col-xxl-10 mb-xl-10 col-md-10 col-sm-12 col-xs-12">
@@ -502,3 +549,7 @@
 </div>
 <!---end::Post -->
 @endsection
+
+@push('script')
+    @include('common.page_script')
+@endpush

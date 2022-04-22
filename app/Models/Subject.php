@@ -39,4 +39,10 @@ class Subject extends Model
     {
         return $this->belongsTo(Subject::class, 'parent_id');
     }
+
+    //pivot relation
+    public function pivotquestion()
+    {
+        return $this->hasMany(Question::class);
+    }
 }

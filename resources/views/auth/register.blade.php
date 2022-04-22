@@ -143,6 +143,23 @@
         </div>
         <!--end::Input group-->
         <!--begin::Input group-->
+        <div class="fv-row mb-7">
+            <label class="form-label fw-bolder text-dark fs-6">Select Type</label>
+            <select class="form-select form-select-solid  @error('answer.*') is-invalid @enderror" data-control="select2" 
+                data-placeholder="Select Type " name="user_type">
+                <option value="jobs">Job Preparation</option>
+                <option value="admission">Admission</option>
+                <option value="academy">Academy</option>
+            </select>
+            @error('user_type')
+                <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                </span>
+            @enderror
+                
+        </div>
+        <!--end::Input group-->
+        <!--begin::Input group-->
         <div class="mb-10 fv-row" data-kt-password-meter="true">
             <!--begin::Wrapper-->
             <div class="mb-1">

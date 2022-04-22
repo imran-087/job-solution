@@ -17,7 +17,7 @@
                 </span>
                
             </div>
-            @foreach(App\Models\MainCategory::with('categories')->where('status', 'active')->get() as $main_category)
+            @foreach(App\Models\MainCategory::with('categories')->where(['status' => 'active', 'slug' => Auth::user()->user_type])->get() as $main_category)
             <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start"
                 class="menu-item menu-lg-down-accordion me-lg-1">
                 <span class="menu-link py-3">

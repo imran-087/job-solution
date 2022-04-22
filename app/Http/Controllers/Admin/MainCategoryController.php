@@ -17,7 +17,7 @@ class MainCategoryController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            dd('here');
+            //dd('here');
             $data = MainCategory::select();
 
             //filter

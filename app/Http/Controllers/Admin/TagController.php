@@ -15,9 +15,11 @@ class TagController extends Controller
     public function index(Request $request)
     {
 
+
         if ($request->ajax()) {
             $data = Question::select();
 
+            //dd($data->tagsubject->count());
             //filter
             if (isset($request->category) && $request->category != "all") {
                 $data->where('sub_category_id', $request->category);
@@ -40,16 +42,22 @@ class TagController extends Controller
                         return $row->subject->name;
                     }
                 })
+                ->addColumn('tag', function ($row) {
+
+                    return  '<div class="badge badge-success">eng</div>';
+
+                    //return $btn;
+                })
 
                 ->addColumn('action', function ($row) {
-                    $btn = '<div class="d-flex align-items-center position-relative my-1">
+                    $btn = '<div >
                                 <input type="text" data-question_id="' . $row->id . '" class="form-control form-control-solid w-350px  search_tag"  placeholder="Type to search">
-                            </div>
-                            <span id="result" ></span>';
+                                <div class="result" style="z-index:999"></div>
+                            </div>';
 
                     return $btn;
                 })
-                ->rawColumns(['action', 'sub_category_id', 'subject_id'])
+                ->rawColumns(['action', 'sub_category_id', 'subject_id', 'tag'])
                 ->make(true);
         }
         $sub_categories = SubCategory::all();
@@ -72,9 +80,8 @@ class TagController extends Controller
 
                 foreach ($data as $row) {
                     $output .=
-                        '<div class="d-flex align-items-center mb-5"
-                            style="margin:0px 30px 20px 30px; background-color:#F5F8FA; border-radius:5px !important; padding:10px;">
-                            <div class="symbol symbol-40px me-4 "></div>
+                        '<div class="d-flex align-items-center mb-2"
+                            style="margin-top:10px; background-color:#F5F8FA; border-radius:5px !important; padding:10px;">
                             <!--begin::Title-->
                             <div class="d-flex flex-column">
                                 <a href="javascript:;" data-qid="' . $request->question_id . '"  data-sid="' . $row->id . '" class="fs-6 text-gray-800 text-hover-primary fw-bold add" >' . $row->name . '</a>
@@ -88,7 +95,7 @@ class TagController extends Controller
             } else {
 
                 $output .= ' <p  class="fs-6 text-800  fw-bold"
-                style="color:red; margin:0px 30px 20px 30px; background-color:#F5F8FA; padding:10px; border-radious:30px;"> '
+                style="color:red; margin-top:10px; background-color:#F5F8FA; padding:10px; border-radius:5px;"> '
                     . 'No Result' .
                     '</p>';
             }

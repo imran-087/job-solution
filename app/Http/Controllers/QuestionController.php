@@ -30,9 +30,9 @@ class QuestionController extends Controller
         $sub_category = SubCategory::where('slug', $sub_category)->first();
         //dd($sub_category);
         if ($sub_category->category->main_category->id == 1) {
-            $subjects = Subject::where('sub_category_id', 0)->get();
+            $subjects = Subject::where(['sub_category_id' => 0, 'parent_id' => null])->get();
         } else {
-            $subjects = Subject::where('sub_category_id', $sub_category->id)->get();
+            $subjects = Subject::where(['sub_category_id' => $sub_category->id, 'parent_id' => null])->get();
         }
         if ($request->type == 'written') {
             //dd('here');
@@ -69,9 +69,9 @@ class QuestionController extends Controller
         $category = Category::where('slug', $category)->first();
         $sub_category = SubCategory::where('slug', $sub_category)->first();
         $subject = Subject::where('slug', $subject)->first();
-        $subjects = Subject::where('sub_category_id', $sub_category->id)->get();
+        $subjects = Subject::where(['sub_category_id' => $sub_category->id, 'parent_id' => null])->get();
         if ($subjects->count() == 0) {
-            $subjects = Subject::where('sub_category_id', 0)->get();
+            $subjects = Subject::where(['sub_category_id' => 0, 'parent_id' => null])->get();
         }
         //dd($subject->id);
         $questions = Question::where(['subject_id' => $subject->id, 'sub_category_id' => $sub_category->id])->paginate(10);
