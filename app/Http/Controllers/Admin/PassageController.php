@@ -77,7 +77,6 @@ class PassageController extends Controller
                 //dd($request->passage_id);
                 $passage->passage = $request->passage;
                 $passage->title = $request->title;
-                $passage->slug =  Str::slug($request->title);
 
                 $passage->updated_at = Carbon::now();
 
@@ -99,7 +98,7 @@ class PassageController extends Controller
 
                 $passage->passage = $request->passage;
                 $passage->title = $request->title;
-                $passage->slug =  Str::slug($request->title);
+                // $passage->slug =  Str::slug($request->title);
                 $passage->created_user_id =  Auth::guard('admin')->user()->id;
 
                 $passage->created_at = Carbon::now();

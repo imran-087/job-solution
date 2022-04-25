@@ -52,7 +52,7 @@
                         <span>Description</span>
                     </label>
                     <div class="col-md-12 mb-5">
-                        <textarea name="description" id="ckeditor" class="form-control form-control-solid h-100px">{!! $description->description !!}</textarea>
+                        <textarea name="description" id="kt_docs_ckeditor_classic" class="form-control form-control-solid h-100px">{!! $description->description !!}</textarea>
                     </div>
                    
                 </div>
@@ -76,3 +76,16 @@
     <!--end::Modal content-->
 </div>
 <!--end::Modal dialog-->
+
+<script type="text/javascript">
+    var myEditor;
+    ClassicEditor
+    .create(document.querySelector('#kt_docs_ckeditor_classic'))
+    .then(editor => {
+        console.log( 'Editor was initialized', editor );
+        myEditor = editor;
+    })
+    .catch(error => {
+        console.error(error);
+    });
+</script>

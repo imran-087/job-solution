@@ -127,7 +127,8 @@
                                         <th class="min-w-20px">#</th>
                                         <th class="min-w-100px">Sub Category</th>
                                         <th class="min-w-100px">Subject</th>
-                                        <th class=" min-w-400px">Question</th>
+                                        <th class=" min-w-300px">Question</th>
+                                        <th class=" min-w-100px">Tag</th>
                                         <th class=" min-w-100px">Add Tag</th>
                                     </tr>
                                     <!--end::Table row-->
@@ -141,6 +142,11 @@
                                         <td>{{ $question->sub_category->name }}</td>
                                         <td>{{ $question->subject->name }}</td>
                                         <td>{{ $question->question }}</td>
+                                        <td>
+                                            @foreach($question->pivotsubject as $tag)
+                                                <div class="badge badge-success"> {{ $tag->name }} </div>
+                                            @endforeach
+                                        </td>
                                         <td>
                                            <div>
 <input type="text" data-question_id="{{$question->id}}" class="form-control form-control-solid w-350px  search_tag"  placeholder="Type to search">

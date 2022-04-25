@@ -129,7 +129,7 @@ class MainCategoryController extends Controller
 
                 $main_category->name = $request->name;
                 $main_category->title = $request->title;
-                $main_category->slug =  Str::slug($request->name);
+                // $main_category->slug =  Str::slug($request->name);
                 $main_category->created_user_id =  Auth::guard('admin')->user()->id;
                 $main_category->status =  $request->status;
 

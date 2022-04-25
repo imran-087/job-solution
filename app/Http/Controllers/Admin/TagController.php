@@ -43,10 +43,9 @@ class TagController extends Controller
                     }
                 })
                 ->addColumn('tag', function ($row) {
-
-                    return  '<div class="badge badge-success">eng</div>';
-
-                    //return $btn;
+                    foreach ($row->pivotsubject as $tag) {
+                        return '<div class="badge badge-success">' . $tag->name . '</div>';
+                    }
                 })
 
                 ->addColumn('action', function ($row) {
@@ -107,12 +106,13 @@ class TagController extends Controller
     public function addTag(Request $request)
     {
         if ($request->ajax()) {
-            $tag = new Tag();
+            $question = Question::find($request->question_id);
+            $question->pivotsubject()->sync($request->subject_id);
 
-            $tag->subject_id = $request->subject_id;
-            $tag->question_id = $request->question_id;
+            // $tag->subject_id = $request->subject_id;
+            // $tag->question_id = $request->question_id;
 
-            if ($tag->save()) {
+            if ($question->save()) {
                 return response()->json([
                     'success' => true,
                     'message' => 'Tag added'

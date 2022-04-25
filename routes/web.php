@@ -102,7 +102,7 @@ Route::post('question/comment/store', [CommentController::class, 'store'])->name
 /******************
    Recent/Samprotik Question
  * *****************/
-Route::get('job/question/recent-question', [RecentQuestionController::class, 'recentQuestion'])->name('question.recent-question');
+Route::get('samprotik', [RecentQuestionController::class, 'recentQuestion'])->name('question.recent-question');
 
 /*********************
    Question Description

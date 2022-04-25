@@ -66,7 +66,7 @@ class ChannelController extends Controller
         return view('admin.forum.channel.channel_index');
     }
 
-    //create or update main category
+    //create or update channel
     public function store(Request $request)
     {
         //dd($request->all());
@@ -108,12 +108,11 @@ class ChannelController extends Controller
                 $channel = new Channel();
 
                 $channel->name = $request->name;
-                $channel->slug =  Str::slug($request->name);
+                // $channel->slug =  Str::slug($request->name);
                 $channel->status = $request->status;
                 $channel->creator_id =  Auth::guard('admin')->user()->id;
 
                 $channel->created_at = Carbon::now();
-
 
                 if ($channel->save()) {
                     return response()->json([

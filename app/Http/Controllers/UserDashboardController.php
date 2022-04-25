@@ -64,6 +64,7 @@ class UserDashboardController extends Controller
         $user->name = $request->name;
         $user->email = $request->email;
         $user->phone = $request->phone;
+        $user->user_type = $request->user_type;
         $user->address = $request->address;
 
         //image upload

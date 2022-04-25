@@ -78,7 +78,7 @@
          
         <!--begin::Row-->
         <div class="row gy-5 g-xl-8" >
-            <div class="col-xxl-10 mb-xl-10 col-md-10 col-sm-12 col-xs-12">
+            <div class="col-xxl-10  col-md-10 col-sm-12 col-xs-12">
                 <!--begin::Engage widget 1-->
                 <div class="card h-md-100">
                     <!--begin::Body-->

@@ -312,7 +312,7 @@
                             <span class="">Subject Description (optional)</span>
                         </label>
                         <!--end::Label-->
-                        <textarea name="description" class="form-control form-control-solid h-100px"></textarea>
+                        <textarea name="description" id="kt_docs_ckeditor_classic" class="form-control form-control-solid h-100px"></textarea>
                         <div class="help-block with-errors description-error"></div>
                     </div>
                     <!--end::Input group-->
@@ -433,7 +433,7 @@
             $('#kk_modal_new_category').modal('show')
         }
 
-        //edit category modal
+        //edit subject modal
         function edit(id){
             $.ajax({
                 type:"GET",
@@ -458,11 +458,14 @@
         $('#kk_modal_new_service_cancel').on('click', function(){
             $('#kk_modal_new_category_form')[0].reset();
             clearAppendData();
+            $('.indicator-label').show()
+            $('.indicator-progress').hide()
+            $('#kk_modal_new_service_submit').removeAttr('disabled')
             $("#kk_modal_new_category").modal('hide');
 
         })
 
-        //new category save
+        //new subject save
         $('#kk_modal_new_category_form').on('submit',function(e){
             e.preventDefault()
             $('.with-errors').text('')
@@ -471,6 +474,7 @@
             $('#kk_modal_new_service_submit').attr('disabled','true')
 
             var formData = new FormData(this);
+            formData.append('description', myEditor.getData());
             $.ajax({
                 type:"POST",
                 url: "{{ url('admin/category/subject/store')}}",
@@ -508,16 +512,16 @@
                             }))
                     }
 
-                $('.indicator-label').show()
-                $('.indicator-progress').hide()
-                $('#kk_modal_new_service_submit').removeAttr('disabled')
+                    $('.indicator-label').show()
+                    $('.indicator-progress').hide()
+                    $('#kk_modal_new_service_submit').removeAttr('disabled')
 
                 }
           });
 
         })
 
-        //deleteCategory
+        //delete subject
         function deleteCategory(id){
             Swal.fire({
                 text: "Are you sure you want delete this?",
@@ -575,6 +579,7 @@
             $('select[name="category"]').val('').text('');
             $('select[name="sub_category"]').val('').text('');
             $('select[name="parent"]').val('').text('');
+            $('#kt_docs_ckeditor_classic').val('').text('');
         }
 
     </script>

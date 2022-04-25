@@ -15,7 +15,7 @@ class SubjectController extends Controller
         //dd($subject);
         if ($subject !== 'all') {
 
-            $subject = Subject::find($subject);
+            $subject = Subject::where('slug', $subject)->first();
             // dd($subject);
             $subject_topics = Subject::where('parent_id', $subject->id)->get();
             //dd($subject_topics);

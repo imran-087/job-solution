@@ -234,7 +234,7 @@
                             <span class="required">Question Descrption</span>
                         </label>
                         <!--end::Label-->
-                        <textarea name="description" id="ckeditor" class="form-control form-control-solid h-100px"></textarea>
+                        <textarea name="description" id="kt_docs_ckeditor_classic" class="form-control form-control-solid h-100px"></textarea>
                         <div class="help-block with-errors description-error"></div>
                     </div>
                     <!--end::Input group-->
@@ -272,10 +272,7 @@
 @push('script')
     <script type="text/javascript">
        
-       //get description
-        $('body').on('click', '.getDescription', function() {
-            var id = $(this).data(id)
-            //console.log(id.id)
+       function getDescription(id){
             $.ajax({
                 type:"GET",
                 url: "{{ url('admin/description/question-all-description/show')}}"+'/'+id.id,
@@ -285,9 +282,15 @@
                     $("#kk_modal_show_description").modal('show');
                 }
             });
+
+       }
+       //show description
+        $('body').on('click', '.getDescription', function() {
+            var id = $(this).data(id)
+            //console.log(id.id)
+           getDescription(id);
            
         });
-
 
         //add deescription
         $('body').on('click', '.addDescription', function() {
@@ -314,7 +317,7 @@
             $('#kk_modal_new_service_submit').attr('disabled','true')
 
             var formData = new FormData(this);
-            formData.append('description', CKEDITOR.instances['ckeditor'].getData());
+            formData.append('description', myEditor.getData());
             $.ajax({
                 type:"POST",
                 url: "{{ url('admin/description/question-description/store')}}",

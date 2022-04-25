@@ -127,7 +127,7 @@ class SubjectController extends Controller
                 $subject->status =  $request->status;
                 $subject->sub_category_id =  $sub_category;
                 $subject->main_category_id =  $request->main_category;
-                $subject->slug =  Str::slug($request->name);
+                // $subject->slug =  Str::slug($request->name);
                 $subject->updated_user_id =  Auth::guard('admin')->user()->id;
 
                 $subject->updated_at = Carbon::now();
@@ -174,10 +174,11 @@ class SubjectController extends Controller
                 $subject->status =  $request->status;
                 $subject->sub_category_id =  $sub_category;
                 $subject->main_category_id =  $request->main_category;
-                $subject->slug =  Str::slug($request->name);
+                $subject->slug =  $this->subjectSlug($request->name, $request->sub_category, $request->main_category);
                 $subject->created_user_id =  Auth::guard('admin')->user()->id;
 
                 $subject->created_at = Carbon::now();
+
 
                 if ($subject->save()) {
                     if ($request->parent && $request->parent !== '' && $request->parent !== 'none') {
@@ -242,5 +243,19 @@ class SubjectController extends Controller
     public function treeView()
     {
         return view('admin.subject.tree_index');
+    }
+
+    //unique slug for subject
+    public function subjectSlug($name, $sub_category, $main_category)
+    {
+        if ($main_category == 1) {
+            $slug = Str::slug($name);
+            return $slug;
+        } else {
+            $sub_category = SubCategory::find($sub_category);
+
+            $slug = Str::slug($name) . '-' . str_replace(" ", "-", $sub_category->name);
+            return $slug;
+        }
     }
 }

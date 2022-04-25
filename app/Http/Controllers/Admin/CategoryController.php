@@ -82,7 +82,7 @@ class CategoryController extends Controller
         return view('admin.category.category', compact('main_categories'));
     }
 
-    //create or update main category
+    //create or update category
     public function store(Request $request)
     {
         //dd($request->all());
@@ -105,7 +105,6 @@ class CategoryController extends Controller
                 $category->title = $request->title;
                 $category->status =  $request->status;
                 $category->main_category_id =  $request->main_category;
-                $category->slug =  Str::slug($request->name);
                 $category->updated_user_id =  Auth::guard('admin')->user()->id;
 
                 $category->updated_at = Carbon::now();
@@ -135,7 +134,7 @@ class CategoryController extends Controller
 
                 $category->name = $request->name;
                 $category->title = $request->title;
-                $category->slug =  Str::slug($request->name);
+                // $category->slug =  Str::slug($request->name);
                 $category->main_category_id =  $request->main_category;
                 $category->created_user_id =  Auth::guard('admin')->user()->id;
                 $category->status =  $request->status;

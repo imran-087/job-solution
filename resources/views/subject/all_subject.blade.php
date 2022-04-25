@@ -67,7 +67,7 @@
                     <!--end::Icon-->
                     <!--begin::Title-->
                     <div class="flex-grow-1 me-2">
-                        <a href="{{ route('subject.subject', $subject->id) }}" class="fw-bolder text-gray-800 text-hover-primary fs-6">{{$subject->name}}</a>
+                        <a href="{{ route('subject.subject', $subject->slug) }}" class="fw-bolder text-gray-800 text-hover-primary fs-6">{{$subject->name}}</a>
                         <span class="text-muted fw-bold d-block">{{$subject->sub_category->name ?? 'jobs'}}</span>
                     </div>
                     <!--end::Title-->

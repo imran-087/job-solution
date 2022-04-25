@@ -162,6 +162,29 @@
                             <!--end::Col-->
                         </div>
                         <!--end::Input group-->
+                        
+                        <!--begin::Input group-->
+                        <div class="row mb-6">
+                            <!--begin::Label-->
+                            <label class="col-lg-4 col-form-label fw-bold fs-6">Type</label>
+                            <!--end::Label-->
+                            <!--begin::Col-->
+                            <div class="col-lg-8 fv-row">
+                               <select class="form-select form-select-solid  @error('answer.*') is-invalid @enderror" data-control="select2" 
+                                data-placeholder="Select Type " name="user_type">
+                                <option value="jobs"  @if(Auth::user()->user_type == 'jobs')  selected  @endif> Job Preparation</option>
+                                <option value="admission"  @if(Auth::user()->user_type == 'admission')  selected @endif>Admission</option>
+                                <option value="academy" @if(Auth::user()->user_type == 'academy')  selected @endif>Academy</option>
+                                </select>
+                                @error('user_type')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
                         <!--begin::Input group-->
                         <div class="row mb-6">
                             <!--begin::Label-->

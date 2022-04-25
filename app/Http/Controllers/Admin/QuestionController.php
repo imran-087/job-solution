@@ -329,7 +329,7 @@ class QuestionController extends Controller
                 $question->lock_status = $request->lock_status;
                 $question->status = $request->status;
                 $question->created_user_id = $request->created_user_id;
-                $question->slug = $request->slug;
+                // $question->slug = $request->slug;
 
                 $question->save();
 
@@ -356,10 +356,12 @@ class QuestionController extends Controller
 
                 //tag
                 if ($request->main_category_id != '') {
-                    $tag = Tag::create([
-                        'subject_id' => $request->subject_id,
-                        'question_id' => $question->id,
-                    ]);
+                    $question->pivotsubject()->sync($request->subject_id);
+                    $question->save();
+                    // $tag = Tag::create([
+                    //     'subject_id' => $request->subject_id,
+                    //     'question_id' => $question->id,
+                    // ]);
                 }
             }
 

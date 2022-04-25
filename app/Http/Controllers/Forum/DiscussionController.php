@@ -11,6 +11,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
@@ -52,7 +53,7 @@ class DiscussionController extends Controller
     public function store(Request $request)
     {
 
-        dd($request->all());
+        //dd($request->all());
         $validator = Validator::make($request->all(), [
             'content' => ['required'],
             'title' => ['required'],
@@ -66,16 +67,16 @@ class DiscussionController extends Controller
             ], 200);
         } else {
             if (Auth::check()) {
+
                 $discussion = new Discussion();
 
                 $discussion->content = $request->content;
                 $discussion->title = $request->title;
                 $discussion->channel_id = $request->channel;
-                $discussion->slug =  Str::slug($request->title);
+                // $discussion->slug =  Str::slug($request->title);
                 $discussion->user_id =  Auth::user()->id;
 
                 $discussion->created_at = Carbon::now();
-
 
                 if ($discussion->save()) {
                     return response()->json([
@@ -222,7 +223,13 @@ class DiscussionController extends Controller
             $extension = $request->file('upload')->getClientOriginalExtension();
             $fileName = $fileName . '_' . time() . '.' . $extension;
 
-            $request->file('upload')->move(public_path('discussion-forum/images'), $fileName);
+            $imgfile = $request->file('upload')->move(public_path('discussion-forum/images'), $fileName);
+            // open an image file
+            $img = Image::make($imgfile);
+            // now you are able to resize the instance
+            $img->resize(320, 220);
+            // finally we save the image as a new file
+            $img->save($imgfile);
 
             $CKEditorFuncNum = $request->input('CKEditorFuncNum');
             $url = asset('discussion-forum/images/' . $fileName);

@@ -110,7 +110,7 @@
                                     <div class="d-flex flex-stack justify-content-start mb-7">
                                         <!--begin::Symbol-->
                                         <div class="symbol symbol-60px symbol-2by3 me-4">
-                                            <div class="symbol-label" style="background-image: url('/metronic8/demo1/assets/media/stock/600x400/img-1.jpg')"></div>
+                                            <div class="symbol-label" style="background-image: url('')"></div>
                                         </div>
                                         <!--end::Symbol-->
                                         <!--begin::Title-->
@@ -152,7 +152,7 @@
                             <div class="d-flex align-items-center flex-grow-1">
                                 <!--begin::Avatar-->
                                 <div class="symbol symbol-45px me-5">
-                                    <img src="/metronic8/demo1/assets/media/avatars/300-7.jpg" alt="">
+                                    <img src="" alt="">
                                 </div>
                                 <!--end::Avatar-->
                                 <!--begin::Info-->
@@ -175,6 +175,7 @@
                         <!--end::Header-->
                         <!--begin::Post-->
                         <div class="mb-7">
+                            <div class="text-gray-800 fw-bold mb-5" style="padding: 10px; background:#F1FAFF; border-radius:5px;">{{ $discussion->title }}</div>
                             <!--begin::Text-->
                             <div class="text-gray-800 mb-5">{!! $discussion->content !!}</div>
                             <!--end::Text-->
@@ -226,7 +227,7 @@
                                 </div>
                                 <!--end::Info-->
                                 <!--begin::Post-->
-                                <span class="text-gray-800 fs-7 fw-normal pt-1">{{ $discussion->reply->reply }}</span>
+                                <span class="text-gray-800 fs-7 fw-normal pt-1">{!! $discussion->reply->reply !!}</span>
                                 <!--end::Post-->
                             </div>
                             <!--end::Info-->
@@ -234,11 +235,14 @@
                         <!--end::Best reply-->
                         <div class="separator mb-4"></div>
                         @endif
+                        <div>
+                            <h4 class="text-gray-800 my-2 ">Your Answer</h4>
+                        </div>
                         <!--begin::Reply input-->
                         <form class="position-relative mb-6" method="POST" action="{{ route('discussion.reply') }}">
                             @csrf
                             <input type="hidden" name="discussion" value="{{ $discussion->id }}">
-                            <textarea class="form-control  form-control-solid border-0   h-100px" name="reply" data-kt-autosize="true" rows="1" placeholder="Write your answer.."></textarea>
+                            <textarea class="form-control  form-control-solid border-0 " id="kt_docs_ckeditor_classic" name="reply" data-kt-autosize="true" rows="1" placeholder="Write your answer.."></textarea>
                             <input type="submit" class=" submit mt-4 mb-2" value="post answer">
                         </form>
                         <!--edit::Reply input-->
@@ -282,7 +286,7 @@
                         <!--begin::Post-->
                         <div class="mb-7">
                             <!--begin::Text-->
-                            <div class="text-gray-800 mb-5">{{ $reply->reply }}</div>
+                            <div class="text-gray-800 mb-5">{!! $reply->reply !!}</div>
                             <!--end::Text-->
                             <!--begin::Toolbar-->
                             {{-- <div class="d-flex align-items-center mb-5">
@@ -427,7 +431,7 @@
                             <span class="required">Discussion Content</span>
                         </label>
                         <!--end::Label-->
-                        <textarea name="content"  class="form-control form-control-solid h-100px"></textarea>
+                        <textarea name="content" id="kt_docs_ckeditor_classic"  class="form-control form-control-solid h-100px"></textarea>
                         <div class="help-block with-errors content-error"></div>
                     </div>
                     <!--end::Input group-->
@@ -501,6 +505,7 @@
             $('#kk_modal_new_service_submit').attr('disabled','true')
 
             var formData = new FormData(this);
+            formData.append('content', myEditor.getData())
             $.ajax({
                 type:"POST",
                 url: "{{ url('discussion/store')}}",
@@ -531,17 +536,14 @@
                                 
                             }).then((function () {
                                 //refresh datatable
-                                $('#dataTable').DataTable().ajax.reload();
+                                location.reload()
                             }))
                     }
 
                     $('.indicator-label').show()
                     $('.indicator-progress').hide()
                     $('#kk_modal_new_service_submit').removeAttr('disabled')
-                    setTimeout(function() {
-                        location.reload();  //Refresh page
-                    }, 1000);
-
+                    
                 }
           });
 
@@ -569,4 +571,5 @@
         });
 
     </script>
+    
 @endpush

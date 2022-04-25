@@ -48,7 +48,7 @@
                 <!--end::Input group-->
                 <div class="d-flex flex-column mb-8 fv-row">
                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                        <span>Description</span>
+                        <span class="text-bold">All Description for this Question</span>
                     </label>
                     @foreach($question->descriptions as $description)
                     <div class="col-md-12 mb-5">

@@ -223,8 +223,9 @@
                                     <!--end::Avatar-->
                                     <!--begin::Info-->
                                     <div class="d-flex flex-column">
-                                        <a href="{{ route('discussion.show', $discussion->id) }}" class="text-gray-900 text-hover-primary fs-6 fw-bolder view" data-id="{{ $discussion->id }}" style="font-size: 20px !important;">{{ Str::limit($discussion->title, 50, $end='...') }}</a>
-                                        <span class="text-gray-400 fw-bold">{{$discussion->created_at->diffForHumans()}}</span>
+                                        <a href="{{ route('discussion.show', $discussion->id) }}" data-id="{{ $discussion->id }}" class=" view text-gray-900 text-hover-primary fs-6 fw-bolder">{{ $discussion->user->name }}</a>
+                                        <span class="text-gray-400 fw-bold">{{ $discussion->created_at->diffForHumans() }}</span>
+                                        
                                     </div>
                                     <!--end::Info-->
                                 </div>
@@ -246,7 +247,7 @@
                                 <!--begin::Text-->
                                 <a href="{{ route('discussion.show', $discussion->id) }}" class="view" data-id="{{ $discussion->id }}">
 
-                                    <p class="text-gray-800 fw-normal mb-5">{!! $discussion->content !!}</p>
+                                   <div class="text-gray-800 fw-bold mb-5" style="padding: 10px; background:#F1FAFF; border-radius:5px;">{{ $discussion->title }}</div>
                                 </a>
                                 <!--end::Text-->
                                 <!--begin::Toolbar-->
@@ -357,11 +358,6 @@
                         </label>
                         <!--end::Label-->
                         <textarea cols="10" name="content" id="kt_docs_ckeditor_classic"  class="form-control form-control-solid h-100px " rows="10" ></textarea>
-
-                        {{-- <textarea name="content" id="" class="form-control form-control-solid h-100px "></textarea> --}}
-                        {{-- <input name="content" type="hidden">
-                        <div id="kt_docs_quill_basic" class="form-control form-control-solid h-100px"  >
-                        </div> --}}
                         <div class="help-block with-errors content-error"></div>
                     </div>
                     <!--end::Input group-->
@@ -583,23 +579,7 @@
     </script>
 
     <script type="text/javascript"> 
-    ClassicEditor
-    .create(document.querySelector('#kt_docs_ckeditor_classic'),{
-        ckfinder:{
-            uploadUrl: "{{ route('ckeditor.upload').'?_token='.csrf_token() }}"
-        },
-        image: {
-            toolbar: [ 'toggleImageCaption', 'imageTextAlternative' ]
-        },
-        
-    })
-    .then(editor => {
-        console.log(editor);
-    })
-    .catch(error => {
-        console.error(error);
-    });
-
+   
     //save discussion
     $('#kk_modal_new_discussion_form').on('submit',function(e){
         e.preventDefault()
@@ -609,6 +589,7 @@
         $('#kk_modal_new_service_submit').attr('disabled','true')
 
         var formData = new FormData(this);
+        formData.append('content', myEditor.getData())
 
         $.ajax({
             type:"POST",
@@ -634,9 +615,10 @@
                     $("#kk_modal_new_discussion").modal('hide');
 
                     Swal.fire({
-                            text: data.message,
-                            icon: "success",
-                            showConfirmButton: true
+                        text: data.message,
+                        icon: "success",
+                        showCancelButton: false,
+                        showConfirmButton: false
 
                         }).then((function () {
                             //refresh datatable

@@ -128,7 +128,6 @@ class SubCategoryController extends Controller
                 $sub_category->status =  $request->status;
                 $sub_category->category_id =  $request->category;
                 $sub_category->year_id = $year;
-                $sub_category->slug =  Str::slug($request->name);
                 $sub_category->updated_user_id =  Auth::guard('admin')->user()->id;
 
                 $sub_category->updated_at = Carbon::now();
@@ -160,7 +159,7 @@ class SubCategoryController extends Controller
                 $sub_category->title = $request->title;
                 $sub_category->category_id =  $request->category;
                 $sub_category->year_id =  $year;
-                $sub_category->slug =  Str::slug($request->name);
+                // $sub_category->slug =  Str::slug($request->name);
                 $sub_category->created_user_id =  Auth::guard('admin')->user()->id;
                 $sub_category->status =  $request->status;
 

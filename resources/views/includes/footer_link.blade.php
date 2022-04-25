@@ -31,9 +31,26 @@
 
 
 	<!--- CK Editor --->
-	<script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
+	{{-- <script src="https://cdn.ckeditor.com/4.15.0/standard/ckeditor.js"></script>
 	<script type="text/javascript">
 	 CKEDITOR.replace('ckeditor');
+	</script> --}}
+	<script type="text/javascript">
+	 	var myEditor;
+		ClassicEditor
+		.create(document.querySelector('#kt_docs_ckeditor_classic'),{
+			//image upload in ckeditor
+			ckfinder:{
+                uploadUrl: '{{ route('ckeditor.upload'). '?_token='.csrf_token() }}'
+            }
+		})
+		.then(editor => {
+			console.log( 'Editor was initialized', editor );
+            myEditor = editor;
+		})
+		.catch(error => {
+			console.error(error);
+		});
 	</script>
 	
 	@stack('script')

@@ -43,6 +43,12 @@ class Subject extends Model
     //pivot relation
     public function pivotquestion()
     {
-        return $this->hasMany(Question::class);
+        return  $this->hasMany(Question::class);
+    }
+
+    //local scope
+    public function scopeSubject($query, $subcategory, $parent)
+    {
+        $query->where(['sub_category_id' => $subcategory, 'parent_id' => $parent]);
     }
 }

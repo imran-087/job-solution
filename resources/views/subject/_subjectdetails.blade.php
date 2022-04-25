@@ -13,7 +13,7 @@ function getparent($subject) {
 	}
 
 	echo '
-	<li class="breadcrumb-item pe-3"><a class="pe-3"  href="'.$find->id.'">'.$find->name.'</a></li>
+	<li class="breadcrumb-item pe-3"><a class="pe-3"  href="'.$find->slug.'">'.$find->name.'</a></li>
 	';
 
 }
@@ -169,7 +169,7 @@ function getparent($subject) {
                                     <!--begin::Content-->
                                     <div class="me-5">
                                         <!--begin::Title-->
-                                        <a href="{{ route('subject.subject', $topic->id) }}" class="text-gray-800 fw-bolder text-hover-primary fs-6">{{$topic->name}}</a>
+                                        <a href="{{ route('subject.subject', $topic->slug) }}" class="text-gray-800 fw-bolder text-hover-primary fs-6">{{$topic->name}}</a>
                                         <!--end::Title-->
                                         <!--begin::Desc-->
                                         <span class="text-gray-400 fw-bold fs-7 d-block text-start ps-0">{{$topic->parentsub->name}}</span>

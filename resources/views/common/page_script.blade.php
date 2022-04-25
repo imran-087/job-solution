@@ -203,7 +203,7 @@
         $('#kk_modal_new_service_submit').attr('disabled','true')
 
         var formData = new FormData(this);
-        formData.append('description', CKEDITOR.instances['ckeditor'].getData());
+        formData.append('description', myEditor.getData());
         $.ajax({
             type:"POST",
             url: "{{ url('description/question-description/store')}}",
