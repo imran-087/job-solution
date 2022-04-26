@@ -17,7 +17,19 @@
                 </span>
                
             </div>
-            @foreach(App\Models\MainCategory::with('categories')->where(['status' => 'active', 'slug' => Auth::user()->user_type])->get() as $main_category)
+            @guest
+                @php
+                    $main_categories = App\Models\MainCategory::with('categories')->where('status', 'active')->get();
+                @endphp
+            @endguest  
+            
+            @auth
+                @php
+                    $main_categories = App\Models\MainCategory::with('categories')->where(['status' => 'active', 'slug' => Auth::user()->user_type])->get() ;
+                @endphp
+            @endauth
+            
+            @foreach($main_categories as $main_category)
             <div data-kt-menu-trigger="click" data-kt-menu-placement="bottom-start"
                 class="menu-item menu-lg-down-accordion me-lg-1">
                 <span class="menu-link py-3">

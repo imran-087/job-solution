@@ -84,7 +84,19 @@
                         <div class="card-p mt-n20 position-relative">
                             <!--begin::Row-->
                             <div class="row g-0 d-flex justify-content-center">
-                                @foreach(App\Models\MainCategory::with('categories')->where(['status' => 'active', 'slug' => Auth::user()->user_type])->get() as $main_category)
+                                @guest
+                                @php
+                                    $main_categories = App\Models\MainCategory::with('categories')->where('status', 'active')->get();
+                                @endphp
+                                @endguest  
+                                
+                                @auth
+                                @php
+                                    $main_categories = App\Models\MainCategory::with('categories')->where(['status' => 'active', 'slug' => Auth::user()->user_type])->get() ;
+                                @endphp
+                                @endauth
+                                
+                                @foreach($main_categories as $main_category)
                                 <!--begin::Col-->
                                 <div class="col-3 bg-light-success px-6 py-8 rounded-2 me-7 mb-7">
                                     <!--begin::Svg Icon | path: icons/duotune/general/gen032.svg-->
@@ -99,6 +111,7 @@
                                 </div>
                                 <!--end::Col-->
                                 @endforeach
+                                
                             </div>
                             <!--end::Row-->
                             

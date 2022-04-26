@@ -129,18 +129,6 @@
                             <!--end::Col-->
                         </div>
                         <!--end::Input group-->
-                        <!--begin::Input group-->
-                        <div class="d-flex flex-column mb-8 fv-row">
-                            
-                        </div>
-                        <!--end::Input group-->
-                       <!--begin::Input group-->
-                        <div class="row g-9 mb-8">
-                       
-                        </div>
-                        <!--end::Input group-->
-
-                        
                     </form>
                     <!--end:Form-->
                     

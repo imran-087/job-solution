@@ -35,7 +35,19 @@
                     <span class="menu-section text-muted text-uppercase fs-8 ls-1">Job Solution</span>
                 </div>
             </div>
-            @foreach(App\Models\MainCategory::where(['status' => 'active', 'slug' => Auth::user()->user_type])->get() as $main_category)
+             @guest
+                @php
+                    $main_categories = App\Models\MainCategory::with('categories')->where('status', 'active')->get();
+                @endphp
+            @endguest  
+                
+            @auth
+                @php
+                    $main_categories = App\Models\MainCategory::with('categories')->where(['status' => 'active', 'slug' => Auth::user()->user_type])->get() ;
+                @endphp
+            @endauth
+                
+            @foreach($main_categories as $main_category)
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                 <a href="{{ url('job-solution', $main_category->slug) }}">
                 <span class="menu-link">

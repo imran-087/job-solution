@@ -39,7 +39,7 @@
         </div>
         <!--end::Input group-->
         
-         <!--begin::Input group-->
+        <!--begin::Input group-->
         <div class="row g-9 mb-8">
             <!--begin::Col-->
             @for($o = 0; $o < $option; $o++) 

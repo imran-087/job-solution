@@ -161,6 +161,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/get-parent-subject/{parent_id}', 'GetAllCategoryController@getParentSubject');
 
 
+        ############## Samprotik Question ###############
+        Route::get('/question/samprotik-question', 'SamprotikQuestionController@index')->name('samprotik.index');
+        Route::post('/question/samprotik-question/create', 'SamprotikQuestionController@create')->name('samprotik.create');
+        Route::post('/question/samprotik-question/store', 'SamprotikQuestionController@store')->name('samprotik.store');
+        Route::get('/question/samprotik-question/show', 'SamprotikQuestionController@show')->name('samprotik.show');
+
+
         /*
         |--------------------------------------------------------------------------
         | Discussion Forum
