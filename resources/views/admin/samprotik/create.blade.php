@@ -25,7 +25,7 @@
                                 <input type="hidden" name="date" value="{{ $date }}">
                                 <!--end::Label-->
                                 <input type="text" class="form-control form-control-solid" placeholder="Enter Question"
-                                    name="question[]" />
+                                    name="question[]" required />
                                 <div class="help-block with-errors title-error"></div>
                             </div>
                             <!--end::Input group-->
@@ -38,7 +38,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <input type="text" class="form-control form-control-solid" placeholder="Enter answer"
-                                            name="answer[]" />
+                                            name="answer[]"  required/>
                                 <div class="help-block with-errors answer-error"></div>
                             </div>
                             <!--end::Input group-->
@@ -56,7 +56,7 @@
                                     <div class="form-check form-check-inline">
                                         <input class="form-check-input" type="radio" name="answer[{{ $i }}]"  value="{{ $o+1 }}">
                                         <input type="text" class="form-control form-control-solid" placeholder="Enter option"
-                                        name="option_{{$o+1}}[]"  value="{{ old('option_.*') }}"/>
+                                        name="option_{{$o+1}}[]"  value="{{ old('option_.*') }}" required/>
                                     </div>
                                     
                                     <div class="help-block with-errors option-error"></div>

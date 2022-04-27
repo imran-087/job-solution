@@ -165,7 +165,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/question/samprotik-question', 'SamprotikQuestionController@index')->name('samprotik.index');
         Route::post('/question/samprotik-question/create', 'SamprotikQuestionController@create')->name('samprotik.create');
         Route::post('/question/samprotik-question/store', 'SamprotikQuestionController@store')->name('samprotik.store');
-        Route::get('/question/samprotik-question/show', 'SamprotikQuestionController@show')->name('samprotik.show');
+        Route::get('/question/samprotik-question/input', 'SamprotikQuestionController@input')->name('samprotik.input');
+        Route::get('/question/samprotik-with-or-without-option/{val}', 'SamprotikQuestionController@optionFilter')->name('samprotik.option-filter');
+
+
+        ############## Written Question ###############
+        Route::get('/question/written-question', 'WrittenQuestionController@index')->name('written.index');
+        Route::post('/question/written-question/create', 'WrittenQuestionController@create')->name('written.create');
+        Route::post('/question/written-question/store', 'WrittenQuestionController@store')->name('written.store');
+        Route::get('/question/written-question/show', 'WrittenQuestionController@show')->name('written.show');
 
 
         /*

@@ -10,9 +10,41 @@ use Illuminate\Support\Facades\Auth;
 
 class SamprotikQuestionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return view('admin.samprotik.index');
+        if ($request->has('filter')) {
+            if ($request->filter == 0) {
+                $questions = SamprotikQuestion::where('options', null)->paginate(10);
+
+                $view = view('admin.samprotik.all_samprotik', compact('questions'))->render();
+                return response()->json([
+                    'html' => $view
+                ]);
+            } else {
+
+                $questions = SamprotikQuestion::where('options', '!=', null)->paginate(10);
+                $view = view('admin.samprotik.all_samprotik', compact('questions'))->render();
+                return response()->json([
+                    'html' => $view
+                ]);
+            }
+        } else {
+            $questions = SamprotikQuestion::paginate(10);
+
+            if ($request->ajax()) {
+                //dd('here');
+                $view = view('admin.samprotik.all_samprotik', compact('questions'))->render();
+                return response()->json(['html' => $view]);
+            }
+            return view('admin.samprotik.index', compact('questions'));
+        }
+    }
+
+
+
+    public function input()
+    {
+        return view('admin.samprotik.input');
     }
 
     public function create(Request $request)
@@ -32,6 +64,10 @@ class SamprotikQuestionController extends Controller
 
     public function store(Request $request)
     {
+        $request->validate([
+            'question.*' => ['required'],
+            'answer.*' => ['required'],
+        ]);
         //dd($request->all());
         foreach ($request->question as $key => $value) {
             if (\strlen($value) > 1) {
@@ -54,6 +90,15 @@ class SamprotikQuestionController extends Controller
                         'answer' => $request->answer[$key],
 
                     ];
+                    if ($request->answer[$key] == 1) {
+                        $question->answer = $request->option_1[$key];
+                    } elseif ($request->answer[$key] == 2) {
+                        $question->answer = $request->option_2[$key];
+                    } elseif ($request->answer[$key] == 3) {
+                        $question->answer = $request->option_3[$key];
+                    } elseif ($request->answer[$key] == 4) {
+                        $question->answer = $request->option_4[$key];
+                    }
                     //dd($data);
                     $question->options = $data;
                 } else {
@@ -65,11 +110,5 @@ class SamprotikQuestionController extends Controller
             }
         }
         return redirect()->back()->with('success', 'Question Created Successfully');
-    }
-
-    public function show()
-    {
-        $questions = SamprotikQuestion::paginate(10);
-        return view('admin.samprotik.show', compact('questions'));
     }
 }

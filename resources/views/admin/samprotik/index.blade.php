@@ -63,125 +63,111 @@
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
            <!--begin::Card-->
-            <div class="card">
+            <div class="card mb-5">
                 <!--begin::Card body-->
                 <div class="card-body pt-4 " style="padding-bottom: 0px !important">
-                    <!--begin:Form-->
-                    <form id="kk_modal_new_samprotik_form" class="form"  >
-                        <div class="messages"></div>
-                        {{-- csrf token  --}}
-                        @csrf
-                       
-                        <!--begin::Input group-->
-                        <div class="row g-9 pb-4">
-                            <!--begin::Col-->
-                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 fv-row">
-                                {{-- <label class="required fs-6 fw-bold mb-2">Question Type</label> --}}
-                                <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                    data-placeholder="Select category" name="category" id="category">
-                                    <option value="bn" selected>Bangladesh</option>
-                                    <option value="in">International</option>
-                                    <option value="bn_in">Bangladesh & International</option>
-                                </select>
-                                @error('category')
-                                <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <!--end:Col-->
-                            <!--begin::Col-->
-                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 fv-row">
-                                {{-- <label class="required fs-6 fw-bold mb-2">Question Type</label> --}}
-                                <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                    data-placeholder="Select" name="option" id="option">
-                                    <option value="0" selected>Without Option</option>
-                                    <option value="1">With Option</option>
-                                </select>
-                                @error('option')
-                                <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <!--end:Col-->
-                            <!--begin::Col-->
-                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 fv-row">
-                               
-                                <input type="date" class="form-control form-control-solid" placeholder="Pic previous date"
-                                    name="date" id="date" />
-                                @error('date')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <!--end::Col-->
-                            <!--begin::Col-->
-                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 fv-row">
-                                <!--begin::Label-->
-                                {{-- <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="required">Number of Question</span>
-                                </label> --}}
-                                <!--end::Label-->
-                                <input type="text" class="form-control form-control-solid" placeholder="Number of Question"
-                                    name="number" id="number" />
-                                @error('number')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <!--end::Col-->
-                            
+                    <div class="row">
+                        <div class="col-md-6 d-flex flex-center" style="border-right: 1px solid gray">
+                            <h3 style="color:#D94540">All সাম্প্রতিক Question</h3>
                         </div>
-                        <!--end::Input group-->
-                    </form>
-                    <!--end:Form-->
+                        <div class="col-md-6">
+                            <!--begin:Form-->
+                            <form id="kk_modal_new_samprotik_form" class="form"  >
+                                <div class="messages"></div>
+                                {{-- csrf token  --}}
+                                @csrf
+                            
+                                <!--begin::Input group-->
+                                <div class="row g-9 pb-4">
+                                    <!--begin::Col-->
+                                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 fv-row">
+                                        <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                            data-placeholder="Select" name="option" id="option">
+                                            <option value="0" selected>Without Option</option>
+                                            <option value="1">With Option</option>
+                                        </select>
+                                       
+                                    </div>
+                                    <!--end:Col-->
+                                    
+                                </div>
+                                <!--end::Input group-->
+                            </form>
+                            <!--end:Form-->
+                        </div>
+                    </div>
                     
                 </div>
                 <!--end::Card body-->
             </div>
             <!--end::Card--> 
-
-            <!--start::samprotik question input--> 
-            <div id="samprotik"></div>     
-            <!--end::samprotik question input--> 
+            <!--begin::samprotik question-->    
+            <div class="row" id="samprotik_ques">
+                @include('admin.samprotik.all_samprotik')
+                
+            </div>
+            <!--end::samprotik question-->
+            <div class="ajax-load text-center" style="display:none">
+                <p><img src="{{ asset('assets/media/gif/loader.gif') }}"></p>
+            </div>
         </div>
         <!--end::Container-->
     </div>
     <!--end::Post-->
 </div>
-
-
 @endsection
 
 @push('script')
 <script type="text/javascript">
+	var page = 1;
+	$(window).scroll(function() {
+	    if($(window).scrollTop() + $(window).height() >= $(document).height()) {
+	        page++;
+	        loadMoreData(page);
+	    }
+	});
+
+	function loadMoreData(page){
+	  $.ajax(
+	        {
+	            url: '?page=' + page,
+	            type: "get",
+	            beforeSend: function()
+	            {
+	                $('.ajax-load').show();
+	            }
+	        })
+	        .done(function(data)
+	        {
+	            if(data.html == " "){
+	                $('.ajax-load').html("No more records found");
+	                return;
+	            }
+	            $('.ajax-load').hide();
+	            $("#samprotik_ques").append(data.html);
+	        })
+	        .fail(function(jqXHR, ajaxOptions, thrownError)
+	        {
+	              alert('server not responding...');
+	        });
+	}
+
+    //filter by with or without option
     $(document).ready(function(){
-        $('#kk_modal_new_samprotik_form').on( "keypress", function(event) {
-            if (event.which == 13 && !event.shiftKey) {
-                event.preventDefault();
-                //console.log('here')
-                var category =  $("#category").find(':selected').val();
-                var option =  $("#option").find(':selected').val();
-                var number = $('#number').val();
-                var date = new Date($('#date').val());
-                var day = date.getDate();
-                var month = date.getMonth() + 1;
-                var year = date.getFullYear();
-                date = ([day, month, year].join('-'));
-           
-                $.ajax({
-                    type: "POST",
-                    url: "{{ url('admin/question/samprotik-question/create')}}",
-                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-                    data: {
-                        category: category,
-                        option : option,
-                        number : number,
-                        date : date
-                    },
-                    //If result found, this funtion will be called.
-                    success: function(data) {
-                        $('#samprotik').html(data.html)
-                    }
-                });
-               
-            }
+        $('#option').change(function(){ 
+            var value = $(this).val();
+            //console.log(value)
+            $.ajax({
+                type:"GET",
+                url: "{{ url('admin/question/samprotik-question?filter=')}}"+value,
+                dataType: 'json',
+                success:function(data){
+                    $("#samprotik_ques").html(data.html);
+                }
+            });
         });
+       
     })
 </script>
 @endpush
+
