@@ -97,7 +97,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/passage/get/{id}', 'PassageController@getPassage')->name('passage.get');
         Route::get('/passage/delete/{id}', 'PassageController@deletePassage')->name('passage.delete');
 
-        ############ Question Route #############
+        ############ MCQ Question Route #############
         Route::get('/question/question-index', 'QuestionController@index')->name('question.index');
         Route::get('/question/create', 'QuestionController@create')->name('question.create');
         Route::post('/question/question-input', 'QuestionController@createQuestionInput')->name('question.question-input');
@@ -166,7 +166,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/question/samprotik-question/create', 'SamprotikQuestionController@create')->name('samprotik.create');
         Route::post('/question/samprotik-question/store', 'SamprotikQuestionController@store')->name('samprotik.store');
         Route::get('/question/samprotik-question/input', 'SamprotikQuestionController@input')->name('samprotik.input');
-        Route::get('/question/samprotik-with-or-without-option/{val}', 'SamprotikQuestionController@optionFilter')->name('samprotik.option-filter');
+        Route::get('/question/samprotik-with-option', 'SamprotikQuestionController@withOption')->name('samprotik.with-option');
+        Route::post('/question/samprotik-filter-by-date', 'SamprotikQuestionController@dateFilter')->name('samprotik.date-filter');
 
 
         ############## Written Question ###############

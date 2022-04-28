@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use Carbon\Carbon;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\SamprotikQuestion;
@@ -12,34 +13,40 @@ class SamprotikQuestionController extends Controller
 {
     public function index(Request $request)
     {
-        if ($request->has('filter')) {
-            if ($request->filter == 0) {
-                $questions = SamprotikQuestion::where('options', null)->paginate(10);
-
-                $view = view('admin.samprotik.all_samprotik', compact('questions'))->render();
-                return response()->json([
-                    'html' => $view
-                ]);
-            } else {
-
-                $questions = SamprotikQuestion::where('options', '!=', null)->paginate(10);
-                $view = view('admin.samprotik.all_samprotik', compact('questions'))->render();
-                return response()->json([
-                    'html' => $view
-                ]);
-            }
-        } else {
-            $questions = SamprotikQuestion::paginate(10);
-
-            if ($request->ajax()) {
-                //dd('here');
-                $view = view('admin.samprotik.all_samprotik', compact('questions'))->render();
-                return response()->json(['html' => $view]);
-            }
-            return view('admin.samprotik.index', compact('questions'));
+        $questions = SamprotikQuestion::where('options', null)->orWhere('answer', '!=', null)->paginate(10);
+        if ($request->ajax()) {
+            //dd('here');
+            $view = view('admin.samprotik.samprotik', compact('questions'))->render();
+            return response()->json(['html' => $view]);
         }
+        return view('admin.samprotik.index', compact('questions'));
     }
 
+    public function withOption(Request $request)
+    {
+        $questions = SamprotikQuestion::where('options', '!=', null)->paginate(10);
+        if ($request->ajax()) {
+            //dd('here');
+            $view = view('admin.samprotik.samprotik', compact('questions'))->render();
+            return response()->json(['html' => $view]);
+        }
+        return view('admin.samprotik.with_option', compact('questions'));
+    }
+
+    public function dateFilter(Request $request)
+    {
+        //dd($request->all());
+        $to = date('Y-m-d H:i:s', strtotime($request->start_date));
+        $form = date('Y-m-d H:i:s', strtotime($request->end_date));
+        $questions = SamprotikQuestion::whereBetween('created_at', [$to, $form])->get();
+        //dd($questions);
+        if ($request->ajax()) {
+            //dd('here');
+            $view = view('admin.samprotik.samprotik', compact('questions'))->render();
+            return response()->json(['html' => $view]);
+        }
+        return view('admin.samprotik.byDate', compact('questions'));
+    }
 
 
     public function input()

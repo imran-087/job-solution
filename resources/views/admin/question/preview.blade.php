@@ -172,7 +172,6 @@
                             @endif 
                         </div>
                         @else
-                      
                         <div class="row"  style="font-size: 16px">
                             @if($question->option_1 != '' )
                             <div class="col-md-6 reading">

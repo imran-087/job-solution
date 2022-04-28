@@ -1,5 +1,5 @@
 @extends('admin.layout.app')
-@section('title', 'Question')
+@section('title', 'MCQ-Question')
 
 @section('content')
 
@@ -31,7 +31,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Question Management</li>
+                    <li class="breadcrumb-item text-muted">Written Question</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -39,7 +39,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Create Question</li>
+                    <li class="breadcrumb-item text-muted">Create</li>
                     <!--end::Item-->
 
                 </ul>
@@ -48,6 +48,7 @@
             <!--end::Page title-->
             <!--begin::Actions-->
             <div class="d-flex align-items-center py-1">
+                
                 <!--begin::Button-->
                 <a href="{{ url()->previous() }}" class="btn btn-sm btn-primary">Back</a>
                 <!--end::Button-->
@@ -64,69 +65,49 @@
         <div id="kt_content_container" class="container-xxl">
             <!--begin::Card-->
             <div class="card">
-                
                 <!--begin::Card body-->
-                <div class="card-body pt-4  " style="padding-bottom: 0px !important">
+                <div class="card-body pt-4 " style="padding-bottom: 0px !important">
                     <!--begin:Form-->
-                    <form id="kk_modal_new_passage_form" class="form" method="POST" action="{{ route('admin.question.question-input') }}" enctype="multipart/form-data">
+                    <form id="kk_modal_new_samprotik_form" class="form"  >
                         <div class="messages"></div>
                         {{-- csrf token  --}}
                         @csrf
                        
                         <!--begin::Input group-->
-                        <div class="row g-9 ">
+                        <div class="row g-9 pb-4">
                             <!--begin::Col-->
-                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 fv-row">
-                                <!--begin::Label-->
-                                {{-- <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="required">Number of Question</span>
-                                </label> --}}
-                                <!--end::Label-->
-                                <input type="text" class="form-control form-control-solid" placeholder="Number of Question"
-                                    name="question" />
-                                @error('question')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <!--end::Col-->
-                            <!--begin::Col-->
-                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 fv-row">
-                                <!--begin::Label-->
-                                {{-- <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="required">Number of Option</span>
-                                </label> --}}
-                                <!--end::Label-->
-                                <input type="text" class="form-control form-control-solid" placeholder="Number of Option [1 - 5]"
-                                    name="option" />
-                                @error('option')
-                                    <div class="text-danger">{{ $message }}</div>
-                                @enderror
-                            </div>
-                            <!--end::Col-->
-                            <!--begin::Col-->
-                            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-6 col-xs-6 fv-row">
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 fv-row offset-2">
                                 {{-- <label class="required fs-6 fw-bold mb-2">Question Type</label> --}}
                                 <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                    data-placeholder="Select question type" name="type">
-                                    
-                                    <option value="mcq" selected>MCQ Question</option>
-                                    <option value="written">Written Question</option>
-                                    <option value="image">Image Question</option>
-                                    <option value="samprotik">Samprotik Question</option>
+                                    data-placeholder="" name="type" id="type">
+                                    <option value="mcq" selected>MCQ</option>
+                                    <option value="image">Image MCQ</option>
+                                    <option value="passage">Passage MCQ</option>
                                 </select>
-                                @error('type')
-                                <div class="text-danger">{{ $message }}</div>
-                                @enderror
+                               
                             </div>
-                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-6 col-xs-6 fv-row">
-                                <!--begin::Actions-->
-                                <label class="fs-6 fw-bold mb-2"></label>
-                                <button type="submit"  class="btn btn-primary">
-                                    <span class="indicator-label">Submit</span>
-                                </button>
-                                <!--end::Actions-->
+                            <!--end:Col-->
+                            <!--begin::Col-->
+                            <div class="col-xl-2 col-lg-2 col-md-2 col-sm-6 col-xs-6 fv-row ">
+                                {{-- <label class="required fs-6 fw-bold mb-2">Question Type</label> --}}
+                                <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                    data-placeholder="" name="option" id="option">
+                                    <option value="4" selected>4</option>
+                                    <option value="3">3</option>
+                                    <option value="5">5</option>
+                                </select>
+                               
+                            </div>
+                            <!--end:Col-->
+                            
+                            <!--begin::Col-->
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 fv-row">
+                                
+                                <input type="text" class="form-control form-control-solid" placeholder="Number of Question"
+                                    name="number" id="number" />
                             </div>
                             <!--end::Col-->
+                            
                         </div>
                         <!--end::Input group-->
                     </form>
@@ -136,46 +117,130 @@
                 <!--end::Card body-->
             </div>
             <!--end::Card-->
-             <!--begin::Card-->
-            <div class="card mt-7">
-                <!--begin::Card header-->
-                <div class="card-header border-0 pt-6">
-                    <!--begin::Card title-->
-                    <div class="card-title">
 
-                    </div>
-                    <!--begin::Card title-->
-
-                </div>
-                <!--end::Card header-->
+            <!--begin::Card-->
+            <div class="card" style="margin-top:20px">
                 <!--begin::Card body-->
-                <div class="card-body pt-0">
+                <div class="card-body pt-4 " style="padding-bottom: 0px !important">
                     <!--begin:Form-->
-                    <form id="kk_modal_new_passage_form" class="form" method="POST"
-                        action="{{ route('admin.question.preview-store') }}" enctype="multipart/form-data">
+                    <form id="kk_modal_new_samprotik_form" class="form"  method="POST" action="{{ route('admin.question.store') }}" enctype="multipart/form-data">
                         <div class="messages"></div>
                         {{-- csrf token  --}}
                         @csrf
-
-                        @include('admin.question.form-header')
-
-                        <!--begin::Include-->
-                        @include('admin.question.mcq_layout')
-                        <!--end::Include-->
-                       
-                        <!--begin::Actions-->
-                        <div class="text-center d-flex justify-content-end" >
-                            <button type="submit" class="btn btn-primary" style="padding: 10px 70px">
-                                <span class="indicator-label">Submit</span>
-                            </button>
+                        <!--begin::Heading-->
+                        <div class="mb-13 text-center">
+                            <!--begin::Title-->
+                            <h1 class="mb-3 mt-3">MCQ Question Input</h1>
+                            <!--end::Title-->
+                            <!--begin::Description-->
+                            <div class="text-muted fw-bold fs-5">Fill up the form and submit
+                            </div>
+                            <!--end::Description-->
                         </div>
-                        <!--end::Actions-->
+                        <!--end::Heading-->
+                        <!--begin::Input group-->
+                        <div class="row g-9 mb-8">
+                            <!--begin::Col-->
+                            <div class="col-md-3 fv-row">
+                                <label class="required fs-6 fw-bold mb-2">Select Main Category</label>
+                                <select class="form-select form-select-solid @error('main_category') is-invalid @enderror" data-control="select2"
+                                    data-hide-search="true" data-placeholder="Select main category" name="main_category"
+                                    id="main_category">
+                                    <option value="">Choose ...</option>
+                                    
+                                    @foreach ($main_categories as $main_category)
+                                    <option value="{{ $main_category->id }}">{{ $main_category->name }}</option>
+                                    @endforeach
+
+                                </select>
+                                @error('main_category')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col-md-3 fv-row">
+                                <label class="required fs-6 fw-bold mb-2">Select Category</label>
+                                <select class="form-select form-select-solid " data-control="select2"
+                                    data-hide-search="true" data-placeholder="Select category" name="category"
+                                    id="category">
+
+
+                                </select>
+                                
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col-md-3 fv-row">
+                                <label class="required fs-6 fw-bold mb-2">Select Sub Category</label>
+                                <select class="form-select form-select-solid @error('sub_category') is-invalid @enderror" data-control="select2"
+                                    data-hide-search="true" data-placeholder="Select sub category" name="sub_category"
+                                    id="sub_category">
+
+
+                                </select>
+                                @error('sub_category')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col-md-3 fv-row">
+                                <label class="required fs-6 fw-bold mb-2">Select Subject</label>
+                                <select class="form-select form-select-solid @error('subject') is-invalid @enderror" data-control="select2"
+                                    data-hide-search="true" data-placeholder="Select subject" name="subject"
+                                    id="subject">
+
+
+                                </select>
+                                @error('subject')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
+                        <!--begin::Input group-->
+                        <div class="row g-9 mb-8">
+                            <!--begin::Col-->
+                            <div class="col-md-2 fv-row">
+                                <label class="required fs-6 fw-bold mb-2">Select Year</label>
+                                <select class="form-select form-select-solid @error('year') is-invalid @enderror" data-control="select2"
+                                    data-hide-search="true" data-placeholder="Select year" name="year"
+                                    id="year">
+                                    <option value="">Choose ...</option>
+                                    @foreach ($years as $year)
+                                    <option value="{{ $year->id }}">{{ $year->year }}</option>
+                                    @endforeach
+
+                                </select>
+                                @error('year')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <!--end::Col-->
+                        </div>
+                        <!--end::Input group-->
+
+                        <!--start::written question input--> 
+                        <div id="input"></div>     
+                        <!--end::written question input--> 
                     </form>
                     <!--end:Form-->
                 </div>
                 <!--end::Card body-->
             </div>
-            <!--end::Card-->
+            <!--end::Card--> 
+
         </div>
         <!--end::Container-->
     </div>
@@ -185,3 +250,37 @@
 
 @endsection
 
+@push('script')
+<script type="text/javascript">
+    $(document).ready(function(){
+        $('#kk_modal_new_samprotik_form').on( "keypress", function(event) {
+            if (event.which == 13 && !event.shiftKey) {
+                event.preventDefault();
+                //console.log('here')
+                var number = $('#number').val();
+                var type =  $("#type").find(':selected').val();
+                var option =  $("#option").find(':selected').val();
+                
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('admin/question/question-input')}}",
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    data: {
+                        number : number,
+                        type : type,
+                        option : option,
+                    },
+                    //If result found, this funtion will be called.
+                    success: function(data) {
+                        $('#input').html(data.html)
+                    }
+                });
+               
+            }
+        });
+    })
+    
+
+    
+</script>
+@endpush

@@ -95,15 +95,14 @@
                                     <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true" style="">
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="{{ route('admin.samprotik.with-option',) }}" class="menu-link px-3">With option</a>
+                                            <a href="{{ route('admin.samprotik.with-option') }}" class="menu-link px-3">With option</a>
                                         </div>
                                         <!--end::Menu item-->
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                            <a href="{{ route('admin.samprotik.index', ) }}" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Without Option</a>
+                                            <a href="{{ route('admin.samprotik.index') }}" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Without Option</a>
                                         </div>
                                         <!--end::Menu item-->
-                                        
                                         
                                     </div>
                                     <!--end::Menu-->
@@ -112,6 +111,7 @@
                                     
                                 </div>
                                 <!--end:Col-->
+                                
                                 <!--begin::Col-->
                                 <div class="col-xl-8 col-lg-8 col-md-8 col-sm-6 col-xs-6 fv-row">
                                     <form id="kk_modal_new_samprotik_form" class="form-inline"  method="POST" action="{{ route('admin.samprotik.date-filter') }}">
@@ -128,13 +128,14 @@
                                                 name="end_date" id="date" />
                                             </div>
                                             <div class="col-md-2">
-                                                <button type="submit" class="btn btn-sm btn-info" ><i class="fas fa-arrow-alt-circle-right"></i></button>
+                                                <button type="submit" class="btn" ><i class="fas fa-arrow-alt-circle-right"></i></button>
                                             </div>
                                         </div>
                                     
                                     </form>
                                 </div>
-                                <!--end:Col-->
+                                <!--end:Col-->  
+                               
                                 
                             </div>
                             <!--end::Input group-->
@@ -199,21 +200,21 @@
 	}
 
     //filter by with or without option
-    $(document).ready(function(){
-        $('#option').change(function(){ 
-            var value = $(this).val();
-            //console.log(value)
-            $.ajax({
-                type:"GET",
-                url: "{{ url('admin/question/samprotik-question?filter=')}}"+value,
-                dataType: 'json',
-                success:function(data){
-                    $("#samprotik_ques").html(data.html);
-                }
-            });
-        });
+    // $(document).ready(function(){
+    //     $('#option').change(function(){ 
+    //         var value = $(this).val();
+    //         //console.log(value)
+    //         $.ajax({
+    //             type:"GET",
+    //             url: "{{ url('admin/question/samprotik-question?filter=')}}"+value,
+    //             dataType: 'json',
+    //             success:function(data){
+    //                 $("#samprotik_ques").html(data.html);
+    //             }
+    //         });
+    //     });
        
-    })
+    // })
 </script>
 @endpush
 

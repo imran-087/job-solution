@@ -71,11 +71,10 @@
                             <h3 style="color:#D94540">All সাম্প্রতিক Question</h3>
                         </div>
                         <div class="col-md-6">
-                            
                             <!--begin::Input group-->
                             <div class="row g-9 pb-4">
                                 <!--begin::Col-->
-                                <div class="col-xl-4 col-lg-4 col-md-4  col-sm-6 col-xs-6 fv-row ">
+                                <div class="col-xl-4 col-lg-4 col-md-4  col-sm-6 col-xs-6 fv-row">
                                     {{-- <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                         data-placeholder="Select" name="option" id="option">
                                         <option value="0" selected>Without Option</option>
@@ -113,7 +112,9 @@
                                 </div>
                                 <!--end:Col-->
                                 <!--begin::Col-->
-                                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-6 col-xs-6 fv-row">
+                                
+                                <!--begin::Col-->
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 fv-row">
                                     <form id="kk_modal_new_samprotik_form" class="form-inline"  method="POST" action="{{ route('admin.samprotik.date-filter') }}">
                                         <div class="messages"></div>
                                         {{-- csrf token  --}}
@@ -128,18 +129,17 @@
                                                 name="end_date" id="date" />
                                             </div>
                                             <div class="col-md-2">
-                                                <button type="submit" class="btn btn-sm btn-info" ><i class="fas fa-arrow-alt-circle-right"></i></button>
+                                                <button type="submit" class="btn" ><i class="fas fa-arrow-alt-circle-right"></i></button>
                                             </div>
                                         </div>
                                     
                                     </form>
                                 </div>
                                 <!--end:Col-->
+                               
                                 
                             </div>
                             <!--end::Input group-->
-                                
-                            
                         </div>
                     </div>
                     
@@ -147,12 +147,12 @@
                 <!--end::Card body-->
             </div>
             <!--end::Card--> 
-            <!--begin::admin.samprotik question-->    
+            <!--begin::samprotik question-->    
             <div class="row" id="samprotik_ques">
                 @include('admin.samprotik.samprotik')
             </div>
             <!--end::samprotik question-->
-
+            
             <div class="ajax-load text-center" style="display:none">
                 <p><img src="{{ asset('assets/media/gif/loader.gif') }}"></p>
             </div>
@@ -198,22 +198,6 @@
 	        });
 	}
 
-    //filter by with or without option
-    $(document).ready(function(){
-        $('#option').change(function(){ 
-            var value = $(this).val();
-            //console.log(value)
-            $.ajax({
-                type:"GET",
-                url: "{{ url('admin/question/samprotik-question?filter=')}}"+value,
-                dataType: 'json',
-                success:function(data){
-                    $("#samprotik_ques").html(data.html);
-                }
-            });
-        });
-       
-    })
 </script>
 @endpush
 
