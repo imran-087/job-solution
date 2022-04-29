@@ -19,9 +19,10 @@ class CreateWrittenQuestionsTable extends Migration
             $table->integer('sub_category_id');
             $table->integer('subject_id');
             $table->integer('year_id')->nullable();
-            $table->json('question');
+            $table->text('question_no');
+            $table->longText('question');
+            $table->longText('answer');
             $table->integer('mark');
-            $table->enum('hard_level', ['easy', 'medium', 'hard'])->default('easy');
             $table->text('slug')->nullable();
             $table->integer('created_user_id');
             $table->integer('updated_user_id')->nullable();

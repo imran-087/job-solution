@@ -59,22 +59,20 @@
     <!--end::Toolbar-->
 
     <!--begin::Post-->
-    <div class="post d-flex flex-column-fluid col-12  id="kt_post">
+    <div class="post d-flex flex-column-fluid col-12"  id="kt_post">
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
            <!--begin::Card-->
             <div class="card mb-5">
-                <!--begin::Card body-->
-                @include('admin.samprotik.menu-bar')
-                <!--end::Card body-->
+                
             </div>
             <!--end::Card--> 
-            <!--begin::samprotik question-->    
-            <div class="row" id="samprotik_ques">
-                @include('admin.samprotik.samprotik')
+            <!--begin::admin.samprotik question-->    
+            <div class="row" id="all_question">
+                @include('admin.question.all-question')
             </div>
             <!--end::samprotik question-->
-            
+
             <div class="ajax-load text-center" style="display:none">
                 <p><img src="{{ asset('assets/media/gif/loader.gif') }}"></p>
             </div>
@@ -112,7 +110,7 @@
 	                return;
 	            }
 	            $('.ajax-load').hide();
-	            $("#samprotik_ques").append(data.html);
+	            $("#all_question").append(data.html);
 	        })
 	        .fail(function(jqXHR, ajaxOptions, thrownError)
 	        {
@@ -120,6 +118,8 @@
 	        });
 	}
 
+    
 </script>
 @endpush
+
 

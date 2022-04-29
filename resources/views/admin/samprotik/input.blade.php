@@ -59,7 +59,7 @@
     <!--end::Toolbar-->
 
     <!--begin::Post-->
-    <div class="post d-flex flex-column-fluid col-12  id="kt_post">
+    <div class="post d-flex flex-column-fluid col-12"  id="kt_post">
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
             <!--begin::Card-->

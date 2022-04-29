@@ -17,6 +17,14 @@ class CreateSubCategoriesTable extends Migration
             $table->id();
             $table->foreignId('category_id')->constrained('categories');
             $table->string('name');
+            $table->string('question_type')->nullable();
+            $table->string('subject_code_1')->nullable();
+            $table->string('subject_code_2')->nullable();
+            $table->string('total_marks')->nullable();
+            $table->string('exam_date')->nullable();
+            $table->string('exam_duration')->nullable();
+            $table->string('post')->nullable();
+            $table->string('negative_marks')->nullable();
             $table->string('title')->nullable();
             $table->string('slug')->unique();
             $table->integer('year_id')->nullable();

@@ -97,16 +97,19 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/passage/get/{id}', 'PassageController@getPassage')->name('passage.get');
         Route::get('/passage/delete/{id}', 'PassageController@deletePassage')->name('passage.delete');
 
-        ############ MCQ Question Route #############
-        Route::get('/question/question-index', 'QuestionController@index')->name('question.index');
-        Route::get('/question/create', 'QuestionController@create')->name('question.create');
-        Route::post('/question/question-input', 'QuestionController@createQuestionInput')->name('question.question-input');
-        Route::get('/question/edit-question/{id}', 'QuestionController@editQuestion')->name('question.question-edit');
-
+        ######### Preview Question #########
         Route::post('/question/preview-question', 'QuestionController@preview')->name('question.preview-store');
         Route::get('/question/preview-question/show', 'QuestionController@previewQuestion')->name('question.preview');
         Route::get('/question/edit-question/modal/{id}', 'QuestionController@editPreviewQuestion')->name('question.preview-edit');
         Route::post('/question/edit-question/update', 'QuestionController@updatePreviewQuestion')->name('question.preview-update');
+
+
+        ############ MCQ Question Route #############
+        Route::get('/question/question-index', 'QuestionController@index')->name('question.index');
+        Route::get('/question/create', 'QuestionController@create')->name('question.create');
+        Route::post('/question/question-input', 'QuestionController@createQuestionInput')->name('question.question-input');
+        Route::get('/question/edit-question', 'QuestionController@editQuestion')->name('question.edit');
+
 
         Route::get('/question/store/{val}', 'QuestionController@storeQuestion')->name('question.store-question');
 
@@ -114,6 +117,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/question/update', 'QuestionController@update')->name('question.update');
         Route::get('/question/get/{id}', 'QuestionController@getQuestion')->name('question.get');
         Route::get('/question/delete/{id}', 'QuestionController@deleteQuestion')->name('question.delete');
+        Route::get('/question/mcQ-question/view', 'QuestionController@allQuestion')->name('question.all-question');
         //edited question
         Route::get('/question/edited-question/index', 'EditedQuestionController@index')->name('question.edited-question');
         Route::get('question/edited-question/delete/{id}', 'EditedQuestionController@delete')->name('question.edited-question.delete');
@@ -167,7 +171,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/question/samprotik-question/store', 'SamprotikQuestionController@store')->name('samprotik.store');
         Route::get('/question/samprotik-question/input', 'SamprotikQuestionController@input')->name('samprotik.input');
         Route::get('/question/samprotik-with-option', 'SamprotikQuestionController@withOption')->name('samprotik.with-option');
-        Route::post('/question/samprotik-filter-by-date', 'SamprotikQuestionController@dateFilter')->name('samprotik.date-filter');
+        Route::get('/question/samprotik-filter-by-date', 'SamprotikQuestionController@dateFilter')->name('samprotik.date-filter');
+        Route::get('/question/samprotik-question/edit', 'SamprotikQuestionController@edit')->name('samprotik.edit');
+        Route::post('/question/samprotik-question/update', 'SamprotikQuestionController@update')->name('samprotik.update');
 
 
         ############## Written Question ###############

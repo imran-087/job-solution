@@ -36,9 +36,9 @@ class SamprotikQuestionController extends Controller
     public function dateFilter(Request $request)
     {
         //dd($request->all());
-        $to = date('Y-m-d H:i:s', strtotime($request->start_date));
-        $form = date('Y-m-d H:i:s', strtotime($request->end_date));
-        $questions = SamprotikQuestion::whereBetween('created_at', [$to, $form])->get();
+        $from = date('Y-m-d H:i:s', strtotime($request->from));
+        $to = date('Y-m-d H:i:s', strtotime($request->to));
+        $questions = SamprotikQuestion::whereBetween('created_at', [$from, $to])->get();
         //dd($questions);
         if ($request->ajax()) {
             //dd('here');
@@ -117,5 +117,33 @@ class SamprotikQuestionController extends Controller
             }
         }
         return redirect()->back()->with('success', 'Question Created Successfully');
+    }
+
+    public function edit(Request $request)
+    {
+        $question = SamprotikQuestion::find($request->id);
+        return view('admin.samprotik.edit', compact('question'));
+    }
+
+    public function update(Request $request)
+    {
+        //dd($request->all());
+        $question = SamprotikQuestion::find($request->id);
+        $question->question = $request->question;
+        $question->answer = $request->answer;
+        $question->category = $request->category;
+        $question->previous_date = $request->date;
+        $data = [
+            'option_1' => $request->option_1,
+            'option_2' => $request->option_2,
+            'option_3' => $request->option_3,
+            'option_4' => $request->option_4,
+            'answer' => $request->answer_option,
+        ];
+        //dd($data);
+        $question->options = ($data);
+        if ($question->save()) {
+            return redirect()->route('admin.samprotik.index')->with('success', 'Updted Successfully');
+        }
     }
 }

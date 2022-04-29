@@ -81,7 +81,7 @@ class QuestionController extends Controller
                 })
                 ->addColumn('action', function ($row) {
                     $btn = '<div class="d-flex justify-content-start flex-shrink-0">
-                        <a href="edit-question/' . $row->id . '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                        <a href="edit-question?id=' . $row->id . '&ques=' . $row->slug . '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                             <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                             <span class="svg-icon svg-icon-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -247,16 +247,15 @@ class QuestionController extends Controller
 
 
     //edit question
-    public function editQuestion($id)
+    public function editQuestion(Request $request)
     {
-
+        $id = $request->id;
         $years = Year::all();
-        $passages = Passage::all();
         $question = Question::find($id);
         //dd($question->toArray());
         $question_option = QuestionOption::where('question_id', $id)->first();
         $sub_category = SubCategory::where('id', $question->sub_category_id)->first();
-
+        $main_categories = MainCategory::all();
         $subjects = Subject::where('sub_category_id', $question->sub_category_id)->get();
         if ($subjects->count() == 0) {
 
@@ -264,7 +263,7 @@ class QuestionController extends Controller
         }
         //dd($subjects);
         //dd($question_options->toArray());
-        return view('admin.question.edit_question', compact(['subjects', 'question', 'years', 'passages', 'question_option', 'sub_category']));
+        return view('admin.question.edit_question', compact(['subjects', 'question', 'years', 'main_categories',  'question_option', 'sub_category']));
     }
 
     //update question
@@ -280,9 +279,6 @@ class QuestionController extends Controller
             'hard_level' => $request->hard_level,
             'mark' => $request->mark,
             'question' => $request->question,
-            'future_editable' => $request->future_editable,
-            'lock_status' => $request->lock_status,
-            'status' => $request->status,
             'updated_user_id' => Auth::guard('admin')->user()->id,
         ]);
 
@@ -293,7 +289,6 @@ class QuestionController extends Controller
             'option_4' => $request->option_4,
             'option_5' => $request->option_5,
             'answer' => $request->mcq_answer,
-            'written_answer' => $request->written_answer,
         ];
 
         $question_option = QuestionOption::where('question_id', $request->id)
@@ -306,7 +301,7 @@ class QuestionController extends Controller
         $question_des->description = $request->description;
         $question_des->created_user_id =  Auth::guard('admin')->user()->id;
 
-        $question_des->created_at = Carbon::now();;
+        $question_des->created_at = Carbon::now();
 
         if ($question && $question_option && $question_des->save()) {
             Session::flash('success', 'Question updated successfull');
@@ -332,5 +327,18 @@ class QuestionController extends Controller
             'success' => true,
             'message' => 'Question deleted successfully!'
         ], 200);
+    }
+
+    //all question
+    public function allQuestion(Request $request)
+    {
+
+        $questions = Question::with('question_option')->paginate(10);
+        if ($request->ajax()) {
+            //dd('here');
+            $view = view('admin.question.all-question', compact('questions'))->render();
+            return response()->json(['html' => $view]);
+        }
+        return view('admin.question.view_question', compact('questions'));
     }
 }
