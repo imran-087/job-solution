@@ -16,16 +16,17 @@ class DatabaseSeeder extends Seeder
         \App\Models\User::factory(10)->create();
         //\App\Models\Admin::factory(10)->create();
         // \App\Models\MainCategory::factory(5)->create();
-        // \App\Models\Category::factory(10)->create();
-        // \App\Models\SubCategory::factory(15)->create();
-        // \App\Models\Subject::factory(20)->create();
+        // \App\Models\Category::factory(5)->create();
+        // \App\Models\SubCategory::factory(5)->create();
+        // \App\Models\Subject::factory(5)->create();
         // \App\Models\Year::factory(10)->create();
         // \App\Models\Question::factory(200)->create();
         // \App\Models\QuestionOption::factory(200)->create();
         // \App\Models\QuestionDescription::factory(100)->create();
 
         $this->call([
-            AdminSeeder::class
+            AdminSeeder::class,
+            MainCategorySeeder::class
         ]);
     }
 }

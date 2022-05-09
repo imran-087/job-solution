@@ -10,26 +10,45 @@
             <!--begin::Input group-->
             <div class="row g-9 pb-4"> 
                 <div style="" class="mb-5"> 
-                    <!--begin::Input group-->
-                    <div class="d-flex flex-column mb-8 fv-row">
-                        <!--begin::Label-->
-                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <div class="required">Question : {{ $i+1 }} </div>
-                        </label>
-                        <!--end::Label-->
-                        <div class="input-group mb-3">
-                            <input type="text" class="form-control form-control-solid" placeholder="Enter Question" name="question[]" />
-                            <div class="input-group-append">
-                                <button class="btn btn-info addRow" type="button">Add</button>
+                    <div class="row">
+                        <div class="col-md-2">
+                            <!--begin::Input group-->
+                            <div class="d-flex flex-column mb-8 fv-row">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <div class="required">Question No. </div>
+                                </label>
+                                <!--end::Label-->
+                                <input type="text" class="form-control form-control-solid" placeholder="Enter Ques. No." name="question_no[]" /> 
                             </div>
+                            <!--end::Input group-->
                         </div>
-
-                        <!-- append dynamic input-->
-                        <div  class="newRow"></div>
-                        <!-- append dynamic input-->
-                      
+                        <div class="col-md-9">
+                            <!--begin::Input group-->
+                            <div class="d-flex flex-column mb-8 fv-row">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <div class="required">Question </div>
+                                </label>
+                                <!--end::Label-->
+                                <input type="text" class="form-control form-control-solid" placeholder="Enter Question" name="question[]" /> 
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+                        <div class="col-md-1">
+                            <!--begin::Input group-->
+                            <div class="d-flex flex-column mb-8 fv-row">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <div class="required">Marks</div>
+                                </label>
+                                <!--end::Label-->
+                                <input type="number" class="form-control form-control-solid" placeholder="5/10" name="mark[]" /> 
+                            </div>
+                            <!--end::Input group-->
+                        </div>
                     </div>
-                    <!--end::Input group-->
+                
                     <!--begin::Input group-->
                     <div class="d-flex flex-column mb-8 fv-row">
                         <!--begin::Label-->
@@ -48,8 +67,12 @@
         </div>
     </div>
     @endfor
+    <!-- append dynamic input-->
+        <div  class="newRow"></div>
+    <!-- append dynamic input-->
     <!--begin::Actions-->
-    <div class="text-center d-flex justify-content-end py-4 px-4" >
+    <div class="text-center d-flex justify-content-between py-4 px-4" >
+        <button class="btn btn-info btn-sm addRow" type="button">Add Input</button>
         <button type="submit" class="btn btn-primary" style="padding: 10px 70px">
             <span class="indicator-label">Submit</span>
         </button>

@@ -106,18 +106,21 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         ############ MCQ Question Route #############
         Route::get('/question/question-index', 'QuestionController@index')->name('question.index');
+
         Route::get('/question/create', 'QuestionController@create')->name('question.create');
         Route::post('/question/question-input', 'QuestionController@createQuestionInput')->name('question.question-input');
         Route::get('/question/edit-question', 'QuestionController@editQuestion')->name('question.edit');
-
-
-        Route::get('/question/store/{val}', 'QuestionController@storeQuestion')->name('question.store-question');
-
         Route::post('/question/store', 'QuestionController@store')->name('question.store');
         Route::post('/question/update', 'QuestionController@update')->name('question.update');
         Route::get('/question/get/{id}', 'QuestionController@getQuestion')->name('question.get');
         Route::get('/question/delete/{id}', 'QuestionController@deleteQuestion')->name('question.delete');
-        Route::get('/question/mcQ-question/view', 'QuestionController@allQuestion')->name('question.all-question');
+        Route::get('/question/mcq-question/view', 'QuestionController@allQuestion')->name('question.all-question');
+        Route::get('/question/passage-mcq-question/view', 'QuestionController@passageQuestion')->name('question.passage-question');
+
+
+        Route::get('/question/store/{val}', 'QuestionController@storeQuestion')->name('question.store-question');
+
+
         //edited question
         Route::get('/question/edited-question/index', 'EditedQuestionController@index')->name('question.edited-question');
         Route::get('question/edited-question/delete/{id}', 'EditedQuestionController@delete')->name('question.edited-question.delete');

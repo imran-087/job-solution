@@ -15,8 +15,8 @@ class CreateQuestionSubjectTable extends Migration
     {
         Schema::create('question_subject', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('question_id')->constrained('question');
-            $table->foreignId('subject_id')->constrained('subject');
+            $table->integer('question_id');
+            $table->integer('subject_id');
             $table->timestamps();
         });
     }

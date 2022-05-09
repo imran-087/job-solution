@@ -107,7 +107,7 @@
                 </a>
             </div>
 
-            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/question*') ? 'show menu-accordion' : '' }}">
+            {{-- <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/question*') ? 'show menu-accordion' : '' }}">
                 <span class="menu-link">
                     <span class="menu-icon">
                         <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
@@ -151,25 +151,11 @@
                             <span class="menu-title">Written Question</span>
                         </a>
                     </div>
-                    <div class="menu-item">
-                        <a class="menu-link {{ request()->is('admin/question/written-question*') ? 'active' : '' }}" href="{{ route('admin.question.all-question') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">View All</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link {{ request()->is('admin/question/edited-question*') ? 'active' : '' }}" href="{{ route('admin.question.edited-question') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Edited Question</span>
-                        </a>
-                    </div>
+                    
                 </div>
-            </div>
-            {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+            </div> --}}
+
+            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                 <span class="menu-link">
                     <span class="menu-icon">
                         <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm007.svg-->
@@ -191,56 +177,24 @@
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
-                            <span class="menu-title">User Profile</span>
+                            <span class="menu-title">MCQ Question</span>
                             <span class="menu-arrow"></span>
                         </span>
                         <div class="menu-sub menu-sub-accordion menu-active-bg">
                             <div class="menu-item">
-                                <a class="menu-link" href="/metronic8/demo1/../demo1/pages/user-profile/overview.html">
+                                <a class="menu-link {{ request()->is('admin/question/create-question*') ? 'active' : '' }}" href="{{ route('admin.question.create') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title">Overview</span>
+                                    <span class="menu-title">Add Question</span>
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a class="menu-link" href="/metronic8/demo1/../demo1/pages/user-profile/projects.html">
+                                <a class="menu-link {{ request()->is('admin/question/written-question*') ? 'active' : '' }}" href="{{ route('admin.question.all-question') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title">Projects</span>
-                                </a>
-                            </div>
-                            <div class="menu-item">
-                                <a class="menu-link" href="/metronic8/demo1/../demo1/pages/user-profile/campaigns.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Campaigns</span>
-                                </a>
-                            </div>
-                            <div class="menu-item">
-                                <a class="menu-link" href="/metronic8/demo1/../demo1/pages/user-profile/documents.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Documents</span>
-                                </a>
-                            </div>
-                            <div class="menu-item">
-                                <a class="menu-link" href="/metronic8/demo1/../demo1/pages/user-profile/followers.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Followers</span>
-                                </a>
-                            </div>
-                            <div class="menu-item">
-                                <a class="menu-link" href="/metronic8/demo1/../demo1/pages/user-profile/activity.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Activity</span>
+                                    <span class="menu-title">View Question</span>
                                 </a>
                             </div>
                         </div>
@@ -250,151 +204,48 @@
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
-                            <span class="menu-title">Blog</span>
+                            <span class="menu-title">Written Question</span>
                             <span class="menu-arrow"></span>
                         </span>
                         <div class="menu-sub menu-sub-accordion menu-active-bg">
                             <div class="menu-item">
-                                <a class="menu-link" href="/metronic8/demo1/../demo1/pages/blog/home.html">
+                                <a class="menu-link {{ request()->is('admin/question/written-question*') ? 'active' : '' }}" href="{{ route('admin.written.index') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title">Blog Home</span>
+                                    <span class="menu-title">Add Question</span>
                                 </a>
                             </div>
-                            <div class="menu-item">
-                                <a class="menu-link" href="/metronic8/demo1/../demo1/pages/blog/post.html">
+                           <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/question/written-question/view*') ? 'active' : '' }}" href="{{ route('admin.written.show') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title">Blog Post</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                        <span class="menu-link">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Pricing</span>
-                            <span class="menu-arrow"></span>
-                        </span>
-                        <div class="menu-sub menu-sub-accordion menu-active-bg">
-                            <div class="menu-item">
-                                <a class="menu-link" href="/metronic8/demo1/../demo1/pages/pricing/pricing-1.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Pricing 1</span>
-                                </a>
-                            </div>
-                            <div class="menu-item">
-                                <a class="menu-link" href="/metronic8/demo1/../demo1/pages/pricing/pricing-2.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Pricing 2</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                        <span class="menu-link">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Careers</span>
-                            <span class="menu-arrow"></span>
-                        </span>
-                        <div class="menu-sub menu-sub-accordion menu-active-bg">
-                            <div class="menu-item">
-                                <a class="menu-link" href="/metronic8/demo1/../demo1/pages/careers/list.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Careers List</span>
-                                </a>
-                            </div>
-                            <div class="menu-item">
-                                <a class="menu-link" href="/metronic8/demo1/../demo1/pages/careers/apply.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Careers Apply</span>
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                        <span class="menu-link">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">FAQ</span>
-                            <span class="menu-arrow"></span>
-                        </span>
-                        <div class="menu-sub menu-sub-accordion menu-active-bg">
-                            <div class="menu-item">
-                                <a class="menu-link" href="/metronic8/demo1/../demo1/pages/faq/classic.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Classic</span>
-                                </a>
-                            </div>
-                            <div class="menu-item">
-                                <a class="menu-link" href="/metronic8/demo1/../demo1/pages/faq/extended.html">
-                                    <span class="menu-bullet">
-                                        <span class="bullet bullet-dot"></span>
-                                    </span>
-                                    <span class="menu-title">Extended</span>
+                                    <span class="menu-title">View Question</span>
                                 </a>
                             </div>
                         </div>
                     </div>
                     <div class="menu-item">
-                        <a class="menu-link" href="/metronic8/demo1/../demo1/pages/about.html">
+                        <a class="menu-link {{ request()->is('admin/question/question-index*') ? 'active' : '' }}" href="{{ route('admin.question.index') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
-                            <span class="menu-title">About Us</span>
+                            <span class="menu-title">All Question</span>
                         </a>
                     </div>
+                    
                     <div class="menu-item">
-                        <a class="menu-link" href="/metronic8/demo1/../demo1/pages/contact.html">
+                        <a class="menu-link {{ request()->is('admin/question/edited-question*') ? 'active' : '' }}" href="{{ route('admin.question.edited-question') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
-                            <span class="menu-title">Contact Us</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link" href="/metronic8/demo1/../demo1/pages/team.html">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Our Team</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link" href="/metronic8/demo1/../demo1/pages/licenses.html">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Licenses</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link" href="/metronic8/demo1/../demo1/pages/sitemap.html">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Sitemap</span>
+                            <span class="menu-title">Edited Question</span>
                         </a>
                     </div>
                 </div>
-            </div> --}}
+            </div>
+
             <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/samprotik-question*') ? 'show menu-accordion' : '' }}">
                 <span class="menu-link">
                     <span class="menu-icon">

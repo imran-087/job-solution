@@ -234,17 +234,73 @@
 
     // add row
     $(document).on('click', '.addRow', function () {
-        
-        // var sub_question = 0;
         var html = '';
-        html += '<div class="input-group mb-3">'
-        html += '<input type="text" name="question[][]" class="form-control form-control-solid inputFormRow" placeholder="Enter Sub Question" autocomplete="off">';
-        html += '<div class="input-group-append">';
-        html += '<button class="btn btn-danger removeRow" type="button">Remove</button>';
-        html += '</div>';
-        html += '</div>';
-        // $(this).closest('.newRow').append(html);
+        html += ' <div class="card" style="margin-top:20px !important; border:7px solid #F2F5F7; border-radius:5px; padding:20px">'
+        html += '<div class="card-body pt-4 " style="padding-bottom: 0px !important">'
+           
+        html += '    <div class="row g-9 pb-4">'
+        html += '       <div style="" class="mb-5"> '
+        html += ' <div class="row">'
+        html += '  <div class="col-md-2">'
+                           
+        html +=  '<div class="d-flex flex-column mb-8 fv-row">'
+                               
+        html += '       <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
+        html += '    <div class="required">Question No</div>'
+        html += '      </label>'
+                                
+        html += '       <input type="text" class="form-control form-control-solid" placeholder="Enter Ques. No." name="question_no[]" />'
+        html += '              </div>'
+                    
+        html += '         </div>'
+        html += '        <div class="col-md-9">'
+                    
+        html += '           <div class="d-flex flex-column mb-8 fv-row">'
+                        
+        html += '               <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
+        html += '                    <div class="required">Question </div>'
+        html += '               </label>'
+                        
+        html += '               <input type="text" class="form-control form-control-solid" placeholder="Enter Question" name="question[]" /> '
+        html += '           </div>'
+                    
+        html += '        </div>'
+        html += '       <div class="col-md-1">'
+                         
+        html += '            <div class="d-flex flex-column mb-8 fv-row">'
+                        
+        html += '                <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
+        html += '                    <div class="required">Marks</div>'
+        html += '                </label>'
+        html += '               <input type="number" class="form-control form-control-solid" placeholder="5/10" name="mark[]" />'
+        html += '           </div>'
+        html += '       </div>'
+        html += '   </div>'
+        html += '    <div class="d-flex flex-column mb-8 fv-row">'
+                
+        html += '        <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
+        html += '             <span class="required fw-bolder">answer</span>'
+        html += '         </label>'
+                
+        html += '        <textarea type="text" class="form-control form-control-solid h-100px"  placeholder="Enter answer" name="answer[]" > </textarea>'
+        html += '        <div class="help-block with-errors answer-error"></div>'
+        html += '     </div>'
+        html += '   </div>'
+        html += '   </div>'
+        html += '   </div>'
+        html += '   </div>'
         $('.newRow').append(html);
+
+
+        // var html = '';
+        // html += '<div class="input-group mb-3">'
+        // html += '<input type="text" name="question[][]" class="form-control form-control-solid inputFormRow" placeholder="Enter Sub Question" autocomplete="off">';
+        // html += '<div class="input-group-append">';
+        // html += '<button class="btn btn-danger removeRow" type="button">Remove</button>';
+        // html += '</div>';
+        // html += '</div>';
+        // $(this).closest('.newRow').append(html);
+       // $('.newRow').append(html);
     });
 
     // remove row

@@ -132,7 +132,7 @@ class QuestionController extends Controller
         ]);
     }
 
-    //preview question store
+    //Question store
     public function store(Request $request)
     {
         //dd($request->all());
@@ -295,15 +295,19 @@ class QuestionController extends Controller
             ->update($question_option_data);
 
         //save question description
-        $question_des = new QuestionDescription();
+        if ($request->description != null) {
+            $question_des = new QuestionDescription();
 
-        $question_des->question_id = $request->id;
-        $question_des->description = $request->description;
-        $question_des->created_user_id =  Auth::guard('admin')->user()->id;
+            $question_des->question_id = $request->id;
+            $question_des->description = $request->description;
+            $question_des->created_user_id =  Auth::guard('admin')->user()->id;
 
-        $question_des->created_at = Carbon::now();
+            $question_des->created_at = Carbon::now();
+            $question_des->save();
+        }
 
-        if ($question && $question_option && $question_des->save()) {
+
+        if ($question && $question_option) {
             Session::flash('success', 'Question updated successfull');
             return redirect()->route('admin.question.index');
         } else {
@@ -332,13 +336,20 @@ class QuestionController extends Controller
     //all question
     public function allQuestion(Request $request)
     {
-
-        $questions = Question::with('question_option')->paginate(10);
+        $questions = Question::with('question_option')->where('question_type', 'mcq')->paginate(10);
         if ($request->ajax()) {
             //dd('here');
             $view = view('admin.question.all-question', compact('questions'))->render();
             return response()->json(['html' => $view]);
         }
         return view('admin.question.view_question', compact('questions'));
+    }
+
+    //passage question
+    public function passageQuestion()
+    {
+        $passages = Passage::with('questions')->get();
+        //dd($passages);
+        return view('admin.question.passage_question', compact('passages'));
     }
 }
