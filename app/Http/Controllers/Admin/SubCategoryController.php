@@ -103,6 +103,10 @@ class SubCategoryController extends Controller
             'name' => ['required'],
             'status' => ['required'],
             'category' => ['required'],
+            'duration' => ['numeric'],
+            'code_1' => ['numeric'],
+            'code_2' => ['numeric'],
+            'mark' => ['numeric'],
             'year' => [$request->main_category == 3 ? 'nullable' : 'required'],
 
         ]);
@@ -115,7 +119,7 @@ class SubCategoryController extends Controller
         } else {
 
             if ($request->main_category == 3) {
-                $year = 'NULL';
+                $year = null;
             } else {
                 $year = $request->year;
             }
@@ -127,6 +131,13 @@ class SubCategoryController extends Controller
                 $sub_category->title = $request->title;
                 $sub_category->status =  $request->status;
                 $sub_category->category_id =  $request->category;
+                $sub_category->question_type =  $request->type;
+                $sub_category->subject_code_1 =  $request->code_1;
+                $sub_category->subject_code_2 =  $request->code_2;
+                $sub_category->total_marks =  $request->mark;
+                $sub_category->exam_date =  $request->date;
+                $sub_category->exam_duration =  $request->duration;
+                $sub_category->job_position =  $request->job_position;
                 $sub_category->year_id = $year;
                 $sub_category->updated_user_id =  Auth::guard('admin')->user()->id;
 
@@ -159,6 +170,13 @@ class SubCategoryController extends Controller
                 $sub_category->title = $request->title;
                 $sub_category->category_id =  $request->category;
                 $sub_category->year_id =  $year;
+                $sub_category->question_type =  $request->type;
+                $sub_category->subject_code_1 =  $request->code_1;
+                $sub_category->subject_code_2 =  $request->code_2;
+                $sub_category->total_marks =  $request->mark;
+                $sub_category->exam_date =  $request->date;
+                $sub_category->exam_duration =  $request->duration;
+                $sub_category->job_position =  $request->job_position;
                 // $sub_category->slug =  Str::slug($request->name);
                 $sub_category->created_user_id =  Auth::guard('admin')->user()->id;
                 $sub_category->status =  $request->status;

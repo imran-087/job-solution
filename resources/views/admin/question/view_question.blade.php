@@ -49,7 +49,9 @@
             <!--begin::Actions-->
             <div class="d-flex align-items-center py-1">
                 <!--begin::Button-->
-                <a href="{{ url()->previous() }}" class="btn btn-sm btn-primary">Back</a>
+                <a href="{{ route('admin.question.all-question') }}" class="btn btn-sm btn-light btn-active-primary me-2">MCQ</a>
+                <a href="{{ route('admin.question.image-question') }}" class="btn btn-sm btn-light btn-active-primary me-2">IMAGE MCQ</a>
+                <a href="{{ route('admin.question.passage-question') }}" class="btn btn-sm btn-light btn-active-primary">PASSAGE MCQ</a>
                 <!--end::Button-->
             </div>
             <!--end::Actions-->
@@ -62,11 +64,7 @@
     <div class="post d-flex flex-column-fluid col-12"  id="kt_post">
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
-           <!--begin::Card-->
-            <div class="card mb-5">
-                
-            </div>
-            <!--end::Card--> 
+           
             <!--begin::admin.samprotik question-->    
             <div class="row" id="all_question">
                 @include('admin.question.all-question')

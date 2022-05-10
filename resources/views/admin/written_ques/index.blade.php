@@ -9,9 +9,7 @@
         <!--begin::Container-->
         <div id="kt_toolbar_container" class="container-fluid d-flex flex-stack">
             <!--begin::Page title-->
-            <div data-kt-swapper="true" data-kt-swapper-mode="prepend"
-                data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
-                class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
+            <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                 <!--begin::Title-->
                 <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Question</h1>
                 <!--end::Title-->
@@ -48,12 +46,7 @@
             <!--end::Page title-->
             <!--begin::Actions-->
             <div class="d-flex align-items-center py-1">
-                <!--begin:Form-->
-                <form id="kk_modal_new_samprotik_form" class="form me-4" >
-                    <input type="text" class="form-control form-control-solid" placeholder="Number of Question"
-                        name="number" id="number" />
-                </form>
-                <!--end:Form-->
+
                 <!--begin::Button-->
                 <a href="{{ url()->previous() }}" class="btn btn-sm btn-primary">Back</a>
                 <!--end::Button-->
@@ -65,17 +58,16 @@
     <!--end::Toolbar-->
 
     <!--begin::Post-->
-    <div class="post d-flex flex-column-fluid col-12  id="kt_post">
+    <div class="post d-flex flex-column-fluid col-12  id=" kt_post">
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
-
             <!--begin::Card-->
             <div class="card" style="margin-top:20px">
                 <!--begin::Card body-->
                 <div class="card-body pt-4 " style="padding-bottom: 0px !important">
                     <!--begin:Form-->
                     <form id="kk_modal_new_samprotik_form" class="form"  method="POST" action="{{ route('admin.written.store') }}">
-                        <div class="messages"></div>
+                        <div class="messages"></div> 
                         {{-- csrf token  --}}
                         @csrf
                         <!--begin::Heading-->
@@ -94,64 +86,56 @@
                             <!--begin::Col-->
                             <div class="col-md-3 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Main Category</label>
-                                <select class="form-select form-select-solid @error('main_category') is-invalid @enderror" data-control="select2"
-                                    data-hide-search="true" data-placeholder="Select main category" name="main_category"
-                                    id="main_category">
+                                <select class="form-select form-select-solid @error('main_category') is-invalid @enderror" data-control="select2" data-hide-search="true" data-placeholder="Select main category" name="main_category" id="main_category">
                                     <option value="">Choose ...</option>
-                                    
+
                                     @foreach ($main_categories as $main_category)
                                     <option value="{{ $main_category->id }}">{{ $main_category->name }}</option>
                                     @endforeach
 
                                 </select>
                                 @error('main_category')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                             <!--end::Col-->
                             <!--begin::Col-->
                             <div class="col-md-3 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Category</label>
-                                <select class="form-select form-select-solid " data-control="select2"
-                                    data-hide-search="true" data-placeholder="Select category" name="category"
-                                    id="category">
+                                <select class="form-select form-select-solid " data-control="select2" data-hide-search="true" data-placeholder="Select category" name="category" id="category">
 
 
                                 </select>
-                                
+
                             </div>
                             <!--end::Col-->
                             <!--begin::Col-->
                             <div class="col-md-3 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Sub Category</label>
-                                <select class="form-select form-select-solid @error('sub_category') is-invalid @enderror" data-control="select2"
-                                    data-hide-search="true" data-placeholder="Select sub category" name="sub_category"
-                                    id="sub_category">
+                                <select class="form-select form-select-solid @error('sub_category') is-invalid @enderror" data-control="select2" data-hide-search="true" data-placeholder="Select sub category" name="sub_category" id="sub_category">
 
 
                                 </select>
                                 @error('sub_category')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                             <!--end::Col-->
                             <!--begin::Col-->
                             <div class="col-md-3 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Subject</label>
-                                <select class="form-select form-select-solid @error('subject') is-invalid @enderror" data-control="select2"
-                                    data-hide-search="true" data-placeholder="Select subject" name="subject"
-                                    id="subject">
+                                <select class="form-select form-select-solid @error('subject') is-invalid @enderror" data-control="select2" data-hide-search="true" data-placeholder="Select subject" name="subject" id="subject">
 
 
                                 </select>
                                 @error('subject')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                             <!--end::Col-->
@@ -163,9 +147,7 @@
                             <!--begin::Col-->
                             <div class="col-md-2 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Year</label>
-                                <select class="form-select form-select-solid @error('year') is-invalid @enderror" data-control="select2"
-                                    data-hide-search="true" data-placeholder="Select year" name="year"
-                                    id="year">
+                                <select class="form-select form-select-solid @error('year') is-invalid @enderror" data-control="select2" data-hide-search="true" data-placeholder="Select year" name="year" id="year">
                                     <option value="">Choose ...</option>
                                     @foreach ($years as $year)
                                     <option value="{{ $year->id }}">{{ $year->year }}</option>
@@ -173,102 +155,144 @@
 
                                 </select>
                                 @error('year')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
                                 @enderror
                             </div>
                             <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col-md-3 offset-7 fv-row" style="border:3px solid #0095E8; border-radius:5px; padding:4px;">
+                                <label class="fs-6 fw-bold mb-2">Number of Question</label>
+                                <!--begin:Form-->
+                                <div id="kk_modal_new_samprotik_form" class="form me-4">
+                                    <input type="text" class="form-control form-control-solid" placeholder="Enter number" name="number" id="number" />
+                                </div>
+                                <!--end:Form-->
+                            </div>
+                            <!--end::Col-->
                         </div>
+
                         <!--end::Input group-->
+                        <div class="card mb-10" style="margin-top:30px !important; border:7px solid #F2F5F7; border-radius:5px; padding:5px">
+                            <div class="card-body pt-4 " style="padding-bottom: 0px !important">
+                                <!--begin::Input group-->
+                                <div class="row g-9 pb-4">
+                                    <div class="row mt-7">
+                                        <div class="col-md-2">
+                                            <!--begin::Input group-->
+                                            <div class="d-flex flex-column mb-8 fv-row">
+                                                <!--begin::Label-->
+                                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                    <div class="required">Instruction No. </div>
+                                                </label>
+                                                <!--end::Label-->
+                                                <input type="text" class="form-control form-control-solid" placeholder="Enter Ins. No." name="instruction_no" />
+                                            </div>
+                                            <!--end::Input group-->
+                                        </div>
+                                        <!--begin::Col-->
+                                        <div class="col-md-10 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                <span class="required text-uppercase fw-bolder" style="font-size: 16px">Question Instruction </span>
+                                            </label>
 
-                        <!--start::written question input--> 
+                                            <!--end::Label-->
+                                            <input type="text" class="form-control form-control-solid mb-2 @error('instruction') is-invalid @enderror" placeholder="Enter instruction" name="instruction" value="{{ old('instruction') }}" />
+
+                                            @error('instruction')
+                                            <span class="invalid-feedback" role="alert">
+                                                <strong>{{ $message }}</strong>
+                                            </span>
+                                            @enderror
+                                        </div>
+                                        <!-- end: col-->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <!--start::mcq question input--> 
                         <div id="written"></div>     
-                        <!--end::written question input--> 
-
+                        <!--end::mcq question input--> 
                         
                     </form>
                     <!--end:Form-->
                 </div>
                 <!--end::Card body-->
             </div>
-            <!--end::Card--> 
-
-            
-            
+            <!--end::Card-->
         </div>
         <!--end::Container-->
     </div>
     <!--end::Post-->
 </div>
 
-
 @endsection
 
 @push('script')
 <script type="text/javascript">
-    $(document).ready(function(){
-        $('#kk_modal_new_samprotik_form').on( "keypress", function(event) {
+    $(document).ready(function() {
+        $('#kk_modal_new_samprotik_form').on("keypress", function(event) {
             if (event.which == 13 && !event.shiftKey) {
                 event.preventDefault();
                 //console.log('here')
                 var number = $('#number').val();
-                
+
                 $.ajax({
-                    type: "POST",
+                    type: "GET",
                     url: "{{ url('admin/question/written-question/create')}}",
-                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                     data: {
-                        number : number,
+                        number: number,
                     },
                     //If result found, this funtion will be called.
                     success: function(data) {
                         $('#written').html(data.html)
                     }
                 });
-               
+
             }
         });
     })
-    
+
 
     // add row
-    $(document).on('click', '.addRow', function () {
+    $(document).on('click', '.addRow', function() {
         var html = '';
         html += ' <div class="card" style="margin-top:20px !important; border:7px solid #F2F5F7; border-radius:5px; padding:20px">'
         html += '<div class="card-body pt-4 " style="padding-bottom: 0px !important">'
-           
+
         html += '    <div class="row g-9 pb-4">'
         html += '       <div style="" class="mb-5"> '
         html += ' <div class="row">'
         html += '  <div class="col-md-2">'
-                           
-        html +=  '<div class="d-flex flex-column mb-8 fv-row">'
-                               
+
+        html += '<div class="d-flex flex-column mb-8 fv-row">'
+
         html += '       <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
         html += '    <div class="required">Question No</div>'
         html += '      </label>'
-                                
+
         html += '       <input type="text" class="form-control form-control-solid" placeholder="Enter Ques. No." name="question_no[]" />'
         html += '              </div>'
-                    
+
         html += '         </div>'
         html += '        <div class="col-md-9">'
-                    
+
         html += '           <div class="d-flex flex-column mb-8 fv-row">'
-                        
+
         html += '               <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
         html += '                    <div class="required">Question </div>'
         html += '               </label>'
-                        
+
         html += '               <input type="text" class="form-control form-control-solid" placeholder="Enter Question" name="question[]" /> '
         html += '           </div>'
-                    
+
         html += '        </div>'
         html += '       <div class="col-md-1">'
-                         
+
         html += '            <div class="d-flex flex-column mb-8 fv-row">'
-                        
+
         html += '                <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
         html += '                    <div class="required">Marks</div>'
         html += '                </label>'
@@ -277,11 +301,11 @@
         html += '       </div>'
         html += '   </div>'
         html += '    <div class="d-flex flex-column mb-8 fv-row">'
-                
+
         html += '        <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
         html += '             <span class="required fw-bolder">answer</span>'
         html += '         </label>'
-                
+
         html += '        <textarea type="text" class="form-control form-control-solid h-100px"  placeholder="Enter answer" name="answer[]" > </textarea>'
         html += '        <div class="help-block with-errors answer-error"></div>'
         html += '     </div>'
@@ -300,11 +324,11 @@
         // html += '</div>';
         // html += '</div>';
         // $(this).closest('.newRow').append(html);
-       // $('.newRow').append(html);
+        // $('.newRow').append(html);
     });
 
     // remove row
-    $(document).on('click', '.removeRow', function () {
+    $(document).on('click', '.removeRow', function() {
         $(this).parent().parent("div").find(".inputFormRow").remove();
         $(this).remove();
     });

@@ -9,6 +9,7 @@ use App\Models\MainCategory;
 use Illuminate\Http\Request;
 use App\Models\WrittenQuestion;
 use App\Http\Controllers\Controller;
+use App\Models\QuestionInstruction;
 use App\Models\SubCategory;
 use Illuminate\Support\Facades\Auth;
 
@@ -37,15 +38,25 @@ class WrittenQuestionController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
-        $request->validate([
-            'main_category' => ['required'],
-            'sub_category' => ['required'],
-            'subject' => ['required'],
-            'year' => [$request->main_category == 3 ? 'nullable' : 'required'],
-            'question.*' => ['required'],
-            'question_no.*' => ['required'],
-            'answer.*' => ['required'],
+        // $request->validate([
+        //     'main_category' => ['required'],
+        //     'sub_category' => ['required'],
+        //     'subject' => ['required'],
+        //     'year' => [$request->main_category == 3 ? 'nullable' : 'required'],
+        //     'question.*' => ['required'],
+        //     'question_no.*' => ['required'],
+        //     'answer.*' => ['required'],
 
+        // ]);
+
+        $instruction = QuestionInstruction::create([
+            'main_category_id' => $request->main_category,
+            'sub_category_id' => $request->sub_category,
+            'subject_id' => $request->subject,
+            'year_id' => $request->year,
+            'instruction_no' => $request->instruction_no,
+            'instruction' => $request->instruction,
+            'created_user_id' => Auth::guard('admin')->user()->id
         ]);
 
         //question save
@@ -60,6 +71,7 @@ class WrittenQuestionController extends Controller
                 //question save
                 $question = new WrittenQuestion();
 
+                $question->instruction_id = $instruction->id;
                 $question->subject_id = $request->subject;
                 $question->sub_category_id = $request->sub_category;
                 $question->main_category_id = $request->main_category;
@@ -88,10 +100,10 @@ class WrittenQuestionController extends Controller
         if ($request->has('sub_category')) {
             //dd('here');
             $details = SubCategory::find($request->sub_category);
-            $questions = WrittenQuestion::where('sub_category_id', $request->sub_category)->get();;
+            $instructions = QuestionInstruction::with('questions')->where('sub_category_id', $request->sub_category)->get();
             $load = 'true';
         }
-        //dd($sub_category);
-        return view('admin.written_ques.view_question', compact('questions', 'sub_categories', 'details', 'load'));
+        //dd($instructions);
+        return view('admin.written_ques.view_question', compact('instructions', 'sub_categories', 'details', 'load'));
     }
 }

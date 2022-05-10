@@ -1,3 +1,4 @@
+
 @foreach($questions as $key => $question)
 <div class="col-md-6">
     <div class="card card-bordered mb-5">
@@ -27,7 +28,7 @@
                 <div class="col-md-6">
                     <p class="text-gray-800 fw-bold " > 
                     <span >
-                         @if($question->question_option->answer == 2)
+                        @if($question->question_option->answer == 2)
                         <i class="fas fa-check-circle fa-2xl"></i>
                         @else
                         <i class="fas fa-dot-circle fa-2xl"></i>
@@ -35,9 +36,9 @@
                     </span> {{$question->question_option->option_2}}</p>
                 </div>
                 <div class="col-md-6">
-                    <p class="text-gray-800 fw-bold " > 
+                    <p class="text-gray-800 fw-bold"> 
                     <span >
-                         @if($question->question_option->answer == 3)
+                        @if($question->question_option->answer == 3)
                         <i class="fas fa-check-circle fa-2xl"></i>
                         @else
                         <i class="fas fa-dot-circle fa-2xl"></i>
@@ -47,7 +48,7 @@
                 <div class="col-md-6">
                     <p class="text-gray-800 fw-bold " > 
                     <span >
-                         @if($question->question_option->answer == 4)
+                        @if($question->question_option->answer == 4)
                         <i class="fas fa-check-circle fa-2xl"></i>
                         @else
                         <i class="fas fa-dot-circle fa-2xl"></i>
@@ -59,3 +60,4 @@
     </div>
 </div>
 @endforeach
+   

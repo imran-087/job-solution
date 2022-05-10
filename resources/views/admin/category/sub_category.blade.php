@@ -195,7 +195,7 @@
                     <!--begin::Heading-->
                     <div class="mb-13 text-center">
                         <!--begin::Title-->
-                        <h1 class="mb-3">Add New Sub Category</h1>
+                        <h1 class="mb-3">Sub Category</h1>
                         <!--end::Title-->
                         <!--begin::Description-->
                         <div class="text-muted fw-bold fs-5">Fill up the form and submit
@@ -258,7 +258,84 @@
                         <div class="help-block with-errors title-error"></div>
                     </div>
                     <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="d-flex flex-column mb-8 fv-row">
+                        <!--begin::Label-->
+                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                            <span class="">Post/Position</span>
+                        </label>
+                        <!--end::Label-->
+                        <input type="text" class="form-control form-control-solid" placeholder="Enter Job Post/Position"
+                            name="job_position" />
+                        <div class="help-block with-errors job_position-error"></div>
+                    </div>
+                    <!--end::Input group-->
                     
+                    <!--begin::Input group-->
+                    <div class="row g-9 mb-8">
+                         <!--begin::Col-->
+                        <div class="col-md-4 fv-row">
+                            <label class="required fs-6 fw-bold mb-2">Exam Type</label>
+                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                data-placeholder="Select Type" name="type">
+                                <option value="mcq" >MCQ</option>
+                                <option value="written">Written</option>
+                            </select>
+                            <div class="help-block with-errors type-error"></div>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-md-4 fv-row">
+                            <label class=" fs-6 fw-bold mb-2">Subject Code 1</label>
+                            <input type="text" class="form-control form-control-solid" placeholder="Subject code 1"
+                            name="code_1" />
+                            <div class="help-block with-errors code_1-error"></div>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-md-4 fv-row">
+                            <label class=" fs-6 fw-bold mb-2">Subject Code 2</label>
+                            <input type="text" class="form-control form-control-solid" placeholder="Subject code 2"
+                            name="code_2" />
+                            <div class="help-block with-errors code_2-error"></div>
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="row g-9 mb-8">
+                        <!--begin::Col-->
+                        <div class="col-md-4 fv-row">
+                            <label class="required fs-5 fw-bold mb-2">Mark</label>
+                            <input type="text" class="form-control form-control-solid" placeholder="Total mark"
+                            name="mark" />
+                            <div class="help-block with-errors mark-error"></div>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-md-4 fv-row">
+                            <label class=" fs-6 fw-bold mb-2">Duration</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control form-control-solid" placeholder="1/2/3/4"
+                                name="duration" aria-label="Exam duration" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <span class="input-group-text form-control-solid" id="basic-addon2">hr</span>
+                                </div>
+                            </div>
+                           
+                            <div class="help-block with-errors duration-error"></div>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-md-4 fv-row">
+                            <label class=" fs-6 fw-bold mb-2">Date</label>
+                            <input type="date" class="form-control form-control-solid" placeholder="Exam date"
+                            name="exam_date" />
+                            <div class="help-block with-errors exam_date-error"></div>
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Input group-->
                     <!--begin::Input group-->
                     <div class="row g-9 mb-8">
                         <!--begin::Col-->
@@ -401,6 +478,13 @@
                    $('input[name="sub_category_id"]').val(data.sub_category.id)
                    $('input[name="name"]').val(data.sub_category.name)
                    $('input[name="title"]').val(data.sub_category.title)
+                   $('input[name="code_1"]').val(data.sub_category.subject_code_1)
+                   $('input[name="code_2"]').val(data.sub_category.subject_code_2)
+                   $('input[name="mark"]').val(data.sub_category.total_marks)
+                   $('input[name="duration"]').val(data.sub_category.exam_duration)
+                   $('input[name="job_position"]').val(data.sub_category.job_position)
+                   $('input[name="date"]').val(data.sub_category.exam_date)
+                   $('select[name="type"]').val(data.sub_category.question_type).change()
                    $('select[name="status"]').val(data.sub_category.status).change()
                    $('select[name="year"]').val(data.sub_category.year_id).change()
                    $('select[name="main_category"]').val(data.main_category.id).change();

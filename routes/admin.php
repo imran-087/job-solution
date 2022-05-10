@@ -116,6 +116,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/question/delete/{id}', 'QuestionController@deleteQuestion')->name('question.delete');
         Route::get('/question/mcq-question/view', 'QuestionController@allQuestion')->name('question.all-question');
         Route::get('/question/passage-mcq-question/view', 'QuestionController@passageQuestion')->name('question.passage-question');
+        Route::get('/question/image-mcq-question/view', 'QuestionController@imageQuestion')->name('question.image-question');
 
 
         Route::get('/question/store/{val}', 'QuestionController@storeQuestion')->name('question.store-question');
@@ -181,7 +182,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         ############## Written Question ###############
         Route::get('/question/written-question', 'WrittenQuestionController@index')->name('written.index');
-        Route::post('/question/written-question/create', 'WrittenQuestionController@create')->name('written.create');
+        Route::get('/question/written-question/create', 'WrittenQuestionController@create')->name('written.create');
         Route::post('/question/written-question/store', 'WrittenQuestionController@store')->name('written.store');
         Route::get('/question/written-question/show', 'WrittenQuestionController@show')->name('written.show');
 

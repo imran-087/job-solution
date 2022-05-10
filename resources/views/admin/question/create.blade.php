@@ -145,7 +145,7 @@
                                 <label class="required fs-6 fw-bold mb-2">Select Main Category</label>
                                 <select class="form-select form-select-solid @error('main_category') is-invalid @enderror" data-control="select2"
                                     data-hide-search="true" data-placeholder="Select main category" name="main_category"
-                                    id="main_category">
+                                    id="main_category" required>
                                     <option value="">Choose ...</option>
                                     
                                     @foreach ($main_categories as $main_category)
@@ -165,7 +165,7 @@
                                 <label class="required fs-6 fw-bold mb-2">Select Category</label>
                                 <select class="form-select form-select-solid " data-control="select2"
                                     data-hide-search="true" data-placeholder="Select category" name="category"
-                                    id="category">
+                                    id="category" required>
 
 
                                 </select>
@@ -177,7 +177,7 @@
                                 <label class="required fs-6 fw-bold mb-2">Select Sub Category</label>
                                 <select class="form-select form-select-solid @error('sub_category') is-invalid @enderror" data-control="select2"
                                     data-hide-search="true" data-placeholder="Select sub category" name="sub_category"
-                                    id="sub_category">
+                                    id="sub_category" required>
 
 
                                 </select>
@@ -193,7 +193,7 @@
                                 <label class="required fs-6 fw-bold mb-2">Select Subject</label>
                                 <select class="form-select form-select-solid @error('subject') is-invalid @enderror" data-control="select2"
                                     data-hide-search="true" data-placeholder="Select subject" name="subject"
-                                    id="subject">
+                                    id="subject" required>
 
 
                                 </select>
@@ -214,7 +214,7 @@
                                 <label class="required fs-6 fw-bold mb-2">Select Year</label>
                                 <select class="form-select form-select-solid @error('year') is-invalid @enderror" data-control="select2"
                                     data-hide-search="true" data-placeholder="Select year" name="year"
-                                    id="year">
+                                    id="year" >
                                     <option value="">Choose ...</option>
                                     @foreach ($years as $year)
                                     <option value="{{ $year->id }}">{{ $year->year }}</option>
@@ -231,9 +231,9 @@
                         </div>
                         <!--end::Input group-->
 
-                        <!--start::written question input--> 
+                        <!--start::mcq question input--> 
                         <div id="input"></div>     
-                        <!--end::written question input--> 
+                        <!--end::mcq question input--> 
                     </form>
                     <!--end:Form-->
                 </div>
@@ -280,7 +280,6 @@
         });
     })
     
-
-    
+ 
 </script>
 @endpush

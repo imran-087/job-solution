@@ -136,15 +136,12 @@ class QuestionController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
-        // $request->validate([
-        //     'main_category' => ['required'],
-        //     'sub_category' => ['required'],
-        //     'subject' => ['required'],
-        //     'year' => [$request->main_category == 3 ? 'nullable' : 'required'],
-        //     'question.*' => ['required'],
-        //     'answer.*' => ['required'],
-
-        // ]);
+        $request->validate([
+            'main_category' => ['required'],
+            'sub_category' => ['required'],
+            'subject' => ['required'],
+            'year' => [$request->main_category == 3 ? 'nullable' : 'required']
+        ]);
 
         //dd('validation ok');
         //multiple image question
@@ -309,7 +306,7 @@ class QuestionController extends Controller
 
         if ($question && $question_option) {
             Session::flash('success', 'Question updated successfull');
-            return redirect()->route('admin.question.index');
+            return redirect()->route('admin.question.all-question');
         } else {
             Session::flash('error', 'Failed..Something went wrong !');
             return redirect()->back();
@@ -351,5 +348,12 @@ class QuestionController extends Controller
         $passages = Passage::with('questions')->get();
         //dd($passages);
         return view('admin.question.passage_question', compact('passages'));
+    }
+    //passage question
+    public function imageQuestion()
+    {
+        $questions = Question::with('question_option')->where('question_type', 'image')->paginate(10);
+        //dd($passages);
+        return view('admin.question.image_question', compact('questions'));
     }
 }

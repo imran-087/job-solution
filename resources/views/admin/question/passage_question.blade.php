@@ -49,7 +49,9 @@
             <!--begin::Actions-->
             <div class="d-flex align-items-center py-1">
                 <!--begin::Button-->
-                <a href="{{ url()->previous() }}" class="btn btn-sm btn-primary">Back</a>
+                <a href="{{ route('admin.question.all-question') }}" class="btn btn-sm btn-light btn-active-primary me-2">MCQ</a>
+                <a href="{{ route('admin.question.image-question') }}" class="btn btn-sm btn-light btn-active-primary me-2">IMAGE MCQ</a>
+                <a href="{{ route('admin.question.passage-question') }}" class="btn btn-sm btn-light btn-active-primary">PASSAGE MCQ</a>
                 <!--end::Button-->
             </div>
             <!--end::Actions-->
@@ -73,7 +75,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="card card-bordered mb-5">
-                            <div class="card-header p-4">
+                            <div class="card-header p-10">
                                 <h4>Read the passage and answer the following question:</h4>
                                 <h3 class="card-title text-gray-700  cursor-pointer mb-0 view"  style="max-width: 1100px !important; line-height:24px">
                                         <span > {!! $passage->passage !!} </span>

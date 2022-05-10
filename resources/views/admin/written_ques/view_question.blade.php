@@ -104,25 +104,28 @@
                             <h3>{{ $details->name }}</h3>
                             <h5>{{ $details->title }}</h5>
                         </div>
-                        @foreach($questions as $question)
-                        <!--begin::Body-->
-                        <div class="card-body pb-0">
-                            <div class="row">
-                                <div class="col-md-2">
-                                    <p>{{ $question->question_no }}</p>
+                        @foreach($instructions as $instruction)
+                        <p>{{ $instruction->instruction_no }} &nbsp; {{ $instruction->instruction }}</p>
+                            @foreach($instruction->questions as $question)
+                            <!--begin::Body-->
+                            <div class="card-body pb-0">
+                                <div class="row">
+                                    <div class="col-md-2">
+                                        <p>{{ $question->question_no }}</p>
+                                    </div>
+                                    <div class="col-md-10">
+                                        <p>{{ $question->question }}</p>
+                                    </div>
                                 </div>
-                                <div class="col-md-10">
-                                    <p>{{ $question->question }}</p>
+                                <div class="row">
+                                    <div class="col-md-10 offset-2">
+                                        <p>{{ $question->answer }}</p>
+                                    </div>
+                                    
                                 </div>
                             </div>
-                            <div class="row">
-                                <div class="col-md-10 offset-2">
-                                    <p>{{ $question->answer }}</p>
-                                </div>
-                                
-                            </div>
-                        </div>
-                        <!--end::Body-->
+                            <!--end::Body-->
+                            @endforeach
                         @endforeach
                     </div>
                     <!--end::Feeds Widget 2-->

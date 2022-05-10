@@ -1,15 +1,11 @@
 <!--start:Form-->
-<form id="kk_modal_new_samprotik_form" class="form"  method="POST" action="{{ route('admin.written.store') }}">
-    <div class="messages"></div>
-    {{-- csrf token  --}}
-    @csrf
-    
+ 
     @for($i = 0; $i < $number; $i++)
     <div class="card" style="margin-top:20px !important; border:7px solid #F2F5F7; border-radius:5px; padding:20px">
         <div class="card-body pt-4 " style="padding-bottom: 0px !important">
             <!--begin::Input group-->
             <div class="row g-9 pb-4"> 
-                <div style="" class="mb-5"> 
+                <div> 
                     <div class="row">
                         <div class="col-md-2">
                             <!--begin::Input group-->
@@ -50,7 +46,7 @@
                     </div>
                 
                     <!--begin::Input group-->
-                    <div class="d-flex flex-column mb-8 fv-row">
+                    <div class="d-flex flex-column  fv-row">
                         <!--begin::Label-->
                         <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                             <span class="required fw-bolder">answer</span>
@@ -67,9 +63,11 @@
         </div>
     </div>
     @endfor
+
     <!-- append dynamic input-->
-        <div  class="newRow"></div>
+    <div  class="newRow"></div>
     <!-- append dynamic input-->
+
     <!--begin::Actions-->
     <div class="text-center d-flex justify-content-between py-4 px-4" >
         <button class="btn btn-info btn-sm addRow" type="button">Add Input</button>
