@@ -105,21 +105,21 @@
                             <h5>{{ $details->title }}</h5>
                         </div>
                         @foreach($instructions as $instruction)
-                        <p>{{ $instruction->instruction_no }} &nbsp; {{ $instruction->instruction }}</p>
+                        <div >
+                            <p style="margin-left: 10px !important">{{ $instruction->instruction_no }} &nbsp; {{ $instruction->instruction }}</p>
+                        </div>
                             @foreach($instruction->questions as $question)
                             <!--begin::Body-->
                             <div class="card-body pb-0">
                                 <div class="row">
-                                    <div class="col-md-2">
-                                        <p>{{ $question->question_no }}</p>
-                                    </div>
-                                    <div class="col-md-10">
-                                        <p>{{ $question->question }}</p>
+                                    
+                                    <div class="col-md-12">
+                                        <p>{{ $question->question_no }}.  &nbsp; {{ $question->question }}</p>
                                     </div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-10 offset-2">
-                                        <p>{{ $question->answer }}</p>
+                                    <div class="col-md-10">
+                                        <p> answer:  &nbsp; {{ $question->answer }}</p>
                                     </div>
                                     
                                 </div>

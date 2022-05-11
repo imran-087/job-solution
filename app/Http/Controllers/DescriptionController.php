@@ -37,7 +37,11 @@ class DescriptionController extends Controller
 
                 $question_des = new QuestionDescription();
 
-                $question_des->question_id = $request->question_id;
+                if ($request->samprotik == 'samprotik') {
+                    $question_des->samprotik_ques_id = $request->question_id;
+                } else {
+                    $question_des->question_id = $request->question_id;
+                }
                 $question_des->description = $request->description;
                 $question_des->created_user_id =  Auth::user()->id;
                 $question_des->status =  'pending';

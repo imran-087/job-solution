@@ -2,11 +2,12 @@
 <div class="card" style="margin-top:20px">
     <!--begin::Card body-->
     <div class="card-body pt-4 " style="padding-bottom: 0px !important">
-         <!--begin:Form-->
-        <form id="kk_modal_new_samprotik_form" class="form"  method="POST" action="{{ route('admin.samprotik.store') }}">
+        <!--begin:Form-->
+        <form id="kk_modal_new_samprotik_form" class="form"  method="POST" action="{{ route('admin.samprotik.preview') }}">
             <div class="messages"></div>
             {{-- csrf token  --}}
             @csrf
+            <input type="hidden" name="number" value="{{ $number }}">
             @for($i = 0; $i < $number; $i++)
             <div class="card" style="margin-top:20px !important; border:7px solid #F2F5F7; border-radius:5px; padding:20px">
                 <div class="card-body pt-4 " style="padding-bottom: 0px !important">

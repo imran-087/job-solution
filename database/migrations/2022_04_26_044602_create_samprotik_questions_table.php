@@ -27,6 +27,7 @@ class CreateSamprotikQuestionsTable extends Migration
             $table->enum('lock_status', ['lock', 'unlock'])->default('unlock');
             $table->enum('future_editable', ['editable', 'noteditable'])->default('editable');
             $table->enum('status', ['active', 'deactive'])->default('active');
+            $table->dateTime('previous_date');
             $table->softDeletes();
             $table->timestamps();
         });

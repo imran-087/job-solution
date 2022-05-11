@@ -132,6 +132,18 @@ class QuestionController extends Controller
         ]);
     }
 
+    public function preview(Request $request)
+    {
+        if ($request->type == 'image') {
+            $this->store($request);
+            return redirect()->route('admin.question.all-question')->with('success', 'Question created successfully');
+        } else {
+            $data['myForm'] = $request->all();
+            //dd($data);
+            return view('admin.question.preview', $data);
+        }
+    }
+
     //Question store
     public function store(Request $request)
     {
@@ -239,7 +251,7 @@ class QuestionController extends Controller
                 }
             }
         }
-        return redirect()->back()->with('success', 'Question created successfully');
+        return redirect()->route('admin.question.all-question')->with('success', 'Question created successfully');
     }
 
 
@@ -333,9 +345,9 @@ class QuestionController extends Controller
     //all question
     public function allQuestion(Request $request)
     {
-        $questions = Question::with('question_option')->where('question_type', 'mcq')->paginate(10);
+        $questions = Question::with('question_option')->where('question_type', 'mcq')->paginate(6);
         if ($request->ajax()) {
-            //dd('here');
+            dd('here');
             $view = view('admin.question.all-question', compact('questions'))->render();
             return response()->json(['html' => $view]);
         }

@@ -110,7 +110,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/question/create', 'QuestionController@create')->name('question.create');
         Route::post('/question/question-input', 'QuestionController@createQuestionInput')->name('question.question-input');
         Route::get('/question/edit-question', 'QuestionController@editQuestion')->name('question.edit');
-        Route::post('/question/store', 'QuestionController@store')->name('question.store');
         Route::post('/question/update', 'QuestionController@update')->name('question.update');
         Route::get('/question/get/{id}', 'QuestionController@getQuestion')->name('question.get');
         Route::get('/question/delete/{id}', 'QuestionController@deleteQuestion')->name('question.delete');
@@ -118,6 +117,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/question/passage-mcq-question/view', 'QuestionController@passageQuestion')->name('question.passage-question');
         Route::get('/question/image-mcq-question/view', 'QuestionController@imageQuestion')->name('question.image-question');
 
+        Route::post('/question/preview', 'QuestionController@preview')->name('question.preview');
+        Route::post('/question/store', 'QuestionController@store')->name('question.store');
 
         Route::get('/question/store/{val}', 'QuestionController@storeQuestion')->name('question.store-question');
 
@@ -172,12 +173,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         ############## Samprotik Question ###############
         Route::get('/question/samprotik-question', 'SamprotikQuestionController@index')->name('samprotik.index');
         Route::post('/question/samprotik-question/create', 'SamprotikQuestionController@create')->name('samprotik.create');
-        Route::post('/question/samprotik-question/store', 'SamprotikQuestionController@store')->name('samprotik.store');
         Route::get('/question/samprotik-question/input', 'SamprotikQuestionController@input')->name('samprotik.input');
         Route::get('/question/samprotik-with-option', 'SamprotikQuestionController@withOption')->name('samprotik.with-option');
         Route::get('/question/samprotik-filter-by-date', 'SamprotikQuestionController@dateFilter')->name('samprotik.date-filter');
         Route::get('/question/samprotik-question/edit', 'SamprotikQuestionController@edit')->name('samprotik.edit');
         Route::post('/question/samprotik-question/update', 'SamprotikQuestionController@update')->name('samprotik.update');
+        Route::post('/question/samprotik-question/preview', 'SamprotikQuestionController@preview')->name('samprotik.preview');
+        Route::post('/question/samprotik-question/store', 'SamprotikQuestionController@store')->name('samprotik.store');
 
 
         ############## Written Question ###############

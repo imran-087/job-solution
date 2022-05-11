@@ -69,8 +69,16 @@ class SamprotikQuestionController extends Controller
         ]);
     }
 
+    public function preview(Request $request)
+    {
+        $data['myForm'] = $request->all();
+        //dd($data);
+        return view('admin.samprotik.preview', $data);
+    }
+
     public function store(Request $request)
     {
+        //dd($request->all());
         $request->validate([
             'question.*' => ['required'],
             'answer.*' => ['required'],
@@ -116,7 +124,7 @@ class SamprotikQuestionController extends Controller
                 $question->save();
             }
         }
-        return redirect()->back()->with('success', 'Question Created Successfully');
+        return redirect()->route('admin.samprotik.index')->with('success', 'Question Created Successfully');
     }
 
     public function edit(Request $request)

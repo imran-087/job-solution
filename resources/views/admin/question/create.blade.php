@@ -123,7 +123,7 @@
                 <!--begin::Card body-->
                 <div class="card-body pt-4 " style="padding-bottom: 0px !important">
                     <!--begin:Form-->
-                    <form id="kk_modal_new_samprotik_form" class="form"  method="POST" action="{{ route('admin.question.store') }}" enctype="multipart/form-data">
+                    <form id="kk_modal_new_samprotik_form" class="form"  method="POST" action="{{ route('admin.question.preview') }}" enctype="multipart/form-data">
                         <div class="messages"></div>
                         {{-- csrf token  --}}
                         @csrf

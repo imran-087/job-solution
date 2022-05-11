@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use App\Models\Year;
 use App\Models\Question;
+use App\Models\SamprotikQuestion;
 use Illuminate\Http\Request;
 
 class RecentQuestionController extends Controller
@@ -49,9 +50,9 @@ class RecentQuestionController extends Controller
                 ->paginate(15);
         } elseif ($request->has('year')) {
             //dd('year');
-            $questions = Question::with('question_option')->where(['question_type' => 'samprotik', 'year_id' => $request->year])->paginate(15);
+            $questions = SamprotikQuestion::paginate(15);
         } else {
-            $questions = Question::with('question_option')->where('question_type', 'samprotik')->paginate(15);
+            $questions = SamprotikQuestion::paginate(15);
         }
 
         //dd($questions);

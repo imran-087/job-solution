@@ -50,275 +50,181 @@
 <div class="post d-flex flex-column-fluid" id="kt_post">
     <!--begin::Container-->
     <div id="kt_content_container" class="container-xxl">
-        
-       
-        <!--begin::Row-->
-        <div class="row gy-5 g-xl-8" >
-            <div class="col-10 mb-xl-10">
-                <!--begin::Engage widget 1-->
-                <div class="card h-md-100">
-                    <!--begin::Body-->
-                    <div class="card-body d-flex flex-column flex-center">
-                        <!--begin::Heading-->
-                        <div class="mb-2">
-                            <!--begin::Title-->
-                            <h1 class="fw-bold text-gray-800 text-center lh-lg">
-                                @if($questions->count() > 0)
-                                    Question Preview
-                                @else
-                                    No Preview Question
-                                <br><a href="{{ route('admin.question.create') }}"><span class="fw-boldest">click here to add Question </a></span>
-                                @endif
-                            </h1>
-                            <!--end::Title-->
-                            
-                        </div>
-                        <!--end::Heading-->
-                       
-                    </div>
-                    <!--end::Body-->
-                </div>
-                <!--end::Engage widget 1-->
+        <!--begin:Form-->
+        <form id="kk_modal_new_samprotik_form" class="form"  method="POST" action="{{ route('admin.question.store') }}" enctype="multipart/form-data">
+            <div class="messages"></div>
+            {{-- csrf token  --}}
+            @csrf
+            <!--begin::Heading-->
+            <div class="mb-13 text-center">
+                <!--begin::Title-->
+                <h1 class="mb-3 mt-3">Preview Before Confirm</h1>
+                <!--end::Title-->
+               
             </div>
-        </div>
-        <!--end::Row-->
-       
-        
-      
-        <!--begin::Row-->
-        <div class="row gy-5 g-xl-8">
-           
+            <!--end::Heading-->
+            @if($myForm['type'] == 'passage')
+            <div class="card" style="margin-top:20px !important; border:7px solid #F2F5F7; border-radius:5px; padding:5px">
+                <div class="card-body pt-4 " style="padding-bottom: 0px !important">
+                    <!--begin::Input group-->
+                    <div class="row g-9 pb-4"> 
+                        <div style="" class="mb-5"> 
+                            <!--begin::Input group-->
+                            <div class="row g-9 mb-8">
+                                <!--begin::Col-->
+                                <div class="col-md-12 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                        <span class="required text-uppercase fw-bolder" style="font-size: 16px">Passage </span>
+                                    </label>
+                                    <input type="hidden" name="type" value="{{ $myForm['type'] }}">
+                                    <!--end::Label-->
+                                    <input type="text" class="form-control form-control-solid mb-2 @error('title') is-invalid @enderror" placeholder="Enter passage title" name="title" value="{{ $myForm['title'] }}"/>
 
-            <!--begin::Col-->
-            <div class="col-xl-10 col-md-10 col-sm-12 col-xs-12" id="question">
-              
-                @if($questions->count() > 0)
-                @foreach($questions as $key => $question)
-                <!--begin::Feeds Widget 2-->    
-                <div class="card card-bordered mb-5">
-                    <div class="card-header">
-                        @if($question->passage_id != '')
-                        <h5 class="mt-5">
-                            <div class="col-md-12 ">
-                                <p class="text-gray-800 fw-normal" style="line-height: 22px">
-                                    <span style="color: black; font-weight:600">Read the following passage and answer this Question :</span> <br>
-                                    {{ $question->passage->passage }}
-                                </p>
-                            </div>
-                        </h5>
-                        @endif
-                        <h3 class="card-title text-gray-700 fw-bolder cursor-pointer mb-0 view"  style="max-width: 1100px !important;">
-                                 {{ $key+1 }}. {{$question->question}} 
-                        </h3>
-                       
-                        <div class="card-toolbar">
-                           <!--begin::Menu-->
-                           <button type="button" class="btn btn-sm btn-light btn-active-light-primary fw-bold edit" data-id="{{ $question->id }}" >Edit</button>
-                            
-                            <!--end::Menu--> 
-                        </div>
-                    </div>
-                    <div class="card-body">
-                        @if($question->question_type == 'mcq')
-                        <div class="row"  style="font-size: 16px">
-                            @if($question->option_1 != '' )
-                            <div class="col-md-6 reading">
-                                <p class="text-gray-800 fw-normal mb-5 {{ ($question->answer == '1') ? 'right-answer' : ''}}" > 
-                                   <i class="fas fa-{{ ($question->answer == '1') ? 'check' : 'times'}} fa-2xl"></i> {{$question->option_1 }}</p>
-                            </div>
-                            @endif
-                            @if($question->option_2 != '')
-                            <div class="col-md-6 reading">
-                                <p class="text-gray-800 fw-normal mb-5  {{ ($question->answer == '2') ? 'right-answer' : ''}} "> 
-                                    <i class="fas fa-{{ ($question->answer == '2') ? 'check' : 'times'}} fa-2xl"></i> {{$question->option_2 }}</p>
-                            </div>
-                            @endif
-                            @if($question->option_3 != '')
-                            <div class="col-md-6 reading">
-                                <p class="text-gray-800 fw-normal mb-5  {{ ($question->answer == '3') ? 'right-answer' : ''}}"> 
-                                    <i class="fas fa-{{ ($question->answer == '3') ? 'check' : 'times'}} fa-2xl"></i> {{$question->option_3}}</p>
-                            </div>
-                            @endif
-                            @if($question->option_4 != '' )
-                            <div class="col-md-6 reading">
-                                <p class="text-gray-800 fw-normal mb-5  {{ ($question->answer == '4') ? 'right-answer' : ''}}"> 
-                                    <i class="fas fa-{{ ($question->answer == '4') ? 'check' : 'times'}} fa-2xl" ></i> {{$question->option_4}}</p>
-                            </div>
-                            @endif
-                            @if($question->option_5 != '')
-                            <div class="col-md-6 reading">
-                                <p class="text-gray-800 fw-normal mb-5  {{ ($question->answer == '5') ? 'right-answer' : ''}}"> 
-                                    <i class="fas fa-{{ ($question->answer == '5') ? 'check' : 'times'}} fa-2xl" ></i> {{$question->option_5}}</p>
-                            </div>
-                            @endif
-                        </div>
-                        @elseif($question->question_type == 'samprotik')
-                        <div class="row"  style="font-size: 16px">
-                            @if($question->answer != '' )
-                            <div class="col-md-12 reading">
-                                <p class="text-gray-800 fw-normal mb-5 " > 
-                                   <i class="fas fa-check fa-2xl"></i> {{$question->answer }}</p>
-                            </div>
-                           
-                            @endif 
-                        </div>
-                        @elseif($question->question_type == 'written')
-                        <div class="row"  style="font-size: 16px">
-                            @if($question->written_answer != '' )
-                            <div class="col-md-12 reading">
-                                <p class="text-gray-800 fw-normal mb-5 " > 
-                                   <i class="fas fa-check fa-2xl"></i> {{$question->written_answer }}</p>
-                            </div>
-                            @endif 
-                        </div>
-                        @else
-                        <div class="row"  style="font-size: 16px">
-                            @if($question->option_1 != '' )
-                            <div class="col-md-6 reading">
-                                <p class="text-gray-800 fw-normal mb-3 {{ ($question->answer == '1') ? 'right-answer' : ''}}" > 
-                                   <i class="fas fa-{{ ($question->answer == '1') ? 'check' : 'times'}} fa-2xl"></i> {{$question->option_1 }}</p>
-                                    <div class="symbol symbol-45px me-2 mb-5">
-                                        <span class="symbol-label">
-                                            <img src="{{ asset($question->image_option[0]) }}" class="h-50 align-self-center" alt="">
+                                    <textarea type="text" id="kt_docs_ckeditor_classic" class="form-control form-control-solid h-100px @error('passage') is-invalid @enderror" placeholder="Enter passage" name="passage" >{{ $myForm['passage'] }}</textarea>
+                                
+                                    @error('passage')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
                                         </span>
-                                    </div>
-                            </div>
-                            @endif
-                            @if($question->option_2 != '')
-                            <div class="col-md-6 reading">
-                                <p class="text-gray-800 fw-normal mb-3  {{ ($question->answer == '2') ? 'right-answer' : ''}} "> 
-                                    <i class="fas fa-{{ ($question->answer == '2') ? 'check' : 'times'}} fa-2xl"></i> {{$question->option_2 }}</p>
-                                    <div class="symbol symbol-45px me-2 mb-5">
-                                        <span class="symbol-label">
-                                            <img src="{{ asset($question->image_option[1]) }}" class="h-50 align-self-center" alt="">
-                                        </span>
-                                    </div>
-                            </div>
-                            @endif
-                            @if($question->option_3 != '')
-                            <div class="col-md-6 reading">
-                                <p class="text-gray-800 fw-normal mb-3  {{ ($question->answer == '3') ? 'right-answer' : ''}}"> 
-                                    <i class="fas fa-{{ ($question->answer == '3') ? 'check' : 'times'}} fa-2xl"></i> {{$question->option_3}}</p>
-                                    <div class="symbol symbol-45px me-2 mb-5">
-                                        <span class="symbol-label">
-                                            <img src="{{ asset($question->image_option[2]) }}" class="h-50 align-self-center" alt="">
-                                        </span>
-                                    </div>
-                            </div>
-                            @endif
-                            @if($question->option_4 != '' )
-                            <div class="col-md-6 reading">
-                                <p class="text-gray-800 fw-normal mb-3  {{ ($question->answer == '4') ? 'right-answer' : ''}}"> 
-                                    <i class="fas fa-{{ ($question->answer == '4') ? 'check' : 'times'}} fa-2xl" ></i> {{$question->option_4}}</p>
-                                    <div class="symbol symbol-45px me-2 mb-5">
-                                        <span class="symbol-label">
-                                            <img src="{{ asset($question->image_option[3]) }}" class="h-50 align-self-center" alt="">
-                                        </span>
-                                    </div>
-                            </div>
-                            @endif
-                            @if($question->option_5 != '')
-                            <div class="col-md-6 reading">
-                                <p class="text-gray-800 fw-normal mb-3  {{ ($question->answer == '5') ? 'right-answer' : ''}}"> 
-                                    <i class="fas fa-{{ ($question->answer == '5') ? 'check' : 'times'}} fa-2xl" ></i> {{$question->option_5}}</p>
-                                    <div class="symbol symbol-45px me-2 mb-5">
-                                        <span class="symbol-label">
-                                            <img src="{{ asset($question->image_option[4]) }}" class="h-50 align-self-center" alt="">
-                                        </span>
-                                    </div>
-                            </div>
-                            @endif
-                        </div>
-                        
-                        @endif
-
-                    </div>
-                    <div class="card-footer" style="padding-top:0px !important; padding-bottom:0px !important;">
-
-                        {{-- <div class="d-flex justify-content-end mt-2" style="margin-bottom: -40px !important;">
-                            <a href="javascript:;" class="comment me-2 btn btn-sm btn-light btn-color-muted btn-active-light-info px-4 py-2"  
-                            data-text="comment"  title="Comment">
-                            <i class="fas fa-comment"></i>
-                            </a>
-                            <a href="javascript:;" class="bookmark me-2 btn btn-sm btn-light btn-color-muted btn-active-light-primary px-4 py-2"  
-                            data-id="{{ $question->id }}" data-catid="{{ $question->sub_category->category->id }}" title="Bookmark">
-                            <i class="fas fa-bookmark"></i>
-                            </a>
-                            <a href="javascript:;" class=" btn btn-sm btn-light btn-color-muted btn-active-light-danger px-4 py-2 vote me-2"  data-id="{{ $question->id }}" title="like">
-                            <!--begin::Svg Icon | path: icons/duotune/general/gen030.svg-->
-                            <i class="fas fa-heart"></i>
-                            <!--end::Svg Icon-->{{$question->vote}}</a>
-                            <a href="" style="cursor:default" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-2">
-                                <i class="fas fa-eye fa-xl"></i> {{$question->view_count}} 
-                            </a>
-                        </div> --}}
-                        <!--begin::Accordion-->
-                        <!--begin::Section-->
-                        {{-- <div class="m-0">
-                           
-                            <!--begin::Heading-->
-                            <div class="d-flex align-items-center  collapsible py-3 toggle mb-0 collapsed" data-bs-toggle="collapse" data-bs-target="#kt_job_4_1_{{$question->id}}" aria-expanded="false">
-                                <!--begin::Icon-->
-                                <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-1">
-                                    <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
-                                    <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
-                                        <i class="fas fa-caret-up fa-2xl"></i>
-                                    </span>
-                                    <!--end::Svg Icon-->
-                                    <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
-                                    <span class="svg-icon toggle-off svg-icon-1">
-                                        <i class="fas fa-caret-down fa-2xl"></i>
-                                    </span>
-                                    <!--end::Svg Icon-->
-                                   
+                                    @enderror
                                 </div>
-                                <!--end::Icon-->
-                                <!--begin::Title-->
-                                <h5 class="text-gray-700 fw-bolder cursor-pointer mb-0">Description</h5>
-                                <p class="badge badge-light-success fw-bolder">{{ $question->descriptions->count() }}</p>
-                                <!--end::Title-->
+                                <!-- end: col-->
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endif
+           
+            @for($i = 0; $i < $myForm['number']; $i++)
+            <div class="card" style="margin-top:20px !important; border:7px solid #F2F5F7; border-radius:5px; padding:5px">
+                <div class="card-body pt-4 " style="padding-bottom: 0px !important">
+                    <!--begin::Input group-->
+                    <div class="row g-9 pb-4"> 
+                        <div style="" class="mb-5"> 
+                            <!--begin::Input group-->
+                            <div class="row g-9 mb-8">
+                                
+                                <!--begin::Col-->
+                                <div class="col-md-12 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                        <span class="required text-uppercase fw-bolder" style="font-size: 16px">Question : {{ $i+1 }} </span>
+                                    </label>
+                                    <input type="hidden" name="type" value="{{ $myForm['type'] }}">
+                                    <input type="hidden" name="sub_category" value="{{ $myForm['sub_category'] }}">
+                                    <input type="hidden" name="main_category" value="{{ $myForm['main_category'] }}">
+                                    <input type="hidden" name="subject" value="{{ $myForm['subject'] }}">
+                                    <input type="hidden" name="year" value="{{ $myForm['year'] }}">
+            
+                                    <!--end::Label-->
+                                    <input type="text" class="form-control form-control-solid @error('question.*') is-invalid @enderror" placeholder="Enter Question" name="question[]" value="{{ $myForm['question'][$i] }}"/>
+                                    @if($myForm['type'] == 'image')
+                                    <input type="file" class="form-control-file mt-2" id="exampleInputFile" name="question_image[]" multiple>
+                                    @endif
+                                    @error('question.*')
+                                        <span class="invalid-feedback" role="alert">
+                                            <strong>{{ $message }}</strong>
+                                        </span>
+                                    @enderror
+                                </div>
+                                <!-- end: col-->
                                 
                             </div>
-                            <!--end::Heading-->
-                            <!--begin::Body-->
-                            <div id="kt_job_4_1_{{$question->id}}" class="fs-6 ms-1 collapse" style="">
-                               <!--begin::Text-->
-                                @foreach($question->descriptions as $description)
-                                    @include('question.description')
-                                @endforeach
-                                <!--end::Text-->
+                            <!--end::Input group-->
+                            
+                            <!--begin::Input group-->
+                            <div class="row g-9 mb-8">
+                                <!--begin::Col-->
+                                {{-- @for($o = 0; $o < 4; $o++)  --}}
+                                <div class="col-md-3 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                        <span class="required">Option : 1 </span>
+                                    </label>
+                                    <!--end::Label-->
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="answer[{{ $i }}]"  value="1"
+                                        @if($myForm['answer'][$i] == '1') checked @endif
+                                        >
+                                        <input type="text" class="form-control form-control-solid" placeholder="Enter option"
+                                        name="option_1[]"  value="{{ $myForm['option_1'][$i] }}"/>
+                                    </div>
+                                
+                                    @if($myForm['type'] == 'image')
+                                    <input type="file" class="form-control-file mt-2" id="exampleInputFile" name="image[]" multiple>
+                                    @endif
+                                </div>    
+                                <div class="col-md-3 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                        <span class="required">Option : 2 </span>
+                                    </label>
+                                    <!--end::Label-->
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="answer[{{ $i }}]"  value="2"
+                                        @if($myForm['answer'][$i] == '2') checked @endif
+                                        >
+                                        <input type="text" class="form-control form-control-solid" placeholder="Enter option"
+                                        name="option_2[]"  value="{{ $myForm['option_2'][$i] }}"/>
+                                    </div>
+                                
+                                    @if($myForm['type'] == 'image')
+                                    <input type="file" class="form-control-file mt-2" id="exampleInputFile" name="image[]" multiple>
+                                    @endif
+                                </div>    
+                                <div class="col-md-3 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                        <span class="required">Option : 3 </span>
+                                    </label>
+                                    <!--end::Label-->
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="answer[{{ $i }}]"  value="3"
+                                        @if($myForm['answer'][$i] == '3') checked @endif
+                                        >
+                                        <input type="text" class="form-control form-control-solid" placeholder="Enter option"
+                                        name="option_3[]"  value="{{ $myForm['option_3'][$i] }}"/>
+                                    </div>
+                                
+                                    @if($myForm['type'] == 'image')
+                                    <input type="file" class="form-control-file mt-2" id="exampleInputFile" name="image[]" multiple>
+                                    @endif
+                                </div>    
+                                <div class="col-md-3 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                        <span class="required">Option : 4 </span>
+                                    </label>
+                                    <!--end::Label-->
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="answer[{{ $i }}]"  value="4"
+                                        @if($myForm['answer'][$i] == '4') checked @endif
+                                        >
+                                        <input type="text" class="form-control form-control-solid" placeholder="Enter option"
+                                        name="option_4[]"  value="{{ $myForm['option_4'][$i] }}"/>
+                                    </div>
+                                
+                                    @if($myForm['type'] == 'image')
+                                    <input type="file" class="form-control-file mt-2" id="exampleInputFile" name="image[]" multiple>
+                                    @endif
+                                </div>    
+                                {{-- @endfor --}}
                             </div>
-                            <!--end::Content-->
-                            
-                        </div> --}}
-                        <!--end::Section-->
-                        <!--end::Accordion-->
-                            
+                        </div> 
                     </div>
+                    <!--end::Input group-->
                 </div>
-                <!--end::Feeds Widget 2-->
-
-            
-                <!--begin::Modal - New Product/Service-->
-                <div class="modal fade" id="kk_modal_show_question" tabindex="-1" aria-hidden="true">
-                    <div id="edited_question_view_modal"></div>
-                </div>
-                <!--end::Modal - New Product/Service-->
-                
-                @endforeach
-                {{-- <div class="d-flex justify-content-end">
-                    {{ $questions->links() }}
-                </div> --}}
-                <div class="d-flex justify-content-end mb-4 mt-4">
-                <button type="submit" class="btn btn-primary" id="confirm_submission" data-text="confirm">Confirm Submission</button>
-                </div>
-               
-                @endif
             </div>
-            <!--end::Col-->
-            
-           
-        </div>
+            @endfor
+            <!--begin::Actions-->
+            <div class="text-center d-flex justify-content-end py-4 px-4" >
+                <button type="submit" class="btn btn-primary" style="padding: 10px 70px">
+                    <span class="indicator-label">Confirm</span>
+                </button>
+            </div>
+        </form>
     </div>
 </div>
 <!---end::Post -->

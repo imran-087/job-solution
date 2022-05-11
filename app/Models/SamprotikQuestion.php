@@ -12,4 +12,9 @@ class SamprotikQuestion extends Model
     protected $casts = [
         'options' => 'json'
     ];
+
+    public function descriptions()
+    {
+        return $this->hasMany(QuestionDescription::class, 'samprotik_ques_id', 'id');
+    }
 }

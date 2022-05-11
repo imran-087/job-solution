@@ -94,7 +94,7 @@ class WrittenQuestionController extends Controller
     {
         $sub_categories = WrittenQuestion::with('sub_category')->groupBy('sub_category_id')->get();
         $load = 'false';
-        $questions = null;
+        $instructions = null;
         $details = null;
         //dd($questions);
         if ($request->has('sub_category')) {

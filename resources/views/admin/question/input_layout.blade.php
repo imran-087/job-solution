@@ -3,7 +3,7 @@
     <div class="messages"></div>
     {{-- csrf token  --}}
    
-   @if($type == 'passage')
+    @if($type == 'passage')
     <div class="card" style="margin-top:20px !important; border:7px solid #F2F5F7; border-radius:5px; padding:5px">
         <div class="card-body pt-4 " style="padding-bottom: 0px !important">
             <!--begin::Input group-->
@@ -35,7 +35,7 @@
             </div>
         </div>
     </div>
-   @endif
+    @endif
     
     @for($i = 0; $i < $number; $i++)
     <div class="card" style="margin-top:20px !important; border:7px solid #F2F5F7; border-radius:5px; padding:5px">
@@ -53,6 +53,7 @@
                                 <span class="required text-uppercase fw-bolder" style="font-size: 16px">Question : {{ $i+1 }} </span>
                             </label>
                             <input type="hidden" name="type" value="{{ $type }}">
+                            <input type="hidden" name="number" value="{{ $number }}">
                             <!--end::Label-->
                             <input type="text" class="form-control form-control-solid @error('question.*') is-invalid @enderror" placeholder="Enter Question" name="question[]" value="{{ old('question.*') }}"/>
                             @if($type == 'image')

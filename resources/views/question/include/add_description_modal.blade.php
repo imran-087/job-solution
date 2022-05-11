@@ -33,7 +33,7 @@
                     <!--begin::Heading-->
                     <div class="mb-13 text-center">
                         <!--begin::Title-->
-                        <h1 class="mb-3">Add New Question Description</h1>
+                        <h1 class="mb-3">Add New Description</h1>
                         <!--end::Title-->
                         <!--begin::Description-->
                         <div class="text-muted fw-bold fs-5">Fill up the form and submit
@@ -46,7 +46,7 @@
                     <div class="d-flex flex-column mb-8 fv-row">
                         <!--begin::Label-->
                         <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="required">Question Descrption</span>
+                            <span class="required">Descrption</span>
                         </label>
                         <!--end::Label-->
                         <textarea name="description" id="kt_docs_ckeditor_classic" class="form-control form-control-solid h-100px"></textarea>
