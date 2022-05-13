@@ -33,7 +33,7 @@
                     <!--begin::Item-->
                     <li class="breadcrumb-item text-muted">Written Question</li>
                     <!--end::Item-->
-                   
+
                 </ul>
                 <!--end::Breadcrumb-->
             </div>
@@ -64,7 +64,7 @@
                             <div class="d-flex flex-column flex-lg-row">
                                 <!--begin::Sidebar-->
                                 <div class="flex-column flex-lg-row-auto w-100 w-lg-275px mb-10 me-lg-20">
-                                   
+
                                     <!--begin::Catigories-->
                                     <div class="mb-15">
                                         <h4 class="text-black mb-5">Sub Category</h4>
@@ -83,13 +83,13 @@
                                         <!--end::Menu-->
                                     </div>
                                     <!--end::Catigories-->
-                                    
+
                                 </div>
                                 <!--end::Sidebar-->
-                                
+
                             </div>
                             <!--end::Layout-->
-                            
+
                         </div>
                         <!--end::Body-->
                     </div>
@@ -104,15 +104,16 @@
                             <h3>{{ $details->name }}</h3>
                             <h5>{{ $details->title }}</h5>
                         </div>
-                        @foreach($instructions as $instruction)
+                        @foreach($parent_instructions as $instruction)
                         <div >
                             <p style="margin-left: 10px !important">{{ $instruction->instruction_no }} &nbsp; {{ $instruction->instruction }}</p>
                         </div>
-                            @foreach($instruction->questions as $question)
+                            @foreach($instruction->question_instruction as $question)
                             <!--begin::Body-->
+                            @foreach ($question->questions as $question)
                             <div class="card-body pb-0">
                                 <div class="row">
-                                    
+
                                     <div class="col-md-12">
                                         <p>{{ $question->question_no }}.  &nbsp; {{ $question->question }}</p>
                                     </div>
@@ -121,7 +122,26 @@
                                     <div class="col-md-10">
                                         <p> answer:  &nbsp; {{ $question->answer }}</p>
                                     </div>
-                                    
+
+                                </div>
+                            </div>
+                            @endforeach
+                            <!--end::Body-->
+                            @endforeach
+                            @foreach($instruction->questions as $question)
+                            <!--begin::Body-->
+                            <div class="card-body pb-0">
+                                <div class="row">
+
+                                    <div class="col-md-12">
+                                        <p>{{ $question->question_no }}.  &nbsp; {{ $question->question }}</p>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <p> answer:  &nbsp; {{ $question->answer }}</p>
+                                    </div>
+
                                 </div>
                             </div>
                             <!--end::Body-->
@@ -129,8 +149,8 @@
                         @endforeach
                     </div>
                     <!--end::Feeds Widget 2-->
-                </div>  
-                @endif 
+                </div>
+                @endif
             </div>
         </div>
         <!--end::Container-->

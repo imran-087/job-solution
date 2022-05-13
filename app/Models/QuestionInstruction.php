@@ -13,6 +13,6 @@ class QuestionInstruction extends Model
 
     public function questions()
     {
-        return $this->hasMany(WrittenQuestion::class, 'instruction_id', 'id');
+        return $this->hasMany(WrittenQuestion::class);
     }
 }

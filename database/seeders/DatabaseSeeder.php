@@ -26,7 +26,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             AdminSeeder::class,
-            MainCategorySeeder::class
+            MainCategorySeeder::class,
+            YearSeeder::class,
         ]);
     }
 }

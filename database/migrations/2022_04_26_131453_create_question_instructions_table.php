@@ -18,8 +18,8 @@ class CreateQuestionInstructionsTable extends Migration
             $table->foreignId('question_parent_instruction_id')->constrained();
             $table->foreignId('main_category_id')->constrained();
             $table->foreignId('sub_category_id')->constrained();
-            $table->foreignId('subject_id')->constrained()->nullable();
-            $table->foreignId('year_id')->constrained()->nullable();
+            $table->foreignId('subject_id')->nullable()->constrained();
+            $table->foreignId('year_id')->nullable()->constrained();
             $table->string('instruction_no');
             $table->text('instruction')->nullable();
             $table->string('mark')->nullable();

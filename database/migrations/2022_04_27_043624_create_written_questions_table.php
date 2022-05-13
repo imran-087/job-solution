@@ -15,12 +15,12 @@ class CreateWrittenQuestionsTable extends Migration
     {
         Schema::create('written_questions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('question_parent_instruction_id')->constrained()->nullable();
-            $table->foreignId('instruction_id')->constrained('question_instructions')->nullable();
+            $table->foreignId('question_parent_instruction_id')->nullable()->constrained();
+            $table->foreignId('question_instruction_id')->nullable()->constrained();
             $table->foreignId('main_category_id')->constrained();
             $table->foreignId('sub_category_id')->constrained();
-            $table->foreignId('subject_id')->constrained()->nullable();
-            $table->foreignId('year_id')->constrained()->nullable();
+            $table->foreignId('subject_id')->nullable()->constrained();
+            $table->foreignId('year_id')->nullable()->constrained();
             $table->string('question_no')->nullable();
             $table->text('question');
             $table->text('question_or')->nullable();
