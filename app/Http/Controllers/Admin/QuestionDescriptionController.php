@@ -190,7 +190,14 @@ class QuestionDescriptionController extends Controller
                 ->addIndexColumn()
 
                 ->editColumn('question_id', function ($row) {
-                    return Str::limit($row->question->question, 15);
+                    if ($row->question_id != null) {
+                        return Str::limit($row->question->question, 15);
+                    }
+                })
+                ->editColumn('samprotik_ques_id', function ($row) {
+                    if ($row->samprotik_ques_id != null) {
+                        return Str::limit($row->samprotik_question->question, 15);
+                    }
                 })
                 ->editColumn('description', function ($row) {
                     return  htmlspecialchars_decode($row->description);
@@ -221,7 +228,7 @@ class QuestionDescriptionController extends Controller
                     </div>';
                     return $btn;
                 })
-                ->rawColumns(['action', 'created_at', 'question_id', 'description'])
+                ->rawColumns(['action', 'created_at', 'question_id', 'samprotik_ques_id', 'description'])
                 ->make(true);
         }
 

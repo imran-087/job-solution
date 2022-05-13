@@ -8,6 +8,7 @@ use App\Models\Question;
 use App\Models\BookmarkType;
 use Illuminate\Http\Request;
 use App\Models\QuestionOption;
+use App\Models\SamprotikBookmark;
 use Illuminate\Support\Facades\Auth;
 
 class QuestionActivityController extends Controller
@@ -121,13 +122,13 @@ class QuestionActivityController extends Controller
     //     }
     // }
 
-    //store bookmark
+    //store mcq-question bookmark
     public function storeBookmark(Request $request)
     {
 
         //dd($request->question_id);
         if (!Auth::check()) {
-            dd('notauth');
+            //dd('notauth');
             return response()->json([
                 'error' => true,
                 'message' => 'Please login to add a bookmark.'
@@ -187,6 +188,7 @@ class QuestionActivityController extends Controller
             }
         }
     }
+    // remove bookmark 
     public function bookmarkRemove($id)
     {
         //dd($id);
@@ -202,6 +204,55 @@ class QuestionActivityController extends Controller
                 'error' => true,
                 'message' => 'Failed !'
             ]);
+        }
+    }
+
+    // samprotik question bookmark 
+    public function samprotikBookmark($id, $category)
+    {
+        if (!Auth::check()) {
+            //dd('unauth');
+            return response()->json([
+                'error' => true,
+                'message' => 'Please login to add bookmark.'
+            ]);
+        } else {
+            $bookmark = SamprotikBookmark::where('question_id', $id)->first();
+            //dd($bookmark);
+            if ($bookmark) {
+                if ($bookmark->user_id == Auth::user()->id) {
+                    return response()->json([
+                        'error' => true,
+                        'message' => 'You alreday bookmarked this question!.'
+                    ]);
+                } else {
+                    //dd('ok');
+                    $bookmark = new SamprotikBookmark();
+                    $bookmark->question_id = $id;
+                    $bookmark->category = $category;
+                    $bookmark->user_id = Auth::user()->id;
+
+                    if ($bookmark->save()) {
+                        return response()->json([
+                            'success' => true,
+                            'message' => 'Bookmarked Added!'
+                        ], 200);
+                    }
+                }
+            } else {
+                //dd('here');
+                $bookmark = new SamprotikBookmark();
+                $bookmark->question_id = $id;
+                $bookmark->category = $category;
+                $bookmark->user_id = Auth::user()->id;
+
+                if ($bookmark->save()) {
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Bookmarked Added!'
+                    ], 200);
+                }
+            }
         }
     }
 }

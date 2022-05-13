@@ -16,4 +16,14 @@ class WrittenQuestion extends Model
     {
         return $this->belongsTo(SubCategory::class);
     }
+
+    public function question_instruction()
+    {
+        return $this->belongsTo(QuestionInstruction::class, 'id', 'instruction_id');
+    }
+
+    public function question_parent_instruction()
+    {
+        return $this->belongsTo(QuestionParentInstruction::class);
+    }
 }

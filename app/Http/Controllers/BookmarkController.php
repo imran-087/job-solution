@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Bookmark;
 use Illuminate\Http\Request;
+use App\Models\SamprotikBookmark;
 use Illuminate\Support\Facades\Auth;
 
 class BookmarkController extends Controller
@@ -14,6 +15,13 @@ class BookmarkController extends Controller
             ->paginate(5);
         //dd($bookmarks);
         return view('user.bookmark_question', compact('bookmarks'));
+    }
+    public function getSamprotikBookmark($id)
+    {
+        $bookmarks = SamprotikBookmark::with(['samprotik_ques'])->where('user_id', Auth::user()->id)
+            ->paginate(5);
+        //dd($bookmarks);
+        return view('user.samprotik_bookmark_question', compact('bookmarks'));
     }
 
     public function getBookmarkByCategory($user, $category)

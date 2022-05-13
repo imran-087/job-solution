@@ -113,10 +113,11 @@
     //edit Question
     $('.editQuestion').on('click', function() {
         var id = $(this).data(id)
-        //console.log(id)
+        var ques_type = $(this).data('ques_type')
+        console.log(ques_type)
         $.ajax({
             type:"GET",
-            url: "{{ url('/question/edit-question')}}"+'/'+id.id,
+            url: "{{ url('/question/edit-question')}}"+'/'+id.id+'/'+ques_type,
             dataType: 'json',
             success:function(data){
                 $("#edited_question_view_modal").html(data.html);

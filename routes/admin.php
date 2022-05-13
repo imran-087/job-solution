@@ -137,7 +137,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('question/tag/tag-added', 'TagController@addTag')->name('question.add-tag');
 
         ############ Description Route #############
-        //Question Description
+        // Description
         Route::get('/description/question-description', 'QuestionDescriptionController@index')->name('question-description.index');
         Route::post('/description/question-description/store', 'QuestionDescriptionController@store')->name('question-description.store');
         Route::get('/description/question-description/create', 'QuestionDescriptionController@create')->name('question-description.create');
@@ -188,6 +188,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/question/written-question/store', 'WrittenQuestionController@store')->name('written.store');
         Route::get('/question/written-question/show', 'WrittenQuestionController@show')->name('written.show');
 
+        ######### Written Parent Instruction ##########
+        Route::get('/question/written-question/parent-instrction', 'ParentInstructionController@create')->name('written.parent-instruction.create');
+        Route::post('/question/written-question/parent-instrction', 'ParentInstructionController@store')->name('written.parent-instruction.store');
 
         /*
         |--------------------------------------------------------------------------

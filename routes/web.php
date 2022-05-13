@@ -79,7 +79,7 @@ Route::get('/jobs/{category}/{sub_category}/{subject}', [QuestionController::cla
 Route::get('/single-question', [QuestionController::class, 'singleQuestion'])->name('question.single-question');
 
 //edit question
-Route::get('/question/edit-question/{id}', [QuestionController::class, 'edit'])->name('question.edit-question');
+Route::get('/question/edit-question/{id}/{type?}', [QuestionController::class, 'edit'])->name('question.edit-question');
 Route::post('/question/edit-question/update', [QuestionController::class, 'update'])->name('question.update-question');
 
 //subject wise question
@@ -95,6 +95,7 @@ Route::get('/question/view-count/{id}', [QuestionActivityController::class, 'vie
 Route::get('/question/bookmark/{id}/{catid}', [QuestionActivityController::class, 'bookmark'])->name('question.bookmark');
 Route::post('/question/bookmark', [QuestionActivityController::class, 'storeBookmark']);
 Route::get('/question/bookmark-remove/{id}', [QuestionActivityController::class, 'bookmarkRemove'])->name('question.bookmark-remove');
+Route::get('/samprotik-question/bookmark/{id}/{cat}', [QuestionActivityController::class, 'samprotikBookmark'])->name('samprotik-question.bookmark');
 
 //comment
 Route::post('question/comment/store', [CommentController::class, 'store'])->name('question.comment-store');
@@ -135,6 +136,7 @@ Route::middleware('auth')->name('user.')->group(function () {
 
   ###**  Bookmark **###
   Route::get('/my-bookmark/user={user}', [BookmarkController::class, 'getBookmark'])->name('bookmark');
+  Route::get('/my-bookmark/samprotik/user={user}', [BookmarkController::class, 'getSamprotikBookmark'])->name('samprotik.bookmark');
   Route::get('/my-bookmark/user={user}/category={category}', [BookmarkController::class, 'getBookmarkByCategory'])->name('bookmark.category');
   Route::get('/my-bookmark/bookmark-type', [BookmarkController::class, 'getBookmarkByType'])->name('bookmark.bookmark-type');
 });

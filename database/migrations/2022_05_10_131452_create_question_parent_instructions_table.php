@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateQuestionInstructionsTable extends Migration
+class CreateQuestionParentInstructionsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,17 +13,14 @@ class CreateQuestionInstructionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('question_instructions', function (Blueprint $table) {
+        Schema::create('question_parent_instructions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('question_parent_instruction_id')->constrained();
-            $table->foreignId('main_category_id')->constrained();
             $table->foreignId('sub_category_id')->constrained();
-            $table->foreignId('subject_id')->constrained()->nullable();
-            $table->foreignId('year_id')->constrained()->nullable();
-            $table->string('instruction_no');
-            $table->text('instruction')->nullable();
+            $table->string('parent_instruction_no');
+            $table->text('parent_instruction')->nullable();
             $table->string('mark')->nullable();
             $table->integer('created_user_id');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -35,6 +32,6 @@ class CreateQuestionInstructionsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('question_instructions');
+        Schema::dropIfExists('question_parent_instructions');
     }
 }

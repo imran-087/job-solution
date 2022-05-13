@@ -14,6 +14,10 @@ class QuestionDescription extends Model
     {
         return $this->belongsTo(Question::class);
     }
+    public function samprotik_question()
+    {
+        return $this->belongsTo(SamprotikQuestion::class, 'samprotik_ques_id', 'id');
+    }
 
     public function edited_descriptions()
     {

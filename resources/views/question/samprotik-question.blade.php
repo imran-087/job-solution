@@ -146,6 +146,7 @@
                         </h3>
                        
                         <div class="card-toolbar">
+                            
                            <!--begin::Menu-->
                            <button type="button" class="btn btn-sm btn-light btn-active-primary fw-bold" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Action</button>
                             
@@ -158,7 +159,7 @@
                                 <!--end::Heading-->
                                 <!--begin::Menu item-->
                                 <div class="menu-item px-3">
-                                    <a href="javascript:;" class="menu-link px-3 editQuestion" data-id="{{ $question->id }}">Edit Question</a>
+                                    <a href="javascript:;" class="menu-link px-3 editQuestion" data-id="{{ $question->id }}" data-ques_type="samprotik">Edit Question</a>
                                 </div>
                                 <!--end::Menu item-->
                                 <!--begin::Menu item-->
@@ -175,6 +176,7 @@
                             </div>
                             <!--end::Menu 3-->
                             <!--end::Menu--> 
+                            
                         </div>
                     </div>
                     <div class="card-body">
@@ -183,15 +185,38 @@
                                 <p class="text-gray-800 fw-bold " > 
                                   <span style="color:green; font-weight:bold">answer:</span> {{$question->answer }}</p>
                             </div>
+                             
+                            <div class="d-flex justify-content-start mt-2">  
+                                         
+                                <button type="button" class="btn btn-sm  btn-light me-3">
+                                    <a href="#">@if($question->category == 'bn') Bangladesh @elseif($question->category == 'in') International @else Bangladesh & International @endif</a>
+                                </button>       
+                            </div>
                         </div>
-                        <div class="d-flex justify-content-end mt-2 text-gray-700 fw-bold ">
+                        {{-- <div class="float-right text-gray-700 fw-bold ">
                             {{$question->created_at->diffForHumans()}}
-                        </div>
+                        </div> --}}
                     </div>
                     <div class="card-footer" style="padding-top:0px !important; padding-bottom:0px !important;">
 
                         <!--begin::Question Activity-->
-                        {{-- @include('question.include.activity') --}}
+                        <div class="d-flex justify-content-end mt-2" style="margin-bottom: -40px !important;">
+                            <a href="javascript:;" class="comment me-2 btn btn-sm btn-light btn-color-muted btn-active-light-info px-4 py-2"  
+                            data-text="comment" data-id="{{ $question->id }}"  data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-dark" title="Add Comment">
+                            <i class="fas fa-comment-alt"></i> {{$question->comments->count()}}
+                            </a>
+                            <a href="javascript:;" class="samprotik-bookmark me-2 btn btn-sm btn-light btn-color-muted btn-active-light-primary px-4 py-2"  
+                            data-id="{{ $question->id }}" data-category="{{ $question->category }}" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-custom-class="tooltip-dark" title="Bookmark">
+                            <i class="fas fa-bookmark"></i>
+                            </a>
+                            <a href="javascript:;" class=" btn btn-sm btn-light btn-color-muted btn-active-light-danger px-4 py-2 vote me-2"  data-id="{{ $question->id }}" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="tooltip-dark" title="Like">
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen030.svg-->
+                            <i class="fas fa-heart"></i>
+                            <!--end::Svg Icon-->{{$question->vote}}</a>
+                            <span style="cursor:default" class="btn btn-sm btn-light btn-color-muted btn-active-light-success px-4 py-2 me-2" data-bs-toggle="tooltip" data-bs-placement="bottom" data-bs-custom-class="tooltip-dark" title="Total view">
+                                <i class="fas fa-eye fa-xl"></i> {{$question->view_count}} 
+                            </span>
+                        </div>
                         <!--end::Question Activity-->
 
                         <!--begin::Accordion-->
@@ -342,14 +367,31 @@
 </div>
 <!---end::Post -->
 
-<!---start::Bookmark modal -->
-@include('question.include.add_bookmark_modal')
-<!---end::Bookmark modal -->
 
 @endsection
 
 @push('script')
 
+    <script type="text/javascript">
+    //samprotik bookmark
+    $('.samprotik-bookmark').on('click', function(){
+        var id = $(this).data('id')
+        var category = $(this).data('category')
+        //alert(id)
+        $.ajax({
+            type:"GET",
+            url: "{{ url('samprotik-question/bookmark')}}"+'/'+id + '/'+category,
+            dataType: 'json',
+            success:function(data){
+                if(data.success){
+                    toastr.success(data.message)
+                }else{
+                    toastr.error(data.message)
+                }
+            }
+        })
+    });
+    </script>
     @include('common.page_script')
 
     

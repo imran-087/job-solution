@@ -66,6 +66,7 @@ class Question extends Model
         return $this->morphMany(Comment::class, 'commentable');
     }
 
+
     //local scope
     public function scopeQuestion($query, $subcategory, $type)
     {

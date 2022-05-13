@@ -103,10 +103,10 @@ class SubCategoryController extends Controller
             'name' => ['required'],
             'status' => ['required'],
             'category' => ['required'],
-            'duration' => ['numeric'],
-            'code_1' => ['numeric'],
-            'code_2' => ['numeric'],
-            'mark' => ['numeric'],
+            // 'duration' => ['numeric'],
+            // 'code_1' => ['numeric'],
+            // 'code_2' => ['numeric'],
+            // 'mark' => ['numeric'],
             'year' => [$request->main_category == 3 ? 'nullable' : 'required'],
 
         ]);

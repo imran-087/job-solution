@@ -57,6 +57,7 @@
                         @endphp
                         <input type="text" class="form-control form-control-solid" name="bookmark_type" list="type_name">
                             <datalist id="type_name">
+                             
                                 @foreach($bookmark_types as $type)
                                 <option value="{{$type->type_name}}">
                                 @endforeach

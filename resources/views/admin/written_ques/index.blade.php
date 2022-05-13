@@ -58,9 +58,10 @@
     <!--end::Toolbar-->
 
     <!--begin::Post-->
-    <div class="post d-flex flex-column-fluid col-12  id=" kt_post">
+    <div class="post d-flex flex-column-fluid col-12"  id="kt_post">
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
+
             <!--begin::Card-->
             <div class="card" style="margin-top:20px">
                 <!--begin::Card body-->
@@ -162,7 +163,18 @@
                             </div>
                             <!--end::Col-->
                             <!--begin::Col-->
-                            <div class="col-md-3 offset-7 fv-row" style="border:3px solid #0095E8; border-radius:5px; padding:4px;">
+                            <div class="col-xl-3 offset-4 col-lg-3 col-md-3 col-sm-6 col-xs-6 fv-row offset-2">
+                                <label class="fs-6 fw-bold mb-2">Select type</label>
+                                <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                    data-placeholder="" name="type" id="type">
+                                    <option value="withIns" selected>With Instruction</option>
+                                    <option value="withoutIns">Without Instruction</option>
+                                </select>
+                               
+                            </div>
+                            <!--end:Col-->
+                            <!--begin::Col-->
+                            <div class="col-md-3  fv-row" >
                                 <label class="fs-6 fw-bold mb-2">Number of Question</label>
                                 <!--begin:Form-->
                                 <div id="kk_modal_new_samprotik_form" class="form me-4">
@@ -173,45 +185,7 @@
                             <!--end::Col-->
                         </div>
 
-                        <!--end::Input group-->
-                        <div class="card mb-10" style="margin-top:30px !important; border:7px solid #F2F5F7; border-radius:5px; padding:5px">
-                            <div class="card-body pt-4 " style="padding-bottom: 0px !important">
-                                <!--begin::Input group-->
-                                <div class="row g-9 pb-4">
-                                    <div class="row mt-7">
-                                        <div class="col-md-2">
-                                            <!--begin::Input group-->
-                                            <div class="d-flex flex-column mb-8 fv-row">
-                                                <!--begin::Label-->
-                                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                                    <div class="required">Instruction No. </div>
-                                                </label>
-                                                <!--end::Label-->
-                                                <input type="text" class="form-control form-control-solid" placeholder="Enter Ins. No." name="instruction_no" />
-                                            </div>
-                                            <!--end::Input group-->
-                                        </div>
-                                        <!--begin::Col-->
-                                        <div class="col-md-10 fv-row">
-                                            <!--begin::Label-->
-                                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                                <span class="required text-uppercase fw-bolder" style="font-size: 16px">Question Instruction </span>
-                                            </label>
-
-                                            <!--end::Label-->
-                                            <input type="text" class="form-control form-control-solid mb-2 @error('instruction') is-invalid @enderror" placeholder="Enter instruction" name="instruction" value="{{ old('instruction') }}" />
-
-                                            @error('instruction')
-                                            <span class="invalid-feedback" role="alert">
-                                                <strong>{{ $message }}</strong>
-                                            </span>
-                                            @enderror
-                                        </div>
-                                        <!-- end: col-->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                         <!--start::mcq question input--> 
                         <div id="written"></div>     
                         <!--end::mcq question input--> 
@@ -238,12 +212,14 @@
                 event.preventDefault();
                 //console.log('here')
                 var number = $('#number').val();
+                var type =  $("#type").find(':selected').val();
 
                 $.ajax({
                     type: "GET",
                     url: "{{ url('admin/question/written-question/create')}}",
                     data: {
                         number: number,
+                        type: type,
                     },
                     //If result found, this funtion will be called.
                     success: function(data) {

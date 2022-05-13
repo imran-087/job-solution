@@ -15,7 +15,8 @@ class CreateQuestionDescriptionsTable extends Migration
     {
         Schema::create('question_descriptions', function (Blueprint $table) {
             $table->id();
-            $table->integer('question_id');
+            $table->integer('question_id')->nullable();
+            $table->integer('samprotik_ques_id')->nullable();
             $table->longText('description');
             $table->integer('best_description')->nullable();
             $table->unsignedBigInteger('vote')->default(0);

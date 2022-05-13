@@ -39,7 +39,7 @@
                 </div>
                 <!--end::Heading-->
                 <input type="hidden" name="question_id" value="{{ $question->id }}">
-                <input type="hidden" name="type" value="{{ $question->question_type }}">
+               
                 <!--begin::Input group-->
                 <div class="d-flex flex-column mb-8 fv-row">
                     <!--begin::Label-->
@@ -63,6 +63,7 @@
                                 <span class="required">Option 1</span>
                             </label>
                             <!--end::Label-->
+                            <input type="hidden" name="type" value="{{ $question->question_type }}">
                             <input type="text" class="form-control form-control-solid" placeholder="Enter Title"
                                 name="option_1" value="{{ $question_option->option_1 }}"/>
                             <div class="help-block with-errors title-error"></div>
@@ -143,15 +144,16 @@
                     </div>
                 </div>
                 <!--end::Input group-->
-                @elseif($question->question_type == 'samprotik')
+                @elseif($type == 'samprotik')
                 <div class="col-md-12" style="color: green; font-weight:bold">
                     <!--begin::Label-->
                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                         <span class="required">Answer</span>
                     </label>
                     <!--end::Label-->
+                    <input type="hidden" name="type" value="{{ $type }}">
                     <input type="text" class="form-control form-control-solid" placeholder="Enter Title"
-                        name="answer" value="{{ $question_option->answer }}" />
+                        name="answer" value="{{ $question->answer }}" />
                     <div class="help-block with-errors answer-error"></div>
                 </div>
                 @elseif($question->question_type == 'written')
@@ -169,7 +171,7 @@
                 <div class="text-center">
                     <button type="reset" id="kk_modal_new_service_cancel" class="btn btn-light me-3">Close</button>
                     <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary">
-                        <span class="indicator-label">Submit</span>
+                        <span class="indicator-label">Update</span>
                         <span class="indicator-progress">Please wait...
                             <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                     </button>

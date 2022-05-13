@@ -209,6 +209,14 @@
                         </span>
                         <div class="menu-sub menu-sub-accordion menu-active-bg">
                             <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/question/written-question*') ? 'active' : '' }}" href="{{ route('admin.written.parent-instruction.create') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Parent Instruction</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
                                 <a class="menu-link {{ request()->is('admin/question/written-question*') ? 'active' : '' }}" href="{{ route('admin.written.index') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
