@@ -187,6 +187,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/question/written-question/create', 'WrittenQuestionController@create')->name('written.create');
         Route::post('/question/written-question/store', 'WrittenQuestionController@store')->name('written.store');
         Route::get('/question/written-question/show', 'WrittenQuestionController@show')->name('written.show');
+        Route::get('/question/written-question/edit/{id}', 'WrittenQuestionController@edit')->name('written.edit');
+        Route::post('/question/written-question/update', 'WrittenQuestionController@update')->name('written.update');
 
         ######### Written Parent Instruction ##########
         Route::get('/question/written-question/parent-instrction', 'ParentInstructionController@create')->name('written.parent-instruction.create');

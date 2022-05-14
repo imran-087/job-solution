@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Models\MainCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use App\Models\QuestionParentInstruction;
 
 class ParentInstructionController extends Controller
@@ -29,6 +30,7 @@ class ParentInstructionController extends Controller
             'parent_instruction_no' => $request->instruction_no,
             'parent_instruction' => $request->instruction,
             'mark' => $request->mark,
+            'created_user_id' => Auth::guard('admin')->user()->id,
         ]);
         return redirect()->back()->with('success', 'Parent Instruction saved');
     }

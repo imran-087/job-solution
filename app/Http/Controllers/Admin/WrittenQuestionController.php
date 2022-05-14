@@ -106,17 +106,51 @@ class WrittenQuestionController extends Controller
         $sub_categories = WrittenQuestion::with('sub_category')->groupBy('sub_category_id')->get();
         $load = 'false';
         $parent_instructions = null;
-        $details = null;
+        $exam_detail = null;
         //dd($questions);
         if ($request->has('sub_category')) {
             //dd('here');
-            $details = SubCategory::find($request->sub_category);
-            $parent_instructions = QuestionParentInstruction::with('questions', 'question_instruction')->where('sub_category_id', $request->sub_category)->get();
+            $exam_detail = SubCategory::find($request->sub_category);
+            $parent_instructions = QuestionParentInstruction::with('written_questions', 'question_instruction')->where('sub_category_id', $request->sub_category)->get();
+            $without_parent_questions = WrittenQuestion::where([
+                'sub_category_id' => $request->sub_category,
+                'question_parent_instruction_id' => null,
+                'question_instruction_id' => null,
+            ])->get();
             $load = 'true';
         }
-        //dd($instructions);
-        return view('admin.written_ques.view_question', compact('parent_instructions', 'sub_categories', 'details', 'load'));
+        //dd($parent_instructions);
+        return view('admin.written_ques.view_question', compact('parent_instructions', 'without_parent_questions', 'sub_categories', 'exam_detail', 'load'));
     }
 
+    public function edit($id)
+    {
+        $question = WrittenQuestion::where('id', $id)->first();
+        //dd($question);
+        $view = view('admin.written_ques.edit', compact('question'))->render();
 
+        return response([
+            'html' => $view
+        ]);
+    }
+
+    public function update(Request $request)
+    {
+        $written_question = WrittenQuestion::find($request->question_id);
+
+        $written_question->question = $request->question;
+        $written_question->answer = $request->answer;
+
+        if ($written_question->update()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Question Updated'
+            ], 200);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Failed!'
+            ]);
+        }
+    }
 }

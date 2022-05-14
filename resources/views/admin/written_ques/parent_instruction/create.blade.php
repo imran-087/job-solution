@@ -141,7 +141,7 @@
                                                 <div class="d-flex flex-column mb-8 fv-row">
                                                     <!--begin::Label-->
                                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                                        <div class="required">IN. </div>
+                                                        <div class="required">INo. </div>
                                                     </label>
                                                     <!--end::Label-->
                                                     <input type="text" class="form-control form-control-solid" placeholder="INo." name="instruction_no" /> 

@@ -16,7 +16,7 @@ class QuestionParentInstruction extends Model
         return $this->hasMany(QuestionInstruction::class);
     }
 
-    public function questions()
+    public function written_questions()
     {
         return $this->hasMany(WrittenQuestion::class);
     }
