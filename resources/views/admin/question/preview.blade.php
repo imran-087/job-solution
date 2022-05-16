@@ -58,7 +58,7 @@
             <!--begin::Heading-->
             <div class="mb-13 text-center">
                 <!--begin::Title-->
-                <h1 class="mb-3 mt-3">Preview Before Confirm</h1>
+                <h1 class="mb-3 mt-3">Preview</h1>
                 <!--end::Title-->
                
             </div>

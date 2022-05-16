@@ -99,7 +99,7 @@ class SubjectController extends Controller
     {
         //dd($request->all());
         $validator = Validator::make($request->all(), [
-            'name' => ['required'],
+            'name.*' => ['required'],
             'status' => ['required'],
             'main_category' => ['required'],
             'sub_category' => [$request->main_category == 1 ? 'nullable' : 'required'],
@@ -165,36 +165,38 @@ class SubjectController extends Controller
                 }
             } else { //create new category
 
-                $subject = new Subject();
+                foreach ($request->name as $key => $value) {
+                    $subject = new Subject();
+                    $subject->name = $request->name[$key];
+                    $subject->title = $request->title;
+                    $subject->description = $request->description;
+                    $subject->status =  $request->status;
+                    $subject->sub_category_id =  $sub_category;
+                    $subject->main_category_id =  $request->main_category;
+                    $subject->slug =  $this->subjectSlug($request->name[$key], $request->sub_category, $request->main_category);
+                    $subject->created_user_id =  Auth::guard('admin')->user()->id;
 
-                $subject->name = $request->name;
-                $subject->title = $request->title;
-                // $subject->parent_id = $request->parent ?? 0;
-                $subject->description = $request->description;
-                $subject->status =  $request->status;
-                $subject->sub_category_id =  $sub_category;
-                $subject->main_category_id =  $request->main_category;
-                $subject->slug =  $this->subjectSlug($request->name, $request->sub_category, $request->main_category);
-                $subject->created_user_id =  Auth::guard('admin')->user()->id;
+                    $subject->created_at = Carbon::now();
 
-                $subject->created_at = Carbon::now();
-
-
-                if ($subject->save()) {
+                    $subject->save();
+                    //assign parent node if parent node is not null
                     if ($request->parent && $request->parent !== '' && $request->parent !== 'none') {
                         $parent = Subject::find($request->parent);
                         $parent->appendNode($subject);
                     }
-                    return response()->json([
-                        'success' => true,
-                        'message' => 'Subject saved successfully!'
-                    ], 200);
-                } else {
-                    return response()->json([
-                        'error' => true,
-                        'message' => 'Failed!.'
-                    ]);
                 }
+
+                // if ($subject->save()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Subject saved successfully!'
+                ], 200);
+                // } else {
+                //     return response()->json([
+                //         'error' => true,
+                //         'message' => 'Failed!.'
+                //     ]);
+                // }
             }
         }
     }

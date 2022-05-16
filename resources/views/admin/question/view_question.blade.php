@@ -116,6 +116,49 @@
 	        });
 	}
 
+    //show description form
+    $(document).on('click', '.add-description', function(){
+        $(this).closest('div').find('.des-form').toggleClass('d-none');
+    })
+
+    //add description
+    
+    $(document).on('submit', '#kk_add_description_form', function(e){
+        e.preventDefault()
+        //console.log('here')
+        $('.with-errors').text('')
+        $('#kk_modal_new_service_submit').attr('disabled','true')
+        var thisadd = $(this);
+        var formData = new FormData(this);
+        $.ajax({
+            type:"POST",
+            url: "{{ url('admin/description/question-description/store')}}",
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                if(data.success ==  false || data.success ==  "false"){
+                    var arr = Object.keys(data.errors);
+                    var arr_val = Object.values(data.errors);
+                    for(var i= 0;i < arr.length;i++){
+                    $('.'+arr[i]+'-error').text(arr_val[i][0])
+                    }
+                }else if(data.error || data.error == 'true'){
+                    var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                    $('#kk_modal_new_question_form').find('.messages').html(alertBox).show();
+                }else{
+                    toastr.success(data.message);
+                    thisadd.parent().parent("div").find('.des-form').addClass('d-none')
+                }
+
+                $('.indicator-label').show()
+                $('.indicator-progress').hide()
+                $('#kk_modal_new_service_submit').removeAttr('disabled')
+            }
+        });
+    })
+
 </script>
 @endpush
 

@@ -62,7 +62,7 @@ jQuery(function () {
         }
     });
 
-    // Get Subject
+   // Get Subject
     $('#sub_category').on('change', function () {
         var subCategoryID = $(this).val();
         if (subCategoryID) {
@@ -83,7 +83,7 @@ jQuery(function () {
                                 '<option value="' + subject.id + '">' + subject.name   + ' - ' + subject.sub_category.name +'</option>');
                             }else{
                                 $('select[name="subject"]').append(
-                                '<option value="' + subject.id + '">' + subject.name   + ' - '+ subject.main_category.name + '</option>');
+                                '<option value="' + subject.id + '">' + subject.name   +' - '+ subject.main_category.name + '</option>');
                             }
                             
                         });
@@ -120,7 +120,7 @@ jQuery(function () {
                                 '<option value="' + parent_subject.id + '">' + parent_subject.name   + ' - ' + parent_subject.sub_category.name +'</option>');
                             }else{
                                 $('select[name="parent"]').append(
-                                '<option value="' + parent_subject.id + '">' + parent_subject.name   + ' - '+ parent_subject.main_category.name + '</option>');
+                                '<option value="' + parent_subject.id + '">' + parent_subject.name   + ' - ' + parent_subject.main_category.name +'</option>');
                             }
                         });
                     }

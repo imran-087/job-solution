@@ -247,25 +247,7 @@
                             <div class="help-block with-errors sub_category-error"></div>
                         </div>
                         <!--end::Col-->
-                        <!--begin::Col-->
-                        {{-- <div class="col-md-6 fv-row">
-                            <label class="required fs-6 fw-bold mb-2">Select Parent (optional)</label>
-                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                data-placeholder="Select parent" name="parent" id="parent">
-                                <option value="">Choose ...</option>
-                                @foreach ($parent_subjects as $parent_subject)
-                                    <option value="{{ $parent_subject->id }}">{{ $parent_subject->name }} &nbsp; 
-                                        @if($parent_subject->sub_category_id == 0)
-                                            - &nbsp; {{ $parent_subject->main_category->name }}
-                                        @else
-                                            - &nbsp; {{ $parent_subject->sub_category->name }} 
-                                            -  &nbsp; {{ $parent_subject->main_category->name }}
-                                        @endif
-                                    </option>
-                                @endforeach
-                            </select>
-                            <div class="help-block with-errors parent-error"></div>
-                        </div> --}}
+                       
                         <!--begin::Col-->
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-bold mb-2">Select Parent (optional)</label>
@@ -288,11 +270,23 @@
                             <span class="required">Subject Name</span>
                         </label>
                         <!--end::Label-->
-                        <input type="text" class="form-control form-control-solid" placeholder="Enter Service Name"
-                            name="name" />
-                        <div class="help-block with-errors name-error"></div>
+                        <div class="row">
+                            <div class="col-md-11">
+                                <input type="text" class="form-control form-control-solid" placeholder="Enter subject name"
+                                    name="name[]" />
+                                <div class="help-block with-errors name-error"></div>
+                            </div>
+                            <div class="col-md-1">
+                                <button class="btn btn-info btn-icon btn-sm addRow" type="button"><i class="fas fa-plus"></i></button>
+                            </div>
+                        </div>
                     </div>
                     <!--end::Input group-->
+
+                    <!-- append dynamic input-->
+                    <div  class="newRow"></div>
+                    <!-- append dynamic input-->
+
                     <!--begin::Input group-->
                     <div class="d-flex flex-column mb-8 fv-row">
                         <!--begin::Label-->
@@ -581,6 +575,36 @@
             $('select[name="parent"]').val('').text('');
             $('#kt_docs_ckeditor_classic').val('').text('');
         }
+
+        //add new input field
+        $(document).on('click', '.addRow', function() {
+            var html = '';
+            html += '<div class="d-flex flex-column mb-8 fv-row dynamic-row">'
+               
+            html += '   <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
+            html += '        <span class="required">Subject Name</span>'
+            html += '    </label>'
+               
+            html += '    <div class="row">'
+            html += '        <div class="col-md-11">'
+            html += '            <input type="text" class="form-control form-control-solid" placeholder="Enter subject name" name="name[]" />'
+            html += '            <div class="help-block with-errors name-error"></div>'
+            html += '        </div>'
+            html += '        <div class="col-md-1">'
+            html += '            <button class="btn btn-danger btn-icon btn-sm removeRow" type="button"><i class="fas fa-minus"></i></button>'
+            html += '        </div>'
+            html += '    </div>'
+            html += '</div>'
+           
+            $(this).closest('.newRow').append(html);
+            $('.newRow').append(html);
+        });
+
+        // remove row
+        $(document).on('click', '.removeRow', function() {
+            $(this).closest('.dynamic-row').remove();
+            //$(this).remove();
+        });
 
     </script>
 @endpush

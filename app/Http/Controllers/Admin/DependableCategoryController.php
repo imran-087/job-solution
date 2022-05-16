@@ -9,7 +9,7 @@ use App\Models\SubCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
-class GetAllCategoryController extends Controller
+class DependableCategoryController extends Controller
 {
     public function getCategory($id)
     {
@@ -37,9 +37,10 @@ class GetAllCategoryController extends Controller
             return response()->json($subject);
         } else {
             if ($sub_category->category->main_category->id == 1) {
-                $subject = Subject::with('main_category')
+                $subject = Subject::with('main_category', 'parentsub')
                     ->where(['status' => 'active', 'main_category_id' => 1, 'sub_category_id' => 0])
                     ->get();
+                //dd($subject);
                 return response()->json($subject);
             } else {
                 $subject = '';
@@ -51,7 +52,7 @@ class GetAllCategoryController extends Controller
     public function getParentSubject($parent_id)
     {
         //dd($parent_id);
-        $subject = Subject::where('parent_id', $parent_id)->get();
+        $subject = Subject::with('parentsub')->where('parent_id', $parent_id)->get();
         //dd($subject);
 
         return response()->json($subject);

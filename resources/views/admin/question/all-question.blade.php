@@ -56,6 +56,35 @@
                         </span> {{$question->question_option->option_4 }}</p>
                 </div>
             </div>
+            
+            <div class="row">
+                <span class="add-description cursor-pointer "><i class="fas fa-plus-circle fa-2xl"></i> <b>Description</b> </span>
+                <!--end::Input group-->
+                @if($question->descriptions->count() > 0)
+                @foreach($question->descriptions as $description) 
+                <div class="row">
+                   
+                    <p class="text-gray-800 fw-bold mt-4 ml-4"> {{ $description->description }}</p>
+                </div>
+                @endforeach
+                @endif
+                <div class="d-flex flex-column mb-8 fv-row des-form d-none">
+                    <form id="kk_add_description_form" class="form">
+                        <div class="messages"></div>
+                        {{-- csrf token  --}}
+                        @csrf
+                        <input type="hidden" name="question" value="{{ $question->id }}">
+                        <div class="col-md-12 mb-5">
+                            <textarea name="description" class="form-control form-control-solid h-100px"></textarea>
+                        </div>
+                        <div class="col-md-2 offset-10">
+                            <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary btn-sm">
+                            <span class="indicator-label">add</span>
+                        </div>
+                    </form>
+                </div>
+            </div>
+           
         </div>
     </div>
 </div>

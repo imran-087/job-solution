@@ -107,6 +107,7 @@ class WrittenQuestionController extends Controller
         $load = 'false';
         $parent_instructions = null;
         $exam_detail = null;
+        $without_parent_questions = null;
         //dd($questions);
         if ($request->has('sub_category')) {
             //dd('here');
@@ -123,34 +124,88 @@ class WrittenQuestionController extends Controller
         return view('admin.written_ques.view_question', compact('parent_instructions', 'without_parent_questions', 'sub_categories', 'exam_detail', 'load'));
     }
 
-    public function edit($id)
+    public function edit($id, $type)
     {
-        $question = WrittenQuestion::where('id', $id)->first();
-        //dd($question);
-        $view = view('admin.written_ques.edit', compact('question'))->render();
+        if ($type == 'parent_instruction') {
+            $question = QuestionParentInstruction::where('id', $id)->first();
+            //dd($question);
+            $view = view('admin.written_ques.edit', compact('question', 'type'))->render();
 
-        return response([
-            'html' => $view
-        ]);
+            return response([
+                'html' => $view
+            ]);
+        } else if ($type == 'instruction') {
+            $question = QuestionInstruction::where('id', $id)->first();
+            //dd($question);
+            $view = view('admin.written_ques.edit', compact('question', 'type'))->render();
+
+            return response([
+                'html' => $view
+            ]);
+        } else if ($type == 'question') {
+            $question = WrittenQuestion::where('id', $id)->first();
+            //dd($question);
+            $view = view('admin.written_ques.edit', compact('question', 'type'))->render();
+
+            return response([
+                'html' => $view
+            ]);
+        }
     }
 
     public function update(Request $request)
     {
-        $written_question = WrittenQuestion::find($request->question_id);
+        //dd($request->all());
+        if ($request->type == 'question') {
+            $written_question = WrittenQuestion::find($request->question_id);
 
-        $written_question->question = $request->question;
-        $written_question->answer = $request->answer;
+            $written_question->question = $request->question;
+            $written_question->answer = $request->answer;
 
-        if ($written_question->update()) {
-            return response()->json([
-                'success' => true,
-                'message' => 'Question Updated'
-            ], 200);
-        } else {
-            return response()->json([
-                'error' => true,
-                'message' => 'Failed!'
-            ]);
+            if ($written_question->update()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Question updated'
+                ], 200);
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Failed!'
+                ]);
+            }
+        } elseif ($request->type == 'instruction') {
+            $question_instruction = QuestionInstruction::find($request->question_id);
+
+            $question_instruction->instruction = $request->question;
+
+            if ($question_instruction->update()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Child Instruction updated'
+                ], 200);
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Failed!'
+                ]);
+            }
+        }
+        if ($request->type == 'parent_instruction') {
+            $question_parent_instruction = QuestionParentInstruction::find($request->question_id);
+
+            $question_parent_instruction->parent_instruction = $request->question;
+
+            if ($question_parent_instruction->update()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Parent instruction updated'
+                ], 200);
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Failed!'
+                ]);
+            }
         }
     }
 }

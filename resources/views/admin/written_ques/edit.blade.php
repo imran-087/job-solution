@@ -37,6 +37,7 @@
                 </div>
                 <!--end::Heading-->
                 <input type="hidden" name="question_id" value="{{ $question->id }}">
+                <input type="hidden" name="type" value="{{ $type }}">
                 <!--begin::Input group-->
                 <div class="d-flex flex-column mb-8 fv-row">
                     <!--begin::Label-->
@@ -44,9 +45,18 @@
                         <span>Question</span>
                     </label>
                     <!--end::Label-->
+                    @if($type == 'parent_instruction')
+                    <input type="text" class="form-control form-control-solid" 
+                        name="question" value="{{ $question->parent_instruction }}"/>
+                    @elseif($type == 'instruction')
+                    <input type="text" class="form-control form-control-solid" 
+                        name="question" value="{{ $question->instruction }}"/>
+                    @else
                     <input type="text" class="form-control form-control-solid" 
                         name="question" value="{{ $question->question }}"/>
+                    @endif
                 </div>
+                @if($type == 'question')
                 <!--end::Input group-->
                 <div class="d-flex flex-column mb-8 fv-row">
                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
@@ -57,6 +67,7 @@
                     </div>
                    
                 </div>
+                @endif
                 <!--begin::Actions-->
                 <div class="text-center">
                     <a href="javascript:;" class="btn btn-light">

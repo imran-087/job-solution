@@ -345,7 +345,7 @@ class QuestionController extends Controller
     //all question
     public function allQuestion(Request $request)
     {
-        $questions = Question::with('question_option')->where('question_type', 'mcq')->paginate(6);
+        $questions = Question::with('question_option', 'descriptions')->where('question_type', 'mcq')->paginate(20);
         if ($request->ajax()) {
             dd('here');
             $view = view('admin.question.all-question', compact('questions'))->render();

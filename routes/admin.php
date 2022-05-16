@@ -163,11 +163,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/user-management/backend-user/change-status/{id}', 'BackendUserController@chnageStatus')->name('user-management.chnage-status');
 
         ############ Dependable setect input route ###############
-        Route::get('/get-category/{id}', 'GetAllCategoryController@getCategory');
-        Route::get('/get-sub-category/{id}', 'GetAllCategoryController@getSubCategory');
-        Route::get('/get-subject/{id}', 'GetAllCategoryController@getSubject');
-        Route::get('/get-question/{subject_id}', 'GetAllCategoryController@getQuestion');
-        Route::get('/get-parent-subject/{parent_id}', 'GetAllCategoryController@getParentSubject');
+        Route::get('/get-category/{id}', 'DependableCategoryController@getCategory');
+        Route::get('/get-sub-category/{id}', 'DependableCategoryController@getSubCategory');
+        Route::get('/get-subject/{id}', 'DependableCategoryController@getSubject');
+        Route::get('/get-question/{subject_id}', 'DependableCategoryController@getQuestion');
+        Route::get('/get-parent-subject/{parent_id}', 'DependableCategoryController@getParentSubject');
 
 
         ############## Samprotik Question ###############
@@ -187,7 +187,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/question/written-question/create', 'WrittenQuestionController@create')->name('written.create');
         Route::post('/question/written-question/store', 'WrittenQuestionController@store')->name('written.store');
         Route::get('/question/written-question/show', 'WrittenQuestionController@show')->name('written.show');
-        Route::get('/question/written-question/edit/{id}', 'WrittenQuestionController@edit')->name('written.edit');
+        Route::get('/question/written-question/edit/{id}/{type}', 'WrittenQuestionController@edit')->name('written.edit');
         Route::post('/question/written-question/update', 'WrittenQuestionController@update')->name('written.update');
 
         ######### Written Parent Instruction ##########

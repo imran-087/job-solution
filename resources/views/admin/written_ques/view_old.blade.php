@@ -109,8 +109,7 @@
                         <div class="d-flex justify-content-between">
                             
                             <p style="margin-left: 15px !important">{{ $parent_instruction->parent_instruction_no }} &nbsp; {{ $parent_instruction->parent_instruction }}</p>
-                            
-
+       
                         </div>
                             
                             @foreach($parent_instruction->written_questions as $question)
