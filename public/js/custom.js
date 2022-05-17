@@ -98,12 +98,12 @@ jQuery(function () {
         }
     });
 
-    // Get parent
+    // Get parent subject
     $('#sub_category').on('change', function () {
         var subCategoryID = $(this).val();
         if (subCategoryID) {
             $.ajax({
-                url: '/admin/get-subject/' + subCategoryID,
+                url: '/admin/get-parent-subject/' + subCategoryID,
                 type: "GET",
                 data: {
                     "_token": "{{ csrf_token() }}"
@@ -131,6 +131,39 @@ jQuery(function () {
             });
         } else {
             $('#parent_subject').empty();
+        }
+    });
+
+    // Get subparent subject
+    $('#parent').on('change', function () {
+        var parentID = $(this).val();
+        if (parentID) {
+            $.ajax({
+                url: '/admin/get-sub-parent-subject/' + parentID,
+                type: "GET",
+                data: {
+                    "_token": "{{ csrf_token() }}"
+                },
+                dataType: "json",
+                success: function (data) {
+                    if (data) {
+                        $('#sub_parent').empty();
+                        $('#sub_parent').append('<option value="">Choose...</option>');
+                        $('#sub_parent').append('<option value="none">No sub parent</option>');
+                        $.each(data, function (key, sub_parent_subject) {
+                            
+                            $('select[name="sub_parent"]').append(
+                            '<option value="' + sub_parent_subject.id + '">' + sub_parent_subject.name   + '</option>');
+                           
+                        });
+                    }
+                        else {
+                        $('#sub_parent_subject').empty(); 
+                    }
+                }
+            });
+        } else {
+            $('#sub_parent_subject').empty();
         }
     });
 

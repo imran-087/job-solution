@@ -262,6 +262,25 @@
                         <!--end::Col-->
                     </div>
                     <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="row g-9 mb-8">
+                        <div class="col-md-6">
+
+                        </div>
+                        <!--begin::Col-->
+                        <div class="col-md-6 fv-row">
+                            <label class="fs-6 fw-bold mb-2">Select Sub Parent (optional)</label>
+                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                data-placeholder="Select sub parent" name="sub_parent" id="sub_parent">
+                                
+                        
+                            </select>
+                            <div class="help-block with-errors sub_parent-error"></div>
+                        </div>
+                        <!--end::Col-->
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Input group-->
                    
                     <!--begin::Input group-->
                     <div class="d-flex flex-column mb-8 fv-row">

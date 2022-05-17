@@ -166,6 +166,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/get-category/{id}', 'DependableCategoryController@getCategory');
         Route::get('/get-sub-category/{id}', 'DependableCategoryController@getSubCategory');
         Route::get('/get-subject/{id}', 'DependableCategoryController@getSubject');
+        Route::get('/get-parent-subject/{id}', 'DependableCategoryController@getParentSubject');
+        Route::get('/get-sub-parent-subject/{id}', 'DependableCategoryController@getSubParentSubject');
         Route::get('/get-question/{subject_id}', 'DependableCategoryController@getQuestion');
         Route::get('/get-parent-subject/{parent_id}', 'DependableCategoryController@getParentSubject');
 
@@ -189,6 +191,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/question/written-question/show', 'WrittenQuestionController@show')->name('written.show');
         Route::get('/question/written-question/edit/{id}/{type}', 'WrittenQuestionController@edit')->name('written.edit');
         Route::post('/question/written-question/update', 'WrittenQuestionController@update')->name('written.update');
+
+        ############## Written Question Test ###############
+        Route::get('/question/written-question/test', 'WrittenQuestionTestController@index')->name('written.test.index');
+        Route::get('/question/written-question/test/create', 'WrittenQuestionTestController@create')->name('written.test.create');
+        Route::post('/question/written-question/test/store', 'WrittenQuestionTestController@store')->name('written.test.store');
+        Route::get('/question/written-question/test/show', 'WrittenQuestionTestController@show')->name('written.test.show');
+        Route::get('/question/written-question/test/edit/{id}/{type}', 'WrittenQuestionTestController@edit')->name('written.test.edit');
+        Route::post('/question/written-question/test/update', 'WrittenQuestionTestController@update')->name('written.test.update');
+        Route::get('/question/written-question/test/get-instruction', 'WrittenQuestionTestController@getInstruction')->name('written.test.instruction');
+
 
         ######### Written Parent Instruction ##########
         Route::get('/question/written-question/parent-instrction', 'ParentInstructionController@create')->name('written.parent-instruction.create');

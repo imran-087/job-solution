@@ -98,6 +98,7 @@ class SubjectController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
+
         $validator = Validator::make($request->all(), [
             'name.*' => ['required'],
             'status' => ['required'],
@@ -181,8 +182,13 @@ class SubjectController extends Controller
                     $subject->save();
                     //assign parent node if parent node is not null
                     if ($request->parent && $request->parent !== '' && $request->parent !== 'none') {
-                        $parent = Subject::find($request->parent);
-                        $parent->appendNode($subject);
+                        if ($request->sub_parent && $request->sub_parent !== '' && $request->sub_parent !== 'none') {
+                            $parent = Subject::find($request->sub_parent);
+                            $parent->appendNode($subject);
+                        } else {
+                            $parent = Subject::find($request->sub_parent);
+                            $parent->appendNode($subject);
+                        }
                     }
                 }
 
