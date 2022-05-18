@@ -66,7 +66,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/category/subject/delete/{id}', 'SubjectController@deleteSubject')->name('subject.delete');
 
         //subject-tree
-        // Route::get('/subject/subject-tree', 'SubjectController@treeView')->name('subject.tree');
+        Route::get('/subject/subject-tree', 'SubjectController@treeView')->name('subject.tree');
+        Route::get('/subject/subject-tree/data', 'SubjectController@treeData')->name('subject.tree_data');
 
         ############ Trashed Route ############
         //question trashed

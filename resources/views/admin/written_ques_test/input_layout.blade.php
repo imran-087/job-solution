@@ -28,6 +28,7 @@
                             </label>
                             <!--end::Label-->
                             <input type="text" class="form-control form-control-solid" placeholder="Enter Question" name="question[]" /> 
+                            <div class="help-block with-errors question.*-error"></div>
                         </div>
                         <!--end::Input group-->
                     </div>
@@ -65,7 +66,7 @@
                     </label>
                     <!--end::Label-->
                     <textarea type="text" class="form-control form-control-solid h-100px"  placeholder="Enter answer"
-                                name="answer[]" > </textarea>
+                                name="answer[]"> </textarea>
                     <div class="help-block with-errors answer-error"></div>
                 </div>
                 <!--end::Input group-->
@@ -82,9 +83,11 @@
 
 <!--begin::Actions-->
 <div class="text-center d-flex justify-content-between py-4 px-4" >
-    <button class="btn btn-info btn-sm addRow" type="button">Add Input</button>
-    <button type="submit" class="btn btn-primary" style="padding: 10px 70px">
+    <button class="btn btn-info btn-sm addRow" type="button" style="padding: 10px 20px">Add Input</button>
+    <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary" style="padding: 10px 70px">
         <span class="indicator-label">Submit</span>
+        <span class="indicator-progress">Please wait...
+            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
     </button>
 </div>
 <!--end::Actions-->

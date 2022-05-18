@@ -64,7 +64,9 @@
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
             <!--begin::Card-->
-            <div id="kt_docs_jstree_ajax"></div>
+            <div id="jstree">
+                
+            </div>
             
             <!--end::Card-->
         </div>
@@ -88,7 +90,7 @@
                 "check_callback": true,
                 'data': {
                     'url': function(node) {
-                        return 'https://preview.keenthemes.com/api/jstree/ajax_data.php'; // Demo API endpoint -- Replace this URL with your set endpoint
+                        return 'http://127.0.0.1:8000/admin/subject/subject-tree/data'; // Demo API endpoint -- Replace this URL with your set endpoint
                     },
                     'data': function(node) {
                         return {
@@ -110,5 +112,37 @@
             },
             "plugins": ["dnd", "state", "types"]
         });
-   </script>
+    </script>
+    <script>
+    $('#jstree').jstree({
+    //Aynı anda sadece 1 tane seçim olmasını istediğim için three_state'i false olarak atadım
+                    "checkbox": {
+                        keep_selected_style: true,
+                        three_state: false,
+                    },
+    //seçilince tüm satırın seçili olmasını, her bir öğede bir checkbox olmasını ve arama fonksiyonu kullanacağımızı belirtiyoruz. Bunlar jsTree'nin plugin'leri. Diğer plugin'leri incelemek için https://www.jstree.com/plugins/ adresine bakabilirsiniz.
+
+                plugins: ["wholerow", "checkbox", "search"],
+                core: {
+    //Yeni kategori ekleyince, New Node yazısı yerine "Yeni Kategori" yazsın.
+                    strings : {
+                        'New node': 'Yeni Kategori'
+                    },
+    //Çoklu seçim yapılmasını istemiyorum, aynı anda tek seçim yapılsın
+    //responsive olsun ve zebra çizgili olsun (stripes)
+                    multiple: false,
+                    themes: {
+                        name:"default",
+                        variant: "large",
+                        responsive: true,
+                        stripes: true,
+                    },
+                    //jsTree'nin Ajax ie otomatik doldurulmasını istiyoruz. 
+                    //Bu fonksiyon (getProductCategories) aşağıda bulunuyor.
+                    data: {
+                        "url": "{{Route("admin.subject.tree_data")}}"
+                    },
+                }
+            });
+    </script>
 @endpush

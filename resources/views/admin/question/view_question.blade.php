@@ -122,7 +122,6 @@
     })
 
     //add description
-    
     $(document).on('submit', '#kk_add_description_form', function(e){
         e.preventDefault()
         //console.log('here')
@@ -149,7 +148,8 @@
                     $('#kk_modal_new_question_form').find('.messages').html(alertBox).show();
                 }else{
                     toastr.success(data.message);
-                    thisadd.parent().parent("div").find('.des-form').addClass('d-none')
+                    thisadd.parent().parent("div").find('.des-form').addClass('d-none');
+                    
                 }
 
                 $('.indicator-label').show()

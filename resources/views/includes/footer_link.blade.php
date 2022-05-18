@@ -18,6 +18,10 @@
 	<script src="{{ asset('assets') }}/plugins/custom/ckeditor/ckeditor-classic.bundle.js"></script>
 	<!--end::Page Custom Javascript-->
 
+	<!--begin::jsTree Bundle(used by all pages)-->
+	<script src="{{ asset('assets') }}/plugins/custom/jstree/jstree.bundle.js"></script>
+	<!--End::jsTree  -->
+
 	<!--Toastr Notification -->
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 	@include('admin.include.toastr')

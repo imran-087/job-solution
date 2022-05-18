@@ -478,7 +478,7 @@
                 </div>
             </div>
             
-            {{-- <div class="menu-item">
+            <div class="menu-item">
                 <a class="menu-link {{ request()->is('admin/subject/subject-tree*') ? 'active' : '' }}" href="{{ route('admin.subject.tree') }}" >
                     <span class="menu-icon">
                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
@@ -495,7 +495,7 @@
                     </span>
                     <span class="menu-title">Subject Tree</span>
                 </a>
-            </div> --}}
+            </div>
             
             <div class="menu-item">
                 <div class="menu-content pt-8 pb-2">

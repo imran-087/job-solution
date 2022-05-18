@@ -135,11 +135,38 @@
                 <!--end::Card body-->
             </div>
             <!--end::Card--> 
+            <!--begin::Card-->
+            <div class="card" style="margin-top:20px">
+                <!--begin::Card body-->
+                <div class="card-body pt-4 " style="padding-bottom: 0px !important">
+                    <!--begin:Form-->
+                    <form id="kk_modal_new_samprotik_form" class="form"  method="POST" action="{{ route('admin.samprotik.preview') }}">
+                        <div class="messages"></div>
+                        {{-- csrf token  --}}
+                        @csrf
+                        <!--begin::Heading-->
+                        <div class="mb-13 text-center">
+                            <!--begin::Title-->
+                            <h1 class="mb-3 mt-3">Samprotik Question Input</h1>
+                            <!--end::Title-->
+                            <!--begin::Description-->
+                            <div class="text-muted fw-bold fs-5">Fill up the form and submit
+                            </div>
+                            <!--end::Description-->
+                        </div>
+                        <!--end::Heading-->
 
-            <!--start::samprotik question input--> 
-            <div id="samprotik"></div>     
-            <!--end::samprotik question input--> 
-            
+                        <!--start::samprotik question input--> 
+                        <div id="samprotik"></div>     
+                        <!--end::samprotik question input--> 
+
+                        </form>
+                    <!--end:Form-->
+                </div>
+                <!--end::Card body-->
+            </div>
+            <!--end::Card--> 
+
         </div>
         <!--end::Container-->
     </div>

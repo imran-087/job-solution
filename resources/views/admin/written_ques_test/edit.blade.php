@@ -42,28 +42,21 @@
                 <div class="d-flex flex-column mb-8 fv-row">
                     <!--begin::Label-->
                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                        <span>Question</span>
+                        <span> {{ $type == 0 ? 'Question' : 'Instruction' }}</span>
                     </label>
                     <!--end::Label-->
-                    @if($type == 'parent_instruction')
-                    <input type="text" class="form-control form-control-solid" 
-                        name="question" value="{{ $question->parent_instruction }}"/>
-                    @elseif($type == 'instruction')
-                    <input type="text" class="form-control form-control-solid" 
-                        name="question" value="{{ $question->instruction }}"/>
-                    @else
                     <input type="text" class="form-control form-control-solid" 
                         name="question" value="{{ $question->question }}"/>
-                    @endif
+                   
                 </div>
-                @if($type == 'question')
+                @if($type == 0)
                 <!--end::Input group-->
                 <div class="d-flex flex-column mb-8 fv-row">
                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                         <span>Question Answer</span>
                     </label>
                     <div class="col-md-12 mb-5">
-                        <textarea name="answer" id="kt_docs_ckeditor_classic" class="form-control form-control-solid h-100px">{{ $question->answer }}</textarea>
+                        <textarea name="answer" id="kt_docs_ckeditor_classic" class="form-control form-control-solid h-100px">{{ $question->answer->answer }}</textarea>
                     </div>
                    
                 </div>

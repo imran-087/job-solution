@@ -16,9 +16,9 @@ class CreateWrittenQuestionTestsTable extends Migration
         Schema::create('written_question_tests', function (Blueprint $table) {
             $table->id();
             $table->nestedSet();
-            $table->string('question_no');
+            $table->string('question_no')->nullable();
             $table->text('question');
-            $table->enum('question_instruction', ['true', 'false'])->default('false');
+            $table->tinyInteger('question_instruction')->default(0);
             $table->foreignId('main_category_id')->constrained();
             $table->foreignId('sub_category_id')->constrained();
             $table->foreignId('subject_id')->nullable()->constrained();

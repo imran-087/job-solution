@@ -68,7 +68,7 @@
                 <!--begin::Card body-->
                 <div class="card-body pt-4 " style="padding-bottom: 0px !important">
                     <!--begin:Form-->
-                    <form id="kk_modal_new_samprotik_form" class="form"  >
+                    <form id="kk_modal_new_mcq_input_generator_form" class="form"  >
                         <div class="messages"></div>
                         {{-- csrf token  --}}
                         @csrf
@@ -123,7 +123,7 @@
                 <!--begin::Card body-->
                 <div class="card-body pt-4 " style="padding-bottom: 0px !important">
                     <!--begin:Form-->
-                    <form id="kk_modal_new_samprotik_form" class="form"  method="POST" action="{{ route('admin.question.preview') }}" enctype="multipart/form-data">
+                    <form id="kk_modal_new_mcq_form" class="form"  method="" action="" enctype="multipart/form-data">
                         <div class="messages"></div>
                         {{-- csrf token  --}}
                         @csrf
@@ -143,21 +143,16 @@
                             <!--begin::Col-->
                             <div class="col-md-3 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Main Category</label>
-                                <select class="form-select form-select-solid @error('main_category') is-invalid @enderror" data-control="select2"
+                                <select class="form-select form-select-solid " data-control="select2"
                                     data-hide-search="true" data-placeholder="Select main category" name="main_category"
-                                    id="main_category" required>
+                                    id="main_category" >
                                     <option value="">Choose ...</option>
                                     
                                     @foreach ($main_categories as $main_category)
                                     <option value="{{ $main_category->id }}">{{ $main_category->name }}</option>
                                     @endforeach
-
                                 </select>
-                                @error('main_category')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <div class="help-block with-errors main_category-error"></div>
                             </div>
                             <!--end::Col-->
                             <!--begin::Col-->
@@ -165,43 +160,35 @@
                                 <label class="required fs-6 fw-bold mb-2">Select Category</label>
                                 <select class="form-select form-select-solid " data-control="select2"
                                     data-hide-search="true" data-placeholder="Select category" name="category"
-                                    id="category" required>
+                                    id="category" >
 
 
                                 </select>
-                                
+                                <div class="help-block with-errors catgory-error"></div>
                             </div>
                             <!--end::Col-->
                             <!--begin::Col-->
                             <div class="col-md-3 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Sub Category</label>
-                                <select class="form-select form-select-solid @error('sub_category') is-invalid @enderror" data-control="select2"
+                                <select class="form-select form-select-solid " data-control="select2"
                                     data-hide-search="true" data-placeholder="Select sub category" name="sub_category"
-                                    id="sub_category" required>
+                                    id="sub_category" >
 
 
                                 </select>
-                                @error('sub_category')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <div class="help-block with-errors sub_category-error"></div>
                             </div>
                             <!--end::Col-->
                             <!--begin::Col-->
                             <div class="col-md-3 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Subject</label>
-                                <select class="form-select form-select-solid @error('subject') is-invalid @enderror" data-control="select2"
+                                <select class="form-select form-select-solid" data-control="select2"
                                     data-hide-search="true" data-placeholder="Select subject" name="subject"
-                                    id="subject" required>
+                                    id="subject" >
 
 
                                 </select>
-                                @error('subject')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <div class="help-block with-errors subject-error"></div>
                             </div>
                             <!--end::Col-->
                         </div>
@@ -212,7 +199,7 @@
                             <!--begin::Col-->
                             <div class="col-md-2 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Year</label>
-                                <select class="form-select form-select-solid @error('year') is-invalid @enderror" data-control="select2"
+                                <select class="form-select form-select-solid " data-control="select2"
                                     data-hide-search="true" data-placeholder="Select year" name="year"
                                     id="year" >
                                     <option value="">Choose ...</option>
@@ -221,11 +208,7 @@
                                     @endforeach
 
                                 </select>
-                                @error('year')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <div class="help-block with-errors year-error"></div>
                             </div>
                             <!--end::Col-->
                         </div>
@@ -234,6 +217,7 @@
                         <!--start::mcq question input--> 
                         <div id="input"></div>     
                         <!--end::mcq question input--> 
+
                     </form>
                     <!--end:Form-->
                 </div>
@@ -253,7 +237,7 @@
 @push('script')
 <script type="text/javascript">
     $(document).ready(function(){
-        $('#kk_modal_new_samprotik_form').on( "keypress", function(event) {
+        $('#kk_modal_new_mcq_input_generator_form').on( "keypress", function(event) {
             if (event.which == 13 && !event.shiftKey) {
                 event.preventDefault();
                 //console.log('here')
@@ -279,7 +263,59 @@
             }
         });
     })
+
+    //save question
+    $('#kk_modal_new_mcq_form').on('submit',function(e){
+        e.preventDefault()
+        $('.with-errors').text('')
+        $('.indicator-label').hide()
+        $('.indicator-progress').show()
+        $('#kk_modal_new_service_submit').attr('disabled','true')
+
+        var formData = new FormData(this);
+        $.ajax({
+            type:"POST",
+            url: "{{ route('admin.question.store') }}",
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                if(data.success ==  false || data.success ==  "false"){
+                    var arr = Object.keys(data.errors);
+                    var arr_val = Object.values(data.errors);
+                    for(var i= 0;i < arr.length;i++){
+                    $('.'+arr[i]+'-error').text(arr_val[i][0])
+                    }
+                }else if(data.error || data.error == 'true'){
+                    var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                    $('#kk_modal_new_category_form').find('.messages').html(alertBox).show();
+                }else{
+                    // empty the form
+                    $('#kk_modal_new_mcq_form')[0].reset();
+                   
+                    Swal.fire({
+                            text: data.message,
+                            icon: "success",
+                            buttonsStyling: !1,
+                            confirmButtonText: "{{__('Ok, got it!')}}",
+                            customClass: {
+                                confirmButton: "btn fw-bold btn-primary"
+                            }
+                        }).then((function () {
+                            //refresh
+                            location.reload();
+                        }))
+                }
+
+                $('.indicator-label').show()
+                $('.indicator-progress').hide()
+                $('#kk_modal_new_service_submit').removeAttr('disabled')
+
+            }
+        });
+
+    })
     
- 
 </script>
 @endpush

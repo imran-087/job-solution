@@ -253,6 +253,23 @@ class SubjectController extends Controller
         return view('admin.subject.tree_index');
     }
 
+    public function treeData()
+    {
+        $subjects = Subject::defaultOrder()->withDepth()->get()->linkNodes();
+        $result = [];
+        foreach ($subjects as $subject) {
+            $parent = $subject->parent_id ?: '#';
+            $node = [
+                'id' => $subject->id,
+                'parent' => $parent,
+                'text' => $subject->name,
+            ];
+            array_push($result, $node);
+        }
+        return response()->json($result);
+    }
+
+
     //unique slug for subject
     public function subjectSlug($name, $sub_category, $main_category)
     {

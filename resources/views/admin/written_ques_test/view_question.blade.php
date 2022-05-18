@@ -124,38 +124,16 @@
                                     <!--end::Content-->
                                     <!--begin::Item-->
                                     @if($questions->count() > 0)
-                                    {{-- @php
-                                        $traverse = function ($questions, $prefix = '-') use (&$traverse) {
-                                            foreach ($questions as $question) {
-                                                echo PHP_EOL.$prefix.' '.$question->question;
-
-                                                $traverse($question->children, $prefix.'-');
-                                            }
-                                        };
-
-                                        $traverse($questions);
-                                    @endphp --}}
-                                    
+                                   
                                     <div class="mb-5">
                                        
-                                        @foreach($questions as $question)
+                                        @foreach($questions as $parent_question)
                                             <!--begin::Title-->
-                                            
-                                            <span class="d-flex">
-                                            {{-- @if( $question->parent_id == null ) --}}
-                                            {{-- <h3 class="text-gray-800 w-bolder mb-4 mt-7">{{ $question->question_no }} | {{ $question->question }}</h3> --}}
-                                            {{-- @endif --}}
-                                           
-                                            {{-- <a href="javascript:;" data-id="{{ $parent_instruction->id }}" data-type="parent_instruction" class="btn btn-sm btn-icon edit" style="margin-right: 15px !important"><i class="fas fa-edit"></i></a> --}}
-                                            </span>
-                                            <!--end::Title-->
-                                           
-                                           
                                             <div class="m-0" style="margin-left:20px !important">
                                                
                                                 <!--begin::Heading-->
-                                                <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_8_1_{{$question->id}}">
-                                                    @if($question->parent_id !== null)
+                                                <div class="d-flex align-items-center collapsible collapsed  py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_8_1_{{$parent_question->id}}">
+                                                    @if($parent_question->question_instruction == 0)
                                                     <!--begin::Icon-->
                                                     <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
                                                         <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
@@ -179,94 +157,39 @@
                                                     <!--end::Icon-->
                                                     @endif
                                                     <!--begin::Title-->
-                                                    <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">{{ $question->question_no }} | {{ $question->question }}</h4>
-                                                    <a href="javascript:;" data-id="{{ $question->id }}" data-type="question" class="btn btn-sm btn-icon edit" style="margin-right: 15px !important"><i class="fas fa-edit"></i></a>
+                                                    <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">{{ $parent_question->question_no }} | {{ $parent_question->question }}</h4>
+                                                    <a href="javascript:;" data-id="{{ $parent_question->id }}" data-type="{{$parent_question->question_instruction}}" class="btn btn-sm btn-icon edit" style="margin-right: 15px !important"><i class="fas fa-edit"></i></a>
                                                     <!--end::Title-->
 
                                                 </div>
                                                 <!--end::Heading-->
-                                                
+                                                @if($parent_question->question_instruction == 0)
                                                 <!--begin::Body-->
-                                                <div id="kt_job_8_1_{{$question->id}}" class="collapse fs-6 ms-1">
+                                                <div id="kt_job_8_1_{{$parent_question->id}}" class="collapse fs-6 ms-1">
                                                     <!--begin::Text-->
-                                                    <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10">উত্তর: &nbsp; {{ $question->answer->answer ?? '' }}</div>
+                                                    <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10">উত্তর: &nbsp; {{ $parent_question->answer->answer ?? '' }}</div>
                                                     <!--end::Text-->
                                                 </div>
-                                                
+                                                @endif
                                                 <!--end::Content-->
-                                                @if($question->question_or == null)
+                                                @if($parent_question->question_or == null)
                                                 <!--begin::Separator-->
                                                 <div class="separator separator-dashed"></div>
                                                 <!--end::Separator-->
                                                 @else
-                                                    @if($question->question_or) 
-                                                    <span><b class="text-uppercase" style="font: 800; font-weight:bold; margin-left:35px">{{ $question->question_or }}</b></span>
+                                                    @if($parent_question->question_or) 
+                                                    <span><b class="text-uppercase" style="font: 800; font-weight:bold; margin-left:35px">{{ $parent_question->question_or }}</b></span>
                                                     @endif
                                                 @endif
 
                                             </div>
-                                    
                                             <!--end::Section-->
-                                            @foreach($question->children as $question)
-                                            <div class="m-0" style="margin-left:40px !important">
-                                                
-                                                <!--begin::Heading-->
-                                                <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_8_1_{{$question->id}}">
-                                                   
-                                                    <!--begin::Icon-->
-                                                    <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
-                                                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
-                                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor"></rect>
-                                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor"></rect>
-                                                            </svg>
-                                                        </span>
-                                                        <!--end::Svg Icon-->
-                                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
-                                                        <span class="svg-icon toggle-off svg-icon-1">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor"></rect>
-                                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor"></rect>
-                                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor"></rect>
-                                                            </svg>
-                                                        </span>
-                                                        <!--end::Svg Icon-->
-                                                    </div>
-                                                    <!--end::Icon-->
-                                                    
-                                                    <!--begin::Title-->
-                                                    <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">{{ $question->question_no }} | {{ $question->question }}</h4>
-                                                    <a href="javascript:;" data-id="{{ $question->id }}" data-type="question" class="btn btn-sm btn-icon edit" style="margin-right: 15px !important"><i class="fas fa-edit"></i></a>
-                                                    <!--end::Title-->
+                                            @foreach($parent_question->children as $child_question)
+                                                <div class="m-0" style="margin-left:40px !important">
 
-                                                </div>
-                                                <!--end::Heading-->
-                                                
-                                                <!--begin::Body-->
-                                                <div id="kt_job_8_1_{{$question->id}}" class="collapse fs-6 ms-1">
-                                                    <!--begin::Text-->
-                                                    <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10">উত্তর: &nbsp; {{ $question->answer->answer ?? '' }}</div>
-                                                    <!--end::Text-->
-                                                </div>
-                                                
-                                                <!--end::Content-->
-                                                @if($question->question_or == null)
-                                                <!--begin::Separator-->
-                                                <div class="separator separator-dashed"></div>
-                                                <!--end::Separator-->
-                                                @else
-                                                    @if($question->question_or) 
-                                                    <span><b class="text-uppercase" style="font: 800; font-weight:bold; margin-left:35px">{{ $question->question_or }}</b></span>
-                                                    @endif
-                                                @endif
-
-                                            </div>
-                                                @foreach($question->children as $question)
-                                                <div class="m-0" style="margin-left:60px !important">
-                                                    {{-- @if($question->parent_id !== null) --}}
                                                     <!--begin::Heading-->
-                                                    <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_8_1_{{$question->id}}">
+                                                    <div class="d-flex align-items-center collapsible collapsed  py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_8_1_{{$child_question->id}}">
+                                                        @if($child_question->question_instruction !== 1)
                                                         <!--begin::Icon-->
                                                         <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
                                                             <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
@@ -288,34 +211,92 @@
                                                             <!--end::Svg Icon-->
                                                         </div>
                                                         <!--end::Icon-->
+                                                        @endif
                                                         <!--begin::Title-->
-                                                        <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">{{ $question->question_no }} | {{ $question->question }}</h4>
-                                                        <a href="javascript:;" data-id="{{ $question->id }}" data-type="question" class="btn btn-sm btn-icon edit" style="margin-right: 15px !important"><i class="fas fa-edit"></i></a>
+                                                        <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">{{ $child_question->question_no }} | {{ $child_question->question }}</h4>
+                                                        <a href="javascript:;" data-id="{{ $child_question->id }}" data-type="{{ $child_question->question_instruction }}" class="btn btn-sm btn-icon edit" style="margin-right: 15px !important"><i class="fas fa-edit"></i></a>
+                                                        <!--end::Title-->
+
+                                                    </div>
+                                                    <!--end::Heading-->
+                                                    @if($child_question->question_instruction == 0)
+                                                    <!--begin::Body-->
+                                                    <div id="kt_job_8_1_{{$child_question->id}}" class="collapse fs-6 ms-1">
+                                                        <!--begin::Text-->
+                                                        <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10">উত্তর: &nbsp; {{ $child_question->answer->answer ?? '' }}</div>
+                                                        <!--end::Text-->
+                                                    </div>
+                                                    @endif
+                                                    <!--end::Content-->
+                                                    @if($child_question->question_or == null)
+                                                    <!--begin::Separator-->
+                                                    <div class="separator separator-dashed"></div>
+                                                    <!--end::Separator-->
+                                                    @else
+                                                    @if($child_question->question_or)
+                                                    <span><b class="text-uppercase" style="font: 800; font-weight:bold; margin-left:35px">{{ $child_question->question_or }}</b></span>
+                                                    @endif
+                                                    @endif
+
+                                                </div>
+
+                                                @foreach($child_question->children as $grand_child_question)
+                                                <div class="m-0" style="margin-left:60px !important">
+
+                                                    <!--begin::Heading-->
+                                                    <div class="d-flex align-items-center collapsible py-3 toggle mb-0 collapsed " data-bs-toggle="collapse" data-bs-target="#kt_job_8_1_{{$grand_child_question->id}}">
+
+                                                        <!--begin::Icon-->
+                                                        <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                                                            <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                                                            <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor"></rect>
+                                                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor"></rect>
+                                                                </svg>
+                                                            </span>
+                                                            <!--end::Svg Icon-->
+                                                            <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                                            <span class="svg-icon toggle-off svg-icon-1">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor"></rect>
+                                                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor"></rect>
+                                                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor"></rect>
+                                                                </svg>
+                                                            </span>
+                                                            <!--end::Svg Icon-->
+                                                        </div>
+                                                        <!--end::Icon-->
+
+                                                        <!--begin::Title-->
+                                                        <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">{{ $grand_child_question->question_no }} | {{ $grand_child_question->question }}</h4>
+                                                        <a href="javascript:;" data-id="{{ $grand_child_question->id }}" data-type="{{ $grand_child_question->question_instruction }}" class="btn btn-sm btn-icon edit" style="margin-right: 15px !important"><i class="fas fa-edit"></i></a>
                                                         <!--end::Title-->
 
                                                     </div>
                                                     <!--end::Heading-->
                                                     {{-- @endif --}}
                                                     <!--begin::Body-->
-                                                    <div id="kt_job_8_1_{{$question->id}}" class="collapse fs-6 ms-1">
+                                                    <div id="kt_job_8_1_{{$grand_child_question->id}}" class="collapse fs-6 ms-1">
                                                         <!--begin::Text-->
-                                                        <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10">উত্তর: &nbsp; {{ $question->answer->answer ?? '' }}</div>
+                                                        <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10">উত্তর: &nbsp; {{ $grand_child_question->answer->answer ?? '' }}</div>
                                                         <!--end::Text-->
                                                     </div>
-                                                    
+
                                                     <!--end::Content-->
-                                                    @if($question->question_or == null)
+                                                    @if($grand_child_question->question_or == null)
                                                     <!--begin::Separator-->
                                                     <div class="separator separator-dashed"></div>
                                                     <!--end::Separator-->
                                                     @else
-                                                        @if($question->question_or) 
-                                                        <span><b class="text-uppercase" style="font: 800; font-weight:bold; margin-left:35px">{{ $question->question_or }}</b></span>
-                                                        @endif
+                                                    @if($grand_child_question->question_or)
+                                                    <span><b class="text-uppercase" style="font: 800; font-weight:bold; margin-left:35px">{{ $grand_child_question->question_or }}</b></span>
+                                                    @endif
                                                     @endif
 
                                                 </div>
                                                 @endforeach
+
                                             @endforeach
                                            
                                         @endforeach
@@ -323,7 +304,6 @@
                                     </div>
                                     @endif
                                     <!--end::Item-->
-                                    
                                 </div>
                                 <!--end::Extended content-->
                             </div>
@@ -356,7 +336,7 @@
             console.log(id)
             $.ajax({
                 type:"GET",
-                url: "{{ url('admin/question/written-question/edit')}}"+'/'+id+'/'+type,
+                url: "{{ url('admin/question/written-question/test/edit')}}"+'/'+id+'/'+type,
                 dataType: 'json',
                 success:function(data){
                     $("#edit_modal").html(data.html);
@@ -383,7 +363,7 @@
             var formData = new FormData(this);
             $.ajax({
                 type:"POST",
-                url: "{{ url('admin/question/written-question/update')}}",
+                url: "{{ url('admin/question/written-question/test/update')}}",
                 data:formData,
                 cache:false,
                 contentType: false,
