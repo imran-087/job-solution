@@ -153,7 +153,6 @@
                        
                     </div>
                 </div>
-                
                 @endforeach
             </div>
             <!--end::passage question-->

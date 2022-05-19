@@ -18,7 +18,9 @@ use App\Models\QuestionOption;
 use App\Models\PreviewQuestion;
 use App\Models\QuestionDescription;
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -169,12 +171,22 @@ class QuestionController extends Controller
             if ($request->file('image') != null) {
                 //dd('ok');
                 foreach ($request->file('image') as $key => $file) {
-                    //    dump($file);
+                    //dump($file);
                     $name = uniqid() . '_' . time() . '.' . $file->getClientOriginalExtension();
                     // dump($name);
-                    $path = public_path() . '/uploads/Img/QuestionImage/';
-                    $file->move($path, $name);
-                    $image_path = 'uploads/Img/QuestionImage/' . $name;
+
+                    //destinationPath
+                    $path = public_path() . '/uploads/question-images/option-img/';
+
+                    //resize image
+                    $imgFile = Image::make($file->getRealPath());
+                    $imgFile->resize(75, 75, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })->save($path . $name, 80);
+
+                    //$file->move($path, $name);
+
+                    $image_path = 'uploads/question-images/option-img/' . $name;
                     $Imgdata[] = $image_path;
                     //dump($Imgdata);
                     $total_question = count($request->question);
@@ -187,12 +199,22 @@ class QuestionController extends Controller
             if ($request->file('question_image') != null) {
                 //dd('ok');
                 foreach ($request->file('question_image') as $key => $file) {
-                    //    dump($file);
+                    //dump($file);
                     $name = uniqid() . '_' . time() . '.' . $file->getClientOriginalExtension();
-                    // dump($name);
-                    $path = public_path() . '/uploads/Img/QuestionImage/';
-                    $file->move($path, $name);
-                    $image_path = 'uploads/Img/QuestionImage/' . $name;
+                    //dump($name);
+
+                    //destinationPath
+                    $path = public_path() . '/uploads/question-images/';
+
+                    //resize image
+                    $imgFile = Image::make($file->getRealPath());
+                    $imgFile->resize(150, 150, function ($constraint) {
+                        $constraint->aspectRatio();
+                    })->save($path . $name, 80);
+
+                    //$file->move($path, $name);
+
+                    $image_path = 'uploads/question-images/' . $name;
                     $ImgdataQues[] = $image_path;
                     //dump($ImgdataQues);
                 }
@@ -203,6 +225,7 @@ class QuestionController extends Controller
                 $passage = new Passage();
                 $passage->passage = $request->passage;
                 $passage->title = $request->title;
+                $passage->sub_category_id = $request->sub_category;
                 $passage->slug = Str::slug($request->title);
                 $passage->created_user_id = Auth::guard('admin')->user()->id;
                 $passage->save();
@@ -238,6 +261,7 @@ class QuestionController extends Controller
                         $question_option = new QuestionOption();
 
                         $question_option->question_id = $question->id;
+
                         $question_option->option_1 = $request->option_1[$key] ?? null;
                         $question_option->option_2 = $request->option_2[$key] ?? null;
                         $question_option->option_3 = $request->option_3[$key] ?? null;
@@ -253,7 +277,7 @@ class QuestionController extends Controller
                         }
 
                         if (isset($ImgdataQues)) {
-                            $question_option->image_question =  $ImgdataQues[$key];
+                            $question_option->image_question =  $ImgdataQues[$key] ?? null;
                         }
 
                         $question_option->save();
@@ -358,13 +382,16 @@ class QuestionController extends Controller
     //all question
     public function allQuestion(Request $request)
     {
-        $questions = Question::with('question_option', 'descriptions')->where('question_type', 'mcq')->paginate(20);
-        if ($request->ajax()) {
-            dd('here');
-            $view = view('admin.question.all-question', compact('questions'))->render();
-            return response()->json(['html' => $view]);
-        }
-        return view('admin.question.view_question', compact('questions'));
+
+        $questions = Question::with('question_option', 'descriptions')->where([
+            'sub_category_id' => $request->sub_category
+        ])->get();
+        $passages = Passage::with('questions')->where('sub_category_id', $request->sub_category)->get();
+        // if ($request->ajax()) {
+        //     $view = view('admin.mcq.all-question', compact('questions'))->render();
+        //     return response()->json(['html' => $view]);
+        // }
+        return view('admin.mcq.view_question', compact('questions', 'passages'));
     }
 
     //passage question
@@ -374,11 +401,37 @@ class QuestionController extends Controller
         //dd($passages);
         return view('admin.question.passage_question', compact('passages'));
     }
-    //passage question
+    //image question
     public function imageQuestion()
     {
         $questions = Question::with('question_option')->where('question_type', 'image')->paginate(10);
         //dd($passages);
         return view('admin.question.image_question', compact('questions'));
+    }
+
+    //new
+    public function getCategory()
+    {
+        $data = Category::with('main_category')->get();
+        return view('admin.mcq.index', compact('data'));
+    }
+
+    function getSubCategory(Request $request)
+    {
+        // dd($request->all());
+        if ($request->main_category == 1) {
+            $sub_categories = SubCategory::where('category_id', $request->id)->select('id', 'name')->get();
+            $subjects = Subject::where(['main_category_id' => 1, 'sub_category_id' => 0, 'parent_id' => null])->select('id', 'name')->get();
+        } else {
+            $sub_categories = SubCategory::with('subject')->where('category_id', $request->id)->select('id', 'name')->get();
+            $subjects = null;
+        }
+
+
+        $view = view('admin.mcq.sub_category', compact('sub_categories', 'subjects'))->render();
+        return response()->json([
+            'success' => true,
+            'html' => $view
+        ]);
     }
 }

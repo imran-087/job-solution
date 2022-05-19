@@ -13,6 +13,7 @@ use App\Models\QuestionDescription;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Hash;
+use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
 
 class UserDashboardController extends Controller
@@ -75,8 +76,18 @@ class UserDashboardController extends Controller
             $image_name = time() . '.' . $image->getClientOriginalExtension();
 
             $destinationPath = \public_path('/uploads/avatar');
-            //dd($image_name);
-            $image->move($destinationPath, $image_name);
+
+            //resize image
+            $imgFile = Image::make($image->getRealPath());
+            $imgFile->resize(
+                200,
+                150,
+                function ($constraint) {
+                    $constraint->aspectRatio();
+                }
+            )->save($destinationPath . $image_name, 80);
+
+            // $image->move($destinationPath, $image_name);
 
             // unlink old image
             $photo_path = \base_path() . '/public' . $user->avatar;
@@ -87,7 +98,8 @@ class UserDashboardController extends Controller
             $user->avatar = '/uploads/avatar/' . $image_name;
         }
 
-        $user->save();
+        $user->update();
+
         Session::flash('success', 'Profile updated successfully');
         return redirect()->back();
     }

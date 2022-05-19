@@ -273,6 +273,12 @@
         $('#kk_modal_new_service_submit').attr('disabled','true')
 
         var formData = new FormData(this);
+        
+        var type = $('#type').val();
+        if(type == 'passage'){
+            formData.append('passage', myEditor.getData());
+        }
+       
         $.ajax({
             type:"POST",
             url: "{{ route('admin.question.store') }}",

@@ -218,18 +218,20 @@ class DiscussionController extends Controller
     {
         //image upload
         if ($request->hasFile('upload')) {
+
             $originName = $request->file('upload')->getClientOriginalName();
             $fileName = pathinfo($originName, PATHINFO_FILENAME);
             $extension = $request->file('upload')->getClientOriginalExtension();
             $fileName = $fileName . '_' . time() . '.' . $extension;
 
-            $imgfile = $request->file('upload')->move(public_path('discussion-forum/images'), $fileName);
-            // open an image file
-            $img = Image::make($imgfile);
-            // now you are able to resize the instance
-            $img->resize(320, 220);
-            // finally we save the image as a new file
-            $img->save($imgfile);
+            //resize image
+            $image = $request->file('file');
+            $path = public_path('discussion-forum/images');
+            $imgFile = Image::make($image->getRealPath());
+            $imgFile->resize(320, 220, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($path . $fileName, 80);
+
 
             $CKEditorFuncNum = $request->input('CKEditorFuncNum');
             $url = asset('discussion-forum/images/' . $fileName);

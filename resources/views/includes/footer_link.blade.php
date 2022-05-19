@@ -53,7 +53,7 @@
             myEditor = editor;
 		})
 		.catch(error => {
-			console.error(error);
+			
 		});
 	</script>
 	

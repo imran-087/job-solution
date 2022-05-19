@@ -24,7 +24,6 @@ class CreateQuestionOptionsTable extends Migration
             $table->json('image_option')->nullable();
             $table->json('image_question')->nullable();
             $table->string('answer')->nullable();
-            $table->longText('written_answer')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

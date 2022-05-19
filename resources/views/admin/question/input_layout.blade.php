@@ -13,7 +13,7 @@
                         <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                             <span class="required text-uppercase fw-bolder" style="font-size: 16px">Passage </span>
                         </label>
-                        <input type="hidden" name="type" value="{{ $type }}">
+                        <input type="hidden" name="type" id='type' value="{{ $type }}">
                         <!--end::Label-->
                         <input type="text" class="form-control form-control-solid mb-2 @error('title') is-invalid @enderror" placeholder="Enter passage title" name="title" value="{{ old('title') }}"/>
 

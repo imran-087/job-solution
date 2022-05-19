@@ -255,6 +255,7 @@ class SubjectController extends Controller
 
     public function treeData()
     {
+
         $subjects = Subject::defaultOrder()->withDepth()->get()->linkNodes();
         $result = [];
         foreach ($subjects as $subject) {

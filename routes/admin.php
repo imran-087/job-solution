@@ -123,6 +123,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/question/store/{val}', 'QuestionController@storeQuestion')->name('question.store-question');
 
+        //new
+        Route::get('/question/mcq-question', 'QuestionController@getCategory')->name('question.category');
+        Route::get('/question/mcq-question/sub-categories', 'QuestionController@getSubCategory')->name('question.sub-category');
 
         //edited question
         Route::get('/question/edited-question/index', 'EditedQuestionController@index')->name('question.edited-question');
