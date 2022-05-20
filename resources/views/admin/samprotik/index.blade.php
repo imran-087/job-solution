@@ -120,7 +120,66 @@
 	        });
 	}
 
-    
+    $(document).ready( function(){
+        //option filter
+        $('#option').change(function(){
+            var val = $(this).val();
+            //console.log(val);
+            $.ajax({
+                type: "GET",
+                url: "{{ url('admin/question/samprotik/option-filter') }}",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data: {
+                    option: val,
+                },
+                //If result found, this funtion will be called.
+                success: function(data) {
+                    $("#samprotik_ques").html('');
+                    $("#samprotik_ques").append(data.html);
+                }
+            });
+        })
+
+        //date filter
+        $('#date-filter').change(function(){
+            var val = $(this).val();
+            //console.log(val);
+            $.ajax({
+                type: "GET",
+                url: "{{ url('admin/question/samprotik-filter-by-date') }}",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data: {
+                    value: val,
+                },
+                //If result found, this funtion will be called.
+                success: function(data) {
+                    $("#samprotik_ques").html('');
+                    $("#samprotik_ques").append(data.html);
+                }
+            })
+        })
+        //category
+        $('#category').change(function(){
+            var val = $(this).val();
+            //console.log(val);
+            $.ajax({
+                type: "GET",
+                url: "{{ url('admin/question/samprotik-filter-category') }}",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data: {
+                    category: val,
+                },
+                //If result found, this funtion will be called.
+                success: function(data) {
+                    $("#samprotik_ques").html('');
+                    $("#samprotik_ques").append(data.html);
+                }
+            });
+        })
+
+        
+    })
 </script>
+
 @endpush
 

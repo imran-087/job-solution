@@ -9,47 +9,57 @@
             <!--begin::Input group-->
             <div class="row g-9 pb-4">
                 <!--begin::Col-->
-                <div class="col-xl-4 col-lg-4 col-md-4  col-sm-6 col-xs-6 fv-row offset-2">
-                    {{-- <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                        data-placeholder="Select" name="option" id="option">
-                        <option value="0" selected>Without Option</option>
+                <div class="col-xl-4 col-lg-4 col-md-4  col-sm-6 col-xs-6 fv-row">
+                    <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                        data-placeholder="Select option" name="option" id="option">
+                        <option></option>
                         <option value="1">With Option</option>
-                    </select> --}}
+                        <option value="0">Without Option</option>
+                    </select>
                     <!-- start: date filter-->
-                <span class="pe-0 text-end">
-                    <a href="#" class="btn btn-sm btn-light btn-active-light-primary fw-bolder" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Filter by option 
-                    <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
-                    <span class="svg-icon svg-icon-5 svg-icon-gray-500 me-1">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                            <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="currentColor"></path>
-                        </svg>
-                    </span>
-                    <!--end::Svg Icon--></a>
-                    <!--begin::Menu-->
-                    <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true" style="">
-                        <!--begin::Menu item-->
-                        <div class="menu-item px-3">
-                            <a href="{{ route('admin.samprotik.with-option') }}" class="menu-link px-3">With option</a>
+                    {{-- <span class="pe-0 text-end">
+                        <a href="#" class="btn btn-sm btn-light btn-active-light-primary fw-bolder" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">Filter by option 
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
+                        <span class="svg-icon svg-icon-5 svg-icon-gray-500 me-1">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M19.0759 3H4.72777C3.95892 3 3.47768 3.83148 3.86067 4.49814L8.56967 12.6949C9.17923 13.7559 9.5 14.9582 9.5 16.1819V19.5072C9.5 20.2189 10.2223 20.7028 10.8805 20.432L13.8805 19.1977C14.2553 19.0435 14.5 18.6783 14.5 18.273V13.8372C14.5 12.8089 14.8171 11.8056 15.408 10.964L19.8943 4.57465C20.3596 3.912 19.8856 3 19.0759 3Z" fill="currentColor"></path>
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon--></a>
+                        <!--begin::Menu-->
+                        <div class="menu menu-sub menu-sub-dropdown menu-column menu-rounded menu-gray-600 menu-state-bg-light-primary fw-bold fs-7 w-125px py-4" data-kt-menu="true" style="">
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-3">
+                                <a href="{{ route('admin.samprotik.with-option') }}" class="menu-link px-3">With option</a>
+                            </div>
+                            <!--end::Menu item-->
+                            <!--begin::Menu item-->
+                            <div class="menu-item px-3">
+                                <a href="{{ route('admin.samprotik.index') }}" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Without Opt.</a>
+                            </div>
+                            <!--end::Menu item-->
+                            
                         </div>
-                        <!--end::Menu item-->
-                        <!--begin::Menu item-->
-                        <div class="menu-item px-3">
-                            <a href="{{ route('admin.samprotik.index') }}" class="menu-link px-3" data-kt-customer-table-filter="delete_row">Without Opt.</a>
-                        </div>
-                        <!--end::Menu item-->
-                        
-                    </div>
-                    <!--end::Menu-->
-                </span>
-                <!--end::date filter--> 
+                        <!--end::Menu-->
+                    </span> --}}
+                    <!--end::date filter--> 
                     
                 </div>
                 <!--end:Col-->
                 
-                    <!--begin::Col-->
-                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 col-xs-6 fv-row">
-                    
-                    <div class="m-0">
+                <!--begin::Col-->
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 col-xs-4 fv-row">
+                    <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                        data-placeholder="Filter by date" name="date" id="date-filter">
+                        <option></option>
+                        <option value="today">Today</option>
+                        <option value="yesterday">Yesterday</option>
+                        <option value="last_7_days">Last 7 Days</option>
+                        <option value="last_30_days">Last 30 Days</option>
+                        <option value="lastmonth">Last Month</option>
+                        <option value="thismonth">This Month</option>
+                    </select>
+                    {{-- <div class="m-0">
                         <!--begin::Menu toggle-->
                         <a href="#" class="btn btn-sm btn-flex btn-light btn-active-primary fw-bolder" data-kt-menu-trigger="click" data-kt-menu-placement="bottom-end">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen031.svg-->
@@ -114,8 +124,20 @@
                             
                         </div>
                         <!--end::Menu 1-->
-                    </div>
+                    </div> --}}
+                </div>
+                <!--end:Col-->
 
+                <!--begin::Col-->
+                <div class="col-xl-4 col-lg-4 col-md-4  col-sm-4 col-xs-4 fv-row">
+                    <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                        data-placeholder="Filter category"  id="category">
+                        <option></option>
+                        <option value="bn">বাংলাদেশ</option>
+                        <option value="in">আন্তর্জাতিক</option>
+                        <option value="bn_in">বাংলাদেশ ও আন্তর্জাতিক</option>
+                    </select>
+                    
                 </div>
                 <!--end:Col-->
                 

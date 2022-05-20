@@ -226,6 +226,7 @@ class QuestionController extends Controller
                 $passage->passage = $request->passage;
                 $passage->title = $request->title;
                 $passage->sub_category_id = $request->sub_category;
+                $passage->subject_id = $request->subject;
                 $passage->slug = Str::slug($request->title);
                 $passage->created_user_id = Auth::guard('admin')->user()->id;
                 $passage->save();
@@ -382,11 +383,23 @@ class QuestionController extends Controller
     //all question
     public function allQuestion(Request $request)
     {
-
-        $questions = Question::with('question_option', 'descriptions')->where([
-            'sub_category_id' => $request->sub_category
-        ])->get();
-        $passages = Passage::with('questions')->where('sub_category_id', $request->sub_category)->get();
+        if ($request->has('sub_category')) {
+            $questions = Question::with('question_option', 'descriptions')->where([
+                'sub_category_id' => $request->sub_category
+            ])->get();
+            $passages = Passage::with('questions')->where('sub_category_id', $request->sub_category)->get();
+        } else {
+            //dd('ok');
+            $questions = Question::with('question_option', 'descriptions')->where([
+                'sub_category_id' => $request->sub_cat,
+                'subject_id' => $request->subject
+            ])->get();
+            $passages = Passage::with('questions')->where([
+                'sub_category_id' => $request->sub_cat,
+                'subject_id' => $request->subject
+            ])->get();
+        }
+        //dd($questions);
         // if ($request->ajax()) {
         //     $view = view('admin.mcq.all-question', compact('questions'))->render();
         //     return response()->json(['html' => $view]);

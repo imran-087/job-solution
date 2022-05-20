@@ -25,11 +25,11 @@
                     <br><br>
                     @if($sub_category->subject->count() > 0)
                     @foreach($sub_category->subject as $subject)
-                    <span class="badge badge-light-success fs-8 fw-bolder">{{ $subject->name }}</span>
+                     <a href="{{ route('admin.question.all-question',['sub_cat' => $sub_category->id, 'subject' => $subject->id]) }}" target="_blank"><span class="badge badge-light-success fs-8 fw-bolder">{{ $subject->name }}</span></a>
                     @endforeach
                     @else
                     @foreach($subjects as $subject)
-                    <span class="badge badge-light-success fs-8 fw-bolder">{{ $subject->name }}</span>
+                    <a href="{{ route('admin.question.all-question',['sub_cat' => $sub_category->id, 'subject' => $subject->id]) }}" target="_blank"><span class="badge badge-light-success fs-8 fw-bolder">{{ $subject->name }}</span></a>
                     @endforeach
                     @endif
                 </div>

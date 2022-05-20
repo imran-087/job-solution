@@ -64,7 +64,7 @@
     <div class="post d-flex flex-column-fluid col-12"  id="kt_post">
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
-           
+            
             <!--begin::admin.samprotik question-->    
             <div class="row" id="all_question">
                 @include('admin.mcq.all-question')

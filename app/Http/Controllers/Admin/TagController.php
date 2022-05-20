@@ -50,7 +50,7 @@ class TagController extends Controller
 
                 ->addColumn('action', function ($row) {
                     $btn = '<div >
-                                <input type="text" data-question_id="' . $row->id . '" class="form-control form-control-solid w-350px  search_tag"  placeholder="Type to search">
+                                <input type="text" data-subject_id="' . $row->subject_id . '" data-question_id="' . $row->id . '" class="form-control form-control-solid w-350px  search_tag"  placeholder="Type to search">
                                 <div class="result" style="z-index:999"></div>
                             </div>';
 
@@ -68,8 +68,10 @@ class TagController extends Controller
         if ($request->ajax()) {
 
             //dd($request->all());
-            $data = Subject::where('name', 'LIKE', '%' . $request->search . '%')
-                ->get();
+            $data = Subject::whereDescendantOf($request->subject_id)
+                ->where('name', 'LIKE', '%' . $request->search . '%')
+                ->orderBy('id', 'desc')->get();
+            //dd($data);
 
             $output = '';
 

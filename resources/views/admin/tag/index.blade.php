@@ -224,8 +224,9 @@
         $(document).ready(function() {
             var timeout = null
             $(document).on('keyup', '.search_tag', function() {
-                var question_id = $(this).data(question_id)
-                var id = question_id.question_id
+                var question_id = $(this).data('question_id')
+                var subject_id = $(this).data('subject_id')
+             
                 var this_input = $(this)
                 //console.log(id)
                 clearTimeout(timeout);
@@ -244,7 +245,8 @@
                         data: {
                             //Assigning value of "val" into "search" variable.
                             search: val,
-                            question_id : id,
+                            question_id : question_id,
+                            subject_id : subject_id,
                         },
                         //If result found, this funtion will be called.
                         success: function(data) {

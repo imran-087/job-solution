@@ -82,11 +82,11 @@
                         <div class="card-body pt-5">
                             <!--begin::Timeline-->
                             <div class="timeline-label mb-5">
-                                @foreach($data as $row)
+                                @foreach($data as $category)
                                 <!--begin::Item-->
                                 <div class="timeline-item">
                                     <!--begin::Label-->
-                                    <div class="timeline-label fw-normal text-muted text-gray-800 fs-6 ">{{$row->main_category->name}}</div>
+                                    <div class="timeline-label fw-normal text-muted text-gray-800 fs-6 ">{{$category->main_category->name}}</div>
                                     <!--end::Label-->
                                     <!--begin::Badge-->
                                     <div class="timeline-badge">
@@ -95,8 +95,8 @@
                                     <!--end::Badge-->
                                     
                                     <!--begin::Text-->
-                                    <div class="fw-bolder timeline-content cursor-pointer ps-3 border p-3 rounded getsubCategory" data-id="{{ $row->id }}" data-main_cat="{{$row->main_category->id}}">
-                                        {{$row->name}}  
+                                    <div class="fw-bolder timeline-content cursor-pointer ps-3 border p-3 rounded getsubCategory" data-id="{{ $category->id }}" data-main_cat="{{$category->main_category->id}}">
+                                        {{$category->name}}  
                                     </div>
                                     <!--end::Text-->
                                 </div>

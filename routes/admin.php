@@ -180,13 +180,14 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/question/samprotik-question', 'SamprotikQuestionController@index')->name('samprotik.index');
         Route::post('/question/samprotik-question/create', 'SamprotikQuestionController@create')->name('samprotik.create');
         Route::get('/question/samprotik-question/input', 'SamprotikQuestionController@input')->name('samprotik.input');
-        Route::get('/question/samprotik-with-option', 'SamprotikQuestionController@withOption')->name('samprotik.with-option');
-        Route::get('/question/samprotik-filter-by-date', 'SamprotikQuestionController@dateFilter')->name('samprotik.date-filter');
         Route::get('/question/samprotik-question/edit', 'SamprotikQuestionController@edit')->name('samprotik.edit');
         Route::post('/question/samprotik-question/update', 'SamprotikQuestionController@update')->name('samprotik.update');
         Route::post('/question/samprotik-question/preview', 'SamprotikQuestionController@preview')->name('samprotik.preview');
         Route::post('/question/samprotik-question/store', 'SamprotikQuestionController@store')->name('samprotik.store');
-
+        // Samprotik filter route
+        Route::get('/question/samprotik/option-filter', 'SamprotikQuestionController@optionFilter')->name('samprotik.option-filter');
+        Route::get('/question/samprotik-filter-by-date', 'SamprotikQuestionController@dateFilter')->name('samprotik.date-filter');
+        Route::get('/question/samprotik-filter-category', 'SamprotikQuestionController@categoryFilter')->name('samprotik.category-filter');
 
         ############## Written Question ###############
         Route::get('/question/written-question', 'WrittenQuestionController@index')->name('written.index');
