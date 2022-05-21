@@ -64,8 +64,99 @@
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
             <!--begin::Card-->
-            <div id="jstree">
-                
+             {{-- <div class="row">
+                <!--begin::Categories-->
+                <div class="col-xl-3">
+                    <!--begin::List Widget 5-->
+                    <div class="card card-xl-stretch">
+                        <!--begin::Header-->
+                        <div class="card-header align-items-center border-0 mt-4">
+                            <h3 class="card-title align-items-start flex-column">
+                                <span class="fw-bolder mb-2 text-dark">Categories</span>
+                                <span class="text-muted fw-bold fs-7">{{$data->count()}} Types</span>
+                            </h3>
+                        
+                        </div>
+                        <!--end::Header-->
+                        <!--begin::Body-->
+                        <div class="card-body pt-5">
+                            <!--begin::Timeline-->
+                            <div class="timeline-label mb-5">
+                                @foreach($data as $main_category)
+                                <!--begin::Item-->
+                                <div class="timeline-item">
+                                   <div class="timeline-label fw-normal text-muted text-gray-800 fs-6 "></div>
+                                    <!--begin::Badge-->
+                                    <div class="timeline-badge">
+                                        <i class="fa fa-genderless text-warning fs-1"></i>
+                                    </div>
+                                    <!--end::Badge-->
+                                    
+                                    <!--begin::Text-->
+                                    <div class="fw-bolder timeline-content cursor-pointer ps-3 border p-3 rounded " data-id="{{ $main_category->id }}" >
+                                        {{$main_category->name}}  
+                                    </div>
+                                    <!--end::Text-->
+                                    @php
+                                        $categories = App\Models\Category::with('sub_categories')->where('main_category_id', 2)->get();
+                                    @endphp
+                                    <!--begin::Text-->
+                                    @if($main_category->id == '2')
+                                    @foreach($categories as $category)
+                                    @foreach($category->sub_categories as $sub_category)
+                                    <div class="fw-bolder timeline-content cursor-pointer ps-3 border p-3 rounded " data-id="{{ $sub_category->id }}" >
+                                        {{$sub_category->name}}  
+                                    </div>
+                                    @endforeach
+                                    @endforeach
+                                    <!--end::Text-->
+                                    @endif
+                                </div>
+                                <!--end::Item-->
+                                @endforeach
+                            </div>
+                            <!--end::Timeline-->
+                        </div>
+                        <!--end: Card Body-->
+                    
+                    </div>
+                    <!--end: List Widget 5-->
+                </div>
+                <!--end::Categories-->
+
+                <!--begin::SubCategories-->
+                <div class="col-md-9">
+                    <!--begin::render sub cmain_category-->    
+                   
+                </div>
+                <!--end::SubCategories-->
+            </div> --}}
+            <div class="card card-xl-stretch">
+                <div class="card-body pt-5">
+                    <div class="row">
+                        <div class="col-md-4 mb-5">
+                            <input type="text"  class="form-control form-control-solid w-250px " id="search_subject" placeholder="search subject">
+                        </div>
+                        <div class="col-xl-3 fv-row">
+                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                data-placeholder="Filter by category"  id="main_category">
+                                <option ></option>
+                                @foreach($main_categories as $main_category)
+                                    <option value="{{ $main_category->id }}">{{ $main_category->name }}</option>
+                                @endforeach
+                            </select>
+                            
+                        </div>
+                        <div class="col-md-3">
+                             <button class="btn btn-success float-right ml-1" type="button" onclick="jstree_save();">
+                                <i class="fas fa-check"></i><strong> Save</strong>
+                            </button>
+                        </div>
+                    </div>
+                    <div id="jstree">
+                        
+                    </div>
+                </div>
             </div>
             
             <!--end::Card-->
@@ -80,69 +171,63 @@
 
 
 @push('script')
-   <script type="text/javascript">
-        $("#kt_docs_jstree_ajax").jstree({
-            "core": {
-                "themes": {
-                    "responsive": false
-                },
-                // so that create works
-                "check_callback": true,
-                'data': {
-                    'url': function(node) {
-                        return 'http://127.0.0.1:8000/admin/subject/subject-tree/data'; // Demo API endpoint -- Replace this URL with your set endpoint
-                    },
-                    'data': function(node) {
-                        return {
-                            'parent': node.id
-                        };
-                    }
-                }
-            },
-            "types": {
-                "default": {
-                    "icon": "fa fa-folder text-primary"
-                },
-                "file": {
-                    "icon": "fa fa-file  text-primary"
-                }
-            },
-            "state": {
-                "key": "demo3"
-            },
-            "plugins": ["dnd", "state", "types"]
-        });
-    </script>
+   
     <script>
-    $('#jstree').jstree({
-    //Aynı anda sadece 1 tane seçim olmasını istediğim için three_state'i false olarak atadım
-                    "checkbox": {
-                        keep_selected_style: true,
-                        three_state: false,
-                    },
-    //seçilince tüm satırın seçili olmasını, her bir öğede bir checkbox olmasını ve arama fonksiyonu kullanacağımızı belirtiyoruz. Bunlar jsTree'nin plugin'leri. Diğer plugin'leri incelemek için https://www.jstree.com/plugins/ adresine bakabilirsiniz.
 
-                plugins: ["wholerow", "checkbox", "search"],
-                core: {
-    //Yeni kategori ekleyince, New Node yazısı yerine "Yeni Kategori" yazsın.
-                    strings : {
-                        'New node': 'Yeni Kategori'
-                    },
-    //Çoklu seçim yapılmasını istemiyorum, aynı anda tek seçim yapılsın
-    //responsive olsun ve zebra çizgili olsun (stripes)
-                    multiple: false,
-                    themes: {
-                        name:"default",
-                        variant: "large",
-                        responsive: true,
-                        stripes: true,
-                    },
-                    //jsTree'nin Ajax ie otomatik doldurulmasını istiyoruz. 
-                    //Bu fonksiyon (getProductCategories) aşağıda bulunuyor.
-                    data: {
-                        "url": "{{Route("admin.subject.tree_data")}}"
-                    },
-                }
+        $('#jstree').jstree({
+            'core' : {
+                'data' : {
+                    'url' : '{{route('admin.subject.tree')}}',
+                    'data' : function (node) {
+                        return { 'id' : node.id };
+                    }
+                },
+                "check_callback" : true,
+            },
+            "plugins" : [ "search", "dnd", "contextmenu" ],
+            'search': {
+                show_only_matches: true
+            },
+            
+        });
+        var to = false;
+        $('#search_subject').keyup(function () {
+            if(to) { clearTimeout(to); }
+            to = setTimeout(function () {
+            var v = $('#search_subject').val();
+            $('#jstree').jstree(true).search(v);
+            }, 250);
+        });
+
+        //category filter
+          $('#main_category').change(function(){
+            let oTree =  $('#jstree').jstree(true);
+            let val = $(this).val();
+            //console.log(val);
+            oTree.settings.core.data = {
+                url: "{{route('admin.subject.tree')}}",
+                data : function (node) {
+                        return { 'id' : node.id, 'main_category_id': val };
+                    }
+            };
+            oTree.refresh()
+           
+        })
+
+        function jstree_save () {
+        // Get the current state of the tree structure with get_json. (I don't need the atr, li properties and state property.)
+        
+            var treeData =$("#jstree").jstree(true).get_json('#',{no_a_attr:true,no_li_attr:true,no_state:true});
+            $.ajax({
+                url: '{{route('admin.subject.store_tree')}}',
+                type: 'POST',
+                //headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data: { 
+                    '_token' : "{{ csrf_token() }}",
+                    data: treeData 
+                },
             });
+        }
+           
     </script>
 @endpush

@@ -21,7 +21,6 @@ class CreateSubjectsTable extends Migration
             $table->integer('sub_category_id')->nullable();
             $table->integer('main_category_id');
             $table->string('description')->nullable();
-            $table->string('slug')->unique();
             $table->string('meta_image')->nullable();
             $table->tinyInteger('future_editable')->nullable();
             $table->unsignedBigInteger('view_count')->nullable();

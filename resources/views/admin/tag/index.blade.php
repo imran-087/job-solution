@@ -127,6 +127,7 @@
                                         <th class="min-w-20px">#</th>
                                         <th class="min-w-100px">Sub Category</th>
                                         <th class="min-w-100px">Subject</th>
+                                        <th class="min-w-100px">Add Subject</th>
                                         <th class=" min-w-300px">Question</th>
                                         <th class=" min-w-100px">Tag</th>
                                         <th class=" min-w-80px">Add Tag</th>
@@ -184,6 +185,10 @@
                     {
                         data: 'subject_id',
                         name: 'subject_id'
+                    },
+                    {
+                        data: 'add_subject',
+                        name: 'add_subject'
                     },
                     {
                         data: 'question',
@@ -297,7 +302,35 @@
                     });
             })
         })
-        
 
+        //get subject
+        
+        $(document).on('click', '.get-subject', function() {
+            var question_id = $(this).data('question_id')
+            var sub_category_id = $(this).data('subcategory_id')
+
+            var this_input = $(this)
+            
+            $.ajax({
+                type: "GET",
+                url: "{{ url('admin/question/subject/get-subject')}}",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data: {
+                    //Assigning value of "val" into "search" variable.
+                    question_id : question_id,
+                    sub_category_id : sub_category_id,
+                },
+                //If result found, this funtion will be called.
+                success: function(data) {
+                    //console.log(data)
+                    this_input.closest('div').find('.subject').html(data);
+                    //this_input.closest('#result').hide()
+                    //$('#result').html(data);
+
+                }
+            });
+           
+        });
+       
     </script>
 @endpush

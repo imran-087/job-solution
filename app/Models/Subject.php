@@ -10,6 +10,8 @@ class Subject extends Model
 {
     use HasFactory, NodeTrait;
 
+    protected $guarded = [];
+
     //ploymorphic relation
     public function edited_categories()
     {

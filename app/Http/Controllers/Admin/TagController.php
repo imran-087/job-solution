@@ -48,15 +48,23 @@ class TagController extends Controller
                     }
                 })
 
+                ->addColumn('add_subject', function ($row) {
+                    $btn = '<div>
+                                <span  data-subcategory_id="' . $row->sub_category_id . '" data-question_id="' . $row->id . '" class="btn btn-sm btn-light btn-active-color-primary w-150px  get-subject cursor-pointer" title="Click" >Add Subject</span>
+                                <div class="subject" style="z-index:999"></div>
+                            </div>';
+
+                    return $btn;
+                })
                 ->addColumn('action', function ($row) {
                     $btn = '<div >
-                                <input type="text" data-subject_id="' . $row->subject_id . '" data-question_id="' . $row->id . '" class="form-control form-control-solid w-350px  search_tag"  placeholder="Type to search">
+                                <input type="text" data-subject_id="' . $row->subject_id . '" data-question_id="' . $row->id . '" class="form-control form-control-solid w-150px  search_tag"  placeholder="Type to search">
                                 <div class="result" style="z-index:999"></div>
                             </div>';
 
                     return $btn;
                 })
-                ->rawColumns(['action', 'sub_category_id', 'subject_id', 'tag'])
+                ->rawColumns(['action', 'sub_category_id', 'subject_id', 'tag', 'add_subject'])
                 ->make(true);
         }
         $sub_categories = SubCategory::all();
@@ -128,9 +136,59 @@ class TagController extends Controller
         }
     }
 
-    public function index2()
+    //get subject
+    public function getSubject(Request $request)
     {
-        $questions = Question::paginate(10);
-        return view('admin.tag.index_2', compact('questions'));
+        //dd($request->all());
+
+        if ($request->ajax()) {
+
+            $subjects = Subject::where([
+
+                'sub_category_id' => $request->sub_category_id,
+                'parent_id' => null
+            ])->get();
+            //dd($subjects);
+
+            if ($subjects->count() == 0) {
+
+                $subjects = Subject::where([
+                    'sub_category_id' => 0,
+                    'parent_id' => null
+                ])->get();
+                //dd($subjects);
+            }
+
+            $output = '';
+
+            if (count($subjects) > 0) {
+
+                $output = '<select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                        data-placeholder="Filter category"  id="category">';
+
+
+                foreach ($subjects as $row) {
+                    $output .=
+                        '
+                            <!--begin::Title-->
+                            <div class="d-flex flex-column">
+                            <option value="' . $row->id . '" class="fs-6 text-gray-800 text-hover-primary fw-bold add" data-qid="' . $request->question_id . '">' . $row->name . '</option>
+                            </div>
+                            <!--end::Title-->
+                         ';
+                    //$output .= '<a href="discussion/' . $row->id . '/show"><li class="list-group-item" style=" border-radious:10px">' . $row->title . '</li></a>';
+                }
+
+                $output .= '</select>';
+            } else {
+
+                $output .= ' <p  class="fs-6 text-800  fw-bold"
+                style="color:red; margin-top:10px; background-color:#F5F8FA; padding:10px; border-radius:5px;"> '
+                    . 'No Result' .
+                    '</p>';
+            }
+
+            return $output;
+        }
     }
 }

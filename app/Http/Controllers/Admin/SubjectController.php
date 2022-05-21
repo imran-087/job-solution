@@ -250,24 +250,53 @@ class SubjectController extends Controller
     //tree view
     public function treeView()
     {
-        return view('admin.subject.tree_index');
+        //dd('here');
+        $main_categories = MainCategory::select('id', 'name')->get();
+
+        if (request()->ajax()) {
+            //dd(request()->all());
+            $main_category_id = request()->main_category_id;
+            $parent_id = request()->id == '#' ? null : request()->id;
+
+
+            $subjects = Subject::when(
+                $main_category_id,
+                function ($query, $main_category_id) use ($parent_id) {
+                    $query->where(['parent_id' => $parent_id, 'main_category_id' => $main_category_id]);
+                },
+                function ($query) use ($parent_id) {
+                    $query->where('parent_id', $parent_id);
+                }
+            )->get();
+            //dd($subjects);
+
+            return view('admin.subject.tree_view', compact('subjects'));
+        }
+
+        return view('admin.subject.tree_index', compact('main_categories'));
+
+        //dd($subjects);
+
     }
 
-    public function treeData()
+    public function treeData(Request $request)
     {
-
-        $subjects = Subject::defaultOrder()->withDepth()->get()->linkNodes();
-        $result = [];
-        foreach ($subjects as $subject) {
-            $parent = $subject->parent_id ?: '#';
-            $node = [
-                'id' => $subject->id,
-                'parent' => $parent,
-                'text' => $subject->name,
-            ];
-            array_push($result, $node);
+        if (request()->ajax()) {
+            $parent = request()->perent == '#' ? 0 : request()->parent;
+            //dd($parent);
+            $subjects = Subject::where('parent_id', $parent)->get();
+            // return view('admin.subject.tree_index', compact('subjects'));
+            $result = [];
+            foreach ($subjects as $subject) {
+                $node = [
+                    'id' => $subject->id,
+                    'parent' => $subject->parent_id ?? '#',
+                    'text' => $subject->name,
+                ];
+                array_push($result, $node);
+            }
+            return response()->json($result);
         }
-        return response()->json($result);
     }
 
 
@@ -283,5 +312,13 @@ class SubjectController extends Controller
             $slug = Str::slug($name) . '-' . str_replace(" ", "-", $sub_category->name);
             return $slug;
         }
+    }
+
+    ///test
+    public function storeSubject(Request $request)
+    {
+        //dd($request->all());
+        $data = $request->data;
+        $result = Subject::rebuildTree($data, true);
     }
 }

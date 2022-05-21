@@ -67,7 +67,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         //subject-tree
         Route::get('/subject/subject-tree', 'SubjectController@treeView')->name('subject.tree');
-        Route::get('/subject/subject-tree/data', 'SubjectController@treeData')->name('subject.tree_data');
+        // Route::get('/subject/subject-tree/data', 'SubjectController@treeData')->name('subject.tree_data');
+
+        // test route for create tree 
+        Route::get('tree/create-subject', 'SubjectController@createSubject')->name('subject.create-tree');
+        Route::post('/tree/store-subject', 'SubjectController@storeSubject')->name('subject.store_tree');
+        // Route::get('tree/create-subject', 'SubjectController@createSubject')->name('subject.create-tree');
 
         ############ Trashed Route ############
         //question trashed
@@ -127,6 +132,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/question/mcq-question', 'QuestionController@getCategory')->name('question.category');
         Route::get('/question/mcq-question/sub-categories', 'QuestionController@getSubCategory')->name('question.sub-category');
 
+
+
         //edited question
         Route::get('/question/edited-question/index', 'EditedQuestionController@index')->name('question.edited-question');
         Route::get('question/edited-question/delete/{id}', 'EditedQuestionController@delete')->name('question.edited-question.delete');
@@ -139,6 +146,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/question/add-tag-on-question2', 'TagController@index2')->name('question.tag2');
         Route::post('question/tag/search', 'TagController@searchTag')->name('question.search-tag');
         Route::post('question/tag/tag-added', 'TagController@addTag')->name('question.add-tag');
+        //add subject
+        Route::get('question/subject/get-subject', 'TagController@getSubject')->name('question.get-subject');
+
 
         ############ Description Route #############
         // Description
