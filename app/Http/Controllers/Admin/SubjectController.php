@@ -121,7 +121,7 @@ class SubjectController extends Controller
             if (isset($request->subject_id) &&  $subject = Subject::find($request->subject_id)) { //update
                 //dd($request->subject_id);
 
-                $subject->name = $request->name;
+                $subject->name = $request->name[0];
                 $subject->title = $request->title;
                 $subject->description = $request->description;
                 // $subject->parent_id = $request->parent ?? 0;
@@ -135,7 +135,7 @@ class SubjectController extends Controller
 
                 //track edited category
                 $subject->edited_categories()->create([
-                    'category' => $request->name,
+                    'category' => $request->name[0],
                     'editor_id' => Auth::guard('admin')->user()->id,
                     'status' => $request->status
                 ]);
@@ -151,8 +151,13 @@ class SubjectController extends Controller
 
                 if ($subject->update()) {
                     if ($request->parent && $request->parent !== '' && $request->parent !== 'none') {
-                        $parent = Subject::find($request->parent);
-                        $parent->appendNode($subject);
+                        if ($request->sub_parent && $request->sub_parent !== '' && $request->sub_parent !== 'none') {
+                            $parent = Subject::find($request->sub_parent);
+                            $parent->appendNode($subject);
+                        } else {
+                            $parent = Subject::find($request->parent);
+                            $parent->appendNode($subject);
+                        }
                     }
                     return response()->json([
                         'success' => true,
@@ -174,7 +179,7 @@ class SubjectController extends Controller
                     $subject->status =  $request->status;
                     $subject->sub_category_id =  $sub_category;
                     $subject->main_category_id =  $request->main_category;
-                    $subject->slug =  $this->subjectSlug($request->name[$key], $request->sub_category, $request->main_category);
+                    // $subject->slug =  $this->subjectSlug($request->name[$key], $request->sub_category, $request->main_category);
                     $subject->created_user_id =  Auth::guard('admin')->user()->id;
 
                     $subject->created_at = Carbon::now();
@@ -186,7 +191,7 @@ class SubjectController extends Controller
                             $parent = Subject::find($request->sub_parent);
                             $parent->appendNode($subject);
                         } else {
-                            $parent = Subject::find($request->sub_parent);
+                            $parent = Subject::find($request->parent);
                             $parent->appendNode($subject);
                         }
                     }
@@ -279,25 +284,25 @@ class SubjectController extends Controller
 
     }
 
-    public function treeData(Request $request)
-    {
-        if (request()->ajax()) {
-            $parent = request()->perent == '#' ? 0 : request()->parent;
-            //dd($parent);
-            $subjects = Subject::where('parent_id', $parent)->get();
-            // return view('admin.subject.tree_index', compact('subjects'));
-            $result = [];
-            foreach ($subjects as $subject) {
-                $node = [
-                    'id' => $subject->id,
-                    'parent' => $subject->parent_id ?? '#',
-                    'text' => $subject->name,
-                ];
-                array_push($result, $node);
-            }
-            return response()->json($result);
-        }
-    }
+    // public function treeData(Request $request)
+    // {
+    //     if (request()->ajax()) {
+    //         $parent = request()->perent == '#' ? 0 : request()->parent;
+    //         //dd($parent);
+    //         $subjects = Subject::where('parent_id', $parent)->get();
+    //         // return view('admin.subject.tree_index', compact('subjects'));
+    //         $result = [];
+    //         foreach ($subjects as $subject) {
+    //             $node = [
+    //                 'id' => $subject->id,
+    //                 'parent' => $subject->parent_id ?? '#',
+    //                 'text' => $subject->name,
+    //             ];
+    //             array_push($result, $node);
+    //         }
+    //         return response()->json($result);
+    //     }
+    // }
 
 
     //unique slug for subject
@@ -320,5 +325,16 @@ class SubjectController extends Controller
         //dd($request->all());
         $data = $request->data;
         $result = Subject::rebuildTree($data, true);
+        if ($result) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Tree rebuild'
+            ]);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Failed'
+            ]);
+        }
     }
 }

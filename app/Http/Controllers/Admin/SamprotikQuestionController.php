@@ -3,33 +3,39 @@
 namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
+
+use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Models\SamprotikQuestion;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 
+
 class SamprotikQuestionController extends Controller
 {
     public function index(Request $request)
     {
-
-        $questions = SamprotikQuestion::where('options', null)->orWhere('answer', '!=', null)->paginate(10);
+        $questions = SamprotikQuestion::paginate(10);
         if ($request->ajax()) {
             //dd('here');
             $view = view('admin.samprotik.samprotik', compact('questions'))->render();
-            return response()->json(['html' => $view]);
+            return response()->json([
+                'html' => $view
+            ]);
         }
 
         return view('admin.samprotik.index', compact('questions'));
     }
+
+
 
     public function optionFilter(Request $request)
     {
         //dd('here');
         if ($request->has('option')) {
             if ($request->option == 0) {
-                $questions = SamprotikQuestion::where('options', null)->orWhere('answer', '!=', null)->paginate(10);
+                $questions = SamprotikQuestion::where('options', null)->paginate(10);
             } else {
                 $questions = SamprotikQuestion::where('options', '!=', null)->paginate(10);
             }
@@ -38,7 +44,6 @@ class SamprotikQuestionController extends Controller
                 $view = view('admin.samprotik.samprotik', compact('questions'))->render();
                 return response()->json(['html' => $view]);
             }
-            return view('admin.samprotik.with_option', compact('questions'));
         }
     }
 
@@ -79,7 +84,6 @@ class SamprotikQuestionController extends Controller
             $view = view('admin.samprotik.samprotik', compact('questions'))->render();
             return response()->json(['html' => $view]);
         }
-        return view('admin.samprotik.with_option', compact('questions'));
 
         //custom date  range filter
         // $from = date('Y-m-d H:i:s', strtotime($request->from));
@@ -99,15 +103,16 @@ class SamprotikQuestionController extends Controller
         //dd($request->all());
         switch ($request->category) {
             case ('bn'):
-                $questions = SamprotikQuestion::where(['options' => null, 'category' => 'bn'])->orWhere('answer', '!=', null)->paginate(10);
+                $questions = SamprotikQuestion::where('category', 'bn')->paginate(10);
+
                 break;
 
             case ('in'):
-                $questions = SamprotikQuestion::where(['options' => null, 'category' => 'in'])->orWhere('answer', '!=', null)->paginate(10);
+                $questions = SamprotikQuestion::where('category', 'in')->paginate(10);
                 break;
 
             case ('bn_in'):
-                $questions = SamprotikQuestion::where(['options' => null, 'category' => 'bn_in'])->orWhere('answer', '!=', null)->paginate(10);
+                $questions = SamprotikQuestion::where('category', 'bn_in')->paginate(10);
                 break;
         }
 
@@ -116,7 +121,6 @@ class SamprotikQuestionController extends Controller
             $view = view('admin.samprotik.samprotik', compact('questions'))->render();
             return response()->json(['html' => $view]);
         }
-        return view('admin.samprotik.index', compact('questions'));
     }
 
 
@@ -224,5 +228,18 @@ class SamprotikQuestionController extends Controller
         if ($question->save()) {
             return redirect()->route('admin.samprotik.index')->with('success', 'Updted Successfully');
         }
+    }
+
+    // Generate PDF
+    public function createPDF()
+    {
+        // retreive all records from db
+        $data = SamprotikQuestion::all();
+        //dd($data);
+        //share data to view
+        view()->share('admin.samprotik.pdf', $data);
+        $pdf = PDF::loadView('admin.samprotik.pdf', compact('data'));
+        // download PDF file with download method
+        return $pdf->download('pdf_file.pdf');
     }
 }

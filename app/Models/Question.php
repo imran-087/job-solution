@@ -11,7 +11,6 @@ class Question extends Model
 {
     use HasFactory, SoftDeletes;
 
-
     protected $guarded = [];
 
     public function main_category()
@@ -34,11 +33,6 @@ class Question extends Model
         return $this->hasOne(QuestionOption::class);
     }
 
-    public function descriptions()
-    {
-        return $this->hasMany(QuestionDescription::class);
-    }
-
     public function passage()
     {
         return $this->belongsTo(Passage::class);
@@ -50,6 +44,7 @@ class Question extends Model
         return  $this->belongsToMany(Subject::class);
     }
 
+    ####* Polymorphic Relation Start *####
     /**
      * Get all of the question's votes.
      */
@@ -66,8 +61,16 @@ class Question extends Model
         return $this->morphMany(Comment::class, 'commentable');
     }
 
+    /**
+     * Get all of the question's descriptions.
+     */
+    public function descriptions()
+    {
+        return $this->morphMany(Description::class, 'descriptionable');
+    }
 
-    //local scope
+
+    //local scope start
     public function scopeQuestion($query, $subcategory, $type)
     {
         $query->with('question_option')->where(['sub_category_id' => $subcategory, 'question_type' => $type]);

@@ -124,13 +124,13 @@
         $(this).closest('div').find('.des-form').toggleClass('d-none');
     })
 
-    //add description
+    //add description --save
     $(document).on('submit', '#kk_add_description_form', function(e){
         e.preventDefault()
         //console.log('here')
         $('.with-errors').text('')
         $('#kk_modal_new_service_submit').attr('disabled','true')
-        var thisadd = $(this);
+        var thisaddbtn = $(this);
         var formData = new FormData(this);
         $.ajax({
             type:"POST",
@@ -151,7 +151,7 @@
                     $('#kk_modal_new_question_form').find('.messages').html(alertBox).show();
                 }else{
                     toastr.success(data.message);
-                    thisadd.parent().parent("div").find('.des-form').addClass('d-none');
+                    thisaddbtn.parent().parent("div").find('.des-form').addClass('d-none');
                     
                 }
 

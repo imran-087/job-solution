@@ -123,7 +123,7 @@
                 <!--begin::Card body-->
                 <div class="card-body pt-4 " style="padding-bottom: 0px !important">
                     <!--begin:Form-->
-                    <form id="kk_modal_new_mcq_form" class="form"  method="" action="" enctype="multipart/form-data">
+                    <form id="kk_modal_new_mcq_form" class="form"  method="POST" action="{{ route('admin.question.preview') }}" enctype="multipart/form-data">
                         <div class="messages"></div>
                         {{-- csrf token  --}}
                         @csrf
@@ -145,7 +145,7 @@
                                 <label class="required fs-6 fw-bold mb-2">Select Main Category</label>
                                 <select class="form-select form-select-solid " data-control="select2"
                                     data-hide-search="true" data-placeholder="Select main category" name="main_category"
-                                    id="main_category" >
+                                    id="main_category" required>
                                     <option value="">Choose ...</option>
                                     
                                     @foreach ($main_categories as $main_category)
@@ -160,7 +160,7 @@
                                 <label class="required fs-6 fw-bold mb-2">Select Category</label>
                                 <select class="form-select form-select-solid " data-control="select2"
                                     data-hide-search="true" data-placeholder="Select category" name="category"
-                                    id="category" >
+                                    id="category" required>
 
 
                                 </select>
@@ -172,7 +172,7 @@
                                 <label class="required fs-6 fw-bold mb-2">Select Sub Category</label>
                                 <select class="form-select form-select-solid " data-control="select2"
                                     data-hide-search="true" data-placeholder="Select sub category" name="sub_category"
-                                    id="sub_category" >
+                                    id="sub_category" required>
 
 
                                 </select>
@@ -184,7 +184,7 @@
                                 <label class="required fs-6 fw-bold mb-2">Select Subject</label>
                                 <select class="form-select form-select-solid" data-control="select2"
                                     data-hide-search="true" data-placeholder="Select subject" name="subject"
-                                    id="subject" >
+                                    id="subject" required>
 
 
                                 </select>
@@ -201,7 +201,7 @@
                                 <label class="required fs-6 fw-bold mb-2">Select Year</label>
                                 <select class="form-select form-select-solid " data-control="select2"
                                     data-hide-search="true" data-placeholder="Select year" name="year"
-                                    id="year" >
+                                    id="year" required>
                                     <option value="">Choose ...</option>
                                     @foreach ($years as $year)
                                     <option value="{{ $year->id }}">{{ $year->year }}</option>
@@ -265,63 +265,63 @@
     })
 
     //save question
-    $('#kk_modal_new_mcq_form').on('submit',function(e){
-        e.preventDefault()
-        $('.with-errors').text('')
-        $('.indicator-label').hide()
-        $('.indicator-progress').show()
-        $('#kk_modal_new_service_submit').attr('disabled','true')
+    // $('#kk_modal_new_mcq_form').on('submit',function(e){
+    //     e.preventDefault()
+    //     $('.with-errors').text('')
+    //     $('.indicator-label').hide()
+    //     $('.indicator-progress').show()
+    //     $('#kk_modal_new_service_submit').attr('disabled','true')
 
-        var formData = new FormData(this);
+    //     var formData = new FormData(this);
         
-        var type = $('#type').val();
-        if(type == 'passage'){
-            formData.append('passage', myEditor.getData());
-        }
+    //     var type = $('#type').val();
+    //     if(type == 'passage'){
+    //         formData.append('passage', myEditor.getData());
+    //     }
        
-        $.ajax({
-            type:"POST",
-            url: "{{ route('admin.question.store') }}",
-            data:formData,
-            cache:false,
-            contentType: false,
-            processData: false,
-            success:function(data){
-                if(data.success ==  false || data.success ==  "false"){
-                    var arr = Object.keys(data.errors);
-                    var arr_val = Object.values(data.errors);
-                    for(var i= 0;i < arr.length;i++){
-                    $('.'+arr[i]+'-error').text(arr_val[i][0])
-                    }
-                }else if(data.error || data.error == 'true'){
-                    var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
-                    $('#kk_modal_new_category_form').find('.messages').html(alertBox).show();
-                }else{
-                    // empty the form
-                    $('#kk_modal_new_mcq_form')[0].reset();
+    //     $.ajax({
+    //         type:"POST",
+    //         url: "{{ route('admin.question.store') }}",
+    //         data:formData,
+    //         cache:false,
+    //         contentType: false,
+    //         processData: false,
+    //         success:function(data){
+    //             if(data.success ==  false || data.success ==  "false"){
+    //                 var arr = Object.keys(data.errors);
+    //                 var arr_val = Object.values(data.errors);
+    //                 for(var i= 0;i < arr.length;i++){
+    //                 $('.'+arr[i]+'-error').text(arr_val[i][0])
+    //                 }
+    //             }else if(data.error || data.error == 'true'){
+    //                 var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+    //                 $('#kk_modal_new_category_form').find('.messages').html(alertBox).show();
+    //             }else{
+    //                 // empty the form
+    //                 $('#kk_modal_new_mcq_form')[0].reset();
                    
-                    Swal.fire({
-                            text: data.message,
-                            icon: "success",
-                            buttonsStyling: !1,
-                            confirmButtonText: "{{__('Ok, got it!')}}",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary"
-                            }
-                        }).then((function () {
-                            //refresh
-                            location.reload();
-                        }))
-                }
+    //                 Swal.fire({
+    //                         text: data.message,
+    //                         icon: "success",
+    //                         buttonsStyling: !1,
+    //                         confirmButtonText: "{{__('Ok, got it!')}}",
+    //                         customClass: {
+    //                             confirmButton: "btn fw-bold btn-primary"
+    //                         }
+    //                     }).then((function () {
+    //                         //refresh
+    //                         location.reload();
+    //                     }))
+    //             }
 
-                $('.indicator-label').show()
-                $('.indicator-progress').hide()
-                $('#kk_modal_new_service_submit').removeAttr('disabled')
+    //             $('.indicator-label').show()
+    //             $('.indicator-progress').hide()
+    //             $('#kk_modal_new_service_submit').removeAttr('disabled')
 
-            }
-        });
+    //         }
+    //     });
 
-    })
+    // })
     
 </script>
 @endpush

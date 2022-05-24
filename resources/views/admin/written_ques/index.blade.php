@@ -67,7 +67,7 @@
                 <!--begin::Card body-->
                 <div class="card-body pt-4 " style="padding-bottom: 0px !important">
                     <!--begin:Form-->
-                    <form id="kk_modal_new_samprotik_form" class="form"  method="POST" action="{{ route('admin.written.store') }}">
+                    <form id="kk_modal_new_written_question_form" class="form"  method="" action="">
                         <div class="messages"></div> 
                         {{-- csrf token  --}}
                         @csrf
@@ -87,7 +87,7 @@
                             <!--begin::Col-->
                             <div class="col-md-3 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Main Category</label>
-                                <select class="form-select form-select-solid @error('main_category') is-invalid @enderror" data-control="select2" data-hide-search="true" data-placeholder="Select main category" name="main_category" id="main_category">
+                                <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select main category" name="main_category" id="main_category">
                                     <option value="">Choose ...</option>
 
                                     @foreach ($main_categories as $main_category)
@@ -95,11 +95,7 @@
                                     @endforeach
 
                                 </select>
-                                @error('main_category')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                <div class="help-block with-errors main_category-error"></div>
                             </div>
                             <!--end::Col-->
                             <!--begin::Col-->
@@ -109,35 +105,27 @@
 
 
                                 </select>
-
+                                <div class="help-block with-errors category-error"></div>
                             </div>
                             <!--end::Col-->
                             <!--begin::Col-->
                             <div class="col-md-3 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Sub Category</label>
-                                <select class="form-select form-select-solid @error('sub_category') is-invalid @enderror" data-control="select2" data-hide-search="true" data-placeholder="Select sub category" name="sub_category" id="sub_category">
+                                <select class="form-select form-select-solid " data-control="select2" data-hide-search="true" data-placeholder="Select sub category" name="sub_category" id="sub_category">
 
 
                                 </select>
-                                @error('sub_category')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                <div class="help-block with-errors sub_category-error"></div>
                             </div>
                             <!--end::Col-->
                             <!--begin::Col-->
                             <div class="col-md-3 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Subject</label>
-                                <select class="form-select form-select-solid @error('subject') is-invalid @enderror" data-control="select2" data-hide-search="true" data-placeholder="Select subject" name="subject" id="subject">
+                                <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" data-placeholder="Select subject" name="subject" id="subject">
 
 
                                 </select>
-                                @error('subject')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                                <div class="help-block with-errors subject-error"></div>
                             </div>
                             <!--end::Col-->
                         </div>
@@ -148,34 +136,29 @@
                             <!--begin::Col-->
                             <div class="col-md-2 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Year</label>
-                                <select class="form-select form-select-solid @error('year') is-invalid @enderror" data-control="select2" data-hide-search="true" data-placeholder="Select year" name="year" id="year">
+                                <select class="form-select form-select-solid " data-control="select2" data-hide-search="true" data-placeholder="Select year" name="year" id="year">
                                     <option value="">Choose ...</option>
                                     @foreach ($years as $year)
                                     <option value="{{ $year->id }}">{{ $year->year }}</option>
                                     @endforeach
 
                                 </select>
-                                @error('year')
-                                <span class="invalid-feedback" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
-                                @enderror
+                               <div class="help-block with-errors year-error"></div>
                             </div>
                             <!--end::Col-->
                             <!--begin::Col-->
-                            <div class="col-xl-3 offset-4 col-lg-3 col-md-3 col-sm-6 col-xs-6 fv-row offset-2">
-                                <label class="fs-6 fw-bold mb-2">Select type</label>
+                            <div class="col-xl-8 fv-row">
+                                <label class="fs-6 fw-bold mb-2">Select Question Instruction </label>
                                 <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                    data-placeholder="" name="type" id="type">
-                                    <option value="withIns" selected>With Instruction</option>
-                                    <option value="withoutIns">Without Instruction</option>
+                                    data-placeholder="Select Question Instruction" name="instruction" id="instruction">
+                                   
                                 </select>
                                
                             </div>
                             <!--end:Col-->
                             <!--begin::Col-->
-                            <div class="col-md-3  fv-row" >
-                                <label class="fs-6 fw-bold mb-2">Number of Question</label>
+                            <div class="col-md-2  fv-row" >
+                                <label class="fs-6 fw-bold mb-2 required">Number of Question</label>
                                 <!--begin:Form-->
                                 <div id="kk_modal_new_samprotik_form" class="form me-4">
                                     <input type="text" class="form-control form-control-solid" placeholder="Enter number" name="number" id="number" />
@@ -185,10 +168,9 @@
                             <!--end::Col-->
                         </div>
 
-                        
-                        <!--start::mcq question input--> 
+                        <!--start::written question input--> 
                         <div id="written"></div>     
-                        <!--end::mcq question input--> 
+                        <!--end::written question input--> 
                         
                     </form>
                     <!--end:Form-->
@@ -207,19 +189,17 @@
 @push('script')
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#kk_modal_new_samprotik_form').on("keypress", function(event) {
+        $('#kk_modal_new_written_question_form').on("keypress", function(event) {
             if (event.which == 13 && !event.shiftKey) {
                 event.preventDefault();
                 //console.log('here')
                 var number = $('#number').val();
-                var type =  $("#type").find(':selected').val();
-
+               
                 $.ajax({
                     type: "GET",
                     url: "{{ url('admin/question/written-question/create')}}",
                     data: {
                         number: number,
-                        type: type,
                     },
                     //If result found, this funtion will be called.
                     success: function(data) {
@@ -229,6 +209,94 @@
 
             }
         });
+
+        //get question instruction
+        $('#subject').on('change', function () {
+            var subCategoryID =  $("#sub_category").find(':selected').val();
+            var subjectID = $(this).val();
+            console.log(subCategoryID);
+            console.log(subjectID)
+            if (subCategoryID && subjectID) {
+                $.ajax({
+                    url: "{{ url('admin/question/written-question/get-instruction')}}",
+                    type: "GET",
+                    data: {
+                        sub_category : subCategoryID,
+                        subject : subjectID
+                    },
+                    dataType: "json",
+                    success: function (data) {
+                        if (data) {
+                            $('#instruction').empty();
+                            $('#instruction').append('<option value="">Choose...</option>');
+                            $('#instruction').append('<option value="none">No instruction</option>');
+                            $.each(data, function (key, instruction) {
+                                $('select[name="instruction"]').append(
+                                '<option value="' + instruction.id + '">' + instruction.question_no   + ' - ' + instruction.question   + '</option>');
+                            });
+                        }
+                            else {
+                            $('#instruction').empty(); 
+                        }
+                    }
+                });
+            } else {
+                $('#instruction').empty();
+            }
+        });
+    })
+
+    //save question
+    $('#kk_modal_new_written_question_form').on('submit',function(e){
+        e.preventDefault()
+        $('.with-errors').text('')
+        $('.indicator-label').hide()
+        $('.indicator-progress').show()
+        $('#kk_modal_new_service_submit').attr('disabled','true')
+
+        var formData = new FormData(this);
+        $.ajax({
+            type:"POST",
+            url: "{{ route('admin.written.store') }}",
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                if(data.success ==  false || data.success ==  "false"){
+                    var arr = Object.keys(data.errors);
+                    var arr_val = Object.values(data.errors);
+                    for(var i= 0;i < arr.length;i++){
+                    $('.'+arr[i]+'-error').text(arr_val[i][0])
+                    }
+                }else if(data.error || data.error == 'true'){
+                    var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                    $('#kk_modal_new_category_form').find('.messages').html(alertBox).show();
+                }else{
+                    // empty the form
+                    $('#kk_modal_new_written_question_form')[0].reset();
+                   
+                    Swal.fire({
+                            text: data.message,
+                            icon: "success",
+                            buttonsStyling: !1,
+                            confirmButtonText: "{{__('Ok, got it!')}}",
+                            customClass: {
+                                confirmButton: "btn fw-bold btn-primary"
+                            }
+                        }).then((function () {
+                            //refresh
+                            location.reload();
+                        }))
+                }
+
+                $('.indicator-label').show()
+                $('.indicator-progress').hide()
+                $('#kk_modal_new_service_submit').removeAttr('disabled')
+
+            }
+        });
+
     })
 
 
@@ -241,15 +309,15 @@
         html += '    <div class="row g-9 pb-4">'
         html += '       <div style="" class="mb-5"> '
         html += ' <div class="row">'
-        html += '  <div class="col-md-2">'
+        html += '  <div class="col-md-1">'
 
         html += '<div class="d-flex flex-column mb-8 fv-row">'
 
         html += '       <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
-        html += '    <div class="required">Question No</div>'
+        html += '    <div class="required">QN</div>'
         html += '      </label>'
 
-        html += '       <input type="text" class="form-control form-control-solid" placeholder="Enter Ques. No." name="question_no[]" />'
+        html += '       <input type="text" class="form-control form-control-solid" placeholder="Q.No." name="question_no[]" />'
         html += '              </div>'
 
         html += '         </div>'
@@ -270,9 +338,19 @@
         html += '            <div class="d-flex flex-column mb-8 fv-row">'
 
         html += '                <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
-        html += '                    <div class="required">Marks</div>'
+        html += '                    <div class="">OR</div>'
         html += '                </label>'
-        html += '               <input type="number" class="form-control form-control-solid" placeholder="5/10" name="mark[]" />'
+        html += '               <input type="text" class="form-control form-control-solid" placeholder="অথবা" name="question_or[]" />'
+        html += '           </div>'
+        html += '       </div>'
+        html += '       <div class="col-md-1">'
+
+        html += '            <div class="d-flex flex-column mb-8 fv-row">'
+
+        html += '                <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
+        html += '                    <div class="required">Mark</div>'
+        html += '                </label>'
+        html += '               <input type="text" class="form-control form-control-solid" placeholder="5/10" name="mark[]" />'
         html += '           </div>'
         html += '       </div>'
         html += '   </div>'
@@ -291,22 +369,7 @@
         html += '   </div>'
         $('.newRow').append(html);
 
-
-        // var html = '';
-        // html += '<div class="input-group mb-3">'
-        // html += '<input type="text" name="question[][]" class="form-control form-control-solid inputFormRow" placeholder="Enter Sub Question" autocomplete="off">';
-        // html += '<div class="input-group-append">';
-        // html += '<button class="btn btn-danger removeRow" type="button">Remove</button>';
-        // html += '</div>';
-        // html += '</div>';
-        // $(this).closest('.newRow').append(html);
-        // $('.newRow').append(html);
     });
 
-    // remove row
-    $(document).on('click', '.removeRow', function() {
-        $(this).parent().parent("div").find(".inputFormRow").remove();
-        $(this).remove();
-    });
 </script>
 @endpush

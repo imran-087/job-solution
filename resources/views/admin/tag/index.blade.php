@@ -271,13 +271,9 @@
         //add tag
         $(document).ready(function(){
             $(document).on('click', '.add', function(){
-                var sid = $(this).data(sid)
-                var qid = $(this).data(qid)
+                var sid = $(this).data('sid')
+                var qid = $(this).data('qid')
 
-                console.log(sid.sid)
-                console.log(qid.qid)
-                // var subject_id = sid.sid
-                // var question_id = qid.qid
                 //AJAX is called.
                     $.ajax({
                         type: "POST",
@@ -285,8 +281,8 @@
                         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
                         data: {
                             //Assigning value of "val" into "search" variable.
-                            subject_id: sid.sid,
-                            question_id : qid.qid,
+                            subject_id: sid,
+                            question_id : qid,
                         },
                         //If result found, this funtion will be called.
                         success: function(data) {
@@ -304,7 +300,6 @@
         })
 
         //get subject
-        
         $(document).on('click', '.get-subject', function() {
             var question_id = $(this).data('question_id')
             var sub_category_id = $(this).data('subcategory_id')
@@ -323,14 +318,47 @@
                 //If result found, this funtion will be called.
                 success: function(data) {
                     //console.log(data)
+                    this_input.hide();
                     this_input.closest('div').find('.subject').html(data);
-                    //this_input.closest('#result').hide()
-                    //$('#result').html(data);
-
+                  
                 }
             });
            
         });
+
+        //add subject
+        $(document).on('change', '.add-subject', function(){
+            var sid = $(this).find(':selected').data('sid');
+            var qid = $(this).find(':selected').data('qid');
+           
+            // console.log(sid)
+            // console.log(qid)
+            var this_input = $(this)
+            
+            //AJAX is called.
+            $.ajax({
+                type: "POST",
+                url: "{{ url('admin/question/subject/add-subject')}}",
+                headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                data: {
+                    //Assigning value of "val" into "search" variable.
+                    subject_id: sid,
+                    question_id : qid,
+                },
+                //If result found, this funtion will be called.
+                success: function(data) {
+                    if(data.success){
+                        toastr.success(data.message);
+                        this_input.hide();
+                        $('#dataTable').DataTable().ajax.reload();
+                    }
+                    else{
+                        toastr.error(data.message)
+                    }
+                    
+                }
+            });
+        })
        
     </script>
 @endpush

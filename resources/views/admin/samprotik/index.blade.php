@@ -69,15 +69,13 @@
                 <!--end::Card body-->
             </div>
             <!--end::Card--> 
+
             <!--begin::admin.samprotik question-->    
             <div class="row" id="samprotik_ques">
                 @include('admin.samprotik.samprotik')
             </div>
             <!--end::samprotik question-->
-
-            <div class="ajax-load text-center" style="display:none">
-                <p><img src="{{ asset('assets/media/gif/loader.gif') }}"></p>
-            </div>
+           
         </div>
         <!--end::Container-->
     </div>
@@ -87,38 +85,27 @@
 
 @push('script')
 <script type="text/javascript">
-	var page = 1;
-	$(window).scroll(function() {
-	    if($(window).scrollTop() + $(window).height() >= $(document).height()) {
-	        page++;
-	        loadMoreData(page);
-	    }
-	});
+	
+    $(document).ready(function(){
 
-	function loadMoreData(page){
-	  $.ajax(
-	        {
-	            url: '?page=' + page,
-	            type: "get",
-	            beforeSend: function()
-	            {
-	                $('.ajax-load').show();
-	            }
-	        })
-	        .done(function(data)
-	        {
-	            if(data.html == " "){
-	                $('.ajax-load').html("No more records found");
-	                return;
-	            }
-	            $('.ajax-load').hide();
-	            $("#samprotik_ques").append(data.html);
-	        })
-	        .fail(function(jqXHR, ajaxOptions, thrownError)
-	        {
-	              alert('server not responding...');
-	        });
-	}
+        $(document).on('click', '.pagination a', function(event){
+            event.preventDefault(); 
+            var page = $(this).attr('href').split('page=')[1];
+            fetch_data(page);
+        });
+
+        function fetch_data(page)
+        {
+            $.ajax({
+                url:"?page="+page,
+                success:function(data)
+                {
+                    $('#samprotik_ques').html(data.html);
+                }
+            });
+        }
+    
+    });
 
     $(document).ready( function(){
         //option filter
@@ -175,9 +162,51 @@
                     $("#samprotik_ques").append(data.html);
                 }
             });
-        })
+        }) 
+    })
 
-        
+    //show description form
+    $(document).on('click', '.add-description', function(){
+        $(this).closest('div').find('.des-form').toggleClass('d-none');
+    })
+
+    //add description --save
+    $(document).on('submit', '#kk_add_description_form', function(e){
+        e.preventDefault()
+        //console.log('here')
+        $('.with-errors').text('')
+        $('#kk_modal_new_service_submit').attr('disabled','true')
+        var thisaddbtn = $(this);
+        var formData = new FormData(this);
+        $.ajax({
+            type:"POST",
+            url: "{{ url('admin/samprotik-description/store')}}",
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                if(data.success ==  false || data.success ==  "false"){
+                    var arr = Object.keys(data.errors);
+                    var arr_val = Object.values(data.errors);
+                    for(var i= 0;i < arr.length;i++){
+                    $('.'+arr[i]+'-error').text(arr_val[i][0])
+                    }
+                }else if(data.error || data.error == 'true'){
+                    var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                    $('#kk_modal_new_question_form').find('.messages').html(alertBox).show();
+                }else{
+                    toastr.success(data.message);
+                    thisaddbtn.parent().parent("div").find('.des-form').addClass('d-none');
+                    
+                    
+                }
+
+                $('.indicator-label').show()
+                $('.indicator-progress').hide()
+                $('#kk_modal_new_service_submit').removeAttr('disabled')
+            }
+        });
     })
 </script>
 

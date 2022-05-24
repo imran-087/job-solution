@@ -58,10 +58,88 @@
             <!--begin::Heading-->
             <div class="mb-13 text-center">
                 <!--begin::Title-->
-                <h1 class="mb-3 mt-3">Preview</h1>
+                <h1 class="mb-3 mt-3">Preview Question Input</h1>
                 <!--end::Title-->
-               
+                <!--begin::Description-->
+                <div class="text-muted fw-bold fs-5">Recheck All The Field and Submit
+                </div>
+                <!--end::Description-->
             </div>
+            <!--end::Heading-->
+            <!--begin::Input group-->
+            <div class="row g-9 mb-8">
+                <!--begin::Col-->
+                <div class="col-md-3 fv-row">
+                    <label class="required fs-6 fw-bold mb-2">Select Main Category</label>
+                    <select class="form-select form-select-solid " data-control="select2"
+                        data-hide-search="true" data-placeholder="Select main category" name="main_category"
+                        id="main_category" >
+                        {{-- <option value="">{{ $myForm['main_category'] }}</option> --}}
+                        {{-- @foreach ($main_categories as $main_category)
+                        <option value="{{ $main_category->id }}">{{ $main_category->name }}</option>
+                        @endforeach --}}
+                    </select>
+                    <div class="help-block with-errors main_category-error"></div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-md-3 fv-row">
+                    <label class="required fs-6 fw-bold mb-2">Select Category</label>
+                    <select class="form-select form-select-solid " data-control="select2"
+                        data-hide-search="true" data-placeholder="Select category" name="category"
+                        id="category" >
+
+                        {{-- <option value="">{{ $myForm['category'] }}</option> --}}
+                    </select>
+                    <div class="help-block with-errors catgory-error"></div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-md-3 fv-row">
+                    <label class="required fs-6 fw-bold mb-2">Select Sub Category</label>
+                    <select class="form-select form-select-solid " data-control="select2"
+                        data-hide-search="true" data-placeholder="Select sub category" name="sub_category"
+                        id="sub_category" >
+
+                        {{-- <option value="">{{$myForm['sub_category']}}</option> --}}
+                    </select>
+                    <div class="help-block with-errors sub_category-error"></div>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-md-3 fv-row">
+                    <label class="required fs-6 fw-bold mb-2">Select Subject</label>
+                    <select class="form-select form-select-solid" data-control="select2"
+                        data-hide-search="true" data-placeholder="Select subject" name="subject"
+                        id="subject" >
+
+                        {{-- <option value="">{{$myForm['subject']}}</option> --}}
+                    </select>
+                    <div class="help-block with-errors subject-error"></div>
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Input group-->
+
+            <!--begin::Input group-->
+            <div class="row g-9 mb-8">
+                <!--begin::Col-->
+                <div class="col-md-2 fv-row">
+                    <label class="required fs-6 fw-bold mb-2">Select Year</label>
+                    <select class="form-select form-select-solid " data-control="select2"
+                        data-hide-search="true" data-placeholder="Select year" name="year"
+                        id="year" >
+                        <option value="">{{ $myForm['year'] }}</option>
+                        {{-- @foreach ($years as $year)
+                        <option value="{{ $year->id }}">{{ $year->year }}</option>
+                        @endforeach --}}
+
+                    </select>
+                    <div class="help-block with-errors year-error"></div>
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Input group-->
             <!--end::Heading-->
             @if($myForm['type'] == 'passage')
             <div class="card" style="margin-top:20px !important; border:7px solid #F2F5F7; border-radius:5px; padding:5px">
@@ -138,7 +216,7 @@
                             <div class="row g-9 mb-8">
                                 <!--begin::Col-->
                                 {{-- @for($o = 0; $o < 4; $o++)  --}}
-                                <div class="col-md-3 fv-row">
+                                <div class="col-md-12 fv-row">
                                     <!--begin::Label-->
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span class="required">Option : 1 </span>
@@ -156,7 +234,7 @@
                                     <input type="file" class="form-control-file mt-2" id="exampleInputFile" name="image[]" multiple>
                                     @endif
                                 </div>    
-                                <div class="col-md-3 fv-row">
+                                <div class="col-md-12 fv-row">
                                     <!--begin::Label-->
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span class="required">Option : 2 </span>
@@ -174,7 +252,7 @@
                                     <input type="file" class="form-control-file mt-2" id="exampleInputFile" name="image[]" multiple>
                                     @endif
                                 </div>    
-                                <div class="col-md-3 fv-row">
+                                <div class="col-md-12 fv-row">
                                     <!--begin::Label-->
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span class="required">Option : 3 </span>
@@ -192,7 +270,7 @@
                                     <input type="file" class="form-control-file mt-2" id="exampleInputFile" name="image[]" multiple>
                                     @endif
                                 </div>    
-                                <div class="col-md-3 fv-row">
+                                <div class="col-md-12 fv-row">
                                     <!--begin::Label-->
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span class="required">Option : 4 </span>

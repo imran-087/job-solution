@@ -1,0 +1,141 @@
+StartFontMetrics 4.1
+Notice Converted by PHP-font-lib
+Comment https://github.com/PhenX/php-font-lib
+EncodingScheme FontSpecific
+FontName AponaLohit
+FontSubfamily Regular
+UniqueID Ekushey Lohit
+FullName AponaLohit
+Version Version 1.01
+PostScriptName AponaLohit
+Trademark not included.
+Weight Medium
+ItalicAngle 0
+IsFixedPitch false
+UnderlineThickness 26
+UnderlinePosition -416
+FontHeightOffset 339
+Ascender 975
+Descender -356
+FontBBox -631 -423 1459 988
+StartCharMetrics 481
+U 32 ; WX 277 ; N space ; G 3
+U 33 ; WX 533 ; N exclam ; G 4
+U 34 ; WX 257 ; N quotedbl ; G 5
+U 39 ; WX 88 ; N quotesingle ; G 6
+U 40 ; WX 572 ; N parenleft ; G 7
+U 41 ; WX 572 ; N parenright ; G 8
+U 44 ; WX 416 ; N comma ; G 9
+U 45 ; WX 533 ; N hyphen ; G 10
+U 46 ; WX 351 ; N period ; G 11
+U 58 ; WX 351 ; N colon ; G 12
+U 59 ; WX 410 ; N semicolon ; G 13
+U 63 ; WX 619 ; N question ; G 14
+U 95 ; WX 930 ; N underscore ; G 15
+U 96 ; WX 372 ; N grave ; G 16
+U 2404 ; WX 520 ; N .notdef.001 ; G 17
+U 2405 ; WX 649 ; N uni0965 ; G 18
+U 2433 ; WX 0 ; N u0981 ; G 19
+U 2434 ; WX 430 ; N u0982 ; G 20
+U 2435 ; WX 533 ; N u0983 ; G 21
+U 2437 ; WX 866 ; N u0985 ; G 22
+U 2438 ; WX 1166 ; N u0986 ; G 23
+U 2439 ; WX 520 ; N u0987 ; G 24
+U 2440 ; WX 653 ; N u0988 ; G 25
+U 2441 ; WX 779 ; N u0989 ; G 26
+U 2442 ; WX 849 ; N u098A ; G 27
+U 2443 ; WX 827 ; N u098B ; G 28
+U 2444 ; WX 602 ; N u098C ; G 29
+U 2447 ; WX 761 ; N u098F ; G 30
+U 2448 ; WX 804 ; N u0990 ; G 31
+U 2451 ; WX 736 ; N u0993 ; G 32
+U 2452 ; WX 821 ; N u0994 ; G 33
+U 2453 ; WX 700 ; N u0995 ; G 34
+U 2454 ; WX 657 ; N u0996 ; G 35
+U 2455 ; WX 655 ; N u0997 ; G 36
+U 2456 ; WX 618 ; N u0998 ; G 37
+U 2457 ; WX 733 ; N u0999 ; G 38
+U 2458 ; WX 540 ; N u099A ; G 39
+U 2459 ; WX 606 ; N u099B ; G 40
+U 2460 ; WX 895 ; N u099C ; G 41
+U 2461 ; WX 757 ; N u099D ; G 42
+U 2462 ; WX 1025 ; N u099E ; G 43
+U 2463 ; WX 545 ; N u099F ; G 44
+U 2464 ; WX 534 ; N u09A0 ; G 45
+U 2465 ; WX 736 ; N u09A1 ; G 46
+U 2466 ; WX 566 ; N u09A2 ; G 47
+U 2467 ; WX 605 ; N u09A3 ; G 48
+U 2468 ; WX 750 ; N u09A4 ; G 49
+U 2469 ; WX 648 ; N u09A5 ; G 50
+U 2470 ; WX 525 ; N u09A6 ; G 51
+U 2471 ; WX 560 ; N u09A7 ; G 52
+U 2472 ; WX 597 ; N u09A8 ; G 53
+U 2474 ; WX 679 ; N u09AA ; G 54
+U 2475 ; WX 731 ; N u09AB ; G 55
+U 2476 ; WX 557 ; N u09AC ; G 56
+U 2477 ; WX 745 ; N u09AD ; G 57
+U 2478 ; WX 555 ; N u09AE ; G 58
+U 2479 ; WX 576 ; N u09AF ; G 59
+U 2480 ; WX 550 ; N u09B0 ; G 60
+U 2482 ; WX 745 ; N u09B2 ; G 61
+U 2486 ; WX 606 ; N u09B6 ; G 62
+U 2487 ; WX 551 ; N u09B7 ; G 63
+U 2488 ; WX 661 ; N u09B8 ; G 64
+U 2489 ; WX 525 ; N u09B9 ; G 65
+U 2492 ; WX 1 ; N u09BC ; G 66
+U 2493 ; WX 544 ; N u09BD ; G 67
+U 2494 ; WX 290 ; N u09BE ; G 68
+U 2495 ; WX 286 ; N u09BF ; G 69
+U 2496 ; WX 286 ; N u09C0 ; G 70
+U 2497 ; WX 3 ; N u09C1 ; G 71
+U 2498 ; WX 0 ; N u09C2 ; G 72
+U 2499 ; WX 0 ; N u09C3 ; G 73
+U 2500 ; WX 0 ; N u09C4 ; G 74
+U 2503 ; WX 377 ; N u09C7 ; G 75
+U 2504 ; WX 391 ; N u09C8 ; G 76
+U 2507 ; WX 714 ; N u09CB ; G 77
+U 2508 ; WX 710 ; N u09CC ; G 78
+U 2509 ; WX 0 ; N u09CD ; G 79
+U 2510 ; WX 534 ; N .notdef.002 ; G 80
+U 2519 ; WX 286 ; N u09D7 ; G 81
+U 2524 ; WX 714 ; N u09DC ; G 82
+U 2525 ; WX 545 ; N u09DD ; G 83
+U 2527 ; WX 589 ; N u09DF ; G 84
+U 2528 ; WX 827 ; N u09E0 ; G 85
+U 2529 ; WX 602 ; N u09E1 ; G 86
+U 2530 ; WX 0 ; N u09E2 ; G 87
+U 2531 ; WX 541 ; N u09E3 ; G 88
+U 2534 ; WX 650 ; N u09E6 ; G 89
+U 2535 ; WX 649 ; N u09E7 ; G 90
+U 2536 ; WX 650 ; N u09E8 ; G 91
+U 2537 ; WX 650 ; N u09E9 ; G 92
+U 2538 ; WX 649 ; N u09EA ; G 93
+U 2539 ; WX 649 ; N u09EB ; G 94
+U 2540 ; WX 650 ; N u09EC ; G 95
+U 2541 ; WX 650 ; N u09ED ; G 96
+U 2542 ; WX 649 ; N u09EE ; G 97
+U 2543 ; WX 649 ; N u09EF ; G 98
+U 2544 ; WX 563 ; N u09F0 ; G 99
+U 2545 ; WX 585 ; N u09F1 ; G 100
+U 2546 ; WX 317 ; N u09F2 ; G 101
+U 2547 ; WX 384 ; N u09F3 ; G 102
+U 2548 ; WX 317 ; N u09F4 ; G 103
+U 2549 ; WX 317 ; N u09F5 ; G 104
+U 2550 ; WX 317 ; N u09F6 ; G 105
+U 2551 ; WX 352 ; N u09F7 ; G 106
+U 2552 ; WX 317 ; N u09F8 ; G 107
+U 2553 ; WX 317 ; N u09F9 ; G 108
+U 2554 ; WX 839 ; N u09FA ; G 109
+U 8204 ; WX 0 ; N afii61664 ; G 110
+U 8205 ; WX 0 ; N afii301 ; G 111
+U 8211 ; WX 650 ; N endash ; G 112
+U 8212 ; WX 1332 ; N emdash ; G 113
+U 8216 ; WX 397 ; N quoteleft ; G 114
+U 8217 ; WX 410 ; N quoteright ; G 115
+U 8220 ; WX 566 ; N quotedblleft ; G 116
+U 8221 ; WX 598 ; N quotedblright ; G 117
+U 8230 ; WX 1053 ; N ellipsis ; G 118
+U 8722 ; WX 317 ; N minus ; G 119
+U 9676 ; WX 936 ; N uni25CC ; G 120
+EndCharMetrics
+EndFontMetrics

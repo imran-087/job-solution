@@ -123,21 +123,17 @@
                                     </div>
                                     <!--end::Content-->
                                     <!--begin::Item-->
-                                    @if($parent_instructions->count() > 0)
+                                    @if($questions->count() > 0)
+                                   
                                     <div class="mb-5">
-                                        @foreach($parent_instructions as $parent_instruction)
+                                       
+                                        @foreach($questions as $parent_question)
                                             <!--begin::Title-->
-                                            <span class="d-flex">
-                                            <h3 class="text-gray-800 w-bolder mb-4 mt-7">{{ $parent_instruction->parent_instruction_no }} &nbsp; {{ $parent_instruction->parent_instruction }}</h3>
-                                            <a href="javascript:;" data-id="{{ $parent_instruction->id }}" data-type="parent_instruction" class="btn btn-sm btn-icon edit" style="margin-right: 15px !important"><i class="fas fa-edit"></i></a>
-                                            </span>
-                                            <!--end::Title-->
-                                            <!--begin::Accordion-->
-                                            @foreach($parent_instruction->written_questions as $question)
-                                            <!--begin::Section-->
                                             <div class="m-0" style="margin-left:20px !important">
+                                               
                                                 <!--begin::Heading-->
-                                                <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_8_1_{{$question->id}}">
+                                                <div class="d-flex align-items-center collapsible collapsed  py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_8_1_{{$parent_question->id}}">
+                                                    @if($parent_question->question_instruction == 0)
                                                     <!--begin::Icon-->
                                                     <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
                                                         <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
@@ -159,193 +155,174 @@
                                                         <!--end::Svg Icon-->
                                                     </div>
                                                     <!--end::Icon-->
+                                                    @endif
                                                     <!--begin::Title-->
-                                                    <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">{{ $question->question_no }} &nbsp; {{ $question->question }}</h4>
-                                                    <a href="javascript:;" data-id="{{ $question->id }}" data-type="question" class="btn btn-sm btn-icon edit" style="margin-right: 15px !important"><i class="fas fa-edit"></i></a>
-                                                    
+                                                    <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">{{ $parent_question->question_no }} | {{ $parent_question->question }}</h4>
+                                                    <a href="javascript:;" data-id="{{ $parent_question->id }}" data-type="{{$parent_question->question_instruction}}" class="btn btn-sm btn-icon edit" style="margin-right: 15px !important"><i class="fas fa-edit"></i></a>
                                                     <!--end::Title-->
+
                                                 </div>
                                                 <!--end::Heading-->
+                                                @if($parent_question->question_instruction == 0)
                                                 <!--begin::Body-->
-                                                <div id="kt_job_8_1_{{$question->id}}" class="collapse fs-6 ms-1">
+                                                <div id="kt_job_8_1_{{$parent_question->id}}" class="collapse fs-6 ms-1">
                                                     <!--begin::Text-->
-                                                    <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10">answer: &nbsp; {{ $question->answer }}</div>
+                                                    <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10"><b>উত্তর:</b> &nbsp; {{ $parent_question->answer->answer ?? '' }}</div>
                                                     <!--end::Text-->
+                                                    @foreach ($parent_question->descriptions as $description)
+                                                    <!--begin::description-->
+                                                    <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10"><b>Description:</b> &nbsp; {{ $description->description ?? '' }}</div>
+                                                    <!--end::description-->
+                                                    @endforeach
+                                                    
+                                                    <button class="btn btn-sm btn-light  mb-4 addDescription" data-id="{{ $parent_question->id }}"> Add Description</button>
                                                 </div>
+                                                @endif
                                                 <!--end::Content-->
-                                                @if($question->question_or == null)
+                                                @if($parent_question->question_or == null)
                                                 <!--begin::Separator-->
                                                 <div class="separator separator-dashed"></div>
                                                 <!--end::Separator-->
                                                 @else
-                                                    @if($question->question_or) 
-                                                    <span><b class="text-uppercase" style="font: 800; font-weight:bold; margin-left:35px">{{ $question->question_or }}</b></span>
+                                                    @if($parent_question->question_or) 
+                                                    <span><b class="text-uppercase" style="font: 800; font-weight:bold; margin-left:35px">{{ $parent_question->question_or }}</b></span>
                                                     @endif
                                                 @endif
 
                                             </div>
                                             <!--end::Section-->
-                                            @endforeach
-                                            <!--end::Accordion-->
+                                            @foreach($parent_question->children as $child_question)
+                                                <div class="m-0" style="margin-left:40px !important">
 
-                                            <!--begin::Accordion-->
-                                            @if($parent_instruction->question_instruction->count() > 0)
-                                            @foreach($parent_instruction->question_instruction as $instruction)
-                                            <!--begin::Section-->
-                                            <div class="m-0" style="margin-left:20px !important">
-                                                <!--begin::Heading-->
-                                                <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_8_1_ins_{{$instruction->id}}">
-                                                    <!--begin::Icon-->
-                                                    <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
-                                                        <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
-                                                        <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor"></rect>
-                                                                <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor"></rect>
-                                                            </svg>
-                                                        </span>
-                                                        <!--end::Svg Icon-->
-                                                        <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
-                                                        <span class="svg-icon toggle-off svg-icon-1">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor"></rect>
-                                                                <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor"></rect>
-                                                                <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor"></rect>
-                                                            </svg>
-                                                        </span>
-                                                        <!--end::Svg Icon-->
-                                                    </div>
-                                                    <!--end::Icon-->
-                                                    <!--begin::Title-->
-                                                    <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">{{ $instruction->instruction_no }} &nbsp; {{ $instruction->instruction }}</h4>
-                                                    <a href="javascript:;" data-id="{{ $instruction->id }}" data-type="instruction" class="btn btn-sm btn-icon edit" style="margin-right: 15px !important"><i class="fas fa-edit"></i></a>
+                                                    <!--begin::Heading-->
+                                                    <div class="d-flex align-items-center collapsible collapsed  py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_8_1_{{$child_question->id}}">
+                                                        @if($child_question->question_instruction !== 1)
+                                                        <!--begin::Icon-->
+                                                        <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                                                            <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                                                            <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor"></rect>
+                                                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor"></rect>
+                                                                </svg>
+                                                            </span>
+                                                            <!--end::Svg Icon-->
+                                                            <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                                            <span class="svg-icon toggle-off svg-icon-1">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor"></rect>
+                                                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor"></rect>
+                                                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor"></rect>
+                                                                </svg>
+                                                            </span>
+                                                            <!--end::Svg Icon-->
+                                                        </div>
+                                                        <!--end::Icon-->
+                                                        @endif
+                                                        <!--begin::Title-->
+                                                        <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">{{ $child_question->question_no }} | {{ $child_question->question }}</h4>
+                                                        <a href="javascript:;" data-id="{{ $child_question->id }}" data-type="{{ $child_question->question_instruction }}" class="btn btn-sm btn-icon edit" style="margin-right: 15px !important"><i class="fas fa-edit"></i></a>
+                                                        <!--end::Title-->
 
-                                                    <!--end::Title-->
-                                                </div>
-                                                <!--end::Heading-->
-                                                <!--begin::Body-->
-                                                <div id="kt_job_8_1_ins_{{$instruction->id}}" class="collapse fs-6 ms-1">
-                                                    @php
-                                                        $instruction_questions = App\Models\WrittenQuestion::where(['sub_category_id' => $instruction->sub_category_id, 'question_instruction_id' => $instruction->id])->get();
-                                                    @endphp
-                                                    @foreach($instruction_questions as $ins_question)
-                                                    <!--begin::Section-->
-                                                    <div class="m-0" style="margin-left:40px !important">
-                                                        <!--begin::Heading-->
-                                                        <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_8_1_ins_q{{$ins_question->id}}">
-                                                            <!--begin::Icon-->
-                                                            <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
-                                                                <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor"></rect>
-                                                                        <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor"></rect>
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                                <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
-                                                                <span class="svg-icon toggle-off svg-icon-1">
-                                                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                                        <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor"></rect>
-                                                                        <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor"></rect>
-                                                                        <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor"></rect>
-                                                                    </svg>
-                                                                </span>
-                                                                <!--end::Svg Icon-->
-                                                            </div>
-                                                            <!--end::Icon-->
-                                                            <!--begin::Title-->
-                                                            <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">{{ $ins_question->question_no }} &nbsp; {{ $ins_question->question }}</h4>
-                                                            <a href="javascript:;" data-id="{{ $ins_question->id }}" data-type="question" class="btn btn-sm btn-icon edit" style="margin-right: 15px !important"><i class="fas fa-edit"></i></a>
-                                                            <!--end::Title-->
-                                                        </div>
-                                                        <!--end::Heading-->
-                                                        <!--begin::Body-->
-                                                        <div id="kt_job_8_1_ins_q{{$ins_question->id}}" class="collapse fs-6 ms-1">
-                                                            <!--begin::Text-->
-                                                            <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10">answer: &nbsp; {{ $ins_question->answer }}</div>
-                                                            <!--end::Text-->
-                                                        </div>
-                                                        <!--end::Content-->
-                                                        <!--begin::Separator-->
-                                                        <div class="separator separator-dashed"></div>
-                                                        <!--end::Separator-->
-                                                        
                                                     </div>
-                                                    <!--end::Section-->
-                                                    @endforeach
+                                                    <!--end::Heading-->
+                                                    @if($child_question->question_instruction == 0)
+                                                    <!--begin::Body-->
+                                                    <div id="kt_job_8_1_{{$child_question->id}}" class="collapse fs-6 ms-1">
+                                                        <!--begin::Text-->
+                                                        <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10"><b>উত্তর:</b> &nbsp; {{ $child_question->answer->answer ?? '' }}</div>
+                                                        <!--end::Text-->
+                                                        @foreach ($child_question->descriptions as $description)
+                                                        <!--begin::description-->
+                                                        <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10"><b>Description:</b> &nbsp; {{ $description->description ?? '' }}</div>
+                                                        <!--end::description-->
+                                                        @endforeach
+                                                       <button class="btn btn-sm btn-light btn-hover-color-primary  mb-4 addDescription" data-id="{{ $child_question->id }}"> Add Description</button>
+                                                    </div>
+                                                    @endif
+                                                    <!--end::Content-->
+                                                    @if($child_question->question_or == null)
+                                                    <!--begin::Separator-->
+                                                    <div class="separator separator-dashed"></div>
+                                                    <!--end::Separator-->
+                                                    @else
+                                                    @if($child_question->question_or)
+                                                    <span><b class="text-uppercase" style="font: 800; font-weight:bold; margin-left:35px">{{ $child_question->question_or }}</b></span>
+                                                    @endif
+                                                    @endif
+
                                                 </div>
-                                                <!--end::Content-->
-                                                <!--begin::Separator-->
-                                                <div class="separator separator-dashed"></div>
-                                                <!--end::Separator-->
-                                                
-                                            </div>
-                                            <!--end::Section-->
+
+                                                @foreach($child_question->children as $grand_child_question)
+                                                <div class="m-0" style="margin-left:60px !important">
+
+                                                    <!--begin::Heading-->
+                                                    <div class="d-flex align-items-center collapsible py-3 toggle mb-0 collapsed " data-bs-toggle="collapse" data-bs-target="#kt_job_8_1_{{$grand_child_question->id}}">
+
+                                                        <!--begin::Icon-->
+                                                        <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
+                                                            <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
+                                                            <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor"></rect>
+                                                                    <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor"></rect>
+                                                                </svg>
+                                                            </span>
+                                                            <!--end::Svg Icon-->
+                                                            <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
+                                                            <span class="svg-icon toggle-off svg-icon-1">
+                                                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                                                    <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor"></rect>
+                                                                    <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor"></rect>
+                                                                    <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor"></rect>
+                                                                </svg>
+                                                            </span>
+                                                            <!--end::Svg Icon-->
+                                                        </div>
+                                                        <!--end::Icon-->
+
+                                                        <!--begin::Title-->
+                                                        <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">{{ $grand_child_question->question_no }} | {{ $grand_child_question->question }}</h4>
+                                                        <a href="javascript:;" data-id="{{ $grand_child_question->id }}" data-type="{{ $grand_child_question->question_instruction }}" class="btn btn-sm btn-icon edit" style="margin-right: 15px !important"><i class="fas fa-edit"></i></a>
+                                                        <!--end::Title-->
+
+                                                    </div>
+                                                    <!--end::Heading-->
+                                                    {{-- @endif --}}
+                                                    <!--begin::Body-->
+                                                    <div id="kt_job_8_1_{{$grand_child_question->id}}" class="collapse fs-6 ms-1">
+                                                        <!--begin::Text-->
+                                                        <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10"><b>উত্তর:</b> &nbsp; {{ $grand_child_question->answer->answer ?? '' }}</div>
+                                                        <!--end::Text-->
+                                                        @foreach ($grand_child_question->descriptions as $description)
+                                                        <!--begin::description-->
+                                                        <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10"><b>Description:</b> &nbsp; {{ $description->description ?? '' }}</div>
+                                                        <!--end::description-->
+                                                        @endforeach
+                                                        <button class="btn btn-sm btn-light btn-hover-color-primary mb-4 addDescription" data-id="{{ $grand_child_question->id }}"> Add Description</button>
+                                                    </div>
+
+                                                    <!--end::Content-->
+                                                    @if($grand_child_question->question_or == null)
+                                                    <!--begin::Separator-->
+                                                    <div class="separator separator-dashed"></div>
+                                                    <!--end::Separator-->
+                                                    @else
+                                                    @if($grand_child_question->question_or)
+                                                    <span><b class="text-uppercase" style="font: 800; font-weight:bold; margin-left:35px">{{ $grand_child_question->question_or }}</b></span>
+                                                    @endif
+                                                    @endif
+
+                                                </div>
+                                                @endforeach
+
                                             @endforeach
-                                            @endif
-                                            <!--end::Accordion-->
-        
+                                           
                                         @endforeach
                                         
                                     </div>
                                     @endif
                                     <!--end::Item-->
-                                    
-                                    @if($without_parent_questions->count() > 0)
-                                    @foreach($without_parent_questions as $without_parent_question)
-                                    <!--begin::Item-->
-                                    <div class="mb-0">
-                                        <!--begin::Accordion-->
-                                        <!--begin::Section-->
-                                        <div class="m-0">
-                                            <!--begin::Heading-->
-                                            <div class="d-flex align-items-center collapsible py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_10_1_{{ $without_parent_question->id }}">
-                                                <!--begin::Icon-->
-                                                <div class="btn btn-sm btn-icon mw-20px btn-active-color-primary me-5">
-                                                    <!--begin::Svg Icon | path: icons/duotune/general/gen036.svg-->
-                                                    <span class="svg-icon toggle-on svg-icon-primary svg-icon-1">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor"></rect>
-                                                            <rect x="6.0104" y="10.9247" width="12" height="2" rx="1" fill="currentColor"></rect>
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->
-                                                    <!--begin::Svg Icon | path: icons/duotune/general/gen035.svg-->
-                                                    <span class="svg-icon toggle-off svg-icon-1">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                                            <rect opacity="0.3" x="2" y="2" width="20" height="20" rx="5" fill="currentColor"></rect>
-                                                            <rect x="10.8891" y="17.8033" width="12" height="2" rx="1" transform="rotate(-90 10.8891 17.8033)" fill="currentColor"></rect>
-                                                            <rect x="6.01041" y="10.9247" width="12" height="2" rx="1" fill="currentColor"></rect>
-                                                        </svg>
-                                                    </span>
-                                                    <!--end::Svg Icon-->
-                                                </div>
-                                                <!--end::Icon-->
-                                                <!--begin::Title-->
-                                                <h3 class="text-gray-800 w-bolder cursor-pointer mb-0">{{ $without_parent_question->question_no }} &nbsp; {{ $without_parent_question->question }}</h3>
-                                                <a href="javascript:;" data-id="{{ $without_parent_question->id }}" data-type="question" class="btn btn-sm btn-icon" style="margin-right: 15px !important"><i class="fas fa-edit"></i></a>
-
-                                                <!--end::Title-->
-                                            </div>
-                                            <!--end::Heading-->
-                                            <!--begin::Body-->
-                                            <div id="kt_job_10_1_{{ $without_parent_question->id }}" class="collapse fs-6 ms-1">
-                                                <!--begin::Text-->
-                                                <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10">answer: &nbsp; {{ $without_parent_question->answer }}</div>
-                                                <!--end::Text-->
-                                            </div>
-                                            <!--end::Content-->
-                                            <!--begin::Separator-->
-                                            <div class="separator separator-dashed"></div>
-                                            <!--end::Separator-->
-                                        </div>
-                                        <!--end::Section-->
-                                        <!--end::Accordion-->
-                                    </div>
-                                    <!--end::Item-->
-                                    @endforeach
-                                    @endif
                                 </div>
                                 <!--end::Extended content-->
                             </div>
@@ -366,10 +343,89 @@
 </div>
 <!--end::Modal - Edit Question view modal-->
 
+<!--begin::Modal - New Description add form-->
+<div class="modal fade" id="kk_modal_new_description" tabindex="-1" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <!--begin::Modal content-->
+        <div class="modal-content rounded">
+            <!--begin::Modal header-->
+            <div class="modal-header pb-0 border-0 justify-content-end">
+                <!--begin::Close-->
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                transform="rotate(-45 6 17.3137)" fill="black" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)"
+                                fill="black" />
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                </div>
+                <!--end::Close-->
+            </div>
+            <!--begin::Modal header-->
+            <!--begin::Modal body-->
+            <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+                <!--begin:Form-->
+                <form id="kk_modal_new_description_form" class="form" enctype="multipart/form-data">
+                    <div class="messages"></div>
+                    {{-- csrf token  --}}
+                    @csrf
+                    <input type="hidden" name="question_id">
+
+                    <!--begin::Heading-->
+                    <div class="mb-13 text-center">
+                        <!--begin::Title-->
+                        <h1 class="mb-3">Add Description</h1>
+                        <!--end::Title-->
+                        <!--begin::Description-->
+                        <div class="text-muted fw-bold fs-5">Fill up the form and submit
+                        </div>
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Heading-->
+                    <!--begin::Input group-->
+                    <div class="d-flex flex-column mb-8 fv-row">
+                        <!--begin::Label-->
+                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                            <span class="required">Description</span>
+                        </label>
+                        <!--end::Label-->
+                        <textarea type="text" class="form-control form-control-solid h-100px" placeholder="Write description here ........"
+                            name="description" ></textarea>
+                        <div class="help-block with-errors description-error"></div>
+                    </div>
+                    <!--end::Input group-->
+                   
+                    <!--begin::Actions-->
+                    <div class="text-center">
+                        <button type="reset" id="kk_modal_new_service_cancel" class="btn btn-light me-3 ">Cancel</button>
+                        <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary">
+                            <span class="indicator-label">Submit</span>
+                            <span class="indicator-progress">Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                    </div>
+                    <!--end::Actions-->
+                </form>
+                <!--end:Form-->
+            </div>
+            <!--end::Modal body-->
+        </div>
+        <!--end::Modal content-->
+    </div>
+    <!--end::Modal dialog-->
+</div>
+<!--end::Modal - New Description add form-->
+
 @endsection
 
 @push('script')
 <script type="text/javascript">
+    //Edit
     $(document).ready(function(){
         $('.edit').on('click', function(){
             var id = $(this).data('id');
@@ -434,7 +490,65 @@
                 }
             });
         })
+    })
 
+    //Description
+    $(document).ready(function(){
+        $('.addDescription').on('click', function(){
+            var id = $(this).data('id');
+            console.log(id)
+            $('input[name="question_id"]').val(id)
+            $('.with-errors').text('')
+            $('#kk_modal_new_description_form')[0].reset();
+            $('#kk_modal_new_description').modal('show')
+        });
+
+        //cancel
+        $('#kk_modal_new_service_cancel').on('click',  function(){
+            $('#kk_modal_new_description_form')[0].reset();
+            $("#kk_modal_new_description").modal('hide');
+        })
+
+        //save description
+        $(document).on('submit', '#kk_modal_new_description_form', function(e){
+            e.preventDefault()
+            //console.log('here')
+            $('.with-errors').text('')
+            $('.indicator-label').hide()
+            $('.indicator-progress').show()
+            $('#kk_modal_new_service_submit').attr('disabled','true')
+
+            var formData = new FormData(this);
+            $.ajax({
+                type:"POST",
+                url: "{{ url('admin/written-question/description/store')}}",
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    if(data.success ==  false || data.success ==  "false"){
+                        var arr = Object.keys(data.errors);
+                        var arr_val = Object.values(data.errors);
+                        for(var i= 0;i < arr.length;i++){
+                        $('.'+arr[i]+'-error').text(arr_val[i][0])
+                        }
+                    }else if(data.error || data.error == 'true'){
+                        var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                        $('#kk_modal_new_question_form').find('.messages').html(alertBox).show();
+                    }else{
+                        toastr.success(data.message);
+                        $('#kk_modal_new_description_form')[0].reset();
+                        $("#kk_modal_new_description").modal('hide');
+                        location.reload();
+                    }
+
+                    $('.indicator-label').show()
+                    $('.indicator-progress').hide()
+                    $('#kk_modal_new_service_submit').removeAttr('disabled')
+                }
+            });
+        })
     })
 </script>
 @endpush

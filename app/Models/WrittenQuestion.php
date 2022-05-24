@@ -5,10 +5,11 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Kalnoy\Nestedset\NodeTrait;
 
 class WrittenQuestion extends Model
 {
-    use HasFactory, SoftDeletes;
+    use HasFactory, SoftDeletes, NodeTrait;
 
     protected $guarded = [];
 
@@ -17,13 +18,17 @@ class WrittenQuestion extends Model
         return $this->belongsTo(SubCategory::class);
     }
 
-    public function question_instruction()
+    public function answer()
     {
-        return $this->belongsTo(QuestionInstruction::class, 'id', 'instruction_id');
+        return $this->hasOne(WrittenAnswer::class);
     }
 
-    public function question_parent_instruction()
+    ####* Polymorphic Relation Start *####
+    /**
+     * Get all of the question's descriptions.
+     */
+    public function descriptions()
     {
-        return $this->belongsTo(QuestionParentInstruction::class);
+        return $this->morphMany(Description::class, 'descriptionable');
     }
 }

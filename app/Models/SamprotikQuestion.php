@@ -9,13 +9,23 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 class SamprotikQuestion extends Model
 {
     use HasFactory, SoftDeletes;
+
     protected $casts = [
         'options' => 'json'
     ];
 
+    public function samprotikBookmarks()
+    {
+        return $this->hasMany(SamprotikBookmarks::class);
+    }
+
+    ####* Polymorphic Relation Start *####
+    /**
+     * Get all of the question's descriptions.
+     */
     public function descriptions()
     {
-        return $this->hasMany(QuestionDescription::class, 'samprotik_ques_id', 'id');
+        return $this->morphMany(Description::class, 'descriptionable');
     }
 
     /**
@@ -32,10 +42,5 @@ class SamprotikQuestion extends Model
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
-    }
-
-    public function samprotikBookmarks()
-    {
-        return $this->hasMany(SamprotikBookmarks::class);
     }
 }

@@ -137,13 +137,15 @@ class QuestionController extends Controller
 
     public function preview(Request $request)
     {
-
+        //dd($request->all());
         if ($request->type == 'image') {
             $this->store($request);
         } else {
             $data['myForm'] = $request->all();
             //dd($data);
-            return view('admin.question.preview', $data);
+            $main_categories = MainCategory::all();
+            $years = Year::all();
+            return view('admin.question.preview', $data)->with('main_categories', 'years');
         }
     }
 
@@ -429,7 +431,7 @@ class QuestionController extends Controller
         return view('admin.mcq.index', compact('data'));
     }
 
-    function getSubCategory(Request $request)
+    public function getSubCategory(Request $request)
     {
         // dd($request->all());
         if ($request->main_category == 1) {

@@ -25,8 +25,10 @@
                     <br><br>
                     @if($sub_category->subject->count() > 0)
                     @foreach($sub_category->subject as $subject)
-                     <a href="{{ route('admin.question.all-question',['sub_cat' => $sub_category->id, 'subject' => $subject->id]) }}" target="_blank"><span class="badge badge-light-success fs-8 fw-bolder">{{ $subject->name }}</span></a>
-                    @endforeach
+                    @if($subject->parent_id == null)
+                    <a href="{{ route('admin.question.all-question',['sub_cat' => $sub_category->id, 'subject' => $subject->id]) }}" target="_blank"><span class="badge badge-light-success fs-8 fw-bolder">{{ $subject->name }}</span></a>
+                    @endif
+                     @endforeach
                     @else
                     @foreach($subjects as $subject)
                     <a href="{{ route('admin.question.all-question',['sub_cat' => $sub_category->id, 'subject' => $subject->id]) }}" target="_blank"><span class="badge badge-light-success fs-8 fw-bolder">{{ $subject->name }}</span></a>

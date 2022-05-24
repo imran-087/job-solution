@@ -64,20 +64,39 @@
                     <p class="text-gray-800 fw-bold " > 
                     <span style="color:green; font-weight:bold">answer:</span> {{$question->answer }}</p>
                 </div>
-                <form action="" class="py-4 d-none edit-form">
-                    @csrf
-                    <div class="col-md-12">
-                        <input type="text" class="form-control" name="answer" value="{{ $question->answer }}">
-                        <input type="hidden" name="id" value="{{ $question->id }}">
-                    </div>
-                    <div class="col-md-2 float-end mt-2">
-                        <button type="submit" class="btn btn-primary btn-sm"> Update</button>
-                    </div>
-                </form>
+            </div>
+
+            <div class="row">
+                @foreach($question->descriptions as $description) 
+                <div class="row">
+                    <p class="text-gray-800 fw-bold mt-4 ml-4"><b>Description:</b> {{ $description->description }}</p>
+                </div>
+                @endforeach
+
+                <span class="add-description cursor-pointer "><i class="fas fa-plus-circle fa-2xl"></i> <b>Description</b> </span>
+               
+                <div class="d-flex flex-column mt-2 fv-row des-form d-none">
+                    <form id="kk_add_description_form" class="form">
+                        <div class="messages"></div>
+                        {{-- csrf token  --}}
+                        @csrf
+                        <input type="hidden" name="question" value="{{ $question->id }}">
+                        <div class="col-md-12 mb-5">
+                            <textarea name="description" class="form-control form-control-solid h-100px"></textarea>
+                        </div>
+                        <div class="col-md-2 offset-10">
+                            <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary btn-sm">
+                            <span class="indicator-label">add</span>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
-        
         @endif
+        
     </div>
 </div>
 @endforeach
+<div>
+     {{ $questions->links() }}
+</div>

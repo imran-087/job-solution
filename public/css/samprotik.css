@@ -1,0 +1,110 @@
+/* samprotik pdf css  */
+  p {
+            margin-bottom: 0;
+        }
+
+        .main-body {
+            position: relative;
+            width: 1350px;
+            border: solid 1px black;
+            margin:auto;
+        }
+
+        .heading {
+            background-color: #84BA3F;
+            padding: 5px;
+            position: relative;
+            color:#fff;
+        }
+
+        .heading h1 {
+            
+            font-size: 60px;
+        }
+        .heading h4 {
+            
+            font-size: 35px;
+        }
+        .heading h1,
+        h4 {
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .source-title {
+            position: absolute;
+            top: 10%;
+            left: 83%;
+        }
+
+        .sub-title {
+                color: #fff;
+                text-align: center;
+                font-size: 50px;
+                font-weight: bold;
+                width: 750px;
+                background-color: #84BA3F;
+                margin: auto;
+                margin-top: 20px;
+                padding: 10px;
+
+        }
+
+        .question {
+            padding: 0px 10px 10px 0;
+            font-size: 30px;
+            color:#138d3e;
+        }
+
+        .question-border {
+            border-right: solid 3px #84BA3F;
+        }
+
+        .question-body {
+            margin: 20px;
+        }
+
+        .water-mark {
+            position: absolute;
+            opacity: .3;
+            height: 200px;
+            width: 200px;
+            left: 50%;
+            margin-left: -100px;
+            top: 50%;
+            margin-top: -100px;
+        }
+
+        .logo {
+            position: absolute;
+        }
+
+        .header-table {
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+            margin-top: 6px;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            padding: 25px 0 0 0;
+            color:#fff;
+        }
+
+        .footer-table {
+
+            font-size: 12px;
+            width: 100%;
+            font-weight: bold;
+            background-color: #84BA3F;
+        }
+
+        .footer-vartical-line {
+            height: 35px;
+            width: 2px;
+            background: #000;
+            position: absolute;
+            bottom: 10px;
+            left: 387px;
+        }

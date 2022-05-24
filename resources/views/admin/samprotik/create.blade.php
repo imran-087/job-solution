@@ -1,4 +1,4 @@
-          
+   
 @for($i = 0; $i < $number; $i++)
 <div class="card" style="margin-top:20px !important; border:7px solid #F2F5F7; border-radius:5px; padding:20px">
     <div class="card-body pt-4 " style="padding-bottom: 0px !important">
@@ -24,7 +24,7 @@
                 <!--end::Input group-->
                 @if($option != '1')
                 <!--begin::Input group-->
-                <div class="d-flex flex-column mb-8 fv-row">
+                <div class="d-flex flex-column fv-row">
                     <!--begin::Label-->
                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                         <span class="required fw-bolder">answer</span>

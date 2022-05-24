@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Subject;
 use App\Models\Category;
 use App\Models\Question;
+use App\Models\Description;
 use App\Models\SubCategory;
 use Illuminate\Support\Str;
 use App\Models\MainCategory;
@@ -129,16 +130,14 @@ class QuestionDescriptionController extends Controller
                 }
             } else { //create new category
 
-                $question_des = new QuestionDescription();
+                $description = new Description();
+                $description->description = $request->description;
+                $description->created_user_id =  Auth::guard('admin')->user()->id;
+                $description->created_at = Carbon::now();
 
-                $question_des->question_id = $request->question;
-                $question_des->description = $request->description;
-                $question_des->created_user_id =  Auth::guard('admin')->user()->id;
+                $question = Question::find($request->question);
 
-                $question_des->created_at = Carbon::now();
-
-
-                if ($question_des->save()) {
+                if ($question->descriptions()->save($description)) {
                     return response()->json([
                         'success' => true,
                         'message' => 'Description saved successfully!'

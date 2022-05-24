@@ -1,8 +1,9 @@
 <!--begin::Card body-->
 <div class="card-body pt-4 " style="padding-bottom: 0px !important">
     <div class="row">
-        <div class="col-md-6 d-flex flex-center" style="border-right: 1px solid gray">
+        <div class="col-md-6 d-flex align-center justify-content-between" style="border-right: 1px solid gray">
             <a href="{{ route('admin.samprotik.index') }}"><h3 style="color:#D94540">All সাম্প্রতিক Question</h3></a>
+            <a class="btn btn-primary btn-sm" href="{{ route('admin.samprotik.pdf') }}">Export to PDF</a>
         </div>
         <div class="col-md-6">
             

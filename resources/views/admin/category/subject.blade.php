@@ -292,7 +292,7 @@
                         <div class="row">
                             <div class="col-md-11">
                                 <input type="text" class="form-control form-control-solid" placeholder="Enter subject name"
-                                    name="name[]" />
+                                    name="name[]" id="name"/>
                                 <div class="help-block with-errors name-error"></div>
                             </div>
                             <div class="col-md-1">
@@ -453,13 +453,13 @@
                 url: "{{ url('admin/category/subject/get')}}"+'/'+id,
                 dataType: 'json',
                 success:function(data){
-                    $('input[name="subject_id"]').val(data.subject.id)
-                    $('input[name="name"]').val(data.subject.name)
-                    $('input[name="title"]').val(data.subject.title)
-                    $('textarea[name="description"]').val(data.subject.description)
-                    $('select[name="parent"]').val(data.subject.parent_id).change()
-                    $('select[name="status"]').val(data.subject.status).change()
-                    $('select[name="main_category"]').val(data.subject.main_category_id).change()
+                    $('input[name="subject_id"]').val(data.subject.id);
+                    $('#name').val(data.subject.name);
+                    $('input[name="title"]').val(data.subject.title);
+                    $('textarea[name="description"]').val(data.subject.description);
+                    $('select[name="parent"]').html('<option value="' + data.subject.parent_id + '">' + data.subject.parent_id + '</option>');;
+                    $('select[name="status"]').val(data.subject.status).change();
+                    $('select[name="main_category"]').val(data.subject.main_category_id).change();
                     $('select[name="category"]').html('<option value="' + data.category.id + '">' + data.category.name + '</option>');
                     $('select[name="sub_category"]').html('<option value="' + data.sub_category.id + '">' + data.sub_category.name + '</option>');
                     $("#kk_modal_new_category").modal('show');
@@ -510,7 +510,7 @@
                         $('#kk_modal_new_category_form')[0].reset();
                         clearAppendData()
                         $("#kk_modal_new_category").modal('hide');
-
+                        $('.dynamic-row').remove();
                         Swal.fire({
                                 text: data.message,
                                 icon: "success",

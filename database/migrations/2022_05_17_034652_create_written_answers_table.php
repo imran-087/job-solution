@@ -15,7 +15,7 @@ class CreateWrittenAnswersTable extends Migration
     {
         Schema::create('written_answers', function (Blueprint $table) {
             $table->id();
-            $table->integer('written_question_test_id');
+            $table->integer('written_question_id');
             $table->longText('answer')->nullable();
             $table->integer('best_answer')->nullable();
             $table->timestamps();

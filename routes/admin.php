@@ -105,7 +105,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         ######### Preview Question #########
         Route::post('/question/preview-question', 'QuestionController@preview')->name('question.preview-store');
-        Route::get('/question/preview-question/show', 'QuestionController@previewQuestion')->name('question.preview');
+        // Route::get('/question/preview-question/show', 'QuestionController@previewQuestion')->name('question.preview');
         Route::get('/question/edit-question/modal/{id}', 'QuestionController@editPreviewQuestion')->name('question.preview-edit');
         Route::post('/question/edit-question/update', 'QuestionController@updatePreviewQuestion')->name('question.preview-update');
 
@@ -148,10 +148,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('question/tag/tag-added', 'TagController@addTag')->name('question.add-tag');
         //add subject
         Route::get('question/subject/get-subject', 'TagController@getSubject')->name('question.get-subject');
+        Route::post('question/subject/add-subject', 'TagController@addSubject')->name('question.add-subject');
 
 
         ############ Description Route #############
-        // Description
+        //Question Description
         Route::get('/description/question-description', 'QuestionDescriptionController@index')->name('question-description.index');
         Route::post('/description/question-description/store', 'QuestionDescriptionController@store')->name('question-description.store');
         Route::get('/description/question-description/create', 'QuestionDescriptionController@create')->name('question-description.create');
@@ -167,6 +168,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/description/question-description/show/{id}', 'QuestionDescriptionController@showDescription')->name('question-description.show');
         Route::get('/description/question-all-description/show/{id}', 'QuestionDescriptionController@getAllDescription')->name('question-all-description.show');
 
+        #** Samprotik Description **#
+        Route::post('/samprotik-description/store', 'SamprotikDescriptionController@store')->name('samprotik-description.store');
+
+        #** Written Description **#
+        Route::post('/written-question/description/store', 'WrittenDescriptionController@store')->name('written-description.store');
 
         ########## User Management ###########
         Route::get('/user-management/user-list', 'UserController@index')->name('user-management.index');
@@ -199,6 +205,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/question/samprotik-filter-by-date', 'SamprotikQuestionController@dateFilter')->name('samprotik.date-filter');
         Route::get('/question/samprotik-filter-category', 'SamprotikQuestionController@categoryFilter')->name('samprotik.category-filter');
 
+        //pdf
+        Route::get('/question/samprotik-question/pdf', 'SamprotikQuestionController@createPDF')->name('samprotik.pdf');
+        //pagination
+        // Route::get('/question/pagination/fetch_data', 'SamprotikQuestionController@fetch_data');
+
+
         ############## Written Question ###############
         Route::get('/question/written-question', 'WrittenQuestionController@index')->name('written.index');
         Route::get('/question/written-question/create', 'WrittenQuestionController@create')->name('written.create');
@@ -206,20 +218,18 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/question/written-question/show', 'WrittenQuestionController@show')->name('written.show');
         Route::get('/question/written-question/edit/{id}/{type}', 'WrittenQuestionController@edit')->name('written.edit');
         Route::post('/question/written-question/update', 'WrittenQuestionController@update')->name('written.update');
+        Route::get('/question/written-question/get-instruction', 'WrittenQuestionController@getInstruction')->name('written.instruction');
 
         ############## Written Question Test ###############
-        Route::get('/question/written-question/test', 'WrittenQuestionTestController@index')->name('written.test.index');
-        Route::get('/question/written-question/test/create', 'WrittenQuestionTestController@create')->name('written.test.create');
-        Route::post('/question/written-question/test/store', 'WrittenQuestionTestController@store')->name('written.test.store');
+        // Route::get('/question/written-question/test', 'WrittenQuestionTestController@index')->name('written.test.index');
+        // Route::get('/question/written-question/test/create', 'WrittenQuestionTestController@create')->name('written.test.create');
+        // Route::post('/question/written-question/test/store', 'WrittenQuestionTestController@store')->name('written.test.store');
         Route::get('/question/written-question/test/show', 'WrittenQuestionTestController@show')->name('written.test.show');
-        Route::get('/question/written-question/test/edit/{id}/{type}', 'WrittenQuestionTestController@edit')->name('written.test.edit');
-        Route::post('/question/written-question/test/update', 'WrittenQuestionTestController@update')->name('written.test.update');
-        Route::get('/question/written-question/test/get-instruction', 'WrittenQuestionTestController@getInstruction')->name('written.test.instruction');
+        // Route::get('/question/written-question/test/edit/{id}/{type}', 'WrittenQuestionTestController@edit')->name('written.test.edit');
+        // Route::post('/question/written-question/test/update', 'WrittenQuestionTestController@update')->name('written.test.update');
+        // Route::get('/question/written-question/test/get-instruction', 'WrittenQuestionTestController@getInstruction')->name('written.test.instruction');
+        // Route::get('/question/written-question/sub-categories', 'WrittenQuestionTestController@getSubCategory')->name('written.test.sub-categories');
 
-
-        ######### Written Parent Instruction ##########
-        Route::get('/question/written-question/parent-instrction', 'ParentInstructionController@create')->name('written.parent-instruction.create');
-        Route::post('/question/written-question/parent-instrction', 'ParentInstructionController@store')->name('written.parent-instruction.store');
 
         /*
         |--------------------------------------------------------------------------

@@ -91,12 +91,11 @@
                 @if($question->descriptions->count() > 0)
                 @foreach($question->descriptions as $description) 
                 <div class="row">
-                   
                     <p class="text-gray-800 fw-bold mt-4 ml-4"> {{ $description->description }}</p>
                 </div>
                 @endforeach
                 @endif
-                <div class="d-flex flex-column mb-8 fv-row des-form d-none">
+                <div class="d-flex flex-column mt-2 fv-row des-form d-none">
                     <form id="kk_add_description_form" class="form">
                         <div class="messages"></div>
                         {{-- csrf token  --}}

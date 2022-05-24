@@ -15,7 +15,6 @@ class TagController extends Controller
     public function index(Request $request)
     {
 
-
         if ($request->ajax()) {
             $data = Question::select();
 
@@ -37,7 +36,7 @@ class TagController extends Controller
                 })
                 ->editColumn('subject_id', function ($row) {
                     if ($row->subject == '') {
-                        return '<div class="badge badge-light-info fw-bolder">Current Ques.</div>';
+                        return '<div class="badge badge-light-info fw-bolder">no subject</div>';
                     } else {
                         return $row->subject->name;
                     }
@@ -50,7 +49,7 @@ class TagController extends Controller
 
                 ->addColumn('add_subject', function ($row) {
                     $btn = '<div>
-                                <span  data-subcategory_id="' . $row->sub_category_id . '" data-question_id="' . $row->id . '" class="btn btn-sm btn-light btn-active-color-primary w-150px  get-subject cursor-pointer" title="Click" >Add Subject</span>
+                                <span  data-subcategory_id="' . $row->sub_category_id . '" data-question_id="' . $row->id . '" class="btn btn-sm btn-light btn-active-color-primary w-120px  get-subject cursor-pointer" title="Click" >Add Subject</span>
                                 <div class="subject" style="z-index:999"></div>
                             </div>';
 
@@ -76,7 +75,7 @@ class TagController extends Controller
         if ($request->ajax()) {
 
             //dd($request->all());
-            $data = Subject::whereDescendantOf($request->subject_id)
+            $data = Subject::whereDescendantOrSelf($request->subject_id)
                 ->where('name', 'LIKE', '%' . $request->search . '%')
                 ->orderBy('id', 'desc')->get();
             //dd($data);
@@ -163,19 +162,16 @@ class TagController extends Controller
 
             if (count($subjects) > 0) {
 
-                $output = '<select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                        data-placeholder="Filter category"  id="category">';
-
+                $output = '<select class="form-select form-select-solid add-subject" data-control="select2" data-hide-search="true">
+                            <option>Select...</option>
+                            ';
+                // <option value="subject=' . $row->id . ' question=' . $request->question_id . '" class="fs-6 text-gray-800 text-hover-primary fw-bold">' . $row->name . '</option>
 
                 foreach ($subjects as $row) {
                     $output .=
-                        '
-                            <!--begin::Title-->
-                            <div class="d-flex flex-column">
-                            <option value="' . $row->id . '" class="fs-6 text-gray-800 text-hover-primary fw-bold add" data-qid="' . $request->question_id . '">' . $row->name . '</option>
-                            </div>
-                            <!--end::Title-->
-                         ';
+                        '<div class="d-flex flex-column">
+                            <option data-sid="' . $row->id . '" data-qid="' . $request->question_id . '" class="fs-6 text-gray-800 text-hover-primary fw-bold">' . $row->name . '</option>
+                        </div>';
                     //$output .= '<a href="discussion/' . $row->id . '/show"><li class="list-group-item" style=" border-radious:10px">' . $row->title . '</li></a>';
                 }
 
@@ -189,6 +185,20 @@ class TagController extends Controller
             }
 
             return $output;
+        }
+    }
+
+    public function addSubject(Request $request)
+    {
+
+        $question = Question::find($request->question_id);
+        $question->subject_id = $request->subject_id;
+
+        if ($question->update()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Subject added'
+            ]);
         }
     }
 }

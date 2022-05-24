@@ -15,23 +15,21 @@ class CreateWrittenQuestionsTable extends Migration
     {
         Schema::create('written_questions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('question_parent_instruction_id')->nullable()->constrained();
-            $table->foreignId('question_instruction_id')->nullable()->constrained();
+            $table->nestedSet();
+            $table->string('question_no')->nullable();
+            $table->text('question');
+            $table->tinyInteger('question_instruction')->default(0);
             $table->foreignId('main_category_id')->constrained();
             $table->foreignId('sub_category_id')->constrained();
             $table->foreignId('subject_id')->nullable()->constrained();
             $table->foreignId('year_id')->nullable()->constrained();
-            $table->string('question_no')->nullable();
-            $table->text('question');
             $table->text('question_or')->nullable();
-            $table->longText('answer')->nullable();
-            $table->string('mark');
+            $table->string('mark')->nullable();
             $table->string('slug')->nullable();
             $table->integer('created_user_id');
             $table->integer('updated_user_id')->nullable();
             $table->unsignedBigInteger('view_count')->nullable();
             $table->unsignedBigInteger('vote')->default(0);
-            $table->enum('status', ['active', 'deactive', 'pending'])->default('active');
             $table->softDeletes();
             $table->timestamps();
         });
