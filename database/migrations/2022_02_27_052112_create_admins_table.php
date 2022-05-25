@@ -23,7 +23,7 @@ class CreateAdminsTable extends Migration
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
             $table->enum('status', ['active', 'deactive', 'ban'])->default('active');
-            $table->integer('role_id');
+            $table->integer('role_id')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

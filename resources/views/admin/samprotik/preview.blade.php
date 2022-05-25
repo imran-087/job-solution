@@ -72,6 +72,80 @@
                         <div class="messages"></div>
                         {{-- csrf token  --}}
                         @csrf
+
+                        <!--begin::Heading-->
+                        <div class="mb-13 text-center">
+                            <!--begin::Title-->
+                            <h1 class="mb-3 mt-3">Preview Samprotik Question Input</h1>
+                            <!--end::Title-->
+                            <!--begin::Description-->
+                            <div class="text-muted fw-bold fs-5">Recheck the form and submit
+                            </div>
+                            <!--end::Description-->
+                        </div>
+                        <!--end::Heading-->
+
+                        <!--begin:menu -->
+                        <!--begin::Input group-->
+                        <div class="row g-9 pb-4">
+                            <!--begin::Col-->
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 fv-row">
+                                <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                    data-placeholder="Select category" name="category" id="category">
+                                    <option value="bn" 
+                                        @if($myForm['category'] == 'bn')  selected @endif
+                                        >
+                                        Bangladesh</option>
+                                    <option value="in"
+                                        @if($myForm['category'] == 'in')  selected @endif
+                                        >
+                                        International</option>
+                                    <option value="bn_in"
+                                        @if($myForm['category'] == 'bn_in')  selected @endif
+                                        >
+                                    Bangladesh & International</option>
+                                </select>
+                                @error('category')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <!--end:Col-->
+                            <!--begin::Col-->
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 fv-row">
+                               
+                                <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                    data-placeholder="Select"  disabled>
+                                    <option selected>Not Editable</option>
+                                    <option>With Option</option>
+                                </select>
+                                @error('option')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <!--end:Col-->
+                            <!--begin::Col-->
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 fv-row">
+                               
+                                <input type="date" class="form-control form-control-solid" placeholder="Pic previous date"
+                                    name="date" id="date" value="{{ $myForm['date'] }}" />
+                                @error('date')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 fv-row">
+                                <input type="text" class="form-control form-control-solid " placeholder="Not work here"
+                                    name="number" id="number" disabled/>
+                                @error('number')
+                                    <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <!--end::Col-->
+                            
+                        </div>
+                        <!--end::Input group-->
+                        <!--end:menu -->
                         
                         @for($i = 0; $i < $myForm['number']; $i++)
                         <div class="card" style="margin-top:20px !important; border:7px solid #F2F5F7; border-radius:5px; padding:20px">
@@ -180,7 +254,7 @@
                                             {{-- @endfor --}}
                                         </div>
                                         @endif
-                                        
+
                                     </div> 
                                 
                                 </div>

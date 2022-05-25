@@ -126,12 +126,12 @@
                                     <!--begin::Table row-->
                                     <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                         <th class="min-w-20px">#</th>
+                                        <th class=" min-w-100px">Main Category</th>
+                                        <th class=" min-w-100px">Sub Category</th>
                                         <th class="min-w-100px">Subject Name</th>
                                         <th class="min-w-100px">Parent</th>
-                                        <th class=" min-w-100px">Category</th>
-                                        <th class=" min-w-100px">Sub Category</th>
                                         <th class=" min-w-100px">Status</th>
-                                        <th class=" min-w-100px">Created at</th>
+                                        {{-- <th class=" min-w-100px">Created at</th> --}}
                                         <th class=" min-w-70px">Actions</th>
                                     </tr>
                                     <!--end::Table row-->
@@ -387,14 +387,6 @@
                         searchable: false
                     },
                     {
-                        data: 'name',
-                        name: 'name'
-                    },
-                    {
-                        data: 'parent_id',
-                        name: 'parent_id'
-                    },
-                    {
                         data: 'main_category_id',
                         name: 'main_category_id'
                     },
@@ -404,13 +396,22 @@
                     },
 
                     {
+                        data: 'name',
+                        name: 'name'
+                    },
+                    {
+                        data: 'parent_id',
+                        name: 'parent_id'
+                    },
+                   
+                    {
                         data: 'status',
                         name: 'status'
                     },
-                    {
-                        data: 'created_at',
-                        name: 'created_at'
-                    },
+                    // {
+                    //     data: 'created_at',
+                    //     name: 'created_at'
+                    // },
                     {
                         data: 'action',
                         name: 'action',
@@ -419,9 +420,9 @@
                     },
 
                 ],
-                "order": [
-                    [6, 'desc']
-                ] //created at desc
+                // "order": [
+                //     [6, 'desc']
+                // ] //created at desc
 
             })
 

@@ -55,92 +55,103 @@
             <div class="messages"></div>
             {{-- csrf token  --}}
             @csrf
-            <!--begin::Heading-->
-            <div class="mb-13 text-center">
-                <!--begin::Title-->
-                <h1 class="mb-3 mt-3">Preview Question Input</h1>
-                <!--end::Title-->
-                <!--begin::Description-->
-                <div class="text-muted fw-bold fs-5">Recheck All The Field and Submit
+            <div class="card">
+                <div class="card-body">
+                    <!--begin::Heading-->
+                    <div class="mb-13 text-center">
+                        <!--begin::Title-->
+                        <h1 class="mb-3 mt-3">Preview Question Input</h1>
+                        <!--end::Title-->
+                        <!--begin::Description-->
+                        <div class="text-muted fw-bold fs-5">Recheck All The Field and Submit
+                        </div>
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Heading-->
+                    <!--begin::Input group-->
+                    <div class="row g-9 mb-8">
+                        <!--begin::Col-->
+                        <div class="col-md-3 fv-row">
+                            <label class="required fs-6 fw-bold mb-2">Select Main Category</label>
+                            <select class="form-select form-select-solid " data-control="select2"
+                                data-hide-search="true" data-placeholder="Select main category" name="main_category"
+                                id="main_category" >
+                    
+                                @foreach ($main_categories as $main_category)
+                                <option value="{{ $main_category->id }}"
+                                    @if($main_category->id == $myForm['main_category']) Selected @endif
+                                    >
+                                    {{ $main_category->name }}</option>
+                                @endforeach
+                            </select>
+                            <div class="help-block with-errors main_category-error"></div>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-md-3 fv-row">
+                            <label class="required fs-6 fw-bold mb-2">Select Category</label>
+                            <select class="form-select form-select-solid " data-control="select2"
+                                data-hide-search="true" data-placeholder="Select category" name="category"
+                                id="category" >
+
+                                <option value="{{ $myForm['category'] }}">{{ getCategory($myForm['category'])->name }}</option>
+                            </select>
+                            <div class="help-block with-errors catgory-error"></div>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-md-3 fv-row">
+                            <label class="required fs-6 fw-bold mb-2">Select Sub Category</label>
+                            <select class="form-select form-select-solid " data-control="select2"
+                                data-hide-search="true" data-placeholder="Select sub category" name="sub_category"
+                                id="sub_category" >
+
+                                <option value="{{ $myForm['sub_category'] }}">{{ getSubCategory($myForm['sub_category'])->name }}</option>
+                            </select>
+                            <div class="help-block with-errors sub_category-error"></div>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-md-3 fv-row">
+                            <label class="required fs-6 fw-bold mb-2">Select Subject</label>
+                            <select class="form-select form-select-solid" data-control="select2"
+                                data-hide-search="true" data-placeholder="Select subject" name="subject"
+                                id="subject" >
+
+                                <option value="{{ $myForm['subject'] }}">{{ getSubject($myForm['subject'])->name }}</option>
+                            </select>
+                            <div class="help-block with-errors subject-error"></div>
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Input group-->
+
+                    <!--begin::Input group-->
+                    <div class="row g-9 mb-8">
+                        <!--begin::Col-->
+                        <div class="col-md-2 fv-row">
+                            <label class="required fs-6 fw-bold mb-2">Select Year</label>
+                            <select class="form-select form-select-solid " data-control="select2"
+                                data-hide-search="true" data-placeholder="Select year" name="year"
+                                id="year" >
+                                <option value="">{{ $myForm['year'] }}</option>
+                                @foreach ($years as $year)
+                                <option value="{{ $year->id }}"
+                                    @if($year->id == $myForm['year']) Selected @endif
+                                    >
+                                {{ $year->year }}</option>
+                                @endforeach
+
+                            </select>
+                            <div class="help-block with-errors year-error"></div>
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Input group-->
                 </div>
-                <!--end::Description-->
+                <!--end::Heading-->
             </div>
-            <!--end::Heading-->
-            <!--begin::Input group-->
-            <div class="row g-9 mb-8">
-                <!--begin::Col-->
-                <div class="col-md-3 fv-row">
-                    <label class="required fs-6 fw-bold mb-2">Select Main Category</label>
-                    <select class="form-select form-select-solid " data-control="select2"
-                        data-hide-search="true" data-placeholder="Select main category" name="main_category"
-                        id="main_category" >
-                        {{-- <option value="">{{ $myForm['main_category'] }}</option> --}}
-                        {{-- @foreach ($main_categories as $main_category)
-                        <option value="{{ $main_category->id }}">{{ $main_category->name }}</option>
-                        @endforeach --}}
-                    </select>
-                    <div class="help-block with-errors main_category-error"></div>
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-md-3 fv-row">
-                    <label class="required fs-6 fw-bold mb-2">Select Category</label>
-                    <select class="form-select form-select-solid " data-control="select2"
-                        data-hide-search="true" data-placeholder="Select category" name="category"
-                        id="category" >
-
-                        {{-- <option value="">{{ $myForm['category'] }}</option> --}}
-                    </select>
-                    <div class="help-block with-errors catgory-error"></div>
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-md-3 fv-row">
-                    <label class="required fs-6 fw-bold mb-2">Select Sub Category</label>
-                    <select class="form-select form-select-solid " data-control="select2"
-                        data-hide-search="true" data-placeholder="Select sub category" name="sub_category"
-                        id="sub_category" >
-
-                        {{-- <option value="">{{$myForm['sub_category']}}</option> --}}
-                    </select>
-                    <div class="help-block with-errors sub_category-error"></div>
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-md-3 fv-row">
-                    <label class="required fs-6 fw-bold mb-2">Select Subject</label>
-                    <select class="form-select form-select-solid" data-control="select2"
-                        data-hide-search="true" data-placeholder="Select subject" name="subject"
-                        id="subject" >
-
-                        {{-- <option value="">{{$myForm['subject']}}</option> --}}
-                    </select>
-                    <div class="help-block with-errors subject-error"></div>
-                </div>
-                <!--end::Col-->
-            </div>
-            <!--end::Input group-->
-
-            <!--begin::Input group-->
-            <div class="row g-9 mb-8">
-                <!--begin::Col-->
-                <div class="col-md-2 fv-row">
-                    <label class="required fs-6 fw-bold mb-2">Select Year</label>
-                    <select class="form-select form-select-solid " data-control="select2"
-                        data-hide-search="true" data-placeholder="Select year" name="year"
-                        id="year" >
-                        <option value="">{{ $myForm['year'] }}</option>
-                        {{-- @foreach ($years as $year)
-                        <option value="{{ $year->id }}">{{ $year->year }}</option>
-                        @endforeach --}}
-
-                    </select>
-                    <div class="help-block with-errors year-error"></div>
-                </div>
-                <!--end::Col-->
-            </div>
-            <!--end::Input group-->
-            <!--end::Heading-->
+            
             @if($myForm['type'] == 'passage')
             <div class="card" style="margin-top:20px !important; border:7px solid #F2F5F7; border-radius:5px; padding:5px">
                 <div class="card-body pt-4 " style="padding-bottom: 0px !important">
@@ -183,19 +194,15 @@
                         <div style="" class="mb-5"> 
                             <!--begin::Input group-->
                             <div class="row g-9 mb-8">
-                                
+                                <input type="hidden" name="type" value="{{ $myForm['type'] }}">
+                               
                                 <!--begin::Col-->
                                 <div class="col-md-12 fv-row">
                                     <!--begin::Label-->
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span class="required text-uppercase fw-bolder" style="font-size: 16px">Question : {{ $i+1 }} </span>
                                     </label>
-                                    <input type="hidden" name="type" value="{{ $myForm['type'] }}">
-                                    <input type="hidden" name="sub_category" value="{{ $myForm['sub_category'] }}">
-                                    <input type="hidden" name="main_category" value="{{ $myForm['main_category'] }}">
-                                    <input type="hidden" name="subject" value="{{ $myForm['subject'] }}">
-                                    <input type="hidden" name="year" value="{{ $myForm['year'] }}">
-            
+                                   
                                     <!--end::Label-->
                                     <input type="text" class="form-control form-control-solid @error('question.*') is-invalid @enderror" placeholder="Enter Question" name="question[]" value="{{ $myForm['question'][$i] }}"/>
                                     @if($myForm['type'] == 'image')
@@ -208,91 +215,73 @@
                                     @enderror
                                 </div>
                                 <!-- end: col-->
-                                
                             </div>
                             <!--end::Input group-->
                             
                             <!--begin::Input group-->
-                            <div class="row g-9 mb-8">
+                            <div class="row g-9">
                                 <!--begin::Col-->
                                 {{-- @for($o = 0; $o < 4; $o++)  --}}
                                 <div class="col-md-12 fv-row">
-                                    <!--begin::Label-->
-                                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                        <span class="required">Option : 1 </span>
-                                    </label>
-                                    <!--end::Label-->
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="answer[{{ $i }}]"  value="1"
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <input class="form-check-input me-3" type="radio" name="answer[{{ $i }}]"  value="1"
                                         @if($myForm['answer'][$i] == '1') checked @endif
                                         >
                                         <input type="text" class="form-control form-control-solid" placeholder="Enter option"
                                         name="option_1[]"  value="{{ $myForm['option_1'][$i] }}"/>
                                     </div>
-                                
-                                    @if($myForm['type'] == 'image')
+                                    {{-- @if($myForm['type'] == 'image')
                                     <input type="file" class="form-control-file mt-2" id="exampleInputFile" name="image[]" multiple>
-                                    @endif
+                                    @endif --}}
                                 </div>    
-                                <div class="col-md-12 fv-row">
-                                    <!--begin::Label-->
-                                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                        <span class="required">Option : 2 </span>
-                                    </label>
-                                    <!--end::Label-->
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="answer[{{ $i }}]"  value="2"
+                                <div class="col-md-12 fv-row align-items-center justify-content-center">
+                                    <div class="d-flex">
+                                        <input class="form-check-input me-3" type="radio" name="answer[{{ $i }}]"  value="2"
                                         @if($myForm['answer'][$i] == '2') checked @endif
                                         >
                                         <input type="text" class="form-control form-control-solid" placeholder="Enter option"
                                         name="option_2[]"  value="{{ $myForm['option_2'][$i] }}"/>
                                     </div>
                                 
-                                    @if($myForm['type'] == 'image')
+                                    {{-- @if($myForm['type'] == 'image')
                                     <input type="file" class="form-control-file mt-2" id="exampleInputFile" name="image[]" multiple>
-                                    @endif
-                                </div>    
+                                    @endif --}}
+                                </div>  
+                                 
                                 <div class="col-md-12 fv-row">
-                                    <!--begin::Label-->
-                                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                        <span class="required">Option : 3 </span>
-                                    </label>
-                                    <!--end::Label-->
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="answer[{{ $i }}]"  value="3"
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <input class="form-check-input me-3" type="radio" name="answer[{{ $i }}]"  value="3"
                                         @if($myForm['answer'][$i] == '3') checked @endif
                                         >
                                         <input type="text" class="form-control form-control-solid" placeholder="Enter option"
                                         name="option_3[]"  value="{{ $myForm['option_3'][$i] }}"/>
                                     </div>
-                                
-                                    @if($myForm['type'] == 'image')
-                                    <input type="file" class="form-control-file mt-2" id="exampleInputFile" name="image[]" multiple>
-                                    @endif
-                                </div>    
+                                </div> 
+                                @if(isset($myForm['option_4']))
                                 <div class="col-md-12 fv-row">
-                                    <!--begin::Label-->
-                                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                        <span class="required">Option : 4 </span>
-                                    </label>
-                                    <!--end::Label-->
-                                    <div class="form-check form-check-inline">
-                                        <input class="form-check-input" type="radio" name="answer[{{ $i }}]"  value="4"
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <input class="form-check-input me-3" type="radio" name="answer[{{ $i }}]"  value="4"
                                         @if($myForm['answer'][$i] == '4') checked @endif
                                         >
                                         <input type="text" class="form-control form-control-solid" placeholder="Enter option"
                                         name="option_4[]"  value="{{ $myForm['option_4'][$i] }}"/>
                                     </div>
-                                
-                                    @if($myForm['type'] == 'image')
-                                    <input type="file" class="form-control-file mt-2" id="exampleInputFile" name="image[]" multiple>
-                                    @endif
                                 </div>    
-                                {{-- @endfor --}}
+                                @endif   
+                                @if(isset($myForm['option_5']))
+                                <div class="col-md-12 fv-row">
+                                    <div class="d-flex align-items-center justify-content-center">
+                                        <input class="form-check-input me-3" type="radio" name="answer[{{ $i }}]"  value="5"
+                                        @if($myForm['answer'][$i] == '5') checked @endif
+                                        >
+                                        <input type="text" class="form-control form-control-solid" placeholder="Enter option"
+                                        name="option_5[]"  value="{{ $myForm['option_5'][$i] }}"/>
+                                    </div>
+                                </div>    
+                                @endif   
                             </div>
                         </div> 
                     </div>
-                    <!--end::Input group-->
                 </div>
             </div>
             @endfor

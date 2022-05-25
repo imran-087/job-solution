@@ -123,13 +123,13 @@ class SamprotikQuestionController extends Controller
         }
     }
 
-
-    public function input()
+    public function create()
     {
-        return view('admin.samprotik.input');
+        return view('admin.samprotik.create');
     }
 
-    public function create(Request $request)
+
+    public function input(Request $request)
     {
         //dd($request->all());
         $category = $request->category;
@@ -137,12 +137,13 @@ class SamprotikQuestionController extends Controller
         $number = $request->number;
         $date = $request->date;
 
-        $view = view('admin.samprotik.create', compact('category', 'option', 'number', 'date'))->render();
+        $view = view('admin.samprotik.input_layout', compact('category', 'option', 'number', 'date'))->render();
 
         return response([
             'html' => $view
         ]);
     }
+
 
     public function preview(Request $request)
     {
@@ -199,7 +200,7 @@ class SamprotikQuestionController extends Controller
                 $question->save();
             }
         }
-        return redirect()->route('admin.samprotik.index')->with('success', 'Question Created Successfully');
+        return redirect()->route('admin.samprotik.create')->with('success', 'Question Created Successfully');
     }
 
     public function edit(Request $request)

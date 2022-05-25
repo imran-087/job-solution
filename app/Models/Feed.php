@@ -16,6 +16,11 @@ class Feed extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
     /**
      * Get all of the feed's comments.
      */

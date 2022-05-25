@@ -50,6 +50,7 @@
                         </label>
                         <input type="hidden" name="type" value="{{ $type }}">
                         <input type="hidden" name="number" value="{{ $number }}">
+                        <input type="hidden" name="option" value="{{ $option }}">
                         <!--end::Label-->
                         <input type="text" class="form-control form-control-solid @error('question.*') is-invalid @enderror" placeholder="Enter Question" name="question[]" value="{{ old('question.*') }}"/>
                         @if($type == 'image')

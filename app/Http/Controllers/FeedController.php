@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Category;
 use App\Models\Feed;
 use App\Models\Vote;
 use Illuminate\Http\Request;
@@ -9,16 +10,25 @@ use Illuminate\Support\Facades\Auth;
 
 class FeedController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $feeds = Feed::with('user', 'comments')->orderBy('id', 'desc')->Paginate(1);
-        return view('feed.index', compact('feeds'));
+        $categories = Category::select('id', 'name')->get();
+
+        if ($request->has('id')) {
+            $feeds = Feed::with('user', 'comments', 'category')->where('category_id', $request->id)->orderBy('id', 'desc')->Paginate(5);
+        } else {
+            $feeds = Feed::with('user', 'comments', 'category')->orderBy('id', 'desc')->Paginate(5);
+        }
+        //dd($categories);
+        return view('feed.index', compact('feeds', 'categories'));
     }
 
     public function store(Request $request)
     {
+        //dd($request->all());
         $data = $request->validate([
-            'content' => 'required'
+            'content' => 'required',
+            'category_id' => 'required'
         ]);
 
         $data['user_id'] = Auth::user()->id;

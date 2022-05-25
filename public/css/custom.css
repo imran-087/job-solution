@@ -1,13 +1,14 @@
-a{
+a {
     color: inherit;
 }
 
-.new-discussion a{
+.new-discussion a {
     padding: 10px 32px !important;
     border-radius: 30px;
     font-weight: 800;
     font-size: 12px;
 }
+
 .nav ul {
     list-style-type: none;
     text-align: center;
@@ -19,24 +20,28 @@ a{
     border-radius: 30px;
     margin: 5px 0px;
 }
-.nav ul a li{
-    
+
+.nav ul a li {
+
     padding: 10px 60px !important;
 }
+
 .nav-link {
     text-decoration: none;
     font-weight: bold;
     padding: 0px !important;
-    
+
 }
-.nav-item{
+
+.nav-item {
     padding: 0px !important;
 }
-.channel-badge a{
+
+.channel-badge a {
     color: inherit;
 }
 
-.channel-badge  {
+.channel-badge {
     border: 2px solid #F56857;
     border-radius: 30px;
     padding: 4px 23px;
@@ -45,18 +50,21 @@ a{
     color: #F56857;
     background: #EFF2F5;
 }
-.channel-badge:hover{
+
+.channel-badge:hover {
     background: #F56857;
     color: #FFF;
     cursor: pointer;
 }
+
 .bg-svg {
     margin-top: 3px;
     padding: 7px 10px;
     background: #EFF2F5;
     border-radius: 5px;
 }
-.submit{
+
+.submit {
     border: 2px solid #F56857;
     border-radius: 30px;
     padding: 4px 23px;
@@ -64,6 +72,7 @@ a{
     color: #FFF;
     background: #F56857;
 }
+
 /* .submit:hover {
     background: #F56857;
     color: #FFF;
@@ -75,16 +84,16 @@ a.btn.btn-primary.me-3.text-uppercase {
     padding: 10px 35px !important;
 }
 
-.float-right{
+.float-right {
     margin-left: 400px !important;
 }
 
-.right-answer{
-    color:green !important;
-    font-weight:bolder !important;
+.right-answer {
+    color: green !important;
+    font-weight: bolder !important;
 }
 
-.menu-item .menu-link:hover{
+.menu-item .menu-link:hover {
     background-color: #F5F8FA;
     color: #0095E8;
     border-radius: 5px;
@@ -94,7 +103,7 @@ a.btn.btn-primary.me-3.text-uppercase {
     font-size: 12px;
 }
 
-.fa-2xl{
+.fa-2xl {
     font-size: 15px !important;
     margin-right: 2px !important;
 }
@@ -102,6 +111,7 @@ a.btn.btn-primary.me-3.text-uppercase {
 i.fas.fa-times.fa-2xl {
     color: red;
 }
+
 i.fas.fa-check.fa-2xl {
     color: green;
 }
@@ -112,10 +122,11 @@ i.fas.fa-check.fa-2xl {
     margin-top: 40px;
 }
 
-.tag{
+.tag {
     position: relative;
 }
-.answer{
+
+.answer {
     position: absolute;
     margin-top: 18px !important;
     margin-left: 448px;
@@ -123,21 +134,18 @@ i.fas.fa-check.fa-2xl {
 
 a.btn.btn-sm.btn-success.me-3.answer {
     padding: 4px 12px !important
-   
 }
+
 
 @media screen and (max-width: 378px) {
-   .swiper-button-next:after,
-   .swiper-button-prev:after{
-       margin-bottom: 65px;
-   }
-   .answer{
-           margin-top: 25px !important;
-    margin-left: 135px;
-   }
+
+    .swiper-button-next:after,
+    .swiper-button-prev:after {
+        margin-bottom: 65px;
+    }
+
+    .answer {
+        margin-top: 25px !important;
+        margin-left: 135px;
+    }
 }
-
-
-
-
-

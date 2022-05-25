@@ -15,9 +15,10 @@ class CreateFeedsTable extends Migration
     {
         Schema::create('feeds', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('category_id')->constrained();
             $table->longText('content');
             $table->integer('user_id');
-            $table->unsignedBigInteger('like');
+            $table->unsignedBigInteger('like')->default(0);
             $table->softDeletes();
             $table->timestamps();
         });

@@ -63,7 +63,34 @@
     <div id="kt_content_container" class="container-xxl">
         <!--begin::Row-->
         <div class="row gy-5 g-xl-10">
-            <div class="col-lxl-8 col-lg-8 col-md-10 col-sm-12 col-xs-12">
+            <div class="col-md-2 ">
+                <div class="card mb-5 mb-xl-8">
+                    <!--begin::Body-->
+                    <div class="card-body pb-0">
+                        <!--begin::Catigories-->
+                        <div class="mb-15">
+                            <h4 class="text-black mb-5">News Category</h4>
+                            <!--begin::Menu-->
+                            <div class="menu menu-rounded menu-column menu-title-gray-700 menu-state-title-primary menu-active-bg-light-primary fw-bold">
+                                @foreach($categories as $category)
+                                <!--begin::Item-->
+                                <div class="menu-item mb-3">
+                                    <!--begin::Link-->
+                                    <a class="menu-link py-3 active" href="{{ route('news-feed', ['id' => $category->id, 'category' => $category->name]) }}">{{$category->name}}</a>
+                                    <!--end::Link-->
+                                </div>
+                                <!--end::Item-->
+                                @endforeach
+                            </div>
+                            <!--end::Menu-->
+                        </div>
+                        <!--end::Catigories-->
+                    </div>
+                    <!--end::Body-->
+                </div>
+            </div>
+            <div class="col-md-6">
+                @if($feeds->count() > 0)
                 @foreach($feeds as $feed)
                 <div class="card mb-5 mb-xl-8">
                     <!--begin::Body-->
@@ -83,8 +110,16 @@
                                     <span class="text-gray-400 fw-bold">{{ $feed->created_at->diffForHumans() }}</span>
                                 </div>
                                 <!--end::Info-->
+                               
                             </div>
                             <!--end::User-->
+                            <!--begin::Menu-->
+                            <div class="my-0">
+                                <div class="badge badge-info">
+                                <a href="">{{ $feed->category->name }}</a>
+                                </div>
+                            </div>
+                            <!--end::Menu-->
                             
                         </div>
                         <!--end::Header-->
@@ -168,11 +203,21 @@
                     </div>
                     <!--end::Body-->
                 </div>
-               
                 @endforeach
+                @else
+                 <div class="card mb-5 mb-xl-8">
+                    <!--begin::Body-->
+                    <div class="card-body pb-0">
+                        <h4 class="text-black mb-5 text-muted">No news available for this category !!!</h4>
+                    </div>
+                    <!--end::Body-->
+                </div>
+                @endif
                 <div class="mb-5">
                     {{ $feeds->links() }}
                 </div>
+            </div>
+            <div class="col-md-4" >
                 @auth
                 <div class="card mb-5 mb-xl-8">
                     <!--begin::Body-->
@@ -191,6 +236,7 @@
                                     <a href="#" class="text-gray-900 text-hover-primary fs-6 fw-bolder">{{ Auth::user()->name }}</a>
                                 </div>
                                 <!--end::Info-->
+                               
                             </div>
                             <!--end::User-->
                             
@@ -199,14 +245,27 @@
                         <!--begin::Form-->
                         <form id="kt_forms_widget_1_form" class="ql-quil ql-quil-plain pb-3" method="POST" action="{{ route('feed.store') }}">
                             @csrf
+                            <!--begin::Col-->
+                            <div class="mt-4 col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12 fv-row">
+                                <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                    data-placeholder="Select news category" name="category_id" required>
+                                    <option value=""></option>
+                                    @foreach($categories as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    @endforeach
+                                </select>
+                                @error('category')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
+                            </div>
+                            <!--end:Col-->
                             <!--begin::Input group-->
                             <div class="d-flex flex-column fv-row">
                                 <!--begin::Label-->
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2 mt-2">
-                                    
                                 </label>
                                 <!--end::Label-->
-                                <textarea name="content" class="form-control form-control-solid h-100px @error('content') is-invalid @enderror" placeholder="Whats on your mind?"></textarea>
+                                <textarea name="content" class="form-control form-control-solid h-200px @error('content') is-invalid @enderror" placeholder="Whats on your mind?"></textarea>
                                 @error('content')
                                 <span class="invalid-content" role="alert">
                                     <strong>{{ $message }}</strong>
@@ -224,11 +283,10 @@
                     <!--end::Body-->
                 </div>
                 @endauth
-               
             </div>
         </div>
-        <!--end::Row-->  
-        
+        <!--end::Row--> 
+      
     </div>
     <!--end::Container-->
 </div>

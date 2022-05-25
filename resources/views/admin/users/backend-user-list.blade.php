@@ -250,9 +250,9 @@
                         <div class="col-md-12 fv-row">
                             <label class="required fs-6 fw-bold mb-2">Select Role</label>
                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                data-placeholder="Select status" name="role">
+                                data-placeholder="Select role" name="role">
                                 @foreach($roles as $role)
-                                <option value="{{$role->id}}" selected>{{$role->name}}</option>
+                                <option value="{{ $role->id }}" selected>{{$role->name}}</option>
                                 @endforeach
                             </select>
                             <div class="help-block with-errors status-error"></div>

@@ -267,7 +267,7 @@
                 <div class="menu-sub menu-sub-accordion  menu-active-bg">
         
                     <div class="menu-item">
-                        <a class="menu-link {{ request()->is('admin/question/samprotik-question/input*') ? 'active' : '' }}" href="{{ route('admin.samprotik.input') }}">
+                        <a class="menu-link {{ request()->is('admin/question/samprotik-question/create*') ? 'active' : '' }}" href="{{ route('admin.samprotik.create') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>

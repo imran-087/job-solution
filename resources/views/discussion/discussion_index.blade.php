@@ -187,7 +187,7 @@
                                         
                                         <!--begin::Menu item-->
                                         <div class="menu-item px-3">
-                                             <a href="{{ url('discussion', 'weekago')}}" class="menu-link px-3" >Last Week</a>
+                                            <a href="{{ url('discussion', 'weekago')}}" class="menu-link px-3" >Last Week</a>
                                         </div>
                                         <!--end::Menu item-->
                                        
@@ -235,7 +235,6 @@
                                     <div class="channel-badge">
                                     <a href="{{ route('discussion.channel', $channel->id) }}">{{$discussion->channel->name}}</a>
                                     </div>
-
                                 </div>
                                 <!--end::Menu-->
                             </div>

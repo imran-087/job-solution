@@ -19,7 +19,7 @@ class SubjectController extends Controller
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Subject::select();
+            $data = Subject::orderBy('created_at', 'desc')->select();
 
             //filter
             if (isset($request->status) && $request->status != "all") {
@@ -47,9 +47,9 @@ class SubjectController extends Controller
 
                     return $row->main_category->name;
                 })
-                ->editColumn('created_at', function ($row) {
-                    return $row->created_at->diffForHumans();
-                })
+                // ->editColumn('created_at', function ($row) {
+                //     return $row->created_at->diffForHumans();
+                // })
                 ->editColumn('status', function ($row) {
                     if ($row->status == "active") {
                         $btn = '<div class="badge badge-light-success fw-bolder">Active</div>';

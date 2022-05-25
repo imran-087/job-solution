@@ -194,8 +194,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         ############## Samprotik Question ###############
         Route::get('/question/samprotik-question', 'SamprotikQuestionController@index')->name('samprotik.index');
-        Route::post('/question/samprotik-question/create', 'SamprotikQuestionController@create')->name('samprotik.create');
-        Route::get('/question/samprotik-question/input', 'SamprotikQuestionController@input')->name('samprotik.input');
+        Route::get('/question/samprotik-question/create', 'SamprotikQuestionController@create')->name('samprotik.create');
+        Route::post('/question/samprotik-question/input', 'SamprotikQuestionController@input')->name('samprotik.input');
         Route::get('/question/samprotik-question/edit', 'SamprotikQuestionController@edit')->name('samprotik.edit');
         Route::post('/question/samprotik-question/update', 'SamprotikQuestionController@update')->name('samprotik.update');
         Route::post('/question/samprotik-question/preview', 'SamprotikQuestionController@preview')->name('samprotik.preview');
