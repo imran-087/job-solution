@@ -5,11 +5,12 @@
         <!--begin::Input group-->
         <div class="row g-9 pb-4"> 
             <div> 
+                <span><b class="me-2 fs-6">Instruction</b><input class="form-check-input instruction mb-2" type="checkbox" value="yes"></span>
+
                 <div class="row">
-                    
                     <div class="col-md-1">
                         <!--begin::Input group-->
-                        <div class="d-flex flex-column mb-8 fv-row">
+                        <div class="d-flex flex-column mb-4 fv-row">
                             <!--begin::Label-->
                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                 <div class="required">QN. </div>
@@ -21,7 +22,7 @@
                     </div>
                     <div class="col-md-9">
                         <!--begin::Input group-->
-                        <div class="d-flex flex-column mb-8 fv-row">
+                        <div class="d-flex flex-column mb-4 fv-row">
                             <!--begin::Label-->
                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                 <div class="required">Question </div>
@@ -34,7 +35,7 @@
                     </div>
                     <div class="col-md-1">
                         <!--begin::Input group-->
-                        <div class="d-flex flex-column mb-8 fv-row">
+                        <div class="d-flex flex-column mb-4 fv-row">
                             <!--begin::Label-->
                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                 <div class="">OR</div>
@@ -44,10 +45,9 @@
                         </div>
                         <!--end::Input group-->
                     </div>
-                    
                     <div class="col-md-1">
                         <!--begin::Input group-->
-                        <div class="d-flex flex-column mb-8 fv-row">
+                        <div class="d-flex flex-column mb-4 fv-row">
                             <!--begin::Label-->
                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                 <div class="required">Mark</div>
@@ -58,18 +58,17 @@
                         <!--end::Input group-->
                     </div>
                 </div>
-                <!--begin::Input group-->
-                <div class="d-flex flex-column  fv-row">
+               
+                <div class="d-flex flex-column  fv-row written-answer">
                     <!--begin::Label-->
                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                        <span class="required fw-bolder">answer</span>
+                        <span class="required fw-bolder">answer</span> 
                     </label>
                     <!--end::Label-->
                     <textarea type="text" class="form-control form-control-solid h-100px"  placeholder="Enter answer"
-                                name="answer[]"> </textarea>
+                            name="answer[]"> </textarea>
                     <div class="help-block with-errors answer-error"></div>
                 </div>
-                <!--end::Input group-->
             </div> 
         </div>
         <!--end::Input group-->
@@ -83,7 +82,7 @@
 
 <!--begin::Actions-->
 <div class="text-center d-flex justify-content-between py-4 px-4" >
-    <button class="btn btn-info btn-sm addRow" type="button" style="padding: 10px 20px">Add Input</button>
+    {{-- <button class="btn btn-info btn-sm addRow" type="button" style="padding: 10px 20px">Add Input</button> --}}
     <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary" style="padding: 10px 70px">
         <span class="indicator-label">Submit</span>
         <span class="indicator-progress">Please wait...

@@ -147,7 +147,7 @@
                             </div>
                             <!--end::Col-->
                             <!--begin::Col-->
-                            <div class="col-xl-8 fv-row">
+                            <div class="col-md-8 fv-row">
                                 <label class="fs-6 fw-bold mb-2">Select Question Instruction </label>
                                 <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                     data-placeholder="Select Question Instruction" name="instruction" id="instruction">
@@ -158,7 +158,7 @@
                             <!--end:Col-->
                             <!--begin::Col-->
                             <div class="col-md-2  fv-row" >
-                                <label class="fs-6 fw-bold mb-2 required">Number of Question</label>
+                                <label class="fs-6 fw-bold mb-2 required">Number of Input</label>
                                 <!--begin:Form-->
                                 <div id="kk_modal_new_samprotik_form" class="form me-4">
                                     <input type="text" class="form-control form-control-solid" placeholder="Enter number" name="number" id="number" />
@@ -166,6 +166,7 @@
                                 <!--end:Form-->
                             </div>
                             <!--end::Col-->
+                            
                         </div>
 
                         <!--start::written question input--> 
@@ -299,6 +300,15 @@
 
     })
 
+    //answer field show hidden
+    $(document).on('change', '.instruction', function(){
+        let val = $(this).val();
+        console.log(val);
+        if(val == 'yes'){
+           $(this).closest('div').find('.written-answer').toggleClass('d-none');
+        }
+       
+    })
 
     // add row
     $(document).on('click', '.addRow', function() {
@@ -307,6 +317,7 @@
         html += '<div class="card-body pt-4 " style="padding-bottom: 0px !important">'
 
         html += '    <div class="row g-9 pb-4">'
+
         html += '       <div style="" class="mb-5"> '
         html += ' <div class="row">'
         html += '  <div class="col-md-1">'

@@ -217,15 +217,20 @@ class SamprotikQuestionController extends Controller
         $question->answer = $request->answer;
         $question->category = $request->category;
         $question->previous_date = $request->date;
-        $data = [
-            'option_1' => $request->option_1,
-            'option_2' => $request->option_2,
-            'option_3' => $request->option_3,
-            'option_4' => $request->option_4,
-            'answer' => $request->answer_option,
-        ];
+
+        if ($request->option_1 != '' && $request->option_2 != '' && $request->option_3 != '' && $request->option_4 != '') {
+            $data = [
+                'option_1' => $request->option_1,
+                'option_2' => $request->option_2,
+                'option_3' => $request->option_3,
+                'option_4' => $request->option_4,
+                'answer' => $request->answer_option,
+            ];
+            $question->options = ($data);
+        }
+
         //dd($data);
-        $question->options = ($data);
+
         if ($question->save()) {
             return redirect()->route('admin.samprotik.index')->with('success', 'Updted Successfully');
         }

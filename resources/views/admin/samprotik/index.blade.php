@@ -145,6 +145,7 @@
                 }
             })
         })
+
         //category
         $('#category').change(function(){
             var val = $(this).val();
@@ -166,9 +167,10 @@
     })
 
     //show description form
-    $(document).on('click', '.add-description', function(){
+    $(document).on('dblclick', '.add-description', function(){
         $(this).closest('div').find('.des-form').toggleClass('d-none');
     })
+
 
     //add description --save
     $(document).on('submit', '#kk_add_description_form', function(e){
@@ -199,6 +201,57 @@
                     toastr.success(data.message);
                     thisaddbtn.parent().parent("div").find('.des-form').addClass('d-none');
                     
+                }
+
+                $('.indicator-label').show()
+                $('.indicator-progress').hide()
+                $('#kk_modal_new_service_submit').removeAttr('disabled')
+            }
+        });
+    })
+
+    //show update description form
+    $(document).on('dblclick', '.update-des', function(){
+        $(this).hide();
+        $(this).closest('div').find('.update-form').toggleClass('d-none');
+    })
+
+    //cancel button of update
+    $(document).on('click', '.kk_modal_new_update_cancel', function(){
+        $(this).closest('div').find('.update-form').toggleClass('d-none');
+        $(this).parent().parent("div").find('.update-des').show();
+    })
+
+    
+    //update description --save
+    $(document).on('submit', '#kk_update_description_form', function(e){
+        e.preventDefault()
+        //console.log('here')
+        $('.with-errors').text('')
+        $('#kk_modal_new_service_update').attr('disabled','true')
+        var thisaddbtn = $(this);
+        var formData = new FormData(this);
+        $.ajax({
+            type:"POST",
+            url: "{{ url('admin/samprotik-description/update')}}",
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                if(data.success ==  false || data.success ==  "false"){
+                    var arr = Object.keys(data.errors);
+                    var arr_val = Object.values(data.errors);
+                    for(var i= 0;i < arr.length;i++){
+                    $('.'+arr[i]+'-error').text(arr_val[i][0])
+                    }
+                }else if(data.error || data.error == 'true'){
+                    var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                    $('#kk_modal_new_question_form').find('.messages').html(alertBox).show();
+                }else{
+                    // toastr.success(data.message);
+                    thisaddbtn.parent().parent("div").find('.update-form').addClass('d-none');
+                    thisaddbtn.parent().parent("div").find('.update-des').show();
                     
                 }
 
@@ -208,6 +261,63 @@
             }
         });
     })
+
+
+    //get tag
+    $(document).on('click', '.get-tag', function() {
+       
+        var this_input = $(this)
+        
+        $.ajax({
+            type: "GET",
+            url: "{{ url('admin/samprotik-tag/get-tag')}}",
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+
+            //If result found, this funtion will be called.
+            success: function(data) {
+                //console.log(data)
+                this_input.hide();
+                this_input.closest('div').find('.tag').html(data);
+                
+            }
+        });
+        
+    });
+
+    //add tag
+    $(document).on('change', '.add-subject', function(){
+        var sid = $(this).find(':selected').data('sid');
+        var qid = $(this).find(':selected').data('qid');
+        
+        // console.log(sid)
+        // console.log(qid)
+        var this_input = $(this)
+        
+        //AJAX is called.
+        $.ajax({
+            type: "POST",
+            url: "{{ url('admin/question/subject/add-subject')}}",
+            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+            data: {
+                //Assigning value of "val" into "search" variable.
+                subject_id: sid,
+                question_id : qid,
+            },
+            //If result found, this funtion will be called.
+            success: function(data) {
+                if(data.success){
+                    toastr.success(data.message);
+                    this_input.hide();
+                    $('#dataTable').DataTable().ajax.reload();
+                }
+                else{
+                    toastr.error(data.message)
+                }
+                
+            }
+        });
+    })
+
 </script>
 
 @endpush

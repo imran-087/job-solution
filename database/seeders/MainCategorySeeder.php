@@ -18,16 +18,7 @@ class MainCategorySeeder extends Seeder
         MainCategory::create([
             'name' => 'Jobs',
             'title' => 'Jobs',
-            'slug' => 'Jobs',
-            'created_user_id' => '1',
-            'status' => 'active',
-            'created_at' => Carbon::now(),
-            'updated_at' => Carbon::now(),
-        ]);
-        MainCategory::create([
-            'name' => 'Academy',
-            'title' => 'Academy',
-            'slug' => 'academy',
+            'slug' => 'jobs',
             'created_user_id' => '1',
             'status' => 'active',
             'created_at' => Carbon::now(),
@@ -37,6 +28,15 @@ class MainCategorySeeder extends Seeder
             'name' => 'Admission',
             'title' => 'Admission',
             'slug' => 'admission',
+            'created_user_id' => '1',
+            'status' => 'active',
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now(),
+        ]);
+        MainCategory::create([
+            'name' => 'Academy',
+            'title' => 'Academy',
+            'slug' => 'academy',
             'created_user_id' => '1',
             'status' => 'active',
             'created_at' => Carbon::now(),

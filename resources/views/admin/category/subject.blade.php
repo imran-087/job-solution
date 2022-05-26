@@ -438,7 +438,7 @@
 
         })
 
-        // add new
+        // add new sbject
         function addNew(){
             $('input[name="subject_id"]').val('')
             $('.with-errors').text('')

@@ -170,6 +170,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         #** Samprotik Description **#
         Route::post('/samprotik-description/store', 'SamprotikDescriptionController@store')->name('samprotik-description.store');
+        Route::post('/samprotik-description/update', 'SamprotikDescriptionController@update')->name('samprotik-description.update');
 
         #** Written Description **#
         Route::post('/written-question/description/store', 'WrittenDescriptionController@store')->name('written-description.store');
@@ -205,6 +206,15 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/question/samprotik-filter-by-date', 'SamprotikQuestionController@dateFilter')->name('samprotik.date-filter');
         Route::get('/question/samprotik-filter-category', 'SamprotikQuestionController@categoryFilter')->name('samprotik.category-filter');
 
+        ######## Samprotik Tag ########
+        Route::get('/samprotik-tag/index', 'SamprotikTagController@index')->name('samprotik-tag.index');
+        Route::post('/samprotik-tag/store', 'SamprotikTagController@store')->name('samprotik-tag.store');
+        Route::get('/samprotik-tag/get/{id}', 'SamprotikTagController@getTag')->name('samprotik-tag.get');
+        Route::get('/samprotik-tag/delete/{id}', 'SamprotikTagController@deleteTag')->name('samprotik-tag.delete');
+
+        //add tag
+        Route::get('/samprotik-tag/get-tag', 'SamprotikTagController@getAllTAg')->name('samprotik-alltag.index');
+
         //pdf
         Route::get('/question/samprotik-question/pdf', 'SamprotikQuestionController@createPDF')->name('samprotik.pdf');
         //pagination
@@ -221,14 +231,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/question/written-question/get-instruction', 'WrittenQuestionController@getInstruction')->name('written.instruction');
 
         ############## Written Question Test ###############
-        // Route::get('/question/written-question/test', 'WrittenQuestionTestController@index')->name('written.test.index');
-        // Route::get('/question/written-question/test/create', 'WrittenQuestionTestController@create')->name('written.test.create');
-        // Route::post('/question/written-question/test/store', 'WrittenQuestionTestController@store')->name('written.test.store');
-        Route::get('/question/written-question/test/show', 'WrittenQuestionTestController@show')->name('written.test.show');
-        // Route::get('/question/written-question/test/edit/{id}/{type}', 'WrittenQuestionTestController@edit')->name('written.test.edit');
-        // Route::post('/question/written-question/test/update', 'WrittenQuestionTestController@update')->name('written.test.update');
-        // Route::get('/question/written-question/test/get-instruction', 'WrittenQuestionTestController@getInstruction')->name('written.test.instruction');
-        // Route::get('/question/written-question/sub-categories', 'WrittenQuestionTestController@getSubCategory')->name('written.test.sub-categories');
+        Route::get('/question/written-question/test/show', 'WrittenQuestionTestController@getCategory')->name('written.test.show');
+        Route::get('/question/written-question/sub-categories', 'WrittenQuestionTestController@getSubCategory')->name('written.test.sub-categories');
+
+        Route::get('/question/written-question/test', 'WrittenQuestionTestController@getQuestion')->name('written.test.question');
 
 
         /*

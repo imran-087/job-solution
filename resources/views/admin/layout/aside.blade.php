@@ -213,7 +213,7 @@
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title"><i class="fas fa-plus"></i> Add</span>
+                                    <span class="menu-title"><i class="fas fa-plus me-3"></i> Add Question</span>
                                 </a>
                             </div>
                            <div class="menu-item">
@@ -221,7 +221,7 @@
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
-                                    <span class="menu-title"> <i class="fas fa-eye"></i> View</span>
+                                    <span class="menu-title"> <i class="fas fa-eye me-3"></i> View Question</span>
                                 </a>
                             </div>
                         </div>
@@ -265,7 +265,6 @@
                     <span class="menu-arrow"></span>
                 </span>
                 <div class="menu-sub menu-sub-accordion  menu-active-bg">
-        
                     <div class="menu-item">
                         <a class="menu-link {{ request()->is('admin/question/samprotik-question/create*') ? 'active' : '' }}" href="{{ route('admin.samprotik.create') }}">
                             <span class="menu-bullet">
@@ -282,7 +281,14 @@
                             <span class="menu-title">All Question</span>
                         </a>
                     </div>
- 
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/samprotik-tag*') ? 'active' : '' }}" href="{{ route('admin.samprotik-tag.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Samprotik Tag</span>
+                        </a>
+                    </div>
                 </div>
             </div>
             <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/description*') ? 'show menu-accordion' : '' }}">

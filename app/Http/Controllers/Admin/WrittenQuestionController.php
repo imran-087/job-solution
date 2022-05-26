@@ -58,7 +58,7 @@ class WrittenQuestionController extends Controller
             'main_category' => ['required'],
             'sub_category' => ['required'],
             'subject' => ['required'],
-            'year' => [$request->main_category == 3 ? 'nullable' : 'required'],
+            // 'year' => [$request->main_category == 3 ? 'nullable' : 'required'],
             'question.*' => ['required']
         ]);
 

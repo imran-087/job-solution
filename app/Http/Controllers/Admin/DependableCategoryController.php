@@ -7,7 +7,9 @@ use App\Models\Category;
 use App\Models\Question;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\URL;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Route;
 
 class DependableCategoryController extends Controller
 {
@@ -20,7 +22,6 @@ class DependableCategoryController extends Controller
 
     public function getSubCategory($id)
     {
-
         $sub_category = SubCategory::where(['category_id' => $id, 'status' => 'active'])->get();
 
         return response()->json($sub_category);
