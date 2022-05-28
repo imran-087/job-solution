@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
+use App\Models\Subject;
 use App\Models\SamprotikTag;
 use Illuminate\Http\Request;
+use App\Models\SamprotikQuestion;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
@@ -133,54 +135,72 @@ class SamprotikTagController extends Controller
     }
 
     //get all tag
-    public function getAllTag()
+    public function getAllTag(Request $request)
     {
 
         if ($request->ajax()) {
-
+            //dd($request->all());
             $subjects = Subject::where([
-
-                'sub_category_id' => $request->sub_category_id,
                 'parent_id' => null
             ])->get();
             //dd($subjects);
+        }
 
-            if ($subjects->count() == 0) {
+        $output = '';
 
-                $subjects = Subject::where([
-                    'sub_category_id' => 0,
-                    'parent_id' => null
-                ])->get();
-                //dd($subjects);
-            }
+        if (count($subjects) > 0) {
 
-            $output = '';
-
-            if (count($subjects) > 0) {
-
-                $output = '<select class="form-select form-select-solid add-subject" data-control="select2" data-hide-search="true">
+            $output = '<select class="form-select form-select-solid add-tag ms-2" data-control="select2" data-hide-search="true">
                             <option>Select...</option>
                             ';
-                // <option value="subject=' . $row->id . ' question=' . $request->question_id . '" class="fs-6 text-gray-800 text-hover-primary fw-bold">' . $row->name . '</option>
+            // <option value="subject=' . $row->id . ' question=' . $request->question_id . '" class="fs-6 text-gray-800 text-hover-primary fw-bold">' . $row->name . '</option>
 
-                foreach ($subjects as $row) {
-                    $output .=
-                        '<div class="d-flex flex-column">
-                            <option data-sid="' . $row->id . '" data-qid="' . $request->question_id . '" class="fs-6 text-gray-800 text-hover-primary fw-bold">' . $row->name . '</option>
+            foreach ($subjects as $row) {
+                $output .=
+                    '<div class="d-flex flex-column">
+                            <option data-sid="' . $row->id . '" data-qid="' . $request->question_id . '" class="fs-6 text-gray-800 text-hover-primary fw-bold ">' . $row->name . '</option>
                         </div>';
-                    //$output .= '<a href="discussion/' . $row->id . '/show"><li class="list-group-item" style=" border-radious:10px">' . $row->title . '</li></a>';
-                }
-
-                $output .= '</select>';
-            } else {
-
-                $output .= ' <p  class="fs-6 text-800  fw-bold"
-                style="color:red; margin-top:10px; background-color:#F5F8FA; padding:10px; border-radius:5px;"> '
-                    . 'No Result' .
-                    '</p>';
+                //$output .= '<a href="discussion/' . $row->id . '/show"><li class="list-group-item" style=" border-radious:10px">' . $row->title . '</li></a>';
             }
 
-            return $output;
+            $output .= '</select>';
+        } else {
+
+            $output .= ' <p  class="fs-6 text-800  fw-bold"
+                style="color:red; margin-top:10px; background-color:#F5F8FA; padding:10px; border-radius:5px;"> '
+                . 'No Result' .
+                '</p>';
+        }
+
+        return $output;
+    }
+
+    //add tag
+    public function addTag(Request $request)
+    {
+        if ($request->ajax()) {
+            //dd($request->all());
+            $question = SamprotikQuestion::find($request->question_id);
+
+            $subject = Subject::find($request->subject_id);
+
+            // $insert = DB::table('subjectables')->insert(
+            //     array('created_user_id' => Auth::guard('admin')->id(), 'status' => 1)
+            // );
+
+            $sync = $question->subjects()->sync($subject->id);
+
+            if ($sync) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Tag added'
+                ], 200);
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Failed'
+                ], 303);
+            }
         }
     }
 }

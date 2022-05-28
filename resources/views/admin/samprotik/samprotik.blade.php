@@ -9,7 +9,8 @@
                 <!--begin::Menu-->
                 <a href="{{route('admin.samprotik.edit', ['id' => $question->id, 'ques' => $question->slug])}}" target="_blank" class="btn btn-sm btn-icon btn-light btn-active-primary fw-bold edit" ><i class="fas fa-edit"></i></a>
                 <!--end::Menu--> 
-                <span class="btn btn-sm btn-light btn-active-color-primary ms-2 get-tag cursor-pointer" title="Click" >Add Tag</span>
+                
+                <span data-question_id=" {{ $question->id }}" class="btn btn-sm btn-light btn-active-color-primary ms-2 get-tag cursor-pointer" title="Click" >Add Tag</span>
                 <div class="tag" style="z-index:999"></div>
             </div>
             

@@ -20,6 +20,7 @@ class SamprotikQuestion extends Model
     }
 
     ####* Polymorphic Relation Start *####
+
     /**
      * Get all of the question's descriptions.
      */
@@ -42,5 +43,13 @@ class SamprotikQuestion extends Model
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
+    }
+
+    /**
+     * Get all of the tags(here tag = subjects) for the samprotik.
+     */
+    public function subjects()
+    {
+        return $this->morphToMany(Subject::class, 'subjectable');
     }
 }

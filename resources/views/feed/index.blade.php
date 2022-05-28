@@ -123,6 +123,14 @@
                             
                         </div>
                         <!--end::Header-->
+                        <!--begin::image-->
+                        <div>
+                            <!--begin::Avatar-->
+                                <div class="symbol symbol-45px me-5">
+                                    <img src="assets/media/avatars/300-21.jpg" alt="">
+                                </div>
+                            <!--end::Avatar-->
+                        </div>
                         <!--begin::Post-->
                         <div class="mb-7">
                             <!--begin::Text-->
@@ -243,12 +251,43 @@
                         </div>
                         <!--end::Header-->
                         <!--begin::Form-->
-                        <form id="kt_forms_widget_1_form" class="ql-quil ql-quil-plain pb-3" method="POST" action="{{ route('feed.store') }}">
+                        <form id="kt_forms_widget_1_form" class="ql-quil ql-quil-plain pb-3" method="POST" action="{{ route('feed.store') }}" enctype="multipart/form-data">
                             @csrf
+                            <!--begin::Input group-->
+                            <div class="d-flex flex-column fv-row">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2 mt-2">
+                                </label>
+                                <!--end::Label-->
+                                <input type="text" name="title" class="form-control form-control-solid @error('title') is-invalid @enderror" placeholder="Enter news title" value={{ old('title') }}>
+                                @error('title')
+                                <span class="invalid-title" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                                <div class="help-block with-errors text-error"></div>
+                            </div>
+                            <!--end::Input group-->
+                            
+                            <!--begin::Input group-->
+                            <div class="d-flex flex-column fv-row">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2 ">
+                                </label>
+                                <!--end::Label-->
+                                <textarea name="content" class="form-control form-control-solid h-200px @error('content') is-invalid @enderror" placeholder="Whats on your mind?">{{ old('content') }}</textarea>
+                                @error('content')
+                                <span class="invalid-content" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                                @enderror
+                                <div class="help-block with-errors description-error"></div>
+                            </div>
+                            <!--end::Input group-->
                             <!--begin::Col-->
-                            <div class="mt-4 col-xl-8 col-lg-8 col-md-8 col-sm-12 col-xs-12 fv-row">
+                            <div class="input-group mb-5">
                                 <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                    data-placeholder="Select news category" name="category_id" required>
+                                    data-placeholder="Select news category" name="category_id" required >
                                     <option value=""></option>
                                     @foreach($categories as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -259,22 +298,24 @@
                                 @enderror
                             </div>
                             <!--end:Col-->
-                            <!--begin::Input group-->
-                            <div class="d-flex flex-column fv-row">
-                                <!--begin::Label-->
-                                <label class="d-flex align-items-center fs-6 fw-bold mb-2 mt-2">
-                                </label>
-                                <!--end::Label-->
-                                <textarea name="content" class="form-control form-control-solid h-200px @error('content') is-invalid @enderror" placeholder="Whats on your mind?"></textarea>
-                                @error('content')
-                                <span class="invalid-content" role="alert">
-                                    <strong>{{ $message }}</strong>
-                                </span>
+                            <div class="mb-3">
+                                <input class="form-control @error('image') is-invalid @enderror" name="image" type="file" id="formFile" value="{{ old('image') }}">
+                                @error('image')
+                                <div class="text-danger">{{ $message }}</div>
                                 @enderror
-                                <div class="help-block with-errors description-error"></div>
+                            </div>
+                            <!--begin::Input group-->
+                            <div class="input-group mb-5">
+                                <span class="input-group-text" id="basic-addon3">
+                                    <i class="las la-wallet fs-1"></i>
+                                </span>
+                                <input type="text" class="form-control @error('reference_url') is-invalid @enderror" name="reference_url"  placeholder="Reference url" value="{{ old('reference_url') }}" aria-describedby="basic-addon3"/>
+                                @error('reference_url')
+                                <div class="text-danger">{{ $message }}</div>
+                                @enderror
                             </div>
                             <!--end::Input group-->
-                            <div>
+                            <div class="d-flex justify-content-end">
                                 <button class="btn btn-sm btn-dark text-white" type="submit">Post</button>
                             </div>
                         </form>

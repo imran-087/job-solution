@@ -31,4 +31,12 @@ class WrittenQuestion extends Model
     {
         return $this->morphMany(Description::class, 'descriptionable');
     }
+
+    /**
+     * Get all of the tags(here tag = subjects) for the Written.
+     */
+    public function subjects()
+    {
+        return $this->morphToMany(Subject::class, 'subjectable');
+    }
 }

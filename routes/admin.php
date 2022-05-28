@@ -214,6 +214,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         //add tag
         Route::get('/samprotik-tag/get-tag', 'SamprotikTagController@getAllTAg')->name('samprotik-alltag.index');
+        Route::post('/samprotik-question/add-tag', 'SamprotikTagController@addTag')->name('samprotik-addtag');
 
         //pdf
         Route::get('/question/samprotik-question/pdf', 'SamprotikQuestionController@createPDF')->name('samprotik.pdf');

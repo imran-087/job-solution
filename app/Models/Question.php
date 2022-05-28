@@ -45,6 +45,7 @@ class Question extends Model
     }
 
     ####* Polymorphic Relation Start *####
+
     /**
      * Get all of the question's votes.
      */
@@ -67,6 +68,14 @@ class Question extends Model
     public function descriptions()
     {
         return $this->morphMany(Description::class, 'descriptionable');
+    }
+
+    /**
+     * Get all of the tags(here tag = subjects) for the question.
+     */
+    public function subjects()
+    {
+        return $this->morphToMany(Subject::class, 'subjectable');
     }
 
 

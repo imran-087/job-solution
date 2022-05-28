@@ -265,14 +265,18 @@
 
     //get tag
     $(document).on('click', '.get-tag', function() {
-       
+        var question_id = $(this).data('question_id')
+
         var this_input = $(this)
-        
+            
         $.ajax({
             type: "GET",
             url: "{{ url('admin/samprotik-tag/get-tag')}}",
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-
+            data: {
+                //Assigning value of "val" into "search" variable.
+                question_id : question_id,
+            },
             //If result found, this funtion will be called.
             success: function(data) {
                 //console.log(data)
@@ -285,7 +289,7 @@
     });
 
     //add tag
-    $(document).on('change', '.add-subject', function(){
+    $(document).on('change', '.add-tag', function(){
         var sid = $(this).find(':selected').data('sid');
         var qid = $(this).find(':selected').data('qid');
         
@@ -296,7 +300,7 @@
         //AJAX is called.
         $.ajax({
             type: "POST",
-            url: "{{ url('admin/question/subject/add-subject')}}",
+            url: "{{ url('admin/samprotik-question/add-tag')}}",
             headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
             data: {
                 //Assigning value of "val" into "search" variable.
@@ -308,7 +312,7 @@
                 if(data.success){
                     toastr.success(data.message);
                     this_input.hide();
-                    $('#dataTable').DataTable().ajax.reload();
+                    $('.get-tag').show();
                 }
                 else{
                     toastr.error(data.message)

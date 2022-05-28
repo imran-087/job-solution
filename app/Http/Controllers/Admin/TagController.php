@@ -7,7 +7,9 @@ use App\Models\Subject;
 use App\Models\Question;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
 class TagController extends Controller
@@ -112,16 +114,22 @@ class TagController extends Controller
         }
     }
 
+    //Questions  Tag
     public function addTag(Request $request)
     {
         if ($request->ajax()) {
+            //dd($request->all());
             $question = Question::find($request->question_id);
-            $question->pivotsubject()->sync($request->subject_id);
 
-            // $tag->subject_id = $request->subject_id;
-            // $tag->question_id = $request->question_id;
+            $subject = Subject::find($request->subject_id);
 
-            if ($question->save()) {
+            // $insert = DB::table('subjectables')->insert(
+            //     array('created_user_id' => Auth::guard('admin')->id(), 'status' => 1)
+            // );
+
+            $sync = $question->subjects()->sync([$subject->id => ['created_user_id' => Auth::user()->id]]);
+
+            if ($sync) {
                 return response()->json([
                     'success' => true,
                     'message' => 'Tag added'

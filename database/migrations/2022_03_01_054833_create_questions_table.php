@@ -20,6 +20,7 @@ class CreateQuestionsTable extends Migration
             $table->integer('subject_id');
             $table->integer('year_id')->nullable();
             $table->integer('passage_id')->nullable();
+            $table->integer('model_test_id')->nullable();
             $table->enum('question_type', ['mcq', 'passage', 'image'])->default('mcq');
             $table->text('question');
             $table->integer('mark');

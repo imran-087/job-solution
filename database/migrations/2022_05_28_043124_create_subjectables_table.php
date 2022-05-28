@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateBookmarksTable extends Migration
+class CreateSubjectablesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,13 @@ class CreateBookmarksTable extends Migration
      */
     public function up()
     {
-        Schema::create('bookmarks', function (Blueprint $table) {
+        Schema::create('subjectables', function (Blueprint $table) {
             $table->id();
-            $table->integer('question_id');
-            $table->integer('category_id');
-            $table->integer('user_id');
-            $table->integer('bookmark_type_id');
+            $table->integer('subject_id');
+            $table->morphs('subjectable');
+            $table->integer('created_user_id');
+            $table->tinyInteger('status');
+            $table->softDeletes();
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ class CreateBookmarksTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('bookmarks');
+        Schema::dropIfExists('subjectables');
     }
 }

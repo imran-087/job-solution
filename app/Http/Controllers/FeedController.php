@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Category;
 use App\Models\Feed;
 use App\Models\Vote;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Intervention\Image\Facades\Image;
 
 class FeedController extends Controller
 {
@@ -27,14 +28,46 @@ class FeedController extends Controller
     {
         //dd($request->all());
         $data = $request->validate([
+            'title' => 'required',
             'content' => 'required',
-            'category_id' => 'required'
+            'category_id' => 'required',
+            'image' => ['mimes:jpg, png, jpeg']
         ]);
 
-        $data['user_id'] = Auth::user()->id;
+        $data['user_id'] =
+            $data['reference_url'] = $request->reference_url;
 
-        Feed::create($data);
-        return redirect()->back()->with('success', 'Thanks for shareing valuable information');
+        //image upload
+        if ($request->file('image')) {
+
+            //image
+            $image = $request->file('image');
+            $image_name = time() . '.' . $image->getClientOriginalExtension();
+
+            $destinationPath = \public_path('/uploads/newsfeed/');
+
+            //resize image
+            $imgFile = Image::make($image->getRealPath());
+            $imgFile->resize(200, 150, function ($constraint) {
+                $constraint->aspectRatio();
+            })->save($destinationPath . $image_name, 80);
+
+            // $image->move($destinationPath, $image_name);
+
+            $image = '/uploads/newsfeed/' . $image_name;
+        }
+
+        $feed = Feed::create([
+            'title' => $request->title,
+            'content' => $request->content,
+            'category_id' => $request->category_id,
+            'image' => $image,
+            'reference_url' => $request->reference_url,
+            'user_id' => Auth::user()->id
+        ]);
+        if ($feed) {
+            return redirect()->back()->with('success', 'Thanks for shareing valuable information');
+        }
     }
 
     public function storeReply(Request $request)

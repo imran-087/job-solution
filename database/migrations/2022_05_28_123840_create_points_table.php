@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFeedsTable extends Migration
+class CreatePointsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,13 @@ class CreateFeedsTable extends Migration
      */
     public function up()
     {
-        Schema::create('feeds', function (Blueprint $table) {
+        Schema::create('points', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('category_id')->constrained();
-            $table->text('title');
-            $table->longText('description');
-            $table->unsignedBigInteger('like')->default(0);
-            $table->string('image')->nullable();
-            $table->string('reference_url')->nullable();
+            $table->string('name')->unique();
+            $table->smallInteger('value');
+            $table->enum('status', ['active', 'inactive']);
+            $table->smallInteger('created_by');
+            $table->smallInteger('updated_by');
             $table->softDeletes();
             $table->timestamps();
         });
@@ -33,6 +32,6 @@ class CreateFeedsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('feeds');
+        Schema::dropIfExists('points');
     }
 }

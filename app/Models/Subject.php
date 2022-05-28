@@ -48,6 +48,32 @@ class Subject extends Model
         return  $this->hasMany(Question::class);
     }
 
+    ######### Polymorphic Relation ###########
+
+    /**
+     * Get all of the samprotik_questions that includes this subject.
+     */
+    public function samprotiks()
+    {
+        return $this->morphedByMany(SamprotikQuestion::class, 'subjectable');
+    }
+
+    /**
+     * Get all of the written_questions that includes this subject.
+     */
+    public function writtens()
+    {
+        return $this->morphedByMany(WrittenQuestion::class, 'subjectable');
+    }
+
+    /**
+     * Get all of the mcq_questions that includes this subject.
+     */
+    public function questions()
+    {
+        return $this->morphedByMany(Question::class, 'subjectable');
+    }
+
     //local scope
     public function scopeSubject($query, $subcategory, $parent)
     {
