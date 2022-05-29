@@ -42,15 +42,16 @@
                     <!--begin::Input group-->
                 <div class="row g-9 mb-8">
                     
+                    <input type="hidden" name="type" value="{{ $type }}">
+                    <input type="hidden" name="number" value="{{ $number }}">
+                    <input type="hidden" name="option" value="{{ $option }}">
+                    
                     <!--begin::Col-->
                     <div class="col-md-12 fv-row">
                         <!--begin::Label-->
                         <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                             <span class="required text-uppercase fw-bolder" style="font-size: 16px">Question : {{ $i+1 }} </span>
                         </label>
-                        <input type="hidden" name="type" value="{{ $type }}">
-                        <input type="hidden" name="number" value="{{ $number }}">
-                        <input type="hidden" name="option" value="{{ $option }}">
                         <!--end::Label-->
                         <input type="text" class="form-control form-control-solid @error('question.*') is-invalid @enderror" placeholder="Enter Question" name="question[]" value="{{ old('question.*') }}"/>
                         @if($type == 'image')

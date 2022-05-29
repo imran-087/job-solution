@@ -16,11 +16,11 @@ class CreatePackagesTable extends Migration
         Schema::create('packages', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->smallInteger('created_by');
-            $table->smallInteger('updated_by');
             $table->smallInteger('price');
             $table->smallInteger('discount_price');
-            $table->enum('status', ['active', 'inactive']);
+            $table->enum('status', ['active', 'deactive']);
+            $table->smallInteger('created_by');
+            $table->smallInteger('updated_by');
             $table->softDeletes();
             $table->timestamps();
         });

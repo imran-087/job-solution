@@ -225,7 +225,8 @@
                                 <div class="col-md-12 fv-row">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <input class="form-check-input me-3" type="radio" name="answer[{{ $i }}]"  value="1"
-                                        @if($myForm['answer'][$i] == '1') checked @endif
+                                        @if($myForm['answer'][$i])
+                                        @if($myForm['answer'][$i] == '1') checked @endif @endif
                                         >
                                         <input type="text" class="form-control form-control-solid" placeholder="Enter option"
                                         name="option_1[]"  value="{{ $myForm['option_1'][$i] }}"/>

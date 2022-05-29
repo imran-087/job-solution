@@ -237,6 +237,26 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/question/written-question/test', 'WrittenQuestionTestController@getQuestion')->name('written.test.question');
 
+        /*
+        |--------------------------------------------------------------------------
+        | Exam
+        |--------------------------------------------------------------------------
+        */
+
+        ######### Exam route ###########
+        Route::get('/exam/create', 'Exam\ExamController@create')->name('exam.create');
+        Route::post('/exam/store', 'Exam\ExamController@store')->name('exam.store');
+
+        ######### Exam details route ###########
+        Route::get('/exam-details/create', 'Exam\ExamDetailsController@create')->name('exam-details.create');
+        Route::post('/exam-details/store', 'Exam\ExamDetailsController@store')->name('exam-details.store');
+
+
+        ####### Package route ###########
+        Route::get('/packages/index', 'PackageController@index')->name('package.index');
+        Route::post('/packages/store', 'PackageController@store')->name('package.store');
+        Route::get('/packages/get/{id}', 'PackageController@get')->name('package.get');
+        Route::get('/packages/delete/{id}', 'PackageController@delete')->name('package.delete');
 
         /*
         |--------------------------------------------------------------------------

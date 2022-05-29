@@ -18,8 +18,8 @@ class CreateExamDetailsTable extends Migration
             $table->id();
             $table->foreignId('exam_id')->constrained()->cascadeOnDelete();
             $table->foreignId('subject_id')->constrained(); //from subject_table 
-            $table->smallInteger('numbers_of_question')->constrained(); //Numbers_Of_Question_Per_Subject 
-            $table->json('question_id')->nullable(); //from subject_table 
+            $table->smallInteger('number_of_question'); //Numbers_Of_Question_Per_Subject 
+            $table->json('question_ids')->nullable(); //from question_table 
             $table->json('question_mark')->nullable(); //Per_Question_Mark[Array/String]  map to per question_id 
             $table->timestamps();
         });

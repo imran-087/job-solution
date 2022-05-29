@@ -21,14 +21,14 @@ class CreateExamsTable extends Migration
             $table->string('name');
             $table->enum('examinee_type', ['user', 'subscriber'])->default('user'); // User/Subscriber user who are eligible for participating exxam
             $table->enum('exam_mode', ['private', 'public']);
-            $table->dateTime('time')->nullable();
+            $table->smallInteger('duration')->nullable();
             $table->smallInteger('number_of_question');
             $table->smallInteger('mark')->default(0);
             $table->smallInteger('cut_mark')->default(0);
+            $table->smallInteger('negative_mark')->default(0);
             $table->smallInteger('exam_price')->default(0);
             $table->smallInteger('discount_price')->nullable();
             $table->smallInteger('required_point')->default(0);
-            $table->smallInteger('negative_mark')->default(0);
             $table->enum('exam_status', ['published', 'unpublished', 'closed']);
             $table->dateTime('exam_starting_time');
             $table->integer('updated_user_id')->nullable();

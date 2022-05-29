@@ -193,7 +193,6 @@
                         $('#samprotik').html(data.html)
                     }
                 });
-               
             }
         });
     })

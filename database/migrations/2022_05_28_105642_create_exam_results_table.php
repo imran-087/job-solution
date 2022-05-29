@@ -24,7 +24,7 @@ class CreateExamResultsTable extends Migration
             $table->smallInteger('mark')->default(0);
             $table->smallInteger('cut_mark')->default(0);
             $table->smallInteger('negative_mark')->default(0);
-            $table->deleted_by('user_id')->nullable();
+            $table->integer('deleted_by')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

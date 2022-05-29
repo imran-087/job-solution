@@ -107,53 +107,6 @@
                 </a>
             </div>
 
-            {{-- <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/question*') ? 'show menu-accordion' : '' }}">
-                <span class="menu-link">
-                    <span class="menu-icon">
-                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">Question Management</span>
-                    <span class="menu-arrow"></span>
-                </span>
-                <div class="menu-sub menu-sub-accordion  menu-active-bg">
-                    <div class="menu-item">
-                        <a class="menu-link {{ request()->is('admin/question/create-question*') ? 'active' : '' }}" href="{{ route('admin.question.create') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Add Question</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link {{ request()->is('admin/question/question-index*') ? 'active' : '' }}" href="{{ route('admin.question.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">All Question</span>
-                        </a>
-                    </div>
-                    
-                    <div class="menu-item">
-                        <a class="menu-link {{ request()->is('admin/question/written-question*') ? 'active' : '' }}" href="{{ route('admin.written.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Written Question</span>
-                        </a>
-                    </div>
-                    
-                </div>
-            </div> --}}
 
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                 <span class="menu-link">
@@ -494,7 +447,74 @@
                     <span class="menu-title">Subject Tree</span>
                 </a>
             </div>
+
+            {{-- Exam Menu Start  --}}
+
+            <div class="menu-item">
+            <div class="menu-content pt-8 pb-2">
+                <span class="menu-section text-muted text-uppercase fs-8 ls-1">Exam</span>
+            </div>
+            </div>
+
+            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/exam*') ? 'show menu-accordion' : '' }}">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Exam Management</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion  menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/exam/create*') ? 'active' : '' }}" href="{{ route('admin.exam.create') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Create Exam</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/exam-details/create*') ? 'active' : '' }}" href="{{ route('admin.exam-details.create') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Exam Details</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-item">
+                <a class="menu-link {{ request()->is('admin/packages*') ? 'active' : '' }}" href="{{ route('admin.package.index') }}" >
+                    <span class="menu-icon">
+                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Packages</span>
+                </a>
+            </div>
             
+            {{-- Exam Menu End  --}}
+
+            {{-- Forum Menu Start  --}}
             <div class="menu-item">
                 <div class="menu-content pt-8 pb-2">
                     <span class="menu-section text-muted text-uppercase fs-8 ls-1">Forum</span>
@@ -537,6 +557,7 @@
                     <span class="menu-title">Discussion</span>
                 </a>
             </div>
+            {{-- Exam Menu end  --}}
             
         </div>
         <!--end::Menu-->
