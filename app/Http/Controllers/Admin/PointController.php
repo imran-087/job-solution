@@ -3,19 +3,19 @@
 namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
-use App\Models\Package;
+use App\Models\Point;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
-class PackageController extends Controller
+class PointController extends Controller
 {
     public function index(Request $request)
     {
         if ($request->ajax()) {
-            $data = Package::select();
+            $data = Point::select();
 
             return DataTables::of($data)
                 ->addIndexColumn()
@@ -44,7 +44,7 @@ class PackageController extends Controller
                             </span>
                             <!--end::Svg Icon-->
                         </a>
-                        <a href="javascript:;" onclick="deletepackage(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                        <a href="javascript:;" onclick="deletepoint(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                             <span class="svg-icon svg-icon-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -61,7 +61,7 @@ class PackageController extends Controller
                 ->rawColumns(['action', 'status', 'created_at'])
                 ->make(true);
         }
-        return view('admin.package.index');
+        return view('admin.point.index');
     }
 
     //create or update main category
@@ -70,8 +70,7 @@ class PackageController extends Controller
         //dd($request->all());
         $validator = Validator::make($request->all(), [
             'name' => ['required'],
-            'price' => ['required'],
-            'discount_price' => ['required'],
+            'value' => ['required'],
             'status' => ['required'],
         ]);
 
@@ -82,11 +81,10 @@ class PackageController extends Controller
             ], 200);
         } else {
 
-            if (isset($request->package_id) &&  $package = Package::find($request->package_id)) { //update
+            if (isset($request->point_id) &&  $package = Point::find($request->point_id)) { //update
                 //dd($request->year_id);
                 $package->name = $request->name;
-                $package->price = $request->price;
-                $package->discount_price = $request->discount_price;
+                $package->value = $request->value;
                 $package->status = $request->status;
                 $package->updated_by =  Auth::guard('admin')->user()->id;
                 $package->updated_at = Carbon::now();
@@ -94,7 +92,7 @@ class PackageController extends Controller
                 if ($package->update()) {
                     return response()->json([
                         'success' => true,
-                        'message' => __('Package updated successfully!')
+                        'message' => __('Item updated successfully!')
                     ], 200);
                 } else {
                     return response()->json([
@@ -104,11 +102,10 @@ class PackageController extends Controller
                 }
             } else { //create new category
 
-                $package = new Package();
+                $package = new Point();
 
                 $package->name = $request->name;
-                $package->price = $request->price;
-                $package->discount_price = $request->discount_price;
+                $package->value = $request->value;
                 $package->status = $request->status;
                 $package->created_by =  Auth::guard('admin')->user()->id;
                 $package->created_at = Carbon::now();
@@ -116,7 +113,7 @@ class PackageController extends Controller
                 if ($package->save()) {
                     return response()->json([
                         'success' => true,
-                        'message' => 'Package created'
+                        'message' => 'New item created'
                     ], 200);
                 } else {
                     return response()->json([
@@ -132,20 +129,20 @@ class PackageController extends Controller
     public function get($id)
     {
         //dd($id);
-        $data = Package::find($id);
+        $data = Point::find($id);
         return response($data);
     }
 
     //deleteCategory
     public function delete($id)
     {
-        $package = Package::find($id);
+        $package = Point::find($id);
 
         $package->delete();
 
         return response()->json([
             'success' => true,
-            'message' => 'Package deleted!'
+            'message' => 'Item deleted!'
         ], 200);
     }
 }

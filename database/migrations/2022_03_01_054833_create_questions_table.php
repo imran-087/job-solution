@@ -34,6 +34,8 @@ class CreateQuestionsTable extends Migration
             $table->enum('lock_status', ['lock', 'unlock'])->default('unlock');
             $table->enum('future_editable', ['editable', 'noteditable'])->default('noteditable');
             $table->enum('status', ['active', 'deactive', 'pending'])->default('active');
+            $table->string('video_url')->nullable();
+            $table->string('youtube_url')->nullable();
             $table->softDeletes();
             $table->timestamps();
         });

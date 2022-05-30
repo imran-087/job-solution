@@ -224,10 +224,13 @@
                                 {{-- @for($o = 0; $o < 4; $o++)  --}}
                                 <div class="col-md-12 fv-row">
                                     <div class="d-flex align-items-center justify-content-center">
+                                        
                                         <input class="form-check-input me-3" type="radio" name="answer[{{ $i }}]"  value="1"
-                                        @if($myForm['answer'][$i])
-                                        @if($myForm['answer'][$i] == '1') checked @endif @endif
+                                        @if( isset($myForm['answer'][$i]) )
+                                            @if($myForm['answer'][$i] == '1') checked @endif 
+                                        @endif
                                         >
+                                        
                                         <input type="text" class="form-control form-control-solid" placeholder="Enter option"
                                         name="option_1[]"  value="{{ $myForm['option_1'][$i] }}"/>
                                     </div>
@@ -238,7 +241,9 @@
                                 <div class="col-md-12 fv-row align-items-center justify-content-center">
                                     <div class="d-flex">
                                         <input class="form-check-input me-3" type="radio" name="answer[{{ $i }}]"  value="2"
-                                        @if($myForm['answer'][$i] == '2') checked @endif
+                                        @if( isset($myForm['answer'][$i]) )
+                                            @if($myForm['answer'][$i] == '2') checked @endif
+                                        @endif
                                         >
                                         <input type="text" class="form-control form-control-solid" placeholder="Enter option"
                                         name="option_2[]"  value="{{ $myForm['option_2'][$i] }}"/>
@@ -248,11 +253,12 @@
                                     <input type="file" class="form-control-file mt-2" id="exampleInputFile" name="image[]" multiple>
                                     @endif --}}
                                 </div>  
-                                 
                                 <div class="col-md-12 fv-row">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <input class="form-check-input me-3" type="radio" name="answer[{{ $i }}]"  value="3"
-                                        @if($myForm['answer'][$i] == '3') checked @endif
+                                        @if( isset($myForm['answer'][$i]) ) 
+                                            @if($myForm['answer'][$i] == '3') checked @endif
+                                        @endif
                                         >
                                         <input type="text" class="form-control form-control-solid" placeholder="Enter option"
                                         name="option_3[]"  value="{{ $myForm['option_3'][$i] }}"/>
@@ -262,7 +268,9 @@
                                 <div class="col-md-12 fv-row">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <input class="form-check-input me-3" type="radio" name="answer[{{ $i }}]"  value="4"
-                                        @if($myForm['answer'][$i] == '4') checked @endif
+                                        @if( isset($myForm['answer'][$i]) )
+                                            @if($myForm['answer'][$i] == '4') checked @endif
+                                        @endif
                                         >
                                         <input type="text" class="form-control form-control-solid" placeholder="Enter option"
                                         name="option_4[]"  value="{{ $myForm['option_4'][$i] }}"/>
@@ -273,7 +281,9 @@
                                 <div class="col-md-12 fv-row">
                                     <div class="d-flex align-items-center justify-content-center">
                                         <input class="form-check-input me-3" type="radio" name="answer[{{ $i }}]"  value="5"
-                                        @if($myForm['answer'][$i] == '5') checked @endif
+                                        @if( isset($myForm['answer'][$i]) )
+                                            @if($myForm['answer'][$i] == '5') checked @endif
+                                        @endif
                                         >
                                         <input type="text" class="form-control form-control-solid" placeholder="Enter option"
                                         name="option_5[]"  value="{{ $myForm['option_5'][$i] }}"/>

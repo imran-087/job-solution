@@ -138,7 +138,7 @@ class QuestionController extends Controller
     //preview question
     public function preview(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
         if ($request->type == 'image') {
             $this->store($request);
         } else {

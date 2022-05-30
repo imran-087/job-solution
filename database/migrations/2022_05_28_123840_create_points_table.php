@@ -17,7 +17,7 @@ class CreatePointsTable extends Migration
             $table->id();
             $table->string('name')->unique();
             $table->smallInteger('value');
-            $table->enum('status', ['active', 'inactive']);
+            $table->enum('status', ['active', 'deactive']);
             $table->smallInteger('created_by');
             $table->smallInteger('updated_by');
             $table->softDeletes();

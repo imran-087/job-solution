@@ -258,6 +258,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/packages/get/{id}', 'PackageController@get')->name('package.get');
         Route::get('/packages/delete/{id}', 'PackageController@delete')->name('package.delete');
 
+        ####### Points route ###########
+        Route::get('/points/index', 'PointController@index')->name('point.index');
+        Route::post('/points/store', 'PointController@store')->name('point.store');
+        Route::get('/points/get/{id}', 'PointController@get')->name('point.get');
+        Route::get('/points/delete/{id}', 'PointController@delete')->name('point.delete');
+
         /*
         |--------------------------------------------------------------------------
         | Discussion Forum

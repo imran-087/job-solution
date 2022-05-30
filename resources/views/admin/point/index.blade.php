@@ -1,5 +1,5 @@
 @extends('admin.layout.app')
-@section('title', 'Package')
+@section('title', 'Points')
 
 @section('content')
 
@@ -13,7 +13,7 @@
                 data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
                 class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                 <!--begin::Title-->
-                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Package</h1>
+                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Points</h1>
                 <!--end::Title-->
                 <!--begin::Separator-->
                 <span class="h-20px border-gray-200 border-start mx-4"></span>
@@ -31,7 +31,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Package Management</li>
+                    <li class="breadcrumb-item text-muted">Points Management</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -39,7 +39,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-dark">Package List</li>
+                    <li class="breadcrumb-item text-dark">Points List</li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -83,7 +83,7 @@
                             </span>
                             <!--end::Svg Icon-->
                             <input type="text" data-kk-product-table-filter="search"
-                                class="form-control form-control-solid w-250px ps-14" placeholder="Search package">
+                                class="form-control form-control-solid w-250px ps-14" placeholder="Search point">
                         </div>
                         <!--end::Search-->
                     </div>
@@ -92,7 +92,7 @@
                     <div class="card-toolbar flex-row-fluid justify-content-end gap-5"
                         data-select2-id="select2-data-123-0tix">
                         <!--begin::Add product-->
-                        <a href="javascript:;" class="btn btn-sm btn-primary me-3" onclick="addNew()">Add Packages</a>
+                        <a href="javascript:;" class="btn btn-sm btn-primary me-3" onclick="addNew()">Add Point</a>
                         <!--end::Add product-->
                     </div>
 
@@ -111,9 +111,8 @@
                                     <!--begin::Table row-->
                                     <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                         <th class="min-w-20px">#</th>
-                                        <th class="min-w-150px">Package Name</th>
-                                        <th class="min-w-150px">Package Price</th>
-                                        <th class="min-w-150px">Discount Price</th>
+                                        <th class="min-w-150px">Name</th>
+                                        <th class="min-w-150px">Value</th>
                                         <th class="min-w-150px">Status</th>
                                         <th class=" min-w-100px">Created at</th>
                                         <th class=" min-w-70px">Actions</th>
@@ -143,7 +142,7 @@
 
 
 <!--begin::Modal - New Tag-->
-<div class="modal fade" id="kk_modal_new_package" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="kk_modal_new_point" tabindex="-1" aria-hidden="true">
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <!--begin::Modal content-->
@@ -169,16 +168,16 @@
             <!--begin::Modal body-->
             <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
                 <!--begin:Form-->
-                <form id="kk_modal_new_package_form" class="form" enctype="multipart/form-data">
+                <form id="kk_modal_new_point_form" class="form" enctype="multipart/form-data">
                     <div class="messages"></div>
                     {{-- csrf token  --}}
                     @csrf
-                    <input type="hidden" name="package_id">
+                    <input type="hidden" name="point_id">
 
                     <!--begin::Heading-->
                     <div class="mb-13 text-center">
                         <!--begin::Title-->
-                        <h1 class="mb-3">Add Package</h1>
+                        <h1 class="mb-3">Add Point</h1>
                         <!--end::Title-->
                         <!--begin::Description-->
                         <div class="text-muted fw-bold fs-5">Fill up the form and submit
@@ -190,7 +189,7 @@
                     <div class="d-flex flex-column mb-8 fv-row">
                         <!--begin::Label-->
                         <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="required">Package Name</span>
+                            <span class="required">Point Name</span>
                         </label>
                         <!--end::Label-->
                         <input type="text" class="form-control form-control-solid" placeholder="Package name"
@@ -198,42 +197,36 @@
                         <div class="help-block with-errors name-error"></div>
                     </div>
                     <!--end::Input group-->
-                    <!--begin::Input group-->
-                    <div class="d-flex flex-column mb-8 fv-row">
-                        <!--begin::Label-->
-                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="required">Package Price</span>
-                        </label>
-                        <!--end::Label-->
-                        <input type="text" class="form-control form-control-solid" placeholder="Package price"
-                            name="price" />
-                        <div class="help-block with-errors price-error"></div>
-                    </div>
-                    <!--end::Input group-->
-                    <!--begin::Input group-->
-                    <div class="d-flex flex-column mb-8 fv-row">
-                        <!--begin::Label-->
-                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="required">Discount Price</span>
-                        </label>
-                        <!--end::Label-->
-                        <input type="text" class="form-control form-control-solid" placeholder="Discount price"
-                            name="discount_price" />
-                        <div class="help-block with-errors discount_price-error"></div>
-                    </div>
-                    <!--end::Input group-->
-                    <!--begin::Input group-->
-                    <div class="d-flex flex-column mb-8 fv-row">
-                       <label class="required fs-6 fw-bold mb-2">Status</label>
-                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                data-placeholder="Select status" name="status">
-                                <option value="active" selected>Active</option>
-                                <option value="deactive">Deactive</option>
-                            </select>
-                        <div class="help-block with-errors status-error"></div>
-                    </div>
-                    <!--end::Input group-->
                     
+                    <div class="row">
+                        <div class="col-md-5">
+                            <!--begin::Input group-->
+                            <div class="d-flex flex-column mb-8 fv-row">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span class="required">Value</span>
+                                </label>
+                                <!--end::Label-->
+                                <input type="text" class="form-control form-control-solid" placeholder="Enter point value"
+                                    name="value" />
+                                <div class="help-block with-errors value-error"></div>
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+                        <div class="col-md-7">
+                            <!--begin::Input group-->
+                            <div class="d-flex flex-column mb-8 fv-row">
+                                <label class="required fs-6 fw-bold mb-2">Status</label>
+                                    <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                        data-placeholder="Select status" name="status">
+                                        <option value="active" selected>Active</option>
+                                        <option value="deactive">Deactive</option>
+                                    </select>
+                                <div class="help-block with-errors status-error"></div>
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+                    </div>
                     
                     <!--begin::Actions-->
                     <div class="text-center">
@@ -267,7 +260,7 @@
                 processing: true,
                 responsive: true,
                 serverSide: true,
-                ajax: "{{ url('admin/packages/index') }}",
+                ajax: "{{ url('admin/points/index') }}",
                 columns: [
                     {
                         data: 'DT_RowIndex',
@@ -280,13 +273,10 @@
                         name: 'name'
                     },
                     {
-                        data: 'price',
-                        name: 'price'
+                        data: 'value',
+                        name: 'value'
                     },
-                    {
-                        data: 'discount_price',
-                        name: 'discount_price'
-                    },
+                    
                     {
                         data: 'status',
                         name: 'status'
@@ -304,7 +294,7 @@
 
                 ],
                 "order": [
-                    [4, 'desc']
+                    [3, 'desc']
                 ] //created at desc
 
             })
@@ -318,37 +308,36 @@
 
         // add new
         function addNew(){
-            $('input[name="package_id"]').val('')
+            $('input[name="point_id"]').val('')
             $('.with-errors').text('')
-            $('#kk_modal_new_package_form')[0].reset();
-            $('#kk_modal_new_package').modal('show')
+            $('#kk_modal_new_point_form')[0].reset();
+            $('#kk_modal_new_point').modal('show')
         }
 
         //edit category modal
         function edit(id){
             $.ajax({
                 type:"GET",
-                url: "{{ url('admin/packages/get')}}"+'/'+id,
+                url: "{{ url('admin/points/get')}}"+'/'+id,
                 dataType: 'json',
                 success:function(data){
-                    $('input[name="package_id"]').val(data.id);
+                    $('input[name="point_id"]').val(data.id);
                     $('input[name="name"]').val(data.name);
-                    $('input[name="price"]').val(data.price);
-                    $('input[name="discount_price"]').val(data.discount_price);
+                    $('input[name="value"]').val(data.value);
                     $('select[name="status"]').val(data.status).change();
-                    $("#kk_modal_new_package").modal('show');
+                    $("#kk_modal_new_point").modal('show');
                 }
           });
         }
 
         //cancel button
         $('#kk_modal_new_service_cancel').on('click', function(){
-            $('#kk_modal_new_package_form')[0].reset();
-            $("#kk_modal_new_package").modal('hide');
+            $('#kk_modal_new_point_form')[0].reset();
+            $("#kk_modal_new_point").modal('hide');
         })
 
         //new category save
-        $('#kk_modal_new_package_form').on('submit',function(e){
+        $('#kk_modal_new_point_form').on('submit',function(e){
             e.preventDefault()
             $('.with-errors').text('')
             $('.indicator-label').hide()
@@ -358,7 +347,7 @@
             var formData = new FormData(this);
             $.ajax({
                 type:"POST",
-                url: "{{ url('admin/packages/store')}}",
+                url: "{{ url('admin/points/store')}}",
                 data:formData,
                 cache:false,
                 contentType: false,
@@ -372,11 +361,11 @@
                         }
                     }else if(data.error || data.error == 'true'){
                         var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
-                        $('#kk_modal_new_package_form').find('.messages').html(alertBox).show();
+                        $('#kk_modal_new_point_form').find('.messages').html(alertBox).show();
                     }else{
                         // empty the form
-                        $('#kk_modal_new_package_form')[0].reset();
-                        $("#kk_modal_new_package").modal('hide');
+                        $('#kk_modal_new_point_form')[0].reset();
+                        $("#kk_modal_new_point").modal('hide');
 
                         Swal.fire({
                                 text: data.message,
@@ -402,7 +391,7 @@
         })
 
     //deleteCategory
-    function deletepackage(id){
+    function deletepoint(id){
         Swal.fire({
             text: "Are you sure you want delete this?",
             icon: "warning",
@@ -418,7 +407,7 @@
             if(o.value){ //if agree
                 $.ajax({
                     type: "GET",
-                    url: "{{ url('admin/packages/delete') }}"+'/'+id,
+                    url: "{{ url('admin/points/delete') }}"+'/'+id,
                     data: {},
                     success: function (res)
                     {
