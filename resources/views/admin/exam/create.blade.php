@@ -131,8 +131,8 @@
                                     data-hide-search="true" data-placeholder="Select ..." name="examinee_type"
                                     id="examinee_type" required>
                                     <option value=""></option>
-                                    <option value="user">User</option>
-                                    <option value="subscriber">Subscriber</option>
+                                    <option value="user">User (free)</option>
+                                    <option value="subscriber">Subscriber (paid)</option>
                                 </select>
                                 <div class="help-block with-errors examinee_type-error"></div>
                             </div>

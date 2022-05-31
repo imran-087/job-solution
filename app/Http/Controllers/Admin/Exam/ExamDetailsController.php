@@ -13,30 +13,79 @@ class ExamDetailsController extends Controller
 {
     public function create()
     {
-        $subjects = Subject::select('id', 'name')->where('parent_id', null)->get();
         $exams = Exam::select('id', 'name')->get();
-        return view('admin.exam.exam_details.create', compact('exams', 'subjects'));
+        return view('admin.exam.exam_details.add_subject', compact('exams'));
+    }
+
+    public function getSubject($id)
+    {
+        $exam = Exam::find($id);
+
+        $subject = Subject::with('sub_category')->where('sub_category_id', $exam->sub_category_id)->get();
+        //dd($subject);
+        return response()->json($subject);
     }
 
     public function store(Request $request)
     {
         //dd($request->all());
-        $questions = Question::inRandomOrder()->limit($request->number_of_question)
-            ->where('subject_id', $request->subject_id)
-            ->select('id')->get();
+        //dd(count($request->number_of_question));
+        foreach ($request->subject_id as $key => $value) {
+            $exam_detail = new ExamDetail();
+            $exam_detail->exam_id = $request->exam_id;
+            $exam_detail->subject_id = $request->subject_id[$key];
+            $exam_detail->number_of_question = $request->number_of_question[$key];
+            $exam_detail->save();
+        }
+        return redirect()->back()->with('success', 'Created');
+    }
 
-        //dd($questions);
+    public function question(Request $request)
+    {
+        $exams = Exam::select('id', 'name')->get();
+        // $questions = Question::paginate(10);
+        // if ($request->ajax()) {
+        //     $view = view('admin.exam.exam_details.table_data', compact('questions'))->render();
+        //     return response()->json([
+        //         'html' => $view
+        //     ]);
+        // }
+        return view('admin.exam.exam_details.add-question', compact('exams'));
+    }
 
-        $exam_detail = new ExamDetail();
-        $exam_detail->exam_id = $request->exam_id;
-        $exam_detail->subject_id = $request->subject_id;
-        $exam_detail->number_of_question = $request->number_of_question;
-        $exam_detail->question_ids = $questions;
+    public function examSubject($id)
+    {
+        $exam_detail = ExamDetail::with('subject')->where('exam_id', $id)->get();
 
-        if ($exam_detail->save()) {
-            return redirect()->back()->with('success', 'Created');
+        return response()->json($exam_detail);
+    }
+
+    public function getQuestion($id)
+    {
+        //dd($id);
+        $questions = Question::where('subject_id', $id)->get();
+        $view = view('admin.exam.exam_details.table_data', compact('questions'))->render();
+        return response()->json([
+            'html' => $view
+        ]);
+    }
+
+    public function addQuestion(Request $request)
+    {
+        $exam_detils = ExamDetail::where(['exam_id' => $request->exam_id])->first();
+        $data[] = $request->ids;
+        $exam_detils->question_ids = $data;
+
+        if ($exam_detils->update()) {
+            return response()->json([
+                'success' => true,
+                'messae' => 'Question added to this subject'
+            ]);
         } else {
-            return redirect()->back()->with('error', 'Failed!');
+            return response()->json([
+                'error' => true,
+                'messae' => 'Question added to this subject'
+            ]);
         }
     }
 }

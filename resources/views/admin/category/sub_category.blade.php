@@ -210,7 +210,7 @@
                             <label class="required fs-6 fw-bold mb-2">Select Main Category</label>
                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                 data-placeholder="Select main category" name="main_category" id="main_category">
-                                <option value="">Choose ...</option>
+                                
                                 @foreach ($main_categories as $main_category)
                                     <option value="{{ $main_category->id }}">{{ $main_category->name }}</option>
                                 @endforeach

@@ -13,4 +13,9 @@ class ExamDetail extends Model
         'question_id' => 'json',
         'question_mark' => 'json',
     ];
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
+    }
 }

@@ -488,7 +488,15 @@
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
-                            <span class="menu-title">Exam Details</span>
+                            <span class="menu-title">Add Subject</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/exam-details/add-question*') ? 'active' : '' }}" href="{{ route('admin.exam-details.question') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Add Question</span>
                         </a>
                     </div>
                 </div>

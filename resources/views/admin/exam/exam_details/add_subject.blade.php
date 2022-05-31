@@ -86,7 +86,6 @@
                                     data-hide-search="true" data-placeholder="Select exam" name="exam_id"
                                     id="exam" required>
                                     <option value="">Choose ...</option>
-                                    
                                     @foreach ($exams as $exam)
                                     <option value="{{ $exam->id }}">{{ $exam->name }}</option>
                                     @endforeach
@@ -99,13 +98,9 @@
                             <div class="col-md-3 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select subject</label>
                                 <select class="form-select form-select-solid " data-control="select2"
-                                    data-hide-search="true" data-placeholder="Select subject" name="subject_id"
+                                    data-hide-search="true" data-placeholder="Select subject" name="subject_id[]"
                                     id="subject" required>
-                                    <option value="">Choose ...</option>
                                     
-                                    @foreach ($subjects as $subject)
-                                    <option value="{{ $subject->id }}">{{ $subject->name }}</option>
-                                    @endforeach
                                 </select>
                                 <div class="help-block with-errors subject-error"></div>
                             </div>
@@ -117,7 +112,7 @@
                                     <span class="required">Number of Ques.</span>
                                 </label>
                                 <!--end::Label-->
-                                <input type="text" class="form-control form-control-solid @error('number_of_question') is-invalid @enderror" placeholder="Number of Question" name="number_of_question" value="{{ old('number_of_question') }}" />
+                                <input type="text" class="form-control form-control-solid @error('number_of_question') is-invalid @enderror" placeholder="Number of Question" name="number_of_question[]" value="{{ old('number_of_question') }}" />
                                 @error('number_of_question')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -125,9 +120,56 @@
                                 @enderror
                             </div>
                             <!-- end: col-->
+                            <!--begin::Col-->
+                            <div class="col-md-1  fv-row">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span class="required"></span>
+                                </label>
+                                <!--end::Label-->
+                                <button class="btn btn-info btn-icon btn-sm addRow" type="button"><i class="fas fa-plus"></i></button> 
+                            </div>
+                            <!-- end: col-->
                             
                         </div>
                         <!--end::Input group-->
+                        <!--begin::Input group-->
+                        {{-- <div class="row g-9 mb-8">
+                        
+                            <!--begin::Col-->
+                            <div class="col-md-3 offset-3 fv-row">
+                                <label class="required fs-6 fw-bold mb-2">Select subject</label>
+                                <select class="form-select form-select-solid " data-control="select2"
+                                    data-hide-search="true" data-placeholder="Select subject" name="subject_id[]"
+                                    id="subject" required>
+                                   
+                                </select>
+                                <div class="help-block with-errors subject-error"></div>
+                            </div>
+                            <!--end::Col-->
+                            <!--begin::Col-->
+                            <div class="col-md-3  fv-row">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span class="required">Number of Ques.</span>
+                                </label>
+                                <!--end::Label-->
+                                <input type="text" class="form-control form-control-solid @error('number_of_question') is-invalid @enderror" placeholder="Number of Question" name="number_of_question[]" value="{{ old('number_of_question') }}" />
+                                @error('number_of_question')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                          
+                            
+                        </div> --}}
+                        <!--end::Input group-->
+
+                        <!-- append dynamic input-->
+                        <div  class="newRow"></div>
+                        <!-- append dynamic input-->
+                       
 
                         <!--begin::Actions-->
                         <div class="text-center d-flex justify-content-end py-4 px-4" >
@@ -156,3 +198,78 @@
 
 
 @endsection
+
+@push('script')
+<script type="text/javascript">
+    // Get Subject
+    $('#exam').on('change', function () {
+        var examID = $(this).val();
+        if (examID) {
+            $.ajax({
+                url: '/admin/exam-details/get-subject/' + examID,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    if (data) {
+                        $('#subject').empty();
+                        $('#subject').append('<option value="">Choose...</option>');
+                        $.each(data, function (key, subject) {
+                            if(subject.sub_category){
+                                $('select[name="subject_id[]"]').append(
+                                '<option value="' + subject.id + '">' + subject.name   + ' - ' + subject.sub_category.name + '</option>');
+                            }else{
+                                $('select[name="subject_id"]').append(
+                                '<option value="' + subject.id + '">' + subject.name   +' - '+ subject.main_category.name + '</option>');
+                            }
+                            
+                        });
+                    }
+                        else {
+                        $('#subject').empty(); 
+                    }
+                }
+            });
+        } else {
+            $('#subject').empty();
+        }
+    });
+
+   
+    //add new input field
+    $(document).on('click', '.addRow', function() {
+        var html = '';
+        html += '<div class="row g-9 mb-8 dynamic-row">'
+            
+        html += '    <div class="col-md-3 offset-3 fv-row">'
+        html += '          <label class="required fs-6 fw-bold mb-2">Select subject</label>'
+        html += '           <select class="form-select form-select-solid " data-control="select2" data-hide-search="true" data-placeholder="Select subject" name="subject_id[]" id="subject" required>'
+        html += '           </select>'
+        html += '           <div class="help-block with-errors subject-error"></div>'
+        html += '     </div>'
+        html += '     <div class="col-md-3  fv-row">'
+        html += '         <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
+        html += '               <span class="required">Number of Ques.</span>'
+        html += '         </label>'
+        html += '         <input type="text" class="form-control form-control-solid @error('number_of_question') is-invalid @enderror" placeholder="Number of Question" name="number_of_question[]"  />'
+        html += '         <div class="help-block with-errors subject-error"></div>'
+        html += '      </div>'
+        html += '     <div class="col-md-1  fv-row">'
+        html += '         <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
+        html += '               <span class="required"></span>'
+        html += '         </label>'
+        html += '          <button class="btn btn-danger btn-icon btn-sm removeRow" type="button"><i class="fas fa-minus"></i></button>'
+        html += '      </div>'
+        html += '</div>'
+        
+        $(this).closest('.newRow').append(html);
+        $('.newRow').append(html);
+    });
+
+    // remove row
+    $(document).on('click', '.removeRow', function() {
+        $(this).closest('.dynamic-row').remove();
+        //$(this).remove();
+    });
+
+</script>
+@endpush
