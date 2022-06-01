@@ -215,7 +215,6 @@
                                     <option value="{{ $main_category->id }}">{{ $main_category->name }}</option>
                                 @endforeach
                                
-                                {{-- <option value="deactive">Deactive</option> --}}
                             </select>
                             <div class="help-block with-errors main_category-error"></div>
                         </div>

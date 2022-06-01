@@ -17,6 +17,7 @@ class CreatePointLogsTable extends Migration
             $table->id();
             $table->foreignId('point_id')->constrained();
             $table->foreignId('user_id')->constrained();
+            $table->string('details');
             $table->timestamps();
         });
     }

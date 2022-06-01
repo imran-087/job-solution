@@ -58,18 +58,18 @@
         <div id="kt_content_container" class="container-xxl">
            
             <!--begin::Card-->
-            <div class="card" style="margin-top:20px">
+            <div class="card" >
                 <!--begin::Card body-->
                 <div class="card-body pt-4 " style="padding-bottom: 0px !important">
                     <!--begin:Form-->
-                    <form id="kk_modal_new_mcq_form" class="form"  method="POST" action="{{ route('admin.exam-details.store') }}" enctype="multipart/form-data">
+                    <form id="kk_modal_new_add_subject_form" class="form" >
                         <div class="messages"></div>
                         {{-- csrf token  --}}
                         @csrf
                         <!--begin::Heading-->
                         <div class="mb-13 text-center">
                             <!--begin::Title-->
-                            <h1 class="mb-3 mt-3">Exam Details</h1>
+                            <h1 class="mb-3 mt-3">Add Subject into exam</h1>
                             <!--end::Title-->
                             <!--begin::Description-->
                             <div class="text-muted fw-bold fs-5">Fill up the form and submit
@@ -79,6 +79,7 @@
                         <!--end::Heading-->
                         <!--begin::Input group-->
                         <div class="row g-9 mb-8">
+                            <input type="hidden" name="total_question">
                             <!--begin::Col-->
                             <div class="col-md-3 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Exam</label>
@@ -133,39 +134,7 @@
                             
                         </div>
                         <!--end::Input group-->
-                        <!--begin::Input group-->
-                        {{-- <div class="row g-9 mb-8">
                         
-                            <!--begin::Col-->
-                            <div class="col-md-3 offset-3 fv-row">
-                                <label class="required fs-6 fw-bold mb-2">Select subject</label>
-                                <select class="form-select form-select-solid " data-control="select2"
-                                    data-hide-search="true" data-placeholder="Select subject" name="subject_id[]"
-                                    id="subject" required>
-                                   
-                                </select>
-                                <div class="help-block with-errors subject-error"></div>
-                            </div>
-                            <!--end::Col-->
-                            <!--begin::Col-->
-                            <div class="col-md-3  fv-row">
-                                <!--begin::Label-->
-                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="required">Number of Ques.</span>
-                                </label>
-                                <!--end::Label-->
-                                <input type="text" class="form-control form-control-solid @error('number_of_question') is-invalid @enderror" placeholder="Number of Question" name="number_of_question[]" value="{{ old('number_of_question') }}" />
-                                @error('number_of_question')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                          
-                            
-                        </div> --}}
-                        <!--end::Input group-->
-
                         <!-- append dynamic input-->
                         <div  class="newRow"></div>
                         <!-- append dynamic input-->
@@ -175,8 +144,6 @@
                         <div class="text-center d-flex justify-content-end py-4 px-4" >
                             <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary" style="padding: 10px 70px">
                                 <span class="indicator-label">Submit</span>
-                                <span class="indicator-progress">Please wait...
-                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                             </button>
                         </div>
                         <!--end::Actions-->
@@ -213,16 +180,17 @@
                     if (data) {
                         $('#subject').empty();
                         $('#subject').append('<option value="">Choose...</option>');
-                        $.each(data, function (key, subject) {
+                        $.each(data.subject, function (key, subject) {
                             if(subject.sub_category){
                                 $('select[name="subject_id[]"]').append(
                                 '<option value="' + subject.id + '">' + subject.name   + ' - ' + subject.sub_category.name + '</option>');
+                               
                             }else{
                                 $('select[name="subject_id"]').append(
                                 '<option value="' + subject.id + '">' + subject.name   +' - '+ subject.main_category.name + '</option>');
-                            }
-                            
+                            } 
                         });
+                        $('input[name="total_question"]').val(data.exam.number_of_question);
                     }
                         else {
                         $('#subject').empty(); 
@@ -241,7 +209,7 @@
         html += '<div class="row g-9 mb-8 dynamic-row">'
             
         html += '    <div class="col-md-3 offset-3 fv-row">'
-        html += '          <label class="required fs-6 fw-bold mb-2">Select subject</label>'
+        html += '           <label class="required fs-6 fw-bold mb-2">Select subject</label>'
         html += '           <select class="form-select form-select-solid " data-control="select2" data-hide-search="true" data-placeholder="Select subject" name="subject_id[]" id="subject" required>'
         html += '           </select>'
         html += '           <div class="help-block with-errors subject-error"></div>'
@@ -250,7 +218,7 @@
         html += '         <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
         html += '               <span class="required">Number of Ques.</span>'
         html += '         </label>'
-        html += '         <input type="text" class="form-control form-control-solid @error('number_of_question') is-invalid @enderror" placeholder="Number of Question" name="number_of_question[]"  />'
+        html += '         <input type="text" class="form-control form-control-solid" placeholder="Number of Question" name="number_of_question[]"  />'
         html += '         <div class="help-block with-errors subject-error"></div>'
         html += '      </div>'
         html += '     <div class="col-md-1  fv-row">'
@@ -270,6 +238,67 @@
         $(this).closest('.dynamic-row').remove();
         //$(this).remove();
     });
+
+    //add subject
+    $('#kk_modal_new_add_subject_form').on('submit',function(e){
+        e.preventDefault()
+        $('.with-errors').text('')
+
+        var arr = $('input[name="number_of_question[]"]').map(function () {
+            return this.value; // $(this).val()
+        }).get();
+
+        var total = 0;
+        for (var i = 0; i < arr.length; i++) {
+            total += arr[i] << 0;
+            
+        }
+
+        // console.log(total);
+        // console.log(total_question);
+
+        var total_question = $('input[name="total_question"]').val();
+
+        if(total_question >= total){
+
+            var formData = new FormData(this);
+
+            $.ajax({
+                type:"POST",
+                url: "{{ route('admin.exam-details.store') }}",
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    if(data.error){
+                        console.log('here');
+                        var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                        $('.messages').html(alertBox).show();
+                    }else{
+                        // empty the form
+                        $('#kk_modal_new_add_subject_form')[0].reset();
+                        $(".dynamic-row").remove();
+
+                        Swal.fire({
+                                text: data.message,
+                                icon: "success",
+                                buttonsStyling: !1,
+                                confirmButtonText: "{{__('Ok, got it!')}}",
+                                customClass: {
+                                    confirmButton: "btn fw-bold btn-primary"
+                                }
+                            }).then((function () {
+                                //refresh datatable
+                            }))
+                    }
+                }
+            });
+        }else{
+            toastr.error('Exam Total Question = '+total_question+'<br> Number of Question = '+ total+  '<br> Number of question should be less than or equal total exam Question');
+        }
+      
+    })
 
 </script>
 @endpush

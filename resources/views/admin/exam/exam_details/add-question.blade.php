@@ -131,58 +131,10 @@
             <div class="col-md-12 mt-6" >
                 <!--begin::Tables Widget 9-->
                 <div class="card card-xl-stretch mb-5 mb-xl-8">
-                    <!--begin::Header-->
-                    <div class="card-header border-0 pt-5">
-                        {{-- <h3 class="card-title align-items-start flex-column">
-                            <span class="card-label fw-bolder fs-3 mb-1">Members Statistics</span>
-                            <span class="text-muted mt-1 fw-bold fs-7">Over 500 members</span>
-                        </h3>
-                        --}}
+                    <div id="table_data">
+
                     </div>
-                    <!--end::Header-->
-                    <!--begin::Body-->
-                    <div class="card-body py-3">
-                        <!--begin::Tables Widget 9-->
-                        <div class="card card-xl-stretch ">
-                            <!--begin::Header-->
-                            <div class="card-header border-0 ">
-                                <h3 class="card-title align-items-start flex-column">
-                                    <span class="card-label fw-bolder fs-3 mb-1">Questions</span>
-                                    <span class="text-muted mt-1 fw-bold fs-7">Over 500 question</span>
-                                </h3>
-                                <div class="card-toolbar" data-bs-toggle="tooltip" data-bs-placement="top" data-bs-trigger="hover" title="" data-bs-original-title="Click to add Question">
-                                <a href="javascript:;" class="btn btn-sm btn-light btn-active-primary add_question" >
-                                <!--begin::Svg Icon | path: icons/duotune/arrows/arr075.svg-->
-                                <span class="svg-icon svg-icon-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                        <rect opacity="0.5" x="11.364" y="20.364" width="16" height="2" rx="1" transform="rotate(-90 11.364 20.364)" fill="currentColor"></rect>
-                                        <rect x="4.36396" y="11.364" width="16" height="2" rx="1" fill="currentColor"></rect>
-                                    </svg>
-                                </span>
-                                <!--end::Svg Icon-->Add</a>
-                            </div>
-                            
-                            </div>
-                            
-                            <!--end::Header-->
-                            <!--begin::Body-->
-                            <div class="card-body py-3">
-                                <!--begin::Table container-->
-                                <div class="table-responsive">
-                                    <!--begin::Table-->
-                                    <div id="table_data">
-                                    
-                                    </div>
-                                    <!--end::Table-->
-                                </div>
-                                <!--end::Table container-->
-                            </div>
-                            <!--begin::Body-->
-                        </div>
-                        <!--end::Tables Widget 9-->
-                    </div>
-                    
-                    
+                   
                 </div>
             </div>
         </div>
@@ -227,18 +179,21 @@
     // Get Question
     $('#kk_submit_for_question_form').on('submit', function (e) {
         e.preventDefault();
-        let subject_id = $('#subject').val();
-        console.log(subject_id);
-        if (subject_id) {
-            $.ajax({
-                url: '/admin/exam-details/get-subject-question/' + subject_id,
-                type: "GET",
-                dataType: "json",
-                success: function (data) {
-                    $('#table_data').html(data.html);
-                }
-            });
-        }
+
+        var formData = new FormData(this);
+
+        $.ajax({
+            type:"POST",
+            url: "{{ route('admin.exam-details.get-question') }}",
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                $('#table_data').html(data.html);
+            }
+        });
+        
     });
 
     //ajax pagination
@@ -269,12 +224,16 @@
         }
     });
 
+
+    //add question
     $(document).on('click', '.add_question', function(e) {
 
         //console.log('here');
         let subject_id = $('#subject').find(':selected').val();
         let exam_id = $('#exam').find(':selected').val();
 
+        var number_of_question = $('#number_of_question').val();
+     
         var allVals = [];
         $(".sub_chk:checked").each(function() {
             allVals.push($(this).attr('data-id'));
@@ -286,9 +245,9 @@
             toastr.error("Please select Question");
   
         } 
-        else if(allVals.length > 10)
+        else if(allVals.length > number_of_question)
         {
-            toastr.error("You select more than 10 item");
+            toastr.error("You cannot add more than "+ number_of_question +" question into this subject");
         }
          else {
 

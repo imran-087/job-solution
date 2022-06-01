@@ -476,6 +476,14 @@
                 </span>
                 <div class="menu-sub menu-sub-accordion  menu-active-bg">
                     <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/exam*') ? 'active' : '' }}" href="{{ route('admin.exam.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Exams</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
                         <a class="menu-link {{ request()->is('admin/exam/create*') ? 'active' : '' }}" href="{{ route('admin.exam.create') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>

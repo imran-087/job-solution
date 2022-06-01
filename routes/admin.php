@@ -244,8 +244,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         */
 
         ######### Exam route ###########
+        Route::get('/exam', 'Exam\ExamController@index')->name('exam.index');
         Route::get('/exam/create', 'Exam\ExamController@create')->name('exam.create');
         Route::post('/exam/store', 'Exam\ExamController@store')->name('exam.store');
+        Route::get('/exam/edit/{id}', 'Exam\ExamController@edit')->name('exam.edit');
+        Route::post('/exam/update', 'Exam\ExamController@update')->name('exam.update');
 
         ######### Exam details route ###########
         Route::get('/exam-details/create', 'Exam\ExamDetailsController@create')->name('exam-details.create');
@@ -256,7 +259,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         ######### Exam Details add questions #########
         Route::get('/exam-details/exam-question', 'Exam\ExamDetailsController@question')->name('exam-details.question');
-        Route::get('/exam-details/get-subject-question/{id}', 'Exam\ExamDetailsController@getQuestion')->name('exam-details.get-question');
+        Route::post('/exam-details/get-subject-question', 'Exam\ExamDetailsController@getQuestion')->name('exam-details.get-question');
         Route::post('/exam-details/exam-question/add', 'Exam\ExamDetailsController@addQuestion')->name('exam-details.question-add');
 
         ####### Package route ###########
