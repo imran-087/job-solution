@@ -27,24 +27,41 @@ class WrittenDescriptionController extends Controller
             ], 200);
         } else {
 
-            $description = new Description();
-            $description->description = $request->description;
-            $description->created_user_id =  Auth::guard('admin')->user()->id;
-            $description->created_at = Carbon::now();
+            if ($request->description_id == null) {
+                $description = new Description();
+                $description->description = $request->description;
+                $description->created_user_id =  Auth::guard('admin')->user()->id;
+                $description->created_at = Carbon::now();
 
-            $question = WrittenQuestion::find($request->question_id);
-            //dd($question);
+                $question = WrittenQuestion::find($request->question_id);
+                //dd($question);
 
-            if ($question->descriptions()->save($description)) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Description saved successfully!'
-                ], 200);
+                if ($question->descriptions()->save($description)) {
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Description saved successfully!'
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'error' => true,
+                        'message' => 'Failed!.'
+                    ]);
+                }
             } else {
-                return response()->json([
-                    'error' => true,
-                    'message' => 'Failed!.'
-                ]);
+                $description = Description::find($request->description_id);
+                $description->description = $request->description;
+
+                if ($description->update()) {
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Description updated successfully!'
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'error' => true,
+                        'message' => 'Failed!.'
+                    ]);
+                }
             }
         }
     }

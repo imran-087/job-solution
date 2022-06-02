@@ -25,7 +25,7 @@ class CreateExamsTable extends Migration
             $table->smallInteger('number_of_question');
             $table->smallInteger('mark')->default(0);
             $table->smallInteger('cut_mark')->default(0);
-            $table->smallInteger('negative_mark')->default(0);
+            $table->float('negative_mark')->default(0);
             $table->smallInteger('exam_price')->default(0);
             $table->smallInteger('discount_price')->nullable();
             $table->smallInteger('required_point')->default(0);

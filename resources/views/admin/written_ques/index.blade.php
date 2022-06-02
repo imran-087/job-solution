@@ -160,7 +160,7 @@
                             <div class="col-md-2  fv-row" >
                                 <label class="fs-6 fw-bold mb-2 required">Number of Input</label>
                                 <!--begin:Form-->
-                                <div id="kk_modal_new_samprotik_form" class="form me-4">
+                                <div id="kk_modal_new_number_of_input_form" class="form me-4">
                                     <input type="text" class="form-control form-control-solid" placeholder="Enter number" name="number" id="number" />
                                 </div>
                                 <!--end:Form-->
@@ -190,7 +190,7 @@
 @push('script')
 <script type="text/javascript">
     $(document).ready(function() {
-        $('#kk_modal_new_written_question_form').on("keypress", function(event) {
+        $('#kk_modal_new_number_of_input_form').on("keypress", function(event) {
             if (event.which == 13 && !event.shiftKey) {
                 event.preventDefault();
                 //console.log('here')

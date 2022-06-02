@@ -171,7 +171,8 @@
                                                     <!--end::Text-->
                                                     @foreach ($parent_question->descriptions as $description)
                                                     <!--begin::description-->
-                                                    <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10"><b>Description:</b> &nbsp; {{ $description->description ?? '' }}</div>
+                                                    <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10 text-center " style="text-align: justify"><b>Description:</b> &nbsp; {{ $description->description ?? '' }} <span class="d-flex justify-content-end cursor-pointer edit-Description" data-id="{{ $description->id }}" data-description="{{ $description->description }}" ><i class="fas fa-edit"></i></span></div>
+                                                    
                                                     <!--end::description-->
                                                     @endforeach
                                                     
@@ -234,7 +235,7 @@
                                                         <!--end::Text-->
                                                         @foreach ($child_question->descriptions as $description)
                                                         <!--begin::description-->
-                                                        <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10"><b>Description:</b> &nbsp; {{ $description->description ?? '' }}</div>
+                                                        <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10 text-center" style="text-align: justify"><b>Description:</b> &nbsp; {{ $description->description ?? '' }} <span class="d-flex justify-content-end cursor-pointer edit-Description" data-id="{{ $description->id }}" data-description="{{ $description->description }}" ><i class="fas fa-edit"></i></span></div>
                                                         <!--end::description-->
                                                         @endforeach
                                                        <button class="btn btn-sm btn-light btn-hover-color-primary  mb-4 addDescription" data-id="{{ $child_question->id }}"> Add Description</button>
@@ -296,7 +297,7 @@
                                                         <!--end::Text-->
                                                         @foreach ($grand_child_question->descriptions as $description)
                                                         <!--begin::description-->
-                                                        <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10"><b>Description:</b> &nbsp; {{ $description->description ?? '' }}</div>
+                                                        <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10" style="text-align: justify"><b>Description:</b> &nbsp; {{ $description->description ?? '' }} <span class="d-flex justify-content-end cursor-pointer edit-Description" data-id="{{ $description->id }}" data-description="{{ $description->description }}" ><i class="fas fa-edit"></i></span></div>
                                                         <!--end::description-->
                                                         @endforeach
                                                         <button class="btn btn-sm btn-light btn-hover-color-primary mb-4 addDescription" data-id="{{ $grand_child_question->id }}"> Add Description</button>
@@ -375,7 +376,7 @@
                     {{-- csrf token  --}}
                     @csrf
                     <input type="hidden" name="question_id">
-
+                    <input type="hidden" name="description_id">
                     <!--begin::Heading-->
                     <div class="mb-13 text-center">
                         <!--begin::Title-->
@@ -394,8 +395,8 @@
                             <span class="required">Description</span>
                         </label>
                         <!--end::Label-->
-                        <textarea type="text" class="form-control form-control-solid h-100px" placeholder="Write description here ........"
-                            name="description" ></textarea>
+                        <textarea type="text" class="form-control form-control-solid h-150px" placeholder="Write description here ........"
+                            name="description" id="textarea" ></textarea>
                         <div class="help-block with-errors description-error"></div>
                     </div>
                     <!--end::Input group-->
@@ -549,6 +550,17 @@
                 }
             });
         })
+
+        $('.edit-Description').on('click', function(){
+            var id = $(this).data('id');
+            var description = $(this).data('description');
+            // console.log(id)
+            // console.log(description)
+            $('input[name="description_id"]').val(id);
+            $('#textarea').val(description);
+            $('.with-errors').text('');
+            $('#kk_modal_new_description').modal('show');
+        });
     })
 </script>
 @endpush

@@ -126,7 +126,8 @@
                                     <!--begin::Table row-->
                                     <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                         <th class="min-w-20px">#</th>
-                                        <th class="min-w-150px">Category Name</th>
+                                        <th class="min-w-100px">Category Name</th>
+                                        <th class="min-w-100px">Main Category</th>
                                         <th class=" min-w-150px">Title</th>
                                         <th class=" min-w-100px">Status</th>
                                         <th class=" min-w-100px">Created at</th>
@@ -303,6 +304,10 @@
                     {
                         data: 'name',
                         name: 'name'
+                    },
+                    {
+                        data: 'main_category_id',
+                        name: 'main_category_id'
                     },
                     {
                         data: 'title',

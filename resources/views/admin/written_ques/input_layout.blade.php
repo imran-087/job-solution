@@ -28,7 +28,9 @@
                                 <div class="required">Question </div>
                             </label>
                             <!--end::Label-->
-                            <input type="text" class="form-control form-control-solid" placeholder="Enter Question" name="question[]" /> 
+                            <textarea type="text" class="form-control form-control-solid h-100px"  placeholder="Enter Question or Instruction"
+                            name="question[]"> </textarea>
+                            {{-- <input type="text" class="form-control form-control-solid" placeholder="Enter Question" name="question[]" />  --}}
                             <div class="help-block with-errors question.*-error"></div>
                         </div>
                         <!--end::Input group-->
@@ -65,7 +67,7 @@
                         <span class="required fw-bolder">answer</span> 
                     </label>
                     <!--end::Label-->
-                    <textarea type="text" class="form-control form-control-solid h-100px"  placeholder="Enter answer"
+                    <textarea type="text" class="form-control form-control-solid h-150px"  placeholder="Enter answer"
                             name="answer[]"> </textarea>
                     <div class="help-block with-errors answer-error"></div>
                 </div>

@@ -114,6 +114,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/question/question-index', 'QuestionController@index')->name('question.index');
 
         Route::get('/question/create', 'QuestionController@create')->name('question.create');
+        Route::get('/question/show/{ques?}', 'QuestionController@show')->name('question.show');
         Route::post('/question/question-input', 'QuestionController@createQuestionInput')->name('question.question-input');
         Route::get('/question/edit-question', 'QuestionController@editQuestion')->name('question.edit');
         Route::post('/question/update', 'QuestionController@update')->name('question.update');
@@ -128,8 +129,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('/question/store/{val}', 'QuestionController@storeQuestion')->name('question.store-question');
 
-        //new
-        Route::get('/question/mcq-question', 'QuestionController@getCategory')->name('question.category');
+        //new mcq folder
+        Route::get('/question/mcq-question', 'QuestionController@getMainCategory')->name('question.category');
+        Route::get('/question/mcq-question/categories/{id}', 'QuestionController@getCategory');
         Route::get('/question/mcq-question/sub-categories', 'QuestionController@getSubCategory')->name('question.sub-category');
 
 
@@ -159,6 +161,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/description/question-description/get/{id}', 'QuestionDescriptionController@getQuestionDes')->name('question-description.get');
         Route::get('/description/question-description/delete/{id}', 'QuestionDescriptionController@deleteQuestionDes')->name('question-description.delete');
 
+        //question description update
+        Route::post('/question-description/update', 'QuestionDescriptionController@update')->name('question-description.update');
+
         Route::get('/description/pending-question-description', 'QuestionDescriptionController@pending')->name('question-description.pending');
         Route::post('/description/pending-description/accept', 'QuestionDescriptionController@acceptDescription')->name('question-description.accept');
         Route::get('/description/pending-description/reject/{id}', 'QuestionDescriptionController@rejectDescription')->name('question-description.reject');
@@ -171,6 +176,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         #** Samprotik Description **#
         Route::post('/samprotik-description/store', 'SamprotikDescriptionController@store')->name('samprotik-description.store');
         Route::post('/samprotik-description/update', 'SamprotikDescriptionController@update')->name('samprotik-description.update');
+
+
 
         #** Written Description **#
         Route::post('/written-question/description/store', 'WrittenDescriptionController@store')->name('written-description.store');
@@ -197,10 +204,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/question/samprotik-question', 'SamprotikQuestionController@index')->name('samprotik.index');
         Route::get('/question/samprotik-question/create', 'SamprotikQuestionController@create')->name('samprotik.create');
         Route::post('/question/samprotik-question/input', 'SamprotikQuestionController@input')->name('samprotik.input');
+        Route::get('/question/samprotik-question/show/{questions?}', 'SamprotikQuestionController@show')->name('samprotik.show');
         Route::get('/question/samprotik-question/edit', 'SamprotikQuestionController@edit')->name('samprotik.edit');
         Route::post('/question/samprotik-question/update', 'SamprotikQuestionController@update')->name('samprotik.update');
         Route::post('/question/samprotik-question/preview', 'SamprotikQuestionController@preview')->name('samprotik.preview');
         Route::post('/question/samprotik-question/store', 'SamprotikQuestionController@store')->name('samprotik.store');
+        Route::get('/question/samprotik-question/delete/{id}', 'SamprotikQuestionController@delete')->name('samprotik.delete');
         // Samprotik filter route
         Route::get('/question/samprotik/option-filter', 'SamprotikQuestionController@optionFilter')->name('samprotik.option-filter');
         Route::get('/question/samprotik-filter-by-date', 'SamprotikQuestionController@dateFilter')->name('samprotik.date-filter');

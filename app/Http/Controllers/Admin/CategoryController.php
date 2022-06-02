@@ -27,9 +27,14 @@ class CategoryController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
 
+                ->editColumn('main_category_id', function ($row) {
+                    return $row->main_category->name;
+                })
+
                 ->editColumn('created_at', function ($row) {
                     return $row->created_at->diffForHumans();
                 })
+
                 ->editColumn('title', function ($row) {
                     if ($row->title == '') {
                         $btn = '<div class="badge badge-light-info fw-bolder">No title available</div>';
@@ -38,6 +43,7 @@ class CategoryController extends Controller
                         return $row->title;
                     }
                 })
+
                 ->editColumn('status', function ($row) {
                     if ($row->status == "active") {
                         $btn = '<div class="badge badge-light-success fw-bolder">Active</div>';
@@ -46,6 +52,7 @@ class CategoryController extends Controller
                     }
                     return $btn;
                 })
+
                 ->addColumn('action', function ($row) {
                     $btn = '<div class="d-flex justify-content-start flex-shrink-0">
                         <a href="javascript:;" onclick="edit(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
@@ -72,7 +79,7 @@ class CategoryController extends Controller
                     </div>';
                     return $btn;
                 })
-                ->rawColumns(['action', 'status', 'created_at', 'title'])
+                ->rawColumns(['action', 'status', 'created_at', 'title', 'main_category_id'])
                 ->make(true);
         }
 

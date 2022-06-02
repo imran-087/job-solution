@@ -68,6 +68,7 @@
                         <!--end::Description-->
                     </div>
                     <!--end::Heading-->
+                    <input type="hidden" name="number" value="{{ $myForm['number'] }}">
                     <!--begin::Input group-->
                     <div class="row g-9 mb-8">
                         <!--begin::Col-->

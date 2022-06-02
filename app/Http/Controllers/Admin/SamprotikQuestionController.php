@@ -200,7 +200,13 @@ class SamprotikQuestionController extends Controller
                 $question->save();
             }
         }
-        return redirect()->route('admin.samprotik.create')->with('success', 'Question Created Successfully');
+        $questions  = SamprotikQuestion::latest()->limit($request->number)->get();
+        return $this->show($questions);
+    }
+
+    public function show($questions)
+    {
+        return view('admin.samprotik.show', compact('questions'));
     }
 
     public function edit(Request $request)
@@ -233,6 +239,21 @@ class SamprotikQuestionController extends Controller
 
         if ($question->save()) {
             return redirect()->route('admin.samprotik.index')->with('success', 'Updted Successfully');
+        }
+    }
+
+    //deleteQuestion
+    public function delete($id)
+    {
+        dd($id);
+
+        $question = SamprotikQuestion::find($id);
+
+        if ($question->delete()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Question deleted successfully!'
+            ], 200);
         }
     }
 

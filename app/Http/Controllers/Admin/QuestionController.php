@@ -292,8 +292,14 @@ class QuestionController extends Controller
                 }
             }
         }
-        return redirect()->route('admin.question.create')->with('success', 'Question created successfully');
-        // }
+
+        $questions = Question::with('question_option')->latest()->take($request->number)->get();
+        return $this->show($questions);
+    }
+
+    public function show($questions)
+    {
+        return view('admin.mcq.show', compact('questions'));
     }
 
 
@@ -373,6 +379,7 @@ class QuestionController extends Controller
     //deleteQuestion
     public function deleteQuestion($id)
     {
+        //dd($id);
         $question = Question::find($id);
         $question_option = QuestionOption::find($question->id);
         $question->delete();
@@ -387,28 +394,38 @@ class QuestionController extends Controller
     //all question
     public function allQuestion(Request $request)
     {
+
         if ($request->has('sub_category')) {
-            $questions = Question::with('question_option', 'descriptions')->where([
+
+            $sub_category = SubCategory::find($request->sub_category)->first();
+
+            $questions = Question::with('subject')->where([
                 'sub_category_id' => $request->sub_category
-            ])->get();
+            ])->groupBy('subject_id')->get();
             $passages = Passage::with('questions')->where('sub_category_id', $request->sub_category)->get();
         } else {
-            //dd('ok');
-            $questions = Question::with('question_option', 'descriptions')->where([
+
+            $sub_category = '';
+
+            $questions = Question::with('subject')->where([
                 'sub_category_id' => $request->sub_cat,
                 'subject_id' => $request->subject
-            ])->get();
+            ])->groupBy('subject_id')->get();
+
             $passages = Passage::with('questions')->where([
                 'sub_category_id' => $request->sub_cat,
                 'subject_id' => $request->subject
             ])->get();
         }
         //dd($questions);
+        return view('admin.mcq.view_question', compact('questions', 'passages', 'sub_category'));
+
+        // for ajax pagination
         // if ($request->ajax()) {
         //     $view = view('admin.mcq.all-question', compact('questions'))->render();
         //     return response()->json(['html' => $view]);
         // }
-        return view('admin.mcq.view_question', compact('questions', 'passages'));
+
     }
 
     //passage question
@@ -426,11 +443,23 @@ class QuestionController extends Controller
         return view('admin.question.image_question', compact('questions'));
     }
 
-    //new
-    public function getCategory()
+    //new mcq folder
+    public function getMainCategory()
     {
-        $data = Category::with('main_category')->get();
-        return view('admin.mcq.index', compact('data'));
+        $main_categories = MainCategory::select('id', 'name')->get();
+        return view('admin.mcq.index', compact('main_categories'));
+    }
+
+    public function getCategory($id)
+    {
+        //dd($id);
+        $categories = Category::where('main_category_id', $id)->get();
+        // dd($categories);
+        $view = view('admin.mcq.category', compact('categories'))->render();
+        return response()->json([
+            'success' => true,
+            'html' => $view
+        ]);
     }
 
     public function getSubCategory(Request $request)

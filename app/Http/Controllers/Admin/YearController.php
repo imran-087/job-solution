@@ -61,7 +61,7 @@ class YearController extends Controller
     {
         //dd($request->all());
         $validator = Validator::make($request->all(), [
-            'year' => ['required'],
+            'year' => 'required|unique:years',
         ]);
 
         if ($validator->fails()) {

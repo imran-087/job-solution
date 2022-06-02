@@ -64,7 +64,7 @@
         <div id="kt_content_container" class="container-xxl">
             
             <!--begin::Card-->
-            <div class="card" style="margin-top:20px">
+            <div class="card" >
                 <!--begin::Card body-->
                 <div class="card-body pt-4 " style="padding-bottom: 0px !important">
                     <!--begin:Form-->
@@ -86,6 +86,7 @@
                         <!--end::Heading-->
 
                         <!--begin:menu -->
+                        <input type="hidden" name="number" value="{{ $myForm['number'] }}">
                         <!--begin::Input group-->
                         <div class="row g-9 pb-4">
                             <!--begin::Col-->
@@ -153,9 +154,9 @@
                                 <!--begin::Input group-->
                                 <div class="row g-9 pb-4">                
                                 
-                                    <div style="" class="mb-5"> 
+                                    <div> 
                                         <!--begin::Input group-->
-                                        <div class="d-flex flex-column mb-8 fv-row">
+                                        <div class="d-flex flex-column  fv-row">
                                             <!--begin::Label-->
                                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                                 <span class="required">Question : {{ $i+1 }} </span>
@@ -171,7 +172,7 @@
                                         <!--end::Input group-->
                                         @if($myForm['option'] != '1')
                                         <!--begin::Input group-->
-                                        <div class="d-flex flex-column mb-8 fv-row">
+                                        <div class="d-flex flex-column  fv-row">
                                             <!--begin::Label-->
                                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                                 <span class="required fw-bolder">answer</span>
@@ -184,7 +185,7 @@
                                         <!--end::Input group-->
                                         
                                         @else
-                                        <div class="row g-9 mb-8">
+                                        <div class="row g-9">
                                             <!--begin::Col-->
                                             {{-- @for($o = 0; $o < 4; $o++)  --}}
                                             <div class="col-md-3 fv-row">

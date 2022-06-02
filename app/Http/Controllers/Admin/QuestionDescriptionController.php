@@ -318,4 +318,19 @@ class QuestionDescriptionController extends Controller
             'html' => $view
         ]);
     }
+
+    //public function update description
+    public function update(Request $request)
+    {
+        //dd($request->all());
+        $description = Description::find($request->description_id);
+        $description->description = $request->description;
+
+        if ($description->save()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Description updated'
+            ]);
+        }
+    }
 }

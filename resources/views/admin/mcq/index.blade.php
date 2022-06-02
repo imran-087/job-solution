@@ -49,9 +49,9 @@
             <!--begin::Actions-->
             <div class="d-flex align-items-center py-1">
                 <!--begin::Button-->
-                <a href="{{ route('admin.question.all-question') }}" class="btn btn-sm btn-light btn-active-primary me-2">MCQ</a>
+                {{-- <a href="{{ route('admin.question.all-question') }}" class="btn btn-sm btn-light btn-active-primary me-2">MCQ</a>
                 <a href="{{ route('admin.question.image-question') }}" class="btn btn-sm btn-light btn-active-primary me-2">IMAGE MCQ</a>
-                <a href="{{ route('admin.question.passage-question') }}" class="btn btn-sm btn-light btn-active-primary">PASSAGE MCQ</a>
+                <a href="{{ route('admin.question.passage-question') }}" class="btn btn-sm btn-light btn-active-primary">PASSAGE MCQ</a> --}}
                 <!--end::Button-->
             </div>
             <!--end::Actions-->
@@ -66,23 +66,33 @@
         <div id="kt_content_container" class="container-xxl">
             <div class="row">
                 <!--begin::Categories-->
-                <div class="col-xl-5">
+                <div class="col-md-4">
                     <!--begin::List Widget 5-->
                     <div class="card card-xl-stretch">
                         <!--begin::Header-->
                         <div class="card-header align-items-center border-0 mt-4">
+                            <div>
+                                <label class="required fs-6 fw-bold mb-2">Select Main Category</label>
+                                <select class="form-select form-select-solid main_category" data-control="select2" data-hide-search="true"
+                                    data-placeholder="Select main category"  name="main_category" >
+                                    <option value=""></option>
+                                    @foreach ($main_categories as $main_category)
+                                        <option value="{{ $main_category->id }}">{{ $main_category->name }}</option>
+                                    @endforeach
+                                </select>
+                                <div class="help-block with-errors main_category-error"></div>
+                            </div>
                             <h3 class="card-title align-items-start flex-column">
                                 <span class="fw-bolder mb-2 text-dark">Categories</span>
-                                <span class="text-muted fw-bold fs-7">{{$data->count()}} Types</span>
                             </h3>
-                        
+                            
                         </div>
                         <!--end::Header-->
                         <!--begin::Body-->
                         <div class="card-body pt-5">
                             <!--begin::Timeline-->
                             <div class="timeline-label mb-5">
-                                @foreach($data as $category)
+                                {{-- @foreach($data as $category)
                                 <!--begin::Item-->
                                 <div class="timeline-item">
                                     <!--begin::Label-->
@@ -101,7 +111,13 @@
                                     <!--end::Text-->
                                 </div>
                                 <!--end::Item-->
-                                @endforeach
+                                @endforeach --}}
+                                <!--begin::Categories-->
+                                <!--begin::render category-->    
+                                <div id="category">
+                                
+                                </div>
+                                <!--end::Categories-->
                             </div>
                             <!--end::Timeline-->
                         </div>
@@ -132,8 +148,26 @@
 
 <script>
 $(document).ready(function(){
+    // Get Category 
+    $('.main_category').on('change', function () {
+        var id = $(this).val();
+        if (id) {
+            $.ajax({
+                url: '/admin/question/mcq-question/categories/' + id,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
 
-    $('.getsubCategory').on('click', function(){
+                    $('#category').html('');
+                    $("#category").html(data.html); 
+                }
+                    
+            });
+        }
+    });
+
+    //render sub category
+    $(document).on('click', '.getsubCategory', function(){
         var id = $(this).data('id');
         var main_cat = $(this).data('main_cat');
         $.ajax({
