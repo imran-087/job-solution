@@ -13,33 +13,44 @@ class ExamDetailsController extends Controller
 {
     public function create()
     {
-        $exams = Exam::select('id', 'name')->get();
+        $exams = Exam::select('id', 'name')->orderBy('id', 'desc')->get();
         return view('admin.exam.exam_details.add_subject', compact('exams'));
     }
 
     public function getSubject($id)
     {
+        //dd($id);
         $exam = Exam::find($id);
 
         $subject = Subject::with('sub_category')->where('sub_category_id', $exam->sub_category_id)->get();
 
-        //dd($subject);
-        $data = [
-            'exam' => $exam,
-            'subject' => $subject,
-        ];
-        return response()->json($data);
+        if ($subject->count() > 0) {
+            $data = [
+                'exam' => $exam,
+                'subject' => $subject,
+            ];
+            return response()->json($data);
+        } else {
+            $subject = Subject::with('main_category')->where(['sub_category_id' => 0, 'parent_id' => null])->get();
+            $data = [
+                'exam' => $exam,
+                'subject' => $subject,
+            ];
+            return response()->json($data);
+        }
     }
 
     public function store(Request $request)
     {
         //dd($request->all());
         //dd(count($request->number_of_question));
-        if (ExamDetail::where('exam_id', $request->exam_id)->whereIn('subject_id', $request->subject_id)->exists()) {
+        $exam_detail = ExamDetail::where('exam_id', $request->exam_id)->whereIn('subject_id', $request->subject_id)->exists();
+        //dd($exam_detail);
+        if ($exam_detail) {
             return response()->json([
                 'error' => true,
                 'message' => 'This subject is already exists in this exam'
-            ], 303);
+            ], 200);
         } else {
             foreach ($request->subject_id as $key => $value) {
                 $exam_detail = new ExamDetail();
@@ -83,8 +94,9 @@ class ExamDetailsController extends Controller
 
     public function addQuestion(Request $request)
     {
-        $exam_detils = ExamDetail::where(['exam_id' => $request->exam_id])->first();
-        $data[] = $request->ids;
+        //dd($request->all());
+        $exam_detils = ExamDetail::where(['exam_id' => $request->exam_id, 'subject_id' => $request->subject_id])->first();
+        $data = $request->ids;
         $exam_detils->question_ids = $data;
 
         if ($exam_detils->update()) {

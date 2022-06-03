@@ -10,8 +10,8 @@ class ExamDetail extends Model
     use HasFactory;
 
     protected $casts = [
-        'question_id' => 'json',
-        'question_mark' => 'json',
+        'question_ids' => 'json',
+        'question_mark' => 'json'
     ];
 
     public function subject()

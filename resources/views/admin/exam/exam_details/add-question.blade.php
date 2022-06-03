@@ -106,6 +106,19 @@
                                     <div class="help-block with-errors subject-error"></div>
                                 </div>
                                 <!--end::Col-->
+
+                                <!--begin::Col-->
+                                <div class="col-md-3 fv-row">
+                                    <label class="required fs-6 fw-bold mb-2">Select Type</label>
+                                    <select class="form-select form-select-solid " data-control="select2"
+                                        data-hide-search="true"  required>
+                                        <option value="">Manual Input</option>
+                                        <option value="">Random Question</option>
+                                        <option value="">Select Question</option>
+                                    </select>
+                                    <div class="help-block with-errors subject-error"></div>
+                                </div>
+                                <!--end::Col-->
                                 <!--begin::Col-->
                                 <div class="col-md-2  fv-row">
                                     <!--begin::Label-->
@@ -233,12 +246,14 @@
         let exam_id = $('#exam').find(':selected').val();
 
         var number_of_question = $('#number_of_question').val();
+
+        var numberOfChecked = $('.sub_chk:checked').length;
+        console.log(numberOfChecked);
      
         var allVals = [];
         $(".sub_chk:checked").each(function() {
             allVals.push($(this).attr('data-id'));
         });
-
 
         if(allVals.length <=0)
         {

@@ -77,16 +77,18 @@
                             <!--end::Description-->
                         </div>
                         <!--end::Heading-->
+                       
                         <!--begin::Input group-->
                         <div class="row g-9 mb-8">
                             <input type="hidden" name="total_question">
+                            <input type="hidden" name="total">
                             <!--begin::Col-->
                             <div class="col-md-3 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Exam</label>
                                 <select class="form-select form-select-solid " data-control="select2"
-                                    data-hide-search="true" data-placeholder="Select exam" name="exam_id"
+                                    data-hide-search="true"  name="exam_id"
                                     id="exam" required>
-                                    <option value="">Choose ...</option>
+                                    <option value="">Select exam -- initial</option>
                                     @foreach ($exams as $exam)
                                     <option value="{{ $exam->id }}">{{ $exam->name }}</option>
                                     @endforeach
@@ -110,15 +112,11 @@
                             <div class="col-md-3  fv-row">
                                 <!--begin::Label-->
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="required">Number of Ques.</span>
+                                    <span class="required">Number of Ques. in this subject</span>
                                 </label>
                                 <!--end::Label-->
-                                <input type="text" class="form-control form-control-solid @error('number_of_question') is-invalid @enderror" placeholder="Number of Question" name="number_of_question[]" value="{{ old('number_of_question') }}" />
-                                @error('number_of_question')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
+                                <input type="text" class="form-control form-control-solid number_of_question"  placeholder="Number of Question" name="number_of_question[]" value="0"/>
+                                <div class="help-block with-errors number_of_question-error"></div>
                             </div>
                             <!-- end: col-->
                             <!--begin::Col-->
@@ -131,7 +129,12 @@
                                 <button class="btn btn-info btn-icon btn-sm addRow" type="button"><i class="fas fa-plus"></i></button> 
                             </div>
                             <!-- end: col-->
-                            
+                            <!--begin::Col-->
+                            <div class="col-md-2  fv-row" id=total_question>
+                               
+                            </div>
+                            <!-- end: col-->
+                           
                         </div>
                         <!--end::Input group-->
                         
@@ -139,6 +142,7 @@
                         <div  class="newRow"></div>
                         <!-- append dynamic input-->
                        
+                        
 
                         <!--begin::Actions-->
                         <div class="text-center d-flex justify-content-end py-4 px-4" >
@@ -155,11 +159,14 @@
             </div>
             <!--end::Card--> 
 
+            <div class="subject">
+
+            </div>
+
         </div>
         <!--end::Container-->
     </div>
     
-   
     <!--end::Post-->
 </div>
 
@@ -170,6 +177,9 @@
 <script type="text/javascript">
     // Get Subject
     $('#exam').on('change', function () {
+
+        $('select[name="subject_id[]"]').html('');
+
         var examID = $(this).val();
         if (examID) {
             $.ajax({
@@ -186,11 +196,15 @@
                                 '<option value="' + subject.id + '">' + subject.name   + ' - ' + subject.sub_category.name + '</option>');
                                
                             }else{
-                                $('select[name="subject_id"]').append(
+                                $('select[name="subject_id[]"]').append(
                                 '<option value="' + subject.id + '">' + subject.name   +' - '+ subject.main_category.name + '</option>');
                             } 
                         });
                         $('input[name="total_question"]').val(data.exam.number_of_question);
+                        var val = '<label class="d-flex align-items-center fs-6 fw-bold mb-2"><span class="required">Exam Total Question</span> </label>'
+                        val += '<span class="badge badge-primary badge-lg"><span id=result> 0  </span> / ' + data.exam.number_of_question + '</span>'
+                                
+                        $('#total_question').html(val)
                     }
                         else {
                         $('#subject').empty(); 
@@ -204,7 +218,8 @@
 
    
     //add new input field
-    $(document).on('click', '.addRow', function() {
+    $(document).on('click', '.addRow', function(e) {
+        e.preventDefault();
         var html = '';
         html += '<div class="row g-9 mb-8 dynamic-row">'
             
@@ -218,7 +233,7 @@
         html += '         <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
         html += '               <span class="required">Number of Ques.</span>'
         html += '         </label>'
-        html += '         <input type="text" class="form-control form-control-solid" placeholder="Number of Question" name="number_of_question[]"  />'
+        html += '         <input type="text" class="form-control form-control-solid number_of_question" placeholder="Number of Question" name="number_of_question[]" value="0" />'
         html += '         <div class="help-block with-errors subject-error"></div>'
         html += '      </div>'
         html += '     <div class="col-md-1  fv-row">'
@@ -236,8 +251,74 @@
     // remove row
     $(document).on('click', '.removeRow', function() {
         $(this).closest('.dynamic-row').remove();
+        let number_of_question = $(this).parent().prev().find('.number_of_question').val();
+        //console.log(number_of_question);
+        substructTotalQuestion(number_of_question);
         //$(this).remove();
     });
+
+    function substructTotalQuestion(number_of_question)
+    {
+        let total_question = $('#result').text();
+        let input_total = parseInt(total_question) - parseInt(number_of_question);
+        
+        $("#result").html(input_total);
+    }
+
+    $('#kk_modal_new_service_submit').attr('disabled', true);
+
+
+
+    $(document).on('keyup', ".number_of_question",function () {
+        var input_total = 0;
+      
+        $('.number_of_question').each(function(){
+            input_total += parseFloat($(this).val());
+        })  
+
+        $("#result").html(input_total);
+
+        var total_question = $('input[name="total_question"]').val();
+
+        if(input_total == total_question) {
+
+            $('#kk_modal_new_service_submit').attr('disabled' , false);
+        }
+       
+        else{
+            $('#kk_modal_new_service_submit').attr('disabled' , true);
+        }
+
+        if ( input_total > total_question){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Numer of input question must be equal to  Total Question.',
+                footer: '<a href="">Pls reduce Num of Ques?</a>'
+            })
+        }
+
+    })
+
+    // $(document).on("change", ".number_of_question", function() {
+    //     var sum = 0;
+    //     $(".number_of_question").each(function(){
+    //         sum += +$(this).val();
+    //     });
+    //    let total_question = $(".total").val(sum);
+    //     console.log(total_question)
+    // });
+
+//     $(".number_of_question").on("blur", function(){
+//     var sum=0;
+//     $(".number_of_question").each(function(){
+//         if($(this).val() != "")
+//           sum += parseInt($(this).val());   
+//     });
+    
+//     $("#result").html(sum);
+//     console.log(sum)
+// });
 
     //add subject
     $('#kk_modal_new_add_subject_form').on('submit',function(e){
@@ -251,8 +332,9 @@
         var total = 0;
         for (var i = 0; i < arr.length; i++) {
             total += arr[i] << 0;
-            
         }
+
+        $('input[name="total"]').val(total);
 
         // console.log(total);
         // console.log(total_question);
@@ -271,14 +353,19 @@
                 contentType: false,
                 processData: false,
                 success:function(data){
+                    //console.log(data);
                     if(data.error){
-                        console.log('here');
                         var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
                         $('.messages').html(alertBox).show();
+                        setTimeout(function() { 
+                            $('.messages').html(alertBox).hide();
+                        }, 3000);
+                        
                     }else{
-                        // empty the form
+                    
                         $('#kk_modal_new_add_subject_form')[0].reset();
                         $(".dynamic-row").remove();
+                        $('.messages').html('');
 
                         Swal.fire({
                                 text: data.message,
@@ -295,10 +382,18 @@
                 }
             });
         }else{
-            toastr.error('Exam Total Question = '+total_question+'<br> Number of Question = '+ total+  '<br> Number of question should be less than or equal total exam Question');
+            //alert('Number of question should be less than total question');
+            var alertBox = '<div class="alert alert-danger" alert-dismissable">Exam Total Question = '+total_question+'<br> Subject total Question = '+ total+  '<br> Subject total Question should be less or equal to Exam Total Question </div>';
+            $('.messages').html(alertBox).show();
+            setTimeout(function() { 
+                $('.messages').html(alertBox).hide();
+            }, 7000);
+            // toastr.error('Exam Total Question = '+total_question+'<br> Number of Question = '+ total+  '<br> Number of question should be less than or equal total exam Question');
         }
       
     })
+
+   
 
 </script>
 @endpush

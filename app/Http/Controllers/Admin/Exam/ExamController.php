@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreExamRequest;
+use App\Models\ExamDetail;
 use Yajra\DataTables\Facades\DataTables;
 
 class ExamController extends Controller
@@ -47,8 +48,22 @@ class ExamController extends Controller
 
                     return $row->category->name;
                 })
-                ->editColumn('created_at', function ($row) {
-                    return $row->created_at->diffForHumans();
+                ->addColumn('subject', function ($row) {
+                    $examDetails = ExamDetail::where('exam_id', $row->id)->get();
+                    $val = '';
+
+                    foreach ($examDetails as $examsubject) {
+                        $explodeQues = 0;
+                        if ($examsubject->question_ids) {
+                            $explodeQues = count(collect(explode(',', $examsubject->question_ids)));
+                        }
+                        //$questionCollect = collect($val2);
+                        $val .= '<div class="badge badge-success me-2 mb-2">' . $examsubject->subject->name . '&nbsp; &nbsp;' . $explodeQues  . '</div>';
+                    }
+                    return $val;
+                })
+                ->addColumn('add_subject', function ($row) {
+                    return '<div class="btn btn-sm btn-primary" onclick="addSubject(' . $row->id . ')">Add Subject</div>';
                 })
                 ->editColumn('exam_status', function ($row) {
                     if ($row->status == "published") {
@@ -87,7 +102,7 @@ class ExamController extends Controller
                     </div>';
                     return $btn;
                 })
-                ->rawColumns(['action', 'exam_status', 'category_id', 'sub_category_id', 'examinee_type'])
+                ->rawColumns(['action', 'subject', 'add_subject', 'exam_status', 'category_id', 'sub_category_id', 'examinee_type'])
                 ->make(true);
         }
 
@@ -126,7 +141,7 @@ class ExamController extends Controller
             'discount_price' => $request->discount_price,
         ]);
         if ($exam) {
-            return redirect()->back()->with('success', 'Exam Created');
+            return redirect()->route('admin.exam-details.create')->with('success', 'Exam created, Now you can add subject to this exam');
         } else {
             return redirect()->back()->with('error', 'Failed!');
         }

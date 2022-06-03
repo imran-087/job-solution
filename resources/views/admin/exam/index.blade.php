@@ -131,7 +131,8 @@
                                         <th class=" min-w-70px">Examinner</th>
                                         <th class=" min-w-70px">Type</th>
                                         <th class=" min-w-70px">Status</th>
-                                        <th class=" min-w-100px">Created at</th>
+                                        <th class=" min-w-70px">Subject</th>
+                                        <th class=" min-w-100px">Add Subject</th>
                                         <th class=" min-w-70px">Actions</th>
                                     </tr>
                                     <!--end::Table row-->
@@ -156,8 +157,8 @@
         <!--end::Container-->
     </div>
     <!--end::Post-->
+    
 </div>
-
 
 
 @endsection
@@ -210,8 +211,13 @@
                     },
                 
                     {
-                        data: 'created_at',
-                        name: 'created_at'
+                        data: 'subject',
+                        name: 'subject'
+                    },
+                
+                    {
+                        data: 'add_subject',
+                        name: 'add_subject'
                     },
                     {
                         data: 'action',
@@ -239,6 +245,94 @@
 
         })
 
-        
+        //add subject
+        function addSubject(id){
+            $('input[name="exam_id"]').val('')
+            $('.with-errors').text('')
+            $('#kk_modal_new_subject_form')[0].reset();
+            $('#kk_modal_add_subject').modal('show')
+        }
+
+        function getSubject(id){
+            $.ajax({
+                url: '/admin/exam-details/get-subject/' + id,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    if (data) {
+                        $('#subject').empty();
+                        $('#subject').append('<option value="">Choose...</option>');
+                        $.each(data.subject, function (key, subject) {
+                            if(subject.sub_category){
+                                $('select[name="subject_id[]"]').append(
+                                '<option value="' + subject.id + '">' + subject.name   + ' - ' + subject.sub_category.name + '</option>');
+                               
+                            }else{
+                                $('select[name="subject_id[]"]').append(
+                                '<option value="' + subject.id + '">' + subject.name   +' - '+ subject.main_category.name + '</option>');
+                            } 
+                        });
+                        $('input[name="total_question"]').val(data.exam.number_of_question);
+                    }
+                        else {
+                        $('#subject').empty(); 
+                    }
+                }
+            });
+        }
+
+        //save subject
+        $('#kk_modal_new_subject_form').on('submit',function(e){
+            e.preventDefault()
+            $('.with-errors').text('')
+            $('.indicator-label').hide()
+            $('.indicator-progress').show()
+            $('#kk_modal_new_service_submit').attr('disabled','true')
+
+            var formData = new FormData(this);
+            $.ajax({
+                type:"POST",
+                url: "{{ url('admin/category/category/store')}}",
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    if(data.success ==  false || data.success ==  "false"){
+                        var arr = Object.keys(data.errors);
+                        var arr_val = Object.values(data.errors);
+                        for(var i= 0;i < arr.length;i++){
+                        $('.'+arr[i]+'-error').text(arr_val[i][0])
+                        }
+                    }else if(data.error || data.error == 'true'){
+                        var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                        $('#kk_modal_new_subject_form').find('.messages').html(alertBox).show();
+                    }else{
+                        // empty the form
+                        $('#kk_modal_new_subject_form')[0].reset();
+                        $("#kk_modal_add_subject").modal('hide');
+
+                        Swal.fire({
+                                text: data.message,
+                                icon: "success",
+                                buttonsStyling: !1,
+                                confirmButtonText: "{{__('Ok, got it!')}}",
+                                customClass: {
+                                    confirmButton: "btn fw-bold btn-primary"
+                                }
+                            }).then((function () {
+                                //refresh datatable
+                                $('#dataTable').DataTable().ajax.reload();
+                            }))
+                    }
+
+                    $('.indicator-label').show()
+                    $('.indicator-progress').hide()
+                    $('#kk_modal_new_service_submit').removeAttr('disabled')
+
+                }
+          });
+
+        })
     </script>
 @endpush

@@ -480,7 +480,7 @@
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
-                            <span class="menu-title">Exams</span>
+                            <span class="menu-title">Exam List</span>
                         </a>
                     </div>
                     <div class="menu-item">
@@ -509,6 +509,9 @@
                     </div>
                 </div>
             </div>
+
+           
+
             <div class="menu-item">
                 <a class="menu-link {{ request()->is('admin/packages*') ? 'active' : '' }}" href="{{ route('admin.package.index') }}" >
                     <span class="menu-icon">
@@ -527,6 +530,7 @@
                     <span class="menu-title">Packages</span>
                 </a>
             </div>
+
             <div class="menu-item">
                 <a class="menu-link {{ request()->is('admin/points*') ? 'active' : '' }}" href="{{ route('admin.point.index') }}" >
                     <span class="menu-icon">
