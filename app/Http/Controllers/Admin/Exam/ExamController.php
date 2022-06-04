@@ -53,12 +53,12 @@ class ExamController extends Controller
                     $val = '';
 
                     foreach ($examDetails as $examsubject) {
-                        $explodeQues = 0;
+                        $subjectQues = 0;
                         if ($examsubject->question_ids) {
-                            $explodeQues = count(collect(explode(',', $examsubject->question_ids)));
+                            $subjectQues = collect($examsubject->question_ids)->count();
                         }
                         //$questionCollect = collect($val2);
-                        $val .= '<div class="badge badge-success me-2 mb-2">' . $examsubject->subject->name . '&nbsp; &nbsp;' . $explodeQues  . '</div>';
+                        $val .= '<div class="badge badge-success me-2 mb-2">' . $examsubject->subject->name . '&nbsp; &nbsp;' . $subjectQues  . '</div>';
                     }
                     return $val;
                 })

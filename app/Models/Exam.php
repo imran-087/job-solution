@@ -31,4 +31,9 @@ class Exam extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    public function examDetails()
+    {
+        return $this->hasMany(ExamDetail::class);
+    }
 }

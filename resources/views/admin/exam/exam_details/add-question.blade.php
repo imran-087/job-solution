@@ -227,6 +227,49 @@
         });
     }
 
+
+
+    //checkbox count
+    $(document).ready(function(){
+
+        //var $checkboxes = $(documnet).(' input[type="checkbox"]');
+       
+        $(document).on('change', 'input[type="checkbox"]', function(){
+            
+           var subject_total_question = $('#number_of_question').val();
+           var numb_of_question_in_question_ids = $('#numb_of_question_in_question_ids').val();
+
+           var numberOfChecked = $('input:checkbox:checked').length ;
+            var  remaingQuestionToChecked = subject_total_question - numberOfChecked ;
+
+            if(subject_total_question == numberOfChecked) {
+             
+                $('#kk_add_question').attr('disabled' , false);
+            }
+            else{
+                console.log('true');
+                $('#kk_add_question').attr('disabled' , true);
+            }
+           
+            if(numberOfChecked > subject_total_question){
+                Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: 'Number of select question must be equal to Subject Total Question.',
+                footer: '<a href="">Pls reduce Num of Ques and try again?</a>'
+                })
+            }
+
+            let html = '<p>Total = ' + subject_total_question + '</p>';
+                html += '<p>Selectd = ' + numberOfChecked + '</p>';
+                html += '<p>Remaining = ' + remaingQuestionToChecked + '</p>';
+            $('#checbox-calucator').html(html);
+            // $('#remaing-question-to-checked').text(remaingQuestionToChecked);
+                    
+        });
+           
+    });
+
     //question add to a subject
     $(document).on('click', '#master', function(e) {
         if($(this).is(':checked',true))
@@ -248,58 +291,35 @@
         var number_of_question = $('#number_of_question').val();
 
         var numberOfChecked = $('.sub_chk:checked').length;
-        console.log(numberOfChecked);
-     
+        //console.log(numberOfChecked);
+        
         var allVals = [];
-        $(".sub_chk:checked").each(function() {
-            allVals.push($(this).attr('data-id'));
+       // var allVals['question_id'] = '';
+        $('#passage_id').find(':selected').each(function() {
+            var passage_id = $(this).val();
+            $(".sub_chk:checked").each(function() {
+                var question_id = $(this).attr('data-id');
+                allVals.push({
+                    'passage_id' : passage_id,
+                    'question_id' : question_id 
+                });
+            });
+    
         });
-
-        if(allVals.length <=0)
-        {
-            toastr.error("Please select Question");
+      
+        
+        // if(allVals.length <=0)
+        // {
+        //     toastr.error("Please select Question");
   
-        } 
-        else if(allVals.length > number_of_question)
-        {
-            toastr.error("You cannot add more than "+ number_of_question +" question into this subject");
-        }
-         else {
+        // } 
+        // else if(allVals.length > number_of_question)
+        // {
+        //     toastr.error("You cannot add more than "+ number_of_question +" question into this subject");
+        // }
+        //  else {
 
 
-            // var check = confirm("Are you sure you want to add this question");
-            // if(check == true){
-
-            //     var join_selected_values = allVals.join(",");
-
-            //     $.ajax({
-            //         url: '/admin/exam-details/exam-question/add',
-            //         type: 'POST',
-            //         headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            //         data: {
-            //             'exam_id' : exam_id,
-            //             'subject_id' : subject_id,
-            //             'ids' : join_selected_values
-            //         },
-            //         success: function (data) {
-            //             if (data.success) {
-            //                 toastr.success(data.message)
-            //             } else if (data.error) {
-            //                 toastr.error(data.message)
-            //             } else {
-            //                 toastr.error('Something went wrong!');
-            //             }
-            //         },
-            //         error: function (data) {
-            //             alert(data.responseText);
-            //         }
-            //     });
-
-
-            //     $.each(allVals, function( index, value ) {
-            //         $('table tr').filter("[data-row-id='" + value + "']").remove();
-            //     });
-            // }
             Swal.fire({
                 text: "Are you sure you want to add this question?",
                 icon: "warning",
@@ -313,7 +333,7 @@
                 }
             }).then((function (o) {
                 if(o.value){ //if agree
-                    var join_selected_values = allVals.join(",");
+                    // var join_selected_values[] = allVals;
 
                 $.ajax({
                     url: '/admin/exam-details/exam-question/add',
@@ -322,7 +342,8 @@
                     data: {
                         'exam_id' : exam_id,
                         'subject_id' : subject_id,
-                        'ids' : join_selected_values
+                        'ids' : allVals,
+                        //'passage_id': allVals['passage_id']
                     },
                     success: function (data) {
                         if (data.success) {
@@ -356,7 +377,7 @@
                 }
 
             }))
-        }
+        // }
     });
  
 </script>

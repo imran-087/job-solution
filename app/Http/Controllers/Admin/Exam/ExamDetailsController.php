@@ -2,18 +2,23 @@
 
 namespace App\Http\Controllers\Admin\Exam;
 
-use App\Http\Controllers\Controller;
 use App\Models\Exam;
-use App\Models\ExamDetail;
-use App\Models\Question;
+use App\Models\Passage;
 use App\Models\Subject;
+use App\Models\Question;
+use App\Models\ExamDetail;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use App\Http\Controllers\Controller;
 
 class ExamDetailsController extends Controller
 {
     public function create()
     {
-        $exams = Exam::select('id', 'name')->orderBy('id', 'desc')->get();
+
+        $exams = Exam::doesnthave('examDetails')->select('id', 'name')->get();
+
+        //dd($exams);
         return view('admin.exam.exam_details.add_subject', compact('exams'));
     }
 
@@ -83,10 +88,12 @@ class ExamDetailsController extends Controller
 
     public function getQuestion(Request $request)
     {
-        // dd($request->all());
+        //dd($request->all());
         $exam_detail = ExamDetail::where(['exam_id' => $request->exam_id, 'subject_id' => $request->subject])->first();
+        $passages = Passage::where('subject_id', $request->subject)->get();
+        //dd($passages);
         $questions = Question::where('subject_id', $request->subject)->get();
-        $view = view('admin.exam.exam_details.table_data', compact('questions', 'exam_detail'))->render();
+        $view = view('admin.exam.exam_details.table_data', compact('questions', 'exam_detail', 'passages'))->render();
         return response()->json([
             'html' => $view
         ]);
@@ -96,8 +103,22 @@ class ExamDetailsController extends Controller
     {
         //dd($request->all());
         $exam_detils = ExamDetail::where(['exam_id' => $request->exam_id, 'subject_id' => $request->subject_id])->first();
-        $data = $request->ids;
-        $exam_detils->question_ids = $data;
+        // $data = [];
+        // $val = collect($request->ids);
+        // $val2 = $val->map(function ($passage_id, $question_id) {
+        //     return [
+        //         'passage_id' => $passage_id,
+        //         'question_id' => $question_id
+        //     ];
+        // });
+        //dd($val2->values()->toArray());
+
+        // foreach ($request->ids as $id) {
+        //     $data = [
+        //         'question_id' => $id
+        //     ];
+        // }
+        $exam_detils->question_ids = $request->ids;
 
         if ($exam_detils->update()) {
             return response()->json([

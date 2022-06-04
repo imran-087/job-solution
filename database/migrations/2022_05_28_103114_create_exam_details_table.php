@@ -22,7 +22,10 @@ class CreateExamDetailsTable extends Migration
             $table->smallInteger('number_of_question'); //Numbers_Of_Question_Per_Subject 
             $table->json('question_ids')->nullable(); //from question_table 
             $table->json('question_mark')->nullable(); //Per_Question_Mark[Array/String]  map to per question_id 
-            $table->foreignId('user_id')->constrained();
+            $table->unsignedBigInteger('created_user_id');
+            $table->foreign('created_user_id')->references('id')->on('users');
+            $table->unsignedBigInteger('updated_user_id')->nullable();
+            $table->foreign('updated_user_id')->references('id')->on('users');
             $table->timestamps();
         });
     }

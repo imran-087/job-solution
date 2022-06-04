@@ -89,7 +89,9 @@
                                     data-hide-search="true"  name="exam_id"
                                     id="exam" required>
                                     <option value="">Select exam -- initial</option>
+
                                     @foreach ($exams as $exam)
+                                    
                                     <option value="{{ $exam->id }}">{{ $exam->name }}</option>
                                     @endforeach
                                 </select>

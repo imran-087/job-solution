@@ -2,8 +2,9 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use App\Models\Exam;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 class ExamDetail extends Model
 {
@@ -17,5 +18,9 @@ class ExamDetail extends Model
     public function subject()
     {
         return $this->belongsTo(Subject::class);
+    }
+    public function exam()
+    {
+        return $this->belongsTo(Exam::class);
     }
 }
