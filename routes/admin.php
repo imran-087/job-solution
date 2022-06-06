@@ -270,6 +270,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/exam-details/exam-question', 'Exam\ExamDetailsController@question')->name('exam-details.question');
         Route::post('/exam-details/get-subject-question', 'Exam\ExamDetailsController@getQuestion')->name('exam-details.get-question');
         Route::post('/exam-details/exam-question/add', 'Exam\ExamDetailsController@addQuestion')->name('exam-details.question-add');
+        Route::post('/exam-details/manual-question-save', 'Exam\ExamDetailsController@manualQuestionStore')->name('manual_question_store');
 
         ####### Package route ###########
         Route::get('/packages/index', 'PackageController@index')->name('package.index');

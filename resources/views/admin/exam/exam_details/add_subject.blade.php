@@ -63,7 +63,6 @@
                 <div class="card-body pt-4 " style="padding-bottom: 0px !important">
                     <!--begin:Form-->
                     <form id="kk_modal_new_add_subject_form" class="form" >
-                        <div class="messages"></div>
                         {{-- csrf token  --}}
                         @csrf
                         <!--begin::Heading-->
@@ -77,7 +76,7 @@
                             <!--end::Description-->
                         </div>
                         <!--end::Heading-->
-                       
+                       <div class="messages col-md-8 offset-2 mb-13"></div>
                         <!--begin::Input group-->
                         <div class="row g-9 mb-8">
                             <input type="hidden" name="total_question">
@@ -91,11 +90,10 @@
                                     <option value="">Select exam -- initial</option>
 
                                     @foreach ($exams as $exam)
-                                    
                                     <option value="{{ $exam->id }}">{{ $exam->name }}</option>
                                     @endforeach
                                 </select>
-                                <div class="help-block with-errors exam-error"></div>
+                                <div class="help-block with-errors exam_id-error"></div>
                             </div>
                             <!--end::Col-->
 
@@ -140,11 +138,10 @@
                         </div>
                         <!--end::Input group-->
                         
-                        <!-- append dynamic input-->
+                        <!-- append dynamic input field-->
                         <div  class="newRow"></div>
-                        <!-- append dynamic input-->
+                        <!-- append dynamic input field -->
                        
-                        
 
                         <!--begin::Actions-->
                         <div class="text-center d-flex justify-content-end py-4 px-4" >
@@ -267,10 +264,10 @@
         $("#result").html(input_total);
     }
 
+    //disabled submit button
     $('#kk_modal_new_service_submit').attr('disabled', true);
 
-
-
+    //count input number of question value
     $(document).on('keyup', ".number_of_question",function () {
         var input_total = 0;
       
@@ -295,32 +292,13 @@
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
-                text: 'Numer of input question must be equal to  Total Question.',
-                footer: '<a href="">Pls reduce Num of Ques?</a>'
+                text: 'Number of input question must be equal to Total Question.',
+                footer: '<a href="" disabled>Pls reduce Num of Ques?</a>'
             })
         }
 
     })
 
-    // $(document).on("change", ".number_of_question", function() {
-    //     var sum = 0;
-    //     $(".number_of_question").each(function(){
-    //         sum += +$(this).val();
-    //     });
-    //    let total_question = $(".total").val(sum);
-    //     console.log(total_question)
-    // });
-
-//     $(".number_of_question").on("blur", function(){
-//     var sum=0;
-//     $(".number_of_question").each(function(){
-//         if($(this).val() != "")
-//           sum += parseInt($(this).val());   
-//     });
-    
-//     $("#result").html(sum);
-//     console.log(sum)
-// });
 
     //add subject
     $('#kk_modal_new_add_subject_form').on('submit',function(e){
@@ -357,11 +335,11 @@
                 success:function(data){
                     //console.log(data);
                     if(data.error){
-                        var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                        var alertBox = '<div class="alert alert-danger text-center" alert-dismissable">' + data.message + '</div>';
                         $('.messages').html(alertBox).show();
                         setTimeout(function() { 
                             $('.messages').html(alertBox).hide();
-                        }, 3000);
+                        }, 5000);
                         
                     }else{
                     
@@ -378,14 +356,15 @@
                                     confirmButton: "btn fw-bold btn-primary"
                                 }
                             }).then((function () {
-                                //refresh datatable
+                                //refresh 
+                               location.reload();
                             }))
                     }
                 }
             });
         }else{
             //alert('Number of question should be less than total question');
-            var alertBox = '<div class="alert alert-danger" alert-dismissable">Exam Total Question = '+total_question+'<br> Subject total Question = '+ total+  '<br> Subject total Question should be less or equal to Exam Total Question </div>';
+            var alertBox = '<div class="alert alert-danger text-center" alert-dismissable">Exam Total Question = '+total_question+'<br> Subject total Question = '+ total+  '<br> Subject total Question should be less or equal to Exam Total Question </div>';
             $('.messages').html(alertBox).show();
             setTimeout(function() { 
                 $('.messages').html(alertBox).hide();

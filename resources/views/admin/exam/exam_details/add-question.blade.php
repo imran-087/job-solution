@@ -71,6 +71,7 @@
                             <div class="mb-13 text-center">
                                 <!--begin::Title-->
                                 <h1 class="mb-3 mt-3">Add Question into Subject</h1>
+                               
                                 <!--end::Title-->
                                 <!--begin::Description-->
                                 <div class="text-muted fw-bold fs-5">Fill up the form and submit
@@ -111,12 +112,25 @@
                                 <div class="col-md-3 fv-row">
                                     <label class="required fs-6 fw-bold mb-2">Select Type</label>
                                     <select class="form-select form-select-solid " data-control="select2"
-                                        data-hide-search="true"  required>
-                                        <option value="">Manual Input</option>
-                                        <option value="">Random Question</option>
-                                        <option value="">Select Question</option>
+                                        data-hide-search="true" name="ques_type" id="ques_type"  required>
+                                        <option value="">Select type</option>
+                                        <option value="random">Random Question</option>
+                                        <option value="select">Select Question</option>
+                                        <option value="manual">Manual Input</option>
+                                      
                                     </select>
-                                    <div class="help-block with-errors subject-error"></div>
+                                    <div class="help-block with-errors ques_type-error"></div>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="col-md-1 fv-row d-none" id="number" >
+                                    <!--begin::Label-->
+                                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                        <span class="required">Number</span>
+                                    </label>
+                                    <!--end::Label-->
+                                    <input type="text" class="form-control form-control-solid"  name="question_number" id="question_number" >
+                                    <div class="help-block with-errors question_number-error"></div>
                                 </div>
                                 <!--end::Col-->
                                 <!--begin::Col-->
@@ -132,6 +146,37 @@
                             
                             </div>
                             <!--end::Input group-->
+                            <div class="div d-none" id="manual_input">
+                                <!--begin::Input group-->
+                                <div class="row g-9 pb-4 mb-13">
+                                    <!--begin::Col-->
+                                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 fv-row offset-3">
+                                        {{-- <label class="required fs-6 fw-bold mb-2">Question Type</label> --}}
+                                        <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                            data-placeholder="" name="type" id="type">
+                                            <option value="mcq" selected>MCQ</option>
+                                            <option value="image">Image MCQ</option>
+                                            <option value="passage">Passage MCQ</option>
+                                        </select>
+                                        
+                                    </div>
+                                    <!--end:Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 fv-row ">
+                                        {{-- <label class="required fs-6 fw-bold mb-2">Question Type</label> --}}
+                                        <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                            data-placeholder="" name="option" id="option">
+                                            <option value="4" selected>4</option>
+                                            <option value="3">3</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                        
+                                    </div>
+                                    <!--end:Col-->
+                                    
+                                </div>
+                                <!--end::Input group-->
+                            </div>
                         
                         </form>
                         <!--end:Form-->
@@ -160,7 +205,7 @@
 
 @push('script')
 <script type="text/javascript">
-    // Get Subject
+    // Get exam Subject
     $('#exam').on('change', function () {
         var examID = $(this).val();
         if (examID) {
@@ -173,9 +218,17 @@
                         $('#subject').empty();
                         $('#subject').append('<option value="">Choose...</option>');
                         $.each(data, function (key, exam_detail) {
-                            if(exam_detail.subject){
-                                $('select[name="subject"]').append(
-                                '<option value="' + exam_detail.subject.id + '">' + exam_detail.subject.name   +  '</option>');
+                            if(exam_detail.question_ids == null){
+                                if(exam_detail.subject){
+                                    $('select[name="subject"]').append(
+                                    '<option value="' + exam_detail.subject.id + '">' + exam_detail.subject.name   +  '</option>');
+                                }
+                            }
+                            else if(exam_detail.question_ids.length != exam_detail.number_of_question){
+                                if(exam_detail.subject){
+                                    $('select[name="subject"]').append(
+                                    '<option value="' + exam_detail.subject.id + '">' + exam_detail.subject.name   +  '</option>');
+                                }
                             }
                         });
                     }
@@ -188,6 +241,20 @@
             $('#subject').empty();
         }
     });
+
+    //random input number of question field show hide
+    $("#ques_type").on('change', function(){
+        var val = $(this).val();
+        if(val == 'random'){
+            $('#number').removeClass('d-none');
+        } else if(val == 'manual'){
+            $('#number').removeClass('d-none');
+            $('#manual_input').removeClass('d-none');
+        } else{
+            $('#number').addClass('d-none');
+            $('#manual_input').addClass('d-none');
+        }
+    })
 
     // Get Question
     $('#kk_submit_for_question_form').on('submit', function (e) {
@@ -226,7 +293,6 @@
             }
         });
     }
-
 
 
     //checkbox count
@@ -348,7 +414,8 @@
                     success: function (data) {
                         if (data.success) {
                             $('#table_data').html('');
-                            toastr.success(data.message)
+                            toastr.success(data.message);
+                            location.reload();
                         } else if (data.error) {
                             toastr.error(data.message)
                         } else {
@@ -379,6 +446,67 @@
             }))
         // }
     });
+
+    //maunal question save
+    $(document).on('submit', '#kk_modal_new_mcq_form', function(e){
+        e.preventDefault()
+        $('.with-errors').text('')
+        // $('.indicator-label').hide()
+        // $('.indicator-progress').show()
+        // $('#kk_modal_new_service_submit').attr('disabled','true')
+
+        var formData = new FormData(this);
+        
+        var type = $('#type').val();
+        if(type == 'passage'){
+            formData.append('passage', myEditor.getData());
+        }
+       
+        $.ajax({
+            type:"POST",
+            url: "{{ route('admin.manual_question_store') }}",
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                if(data.success ==  false || data.success ==  "false"){
+                    var arr = Object.keys(data.errors);
+                    var arr_val = Object.values(data.errors);
+                    for(var i= 0;i < arr.length;i++){
+                    $('.'+arr[i]+'-error').text(arr_val[i][0])
+                    }
+                }else if(data.error || data.error == 'true'){
+                    var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                    $('#kk_modal_new_category_form').find('.messages').html(alertBox).show();
+                }else{
+                    // empty the form
+                    $('#kk_modal_new_mcq_form')[0].reset();
+                   
+                    Swal.fire({
+                            text: data.message,
+                            icon: "success",
+                            buttonsStyling: !1,
+                            confirmButtonText: "{{__('Ok, got it!')}}",
+                            customClass: {
+                                confirmButton: "btn fw-bold btn-primary"
+                            }
+                        }).then((function () {
+                            //refresh
+                            location.reload();
+                        }))
+                }
+
+                $('.indicator-label').show()
+                $('.indicator-progress').hide()
+                $('#kk_modal_new_service_submit').removeAttr('disabled')
+
+            }
+        });
+
+    })
+
+    
  
 </script>
 @endpush
