@@ -58,13 +58,11 @@ class ExamController extends Controller
                             $subjectQues = collect($examsubject->question_ids)->count();
                         }
                         //$questionCollect = collect($val2);
-                        $val .= '<div class="badge badge-success me-2 mb-2">' . $examsubject->subject->name . '&nbsp; &nbsp;' . $subjectQues  . '</div>';
+                        $val .= '<a target="_blank" href="exam/details-view?exam_id=' . $row->id . '&subject_id=' . $examsubject->subject->id . '"><div class="badge badge-success me-2 mb-2">' . $examsubject->subject->name . '&nbsp; &nbsp;' . $subjectQues  . '</div></a>';
                     }
                     return $val;
                 })
-                ->addColumn('add_subject', function ($row) {
-                    return '<div class="btn btn-sm btn-primary" onclick="addSubject(' . $row->id . ')">Add Subject</div>';
-                })
+
                 ->editColumn('exam_status', function ($row) {
                     if ($row->status == "published") {
                         $btn = '<div class="badge badge-light-success fw-bolder">Published</div>';
@@ -77,7 +75,11 @@ class ExamController extends Controller
                     return $btn;
                 })
                 ->addColumn('action', function ($row) {
+
                     $btn = '<div class="d-flex justify-content-start flex-shrink-0">
+                        <a href="exam/details-view?exam_id=' . $row->id . '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
+                            <i class="fas fa-eye"></i>
+                        </a>
                         <a href="exam/edit/' . $row->id . '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                             <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                             <span class="svg-icon svg-icon-3">
@@ -102,7 +104,7 @@ class ExamController extends Controller
                     </div>';
                     return $btn;
                 })
-                ->rawColumns(['action', 'subject', 'add_subject', 'exam_status', 'category_id', 'sub_category_id', 'examinee_type'])
+                ->rawColumns(['action', 'subject', 'exam_status', 'category_id', 'sub_category_id', 'examinee_type'])
                 ->make(true);
         }
 
@@ -151,7 +153,13 @@ class ExamController extends Controller
     {
         $exam = Exam::find($id);
         $categories = Category::select('id', 'name')->get();
-        return view('admin.exam.edit', compact('exam', 'categories'));
+
+        //exam subject edit
+        $exam_details = ExamDetail::with('subject')->where('exam_id',  $id)
+            ->where('question_ids', null)
+            // ->where('created_user_id', Auth::guard('admin')->id())
+            ->get();
+        return view('admin.exam.edit', compact('exam', 'categories', 'exam_details'));
     }
 
     public function update(Request $request)

@@ -76,11 +76,15 @@
                             <!--end::Description-->
                         </div>
                         <!--end::Heading-->
+                        
+                        {{-- hidden field  --}}
+                        <input type="hidden" name="total_question">
+                        <input type="hidden" name="total">
+
                        <div class="messages col-md-8 offset-2 mb-13"></div>
                         <!--begin::Input group-->
                         <div class="row g-9 mb-8">
-                            <input type="hidden" name="total_question">
-                            <input type="hidden" name="total">
+                           
                             <!--begin::Col-->
                             <div class="col-md-3 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Exam</label>

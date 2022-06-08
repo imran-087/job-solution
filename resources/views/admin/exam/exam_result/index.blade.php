@@ -84,7 +84,7 @@
                             </span>
                             <!--end::Svg Icon-->
                             <input type="text" data-kk-product-table-filter="search"
-                                class="form-control form-control-solid w-250px ps-14" placeholder="Search exam">
+                                class="form-control form-control-solid w-250px ps-14" placeholder="Search examinee">
                         </div>
                         <!--end::Search-->
                     </div>
@@ -106,14 +106,15 @@
                             </select>
                             <!--end::Select2-->
                         </div>
-                        <div>
-                            <a href="{{ route('admin.exam-details.create') }}" class="btn btn-sm btn-primary">Add Subject</a>
-                        </div>
+                        
                        
                     </div>
 
                 </div>
                 <!--end::Card header-->
+
+                
+
                 <!--begin::Card body-->
                 <div class="card-body pt-0">
                     <!--begin::Table-->
@@ -127,14 +128,15 @@
                                     <!--begin::Table row-->
                                     <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                         <th class="min-w-20px">#</th>
-                                        <th class="min-w-50px">Category</th>
-                                        <th class="min-w-50px">Sub Category</th>
-                                        <th class="min-w-150px">Name</th>
-                                        <th class="min-w-50px">Question</th>
-                                        <th class="min-w-70px">Examinner</th>
-                                        <th class="min-w-70px">Type</th>
+                                        <th class="min-w-150px">Examinee</th>
+                                        <th class="min-w-150px">Exam Name</th>
+                                        <th class="min-w-50px">T. Question</th>
+                                        <th class="min-w-70px">T. Mark</th>
+                                        <th class="min-w-70px">Answer</th>
+                                        <th class="min-w-70px">Wright</th>
+                                        <th class="min-w-70px">Wrong</th>
+                                        <th class="min-w-70px">Mark</th>
                                         <th class="min-w-70px">Status</th>
-                                        <th class="min-w-70px">Subject</th>
                                         <th class="min-w-70px">Actions</th>
                                     </tr>
                                     <!--end::Table row-->
@@ -174,7 +176,7 @@
                 processing: true,
                 responsive: true,
                 serverSide: true,
-                ajax: "{{ url('admin/exam') }}",
+                ajax: "{{ url('admin/exam-result') }}",
                 columns: [
                     {
                         data: 'DT_RowIndex',
@@ -183,38 +185,44 @@
                         searchable: false
                     },
                     {
-                        data: 'category_id',
-                        name: 'category_id'
+                        data: 'user_id',
+                        name: 'user_id'
                     },
                     {
-                        data: 'sub_category_id',
-                        name: 'sub_category_id'
-                    },
-                    {
-                        data: 'name',
-                        name: 'name'
+                        data: 'exam_id',
+                        name: 'exam_id'
                     },
                     {
                         data: 'number_of_question',
                         name: 'number_of_question'
                     },
                     {
-                        data: 'user_id',
-                        name: 'user_id'
+                        data: 'mark',
+                        name: 'mark'
                     },
+                    
                     {
-                        data: 'examinee_type',
-                        name: 'examinee_type'
+                        data: 'answer',
+                        name: 'answer'
                     },
 
                     {
-                        data: 'exam_status',
-                        name: 'exam_status'
+                        data: 'wright',
+                        name: 'wright'
                     },
                 
                     {
-                        data: 'subject',
-                        name: 'subject'
+                        data: 'wrong',
+                        name: 'wrong'
+                    },
+
+                    {
+                        data: 'get_mark',
+                        name: 'get_mark'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status'
                     },
                 
                     {
@@ -238,7 +246,7 @@
 
             $('.kk-datatable-filter').on('change',function(){
                 //console.log(this.value)
-                table.ajax.url( "{{ url('admin/exam?status=') }}"+this.value ).load();
+                table.ajax.url( "{{ url('admin/exam-result?status=') }}"+this.value ).load();
             })
 
         })

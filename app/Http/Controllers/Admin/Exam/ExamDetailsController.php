@@ -14,9 +14,13 @@ use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
+use PhpParser\Node\Identifier;
+use Yajra\DataTables\Facades\DataTables;
 
 class ExamDetailsController extends Controller
 {
+
+
     public function create()
     {
 
@@ -169,8 +173,19 @@ class ExamDetailsController extends Controller
             ->limit($question_number)
             ->select('id')
             ->get();
+        // $questions = [
+        //     'passage_id' => 0
+        // ];
 
-        //dd($questions);
+        // foreach ($questions as $question) {
+        //     $question = [
+        //         'passage_id' => 0,
+        //         'question_id' => $question->id
+        //     ];
+        //     dump($question);
+        // }
+        //$questions = $questions->toArray();
+        //dd('ok');
         if ($questions->count() == $question_number) {
             $exam_detail = ExamDetail::where(['exam_id' => $exam_id, 'subject_id' => $subject_id])->first();
             //$allVall = [];
@@ -322,5 +337,11 @@ class ExamDetailsController extends Controller
                 'message' => 'Question aded to this subject'
             ]);
         }
+    }
+
+    //update exam subject
+    public function update(Request $request)
+    {
+        dd($request->all);
     }
 }
