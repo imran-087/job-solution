@@ -96,15 +96,9 @@
                                 @foreach ($exam->question_ids as $ques_id) 
                 
                                     @php
-                                        $questin_ids = (object)$ques_id;
-                                        // if($subject_id == null){
-                                            $questions = App\Models\Question::with('question_option')->where('id', $questin_ids->question_id)->get();
-                                        // }else{
-                                            $questions = App\Models\Question::with('question_option')
-                                                ->where('id', $questin_ids->question_id)
-                                                ->where('subject_id', 1)
-                                                ->get();
-                                        // }
+                                        $question_ids = (object)$ques_id;
+                                       
+                                        $questions = App\Models\Question::with('question_option')->where('id', $question_ids->question_id)->get();
                                         
                                     @endphp
         

@@ -150,11 +150,11 @@
     <!--end::Post-->
 </div>
 
-<!--begin::Modal - Edit Question view modal-->
+<!--begin::Modal - Edit Description view modal-->
 <div class="modal fade" id="kk_modal_show_description" tabindex="-1" aria-hidden="true">
 <div id="description_view_modal"></div>
 </div>
-<!--end::Modal - Edit Question view modal-->
+<!--end::Modal - Edit Description view modal-->
 
 
 @endsection

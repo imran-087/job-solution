@@ -16,6 +16,7 @@ use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\RecentQuestionController;
 use App\Http\Controllers\ProfileSettingsController;
 use App\Http\Controllers\Forum\DiscussionController;
+use App\Http\Controllers\ModelTest\ModelTestController;
 use App\Http\Controllers\QuestionActivityController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserActivityController;
@@ -140,6 +141,14 @@ Route::middleware('auth')->name('user.')->group(function () {
   Route::get('/my-bookmark/user={user}/category={category}', [BookmarkController::class, 'getBookmarkByCategory'])->name('bookmark.category');
   Route::get('/my-bookmark/bookmark-type', [BookmarkController::class, 'getBookmarkByType'])->name('bookmark.bookmark-type');
 });
+
+
+########### Satt Exam ############
+#******* Model test **********#
+Route::get('/model-test', [ModelTestController::class, 'index'])->name('model-test.index');
+Route::get('/model-test/exam-details', [ModelTestController::class, 'show'])->name('model-test.exam-details');
+Route::get('/model-test/attend', [ModelTestController::class, 'modelTest'])->name('model-test.attend');
+Route::post('/model-test/submitted-data', [ModelTestController::class, 'submittedData'])->name('model-test.submit');
 
 ######***News Feed ***#######
 Route::get('/news-feed', [FeedController::class, 'index'])->name('news-feed');

@@ -9,7 +9,11 @@ class ExamResult extends Model
 {
     use HasFactory;
 
-    protected $guraded = [];
+    protected $casts = [
+        'submitted_data' => 'json',
+    ];
+
+    protected $guarded = [];
 
     public function exam()
     {

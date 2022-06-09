@@ -84,4 +84,15 @@ class Question extends Model
     {
         $query->with('question_option')->where(['sub_category_id' => $subcategory, 'question_type' => $type]);
     }
+
+    //json relation witjh exam details
+    public function exam_details()
+    {
+        return $this->hasManyJson(ExamDetail::class, 'question_ids->question_id');
+    }
+
+    public function users()
+    {
+        return $this->hasManyJson(User::class, 'options->roles[]->role_id');
+    }
 }

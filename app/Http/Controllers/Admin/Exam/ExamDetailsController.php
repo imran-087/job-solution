@@ -171,30 +171,25 @@ class ExamDetailsController extends Controller
         $questions = Question::where(['subject_id' => $subject_id, 'passage_id' => null])
             ->inRandomOrder()
             ->limit($question_number)
-            ->select('id')
+            ->select('id as question_id')
             ->get();
-        // $questions = [
-        //     'passage_id' => 0
-        // ];
 
-        // foreach ($questions as $question) {
-        //     $question = [
-        //         'passage_id' => 0,
-        //         'question_id' => $question->id
-        //     ];
-        //     dump($question);
-        // }
-        //$questions = $questions->toArray();
-        //dd('ok');
+        foreach ($questions as $question) {
+            $question['passage_id'] = 0;
+            $dataSet[] =   $question;
+        }
+
+        //dd($dataSet);
         if ($questions->count() == $question_number) {
             $exam_detail = ExamDetail::where(['exam_id' => $exam_id, 'subject_id' => $subject_id])->first();
-            //$allVall = [];
-            $exam_detail->question_ids = $questions;
-            if ($exam_detail->update()) {
-                return response()->route([
-                    'success' => true,
-                    'message' => 'Random question added to this subject'
-                ]);
+            if ($question_number == $exam_detail->number_of_question) {
+                $exam_detail->question_ids = $dataSet;
+                if ($exam_detail->update()) {
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Random question added to this subject'
+                    ]);
+                }
             }
         }
     }
@@ -271,7 +266,6 @@ class ExamDetailsController extends Controller
         }
 
 
-
         //question save
         foreach ($request->question as $key => $value) {
             if (\strlen($value) > 1) {
@@ -327,10 +321,18 @@ class ExamDetailsController extends Controller
         }
 
         //now save question_id into exam_details table
-        $questions = Question::latest()->take($request->number)->select('id')->get();
+        $questions = Question::latest()->take($request->number)
+            ->select('id as question_id')
+            ->get();
+
+        foreach ($questions as $question) {
+            $question['passage_id'] = 0;
+            $dataSet[] =   $question;
+        }
+
         $exam_detail = ExamDetail::where(['exam_id' => $request->exam_id, 'subject_id' => $request->subject_id])->first();
-        //$allVall = [];
-        $exam_detail->question_ids = $questions;
+
+        $exam_detail->question_ids = $dataSet;
         if ($exam_detail->update()) {
             return response()->json([
                 'success' => true,

@@ -242,11 +242,13 @@
         }
     });
 
-    //random input number of question field show hide
+    //random input number of question field show/hide
     $("#ques_type").on('change', function(){
         var val = $(this).val();
         if(val == 'random'){
             $('#number').removeClass('d-none');
+            $('#manual_input').addClass('d-none');
+            $('#table_data').html('');
         } else if(val == 'manual'){
             $('#number').removeClass('d-none');
             $('#manual_input').removeClass('d-none');
@@ -270,7 +272,13 @@
             contentType: false,
             processData: false,
             success:function(data){
-                $('#table_data').html(data.html);
+                if(data.success){
+                    toastr.success(data.message);
+                    location.reload()
+                }else{
+                    $('#table_data').html(data.html);
+                }
+                
             }
         });
         
@@ -336,7 +344,7 @@
            
     });
 
-    //question add to a subject
+    //selectbox
     $(document).on('click', '#master', function(e) {
         if($(this).is(':checked',true))
         {
@@ -366,8 +374,8 @@
             $(".sub_chk:checked").each(function() {
                 var question_id = $(this).attr('data-id');
                 allVals.push({
-                    'passage_id' : passage_id,
-                    'question_id' : question_id 
+                    'question_id' : question_id,
+                    'passage_id' : passage_id 
                 });
             });
     
