@@ -166,7 +166,7 @@
                                             <input type="hidden" name="date" value="{{ $myForm['date'] }}">
                                             <!--end::Label-->
                                             <input type="text" class="form-control form-control-solid" placeholder="Enter Question"
-                                                name="question[]"  value="{{ $myForm['question'][$i] }}" required />
+                                                name="question[]"  value="{{ $myForm['question'][$i] }}" />
                                             <div class="help-block with-errors title-error"></div>
                                         </div>
                                         <!--end::Input group-->
@@ -179,7 +179,7 @@
                                             </label>
                                             <!--end::Label-->
                                             <input type="text" class="form-control form-control-solid" placeholder="Enter answer"
-                                                        name="answer[]" value="{{ $myForm['answer'][$i] }}" required/>
+                                                        name="answer[]" value="{{ $myForm['answer'][$i] }}" />
                                             <div class="help-block with-errors answer-error"></div>
                                         </div>
                                         <!--end::Input group-->
@@ -199,7 +199,7 @@
                                                     @if($myForm['answer'][$i] == '1') checked @endif
                                                     >
                                                     <input type="text" class="form-control form-control-solid" placeholder="Enter option"
-                                                    name="option_1[]"  value="{{ $myForm['option_1'][$i] }}" required/>
+                                                    name="option_1[]"  value="{{ $myForm['option_1'][$i] }}" />
                                                 </div>
                                                 
                                                 <div class="help-block with-errors option-error"></div>
@@ -215,7 +215,7 @@
                                                      @if($myForm['answer'][$i] == '2') checked @endif
                                                     >
                                                     <input type="text" class="form-control form-control-solid" placeholder="Enter option"
-                                                    name="option_2[]"  value="{{ $myForm['option_2'][$i] }}" required/>
+                                                    name="option_2[]"  value="{{ $myForm['option_2'][$i] }}" />
                                                 </div>
                                                 
                                                 <div class="help-block with-errors option-error"></div>
@@ -231,7 +231,7 @@
                                                     @if($myForm['answer'][$i] == '3') checked @endif
                                                     >
                                                     <input type="text" class="form-control form-control-solid" placeholder="Enter option"
-                                                    name="option_3[]"  value="{{ $myForm['option_3'][$i] }}" required/>
+                                                    name="option_3[]"  value="{{ $myForm['option_3'][$i] }}" />
                                                 </div>
                                                 
                                                 <div class="help-block with-errors option-error"></div>
@@ -247,7 +247,7 @@
                                                     @if($myForm['answer'][$i] == '4') checked @endif
                                                     >
                                                     <input type="text" class="form-control form-control-solid" placeholder="Enter option"
-                                                    name="option_4[]"  value="{{ $myForm['option_4'][$i] }}" required/>
+                                                    name="option_4[]"  value="{{ $myForm['option_4'][$i] }}" />
                                                 </div>
                                                 
                                                 <div class="help-block with-errors option-error"></div>

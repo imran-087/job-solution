@@ -114,7 +114,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/question/question-index', 'QuestionController@index')->name('question.index');
 
         Route::get('/question/create', 'QuestionController@create')->name('question.create');
-        Route::get('/question/show/{ques?}', 'QuestionController@show')->name('question.show');
+        Route::get('/question/show-latest-input', 'QuestionController@show')->name('question.show');
         Route::post('/question/question-input', 'QuestionController@createQuestionInput')->name('question.question-input');
         Route::get('/question/edit-question', 'QuestionController@editQuestion')->name('question.edit');
         Route::post('/question/update', 'QuestionController@update')->name('question.update');
@@ -134,6 +134,11 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/question/mcq-question/categories/{id}', 'QuestionController@getCategory');
         Route::get('/question/mcq-question/sub-categories', 'QuestionController@getSubCategory')->name('question.sub-category');
 
+        ##### Academy Mcq ###
+        Route::get('academy/mcq-question', 'QuestionController@academy')->name('academy.index');
+        Route::get('academy/sub-categories/{id}', 'QuestionController@academySubCategory')->name('academy.sub-category');
+        Route::get('academy/class/subject/{id}', 'QuestionController@academySubject')->name('academy.subject');
+        Route::get('academy/class/subject-mcq', 'QuestionController@academySubjectMcq')->name('academy-mcq.subject-all');
 
 
         //edited question
@@ -204,7 +209,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/question/samprotik-question', 'SamprotikQuestionController@index')->name('samprotik.index');
         Route::get('/question/samprotik-question/create', 'SamprotikQuestionController@create')->name('samprotik.create');
         Route::post('/question/samprotik-question/input', 'SamprotikQuestionController@input')->name('samprotik.input');
-        Route::get('/question/samprotik-question/show/{questions?}', 'SamprotikQuestionController@show')->name('samprotik.show');
+        Route::get('/question/samprotik-question/show-latest-input', 'SamprotikQuestionController@show')->name('samprotik.show');
         Route::get('/question/samprotik-question/edit', 'SamprotikQuestionController@edit')->name('samprotik.edit');
         Route::post('/question/samprotik-question/update', 'SamprotikQuestionController@update')->name('samprotik.update');
         Route::post('/question/samprotik-question/preview', 'SamprotikQuestionController@preview')->name('samprotik.preview');
@@ -308,5 +313,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         ########### Mark as read Notification ################
         Route::get('/notification/mark-as-read/{id}', 'NotificationController@markAsRead')->name('notification.mark-as-read');
+
+
+        ######### Image Converter #########
+        Route::get('/jobs-samprotik-image-generate', 'HtmlToImagePdfController@samprotikToImage')->name('image.samprotik');
     });
 });

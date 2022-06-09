@@ -49,9 +49,7 @@
             <!--begin::Actions-->
             <div class="d-flex align-items-center py-1">
                 <!--begin::Button-->
-                {{-- <a href="{{ route('admin.question.all-question') }}" class="btn btn-sm btn-light btn-active-primary me-2">MCQ</a>
-                <a href="{{ route('admin.question.image-question') }}" class="btn btn-sm btn-light btn-active-primary me-2">IMAGE MCQ</a>
-                <a href="{{ route('admin.question.passage-question') }}" class="btn btn-sm btn-light btn-active-primary">PASSAGE MCQ</a> --}}
+                <a href="{{ url()->previous() }}" class="btn btn-sm btn-primary ">Back</a>
                 <!--end::Button-->
             </div>
             <!--end::Actions-->
@@ -122,8 +120,9 @@
     })
 
     //cancel button of add
-    $(document).on('click', '.kk_add_cancel', function(){
-        $(this).closest('div').find('.des-form').toggleClass('d-none');
+    $(document).on('click', '.kk_modal_new_add_cancel', function(){
+        $(this).parent('div.des-form').addClass('d-none');
+        
     })
 
     //add description --save

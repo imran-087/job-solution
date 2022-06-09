@@ -48,9 +48,9 @@
             <!--end::Page title-->
             <!--begin::Actions-->
             <div class="d-flex align-items-center py-1">
-                
+                <h4 class="badge badge-light me-2">Total input by {{Auth::user()->name}} : <span class="text-danger fs-5">{{$questions->count()}} </span></h4>
                 <!--begin::Button-->
-                <a href="{{ url()->previous() }}" class="btn btn-sm btn-primary">Back</a>
+                {{-- <a href="{{ url()->previous() }}" class="btn btn-sm btn-primary">Back</a> --}}
                 <!--end::Button-->
             </div>
             <!--end::Actions-->

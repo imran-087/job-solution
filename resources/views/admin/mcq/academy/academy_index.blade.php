@@ -69,43 +69,35 @@
                 <div class="col-md-4">
                     <!--begin::List Widget 5-->
                     <div class="card card-xl-stretch">
-                       <!--begin::Header-->
+                        <!--begin::Header-->
                         <div class="card-header align-items-center border-0 mt-4">
-                          
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="fw-bolder text-muted">Categories</span>
+                                <span class="fw-bolder mb-2 text-muted">Academy</span>
                             </h3>
+                           
+                            <label class="required fs-6 fw-bold mb-2">Select </label>
+                            <select class="form-select form-select-solid category" data-control="select2" data-hide-search="true"
+                                data-placeholder="Select"  name="category" >
+                                <option value="null">Initial ---</option>
+                                @foreach ($data as $category)
+                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                @endforeach
+                            </select>
+                            <div class="help-block with-errors main_category-error"></div>
                             
                         </div>
                         <!--end::Header-->
                         <!--begin::Body-->
                         <div class="card-body pt-5">
-                            
                             <!--begin::Timeline-->
                             <div class="timeline-label mb-5">
                                 
-                                @foreach($data as $category)
-                                <!--begin::Item-->
-                                <div class="timeline-item">
-                                    <!--begin::Label-->
-                                    <div class="timeline-label fw-normal text-muted text-gray-800 fs-6 "></div>
-                                    <!--end::Label-->
-                                    <!--begin::Badge-->
-                                    <div class="timeline-badge">
-                                        <i class="fa fa-genderless text-warning fs-1"></i>
-                                    </div>
-                                    <!--end::Badge-->
-                                    
-                                    <!--begin::Text-->
-                                    <div class="fw-bolder timeline-content cursor-pointer ps-3 border p-3 rounded getsubCategory" data-id="{{ $category->id }}" data-main_cat="{{$category->main_category->id}}">
-                                        {{$category->name}}  
-                                    </div>
-                                    <!--end::Text-->
-                                </div>
-                                <!--end::Item-->
-                                @endforeach
                                 <!--begin::Categories-->
-    
+                                <!--begin::render category-->    
+                                <div id="sub_category">
+                                
+                                </div>
+                                <!--end::Categories-->
                             </div>
                             <!--end::Timeline-->
                         </div>
@@ -119,7 +111,7 @@
                 <!--begin::SubCategories-->
                 <div class="col-md-7">
                     <!--begin::render sub ccategory-->    
-                    <div id="sub_category">
+                    <div id="subject">
                     
                     </div>
                 </div>
@@ -136,21 +128,34 @@
 
 <script>
 $(document).ready(function(){
-    //render sub category
-    $(document).on('click', '.getsubCategory', function(){
-        var id = $(this).data('id');
-        var main_cat = $(this).data('main_cat');
-        $.ajax({
-             type:"GET",
-                url: "{{ url('admin/question/mcq-question/sub-categories')}}",
-                data:{
-                    id: id,
-                    main_category : main_cat
-                },
-                dataType: 'json',
-                success:function(data){
+    // Get Category 
+    $('.category').on('change', function () {
+        var id = $(this).val();
+        if (id) {
+            $.ajax({
+                url: '/admin/academy/sub-categories/' + id,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+
                     $('#sub_category').html('');
                     $("#sub_category").html(data.html); 
+                }
+                    
+            });
+        }
+    });
+
+    //render subject
+    $(document).on('click', '.getsubject', function(){
+        var id = $(this).data('id');
+        $.ajax({
+             type:"GET",
+                url: "{{ url('admin/academy/class/subject')}}" + "/" + id,
+                dataType: 'json',
+                success:function(data){
+                    $('#subject').html('');
+                    $("#subject").html(data.html); 
                 }
         })
     })
@@ -158,52 +163,7 @@ $(document).ready(function(){
 });
 </script>
 
-{{-- <script type="text/javascript">
 
-    //show description form
-    $(document).on('click', '.add-description', function(){
-        $(this).closest('div').find('.des-form').toggleClass('d-none');
-    })
-
-    //add description
-    $(document).on('submit', '#kk_add_description_form', function(e){
-        e.preventDefault()
-        //console.log('here')
-        $('.with-errors').text('')
-        $('#kk_modal_new_service_submit').attr('disabled','true')
-        var thisadd = $(this);
-        var formData = new FormData(this);
-        $.ajax({
-            type:"POST",
-            url: "{{ url('admin/description/question-description/store')}}",
-            data:formData,
-            cache:false,
-            contentType: false,
-            processData: false,
-            success:function(data){
-                if(data.success ==  false || data.success ==  "false"){
-                    var arr = Object.keys(data.errors);
-                    var arr_val = Object.values(data.errors);
-                    for(var i= 0;i < arr.length;i++){
-                    $('.'+arr[i]+'-error').text(arr_val[i][0])
-                    }
-                }else if(data.error || data.error == 'true'){
-                    var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
-                    $('#kk_modal_new_question_form').find('.messages').html(alertBox).show();
-                }else{
-                    toastr.success(data.message);
-                    thisadd.parent().parent("div").find('.des-form').addClass('d-none');
-                    
-                }
-
-                $('.indicator-label').show()
-                $('.indicator-progress').hide()
-                $('#kk_modal_new_service_submit').removeAttr('disabled')
-            }
-        });
-    })
-
-</script> --}}
 @endpush
 
 

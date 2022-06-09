@@ -119,7 +119,8 @@ class QuestionController extends Controller
     {
         $main_categories = MainCategory::all();
         $years = Year::all();
-        return view('admin.question.create', compact('main_categories', 'years'));
+        $questions = Question::where('created_user_id', Auth::id())->select('created_user_id')->get();
+        return view('admin.question.create', compact('main_categories', 'years', 'questions'));
     }
 
     public function createQuestionInput(Request $request)
@@ -239,10 +240,13 @@ class QuestionController extends Controller
             $passage->save();
         }
 
-
+        $latest_input_record_number = 0;
         //question save
         foreach ($request->question as $key => $value) {
             if (\strlen($value) > 1) {
+
+                $latest_input_record_number += 1;
+
                 if ($request->main_category == 3) {
                     $year = null;
                 } else {
@@ -292,14 +296,22 @@ class QuestionController extends Controller
                 }
             }
         }
-
-        $questions = Question::with('question_option')->latest()->take($request->number)->get();
-        return $this->show($questions);
+        //dd($latest_input_record_number);
+        return redirect()->route(
+            'admin.question.show',
+            [
+                'sub_category' => $request->sub_category,
+                'subject' => $request->subject,
+                'latest_input' => $latest_input_record_number
+            ]
+        )->with('message', 'Question saved correctly!!!');
     }
 
-    public function show($questions)
+    public function show(Request $request)
     {
-        return view('admin.mcq.show', compact('questions'));
+        $subject = Subject::select('name', 'id')->where('id', $request->subject)->with('sub_category')->first();
+        $questions = Question::with('question_option')->latest()->take($request->latest_input)->get();
+        return view('admin.mcq.latest_insert_show', compact('questions', 'subject'));
     }
 
 
@@ -391,6 +403,33 @@ class QuestionController extends Controller
         ], 200);
     }
 
+
+    //new mcq folder
+    public function getMainCategory()
+    {
+        $data = Category::where('main_category_id', '!=', '2')->with('main_category')->get();
+        return view('admin.mcq.index', compact('data'));
+    }
+
+    public function getSubCategory(Request $request)
+    {
+        // dd($request->all());
+        if ($request->main_category == 1) {
+            $sub_categories = SubCategory::where('category_id', $request->id)->select('id', 'name')->get();
+            $subjects = Subject::where(['main_category_id' => 1, 'sub_category_id' => 0, 'parent_id' => null])->select('id', 'name')->get();
+        } else {
+            $sub_categories = SubCategory::with('subject')->where('category_id', $request->id)->select('id', 'name')->get();
+            $subjects = null;
+        }
+
+
+        $view = view('admin.mcq.sub_category', compact('sub_categories', 'subjects'))->render();
+        return response()->json([
+            'success' => true,
+            'html' => $view
+        ]);
+    }
+
     //all question
     public function allQuestion(Request $request)
     {
@@ -428,56 +467,45 @@ class QuestionController extends Controller
 
     }
 
-    //passage question
-    public function passageQuestion()
+    //academy 
+    public function academy()
     {
-        $passages = Passage::with('questions')->get();
-        //dd($passages);
-        return view('admin.question.passage_question', compact('passages'));
-    }
-    //image question
-    public function imageQuestion()
-    {
-        $questions = Question::with('question_option')->where('question_type', 'image')->paginate(10);
-        //dd($passages);
-        return view('admin.question.image_question', compact('questions'));
+        $data = Category::where('main_category_id', 2)->get();
+        return view('admin.mcq.academy.academy_index', compact('data'));
     }
 
-    //new mcq folder
-    public function getMainCategory()
-    {
-        $main_categories = MainCategory::select('id', 'name')->get();
-        return view('admin.mcq.index', compact('main_categories'));
-    }
-
-    public function getCategory($id)
+    public function academySubCategory($id)
     {
         //dd($id);
-        $categories = Category::where('main_category_id', $id)->get();
+        $sub_categories = SubCategory::where('category_id', $id)->get();
         // dd($categories);
-        $view = view('admin.mcq.category', compact('categories'))->render();
+        $view = view('admin.mcq.academy.sub_category', compact('sub_categories'))->render();
         return response()->json([
             'success' => true,
             'html' => $view
         ]);
     }
 
-    public function getSubCategory(Request $request)
+    public function academySubject($id)
     {
-        // dd($request->all());
-        if ($request->main_category == 1) {
-            $sub_categories = SubCategory::where('category_id', $request->id)->select('id', 'name')->get();
-            $subjects = Subject::where(['main_category_id' => 1, 'sub_category_id' => 0, 'parent_id' => null])->select('id', 'name')->get();
-        } else {
-            $sub_categories = SubCategory::with('subject')->where('category_id', $request->id)->select('id', 'name')->get();
-            $subjects = null;
-        }
-
-
-        $view = view('admin.mcq.sub_category', compact('sub_categories', 'subjects'))->render();
+        $subjects = Subject::with('sub_category')->where(['sub_category_id' => $id, 'parent_id' => null])->get();
+        $view = view('admin.mcq.academy.subject', compact('subjects'))->render();
         return response()->json([
             'success' => true,
             'html' => $view
         ]);
+    }
+
+    public function academySubjectMcq(Request $request)
+    {
+        $subject = Subject::find($request->subject);
+        $subjects = Subject::descendantsAndSelf($request->subject)->pluck('id');
+        //dd($subject);
+        $questions = Question::whereIn('subject_id', $subjects)->with('question_option', 'descriptions')->get();
+        //dd($questions);
+        $passages = Passage::with('questions')->where([
+            'subject_id' => $request->subject
+        ])->get();
+        return view('admin.mcq.academy.question', compact('questions', 'passages', 'subject'));
     }
 }

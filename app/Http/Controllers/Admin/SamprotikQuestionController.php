@@ -125,7 +125,8 @@ class SamprotikQuestionController extends Controller
 
     public function create()
     {
-        return view('admin.samprotik.create');
+        $questions = SamprotikQuestion::where('created_user_id', Auth::id())->select('created_user_id')->get();
+        return view('admin.samprotik.create', compact('questions'));
     }
 
 
@@ -155,13 +156,18 @@ class SamprotikQuestionController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
-        $request->validate([
-            'question.*' => ['required'],
-            'answer.*' => ['required'],
-        ]);
+        // $request->validate([
+        //     'question.*' => ['required'],
+        //     'answer.*' => ['required'],
+        // ]);
         //dd($request->all());
+
+        $latest_input_record_number = 0;
+
         foreach ($request->question as $key => $value) {
             if (\strlen($value) > 1) {
+
+                $latest_input_record_number += 1;
                 //question save
                 $question = new SamprotikQuestion();
                 $question->category = $request->category;
@@ -200,13 +206,20 @@ class SamprotikQuestionController extends Controller
                 $question->save();
             }
         }
-        $questions  = SamprotikQuestion::latest()->limit($request->number)->get();
-        return $this->show($questions);
+        return redirect()->route(
+            'admin.samprotik.show',
+            [
+                'category' => $request->category,
+                'latest_input' => $latest_input_record_number
+            ]
+        )->with('message', 'Question saved correctly!!!');
     }
 
-    public function show($questions)
+    public function show(Request $request)
     {
-        return view('admin.samprotik.show', compact('questions'));
+        $category = $request->category;
+        $questions  = SamprotikQuestion::latest()->limit($request->latest_input)->get();
+        return view('admin.samprotik.show_latest_input', compact('questions', 'category'));
     }
 
     public function edit(Request $request)

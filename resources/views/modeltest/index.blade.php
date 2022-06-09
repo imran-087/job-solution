@@ -87,7 +87,7 @@
                         <!--end::Select2-->
                     </div>
                     <div>
-                        <a href="#" class="btn btn-sm btn-primary">Custom</a>
+                        <a href="{{ route('custom.model-test')  }}" class="btn btn-sm btn-primary">Custom</a>
                     </div>
                     
                 </div>

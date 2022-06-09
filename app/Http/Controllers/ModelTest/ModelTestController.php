@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers\ModelTest;
 
+use Carbon\Carbon;
 use App\Models\Exam;
 use App\Models\ExamDetail;
 use App\Models\ExamResult;
+use App\Models\MainCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -126,5 +127,17 @@ class ModelTestController extends Controller
             'time' => Carbon::now(),
             'submitted_data' => $request->submitted_data
         ]);
+    }
+
+    //custom model test
+    public function createCustomModelTest()
+    {
+        $main_categories = MainCategory::select('id', 'name')->get();
+        return view('modeltest.custom.create', compact('main_categories'));
+    }
+
+    public function getCustomModelTestQuestion(Request $request)
+    {
+        dd($request->all());
     }
 }

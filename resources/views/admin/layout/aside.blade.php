@@ -143,11 +143,19 @@
                                 </a>
                             </div>
                             <div class="menu-item">
-                                <a class="menu-link {{ request()->is('admin/question/written-question*') ? 'active' : '' }}" href="{{ route('admin.question.category') }}">
+                                <a class="menu-link {{ request()->is('admin/question/mcq-question*') ? 'active' : '' }}" href="{{ route('admin.question.category') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>
                                     <span class="menu-title">View Question</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/academy/mcq-question*') ? 'active' : '' }}" href="{{ route('admin.academy.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Academy Question</span>
                                 </a>
                             </div>
                         </div>
@@ -605,6 +613,31 @@
                 </a>
             </div>
             {{-- Exam Menu end  --}}
+
+            <div class="menu-item">
+            <div class="menu-content pt-8 pb-2">
+                <span class="menu-section text-muted text-uppercase fs-8 ls-1">Converter</span>
+            </div>
+            </div>
+
+            <div class="menu-item">
+                <a class="menu-link {{ request()->is('admin/forum/channel*') ? 'active' : '' }}" href="{{ route('admin.image.samprotik') }}" >
+                    <span class="menu-icon">
+                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Samprotik to Image</span>
+                </a>
+            </div>
             
         </div>
         <!--end::Menu-->

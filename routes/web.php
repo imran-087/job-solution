@@ -150,6 +150,11 @@ Route::get('/model-test/exam-details', [ModelTestController::class, 'show'])->na
 Route::get('/model-test/attend', [ModelTestController::class, 'modelTest'])->name('model-test.attend');
 Route::post('/model-test/submitted-data', [ModelTestController::class, 'submittedData'])->name('model-test.submit');
 
+#******* Custom Model test **********#
+Route::get('model-test/custom-model-test', [ModelTestController::class, 'createCustomModelTest'])->name('custom.model-test');
+Route::post('model-test/custom-model-test', [ModelTestController::class, 'getCustomModelTestQuestion'])->name('custom.model-test.post');
+
+
 ######***News Feed ***#######
 Route::get('/news-feed', [FeedController::class, 'index'])->name('news-feed');
 Route::middleware('auth')->post('/feed/store', [FeedController::class, 'store'])->name('feed.store');

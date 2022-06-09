@@ -32,6 +32,7 @@
 
 	<!---- own js ---->
 	<script src="{{ asset('js/custom.js') }}"></script>
+	
 
 
 	<!--- CK Editor --->

@@ -1,5 +1,5 @@
-@if($categories->count() > 0)
-@foreach($categories as $category)
+@if($sub_categories->count() > 0)
+@foreach($sub_categories as $category)
 <!--begin::Item-->
 <div class="timeline-item">
     <!--begin::Label-->
@@ -12,7 +12,7 @@
     <!--end::Badge-->
     
     <!--begin::Text-->
-    <div class="fw-bolder timeline-content cursor-pointer ps-3 border p-3 rounded getsubCategory" data-id="{{ $category->id }}" data-main_cat="{{$category->main_category->id}}">
+    <div class="fw-bolder timeline-content cursor-pointer ps-3 border p-3 rounded getsubject" data-id="{{ $category->id }}" >
         {{$category->name}}  
     </div>
     <!--end::Text-->
@@ -21,6 +21,6 @@
 @endforeach
 @else
 <div>
-    <h3 class="text-danger">No Category found</h3>
+    <h4 class="text-danger">Not found</h4>
 </div>
 @endif

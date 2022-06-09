@@ -24,19 +24,21 @@ class MainCategorySeeder extends Seeder
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
+
         MainCategory::create([
-            'name' => 'Admission',
-            'title' => 'Admission',
-            'slug' => 'admission',
+            'name' => 'Academy',
+            'title' => 'Academy',
+            'slug' => 'academy',
             'created_user_id' => '1',
             'status' => 'active',
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ]);
+
         MainCategory::create([
-            'name' => 'Academy',
-            'title' => 'Academy',
-            'slug' => 'academy',
+            'name' => 'Admission',
+            'title' => 'Admission',
+            'slug' => 'admission',
             'created_user_id' => '1',
             'status' => 'active',
             'created_at' => Carbon::now(),

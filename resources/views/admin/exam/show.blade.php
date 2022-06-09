@@ -101,10 +101,9 @@
                                         $questions = App\Models\Question::with('question_option')->where('id', $question_ids->question_id)->get();
                                         
                                     @endphp
-        
+                                    <div class="row">
                                     @foreach($questions as $question)
 
-                                       
                                         <div class="col-md-6">
                                             <div class="card card-bordered mb-5">
                                                 <div class="card-header card-success">
@@ -188,7 +187,7 @@
                                         </div>
                                         
                                     @endforeach
-                                   
+                                    </div>
                                 @endforeach
                                 @endif
                             @endforeach
