@@ -203,7 +203,21 @@
 @push('script')
     <script type="text/javascript">
 
-        $(document).ready(function(){
+    $(document).ready(function(){
+
+        var ids = [];
+        $(".click-option").each(function(){
+            ids.push($(this).data('id'));
+        })
+        // console.log(ids);
+
+        function onlyUnique(value, index, self) {
+            return self.indexOf(value) === index;
+        }
+        // distinct value 
+        var question_ids = ids.filter(onlyUnique);
+        //console.log(question_ids);
+
         var submit_data = [];
 
         $('.click-option').on('click', function(){
@@ -234,10 +248,9 @@
         $('#kk_exam_submit').on('click', function(e){
             e.preventDefault();
 
-            console.log(submit_data);
+            //console.log(submit_data);
 
             var exam_id = $('#exam_id').val();
-            var sub_category_id = $('#sub_category_id').val();
 
             $.ajax({
                 type:"POST",
@@ -246,9 +259,12 @@
                     "_token": "{{ csrf_token() }}",
                     'submitted_data' : submit_data,
                     'exam_id' : exam_id,
+                    'question_ids' : question_ids
                 },
                 dataType: 'json',
                 success:function(data){
+                    toastr.success(data.message);
+                    window.location.href = data.url;
                     // if(data.success == true){
                     //     toastr.success(data.message);
                     //     var val = $('#wright').html()

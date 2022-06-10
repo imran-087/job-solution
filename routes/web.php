@@ -16,7 +16,9 @@ use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\RecentQuestionController;
 use App\Http\Controllers\ProfileSettingsController;
 use App\Http\Controllers\Forum\DiscussionController;
+use App\Http\Controllers\ModelTest\CustomModelTestController;
 use App\Http\Controllers\ModelTest\ModelTestController;
+use App\Http\Controllers\ModelTest\ModelTestResultController;
 use App\Http\Controllers\QuestionActivityController;
 use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\UserActivityController;
@@ -151,8 +153,15 @@ Route::get('/model-test/attend', [ModelTestController::class, 'modelTest'])->nam
 Route::post('/model-test/submitted-data', [ModelTestController::class, 'submittedData'])->name('model-test.submit');
 
 #******* Custom Model test **********#
-Route::get('model-test/custom-model-test', [ModelTestController::class, 'createCustomModelTest'])->name('custom.model-test');
-Route::post('model-test/custom-model-test', [ModelTestController::class, 'getCustomModelTestQuestion'])->name('custom.model-test.post');
+Route::get('/custom/model-test', [CustomModelTestController::class, 'create'])->name('custom.model-test');
+Route::get('custom/model-test/data', [CustomModelTestController::class, 'getData'])->name('custom.test.data');
+
+
+#******* Model test result**********#
+Route::get('/model-test/result', [ModelTestResultController::class, 'index'])->name('result.index');
+Route::get('/model-test/exam-details', [ModelTestController::class, 'show'])->name('model-test.exam-details');
+Route::get('/model-test/attend', [ModelTestController::class, 'modelTest'])->name('model-test.attend');
+Route::post('/model-test/submitted-data', [ModelTestController::class, 'submittedData'])->name('model-test.submit');
 
 
 ######***News Feed ***#######

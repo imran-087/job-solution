@@ -48,10 +48,10 @@
             <!--begin::Card body-->
             <div class="card-body pt-4 " style="padding-bottom: 0px !important">
                 <!--begin:Form-->
-                <form id="kk_custom_model_test_generator_form" class="form"  method="POST" action="{{ route('custom.model-test.post') }}" enctype="multipart/form-data">
+                <form id="kk_custom_model_test_generator_form" class="form"  method="GET" action="{{ route('custom.test.data') }}" enctype="multipart/form-data">
                     <div class="messages"></div>
                     {{-- csrf token  --}}
-                    @csrf
+                    {{-- @csrf --}}
                     <!--begin::Heading-->
                     <div class="mb-13 text-center">
                         <!--begin::Title-->

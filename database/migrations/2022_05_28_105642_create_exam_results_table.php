@@ -15,7 +15,7 @@ class CreateExamResultsTable extends Migration
     {
         Schema::create('exam_results', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('exam_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('exam_id')->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('sub_category_id')->nullable()->constrained(); //from sub_categories_table
             $table->foreignId('user_id')->constrained()->cascadeOnDelete(); //Examinee id
             $table->json('question_id'); //submitted questions

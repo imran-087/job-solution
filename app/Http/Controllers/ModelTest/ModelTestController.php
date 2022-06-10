@@ -9,6 +9,7 @@ use App\Models\ExamResult;
 use App\Models\MainCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Question;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -116,28 +117,30 @@ class ModelTestController extends Controller
 
     public function submittedData(Request $request)
     {
+        //dd($request->all());
         $exam = Exam::find($request->exam_id);
         $exam_result = ExamResult::create([
-            'exam_id' => $exam->id,
-            'sub_category_id' => $exam->sub_category_id,
-            'mark' => $exam->mark,
-            'cut_mark' => $exam->cut_mark ?? '0',
-            'negative_mark' => $request->negative_mark ?? '0',
+            'exam_id' => $exam->id ?? null,
+            'sub_category_id' => $exam->sub_category_id ?? $request->sub_category_id,
+            'mark' => $exam->mark ?? $request->mark,
+            'cut_mark' => $exam->cut_mark ?? $request->cut_mark,
+            'negative_mark' => $exam->negative_mark ?? $request->negative_mark,
             'user_id' => Auth::user()->id,
             'time' => Carbon::now(),
-            'submitted_data' => $request->submitted_data
+            'submitted_data' => $request->submitted_data,
         ]);
-    }
 
-    //custom model test
-    public function createCustomModelTest()
-    {
-        $main_categories = MainCategory::select('id', 'name')->get();
-        return view('modeltest.custom.create', compact('main_categories'));
-    }
-
-    public function getCustomModelTestQuestion(Request $request)
-    {
-        dd($request->all());
+        if ($exam_result) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Exam Submitted !! View your result Go to Exam result menu',
+                'url' => url('/model-test')
+            ]);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Failed !!!'
+            ]);
+        }
     }
 }
