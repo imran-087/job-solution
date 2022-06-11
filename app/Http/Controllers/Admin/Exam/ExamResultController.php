@@ -2,15 +2,69 @@
 
 namespace App\Http\Controllers\Admin\Exam;
 
+use App\Models\Question;
 use App\Models\ExamResult;
 use Illuminate\Http\Request;
+use App\Models\QuestionOption;
+use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
 use Yajra\DataTables\Facades\DataTables;
+use Barryvdh\Debugbar\Twig\Extension\Dump;
 
 class ExamResultController extends Controller
 {
     public function index(Request $request)
     {
+        DB::enableQueryLog();
+
+        $exam_result = ExamResult::where('id', 1)->first();
+        dump("exam Result: ". $exam_result);
+
+        $submitted_queston_collection = collect($exam_result->submitted_data);
+        dump("submitted_queston_collection");
+        dump($submitted_queston_collection);
+
+
+
+        $quesion_id_collection = $submitted_queston_collection->pluck('question_id');
+        dump("quesion_id_collection: ". $quesion_id_collection);
+
+
+
+
+        $question_option = QuestionOption::whereIn('question_id', $quesion_id_collection)->select("question_id", "option_1", "option_2", "option_3", "option_4", "option_5", "image_option", "answer" );
+        dump($question_option);
+
+        $question_details = Question::joinSub($question_option, 'question_options', function ($join) {
+            $join->on('questions.id', '=', 'question_options.question_id');
+        })->select("question_id", "subject_id",  "question", "future_editable", "option_1", "option_2", "option_3", "option_4", "option_5", "image_option", "answer" )->get()->toArray();
+
+        dump($question_details);
+
+        $submitted_question_details_collection = collect($question_details);
+
+        dump("submitted_question_details_collection");
+
+        dump($submitted_question_details_collection);
+
+
+
+
+        $exam_result_collection = $submitted_queston_collection->map(function ($item) use ($submitted_question_details_collection){
+            return  array_merge($item, $submitted_question_details_collection->firstWhere('question_id','==', $item['question_id']));
+        });
+
+        dump($exam_result_collection);
+
+        dump($exam_result_collection);
+
+        // dd(DB::getQueryLog());
+
+
+        dd("End");
+
+
+
         if ($request->ajax()) {
             $data = ExamResult::orderBy('created_at', 'desc')->select();
 
@@ -63,7 +117,7 @@ class ExamResultController extends Controller
                         <a href="exam/details-view?exam_id=' . $row->id . '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                             <i class="fas fa-eye"></i>
                         </a>
-                       
+
                         <a href="javascript:;" onclick="deleteCategory(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                             <span class="svg-icon svg-icon-3">

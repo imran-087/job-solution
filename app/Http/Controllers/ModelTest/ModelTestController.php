@@ -77,7 +77,7 @@ class ModelTestController extends Controller
                         <a href="javascript:;" onclick="view(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                             <i class="fas fa-eye"></i>
                         </a>
-                        
+
                         <a href="model-test/attend?exam_id=' . $row->id . '" class="btn btn-sm btn-primary">
                             Attend
                         </a>
@@ -127,7 +127,7 @@ class ModelTestController extends Controller
             'cut_mark' => $exam->cut_mark ?? $request->cut_mark,
             'negative_mark' => $exam->negative_mark ?? $request->negative_mark,
             'user_id' => Auth::user()->id,
-            'time' => Carbon::now(),
+            'starting_time' => Carbon::now(),
             'submitted_data' => $request->submitted_data
         ]);
 

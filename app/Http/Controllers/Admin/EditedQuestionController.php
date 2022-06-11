@@ -15,6 +15,10 @@ class EditedQuestionController extends Controller
 {
     public function index(Request $request)
     {
+
+
+
+        
         if ($request->ajax()) {
             $data = EditedQuestion::where('status', 'pending')->select();
 

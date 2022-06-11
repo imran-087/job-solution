@@ -17,11 +17,13 @@ class CreateExamDetailsTable extends Migration
         Schema::create('exam_details', function (Blueprint $table) {
             $table->id();
             $table->foreignId('exam_id')->constrained()->cascadeOnDelete();
-            $table->foreignId('subject_id')->constrained(); //from subject_table 
-            $table->smallInteger('number_of_question'); //Numbers_Of_Question_Per_Subject 
-            $table->smallInteger('number_of_question'); //Numbers_Of_Question_Per_Subject 
-            $table->json('question_ids')->nullable(); //from question_table 
-            $table->json('question_mark')->nullable(); //Per_Question_Mark[Array/String]  map to per question_id 
+            $table->foreignId('subject_id')->constrained(); //from subject_table
+            $table->smallInteger('number_of_question'); //Numbers_Of_Question_Per_Subject
+            // $table->smallInteger('number_of_question'); //Numbers_Of_Question_Per_Subject
+
+
+            $table->json('question_ids')->nullable(); //from question_table
+            $table->json('question_mark')->nullable(); //Per_Question_Mark[Array/String]  map to per question_id
             $table->unsignedBigInteger('created_user_id');
             $table->foreign('created_user_id')->references('id')->on('users');
             $table->unsignedBigInteger('updated_user_id')->nullable();
