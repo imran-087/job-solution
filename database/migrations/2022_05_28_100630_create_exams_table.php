@@ -19,6 +19,7 @@ class CreateExamsTable extends Migration
             $table->foreignId('sub_category_id')->nullable()->constrained(); //from sub_categories_table
             $table->foreignId('user_id')->constrained(); //from users table -- this will be examiner id
             $table->string('name');
+            $table->text('exam_instruction');
             $table->enum('examinee_type', ['user', 'subscriber'])->default('user'); // User/Subscriber user who are eligible for participating exxam
             $table->enum('exam_mode', ['private', 'public']);
             $table->smallInteger('duration')->nullable();

@@ -8,6 +8,7 @@ use App\Models\ExamResult;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\ExamResultAnalytic;
 use App\Models\QuestionOption;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
@@ -17,68 +18,61 @@ class ModelTestResultController extends Controller
     public function index(Request $request)
     {
 
-        // if ($request->ajax()) {
-        //     $data = ExamResult::where('user_id', Auth::id())->orderBy('created_at', 'desc')->select();
+        if ($request->ajax()) {
+            $data = ExamResultAnalytic::where('user_id', Auth::id())->orderBy('created_at', 'desc')->select();
 
-        //     //filter
-        //     if (isset($request->status) && $request->status != "all") {
-        //         $data->where('examinee_type', $request->status);
-        //     }
+            //filter
+            if (isset($request->status) && $request->status != "all") {
+                $data->where('examinee_type', $request->status);
+            }
 
-        //     return DataTables::of($data)
-        //         ->addIndexColumn()
+            return DataTables::of($data)
+                ->addIndexColumn()
 
-        //         ->editColumn('exam_id', function ($row) {
-        //             if ($row->exam_id == null) {
-        //                 $btn = '<div class="badge badge-light-success fw-bolder">Custom Model Test</div>';
-        //             } else {
-        //                 $btn = '<div class="badge badge-light-info fw-bolder">' . $row->exam->name . '</div>';
-        //             }
-        //             return $btn;
-        //         })
+                ->editColumn('exam_id', function ($row) {
 
-        //         ->addColumn('total_question', function ($row) {
-        //             return collect($row->submitted_data)->count();
-        //         })
+                    if ($row->exam_id == null) {
+                        $btn = '<div class="badge badge-light-success fw-bolder">Custom Model Test</div>';
+                    } else {
+                        $btn = '<div class="badge badge-light-info fw-bolder">' . $row->exam->name . '</div>';
+                    }
+                    return $btn;
+                })
+                ->addColumn('status', function ($row) {
+                    if ($row->obtain_mark > $row->cut_mark) {
+                        $btn = '<div class="badge badge-light-success fw-bolder">Good</div>';
+                    } else if ($row->obtain_mark == $row->cut_mark) {
+                        $btn = '<div class="badge badge-light-warning fw-bolder">Average</div>';
+                    } else {
+                        $btn = '<div class="badge badge-light-danger fw-bolder">Disastar</div>';
+                    }
+                    return $btn;
+                })
 
-        //         ->addColumn('answer', function ($row) {
-        //             $submitted_data = collect($row->submitted_data);
-        //             return object()
-        //         })
+                ->addColumn('action', function ($row) {
 
-        //         ->addColumn('not_answer', function ($row) {
+                    $btn = '
+                        <div class="d-flex justify-content-start flex-shrink-0">
 
-        //             // return collect($row->submitted_data)->count() - collect($row->submitted_data)->count();
-        //             return 'not ans';
-        //         })
-
-        //         ->addColumn('right', function ($row) {
-        //             return 'right';
-        //         })
-
-        //         ->addColumn('wrong', function ($row) {
-        //             return 'wrong';
-        //         })
-
-        //         ->addColumn('obtain_mark', function ($row) {
-        //             return 'obtain';
-        //         })
-
-        //         ->addColumn('action', function ($row) {
-
-        //             $btn = '
-        //                 <div class="d-flex justify-content-start flex-shrink-0">
-
-        //                     <a href="model-test/attend?exam_id=' . $row->id . '" class="btn btn-sm btn-primary">
-        //                         view
-        //                     </a>
-        //                 </div>';
-        //             return $btn;
-        //         })
-        //         ->rawColumns(['action', 'exam_id', 'total_question', 'answer', 'not_answer', 'right', 'wrong', 'obtain_mark'])
-        //         ->make(true);
-        // }
+                            <a href="details-view?model_test=' . $row->exam_id . '" class="btn btn-sm btn-primary">
+                                view
+                            </a>
+                        </div>';
+                    return $btn;
+                })
+                ->rawColumns(['action', 'exam_id', 'status'])
+                ->make(true);
+        }
 
         return view('modeltest.result.index');
+    }
+
+    //details view
+    public function show(Request $request)
+    {
+        $exam = Exam::find($request->model_test);
+        $exam_results = ExamResult::with('exam')->where('exam_id', $request->model_test)->get();
+        //dd($exam_results);
+        return view('modeltest.result.view_details', compact('exam_results', 'exam'));
     }
 }

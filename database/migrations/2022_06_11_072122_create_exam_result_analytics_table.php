@@ -19,14 +19,15 @@ class CreateExamResultAnalyticsTable extends Migration
             $table->foreignId('user_id')->constrained();
             $table->integer('total_question');
             $table->integer('total_mark');
-            $table->integer('duration');
-            $table->integer('cut_mark');
-            $table->float('negative_mark');
+            $table->integer('duration')->nullable();
+            $table->integer('cut_mark')->nullable()->default(0);
+            $table->float('negative_mark')->nullable()->default(0);
             $table->integer('answered');
             $table->integer('right_ans');
             $table->integer('wrong_ans');
+            $table->integer('not_ans');
             $table->float('obtain_mark');
-            $table->dateTime('exam_time');
+            $table->dateTime('exam_time')->nullable();
             $table->timestamps();
         });
     }

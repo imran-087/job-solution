@@ -159,9 +159,7 @@ Route::get('custom/model-test/data', [CustomModelTestController::class, 'getData
 
 #******* Model test result**********#
 Route::get('/model-test/result', [ModelTestResultController::class, 'index'])->name('result.index');
-Route::get('/model-test/exam-details', [ModelTestController::class, 'show'])->name('model-test.exam-details');
-Route::get('/model-test/attend', [ModelTestController::class, 'modelTest'])->name('model-test.attend');
-Route::post('/model-test/submitted-data', [ModelTestController::class, 'submittedData'])->name('model-test.submit');
+Route::get('/model-test/details-view', [ModelTestResultController::class, 'show'])->name('model-test.details-view');
 
 
 ######***News Feed ***#######

@@ -113,10 +113,11 @@
                                     <th class="min-w-50px">Cut Mark</th>
                                     <th class="min-w-50px">Negative Mark</th>
                                     <th class="min-w-50px">Answered</th>
-                                    <th class="min-w-50px">Not Ans.</th>
                                     <th class="min-w-50px">Right</th>
                                     <th class="min-w-50px">Wrong</th>
+                                    <th class="min-w-50px">Not Ans.</th>
                                     <th class="min-w-50px">Obtain Mark</th>
+                                    <th class="min-w-50px">Status</th>
                                     <th class="min-w-70px">Actions</th>
                                 </tr>
                                 <!--end::Table row-->
@@ -124,7 +125,7 @@
                             <!--end::Table head-->
 
                             <tbody>
-                                <tr class="odd">				
+                                {{-- <tr class="odd">				
                                     <!--begin::SKU=-->
                                     <td class=" pe-0">
                                         <span class="fw-bolder">02439003</span>
@@ -186,7 +187,7 @@
                                     </td>
                                     <!--end::Price=-->
                                     
-                                </tr>
+                                </tr> --}}
                             </tbody>
 
                         </table>
@@ -208,7 +209,7 @@
 @endsection
 
 @push('script')
-    {{-- <script type="text/javascript">
+    <script type="text/javascript">
         $(document).ready(function() {
 
             var table = $('#dataTable').DataTable({
@@ -232,8 +233,8 @@
                         name: 'total_question'
                     },
                     {
-                        data: 'mark',
-                        name: 'mark'
+                        data: 'total_mark',
+                        name: 'total_mark'
                     },
                     {
                         data: 'cut_mark',
@@ -244,24 +245,29 @@
                         name: 'negative_mark'
                     },
                     {
-                        data: 'answer',
-                        name: 'answer'
+                        data: 'answered',
+                        name: 'answered'
+                    },
+                  
+                    {
+                        data: 'right_ans',
+                        name: 'right_ans'
                     },
                     {
-                        data: 'not_answer',
-                        name: 'not_answer'
+                        data: 'wrong_ans',
+                        name: 'wrong_ans'
                     },
-                    {
-                        data: 'right',
-                        name: 'right'
-                    },
-                    {
-                        data: 'wrong',
-                        name: 'wrong'
+                      {
+                        data: 'not_ans',
+                        name: 'not_ans'
                     },
                     {
                         data: 'obtain_mark',
                         name: 'obtain_mark'
+                    },
+                    {
+                        data: 'status',
+                        name: 'status'
                     },
                   
                     {
@@ -290,21 +296,5 @@
 
         })
 
-        //view exam details
-        function view(id){
-            $.ajax({
-                type:"GET",
-                url: "{{ url('/model-test/exam-details')}}",
-                dataType: 'json',
-                data:{
-                    'id' : id
-                },
-                success:function(data){
-                    $("#exam_details").html(data.html);
-                    $("#kk_exam_details_modal").modal('show');
-                }
-            });
-        }
-
-    </script> --}}
+    </script>
 @endpush

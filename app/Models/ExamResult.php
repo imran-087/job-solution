@@ -2,9 +2,10 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Database\Eloquent\Model;
 use function Illuminate\Events\queueable;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
 class ExamResult extends Model
@@ -46,9 +47,9 @@ class ExamResult extends Model
 
             $not_answered_count = $total_question_count - $answered_count;
 
-            dump('total =' . $total_question_count);
-            dump('answered =' . $answered_count);
-            dump('not_answered =' . $not_answered_count);
+            // dump('total =' . $total_question_count);
+            // dump('answered =' . $answered_count);
+            // dump('not_answered =' . $not_answered_count);
 
             $question_ids = $answered->pluck('question_id');
             // dd($question_ids);
@@ -58,16 +59,32 @@ class ExamResult extends Model
             $submitted_option = $answered->pluck('select_option');
             $wrong_option = $submitted_option->diff($correct_option);
             $wrong_answer_count = $wrong_option->count();
-            dump('wrong answer =' . $wrong_answer_count);
+            //dump('wrong answer =' . $wrong_answer_count);
 
             $right_answer = $answered_count - $wrong_answer_count;
-            dump('right answer =' . $right_answer);
+            //dump('right answer =' . $right_answer);
 
             $negative_mark = $wrong_answer_count * $examResult->negative_mark;
-            dump('negative_mark =' . $negative_mark);
+            //dump('negative_mark =' . $negative_mark);
 
             $obtain_mark = (($total_question_count / $examResult->mark) * $right_answer) - $negative_mark;
-            dump('obtain_mark =' . $obtain_mark);
+            //dump('obtain_mark =' . $obtain_mark);
+
+
+            // Saved Data to result_anaylitcs table 
+            ExamResultAnalytic::create([
+                'exam_id' => $examResult->exam_id,
+                'user_id' => Auth::id(),
+                'total_question' => $total_question_count,
+                'total_mark' => $examResult->mark,
+                'cut_mark' => $examResult->cut_mark,
+                'negative_mark' => $examResult->negative_mark,
+                'answered' => $answered_count,
+                'right_ans' => $right_answer,
+                'wrong_ans' => $wrong_answer_count,
+                'not_ans' => $not_answered_count,
+                'obtain_mark' => $obtain_mark,
+            ]);
         }));
     }
 }
