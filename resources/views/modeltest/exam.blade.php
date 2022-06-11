@@ -114,7 +114,7 @@
                                     <div class="col-md-6 ">
                                         <div class="card card-bordered mb-5">
                                             <div class="card-header card-success">
-                                                <h3 class="card-title text-gray-700 fw-bolder cursor-default mb-0">
+                                                <h3 class="card-title text-gray-700 fw-bolder cursor-default mb-0 question" data-id="{{ $question->id }}" data-passage_id="{{ $question->passage_id }}">
                                                         <span > {{ $question->id }}. {{$question->question}} </span>
                                                 </h3>
                                             </div>
@@ -186,17 +186,12 @@
             </div>
             
         </div>
-        
-        
-                
+              
     </div>
     <!--end::Container-->
 </div>
 <!--end::Post-->
     
-
-
-
 @endsection
 
 
@@ -205,33 +200,26 @@
 
     $(document).ready(function(){
 
-        var ids = [];
-        $(".click-option").each(function(){
-            ids.push($(this).data('id'));
+        var exam_selected_questions = [];
+        $(".question").each(function(){
+            var data = {};
+            data.passage_id = parseInt(($(this).data('passage_id')));
+            data.question_id = parseInt(($(this).data('id')));
+            data.select_option = 0;
+            exam_selected_questions.push(data);
+                
         })
-        // console.log(ids);
-
-        function onlyUnique(value, index, self) {
-            return self.indexOf(value) === index;
-        }
-        // distinct value 
-        var question_ids = ids.filter(onlyUnique);
-        //console.log(question_ids);
-
-        var submit_data = [];
 
         $('.click-option').on('click', function(){
-            var data = {};
-            var id = $(this).data('id')
-            var option_no = $(this).data('option')
-            // console.log(id)
-            // console.log(option_no)
+           var data = {};
+            data.id = parseInt($(this).data('id'));
+            data.option_no = parseInt($(this).data('option'));
 
-            data.question_id = parseInt(id);
-            data.select_option = parseInt(option_no);
-            //console.log(data);
+            objIndex = exam_selected_questions.findIndex((obj => obj.question_id == data.id));
+            //console.log("Before update: ", exam_selected_questions[objIndex]);
 
-            submit_data.push(data);
+            exam_selected_questions[objIndex].select_option = data.option_no;
+            //console.log("After update: ", exam_selected_questions[objIndex]);
 
             //add a class
             $(this).find('i').removeClass('far');
@@ -240,15 +228,11 @@
             //disable click
             $(this).closest('.row').find('p').off('click').removeClass('cursor-pointer')
 
-            //push data to global array veriable
-            console.log(submit_data);
  
         })
 
         $('#kk_exam_submit').on('click', function(e){
             e.preventDefault();
-
-            //console.log(submit_data);
 
             var exam_id = $('#exam_id').val();
 
@@ -257,29 +241,14 @@
                 url: "{{ url('/model-test/submitted-data') }}",
                 data :{
                     "_token": "{{ csrf_token() }}",
-                    'submitted_data' : submit_data,
+                    'submitted_data' : exam_selected_questions,
                     'exam_id' : exam_id,
-                    'question_ids' : question_ids
                 },
                 dataType: 'json',
                 success:function(data){
                     toastr.success(data.message);
                     window.location.href = data.url;
-                    // if(data.success == true){
-                    //     toastr.success(data.message);
-                    //     var val = $('#wright').html()
-                    //     //console.log(val)
-                    //     $('#wright').html(parseInt(val)+1)
-                        
-                    // }
-                    // if(data.error == true){
-                    //     toastr.error(data.message);
-
-                    //     var val = $('#wrong').html()
-                    //     //console.log(val)
-                    //     $('#wrong').html(parseInt(val)+1)
-                        
-                    // }
+                   
                 }
             })
         })

@@ -117,7 +117,8 @@ class ModelTestController extends Controller
 
     public function submittedData(Request $request)
     {
-        //dd($request->all());
+        //dd(json_encode($request->submitted_data));
+
         $exam = Exam::find($request->exam_id);
         $exam_result = ExamResult::create([
             'exam_id' => $exam->id ?? null,
@@ -127,14 +128,14 @@ class ModelTestController extends Controller
             'negative_mark' => $exam->negative_mark ?? $request->negative_mark,
             'user_id' => Auth::user()->id,
             'time' => Carbon::now(),
-            'submitted_data' => $request->submitted_data,
+            'submitted_data' => $request->submitted_data
         ]);
 
         if ($exam_result) {
             return response()->json([
                 'success' => true,
                 'message' => 'Exam Submitted !! View your result Go to Exam result menu',
-                'url' => url('/model-test')
+                'url' => url('/model-test/result')
             ]);
         } else {
             return response()->json([

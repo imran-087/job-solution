@@ -124,7 +124,69 @@
                             <!--end::Table head-->
 
                             <tbody>
-
+                                <tr class="odd">				
+                                    <!--begin::SKU=-->
+                                    <td class=" pe-0">
+                                        <span class="fw-bolder">02439003</span>
+                                    </td>
+                                    <!--end::SKU=-->
+                                    <!--begin::Qty=-->
+                                    <td class=" pe-0" data-order="10">
+                                        <span class="fw-bolder ms-3">Bane</span>
+                                    </td>
+                                    <!--end::Qty=-->
+                                    <!--begin::Price=-->
+                                    <td class=" pe-0">
+                                        <span class="fw-bolder text-dark">$72.00</span>
+                                    </td>
+                                    <!--end::Price=-->
+                                    <!--begin::Price=-->
+                                    <td class=" pe-0">
+                                        <span class="fw-bolder text-dark">$72.00</span>
+                                    </td>
+                                    <!--end::Price=-->
+                                    <!--begin::Price=-->
+                                    <td class=" pe-0">
+                                        <span class="fw-bolder text-dark">$72.00</span>
+                                    </td>
+                                    <!--end::Price=-->
+                                    <!--begin::Price=-->
+                                    <td class=" pe-0">
+                                        <span class="fw-bolder text-dark">$72.00</span>
+                                    </td>
+                                    <!--end::Price=-->
+                                    <!--begin::Price=-->
+                                    <td class=" pe-0">
+                                        <span class="fw-bolder text-dark">$72.00</span>
+                                    </td>
+                                    <!--end::Price=-->
+                                    <!--begin::Price=-->
+                                    <td class=" pe-0">
+                                        <span class="fw-bolder text-dark">$72.00</span>
+                                    </td>
+                                    <!--end::Price=-->
+                                    <!--begin::Price=-->
+                                    <td class=" pe-0">
+                                        <span class="fw-bolder text-dark">$72.00</span>
+                                    </td>
+                                    <!--end::Price=-->
+                                    <!--begin::Price=-->
+                                    <td class=" pe-0">
+                                        <span class="fw-bolder text-dark">$72.00</span>
+                                    </td>
+                                    <!--end::Price=-->
+                                    <!--begin::Price=-->
+                                    <td class=" pe-0">
+                                        <span class="fw-bolder text-dark">$72.00</span>
+                                    </td>
+                                    <!--end::Price=-->
+                                    <!--begin::Price=-->
+                                    <td class=" pe-0">
+                                        <span class="fw-bolder text-dark">$72.00</span>
+                                    </td>
+                                    <!--end::Price=-->
+                                    
+                                </tr>
                             </tbody>
 
                         </table>
@@ -143,16 +205,10 @@
 <!--end::Post-->
 
 
-<!--begin::Modal - Exam Details modal-->
-<div class="modal fade" id="kk_exam_details_modal" tabindex="-1" aria-hidden="true">
-<div id="exam_details"></div>
-</div>
-<!--end::Modal - Exam Details  modal-->
-
 @endsection
 
 @push('script')
-    <script type="text/javascript">
+    {{-- <script type="text/javascript">
         $(document).ready(function() {
 
             var table = $('#dataTable').DataTable({
@@ -250,5 +306,5 @@
             });
         }
 
-    </script>
+    </script> --}}
 @endpush

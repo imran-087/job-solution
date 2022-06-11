@@ -193,7 +193,7 @@
                 
         })
 
-        //console.log(exam_selected_questions);
+        console.log(exam_selected_questions);
 
         // array filter for unique value from option
         // function onlyUnique(value, index, self) {
@@ -214,7 +214,7 @@
             //console.log("Before update: ", exam_selected_questions[objIndex]);
 
             exam_selected_questions[objIndex].select_option = data.option_no;
-            //console.log("After update: ", exam_selected_questions[objIndex]);
+            console.log("After update: ", exam_selected_questions[objIndex]);
 
             //add a class
             $(this).find('i').removeClass('far');
