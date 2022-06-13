@@ -66,109 +66,94 @@
             <div class="col-md-12">
                 <div class="card shadow-sm">
                     <div class="card-header py-10 d-flex flex-column justify-content-center align-items-center">
-                        <h3 class="card-title">Exam Name : {{$exam->name}}</h3>
+                        <h3 class="card-title">Exam Name : {{$exam->name ?? 'Custom Exam' }}</h3>
                     </div>
                     <div class="card-header fw-bold d-flex justify-content-between py-3 px-5">
                         <div class="left">
-                            <p>Total Question: {{ $exam->number_of_question }}</p>
-                            <p>Total Mark: {{ $exam->mark }}</p>
-                            <p>Cut Mark: {{ $exam->cut_mark }}</p>
-                            <p>Negative Mark: {{ $exam->negative_mark }}</p>
+                            <p>Total Question: {{ $exam->number_of_question ?? '' }}</p>
+                            <p>Total Mark: {{ $exam->mark ?? '' }}</p>
+                            <p>Cut Mark: {{ $exam->cut_mark ?? '' }}</p>
+                            <p>Negative Mark: {{ $exam->negative_mark ?? '' }}</p>
                         </div>
                         <div class="right">
-                            <p>Duration: {{ $exam->duration }}</p>
-                            <p>Time: {{ Carbon\Carbon::parse($exam->exam_starting_time)->format('g:i:s A') }}</p>
-                            <p>Date: {{ Carbon\Carbon::parse($exam->exam_starting_time)->format('d-m-Y ') }}</p>
-                            
+                            <p>Duration: {{ $exam->duration ?? '' }}</p>
+                            <p>Time: {{  Carbon\Carbon::parse($exam->exam_starting_time)->format('g:i:s A')   }}</p>
+                            <p>Date: {{  Carbon\Carbon::parse($exam->exam_starting_time)->format('d-m-Y ')  }}</p>
                         </div>
                     </div>
                    
+                    
                     <div class="card-body">
-                        @foreach ($exam_results as $key => $exam) 
-                        
-                            @isset($exam->submitted_data)
-                            @foreach ($exam->submitted_data as $ques_id) 
-            
-                                @php
-                                    $questin_ids = (object)$ques_id;
-                                   
-                                    $questions = App\Models\Question::with('question_option')->where('id', $questin_ids->question_id)->get();
-                                
-                                    $questions = App\Models\Question::with('question_option')
-                                        ->where('id', $questin_ids->question_id)
-                                        ->get();
-                                @endphp
-
-                                @foreach($questions as $question)
-                                    <div class="col-md-6 ">
-                                        <div class="card card-bordered mb-5">
-                                            <div class="card-header card-success">
-                                                <h3 class="card-title text-gray-700 fw-bolder cursor-default mb-0 question" data-id="{{ $question->id }}" data-passage_id="{{ $question->passage_id }}">
-                                                        <span > {{ $question->id }}. {{$question->question}} </span>
-                                                </h3>
+                        <div class="row">
+                            @foreach($exam_result_collection as $key => $question)
+                                @php $question = (object) $question @endphp
+                                <div class="col-md-6 ">
+                                    <div class="card card-bordered mb-5">
+                                        <div class="card-header card-success">
+                                            <h3 class="card-title text-gray-700 fw-bolder cursor-default mb-0 question" >
+                                                    <span> {{ $loop->index+1 }}.  {{$question->question }} </span>
+                                            </h3>
+                                            <div class="card-toolbar">
+                                                <i class="{{ $question->answer == $select_option_collection[$key] ? 'fas fa-check' : 'fas fa-ban' }}  "></i>
                                             </div>
-                                            <div class="card-body">
-                                                <div class="row"  style="font-size: 16px">
-                                                    <div class="col-md-6">
-                                                        <p class="text-gray-800 fw-bold cursor-pointer click-option" data-id="{{ $question->id }}" data-option="1"> 
-                                                            <span ><i class="{{ $question->question_option->answer == 1 ? 'fas' : 'far' }} fa-circle fa-2xl"></i></span> {{$question->question_option->option_1 }}
-                                                        </p>
-                                                        @if($question->question_type == 'image')
-                                                        <div class="symbol symbol-45px me-2 mb-5 mt-2">
-                                                            <span class="symbol-label">
-                                                                <img src="{{ asset($question->question_option->image_option[0]) }}" class="h-50 align-self-center" alt="">
-                                                            </span>
-                                                        </div>
-                                                        @endif
+                                        </div>
+                                        <div class="card-body">
+                                            <div class="row"  style="font-size: 16px">
+                                                <div class="col-md-6">
+                                                    <p class="text-gray-800 fw-bold cursor-pointer click-option" data-id="{{ $question->question_id }}" data-option="1"> 
+                                                        <span ><i class="{{ $question->answer == 1 ? 'fas' : 'far' }} fa-circle fa-2xl"></i></span> {{$question->option_1 }}
+                                                    </p>
+                                                    @if($question->question_type == 'image')
+                                                    <div class="symbol symbol-45px me-2 mb-5 mt-2">
+                                                        <span class="symbol-label">
+                                                            <img src="{{ asset($question->image_option[0]) }}" class="h-50 align-self-center" alt="">
+                                                        </span>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <p class="text-gray-800 fw-bold cursor-pointer click-option" data-id="{{ $question->id }}" data-option="2"> 
-                                                            <span> <i class="{{ $question->question_option->answer == 2 ? 'fas' : 'far' }} fa-circle fa-2xl"></i> </span> {{$question->question_option->option_2}}
-                                                        </p>
-                                                        @if($question->question_type == 'image')
-                                                        <div class="symbol symbol-45px me-2 mb-5 mt-2">
-                                                            <span class="symbol-label">
-                                                                <img src="{{ asset($question->question_option->image_option[1]) }}" class="h-50 align-self-center" alt="">
-                                                            </span>
-                                                        </div>
-                                                        @endif
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p class="text-gray-800 fw-bold cursor-pointer click-option" data-id="{{ $question->question_id }}" data-option="2"> 
+                                                        <span> <i class="{{ $question->answer == 2 ? 'fas' : 'far' }} fa-circle fa-2xl"></i> </span> {{$question->option_2}}
+                                                    </p>
+                                                    @if($question->question_type == 'image')
+                                                    <div class="symbol symbol-45px me-2 mb-5 mt-2">
+                                                        <span class="symbol-label">
+                                                            <img src="{{ asset($question->image_option[1]) }}" class="h-50 align-self-center" alt="">
+                                                        </span>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <p class="text-gray-800 fw-bold cursor-pointer click-option" data-id="{{ $question->id }}" data-option="3"> 
-                                                            <span ><i class="{{ $question->question_option->answer == 3 ? 'fas' : 'far' }} fa-circle fa-2xl"></i></span> {{$question->question_option->option_3 }}
-                                                        </p>
-                                                        @if($question->question_type == 'image')
-                                                        <div class="symbol symbol-45px me-2 mb-5 mt-2">
-                                                            <span class="symbol-label">
-                                                                <img src="{{ asset($question->question_option->image_option[2]) }}" class="h-50 align-self-center" alt="">
-                                                            </span>
-                                                        </div>
-                                                        @endif
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p class="text-gray-800 fw-bold cursor-pointer click-option" data-id="{{ $question->question_id }}" data-option="3"> 
+                                                        <span ><i class="{{ $question->answer == 3 ? 'fas' : 'far' }} fa-circle fa-2xl"></i></span> {{$question->option_3 }}
+                                                    </p>
+                                                    @if($question->question_type == 'image')
+                                                    <div class="symbol symbol-45px me-2 mb-5 mt-2">
+                                                        <span class="symbol-label">
+                                                            <img src="{{ asset($question->image_option[2]) }}" class="h-50 align-self-center" alt="">
+                                                        </span>
                                                     </div>
-                                                    <div class="col-md-6">
-                                                        <p class="text-gray-800 fw-bold cursor-pointer click-option" data-id="{{ $question->id }}" data-option="4" > 
-                                                            <span ><i class="{{ $question->question_option->answer == 4 ? 'fas' : 'far' }} fa-circle fa-2xl"></i></span> {{$question->question_option->option_4 }}
-                                                        </p>
-                                                        @if($question->question_type == 'image')
-                                                        <div class="symbol symbol-45px me-2 mb-5 mt-2">
-                                                            <span class="symbol-label">
-                                                                <img src="{{ asset($question->question_option->image_option[3]) }}" class="h-50 align-self-center" alt="">
-                                                            </span>
-                                                        </div>
-                                                        @endif
+                                                    @endif
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <p class="text-gray-800 fw-bold cursor-pointer click-option" data-id="{{ $question->question_id }}" data-option="4" > 
+                                                        <span ><i class="{{ $question->answer == 4 ? 'fas' : 'far' }} fa-circle fa-2xl"></i></span> {{$question->option_4 }}
+                                                    </p>
+                                                    @if($question->question_type == 'image')
+                                                    <div class="symbol symbol-45px me-2 mb-5 mt-2">
+                                                        <span class="symbol-label">
+                                                            <img src="{{ asset($question->image_option[3]) }}" class="h-50 align-self-center" alt="">
+                                                        </span>
                                                     </div>
+                                                    @endif
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    
-                                @endforeach
-                                
-                            @endforeach
-                            @endif
-                        @endforeach
-                    </div>
-                   
+                                </div>
+                            @endforeach     
+                        </div>
+                    </div>  
                 </div>
             </div>
             

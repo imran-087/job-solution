@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\ModelTest;
 
 use App\Models\Exam;
+use App\Models\Question;
 use App\Models\ExamDetail;
 use App\Models\ExamResult;
 use Illuminate\Http\Request;
+use App\Models\QuestionOption;
+use App\Models\ExamResultAnalytic;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\ExamResultAnalytic;
-use App\Models\QuestionOption;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -54,7 +55,7 @@ class ModelTestResultController extends Controller
                     $btn = '
                         <div class="d-flex justify-content-start flex-shrink-0">
 
-                            <a href="details-view?model_test=' . $row->exam_id . '" class="btn btn-sm btn-primary">
+                            <a href="details-view?exam_result_id=' . $row->exam_result_id . '" class="btn btn-sm btn-primary">
                                 view
                             </a>
                         </div>';
@@ -70,9 +71,81 @@ class ModelTestResultController extends Controller
     //details view
     public function show(Request $request)
     {
-        $exam = Exam::find($request->model_test);
-        $exam_results = ExamResult::with('exam')->where('exam_id', $request->model_test)->get();
-        //dd($exam_results);
-        return view('modeltest.result.view_details', compact('exam_results', 'exam'));
+        //dd($request->exam_id);
+        // $exam = Exam::find($request->exam_id);
+
+        $exam_result = ExamResult::where('id', $request->exam_result_id)->first();
+        // dump("exam Result: " . $exam_result);
+
+        $submitted_queston_collection = collect($exam_result->submitted_data);
+        // dump("submitted_queston_collection");
+        // dump($submitted_queston_collection);
+
+
+        $quesion_id_collection = $submitted_queston_collection->pluck('question_id');
+        // dump("quesion_id_collection: " . $quesion_id_collection);
+
+
+        $question_option = QuestionOption::whereIn('question_id', $quesion_id_collection)->select("question_id", "option_1", "option_2", "option_3", "option_4", "option_5", "image_option", "answer");
+        // dump($question_option);
+
+        $question_details = Question::joinSub($question_option, 'question_options', function ($join) {
+            $join->on('questions.id', '=', 'question_options.question_id');
+        })->select(
+            "question_id",
+            "question",
+            "question_type",
+            "future_editable",
+            "option_1",
+            "option_2",
+            "option_3",
+            "option_4",
+            "option_5",
+            "image_option",
+            "answer"
+        )->get()->toArray();
+
+        // dump($question_details);
+
+        $submitted_question_details_collection = collect($question_details);
+
+        // dump("submitted_question_details_collection");
+
+        // dump($submitted_question_details_collection);
+
+
+        $exam_result_collection = $submitted_queston_collection->map(function ($item) use ($submitted_question_details_collection) {
+            return  array_merge($item, $submitted_question_details_collection->firstWhere('question_id', '==', $item['question_id']));
+        });
+
+        // dump('exam_result_collection');
+
+
+        $exam_result_collection->sortBy('subject_id');
+        $result = $exam_result_collection->groupBy([
+            'subject_id',
+            function ($item) {
+                return $item['passage_id'];
+            },
+        ]);
+
+
+        dd($result->toJson(JSON_PRETTY_PRINT));
+
+        // $rest = $exam_result_collection->map(function ($game) {
+        //     return $game->groupBy('subject_id')->map(function ($catGame) {
+        //         return $catGame->map(function ($category) {
+        //             return $category->groupBy('passage_id');
+        //         });
+        //     });
+        // });
+
+        // dd($rest);
+
+
+
+        dd("End");
+
+        return view('modeltest.result.view_details', compact('exam_result_collection', 'exam', 'select_option_collection'));
     }
 }

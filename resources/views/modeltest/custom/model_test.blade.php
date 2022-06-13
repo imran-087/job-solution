@@ -95,7 +95,7 @@
                             <div class="col-md-6 ">
                                 <div class="card card-bordered mb-5">
                                     <div class="card-header card-success">
-                                        <h3 class="card-title text-gray-700 fw-bolder cursor-default mb-0 question" data-id={{ $question->id }} data-passage_id={{ $question->passage_id }}>
+                                        <h3 class="card-title text-gray-700 fw-bolder cursor-default mb-0 question" data-id={{ $question->id }} data-subject_id="{{ $question->subject_id }}" data-passage_id={{ $question->passage_id }}>
                                                 <span > {{ $question->id }}. {{$question->question}} </span>
                                         </h3>
                                     </div>
@@ -187,6 +187,7 @@
         $(".question").each(function(){
             var data = {};
             data.passage_id = parseInt(($(this).data('passage_id')));
+            data.subject_id = parseInt(($(this).data('subject_id')));
             data.question_id = parseInt(($(this).data('id')));
             data.select_option = 0;
             exam_selected_questions.push(data);
@@ -252,21 +253,7 @@
                 success:function(data){
                     toastr.success(data.message);
                     window.location.href = data.url;
-                    // if(data.success == true){
-                    //     toastr.success(data.message);
-                    //     var val = $('#wright').html()
-                    //     //console.log(val)
-                    //     $('#wright').html(parseInt(val)+1)
-                        
-                    // }
-                    // if(data.error == true){
-                    //     toastr.error(data.message);
-
-                    //     var val = $('#wrong').html()
-                    //     //console.log(val)
-                    //     $('#wrong').html(parseInt(val)+1)
-                        
-                    // }
+                   
                 }
             })
         })

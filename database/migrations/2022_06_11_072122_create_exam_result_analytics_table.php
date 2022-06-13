@@ -15,6 +15,7 @@ class CreateExamResultAnalyticsTable extends Migration
     {
         Schema::create('exam_result_analytics', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('exam_result_id')->constrained();
             $table->foreignId('exam_id')->nullable()->constrained();
             $table->foreignId('user_id')->constrained();
             $table->integer('total_question');

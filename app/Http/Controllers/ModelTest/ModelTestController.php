@@ -4,12 +4,13 @@ namespace App\Http\Controllers\ModelTest;
 
 use Carbon\Carbon;
 use App\Models\Exam;
+use App\Models\Question;
 use App\Models\ExamDetail;
 use App\Models\ExamResult;
 use App\Models\MainCategory;
 use Illuminate\Http\Request;
+use App\Models\QuestionOption;
 use App\Http\Controllers\Controller;
-use App\Models\Question;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -104,22 +105,57 @@ class ModelTestController extends Controller
         ]);
     }
 
-    //model test
+    //model test question / getting model test data form exam details table
     public function modelTest(Request $request)
     {
         $exam = Exam::find($request->exam_id);
 
-        //dd($subject_id);
-        $exam_details = ExamDetail::with('subject')->where('exam_id', $request->exam_id)->get();
 
-        return view('modeltest.exam', compact('exam', 'exam_details'));
+        $exam_details = ExamDetail::where('exam_id', $request->exam_id)->with('question')->get();
+        // dd($exam_details);
+
+        $questions_arr = [];
+
+        foreach ($exam_details as $exam_detail) {
+            $collection = collect($exam_detail->question_ids);
+            //dump($collection);
+            $quesion_id_collection = $collection->pluck('question_id');
+
+            $question_option = QuestionOption::whereIn('question_id', $quesion_id_collection)->select("question_id", "option_1", "option_2", "option_3", "option_4", "option_5",  "image_option", "image_question", "answer");
+            // dump($question_option);
+
+            $question_details = Question::joinSub($question_option, 'question_options', function ($join) {
+                $join->on('questions.id', '=', 'question_options.question_id');
+            })->select(
+                "question_id",
+                "subject_id",
+                "passage_id",
+                "question",
+                "question_type",
+                "future_editable",
+                "option_1",
+                "option_2",
+                "option_3",
+                "option_4",
+                "option_5",
+                "image_option",
+                "image_question",
+                "answer"
+            )->get()->toArray();
+
+            $questions_arr = array_merge($questions_arr, $question_details);
+        }
+
+        $questions = collect($questions_arr);
+        //dump($questions);
+        return view('modeltest.exam', compact('exam', 'questions'));
     }
 
     public function submittedData(Request $request)
     {
-        //dd(json_encode($request->submitted_data));
-
+        //dd($request->all());
         $exam = Exam::find($request->exam_id);
+
         $exam_result = ExamResult::create([
             'exam_id' => $exam->id ?? null,
             'sub_category_id' => $exam->sub_category_id ?? $request->sub_category_id,

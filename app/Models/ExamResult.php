@@ -52,23 +52,26 @@ class ExamResult extends Model
             // dump('not_answered =' . $not_answered_count);
 
             $question_ids = $answered->pluck('question_id');
-            // dd($question_ids);
+            //dump($question_ids);
             $correct_option = QuestionOption::whereIn('question_id', $question_ids)->pluck('answer');
             //dump('correct option =' . $correct_option);
 
             $submitted_option = $answered->pluck('select_option');
-            $wrong_option = $submitted_option->diff($correct_option);
-            $wrong_answer_count = $wrong_option->count();
-            //dump('wrong answer =' . $wrong_answer_count);
+            // $wrong_option = $submitted_option->diff($correct_option);
+            // $wrong_answer_count = $wrong_option->count();
 
-            $right_answer = $answered_count - $wrong_answer_count;
-            //dump('right answer =' . $right_answer);
+            $right_option = $submitted_option->intersect($correct_option);
+            $right_answer_count = $right_option->count();
+            //dd('right answer =' . $right_answer_count);
+
+            $wrong_answer_count = $answered_count - $right_answer_count;
+            // //dump('right answer =' . $right_answer);
 
             $negative_mark = $wrong_answer_count * $examResult->negative_mark;
-            //dump('negative_mark =' . $negative_mark);
+            // //dump('negative_mark =' . $negative_mark);
 
-            $obtain_mark = (($total_question_count / $examResult->mark) * $right_answer) - $negative_mark;
-            //dump('obtain_mark =' . $obtain_mark);
+            $obtain_mark = (($total_question_count / $examResult->mark) * $right_answer_count) - $negative_mark;
+            // //dump('obtain_mark =' . $obtain_mark);
 
 
             // Saved Data to result_anaylitcs table 
@@ -80,7 +83,7 @@ class ExamResult extends Model
                 'cut_mark' => $examResult->cut_mark,
                 'negative_mark' => $examResult->negative_mark,
                 'answered' => $answered_count,
-                'right_ans' => $right_answer,
+                'right_ans' => $right_answer_count,
                 'wrong_ans' => $wrong_answer_count,
                 'not_ans' => $not_answered_count,
                 'obtain_mark' => $obtain_mark,
