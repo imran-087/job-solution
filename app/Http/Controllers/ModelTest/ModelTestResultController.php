@@ -71,7 +71,7 @@ class ModelTestResultController extends Controller
     //details view
     public function show(Request $request)
     {
-        //dd($request->exam_id);
+        //dd($request->exam_result_id);
         // $exam = Exam::find($request->exam_id);
 
         $exam_result = ExamResult::where('id', $request->exam_result_id)->first();
@@ -113,39 +113,25 @@ class ModelTestResultController extends Controller
 
         // dump($submitted_question_details_collection);
 
-
         $exam_result_collection = $submitted_queston_collection->map(function ($item) use ($submitted_question_details_collection) {
             return  array_merge($item, $submitted_question_details_collection->firstWhere('question_id', '==', $item['question_id']));
         });
 
-        // dump('exam_result_collection');
+        dump($exam_result_collection);
 
 
-        $exam_result_collection->sortBy('subject_id');
-        $result = $exam_result_collection->groupBy([
-            'subject_id',
-            function ($item) {
-                return $item['passage_id'];
-            },
-        ]);
+        // $exam_result_collection = $exam_result_collection->groupBy(['subject_id', function ($item) {
+        //     return $item['passage_id'];
+        // }], $preserveKeys = true);
 
 
-        dd($result->toJson(JSON_PRETTY_PRINT));
+        //dd($exam_result->toJson(JSON_PRETTY_PRINT));
 
-        // $rest = $exam_result_collection->map(function ($game) {
-        //     return $game->groupBy('subject_id')->map(function ($catGame) {
-        //         return $catGame->map(function ($category) {
-        //             return $category->groupBy('passage_id');
-        //         });
-        //     });
-        // });
+        //dd("End");
 
-        // dd($rest);
+        $exam_analytics = ExamResultAnalytic::where('exam_result_id', $request->exam_result_id)->first();
+        //dd($exam_analytics);
 
-
-
-        dd("End");
-
-        return view('modeltest.result.view_details', compact('exam_result_collection', 'exam', 'select_option_collection'));
+        return view('modeltest.result.view_details', compact('exam_result_collection', 'exam_analytics'));
     }
 }

@@ -83,7 +83,25 @@
 
                         <!--begin::Input group-->
                         <div class="row g-9 mb-8">
-                           
+                             <!--begin::Col-->
+                            <div class="col-md-12 fv-row">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span class="required">Exam Instruction</span>
+                                </label>
+                                <!--end::Label-->
+                                <textarea class="form-control form-control-solid h-70px @error('instruction') is-invalid @enderror" placeholder="Enter exam instruction" name="instruction" >{{ $exam->instruction }}</textarea>
+                                @error('instruction')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <!-- end: col-->
+                        </div>
+
+                        <!--begin::Input group-->
+                        <div class="row g-9 mb-8">
                             <!--begin::Col-->
                             <div class="col-md-3 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Category</label>

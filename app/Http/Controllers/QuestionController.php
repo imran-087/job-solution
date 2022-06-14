@@ -150,7 +150,7 @@ class QuestionController extends Controller
                     //notification
                     $admin = Admin::where('id', 1)->first();
                     // dd($admin);
-                    $admin->notify(new EditQuestionNotification($question));
+                    //$admin->notify(new EditQuestionNotification($question));
 
                     return response()->json([
                         'success' => true,

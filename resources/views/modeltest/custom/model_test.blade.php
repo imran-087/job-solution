@@ -204,9 +204,16 @@
         // var unique_exam_questions = exam_questions.filter(onlyUnique);
         
         // console.log(unique_exam_questions);
-       
+           
+           var global = 0;
+            function setGlobal(){
+            global += 1;
+        };
+        console.log(global);
+           
         //getting data from option and update exam_selected_questions select_option field value
         $('.click-option').on('click', function(){
+            setGlobal();
             var data = {};
             data.id = parseInt($(this).data('id'));
             data.option_no = parseInt($(this).data('option'));
@@ -215,7 +222,7 @@
             //console.log("Before update: ", exam_selected_questions[objIndex]);
 
             exam_selected_questions[objIndex].select_option = data.option_no;
-            console.log("After update: ", exam_selected_questions[objIndex]);
+            //console.log("After update: ", exam_selected_questions[objIndex]);
 
             //add a class
             $(this).find('i').removeClass('far');
@@ -226,6 +233,7 @@
 
  
         })
+        // console.log(click_option());
 
         $('#kk_exam_submit').on('click', function(e){
             e.preventDefault();

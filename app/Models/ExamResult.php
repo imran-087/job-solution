@@ -36,52 +36,59 @@ class ExamResult extends Model
      */
     protected static function booted()
     {
-        static::created(queueable(function ($examResult) {
+        static::created(queueable(function ($exam) {
 
-            $collection = (collect($examResult->submitted_data));
+            $collection = (collect($exam->submitted_data));
 
             $total_question_count = $collection->count();
 
-            $answered = $collection->where('select_option', '!=', 0);
+            $answered = $collection->where('select_option', '>', 0)->sortBy('question_id');
+            dump('answered =' . $answered);
             $answered_count = $answered->count();
 
             $not_answered_count = $total_question_count - $answered_count;
 
-            // dump('total =' . $total_question_count);
-            // dump('answered =' . $answered_count);
-            // dump('not_answered =' . $not_answered_count);
+            dump('total =' . $total_question_count);
+            dump('answered =' . $answered_count);
+            dump('not_answered =' . $not_answered_count);
 
             $question_ids = $answered->pluck('question_id');
-            //dump($question_ids);
-            $correct_option = QuestionOption::whereIn('question_id', $question_ids)->pluck('answer');
-            //dump('correct option =' . $correct_option);
+            dump($question_ids);
+            $correct_option = collect(QuestionOption::whereIn('question_id', $question_ids)->pluck('answer'))->toArray();
 
-            $submitted_option = $answered->pluck('select_option');
-            // $wrong_option = $submitted_option->diff($correct_option);
-            // $wrong_answer_count = $wrong_option->count();
 
-            $right_option = $submitted_option->intersect($correct_option);
-            $right_answer_count = $right_option->count();
-            //dd('right answer =' . $right_answer_count);
+            $submitted_option = collect($answered->pluck('select_option'))->toArray();
+
+            $right_option = array_map(function ($submitted_option, $correct_option) {
+                return $submitted_option === $correct_option;
+            }, $submitted_option, $correct_option);
+
+            var_dump($right_option);
+            dump($right_option);
+
+            $right_answer_count = count(array_filter($right_option));
+            dump('right answer =' . $right_answer_count);
 
             $wrong_answer_count = $answered_count - $right_answer_count;
-            // //dump('right answer =' . $right_answer);
+            dump('wrong answer =' . $wrong_answer_count);
 
-            $negative_mark = $wrong_answer_count * $examResult->negative_mark;
-            // //dump('negative_mark =' . $negative_mark);
+            $negative_mark = $wrong_answer_count * $exam->negative_mark;
+            dump('negative_mark =' . $negative_mark);
 
-            $obtain_mark = (($total_question_count / $examResult->mark) * $right_answer_count) - $negative_mark;
-            // //dump('obtain_mark =' . $obtain_mark);
-
+            $obtain_mark = (($total_question_count / $exam->mark) * $right_answer_count) - $negative_mark;
+            dump('obtain_mark =' . $obtain_mark);
 
             // Saved Data to result_anaylitcs table 
             ExamResultAnalytic::create([
-                'exam_id' => $examResult->exam_id,
+                'exam_id' => $exam->exam_id,
+                'exam_result_id' => $exam->id,
                 'user_id' => Auth::id(),
                 'total_question' => $total_question_count,
-                'total_mark' => $examResult->mark,
-                'cut_mark' => $examResult->cut_mark,
-                'negative_mark' => $examResult->negative_mark,
+                'total_mark' => $exam->mark,
+                'cut_mark' => $exam->cut_mark,
+                'negative_mark' => $exam->negative_mark,
+                'duration' => $exam->duration,
+                'exam_time' => $exam->starting_time,
                 'answered' => $answered_count,
                 'right_ans' => $right_answer_count,
                 'wrong_ans' => $wrong_answer_count,

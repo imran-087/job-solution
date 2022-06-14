@@ -76,7 +76,7 @@
                             <p>Negative Mark: {{ $exam->negative_mark }}</p>
                         </div>
                         <div class="right">
-                            <p>Duration: {{ $exam->duration }}</p>
+                            <p id="time_countdown">Duration: {{ $exam->duration }}</p>
                             <p>Time: {{ Carbon\Carbon::parse($exam->exam_starting_time)->format('g:i:s A') }}</p>
                             <p>Date: {{ Carbon\Carbon::parse($exam->exam_starting_time)->format('d-m-Y ') }}</p>
                             
@@ -85,6 +85,7 @@
 
                     {{-- Hidden field  --}}
                     <input type="hidden" name="exam_id" value="{{ $exam->id }}" id="exam_id">
+                    <input type="hidden" name="duration" value="{{ $exam->duration }}" id="duration">
                    
                     <div class="card-body">
                         <div class="row">
@@ -175,7 +176,7 @@
     <script type="text/javascript">
 
     $(document).ready(function(){
-
+      
         var exam_selected_questions = [];
         $(".question").each(function(){
             var data = {};
@@ -186,10 +187,13 @@
             exam_selected_questions.push(data);
                 
         })
-        console.log(exam_selected_questions);
+        //console.log(exam_selected_questions.length);
 
+        const click_option = (click_option) => click_option++;
         $('.click-option').on('click', function(){
-           var data = {};
+            click_option();
+
+            var data = {};
             data.id = parseInt($(this).data('id'));
             data.option_no = parseInt($(this).data('option'));
 
@@ -199,16 +203,20 @@
             exam_selected_questions[objIndex].select_option = data.option_no;
             //console.log("After update: ", exam_selected_questions[objIndex]);
 
+            console.log(exam_selected_questions);
+            
             //add a class
             $(this).find('i').removeClass('far');
             $(this).find('i').addClass('fas');
             
             //disable click
-            $(this).closest('.row').find('p').off('click').removeClass('cursor-pointer')
+            $(this).closest('.row').find('p').off('click').removeClass('cursor-pointer');
+            //console.log(click_option);
 
- 
-        })
+        });
+        console.log(click_option);
 
+        //submit 
         $('#kk_exam_submit').on('click', function(e){
             e.preventDefault();
 
@@ -230,6 +238,31 @@
                 }
             })
         })
+
+        //set time interval for auto submit
+        // setTimeout(function() {
+        //     $('#kk_exam_submit').trigger('click');    
+        // }, 4e3);
+                        
+
+        //time counter 
+        var timer2 = $('#duration').val();
+        var interval = setInterval(function() {
+
+
+        var timer = timer2.split(':');
+        //by parsing integer, I avoid all extra string processing
+        var minutes = parseInt(timer[0], 10);
+        var seconds = parseInt(timer[1], 10);
+        --seconds;
+        minutes = (seconds < 0) ? --minutes : minutes;
+        if (minutes < 0) clearInterval(interval);
+        seconds = (seconds < 0) ? 59 : seconds;
+        seconds = (seconds < 10) ? '0' + seconds : seconds;
+        //minutes = (minutes < 10) ?  minutes : minutes;
+        $('#time_countdown').html('<p>Time Remaining  <span style="color:red; font-size:24px;">' + minutes + ':' + seconds +'</span></p>');
+        timer2 = minutes + ':' + seconds;
+        }, 1000);
     })
     </script>
 @endpush

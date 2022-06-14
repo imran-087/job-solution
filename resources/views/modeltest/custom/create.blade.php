@@ -149,6 +149,17 @@
                             
                         </div>
                         <!-- end: col-->
+                        <!-- end: col-->
+                        <div class="col-md-2 fv-row">
+                            <!--begin::Label-->
+                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                <span class="required" >Duration</span>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid " placeholder="Exam duration (5 min.)" name="duration" />
+                            
+                        </div>
+                        <!-- end: col-->
                     </div>
 
                     <!--begin::Actions-->

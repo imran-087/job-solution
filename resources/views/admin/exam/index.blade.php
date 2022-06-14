@@ -107,7 +107,7 @@
                             <!--end::Select2-->
                         </div>
                         <div>
-                            <a href="{{ route('admin.exam-details.create') }}" class="btn btn-sm btn-primary">Add Subject</a>
+                            <a href="{{ route('admin.exam.create') }}" class="btn btn-sm btn-primary">Create Exam</a>
                         </div>
                        
                     </div>

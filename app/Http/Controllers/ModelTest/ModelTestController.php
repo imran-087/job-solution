@@ -110,7 +110,6 @@ class ModelTestController extends Controller
     {
         $exam = Exam::find($request->exam_id);
 
-
         $exam_details = ExamDetail::where('exam_id', $request->exam_id)->with('question')->get();
         // dd($exam_details);
 
@@ -163,14 +162,15 @@ class ModelTestController extends Controller
             'cut_mark' => $exam->cut_mark ?? $request->cut_mark,
             'negative_mark' => $exam->negative_mark ?? $request->negative_mark,
             'user_id' => Auth::user()->id,
-            'time' => Carbon::now(),
+            'starting_time' => Carbon::now(),
+            'duration' => $exam->duration ?? $request->duration,
             'submitted_data' => $request->submitted_data
         ]);
 
         if ($exam_result) {
             return response()->json([
                 'success' => true,
-                'message' => 'Exam Submitted !! View your result Go to Exam result menu',
+                'message' => 'Exam Submitted !! View your result details Go to Exam result menu',
                 'url' => url('/model-test/result')
             ]);
         } else {

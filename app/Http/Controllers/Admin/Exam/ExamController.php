@@ -90,17 +90,7 @@ class ExamController extends Controller
                             </span>
                             <!--end::Svg Icon-->
                         </a>
-                        <a href="javascript:;" onclick="deleteCategory(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
-                            <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
-                            <span class="svg-icon svg-icon-3">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                    <path d="M5 9C5 8.44772 5.44772 8 6 8H18C18.5523 8 19 8.44772 19 9V18C19 19.6569 17.6569 21 16 21H8C6.34315 21 5 19.6569 5 18V9Z" fill="black"></path>
-                                    <path opacity="0.5" d="M5 5C5 4.44772 5.44772 4 6 4H18C18.5523 4 19 4.44772 19 5V5C19 5.55228 18.5523 6 18 6H6C5.44772 6 5 5.55228 5 5V5Z" fill="black"></path>
-                                    <path opacity="0.5" d="M9 4C9 3.44772 9.44772 3 10 3H14C14.5523 3 15 3.44772 15 4V4H9V4Z" fill="black"></path>
-                                </svg>
-                            </span>
-                            <!--end::Svg Icon-->
-                        </a>
+                        
                     </div>';
                     return $btn;
                 })
@@ -121,16 +111,17 @@ class ExamController extends Controller
         //dd($request->all());
 
         $exam_starting_time = Carbon::parse($request->exam_starting_time)->format('Y-m-d\TH:i');
-
+        $duration = $request->duration . ':00';
 
         $exam = Exam::create([
             'category_id' => $request->category,
             'sub_category_id' => $request->sub_category,
             'user_id' => Auth::guard('admin')->user()->id,
             'name' => $request->name,
+            'name' => $request->instruction,
             'examinee_type' => $request->examinee_type,
             'exam_mode' => $request->exam_mode,
-            'duration' => $request->duration,
+            'duration' => $duration,
             'number_of_question' => $request->number_of_question,
             'mark' => $request->mark,
             'cut_mark' => $request->cut_mark ?? '0',

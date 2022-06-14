@@ -16,17 +16,15 @@ class ExamViewController extends Controller
         $exam = Exam::find($request->exam_id);
 
         // // //dd($subject_id);
-        // if ($request->has('subject_id')) {
-        //     $exam_details = ExamDetail::with('subject')
-        //         ->where('exam_id', $request->exam_id)
-        //         ->where('subject_id', $request->subject_id)
-        //         ->get();
-        // } else {
-        //     $exam_details = ExamDetail::with('subject')->where('exam_id', $request->exam_id)->get();
-        // }
-
-        $exam_details = ExamDetail::where('exam_id', $request->exam_id)->with('question')->get();
-        // dd($exam_details);
+        if ($request->has('subject_id')) {
+            $exam_details = ExamDetail::with('question')
+                ->where('exam_id', $request->exam_id)
+                ->where('subject_id', $request->subject_id)
+                ->get();
+        } else {
+            $exam_details = ExamDetail::where('exam_id', $request->exam_id)->with('question')->get();
+            // dd($exam_details);
+        }
 
         $questions_arr = [];
 
@@ -34,12 +32,7 @@ class ExamViewController extends Controller
             $collection = collect($exam_detail->question_ids);
             //dump($collection);
             $quesion_id_collection = $collection->pluck('question_id');
-            //dump($quesion_id_collection);
-            // $questions = Question::whereIn('id', $quesion_id_collection)
-            //     ->with(['question_option' => function ($query) {
-            //         $query->select('question_id', 'option_1', 'option_2', 'option_3', 'option_4', 'option_5', 'image_option', 'image_question', 'answer');
-            //     }])->get()->toArray();
-
+        
             $question_option = QuestionOption::whereIn('question_id', $quesion_id_collection)->select("question_id", "option_1", "option_2", "option_3", "option_4", "option_5",  "image_option", "image_question", "answer");
             // dump($question_option);
 
@@ -65,6 +58,7 @@ class ExamViewController extends Controller
         }
 
         $questions = collect($questions_arr);
+
         //dump($questions);
         return view('admin.exam.show', compact('exam', 'questions'));
     }
