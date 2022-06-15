@@ -11,6 +11,7 @@ use App\Models\QuestionOption;
 use App\Models\ExamResultAnalytic;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Subject;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 
@@ -117,15 +118,21 @@ class ModelTestResultController extends Controller
             return  array_merge($item, $submitted_question_details_collection->firstWhere('question_id', '==', $item['question_id']));
         });
 
-        dump($exam_result_collection);
+        // dump($exam_result_collection);
 
 
-        // $exam_result_collection = $exam_result_collection->groupBy(['subject_id', function ($item) {
-        //     return $item['passage_id'];
-        // }], $preserveKeys = true);
+        $exam_result_collection = $exam_result_collection->groupBy(['subject_id', function ($item) {
+            return $item['passage_id'];
+        }], $preserveKeys = true);
+
+        //dump($exam_result_collection);
+        // foreach ($exam_result_collection as $subject_id => $subject_arr) {
+        //     dump(Subject::where('id', $subject_id)->value('name'));
+
+        //     dump($subject_arr);
+        // }
 
 
-        //dd($exam_result->toJson(JSON_PRETTY_PRINT));
 
         //dd("End");
 

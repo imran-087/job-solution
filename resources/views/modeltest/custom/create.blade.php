@@ -149,15 +149,25 @@
                             
                         </div>
                         <!-- end: col-->
-                        <!-- end: col-->
+                        <!--begin::Col-->
                         <div class="col-md-2 fv-row">
                             <!--begin::Label-->
                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                <span class="required" >Duration</span>
+                                <span class="required">Exam Duration</span>
                             </label>
                             <!--end::Label-->
-                            <input type="text" class="form-control form-control-solid " placeholder="Exam duration (5 min.)" name="duration" />
-                            
+                            <!--begin::Input group-->
+                            <div class="input-group mb-5">
+                                <input type="text" class="form-control  
+                                @error('duration') is-invalid @enderror" placeholder="15" name="duration" value="{{ old('duration') }}"/>
+                                <span class="input-group-text">min</span>
+                                @error('duration')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <!--end::Input group-->
                         </div>
                         <!-- end: col-->
                     </div>

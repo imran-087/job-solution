@@ -286,7 +286,6 @@
 
                             <!--begin::Col-->
                             <div class="col-md-2 fv-row">
-                                
                                 <!--begin::Label-->
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                     <span class="required">Exam Duration</span>
@@ -304,7 +303,6 @@
                                     @enderror
                                 </div>
                                 <!--end::Input group-->
-                                
                             </div>
                             <!-- end: col-->
                             <!--begin::Col-->

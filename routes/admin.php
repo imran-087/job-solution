@@ -269,7 +269,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/exam-details/get-subject/{id}', 'Exam\ExamDetailsController@getSubject')->name('exam-details.subject');
         Route::post('/exam-details/store', 'Exam\ExamDetailsController@store')->name('exam-details.store');
         Route::post('/exam-details/update', 'Exam\ExamDetailsController@update')->name('exam-details.update');
-        Route::get('/exam-details/get-subject/subject/{id}', 'Exam\ExamDetailsController@examSubject')->name('exam-details.subject');
+        Route::get('/exam-details/get-exam-subject/{id}', 'Exam\ExamDetailsController@examSubject')->name('exam-details.subject');
+
+
 
         #***** Exam view ******#
         Route::get('/exam/details-view', 'Exam\ExamViewController@show')->name('exam.show');

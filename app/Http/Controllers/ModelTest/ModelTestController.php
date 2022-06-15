@@ -150,9 +150,10 @@ class ModelTestController extends Controller
         return view('modeltest.exam', compact('exam', 'questions'));
     }
 
+    //MODEL TEST DATA 
     public function submittedData(Request $request)
     {
-        //dd($request->all());
+        // dd($request->all());
         $exam = Exam::find($request->exam_id);
 
         $exam_result = ExamResult::create([

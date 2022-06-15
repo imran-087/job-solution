@@ -151,7 +151,7 @@
                                 <div class="row g-9 pb-4 mb-13">
                                     <!--begin::Col-->
                                     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 fv-row offset-3">
-                                        {{-- <label class="required fs-6 fw-bold mb-2">Question Type</label> --}}
+                                        <label class="required fs-6 fw-bold mb-2">Question Type</label>
                                         <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                             data-placeholder="" name="type" id="type">
                                             <option value="mcq" selected>MCQ</option>
@@ -163,7 +163,7 @@
                                     <!--end:Col-->
                                     <!--begin::Col-->
                                     <div class="col-xl-3 col-lg-3 col-md-3 col-sm-6 col-xs-6 fv-row ">
-                                        {{-- <label class="required fs-6 fw-bold mb-2">Question Type</label> --}}
+                                        <label class="required fs-6 fw-bold mb-2">Option Number</label>
                                         <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                             data-placeholder="" name="option" id="option">
                                             <option value="4" selected>4</option>

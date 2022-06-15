@@ -11,14 +11,15 @@
     @if($questions->count() > 0)
 
     @foreach($questions as $key => $question)
+        <div class="card card-bordered mb-5 py-2 px-2">
+            <div class="d-flex flex-column align-items-center justify-content-center ">
+                <h3 class="">বিষয় ঃ {{$question->subject->name}}
+                {{ $question->subject_id }}</h3>
+            </div>
+        </div>
         @php
         $subject_questions = App\Models\Question::with('question_option', 'descriptions')->where('subject_id', $question->subject_id)->get();
         @endphp
-        <div class="card card-bordered mb-5 py-2 px-2">
-            <div class="d-flex flex-column align-items-center justify-content-center ">
-                <h3 class="">বিষয় ঃ {{$question->subject->name}}</h3>
-            </div>
-        </div>
         <div class="row">
         @foreach($subject_questions as $key => $question)
             <div class="col-md-6">

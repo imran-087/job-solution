@@ -157,7 +157,7 @@
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-end">
-                        <button class="btn btn-primary btn-sm" id="kk_exam_submit" >Submit</button>
+                        <button class="btn btn-primary btn-sm py-3 px-20 fs-5" id="kk_exam_submit" >Submit</button>
                     </div>
                 </div>
             </div>
@@ -189,9 +189,10 @@
         })
         //console.log(exam_selected_questions.length);
 
-        const click_option = (click_option) => click_option++;
+        var click_count = 0;
         $('.click-option').on('click', function(){
-            click_option();
+            //count the number of how many question are answered
+            click_count +=1;
 
             var data = {};
             data.id = parseInt($(this).data('id'));
@@ -203,7 +204,7 @@
             exam_selected_questions[objIndex].select_option = data.option_no;
             //console.log("After update: ", exam_selected_questions[objIndex]);
 
-            console.log(exam_selected_questions);
+            //console.log(exam_selected_questions);
             
             //add a class
             $(this).find('i').removeClass('far');
@@ -214,55 +215,96 @@
             //console.log(click_option);
 
         });
-        console.log(click_option);
-
+       
         //submit 
         $('#kk_exam_submit').on('click', function(e){
             e.preventDefault();
 
             var exam_id = $('#exam_id').val();
 
-            $.ajax({
-                type:"POST",
-                url: "{{ url('/model-test/submitted-data') }}",
-                data :{
-                    "_token": "{{ csrf_token() }}",
-                    'submitted_data' : exam_selected_questions,
-                    'exam_id' : exam_id,
-                },
-                dataType: 'json',
-                success:function(data){
-                    toastr.success(data.message);
-                    window.location.href = data.url;
-                   
-                }
-            })
+            //alert if all question are not answered
+            //console.log(click_count);
+            if(exam_selected_questions.length != click_count){
+                Swal.fire({
+                    text: "you are not answered all the question. if you want to sumbit? click Force Submit",
+                    icon: "warning",
+                    showCancelButton: !0,
+                    buttonsStyling: !1,
+                    confirmButtonText: "Force Submit",
+                    cancelButtonText: "Go Back",
+                    customClass: {
+                        confirmButton: "btn fw-bold btn-danger",
+                        cancelButton: "btn fw-bold btn-active-light-primary"
+                    }
+                }).then((function (o) {
+                    if(o.value){ //if agree
+                        $.ajax({
+                            type:"POST",
+                            url: "{{ url('/model-test/submitted-data') }}",
+                            data :{
+                                "_token": "{{ csrf_token() }}",
+                                'submitted_data' : exam_selected_questions,
+                                'exam_id' : exam_id,
+                            },
+                            dataType: 'json',
+                            success:function(data){
+                                toastr.success(data.message);
+                                window.location.href = data.url;
+                            
+                            }
+                        })
+                    }
+                }))
+            }else{
+                $.ajax({
+                    type:"POST",
+                    url: "{{ url('/model-test/submitted-data') }}",
+                    data :{
+                        "_token": "{{ csrf_token() }}",
+                        'submitted_data' : exam_selected_questions,
+                        'exam_id' : exam_id,
+                    },
+                    dataType: 'json',
+                    success:function(data){
+                        toastr.success(data.message);
+                        window.location.href = data.url;
+                    
+                    }
+                })
+            }
+
         })
 
         //set time interval for auto submit
-        // setTimeout(function() {
-        //     $('#kk_exam_submit').trigger('click');    
-        // }, 4e3);
+        var exam_duration =  $('#duration').val();
+        var exam_time_in_milisecond = exam_duration * 60000;
+        //console.log(exam_time_in_milisecond);
+        
+        setTimeout(function() {
+            $('#kk_exam_submit').trigger('click');    
+        }, exam_time_in_milisecond);
                         
 
         //time counter 
         var timer2 = $('#duration').val();
+            timer2 = timer2 + ':00';
         var interval = setInterval(function() {
 
+            var timer = timer2.split(':');
+            //by parsing integer, I avoid all extra string processing
+            var minutes = parseInt(timer[0], 10);
+            var seconds = parseInt(timer[1], 10);
+            --seconds;
+            minutes = (seconds < 0) ? --minutes : minutes;
+            if (minutes < 0) clearInterval(interval);
+            seconds = (seconds < 0) ? 59 : seconds;
+            seconds = (seconds < 10) ? '0' + seconds : seconds;
 
-        var timer = timer2.split(':');
-        //by parsing integer, I avoid all extra string processing
-        var minutes = parseInt(timer[0], 10);
-        var seconds = parseInt(timer[1], 10);
-        --seconds;
-        minutes = (seconds < 0) ? --minutes : minutes;
-        if (minutes < 0) clearInterval(interval);
-        seconds = (seconds < 0) ? 59 : seconds;
-        seconds = (seconds < 10) ? '0' + seconds : seconds;
-        //minutes = (minutes < 10) ?  minutes : minutes;
-        $('#time_countdown').html('<p>Time Remaining  <span style="color:red; font-size:24px;">' + minutes + ':' + seconds +'</span></p>');
-        timer2 = minutes + ':' + seconds;
+            //minutes = (minutes < 10) ?  minutes : minutes;
+            $('#time_countdown').html('<p>Time Remaining  <span style="color:red; font-size:24px;">' + minutes + ':' + seconds +'</span></p>');
+            timer2 = minutes + ':' + seconds;
         }, 1000);
+        
     })
     </script>
 @endpush

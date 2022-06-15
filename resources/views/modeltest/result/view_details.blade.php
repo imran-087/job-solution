@@ -94,8 +94,260 @@
                     
                     <div class="card-body">
                         <div class="row">
-                            @foreach($exam_result_collection as  $result_data)
-                                @php $result_data = (object) $result_data @endphp
+                            @foreach($exam_result_collection as $subject_id => $subject_collection)
+                            @php $subject = App\Models\Subject::where('id', $subject_id)->value('name') @endphp
+                            <h3> {{ $subject }}</h3>
+                            <br><br><br>
+                                @foreach( $subject_collection as $passage_id => $passage_collection )
+                                 @php $passage = App\Models\Passage::where('id', $passage_id)->value('passage') @endphp
+                                <h4> {!! $passage !!}</h4>
+                                    @foreach($passage_collection as $result_data)
+                                        @php $result_data = (object) $result_data @endphp
+                                        
+                                        <div class="col-md-6">
+                                            <div class="card card-bordered mb-5">
+                                                <div class="card-header card-success">
+                                                    <h3 class="card-title text-gray-700 fw-bolder cursor-default mb-0 result_data" >
+                                                            <span> {{ $loop->index+1 }}.  {{$result_data->question }} </span>
+                                                    </h3>
+                                                    <div class="card-toolbar">
+                                                        <a href="javascript:;" class="btn btn-sm btn-icon btn-active-color-primary editQuestion" data-id="{{$result_data->question_id }}" data-ques_type="{{$result_data->question_type}}">
+                                                            <i class="fas fa-edit"></i>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="card-body">
+                                                    <div class="row"  style="font-size: 16px">
+                                                        <div class="col-md-6">
+                                                            <p class="{{ $result_data->answer == 1 ? 'right-answer' : '' }} text-gray-800 fw-bold " > 
+                                                                <span ><i 
+                                                                    @if($result_data->select_option == 1)
+                                                                        class="fas fa-check-circle fa-2xl"
+                                                                    @elseif($result_data->select_option == 0)
+                                                                        class="far fa-circle fa-2xl"
+                                                                    
+                                                                    @else
+                                                                        class="fas fa-ban fa-2xl"
+                                                                    @endif
+                                                                    ></i>
+                                                                </span> {{$result_data->option_1 }} 
+                                                                <span>
+                                                                    <i
+                                                                        @if($result_data->select_option != 0 && $result_data->select_option == 1)
+                                                                        class="{{ $result_data->select_option == $result_data->answer ? 'fas fa-check' : 'fas fa-times'  }} fa-2xl" 
+                                                                        @endif
+                                                                        >
+                                                                    </i>
+                                                                </span>
+                                                                
+                                                                
+                                                            </p>
+                                                            @if($result_data->question_type == 'image')
+                                                            <div class="symbol symbol-45px me-2 mb-5 mt-2">
+                                                                <span class="symbol-label">
+                                                                    <img src="{{ asset($result_data->image_option[0]) }}" class="h-50 align-self-center" alt="">
+                                                                </span>
+                                                            </div>
+                                                            @endif
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <p class="text-gray-800 fw-bold {{ $result_data->answer == 2 ? 'right-answer' : '' }}"  > 
+                                                                <span><i 
+                                                                    @if($result_data->select_option == 2)
+                                                                        class="fas fa-check-circle fa-2xl"
+                                                                    @elseif($result_data->select_option == 0)
+                                                                        class="far fa-circle fa-2xl"
+                                                                        
+                                                                    @else
+                                                                    class="fas fa-ban fa-2xl"
+                                                                    @endif
+                                                                    ></i> 
+                                                                </span> {{$result_data->option_2}}
+                                                                <span>
+                                                                    <i
+                                                                        @if($result_data->select_option != 0 && $result_data->select_option == 2)
+                                                                        class="{{ $result_data->select_option == $result_data->answer ? 'fas fa-check' : 'fas fa-times'  }} fa-2xl" 
+                                                                        @endif
+                                                                        >
+                                                                    </i>
+                                                                </span>
+                                                            </p>
+                                                            @if($result_data->question_type == 'image')
+                                                            <div class="symbol symbol-45px me-2 mb-5 mt-2">
+                                                                <span class="symbol-label">
+                                                                    <img src="{{ asset($result_data->image_option[1]) }}" class="h-50 align-self-center" alt="">
+                                                                </span>
+                                                            </div>
+                                                            @endif
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <p class="text-gray-800 fw-bold {{ $result_data->answer == 3 ? 'right-answer' : '' }}"> 
+                                                                <span ><i 
+                                                                    @if($result_data->select_option == 3)
+                                                                        class="fas fa-check-circle fa-2xl"
+                                                                    @elseif($result_data->select_option == 0)
+                                                                        class="far fa-circle fa-2xl"
+                                                                        
+                                                                    @else
+                                                                        class="fas fa-ban fa-2xl"
+                                                                    @endif
+                                                                    ></i>
+                                                                </span> {{$result_data->option_3 }}
+                                                                <span>
+                                                                    <i
+                                                                        @if($result_data->select_option != 0 && $result_data->select_option == 3)
+                                                                        class="{{ $result_data->select_option == $result_data->answer ? 'fas fa-check' : 'fas fa-times'  }} fa-2xl" 
+                                                                        @endif
+                                                                        >
+                                                                    </i>
+                                                                </span>
+                                                            </p>
+                                                            @if($result_data->question_type == 'image')
+                                                            <div class="symbol symbol-45px me-2 mb-5 mt-2">
+                                                                <span class="symbol-label">
+                                                                    <img src="{{ asset($result_data->image_option[2]) }}" class="h-50 align-self-center" alt="">
+                                                                </span>
+                                                            </div>
+                                                            @endif
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <p class="text-gray-800 fw-bold {{ $result_data->answer == 4 ? 'right-answer' : '' }}" > 
+                                                                <span><i 
+                                                                    @if($result_data->select_option == 4)
+                                                                        class="fas fa-check-circle fa-2xl"
+                                                                    @elseif($result_data->select_option == 0)
+                                                                        class="far fa-circle fa-2xl"
+                                                                    
+                                                                    @else
+                                                                        class="fas fa-ban fa-2xl"
+                                                                    @endif
+                                                                    ></i>
+                                                                </span> {{$result_data->option_4 }}
+                                                                <span>
+                                                                    <i
+                                                                        @if($result_data->select_option != 0 && $result_data->select_option == 4)
+                                                                        class="{{ $result_data->select_option == $result_data->answer ? 'fas fa-check' : 'fas fa-times'  }} fa-2xl" 
+                                                                        @endif
+                                                                        >
+                                                                    </i>
+                                                                </span>
+                                                            </p>
+                                                            @if($result_data->question_type == 'image')
+                                                            <div class="symbol symbol-45px me-2 mb-5 mt-2">
+                                                                <span class="symbol-label">
+                                                                    <img src="{{ asset($result_data->image_option[3]) }}" class="h-50 align-self-center" alt="">
+                                                                </span>
+                                                            </div>
+                                                            @endif
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+                                @endforeach
+                            @endforeach     
+                        </div>
+                    </div>  
+                </div>
+            </div>
+        </div>
+              
+    </div>
+    <!--end::Container-->
+</div>
+<!--end::Post-->
+
+ <!--begin::Modal - Edit Question-->
+<div class="modal fade" id="kk_modal_show_question" tabindex="-1" aria-hidden="true">
+    <div id="edit_question_modal"></div>
+</div>
+<!--end::Modal - Edit Question-->
+
+    
+@endsection
+
+@push('script')
+<script type="text/javascript">
+        //edit Question
+    $('.editQuestion').on('click', function() {
+        var id = $(this).data('id')
+        var ques_type = $(this).data('ques_type')
+        console.log(ques_type)
+        $.ajax({
+            type:"GET",
+            url: "{{ url('/question/edit-question')}}"+'/'+id+'/'+ques_type,
+            dataType: 'json',
+            success:function(data){
+                $("#edit_question_modal").html(data.html);
+                $("#kk_modal_show_question").modal('show');
+            }
+        });
+    });
+
+    //edit question cancel button
+    $(document).on('click', '#kk_modal_new_service_cancel', function(){
+        
+        $("#kk_modal_show_question").modal('hide');
+        
+    })
+
+    //update edited question
+    $(document).on('submit', '#kk_modal_new_question_form', function(e){
+        e.preventDefault()
+        //console.log('here')
+        $('.with-errors').text('')
+        $('.indicator-label').hide()
+        $('.indicator-progress').show()
+        $('#kk_modal_new_service_submit').attr('disabled','true')
+
+        var formData = new FormData(this);
+        $.ajax({
+            type:"POST",
+            url: "{{ url('/question/edit-question/update')}}",
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                if(data.success ==  false || data.success ==  "false"){
+                    var arr = Object.keys(data.errors);
+                    var arr_val = Object.values(data.errors);
+                    for(var i= 0;i < arr.length;i++){
+                    $('.'+arr[i]+'-error').text(arr_val[i][0])
+                    }
+                }else if(data.error || data.error == 'true'){
+                    var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                    $('#kk_modal_new_question_form').find('.messages').html(alertBox).show();
+                }else{
+                    // empty the form
+                    $('#kk_modal_new_question_form')[0].reset();
+                    $("#kk_modal_show_question").modal('hide');
+
+                    Swal.fire({
+                        text: data.message,
+                        icon: "success",
+                        buttonsStyling: !1,
+                        confirmButtonText: "{{__('Ok, got it!')}}",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary"
+                        }
+                    })
+                }
+
+                $('.indicator-label').show()
+                $('.indicator-progress').hide()
+                $('#kk_modal_new_service_submit').removeAttr('disabled')
+
+            }
+        });
+    })
+</script>
+@endpush
+
+
+
+{{-- @php $result_data = (object) $result_data @endphp
                                 <div class="col-md-6">
                                     <div class="card card-bordered mb-5">
                                         <div class="card-header card-success">
@@ -235,103 +487,4 @@
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                                
-                            @endforeach     
-                        </div>
-                    </div>  
-                </div>
-            </div>
-        </div>
-              
-    </div>
-    <!--end::Container-->
-</div>
-<!--end::Post-->
-
- <!--begin::Modal - Edit Question-->
-<div class="modal fade" id="kk_modal_show_question" tabindex="-1" aria-hidden="true">
-    <div id="edit_question_modal"></div>
-</div>
-<!--end::Modal - Edit Question-->
-
-    
-@endsection
-
-@push('script')
-<script type="text/javascript">
-        //edit Question
-    $('.editQuestion').on('click', function() {
-        var id = $(this).data('id')
-        var ques_type = $(this).data('ques_type')
-        console.log(ques_type)
-        $.ajax({
-            type:"GET",
-            url: "{{ url('/question/edit-question')}}"+'/'+id+'/'+ques_type,
-            dataType: 'json',
-            success:function(data){
-                $("#edit_question_modal").html(data.html);
-                $("#kk_modal_show_question").modal('show');
-            }
-        });
-    });
-
-    //edit question cancel button
-    $(document).on('click', '#kk_modal_new_service_cancel', function(){
-        
-        $("#kk_modal_show_question").modal('hide');
-        
-    })
-
-    //update edited question
-    $(document).on('submit', '#kk_modal_new_question_form', function(e){
-        e.preventDefault()
-        //console.log('here')
-        $('.with-errors').text('')
-        $('.indicator-label').hide()
-        $('.indicator-progress').show()
-        $('#kk_modal_new_service_submit').attr('disabled','true')
-
-        var formData = new FormData(this);
-        $.ajax({
-            type:"POST",
-            url: "{{ url('/question/edit-question/update')}}",
-            data:formData,
-            cache:false,
-            contentType: false,
-            processData: false,
-            success:function(data){
-                if(data.success ==  false || data.success ==  "false"){
-                    var arr = Object.keys(data.errors);
-                    var arr_val = Object.values(data.errors);
-                    for(var i= 0;i < arr.length;i++){
-                    $('.'+arr[i]+'-error').text(arr_val[i][0])
-                    }
-                }else if(data.error || data.error == 'true'){
-                    var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
-                    $('#kk_modal_new_question_form').find('.messages').html(alertBox).show();
-                }else{
-                    // empty the form
-                    $('#kk_modal_new_question_form')[0].reset();
-                    $("#kk_modal_show_question").modal('hide');
-
-                    Swal.fire({
-                        text: data.message,
-                        icon: "success",
-                        buttonsStyling: !1,
-                        confirmButtonText: "{{__('Ok, got it!')}}",
-                        customClass: {
-                            confirmButton: "btn fw-bold btn-primary"
-                        }
-                    })
-                }
-
-                $('.indicator-label').show()
-                $('.indicator-progress').hide()
-                $('#kk_modal_new_service_submit').removeAttr('disabled')
-
-            }
-        });
-    })
-</script>
-@endpush
+                                </div> --}}
