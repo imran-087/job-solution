@@ -93,10 +93,10 @@
                                 data-kt-ecommerce-product-filter="status" data-select2-id="select2-data-10-i8aq"
                                 tabindex="-1" aria-hidden="true">
                                 <option data-select2-id="select2-data-12-ibou"></option>
-                                <option value="all" data-select2-id="select2-data-128-oc9k">All</option>
-                                <option value="active" data-select2-id="select2-data-129-5n39">Active</option>
-                                <option value="deactive" data-select2-id="select2-data-131-pohp">Deactive</option>
-                                <option value="ban" data-select2-id="select2-data-131-pohp">Ban</option>
+                                <option value="all" >All</option>
+                                <option value="active" >Active</option>
+                                <option value="deactive" >Deactive</option>
+                                <option value="ban" >Ban</option>
 
                             </select>
                             <!--end::Select2-->
@@ -340,6 +340,11 @@
             t) {
             table.search(t.target.value).draw()
         }))
+
+        $('.kk-datatable-filter').on('change',function(){
+            console.log(this.value)
+            table.ajax.url( "{{ url('admin/user-management/backend-user-list?status=') }}"+this.value ).load();
+        })
 
 
     })

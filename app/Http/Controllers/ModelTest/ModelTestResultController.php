@@ -120,7 +120,6 @@ class ModelTestResultController extends Controller
 
         // dump($exam_result_collection);
 
-
         $exam_result_collection = $exam_result_collection->groupBy(['subject_id', function ($item) {
             return $item['passage_id'];
         }], $preserveKeys = true);

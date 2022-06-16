@@ -268,15 +268,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/exam-details/create', 'Exam\ExamDetailsController@create')->name('exam-details.create');
         Route::get('/exam-details/get-subject/{id}', 'Exam\ExamDetailsController@getSubject')->name('exam-details.subject');
         Route::post('/exam-details/store', 'Exam\ExamDetailsController@store')->name('exam-details.store');
+        Route::get('/exam-details/get-exam-subject/{id}', 'Exam\ExamDetailsController@getExamSubject')->name('exam-details.subject');
         Route::post('/exam-details/update', 'Exam\ExamDetailsController@update')->name('exam-details.update');
-        Route::get('/exam-details/get-exam-subject/{id}', 'Exam\ExamDetailsController@examSubject')->name('exam-details.subject');
-
 
 
         #***** Exam view ******#
         Route::get('/exam/details-view', 'Exam\ExamViewController@show')->name('exam.show');
 
+
         ######### Exam Details add questions #########
+        Route::get('/exam-details/get-subject/subject/{id}', 'Exam\ExamDetailsController@examSubject')->name('exam-details.exam-subject');
         Route::get('/exam-details/exam-question', 'Exam\ExamDetailsController@question')->name('exam-details.question');
         Route::post('/exam-details/get-subject-question', 'Exam\ExamDetailsController@getQuestion')->name('exam-details.get-question');
         Route::post('/exam-details/exam-question/add', 'Exam\ExamDetailsController@addQuestion')->name('exam-details.question-add');
@@ -284,6 +285,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         ########## Exam result/report ##########
         Route::get('/exam-result', 'Exam\ExamResultController@index')->name('exam-result.index');
+        Route::get('/exam-result-details-view', 'Exam\ExamResultController@show')->name('exam-result.show');
 
         ####### Package route ###########
         Route::get('/packages/index', 'PackageController@index')->name('package.index');

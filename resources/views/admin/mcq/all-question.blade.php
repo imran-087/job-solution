@@ -11,14 +11,14 @@
     @if($questions->count() > 0)
 
     @foreach($questions as $key => $question)
-        <div class="card card-bordered mb-5 py-2 px-2">
+        <div class="card card-bordered mb-5 py-3 px-2">
             <div class="d-flex flex-column align-items-center justify-content-center ">
                 <h3 class="">বিষয় ঃ {{$question->subject->name}}
                 {{ $question->subject_id }}</h3>
             </div>
         </div>
         @php
-        $subject_questions = App\Models\Question::with('question_option', 'descriptions')->where('subject_id', $question->subject_id)->get();
+        $subject_questions = App\Models\Question::with('question_option', 'descriptions')->where(['subject_id' => $question->subject_id, 'sub_category_id' => $sub_category->id])->get();
         @endphp
         <div class="row">
         @foreach($subject_questions as $key => $question)

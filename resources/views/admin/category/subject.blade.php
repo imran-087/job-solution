@@ -209,8 +209,8 @@
                         <div class="col-md-6 fv-row">
                             <label class="required fs-6 fw-bold mb-2">Select Main Category</label>
                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                data-placeholder="Select main category" name="main_category" id="main_category">
-                               
+                                name="main_category" id="main_category">
+                                <option value="">Select main category</option>
                                 @foreach ($main_categories as $main_category)
                                     <option value="{{ $main_category->id }}">{{ $main_category->name }}</option>
                                 @endforeach
@@ -457,7 +457,7 @@
                     $('#name').val(data.subject.name);
                     $('input[name="title"]').val(data.subject.title);
                     $('textarea[name="description"]').val(data.subject.description);
-                    $('select[name="parent"]').html('<option value="' + data.subject.parent_id + '">' + data.subject.parent_id + '</option>');;
+                    $('select[name="parent"]').html('<option value="' + data.parent_subject.id + '">' + data.parent_subject.name + '</option>');
                     $('select[name="status"]').val(data.subject.status).change();
                     $('select[name="main_category"]').val(data.subject.main_category_id).change();
                     $('select[name="category"]').html('<option value="' + data.category.id + '">' + data.category.name + '</option>');

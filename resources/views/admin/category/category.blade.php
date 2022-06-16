@@ -208,7 +208,8 @@
                         <div class="col-md-12 fv-row">
                             <label class="required fs-6 fw-bold mb-2">Select Main Category</label>
                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                data-placeholder="Select main category"  name="main_category" id="main_category">
+                                name="main_category" id="main_category">
+                                <option value="">Select Main Category</option>
                                 @foreach ($main_categories as $main_category)
                                     <option value="{{ $main_category->id }}">{{ $main_category->name }}</option>
                                 @endforeach
@@ -331,7 +332,7 @@
 
                 ],
                 "order": [
-                    [4, 'desc']
+                    [5, 'desc']
                 ] //created at desc
 
             })
@@ -353,6 +354,7 @@
             $('input[name="category_id"]').val('')
             $('.with-errors').text('')
             $('#kk_modal_new_category_form')[0].reset();
+            $('#main_category').get(0).selectedIndex = 0;
             $('#kk_modal_new_category').modal('show')
         }
 
@@ -377,6 +379,7 @@
         $('#kk_modal_new_service_cancel').on('click', function(){
             $('#kk_modal_new_category_form')[0].reset();
             $("#kk_modal_new_category").modal('hide');
+            $('#main_category').get(0).selectedIndex = 0;
         })
 
         //new category save
@@ -409,6 +412,7 @@
                         // empty the form
                         $('#kk_modal_new_category_form')[0].reset();
                         $("#kk_modal_new_category").modal('hide');
+                        $('#main_category').get(0).selectedIndex = 0;
 
                         Swal.fire({
                                 text: data.message,

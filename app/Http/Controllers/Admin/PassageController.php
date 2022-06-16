@@ -24,6 +24,9 @@ class PassageController extends Controller
                 ->editColumn('created_at', function ($row) {
                     return $row->created_at->diffForHumans();
                 })
+                ->editColumn('passage', function ($row) {
+                    return  htmlspecialchars_decode($row->passage);
+                })
 
                 ->addColumn('action', function ($row) {
                     $btn = '<div class="d-flex justify-content-start flex-shrink-0">
@@ -51,7 +54,7 @@ class PassageController extends Controller
                     </div>';
                     return $btn;
                 })
-                ->rawColumns(['action', 'created_at'])
+                ->rawColumns(['action', 'passage', 'created_at'])
                 ->make(true);
         }
         return view('admin.passage.passage_index');

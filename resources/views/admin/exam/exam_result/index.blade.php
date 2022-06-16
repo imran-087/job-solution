@@ -128,15 +128,18 @@
                                     <!--begin::Table row-->
                                     <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                         <th class="min-w-20px">#</th>
-                                        <th class="min-w-150px">Examinee</th>
                                         <th class="min-w-150px">Exam Name</th>
-                                        <th class="min-w-50px">T. Question</th>
-                                        <th class="min-w-70px">T. Mark</th>
-                                        <th class="min-w-70px">Answer</th>
-                                        <th class="min-w-70px">Wright</th>
-                                        <th class="min-w-70px">Wrong</th>
-                                        <th class="min-w-70px">Mark</th>
-                                        <th class="min-w-70px">Status</th>
+                                        {{-- <th class="min-w-150px">Examinee</th> --}}
+                                        <th class="min-w-50px">Question</th>
+                                        <th class="min-w-50px">Mark</th>
+                                        <th class="min-w-50px">Cut Mark</th>
+                                        <th class="min-w-50px">Negative Mark</th>
+                                        <th class="min-w-50px">Answered</th>
+                                        <th class="min-w-50px">Right</th>
+                                        <th class="min-w-50px">Wrong</th>
+                                        <th class="min-w-50px">Not Ans.</th>
+                                        <th class="min-w-50px">Obtain Mark</th>
+                                        <th class="min-w-50px">Status</th>
                                         <th class="min-w-70px">Actions</th>
                                     </tr>
                                     <!--end::Table row-->
@@ -185,46 +188,55 @@
                         searchable: false
                     },
                     {
-                        data: 'user_id',
-                        name: 'user_id'
-                    },
-                    {
                         data: 'exam_id',
                         name: 'exam_id'
                     },
+                    // {
+                    //     data: 'user_id',
+                    //     name: 'user_id'
+                    // },
                     {
-                        data: 'number_of_question',
-                        name: 'number_of_question'
+                        data: 'total_question',
+                        name: 'total_question'
                     },
                     {
-                        data: 'mark',
-                        name: 'mark'
+                        data: 'total_mark',
+                        name: 'total_mark'
                     },
-                    
                     {
-                        data: 'answer',
-                        name: 'answer'
+                        data: 'cut_mark',
+                        name: 'cut_mark'
                     },
-
                     {
-                        data: 'wright',
-                        name: 'wright'
+                        data: 'negative_mark',
+                        name: 'negative_mark'
                     },
-                
                     {
-                        data: 'wrong',
-                        name: 'wrong'
+                        data: 'answered',
+                        name: 'answered'
                     },
-
+                  
                     {
-                        data: 'get_mark',
-                        name: 'get_mark'
+                        data: 'right_ans',
+                        name: 'right_ans'
+                    },
+                    {
+                        data: 'wrong_ans',
+                        name: 'wrong_ans'
+                    },
+                      {
+                        data: 'not_ans',
+                        name: 'not_ans'
+                    },
+                    {
+                        data: 'obtain_mark',
+                        name: 'obtain_mark'
                     },
                     {
                         data: 'status',
                         name: 'status'
                     },
-                
+                  
                     {
                         data: 'action',
                         name: 'action',

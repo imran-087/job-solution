@@ -288,8 +288,8 @@
 <!--end::Modal - Subject add-->
 
 <!--begin::Modal - Edit Subject modal-->
-<div class="modal fade" id="kk_exam_details_modal" tabindex="-1" aria-hidden="true">
-<div id="exam_details"></div>
+<div class="modal fade" id="kk_exam_subject_edit_modal" tabindex="-1" aria-hidden="true">
+<div id="exam_subject"></div>
 </div>
 <!--end::Modal - Edit Subject  modal-->
 
@@ -391,7 +391,7 @@
                     subjectSelectInput(data);
                     $("#kk_modal_add_subject").modal('show');
                 }
-          });
+            });
         }
 
         function subjectSelectInput(data)
@@ -471,6 +471,7 @@
 
             //get exam id
             var id = $('#exam_id').val();
+            console.log(id);
             //getting subject for this exam
             addSubject(id);
 
@@ -599,11 +600,19 @@
                 url: "{{ url('/admin/exam-details/get-exam-subject/')}}"+'/'+id,
                 dataType: 'json',
                 success:function(data){
-                    $("#exam_details").html(data.html);
-                    $("#kk_exam_details_modal").modal('show');
+                    $("#exam_subject").html(data.html);
+                    $("#kk_exam_subject_edit_modal").modal('show');
+
+                    var total_exam_question = $('input[name="total_exam_question"]').val();
+
+                    var val = '<label class="d-flex align-items-center fs-6 fw-bold mb-2"><span class="required">Exam Total Question</span> </label>'
+                    val += '<span class="badge badge-primary badge-lg"><span id=result>' + total_exam_question +  '</span> / ' + total_exam_question + '</span>'
+                            
+                    $('#total_exam_question').html(val)
                 }
             });
         }
 
+        
     </script>
 @endpush

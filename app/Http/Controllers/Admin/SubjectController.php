@@ -217,6 +217,13 @@ class SubjectController extends Controller
     {
         //dd($id);
         $subject = Subject::find($id);
+
+        if ($subject->parent_id != null) {
+            $parent_subject = Subject::find($subject->parent_id);
+        } else {
+            $parent_subject = '';
+        }
+
         if ($subject->sub_category_id == 0) {
             //dd('here');
             $main_category = MainCategory::where('id', $subject->main_category_id)->first();
@@ -235,6 +242,7 @@ class SubjectController extends Controller
             'sub_category' => $sub_category,
             'category' => $category,
             'main_category' => $main_category,
+            'parent_subject' => $parent_subject
         ];
         return response($data);
     }

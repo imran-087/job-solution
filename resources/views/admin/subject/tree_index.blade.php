@@ -73,7 +73,7 @@
                         <div class="col-md-3 fv-row">
                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                 data-placeholder="Filter by category"  id="main_category">
-                                <option ></option>
+                                <option value="">Select category</option>
                                 @foreach($main_categories as $main_category)
                                     <option value="{{ $main_category->id }}">{{ $main_category->name }}</option>
                                 @endforeach

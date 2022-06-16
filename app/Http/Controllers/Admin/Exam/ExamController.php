@@ -124,7 +124,6 @@ class ExamController extends Controller
         //dd($request->all());
 
         $exam_starting_time = Carbon::parse($request->exam_starting_time)->format('Y-m-d\TH:i');
-        $duration = $request->duration . ':00';
 
         $exam = Exam::create([
             'category_id' => $request->category,
@@ -134,7 +133,7 @@ class ExamController extends Controller
             'name' => $request->instruction,
             'examinee_type' => $request->examinee_type,
             'exam_mode' => $request->exam_mode,
-            'duration' => $duration,
+            'duration' => $request->duration,
             'number_of_question' => $request->number_of_question,
             'mark' => $request->mark,
             'cut_mark' => $request->cut_mark ?? '0',

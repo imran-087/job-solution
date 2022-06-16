@@ -19,6 +19,11 @@ class BackendUserController extends Controller
         if ($request->ajax()) {
             $data = Admin::select();
 
+            //filter
+            if (isset($request->status) && $request->status != "all") {
+                $data->where('status', $request->status);
+            }
+
             return DataTables::of($data)
                 ->addIndexColumn()
 

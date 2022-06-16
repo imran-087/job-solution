@@ -32,7 +32,7 @@ class ExamViewController extends Controller
             $collection = collect($exam_detail->question_ids);
             //dump($collection);
             $quesion_id_collection = $collection->pluck('question_id');
-        
+
             $question_option = QuestionOption::whereIn('question_id', $quesion_id_collection)->select("question_id", "option_1", "option_2", "option_3", "option_4", "option_5",  "image_option", "image_question", "answer");
             // dump($question_option);
 
@@ -41,6 +41,7 @@ class ExamViewController extends Controller
             })->select(
                 "question_id",
                 "subject_id",
+                "passage_id",
                 "question",
                 "question_type",
                 "future_editable",
@@ -57,9 +58,13 @@ class ExamViewController extends Controller
             $questions_arr = array_merge($questions_arr, $question_details);
         }
 
-        $questions = collect($questions_arr);
+        $question_collection = collect($questions_arr);
+        $question_collection = $question_collection->groupBy(['subject_id', function ($item) {
+            return $item['passage_id'];
+        }], $preserveKeys = true);
 
-        //dump($questions);
-        return view('admin.exam.show', compact('exam', 'questions'));
+        //dd($questions);
+
+        return view('admin.exam.show', compact('exam', 'question_collection'));
     }
 }

@@ -96,7 +96,7 @@
                             
                         </div>
                         <!--begin::Add product-->
-                        <a href="javascript:;" class="btn btn-sm btn-primary me-3" onclick="addNew()">Add Passage</a>
+                        {{-- <a href="javascript:;" class="btn btn-sm btn-primary me-3" onclick="addNew()">Add Passage</a> --}}
                         <!--end::Add product-->
                     </div>
 
@@ -303,7 +303,7 @@
                 dataType: 'json',
                 success:function(data){
                    $('input[name="passage_id"]').val(data.id)
-                   $('textarea[name="passage"]').val(data.passage)
+                   $('textarea[name="passage"]').text(data.passage)
                    $('input[name="title"]').val(data.title)
                    $("#kk_modal_new_passage").modal('show');
                 }
