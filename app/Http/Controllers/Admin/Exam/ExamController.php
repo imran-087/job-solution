@@ -152,21 +152,23 @@ class ExamController extends Controller
         }
     }
 
+
+
     public function edit($id)
     {
         $exam = Exam::find($id);
         $categories = Category::select('id', 'name')->get();
 
         //exam subject edit
-        $exam_details = ExamDetail::with('subject')->where('exam_id',  $id)
-            ->where('question_ids', null)
-            // ->where('created_user_id', Auth::guard('admin')->id())
-            ->get();
-        return view('admin.exam.edit', compact('exam', 'categories', 'exam_details'));
+        $question_exist = ExamDetail::where('exam_id', $id)->where('question_ids', '!=', null)->exists();
+
+
+        return view('admin.exam.edit', compact('exam', 'categories', 'question_exist'));
     }
 
     public function update(Request $request)
     {
+
         //dd($request->all());
 
         $exam_starting_time = Carbon::parse($request->exam_starting_time)->format('Y-m-d\TH:i');

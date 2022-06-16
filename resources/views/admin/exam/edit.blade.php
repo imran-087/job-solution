@@ -184,7 +184,8 @@
                                     <span class="required">Number of Ques.</span>
                                 </label>
                                 <!--end::Label-->
-                                <input type="text" class="form-control form-control-solid @error('number_of_question') is-invalid @enderror" placeholder="Number of Question" name="number_of_question" value="{{ $exam->number_of_question }}"/>
+                                <input type="text" class="form-control form-control-solid @error('number_of_question') is-invalid @enderror" placeholder="Number of Question"
+                                 name="number_of_question" value="{{ $exam->number_of_question }}" {{ $question_exist == 'true' ? 'disabled' : '' }} />
                                 @error('number_of_question')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

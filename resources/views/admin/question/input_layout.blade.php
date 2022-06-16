@@ -107,18 +107,31 @@
 <!--end::Actions-->
 
 
-<script type="text/javascript">
+{{-- <script type="text/javascript">
     ClassicEditor
     .create(document.querySelector('#kt_docs_ckeditor_classic'))
     .then(editor => {
-        console.log( 'Editor was initialized', editor );
+        // console.log( 'Editor was initialized', editor );
         myEditor = editor;
     })
     .catch(error => {
         console.error(error);
     });
-</script>
+</script> --}}
+@push('script')
+<script type="text/javascript">
+   import MathType from '@wiris/mathtype-ckeditor5';
 
+    ClassicEditor
+        .create( document.querySelector( '#kt_docs_ckeditor_classic' ), {
+            plugins: [ MathType, ... ],
+            toolbar: [ 'MathType', 'ChemType', ... ]
+        } )
+        .then( ... )
+        .catch( ... );
+
+</script>
+@endpush
 
       
 

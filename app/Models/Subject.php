@@ -37,6 +37,11 @@ class Subject extends Model
         return $this->belongsTo(MainCategory::class);
     }
 
+    public function passages()
+    {
+        return $this->hasMany(Passage::class);
+    }
+
     public function parentsub()
     {
         return $this->belongsTo(Subject::class, 'parent_id');

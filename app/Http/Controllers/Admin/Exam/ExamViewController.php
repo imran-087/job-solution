@@ -17,12 +17,11 @@ class ExamViewController extends Controller
 
         // // //dd($subject_id);
         if ($request->has('subject_id')) {
-            $exam_details = ExamDetail::with('question')
-                ->where('exam_id', $request->exam_id)
+            $exam_details = ExamDetail::where('exam_id', $request->exam_id)
                 ->where('subject_id', $request->subject_id)
                 ->get();
         } else {
-            $exam_details = ExamDetail::where('exam_id', $request->exam_id)->with('question')->get();
+            $exam_details = ExamDetail::where('exam_id', $request->exam_id)->get();
             // dd($exam_details);
         }
 
@@ -63,7 +62,7 @@ class ExamViewController extends Controller
             return $item['passage_id'];
         }], $preserveKeys = true);
 
-        //dd($questions);
+        // dd($question_collection);
 
         return view('admin.exam.show', compact('exam', 'question_collection'));
     }

@@ -89,8 +89,8 @@
                         <div class="card-body">
                             <div class="row">
                             @foreach($question_collection as $subject_id => $subject_collection)
-                                @php $subject = App\Models\Subject::where('id', $subject_id)->value('name') @endphp
-                                <h3 class="text-center border py-3 rounded">বিষয়ঃ {{ $subject }}</h3>
+                            @php $subject = App\Models\Subject::where('id', $subject_id)->select('name', 'id')->first(); @endphp
+                                <h3 class="text-center border py-3 rounded">বিষয়ঃ {{ $subject->id }} {{ $subject->name }}</h3>
                                 @foreach( $subject_collection as $passage_id => $passage_collection )
                                     @php $passage = App\Models\Passage::where('id', $passage_id)->value('passage') @endphp
                                     <h4> {!! $passage !!}</h4>

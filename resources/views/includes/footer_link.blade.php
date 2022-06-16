@@ -47,7 +47,11 @@
 			//image upload in ckeditor
 			ckfinder:{
                 uploadUrl: '{{ route('ckeditor.upload'). '?_token='.csrf_token() }}'
-            }
+            },
+			{
+            plugins: [ MathType],
+            toolbar: [ 'MathType', 'ChemType']
+        	}
 		})
 		.then(editor => {
 			console.log( 'Editor was initialized', editor );

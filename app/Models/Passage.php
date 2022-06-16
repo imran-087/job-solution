@@ -15,5 +15,8 @@ class Passage extends Model
         return $this->hasMany(Question::class);
     }
 
-   
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
+    }
 }

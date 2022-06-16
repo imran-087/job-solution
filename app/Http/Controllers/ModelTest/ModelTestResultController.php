@@ -104,9 +104,11 @@ class ModelTestResultController extends Controller
             "option_5",
             "image_option",
             "answer"
-        )->get()->toArray();
-
+        )->get();
+        $question_details = $question_details->toArray();
         // dump($question_details);
+
+
 
         $submitted_question_details_collection = collect($question_details);
 
@@ -118,13 +120,15 @@ class ModelTestResultController extends Controller
             return  array_merge($item, $submitted_question_details_collection->firstWhere('question_id', '==', $item['question_id']));
         });
 
-        // dump($exam_result_collection);
+        //dump($exam_result_collection);
+        $subject_with_passage = Subject::whereIn('id', $exam_result_collection->pluck('subject_id')->unique())->with('passages')->get();
+        //dd($subject_with_passage);
 
         $exam_result_collection = $exam_result_collection->groupBy(['subject_id', function ($item) {
             return $item['passage_id'];
         }], $preserveKeys = true);
 
-        //dump($exam_result_collection);
+        // dump($exam_result_collection);
         // foreach ($exam_result_collection as $subject_id => $subject_arr) {
         //     dump(Subject::where('id', $subject_id)->value('name'));
 
