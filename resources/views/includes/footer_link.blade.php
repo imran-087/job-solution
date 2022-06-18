@@ -40,26 +40,36 @@
 	<script type="text/javascript">
 	 CKEDITOR.replace('ckeditor');
 	</script> --}}
-	<script type="text/javascript">
+	<script type="module">
 	 	var myEditor;
-		ClassicEditor
-		.create(document.querySelector('#kt_docs_ckeditor_classic'),{
-			//image upload in ckeditor
-			ckfinder:{
-                uploadUrl: '{{ route('ckeditor.upload'). '?_token='.csrf_token() }}'
-            },
-			{
-            plugins: [ MathType],
-            toolbar: [ 'MathType', 'ChemType']
-        	}
-		})
-		.then(editor => {
-			console.log( 'Editor was initialized', editor );
-            myEditor = editor;
-		})
-		.catch(error => {
+
+
+ClassicEditor
+    .create( document.querySelector( '#kt_docs_ckeditor_classic' ), {
+        plugins: [ MathType, ],
+        toolbar: [ 'MathType', 'ChemType', ]
+    } )
+    .then(  )
+    .catch( );
+
+		// import MathType from '/node_modules@wiris/mathtype-ckeditor5';
+		// ClassicEditor
+		// .create(document.querySelector('#kt_docs_ckeditor_classic'),{
+		// 	plugins: [MathType],
+        //     toolbar: [ 'MathType', 'ChemType']
+		// 	//image upload in ckeditor
+		// 	// ckfinder:{
+        //     //     uploadUrl: '{{ route('ckeditor.upload'). '?_token='.csrf_token() }}'
+					
+        //     // }
+		// })
+		// .then(editor => {
+		// 	console.log( 'Editor was initialized', editor );
+        //     myEditor = editor;
+		// })
+		// .catch(error => {
 			
-		});
+		// });
 	</script>
 	
 	@stack('script')

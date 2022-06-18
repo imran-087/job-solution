@@ -208,7 +208,7 @@
                             <span class="required">Passage Content</span>
                         </label>
                         <!--end::Label-->
-                        <textarea name="passage" class="form-control form-control-solid h-100px"></textarea>
+                        <textarea name="passage" id="kt_docs_ckeditor_classic" class="form-control form-control-solid h-100px"></textarea>
                         <div class="help-block with-errors passage-error"></div>
                     </div>
                     <!--end::Input group-->
@@ -302,9 +302,10 @@
                 url: "{{ url('admin/passage/get')}}"+'/'+id,
                 dataType: 'json',
                 success:function(data){
-                   $('input[name="passage_id"]').val(data.id)
-                   $('textarea[name="passage"]').text(data.passage)
-                   $('input[name="title"]').val(data.title)
+                   $('input[name="passage_id"]').val(data.id);
+                //    $('textarea[name="passage"]').setData(data.passage)
+                    myEditor.setData(data.passage);
+                   $('input[name="title"]').val(data.title);
                    $("#kk_modal_new_passage").modal('show');
                 }
           });
@@ -325,6 +326,7 @@
             $('#kk_modal_new_service_submit').attr('disabled','true')
 
             var formData = new FormData(this);
+            //formData.append('passage', myEditor.getData());
             $.ajax({
                 type:"POST",
                 url: "{{ url('admin/passage/store')}}",
@@ -422,6 +424,17 @@
 
         }))
     }
-
+    </script>
+    <script type="text/javascript">
+        
+        ClassicEditor
+        .create(document.querySelector('#kt_docs_ckeditor_classic'))
+        .then(editor => {
+            // console.log( 'Editor was initialized', editor );
+            myEditor = editor;
+        })
+        .catch(error => {
+            console.error(error);
+        });
     </script>
 @endpush

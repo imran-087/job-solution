@@ -8,7 +8,9 @@ use App\Models\User;
 use App\Models\Year;
 use App\Models\Passage;
 use App\Models\Subject;
+use App\Models\Category;
 use App\Models\Question;
+use App\Models\Description;
 use App\Models\SubCategory;
 use Illuminate\Support\Str;
 use App\Models\MainCategory;
@@ -18,7 +20,6 @@ use App\Models\QuestionOption;
 use App\Models\PreviewQuestion;
 use App\Models\QuestionDescription;
 use App\Http\Controllers\Controller;
-use App\Models\Category;
 use Illuminate\Support\Facades\Auth;
 use Intervention\Image\Facades\Image;
 use Illuminate\Support\Facades\Session;
@@ -136,6 +137,8 @@ class QuestionController extends Controller
         ]);
     }
 
+
+
     //preview question
     public function preview(Request $request)
     {
@@ -143,7 +146,23 @@ class QuestionController extends Controller
         if ($request->type == 'image') {
             $this->store($request);
         } else {
-            $data['myForm'] = $request->all();
+
+            $collection = collect($request->all())->toArray();
+            function array_filter_recursive($input)
+            {
+                foreach ($input as &$value) {
+                    if (is_array($value)) {
+                        $value = array_filter_recursive($value);
+                    }
+                }
+                return array_filter($input);
+            }
+
+
+            $collection = array_filter_recursive($collection);
+
+
+            $data['myForm'] = $collection;
             $data['main_categories'] = MainCategory::all();
             $data['years'] = Year::all();
             //dd($data);
@@ -348,7 +367,7 @@ class QuestionController extends Controller
             'hard_level' => $request->hard_level,
             'mark' => $request->mark,
             'question' => $request->question,
-            'updated_user_id' => Auth::guard('admin')->user()->id,
+            'updated_user_id' => Auth::guard('admin')->user()->id
         ]);
 
         $question_option_data = [
@@ -365,27 +384,25 @@ class QuestionController extends Controller
 
         //save question description
         if ($request->description != null) {
-            $question_des = new QuestionDescription();
 
-            $question_des->question_id = $request->id;
-            $question_des->description = $request->description;
-            $question_des->created_user_id =  Auth::guard('admin')->user()->id;
+            $description = new Description();
+            $description->description = $request->description;
+            $description->created_user_id =  Auth::guard('admin')->user()->id;
+            $description->created_at = Carbon::now();
 
-            $question_des->created_at = Carbon::now();
-            $question_des->save();
+            $question = Question::find($request->id);
+
+            $question->descriptions()->save($description);
         }
 
 
         if ($question && $question_option) {
             Session::flash('success', 'Question updated successfull');
-            return redirect()->route('admin.question.all-question');
+            return redirect()->back();
         } else {
             Session::flash('error', 'Failed..Something went wrong !');
             return redirect()->back();
         }
-
-        // Session::flash('success', 'Question updated successfull');
-        // return redirect()->route('admin.question.index');
     }
 
     //deleteQuestion

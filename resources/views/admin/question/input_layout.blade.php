@@ -107,7 +107,7 @@
 <!--end::Actions-->
 
 
-{{-- <script type="text/javascript">
+<script type="text/javascript">
     ClassicEditor
     .create(document.querySelector('#kt_docs_ckeditor_classic'))
     .then(editor => {
@@ -117,9 +117,9 @@
     .catch(error => {
         console.error(error);
     });
-</script> --}}
-@push('script')
-<script type="text/javascript">
+</script>
+
+{{-- <script type="text/javascript">
    import MathType from '@wiris/mathtype-ckeditor5';
 
     ClassicEditor
@@ -130,8 +130,8 @@
         .then( ... )
         .catch( ... );
 
-</script>
-@endpush
+</script> --}}
+
 
       
 

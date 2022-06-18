@@ -270,7 +270,6 @@ class ExamDetailsController extends Controller
             $passage->save();
         }
 
-
         //question save
         foreach ($request->question as $key => $value) {
             if (\strlen($value) > 1) {
@@ -374,27 +373,39 @@ class ExamDetailsController extends Controller
         $exam_details = ExamDetail::where('question_ids', null)->where('exam_id', $request->exam_id)->delete();
 
         if ($exam_details) {
-            $check_for_unique_subject = count($request->subject_id) > count(array_unique($request->subject_id));
 
-            if (!$check_for_unique_subject) {
-                foreach ($request->subject_id as $key => $value) {
+            $exam_detail = ExamDetail::where(['exam_id' => $request->exam_id, 'created_user_id' => Auth::guard('admin')->id()])
+                ->whereIn('subject_id', $request->subject_id)->exists();
 
-                    $exam_detail = new ExamDetail();
-                    $exam_detail->exam_id = $request->exam_id;
-                    $exam_detail->subject_id = $request->subject_id[$key];
-                    $exam_detail->number_of_question = $request->number_of_question[$key];
-                    $exam_detail->updated_user_id = Auth::guard('admin')->id();
-                    $exam_detail->save();
-                }
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Subject updated for this exam'
-                ], 200);
-            } else {
+            //dd($exam_detail);
+            if ($exam_detail) {
                 return response()->json([
                     'error' => true,
-                    'message' => 'Duplicates subject found, cannot add same subject into a exam'
+                    'message' => 'Choosen subject is already exists in this exam'
                 ], 200);
+            } else {
+                $check_for_unique_subject = count($request->subject_id) > count(array_unique($request->subject_id));
+
+                if (!$check_for_unique_subject) {
+                    foreach ($request->subject_id as $key => $value) {
+
+                        $exam_detail = new ExamDetail();
+                        $exam_detail->exam_id = $request->exam_id;
+                        $exam_detail->subject_id = $request->subject_id[$key];
+                        $exam_detail->number_of_question = $request->number_of_question[$key];
+                        $exam_detail->updated_user_id = Auth::guard('admin')->id();
+                        $exam_detail->save();
+                    }
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Subject updated for this exam'
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'error' => true,
+                        'message' => 'Duplicates subject found, cannot add same subject into a exam'
+                    ], 200);
+                }
             }
         }
     }
