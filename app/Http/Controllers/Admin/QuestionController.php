@@ -143,29 +143,42 @@ class QuestionController extends Controller
     public function preview(Request $request)
     {
         //dd($request->all());
+
+        //filter empty input field
+        $collection = collect($request->all())->toArray();
+        function array_filter_recursive($input)
+        {
+            foreach ($input as &$value) {
+                if (is_array($value)) {
+                    $value = array_filter_recursive($value);
+                }
+            }
+            return array_filter($input);
+        }
+
+        $collection = array_filter_recursive($collection);
+
+        $count_question = count($collection['question']);
+        //dd($count_question);
+        //if this is an image question
         if ($request->type == 'image') {
             $this->store($request);
-        } else {
-
-            $collection = collect($request->all())->toArray();
-            function array_filter_recursive($input)
-            {
-                foreach ($input as &$value) {
-                    if (is_array($value)) {
-                        $value = array_filter_recursive($value);
-                    }
-                }
-                return array_filter($input);
-            }
-
-
-            $collection = array_filter_recursive($collection);
-
+            return redirect()->route(
+                'admin.question.show',
+                [
+                    'sub_category' => $request->sub_category,
+                    'subject' => $request->subject,
+                    'latest_input' => $count_question
+                ]
+            )->with('message', 'Question saved correctly!!!');
+        } else { //without image
 
             $data['myForm'] = $collection;
-            $data['main_categories'] = MainCategory::all();
-            $data['years'] = Year::all();
+            $data['main_categories'] = MainCategory::select('id', 'name')->get();
+            $data['years'] = Year::select('id', 'year')->get();
+            $data['count_question'] = $count_question;
             //dd($data);
+
             return view('admin.question.preview', $data);
         }
     }
@@ -315,6 +328,7 @@ class QuestionController extends Controller
                 }
             }
         }
+
         //dd($latest_input_record_number);
         return redirect()->route(
             'admin.question.show',
@@ -328,8 +342,13 @@ class QuestionController extends Controller
 
     public function show(Request $request)
     {
-        $subject = Subject::select('name', 'id')->where('id', $request->subject)->with('sub_category')->first();
-        $questions = Question::with('question_option')->latest()->take($request->latest_input)->get();
+        $subject = Subject::select('name', 'id')
+            ->where('id', $request->subject)
+            ->with('sub_category')->first();
+
+        $questions = Question::with('question_option')
+            ->latest()->take($request->latest_input)->get();
+
         return view('admin.mcq.latest_insert_show', compact('questions', 'subject'));
     }
 
@@ -357,7 +376,7 @@ class QuestionController extends Controller
     //update question
     public function update(Request $request)
     {
-        //dd($request->all());
+        dd($request->all());
         $question = Question::where('id', $request->id)->update([
             'subject_id' => $request->subject,
             'sub_category_id' => $request->sub_category,
@@ -394,7 +413,6 @@ class QuestionController extends Controller
 
             $question->descriptions()->save($description);
         }
-
 
         if ($question && $question_option) {
             Session::flash('success', 'Question updated successfull');
@@ -461,7 +479,7 @@ class QuestionController extends Controller
             $passages = Passage::with('questions')->where('sub_category_id', $request->sub_category)->get();
         } else {
 
-            $sub_category = '';
+            $sub_category = SubCategory::find($request->sub_cat)->first();
 
             $questions = Question::with('subject')->where([
                 'sub_category_id' => $request->sub_cat,

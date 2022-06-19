@@ -116,6 +116,7 @@ class ExamDetailsController extends Controller
 
         //if someone want random question
         if ($request->ques_type == 'random') {
+            //dd('random');
             $this->randomQuestion($request->exam_id, $request->subject, $request->question_number);
         }
 
@@ -186,6 +187,7 @@ class ExamDetailsController extends Controller
 
         //dd($dataSet);
         if ($questions->count() == $question_number) {
+            dd('ok');
             $exam_detail = ExamDetail::where(['exam_id' => $exam_id, 'subject_id' => $subject_id])->first();
             if ($question_number == $exam_detail->number_of_question) {
                 $exam_detail->question_ids = $dataSet;

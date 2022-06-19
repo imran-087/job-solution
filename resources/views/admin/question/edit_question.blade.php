@@ -306,6 +306,7 @@
                                 <div class="help-block with-errors main_category-error"></div>
                             </div>
                             <!--end::Col-->
+                            @isset($question->question_option->option_4)
                             <!--begin::Col-->
                             <div class="col-md-3 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Option 4</label>
@@ -332,7 +333,36 @@
                                 <div class="help-block with-errors main_category-error"></div>
                             </div>
                             <!--end::Col-->
-                            
+                            @endisset
+
+                            @isset($question->question_option->option_5)
+                            <!--begin::Col-->
+                            <div class="col-md-3 fv-row">
+                                <label class="required fs-6 fw-bold mb-2">Option 4</label>
+                                <div class="form-check form-check-inline">                
+                                    <input class="form-check-input" type="radio" name="answer"  value="5" @isset($question->question_option->answer)
+                                        @if($question->question_option->answer == '5') checked @endif @endisset>
+                                   <input type="text" class="form-control form-control-solid" placeholder="Enter Question"
+                                    name="option_4" value="{{ $question_option->option_5 }}" />
+                                     
+                                </div>
+                                @if($question->question_type == 'image')
+                                <div class="form-check form-check-inline d-flex">
+                                    <div class="symbol symbol-45px me-2 mb-5 mt-2">
+                                        <span class="symbol-label">
+                                            <img src="{{ asset($question->question_option->image_option[4]) }}" class="h-50 align-self-center" alt="">
+                                        </span>
+                                    </div>
+                                    <input type="file" name="image[]" class="mt-2" value="{{$question->question_option->image_option['4']}}">
+                                    <input type="hidden" name="old_image[]" class="mt-2" value="{{$question->question_option->image_option['4']}}">
+                                    
+                                </div>
+                                @endif
+                               
+                                <div class="help-block with-errors main_category-error"></div>
+                            </div>
+                            <!--end::Col-->
+                            @endisset
                         </div>
                         <!--end::Input group-->
                        

@@ -69,6 +69,8 @@
                                     <h3 class="card-title text-gray-700 fw-bolder cursor-pointer mb-0 view" data-id="{{ $question->id }}" style="max-width: 1100px !important; color:#0095E8 !important">
                                             <span > {{ $question->id }}. {{$question->question}} </span>
                                     </h3>
+                                    
+                                   
                                     <div class="card-toolbar">
                                         <!--begin::Menu-->
                                         <a href="{{route('admin.question.edit', ['id' => $question->id, 'ques' => $question->slug])}}" target="_blank" class="btn btn-sm btn-icon btn-light btn-active-primary fw-bold edit me-1" ><i class="fas fa-edit"></i></a>
@@ -82,6 +84,20 @@
                                 </div>
                                 <div class="card-body">
                                     <div class="row"  style="font-size: 16px">
+                                        {{-- question image start--}}
+                                        <div class="text-center mb-3">
+                                            @if($question->question_type == 'image')
+                                            @isset($question->question_option->image_question)
+                                                <div class="symbol symbol-45px me-2 mb-5 mt-2">
+                                                    <span class="symbol-label">
+                                                        <img src="{{ asset($question->question_option->image_question) }}" class="h-150 align-self-center" alt="">
+                                                    </span>
+                                                </div>
+                                            @endisset
+                                            @endif
+                                        </div>
+                                        {{-- question image end  --}}
+
                                         <div class="col-md-6">
                                             <p class="text-gray-800 fw-bold " > 
                                             <span >
@@ -133,23 +149,46 @@
                                                 </div>
                                                 @endif
                                         </div>
+                                        @isset($question->question_option->option_4)
                                         <div class="col-md-6">
                                             <p class="text-gray-800 fw-bold " > 
-                                            <span >
+                                                <span >
                                                 @if($question->question_option->answer == 4)
                                                 <i class="fas fa-check-circle fa-2xl"></i>
                                                 @else
                                                 <i class="fas fa-dot-circle fa-2xl"></i>
                                                 @endif
-                                                </span> {{$question->question_option->option_4 }}</p>
-                                                @if($question->question_type == 'image')
-                                                <div class="symbol symbol-45px me-2 mb-5 mt-2">
-                                                    <span class="symbol-label">
-                                                        <img src="{{ asset($question->question_option->image_option[3]) }}" class="h-50 align-self-center" alt="">
-                                                    </span>
-                                                </div>
-                                                @endif
+                                                </span> {{$question->question_option->option_4 }}
+                                            </p>
+                                            @if($question->question_type == 'image')
+                                            <div class="symbol symbol-45px me-2 mb-5 mt-2">
+                                                <span class="symbol-label">
+                                                    <img src="{{ asset($question->question_option->image_option[3]) }}" class="h-50 align-self-center" alt="">
+                                                </span>
+                                            </div>
+                                            @endif
                                         </div>
+                                        @endisset
+                                        @isset($question->question_option->option_5)
+                                        <div class="col-md-6">
+                                            <p class="text-gray-800 fw-bold " > 
+                                                <span >
+                                                @if($question->question_option->answer == 5)
+                                                <i class="fas fa-check-circle fa-2xl"></i>
+                                                @else
+                                                <i class="fas fa-dot-circle fa-2xl"></i>
+                                                @endif
+                                                </span> {{$question->question_option->option_5 }}
+                                            </p>
+                                            @if($question->question_type == 'image')
+                                            <div class="symbol symbol-45px me-2 mb-5 mt-2">
+                                                <span class="symbol-label">
+                                                    <img src="{{ asset($question->question_option->image_option[4]) }}" class="h-50 align-self-center" alt="">
+                                                </span>
+                                            </div>
+                                            @endif
+                                        </div>
+                                        @endisset
                                     </div>
 
                                     <div class="row">

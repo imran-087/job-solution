@@ -1,5 +1,5 @@
 @extends('admin.layout.app')
-@section('title', 'Samprotik-Question')
+@section('title', 'MCQ-Question')
 
 @section('content')
 

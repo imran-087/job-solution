@@ -187,7 +187,7 @@
             </div>
             @endif
            
-            @for($i = 0; $i < $myForm['number']; $i++)
+            @for($i = 0; $i < $count_question; $i++)
             <div class="card" style="margin-top:20px !important; border:7px solid #F2F5F7; border-radius:5px; padding:5px">
                 <div class="card-body pt-4 " style="padding-bottom: 0px !important">
                     <!--begin::Input group-->

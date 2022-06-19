@@ -66,8 +66,7 @@ class ExamController extends Controller
                 ->editColumn('exam_status', function ($row) {
                     if ($row->status == "published") {
                         $btn = '<div class="badge badge-light-success fw-bolder">Published</div>';
-                    }
-                    if ($row->status == "unpublished") {
+                    } elseif ($row->status == "unpublished") {
                         $btn = '<div class="badge badge-light-warning fw-bolder">Unpublished</div>';
                     } else {
                         $btn = '<div class="badge badge-light-danger fw-bolder">Closed</div>';
@@ -77,10 +76,11 @@ class ExamController extends Controller
                 ->addColumn('action', function ($row) {
 
                     $btn = '<div class="d-flex justify-content-start flex-shrink-0">
-                        <a href="exam/details-view?exam_id=' . $row->id . '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title:"View Exam">
+
+                        <a href="exam/details-view?exam_id=' . $row->id . '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="View Exam">
                             <i class="fas fa-eye"></i>
                         </a>
-                        <a href="exam/edit/' . $row->id . '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title:"Edit Exam">
+                        <a href="exam/edit/' . $row->id . '" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" title="Edit Exam">
                             <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                             <span class="svg-icon svg-icon-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -90,10 +90,11 @@ class ExamController extends Controller
                             </span>
                             <!--end::Svg Icon-->
                         </a>
-                        <a href="javascript:;" onclick="addSubject(' . $row->id . ')" class="btn btn-light btn-active-color-primary btn-sm me-1" title:"Add Subject">
+                        <a href="javascript:;" onclick="addSubject(' . $row->id . ')" class="btn btn-light btn-active-color-primary btn-sm me-1 " title="Add Subject">
                             <i class="fas fa-plus">&nbsp;Subject</i>
                         </a>
-                        <a href="javascript:;" onclick="editSubject(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm " title:"Edit Subject">
+                        
+                        <a href="javascript:;" onclick="editSubject(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm " title="Edit Subject">
                             <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                             <span class="svg-icon svg-icon-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -103,8 +104,9 @@ class ExamController extends Controller
                             </span>
                             <!--end::Svg Icon-->
                         </a>
-                        
+
                     </div>';
+
                     return $btn;
                 })
                 ->rawColumns(['action', 'subject', 'exam_status', 'category_id', 'sub_category_id', 'examinee_type'])
