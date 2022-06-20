@@ -64,7 +64,7 @@
                     <div class="card-body pt-4 " style="padding-bottom: 0px !important">
                         <!--begin:Form-->
                         <form id="kk_submit_for_question_form" class="form"  >
-                            <div class="messages"></div>
+                            
                             {{-- csrf token  --}}
                             @csrf
                             <!--begin::Heading-->
@@ -79,6 +79,9 @@
                                 <!--end::Description-->
                             </div>
                             <!--end::Heading-->
+
+                            <div class="messages col-md-8 offset-2 mb-13"></div>
+
                             <!--begin::Input group-->
                             <div class="row g-9 mb-8">
                                 <!--begin::Col-->
@@ -107,6 +110,12 @@
                                     <div class="help-block with-errors subject-error"></div>
                                 </div>
                                 <!--end::Col-->
+                                 <!--begin::Col-->
+                                <div class="col-md-1 fv-row d-none" id="number_of_question_for_this_subject" >
+                                    <!--begin::Label-->
+                                    
+                                </div>
+                                <!--end::Col-->
 
                                 <!--begin::Col-->
                                 <div class="col-md-3 fv-row">
@@ -133,8 +142,9 @@
                                     <div class="help-block with-errors question_number-error"></div>
                                 </div>
                                 <!--end::Col-->
+                               
                                 <!--begin::Col-->
-                                <div class="col-md-2  fv-row">
+                                <div class="col-md-1  fv-row">
                                     <!--begin::Label-->
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                                         <span class="required"></span>
@@ -221,7 +231,7 @@
                             if(exam_detail.question_ids == null){
                                 if(exam_detail.subject){
                                     $('select[name="subject"]').append(
-                                    '<option value="' + exam_detail.subject.id + '">' + exam_detail.subject.name   +  '</option>');
+                                    '<option value="' + exam_detail.subject.id + '">' + exam_detail.subject.name   +  '&nbsp&nbsp--&nbsp Num. Of Q. &nbsp&nbsp&nbsp--&nbsp' + exam_detail.number_of_question +'</span></option>');
                                 }
                             }
                             else if(exam_detail.question_ids.length != exam_detail.number_of_question){
@@ -230,6 +240,9 @@
                                     '<option value="' + exam_detail.subject.id + '">' + exam_detail.subject.name   +  '</option>');
                                 }
                             }
+                            // $("#number_of_question_for_this_subject").removeClass('d-none');
+                            // var html = '<label class="d-flex align-items-center fs-6 fw-bold mb-2"><span class="required">Sub.Q.No.</span></label><button  class="form-control form-control-solid" disabled>'+ exam_detail.number_of_question +'</button>';
+                            // $("#number_of_question_for_this_subject").html(html);
                         });
                     }
                         else {
@@ -264,24 +277,44 @@
 
         var formData = new FormData(this);
 
-        $.ajax({
-            type:"POST",
-            url: "{{ route('admin.exam-details.get-question') }}",
-            data:formData,
-            cache:false,
-            contentType: false,
-            processData: false,
-            success:function(data){
-                if(data.success){
-                    toastr.success(data.message);
-                    location.reload()
-                }else{
+        var random_question = $('#ques_type').find(":selected").val();
+       
+        if(random_question == 'random'){
+            $.ajax({
+                type:"POST",
+                url: "{{ route('admin.exam-details.random-question-add') }}",
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    if(data.success){
+                        toastr.success(data.message);
+                        location.reload();
+                    }else{
+                       var alertBox = '<div class="alert alert-danger text-center" alert-dismissable">' + data.message + '</div>';
+                        $('.messages').html(alertBox).show();
+                        setTimeout(function() { 
+                            $('.messages').html(alertBox).hide();
+                        }, 5000);
+                    }
+                    
+                }
+            });
+        }else{
+            $.ajax({
+                type:"POST",
+                url: "{{ route('admin.exam-details.get-question') }}",
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
                     $('#table_data').html(data.html);
                 }
-                
-            }
-        });
-        
+            });
+        }
+  
     });
 
     //ajax pagination
@@ -369,17 +402,20 @@
         
         var allVals = [];
        // var allVals['question_id'] = '';
-        $('#passage_id').find(':selected').each(function() {
-            var passage_id = $(this).val();
+        // $('#passage_id').find(':selected').each(function() {
+        //     var passage_id = $(this).val();
+        
+        //get all question_id and passage_id
             $(".sub_chk:checked").each(function() {
                 var question_id = $(this).attr('data-id');
+                var passage_id = $(this).attr('data-passage_id');
                 allVals.push({
                     'question_id' : question_id,
                     'passage_id' : passage_id 
                 });
             });
     
-        });
+        // });
       
         
         // if(allVals.length <=0)
@@ -408,7 +444,7 @@
             }).then((function (o) {
                 if(o.value){ //if agree
                     // var join_selected_values[] = allVals;
-
+                    //console.log(allVals);
                 $.ajax({
                     url: '/admin/exam-details/exam-question/add',
                     type: 'POST',

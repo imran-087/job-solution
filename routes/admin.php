@@ -127,7 +127,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/question/preview', 'QuestionController@preview')->name('question.preview');
         Route::post('/question/store', 'QuestionController@store')->name('question.store');
 
-        Route::get('/question/store/{val}', 'QuestionController@storeQuestion')->name('question.store-question');
+        // Route::get('/question/store/{val}', 'QuestionController@storeQuestion')->name('question.store-question');
 
         //new mcq folder
         Route::get('/question/mcq-question', 'QuestionController@getMainCategory')->name('question.category');
@@ -282,7 +282,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/exam-details/get-subject-question', 'Exam\ExamDetailsController@getQuestion')->name('exam-details.get-question');
         Route::post('/exam-details/exam-question/add', 'Exam\ExamDetailsController@addQuestion')->name('exam-details.question-add');
         Route::post('/exam-details/manual-question-save', 'Exam\ExamDetailsController@manualQuestionStore')->name('manual_question_store');
-
+        Route::post('exam-details/random-question', 'Exam\ExamDetailsController@randomQuestionStore')->name('exam-details.random-question-add');
         ########## Exam result/report ##########
         Route::get('/exam-result', 'Exam\ExamResultController@index')->name('exam-result.index');
         Route::get('/exam-result-details-view', 'Exam\ExamResultController@show')->name('exam-result.show');

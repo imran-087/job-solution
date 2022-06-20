@@ -19,7 +19,7 @@ class CreateQuestionsTable extends Migration
             $table->integer('sub_category_id');
             $table->integer('subject_id');
             $table->integer('year_id')->nullable();
-            $table->integer('passage_id')->nullable();
+            $table->integer('passage_id')->default(0);
             $table->integer('exam_id')->nullable();
             $table->enum('question_type', ['mcq', 'passage', 'image'])->default('mcq');
             $table->text('question');

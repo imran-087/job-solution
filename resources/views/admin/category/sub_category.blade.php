@@ -278,8 +278,10 @@
                             <label class="required fs-6 fw-bold mb-2">Exam Type</label>
                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                 data-placeholder="Select Type" name="type">
+                                <option value="">Select type</option>
                                 <option value="mcq" >MCQ</option>
                                 <option value="written">Written</option>
+                                <option value="mcq_written">MCQ + Written</option>
                             </select>
                             <div class="help-block with-errors type-error"></div>
                         </div>

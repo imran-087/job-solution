@@ -108,24 +108,20 @@ class ExamDetailsController extends Controller
         return response()->json($exam_detail);
     }
 
-
     //get exam question from question table
     public function getQuestion(Request $request)
     {
         //dd($request->all());
 
-        //if someone want random question
-        if ($request->ques_type == 'random') {
-            //dd('random');
-            $this->randomQuestion($request->exam_id, $request->subject, $request->question_number);
-        }
-
         // for select question
-        else if ($request->ques_type == 'select') {
+        if ($request->ques_type == 'select') {
+            $exam = Exam::where('id', $request->exam_id)->select('id', 'sub_category_id')->first();
             $exam_detail = ExamDetail::where(['exam_id' => $request->exam_id, 'subject_id' => $request->subject])->first();
-            $passages = Passage::where('subject_id', $request->subject)->get();
+            $passages = Passage::with('questions')
+                ->where(['subject_id' => $request->subject, 'sub_category_id' => $exam->sub_category_id])
+                ->get();
             //dd($passages);
-            $questions = Question::where('subject_id', $request->subject)->get();
+            $questions = Question::where(['subject_id' => $request->subject, 'passage_id' => '0', 'sub_category_id' => $exam->sub_category_id])->get();
             $view = view('admin.exam.exam_details.table_data', compact('questions', 'exam_detail', 'passages'))->render();
             return response()->json([
                 'html' => $view
@@ -150,6 +146,52 @@ class ExamDetailsController extends Controller
         }
     }
 
+    public function randomQuestionStore(Request $request)
+    {
+        //dd($request->all());
+        $exam_detail = ExamDetail::where(['exam_id' => $request->exam_id, 'subject_id' => $request->subject])->first();
+        if ($request->question_number == $exam_detail->number_of_question) {
+            //dd('here');
+            $questions = Question::where(['subject_id' => $request->subject, 'passage_id' => 0])
+                ->inRandomOrder()
+                ->limit($request->question_number)
+                ->select('id as question_id')
+                ->get();
+
+            foreach ($questions as $question) {
+                $question['passage_id'] = 0;
+                $dataSet[] =   $question;
+            }
+            //dd($questions);
+            if ($questions->count() == $request->question_number) {
+                //dd('ok');
+                $exam_detail->question_ids = $dataSet;
+                if ($exam_detail->update()) {
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Random question added to this subject'
+                    ]);
+                }
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'Too much question'
+                ]);
+            }
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'You entered wrong number of question.Pleaase enter ' . $exam_detail->number_of_question
+            ]);
+        }
+
+
+        //dd($dataSet);
+
+
+    }
+
+    //for select question store
     public function addQuestion(Request $request)
     {
         //dd($request->all());
@@ -170,36 +212,6 @@ class ExamDetailsController extends Controller
         }
     }
 
-    //random question from esxisting questions table
-    public function randomQuestion($exam_id, $subject_id, $question_number)
-    {
-        //dd('here');
-        $questions = Question::where(['subject_id' => $subject_id, 'passage_id' => null])
-            ->inRandomOrder()
-            ->limit($question_number)
-            ->select('id as question_id')
-            ->get();
-
-        foreach ($questions as $question) {
-            $question['passage_id'] = 0;
-            $dataSet[] =   $question;
-        }
-
-        //dd($dataSet);
-        if ($questions->count() == $question_number) {
-            dd('ok');
-            $exam_detail = ExamDetail::where(['exam_id' => $exam_id, 'subject_id' => $subject_id])->first();
-            if ($question_number == $exam_detail->number_of_question) {
-                $exam_detail->question_ids = $dataSet;
-                if ($exam_detail->update()) {
-                    return response()->json([
-                        'success' => true,
-                        'message' => 'Random question added to this subject'
-                    ]);
-                }
-            }
-        }
-    }
 
     //manual question store
     public function manualQuestionStore(Request $request)

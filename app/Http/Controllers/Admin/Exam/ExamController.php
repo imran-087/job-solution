@@ -124,6 +124,9 @@ class ExamController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
+        $request->validate([
+            'number_of_question' => 'required | max:200'
+        ]);
 
         $exam_starting_time = Carbon::parse($request->exam_starting_time)->format('Y-m-d\TH:i');
 

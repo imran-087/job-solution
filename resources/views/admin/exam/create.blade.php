@@ -179,7 +179,7 @@
                                     <span class="required">Number of Ques.</span>
                                 </label>
                                 <!--end::Label-->
-                                <input type="text" class="form-control form-control-solid @error('number_of_question') is-invalid @enderror" placeholder="Number of Question" name="number_of_question" value="{{ old('number_of_question') }}"/>
+                                <input type="text" class="form-control form-control-solid @error('number_of_question') is-invalid @enderror" placeholder="Number of Question" name="number_of_question" onfocusout="myFunction()" value="{{ old('number_of_question') }}"/>
                                 @error('number_of_question')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -365,3 +365,21 @@
 
 
 @endsection
+
+
+@push('script')
+<script type="text/javascript">
+    function myFunction(){
+        let number_of_question = $('input[name="number_of_question"]').val();
+        if(number_of_question > 200){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: "You can't add more than 200 question into an exam",
+                footer: 'Pls reduce Num of Ques and try again'
+            })
+        }
+    }
+    
+</script>
+@endpush

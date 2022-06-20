@@ -17,7 +17,8 @@ class CreateSubCategoriesTable extends Migration
             $table->id();
             $table->foreignId('category_id')->constrained('categories');
             $table->string('name');
-            $table->string('question_type')->nullable();
+            $table->foreignId('institute_id')->nullable()->constrained();
+            $table->string('question_type', 10)->nullable();
             $table->string('subject_code_1')->nullable();
             $table->string('subject_code_2')->nullable();
             $table->string('total_marks')->nullable();
@@ -30,7 +31,7 @@ class CreateSubCategoriesTable extends Migration
             $table->integer('year_id')->nullable();
             $table->integer('created_user_id');
             $table->integer('updated_user_id')->nullable();
-            $table->enum('status', ['active', 'deactive'])->default('active');
+            $table->enum('status', ['active', 'deactive', 'complete'])->default('active');
             $table->softDeletes();
             $table->timestamps();
         });
