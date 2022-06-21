@@ -47,6 +47,13 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/category/main-category/get/{id}', 'MainCategoryController@getCategory')->name('main-category.get');
         Route::get('/category/main-category/delete/{id}', 'MainCategoryController@deleteCategory')->name('main-category.delete');
 
+        ####### Institute route ###########
+        Route::get('/institutes/index', 'InstituteController@index')->name('institute.index');
+        Route::post('/institutes/store', 'InstituteController@store')->name('institute.store');
+        Route::get('/institutes/get/{id}', 'InstituteController@get')->name('institute.get');
+        Route::get('/institutes/delete/{id}', 'InstituteController@delete')->name('institute.delete');
+
+
         ############ Category Route #############
         Route::get('/category/category-index', 'CategoryController@index')->name('category.index');
         Route::post('/category/category/store', 'CategoryController@store')->name('category.store');
@@ -280,6 +287,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/exam-details/get-subject/subject/{id}', 'Exam\ExamDetailsController@examSubject')->name('exam-details.exam-subject');
         Route::get('/exam-details/exam-question', 'Exam\ExamDetailsController@question')->name('exam-details.question');
         Route::post('/exam-details/get-subject-question', 'Exam\ExamDetailsController@getQuestion')->name('exam-details.get-question');
+
         Route::post('/exam-details/exam-question/add', 'Exam\ExamDetailsController@addQuestion')->name('exam-details.question-add');
         Route::post('/exam-details/manual-question-save', 'Exam\ExamDetailsController@manualQuestionStore')->name('manual_question_store');
         Route::post('exam-details/random-question', 'Exam\ExamDetailsController@randomQuestionStore')->name('exam-details.random-question-add');

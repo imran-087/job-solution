@@ -171,10 +171,10 @@
                             <div class="col-md-3 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Sub Category</label>
                                 <select class="form-select form-select-solid " data-control="select2"
-                                    data-hide-search="true" data-placeholder="Select sub category" name="sub_category"
+                                    data-hide-search="true"  name="sub_category"
                                     id="sub_category" required>
 
-
+                                    <option value="{{ $sub_category->id }}">{{ $sub_category->name }}</option>
                                 </select>
                                 <div class="help-block with-errors sub_category-error"></div>
                             </div>
@@ -183,10 +183,11 @@
                             <div class="col-md-3 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Subject</label>
                                 <select class="form-select form-select-solid" data-control="select2"
-                                    data-hide-search="true" data-placeholder="Select subject" name="subject"
+                                    data-hide-search="true" name="subject"
                                     id="subject" required>
-
-
+                                    @foreach($subjects as $subject)
+                                    <option value="{{ $subject->id }}">{{ $subject->name }} &nbsp;&nbsp; --- &nbsp;&nbsp; <span style="margin-left:10px; !important"> {{ $subject->sub_category->name ?? $subject->main_category->name  }} </span></option>
+                                    @endforeach
                                 </select>
                                 <div class="help-block with-errors subject-error"></div>
                             </div>

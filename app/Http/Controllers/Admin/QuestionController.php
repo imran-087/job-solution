@@ -118,10 +118,36 @@ class QuestionController extends Controller
 
     public function create(Request $request)
     {
-        $main_categories = MainCategory::all();
-        $years = Year::all();
+        $main_categories = MainCategory::select('id', 'name')->get();
+        $years = Year::select('id', 'year')->get();
         $questions = Question::where('created_user_id', Auth::id())->select('created_user_id')->get();
-        return view('admin.question.create', compact('main_categories', 'years', 'questions'));
+
+        if ($request->has('sub_category')) {
+            $sub_category = SubCategory::where('id', $request->sub_category)->first();
+
+            $subjects = Subject::with('sub_category', 'main_category')
+                ->where(['sub_category_id' => $request->sub_category, 'status' => 'active'])
+                ->get();
+            if ($subjects->count() > 0) {
+                return view('admin.question.create', compact('sub_category', 'main_categories', 'subjects', 'years', 'questions'));
+            } else {
+                if ($sub_category->category->main_category->id == 1) {
+                    $subjects = Subject::with('main_category')
+                        ->where(['status' => 'active', 'parent_id' => null, 'main_category_id' => 1, 'sub_category_id' => 0])
+                        ->get();
+                    //dd($subject);
+                    return view(
+                        'admin.question.create',
+                        compact('sub_category', 'subjects', 'years', 'main_categories', 'questions')
+                    );
+                } else {
+                    $subjects = '';
+                    return view('admin.question.create', compact('sub_category', 'main_categories', 'subjects', 'years', 'questions'));
+                }
+            }
+        } else {
+            return view('admin.question.create', compact('main_categories', 'years', 'questions'));
+        }
     }
 
     public function createQuestionInput(Request $request)

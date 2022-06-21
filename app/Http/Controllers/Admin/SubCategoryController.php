@@ -61,6 +61,9 @@ class SubCategoryController extends Controller
                 })
                 ->addColumn('action', function ($row) {
                     $btn = '<div class="d-flex justify-content-start flex-shrink-0">
+                        <a href="/admin/question/create?sub_category=' . $row->id . '" target="_blank" class="btn btn-bg-light btn-active-color-primary btn-sm me-1">
+                            Add Question
+                        </a>
                         <a href="javascript:;" onclick="edit(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                             <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                             <span class="svg-icon svg-icon-3">

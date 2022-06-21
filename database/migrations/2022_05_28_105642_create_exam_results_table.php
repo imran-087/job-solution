@@ -19,7 +19,7 @@ class CreateExamResultsTable extends Migration
             $table->foreignId('sub_category_id')->nullable()->constrained(); //from sub_categories_table
             $table->foreignId('user_id')->constrained()->cascadeOnDelete(); //Examinee id
             $table->json('submitted_data'); //submitted answer for all questions. deafult 0
-            $table->dateTime('staring_time')->nullable();
+            $table->dateTime('starting_time')->nullable();
             $table->integer('duration')->nullable();
             $table->smallInteger('mark')->default(0);
             $table->smallInteger('cut_mark')->default(0);

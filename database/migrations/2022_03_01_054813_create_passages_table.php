@@ -15,11 +15,12 @@ class CreatePassagesTable extends Migration
     {
         Schema::create('passages', function (Blueprint $table) {
             $table->id();
-            $table->integer('sub_category_id');
+            $table->integer('sub_category_id')->nullable();
             $table->integer('subject_id');
+            $table->integer('exam_id')->nullable();
             $table->string('title');
             $table->longText('passage');
-            $table->string('slug')->unique();
+            $table->string('slug');
             $table->integer('created_user_id');
             $table->softDeletes();
             $table->timestamps();

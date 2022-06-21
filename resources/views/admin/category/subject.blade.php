@@ -223,7 +223,7 @@
                         <div class="col-md-6 fv-row">
                             <label class="required fs-6 fw-bold mb-2">Select Category</label>
                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                data-placeholder="Select category" name="category" id="category">
+                                name="category" id="category">
                                 
                         
                             </select>
@@ -239,7 +239,7 @@
                         <div class="col-md-6 fv-row">
                             <label class="required fs-6 fw-bold mb-2">Select Sub Category</label>
                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                data-placeholder="Select sub category" name="sub_category" id="sub_category">
+                                name="sub_category" id="sub_category">
                                 
                         
                             </select>
@@ -251,7 +251,7 @@
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-bold mb-2">Select Parent (optional)</label>
                                     <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                        data-placeholder="Select parent" name="parent" id="parent">
+                                        name="parent" id="parent">
                                         
                                 
                                     </select>

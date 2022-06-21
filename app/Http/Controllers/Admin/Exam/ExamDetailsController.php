@@ -115,13 +115,30 @@ class ExamDetailsController extends Controller
 
         // for select question
         if ($request->ques_type == 'select') {
+            //dd('here');
             $exam = Exam::where('id', $request->exam_id)->select('id', 'sub_category_id')->first();
             $exam_detail = ExamDetail::where(['exam_id' => $request->exam_id, 'subject_id' => $request->subject])->first();
             $passages = Passage::with('questions')
                 ->where(['subject_id' => $request->subject, 'sub_category_id' => $exam->sub_category_id])
                 ->get();
             //dd($passages);
-            $questions = Question::where(['subject_id' => $request->subject, 'passage_id' => '0', 'sub_category_id' => $exam->sub_category_id])->get();
+            $questions = Question::with('question_option')
+                ->where(
+                    [
+                        'subject_id' => $request->subject,
+                        'passage_id' => '0',
+                        'sub_category_id' => $exam->sub_category_id
+                    ]
+                )->paginate(5);
+
+            if ($request->has('page')) {
+                //dd('here');
+                $view = view('admin.exam.exam_details.table_data', compact('questions', 'exam_detail', 'passages'))->render();
+                return response()->json([
+                    'html' => $view
+                ]);
+            }
+            //dd('wrong here');
             $view = view('admin.exam.exam_details.table_data', compact('questions', 'exam_detail', 'passages'))->render();
             return response()->json([
                 'html' => $view
@@ -145,6 +162,8 @@ class ExamDetailsController extends Controller
             ]);
         }
     }
+
+
 
     public function randomQuestionStore(Request $request)
     {
@@ -217,6 +236,7 @@ class ExamDetailsController extends Controller
     public function manualQuestionStore(Request $request)
     {
         //dd($request->all());
+
         //question option images
         if ($request->file('image') != null) {
             //dd('ok');
@@ -277,8 +297,9 @@ class ExamDetailsController extends Controller
             $passage = new Passage();
             $passage->passage = $request->passage;
             $passage->title = $request->title;
-            $passage->sub_category_id = $request->sub_category;
-            $passage->subject_id = $request->subject;
+            $passage->sub_category_id = $request->sub_category ?? null;
+            $passage->exam_id = $request->exam_id;
+            $passage->subject_id = $request->subject_id;
             $passage->slug = Str::slug($request->title);
             $passage->created_user_id = Auth::guard('admin')->user()->id;
             $passage->save();
@@ -299,7 +320,7 @@ class ExamDetailsController extends Controller
                 $question->sub_category_id = $request->sub_category ?? null;
                 $question->main_category_id = $request->main_category ?? null;
                 $question->year_id = $year ?? null;
-                $question->passage_id = $passage->id ?? null;
+                $question->passage_id = $passage->id ?? '0';
                 $question->question_type = $request->type;
                 $question->hard_level = 1;
                 $question->mark = 1;
@@ -321,7 +342,7 @@ class ExamDetailsController extends Controller
                     $question_option->option_4 = $request->option_4[$key] ?? null;
                     $question_option->option_5 = $request->option_5[$key] ?? null;
 
-                    $question_option->answer = $request->answer[$key];
+                    $question_option->answer = $request->answer[$key] ?? 0;
 
                     if (isset($chunk_image)) {
                         $question_option->image_option =  $chunk_image[$key];
@@ -340,16 +361,16 @@ class ExamDetailsController extends Controller
 
         //now save question_id into exam_details table
         $questions = Question::latest()->take($request->number)
-            ->select('id as question_id')
+            ->select('id as question_id', 'passage_id')
             ->get();
 
         foreach ($questions as $question) {
-            $question['passage_id'] = 0;
+            $question['passage_id'] = $question->passage_id;
             $dataSet[] =   $question;
         }
+        //dd($dataSet);
 
         $exam_detail = ExamDetail::where(['exam_id' => $request->exam_id, 'subject_id' => $request->subject_id])->first();
-
         $exam_detail->question_ids = $dataSet;
         if ($exam_detail->update()) {
             return response()->json([

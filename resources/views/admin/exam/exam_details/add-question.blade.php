@@ -198,12 +198,11 @@
 
             <div class="col-md-12 mt-6" >
                 <!--begin::Tables Widget 9-->
-                <div class="card card-xl-stretch mb-5 mb-xl-8">
-                    <div id="table_data">
+                <div id="table_data">
 
-                    </div>
-                   
                 </div>
+                   
+              
             </div>
         </div>
     </div>
@@ -271,7 +270,7 @@
         }
     })
 
-    // Get Question
+    // Question
     $('#kk_submit_for_question_form').on('submit', function (e) {
         e.preventDefault();
 
@@ -326,8 +325,20 @@
 
     function fetch_data(page)
     {
+        let ques_type = $("#ques_type").find(":selected").val();
+        let subject = $("#subject").find(":selected").val();
+        let exam_id = $('#exam').find(':selected').val();
         $.ajax({
-            url:"?page="+page,
+            
+            type:"POST",
+            url:"/admin/exam-details/get-subject-question?page="+page,
+            data: {
+                "_token": "{{ csrf_token() }}",
+                "ques_type" : ques_type,
+                "subject" : subject,
+                "exam_id" : exam_id
+                
+            },
             success:function(data)
             {
                 $('#table_data').html(data.html);
@@ -501,10 +512,10 @@
 
         var formData = new FormData(this);
         
-        var type = $('#type').val();
-        if(type == 'passage'){
-            formData.append('passage', myEditor.getData());
-        }
+        // var type = $('#type').val();
+        // if(type == 'passage'){
+        //     formData.append('passage', myEditor.getData());
+        // }
        
         $.ajax({
             type:"POST",

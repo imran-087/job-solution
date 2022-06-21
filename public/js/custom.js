@@ -14,6 +14,7 @@ jQuery(function () {
                 dataType: "json",
                 success: function (data) {
                     if (data) {
+                        $('#parent').empty();
                         $('#category').empty();
                         $('#category').append('<option value="">Choose...</option>');
                         $.each(data, function (key, category) {
@@ -112,7 +113,7 @@ jQuery(function () {
                 success: function (data) {
                     if (data) {
                         $('#parent').empty();
-                        $('#parent').append('<option value="">Choose...</option>');
+                        $('#parent').append('<option value="">Select Parent...</option>');
                         $('#parent').append('<option value="none">No parent</option>');
                         $.each(data, function (key, parent_subject) {
                             if(parent_subject.sub_category){
