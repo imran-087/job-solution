@@ -14,8 +14,7 @@
     @foreach($questions as $key => $question)
         <div class="card card-bordered mb-5 py-3 px-2">
             <div class="d-flex flex-column align-items-center justify-content-center ">
-                <h3 class="">বিষয় ঃ {{$question->subject->name}}
-                {{ $question->subject_id }}</h3>
+                <h3 class="">বিষয় ঃ {{$question->subject->name}}</h3>
             </div>
             <div class="card-body">
                 @php

@@ -18,6 +18,7 @@ use Illuminate\Http\Request;
 use App\Models\EditedQuestion;
 use App\Models\QuestionOption;
 use App\Models\PreviewQuestion;
+use Illuminate\Support\Facades\DB;
 use App\Models\QuestionDescription;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
@@ -468,23 +469,35 @@ class QuestionController extends Controller
     //new mcq folder
     public function getMainCategory()
     {
-        $data = Category::where('main_category_id', '!=', '2')->with('main_category')->get();
+        $data = Category::where('main_category_id', 1)->with('main_category')->get();
         return view('admin.mcq.index', compact('data'));
     }
 
     public function getSubCategory(Request $request)
     {
-        // dd($request->all());
-        if ($request->main_category == 1) {
-            $sub_categories = SubCategory::where('category_id', $request->id)->select('id', 'name')->get();
-            $subjects = Subject::where(['main_category_id' => 1, 'sub_category_id' => 0, 'parent_id' => null])->select('id', 'name')->get();
-        } else {
-            $sub_categories = SubCategory::with('subject')->where('category_id', $request->id)->select('id', 'name')->get();
-            $subjects = null;
+        //dd($request->all());
+        // if ($request->main_category == 1) {
+        $sub_categories = SubCategory::where('category_id', $request->id)->select('id', 'name')
+            ->withCount('question')
+            ->get();
+
+        $subject_analytics = [];
+        foreach ($sub_categories as $sub_category) {
+
+            $questions = Question::whereBelongsTo($sub_category)
+                ->select('id', 'subject_id', DB::raw('count(*) as total'))
+                ->groupBy('subject_id')->with(['subject' => function ($query) {
+                    $query->select('id', 'name');
+                }])
+                ->get();
+            $subject_analytics = $questions;
         }
+        dump($subject_analytics);
+        dd('end');
 
 
-        $view = view('admin.mcq.sub_category', compact('sub_categories', 'subjects'))->render();
+
+        $view = view('admin.mcq.sub_category', compact('sub_categories', 'subject_analytics', 'subject_question_count', 'total_question'))->render();
         return response()->json([
             'success' => true,
             'html' => $view
@@ -494,7 +507,7 @@ class QuestionController extends Controller
     //all question
     public function allQuestion(Request $request)
     {
-
+        dd($request->all());
         if ($request->has('sub_category')) {
 
             $sub_category = SubCategory::find($request->sub_category)->first();

@@ -82,6 +82,7 @@
 
                             <div class="messages col-md-8 offset-2 mb-13"></div>
 
+
                             <!--begin::Input group-->
                             <div class="row g-9 mb-8">
                                 <!--begin::Col-->
@@ -110,13 +111,7 @@
                                     <div class="help-block with-errors subject-error"></div>
                                 </div>
                                 <!--end::Col-->
-                                 <!--begin::Col-->
-                                <div class="col-md-1 fv-row d-none" id="number_of_question_for_this_subject" >
-                                    <!--begin::Label-->
-                                    
-                                </div>
-                                <!--end::Col-->
-
+                               
                                 <!--begin::Col-->
                                 <div class="col-md-3 fv-row">
                                     <label class="required fs-6 fw-bold mb-2">Select Type</label>
@@ -142,8 +137,16 @@
                                     <div class="help-block with-errors question_number-error"></div>
                                 </div>
                                 <!--end::Col-->
-                               
+
                                 <!--begin::Col-->
+                                <div class="col-md-2  fv-row" id=number_of_question_for_this_subject>
+                                
+                                </div>
+                                {{-- hidden  --}}
+                                <input type="hidden" name="number_of_question_for_this_subject">
+                                <!-- end: col-->
+                               
+                                {{-- <!--begin::Col-->
                                 <div class="col-md-1  fv-row">
                                     <!--begin::Label-->
                                     <label class="d-flex align-items-center fs-6 fw-bold mb-2">
@@ -152,7 +155,7 @@
                                     <!--end::Label-->
                                     <button type="submit" id="kk_submit_for_question" class="btn btn-small btn-primary">Submit</button>
                                 </div>
-                                <!-- end: col-->   
+                                <!-- end: col-->    --}}
                             
                             </div>
                             <!--end::Input group-->
@@ -185,9 +188,14 @@
                                     <!--end:Col-->
                                     
                                 </div>
-                                <!--end::Input group-->
+                                
                             </div>
-                        
+                            <!--end::Input group-->
+                            <!--begin::Actions-->
+                                <div class="text-center d-flex justify-content-end py-4 px-4" >
+                                    <button type="submit" id="kk_submit_for_question" class="btn btn-small btn-primary" style="padding: 10px 70px">Submit</button>
+                                </div>
+                            <!--end::Actions-->
                         </form>
                         <!--end:Form-->
                     </div>
@@ -239,9 +247,7 @@
                                     '<option value="' + exam_detail.subject.id + '">' + exam_detail.subject.name   +  '</option>');
                                 }
                             }
-                            // $("#number_of_question_for_this_subject").removeClass('d-none');
-                            // var html = '<label class="d-flex align-items-center fs-6 fw-bold mb-2"><span class="required">Sub.Q.No.</span></label><button  class="form-control form-control-solid" disabled>'+ exam_detail.number_of_question +'</button>';
-                            // $("#number_of_question_for_this_subject").html(html);
+                           
                         });
                     }
                         else {
@@ -254,6 +260,43 @@
         }
     });
 
+    //get_number_of_question_for_this_subject
+    $(document).on('change', '#subject', function(){
+        var subject_id = $(this).val()
+        var examID = $('#exam').find(':selected').val();
+        //console.log(examID);
+       
+        $.ajax({
+            url: '/admin/exam-details/get-subject-number-of-question' ,
+            type: "GET",
+            dataType: "json",
+            data:{
+                subject_id : subject_id,
+                exam_id : examID
+            },
+            success: function (data) {
+                console.log(data);
+                if (data) {
+                    $("input[name=number_of_question_for_this_subject]").val(data.subject_number_of_ques);
+                    $('#number_of_question_for_this_subject').empty();
+                    var val = '<label class="d-flex align-items-center fs-6 fw-bold mb-2"><span class="required">Subject Total Question</span> </label>'
+                    val += '<span class="badge badge-primary badge-lg"><span id=result> 0  </span> / ' + data.subject_number_of_ques + '</span>'
+                            
+                    $('#number_of_question_for_this_subject').html(val);
+                    if(data.subject_previous_ques != null){
+                        $("#result").text(data.subject_previous_ques)
+                    }
+                    
+                }
+                    else {
+                    $('#number_of_question_for_this_subject').empty(); 
+                }
+            }
+        });
+       
+    });
+    
+
     //random input number of question field show/hide
     $("#ques_type").on('change', function(){
         var val = $(this).val();
@@ -261,16 +304,62 @@
             $('#number').removeClass('d-none');
             $('#manual_input').addClass('d-none');
             $('#table_data').html('');
+
+            //disabled submit button
+            $('#kk_submit_for_question').attr('disabled', true);
+
+
+            //get question_number field value and show submit button
+            $('#question_number').on('keyup', function(){
+                var question_number  = $(this).val();
+                var number_of_question_for_this_subject = $("input[name=number_of_question_for_this_subject]").val();
+                //console.log(number_of_question_for_this_subject);
+                $('#result').text(parseInt(question_number));
+                if(parseInt(question_number) == number_of_question_for_this_subject){
+                    $('#kk_submit_for_question').attr('disabled', false);
+                }else{
+                    $('#kk_submit_for_question').attr('disabled', true);
+                }
+            })
+
+
         } else if(val == 'manual'){
             $('#number').removeClass('d-none');
             $('#manual_input').removeClass('d-none');
+            $('#table_data').html('');
+
+             //disabled submit button
+            $('#kk_submit_for_question').attr('disabled', true);
+
+
+            //get question_number field value and show submit button
+            $('#question_number').on('keyup', function(){
+              
+                var question_number  = $(this).val();
+                
+                var number_of_question_for_this_subject = $("input[name=number_of_question_for_this_subject]").val();
+                //console.log(number_of_question_for_this_subject);
+                
+                $('#result').text(parseInt(question_number));
+               
+                if(number_of_question_for_this_subject >= parseInt(question_number) ){
+                    $('#kk_submit_for_question').attr('disabled', false);
+                }else{
+                    $('#kk_submit_for_question').attr('disabled', true);
+                }
+            })
+
+
         } else{
             $('#number').addClass('d-none');
             $('#manual_input').addClass('d-none');
         }
     })
 
-    // Question
+    
+    
+
+    // get select question , manual input layout and random question store
     $('#kk_submit_for_question_form').on('submit', function (e) {
         e.preventDefault();
 

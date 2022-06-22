@@ -22,6 +22,8 @@
             {{-- Hidden input field --}}
             <input type="hidden" name="subject_id" value="{{ $subject_id }}">
             <input type="hidden" name="exam_id" value="{{ $exam_id }}">
+            {{-- <input type="text" name="previous_number_of_ques" value="{{ collect($exam_detail->question_ids)->count() }}"> --}}
+
 
             @if($type == 'passage')
             <div class="card" style="margin-top:20px !important; border:7px solid #F2F5F7; border-radius:5px; padding:5px">

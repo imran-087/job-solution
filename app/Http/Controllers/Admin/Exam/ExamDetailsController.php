@@ -103,9 +103,26 @@ class ExamDetailsController extends Controller
     //exam subject for add question into this subject
     public function examSubject($id)
     {
-
         $exam_detail = ExamDetail::with('subject')->where('exam_id', $id)->get();
         return response()->json($exam_detail);
+    }
+
+    //get exam subject number of question
+    public function getSubjectNumOfQuestion(Request $request)
+    {
+        $subject_number_of_ques = ExamDetail::where(['exam_id' => $request->exam_id, 'subject_id' => $request->subject_id])
+            ->value('number_of_question');
+
+        $exam_detail = ExamDetail::where(['exam_id' => $request->exam_id, 'subject_id' => $request->subject_id])
+            ->select('question_ids')->first();
+
+        $subject_previous_ques = (collect($exam_detail->question_ids)->count());
+
+        $data = [
+            'subject_number_of_ques' => $subject_number_of_ques,
+            'subject_previous_ques' => $subject_previous_ques,
+        ];
+        return response()->json($data);
     }
 
     //get exam question from question table
@@ -148,6 +165,7 @@ class ExamDetailsController extends Controller
         //for manual input
         else if ($request->ques_type == 'manual') {
             //dd($request->all());
+
             $subject_id = $request->subject;
             $exam_id = $request->exam_id;
             $number = $request->question_number;
@@ -164,24 +182,27 @@ class ExamDetailsController extends Controller
     }
 
 
-
+    //random question store into subject
     public function randomQuestionStore(Request $request)
     {
         //dd($request->all());
+        $exam = Exam::find($request->exam_id);
         $exam_detail = ExamDetail::where(['exam_id' => $request->exam_id, 'subject_id' => $request->subject])->first();
         if ($request->question_number == $exam_detail->number_of_question) {
             //dd('here');
-            $questions = Question::where(['subject_id' => $request->subject, 'passage_id' => 0])
+            $questions = Question::where(['subject_id' => $request->subject, 'sub_category_id' => $exam->sub_category_id])
                 ->inRandomOrder()
                 ->limit($request->question_number)
-                ->select('id as question_id')
+                ->select('id as question_id', 'passage_id')
                 ->get();
 
             foreach ($questions as $question) {
-                $question['passage_id'] = 0;
+                $question['passage_id'] = $question->passage_id;
                 $dataSet[] =   $question;
             }
-            //dd($questions);
+
+            //dd($dataSet);
+
             if ($questions->count() == $request->question_number) {
                 //dd('ok');
                 $exam_detail->question_ids = $dataSet;
@@ -371,6 +392,16 @@ class ExamDetailsController extends Controller
         //dd($dataSet);
 
         $exam_detail = ExamDetail::where(['exam_id' => $request->exam_id, 'subject_id' => $request->subject_id])->first();
+        if ($exam_detail->question_ids) {
+            $dataSet =
+                array_merge(
+                    $exam_detail->question_ids,
+                    $dataSet
+                );
+        }
+
+        //dd($dataSet);
+
         $exam_detail->question_ids = $dataSet;
         if ($exam_detail->update()) {
             return response()->json([

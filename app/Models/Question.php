@@ -18,7 +18,7 @@ class Question extends Model
         return $this->belongsTo(MainCategory::class);
     }
 
-    public function sub_category()
+    public function subCategory()
     {
         return $this->belongsTo(SubCategory::class);
     }

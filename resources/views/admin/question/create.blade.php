@@ -173,8 +173,9 @@
                                 <select class="form-select form-select-solid " data-control="select2"
                                     data-hide-search="true"  name="sub_category"
                                     id="sub_category" required>
-
+                                    @isset($sub_category)
                                     <option value="{{ $sub_category->id }}">{{ $sub_category->name }}</option>
+                                    @endisset
                                 </select>
                                 <div class="help-block with-errors sub_category-error"></div>
                             </div>
@@ -185,9 +186,11 @@
                                 <select class="form-select form-select-solid" data-control="select2"
                                     data-hide-search="true" name="subject"
                                     id="subject" required>
+                                    @isset($subjects)
                                     @foreach($subjects as $subject)
                                     <option value="{{ $subject->id }}">{{ $subject->name }} &nbsp;&nbsp; --- &nbsp;&nbsp; <span style="margin-left:10px; !important"> {{ $subject->sub_category->name ?? $subject->main_category->name  }} </span></option>
                                     @endforeach
+                                    @endisset
                                 </select>
                                 <div class="help-block with-errors subject-error"></div>
                             </div>

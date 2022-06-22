@@ -125,8 +125,9 @@ class ExamController extends Controller
     {
         //dd($request->all());
         $request->validate([
-            'number_of_question' => 'required | max:200'
+            'number_of_question' => 'required | numeric | max:200'
         ]);
+        $marks = $request->number_of_question * $request->mark;
 
         $exam_starting_time = Carbon::parse($request->exam_starting_time)->format('Y-m-d\TH:i');
 
@@ -135,12 +136,12 @@ class ExamController extends Controller
             'sub_category_id' => $request->sub_category,
             'user_id' => Auth::guard('admin')->user()->id,
             'name' => $request->name,
-            'name' => $request->instruction,
+            'instruction' => $request->instruction,
             'examinee_type' => $request->examinee_type,
             'exam_mode' => $request->exam_mode,
             'duration' => $request->duration,
             'number_of_question' => $request->number_of_question,
-            'mark' => $request->mark,
+            'mark' => $marks,
             'cut_mark' => $request->cut_mark ?? '0',
             'negative_mark' => $request->negative_mark ?? '0',
             'required_point' => $request->required_point ?? '0',
@@ -148,7 +149,6 @@ class ExamController extends Controller
             'discount_price' => $request->discount_price ?? 0,
             'exam_status' => $request->exam_status,
             'exam_starting_time' => $exam_starting_time,
-            'discount_price' => $request->discount_price,
         ]);
         if ($exam) {
             return redirect()->route('admin.exam-details.create')->with('success', 'Exam created, Now you can add subject to this exam');

@@ -27,6 +27,7 @@ class CreateExamResultAnalyticsTable extends Migration
             $table->integer('right_ans');
             $table->integer('wrong_ans');
             $table->integer('not_ans');
+            $table->float('obtain_negative_mark');
             $table->float('obtain_mark');
             $table->dateTime('exam_time')->nullable();
             $table->timestamps();

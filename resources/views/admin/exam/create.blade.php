@@ -191,7 +191,7 @@
                             <div class="col-md-2 fv-row">
                                 <!--begin::Label-->
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="required">Mark</span>
+                                    <span class="required">Mark (per Ques.)</span>
                                 </label>
                                 <!--end::Label-->
                                 <input type="text" class="form-control form-control-solid 

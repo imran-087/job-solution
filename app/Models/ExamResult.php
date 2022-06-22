@@ -75,7 +75,7 @@ class ExamResult extends Model
             $negative_mark = $wrong_answer_count * $exam_result->negative_mark;
             //dump('negative_mark =' . $negative_mark);
 
-            $obtain_mark = (($total_question_count / $exam_result->mark) * $right_answer_count) - $negative_mark;
+            $obtain_mark = (($exam_result->mark / $total_question_count) * $right_answer_count) - $negative_mark;
             //dump('obtain_mark =' . $obtain_mark);
 
             // Saved Data to result_anaylitcs table 
@@ -93,6 +93,7 @@ class ExamResult extends Model
                 'right_ans' => $right_answer_count,
                 'wrong_ans' => $wrong_answer_count,
                 'not_ans' => $not_answered_count,
+                'obtain_negative_mark' => $negative_mark,
                 'obtain_mark' => $obtain_mark,
             ]);
             if ($exam_result_analytics) {

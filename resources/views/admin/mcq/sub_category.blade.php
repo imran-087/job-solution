@@ -21,18 +21,18 @@
                 <!--end::Checkbox-->
                 <!--begin::Description-->
                 <div class="flex-grow-1">
-                    <a href="{{ route('admin.question.all-question',['sub_category' => $sub_category->id]) }}" target="_blank" class="text-gray-800 text-hover-primary fw-bolder fs-6">{{ $sub_category->name }}</a>
+                    <a href="{{ route('admin.question.all-question',['sub_category' => $sub_category->id]) }}" target="_blank" class="text-gray-800 text-hover-primary fw-bolder fs-6">{{ $sub_category->name }} <span class="badge badge-light-danger fs-6 ms-5">{{ $total_question }}</span></a>
                     <br><br>
-                    @if($sub_category->subject->count() > 0)
-                        @foreach($sub_category->subject as $subject)
-                            @if($subject->parent_id == null)
-                            <a href="{{ route('admin.question.all-question',['sub_cat' => $sub_category->id, 'subject' => $subject->id]) }}" target="_blank"><span class="badge badge-light-success fs-8 fw-bolder mb-2 me-2">{{ $subject->name }}</span></a>
-                            @endif
+                    @if($subjects->count() > 0)
+                        @foreach($subjects as $key => $subject)
+                            {{-- @if($subject->parent_id == null) --}}
+                            <a href="{{ route('admin.question.all-question',['sub_cat' => $sub_category->id, 'subject' => $subject->id]) }}" target="_blank"><span class="badge badge-success fs-8 fw-bolder mb-2 me-2">{{ $subject->name }}<span class="badge badge-light-info ms-2">{{ $subject_question_count[$key] }}</span></span></a>
+                            {{-- @endif --}}
                         @endforeach
-                            @else
+                            {{-- @else
                             @foreach($subjects as $subject)
                             <a href="{{ route('admin.question.all-question',['sub_cat' => $sub_category->id, 'subject' => $subject->id]) }}" target="_blank"><span class="badge badge-light-success fs-8 fw-bolder  mb-2 me-2">{{ $subject->name }}</span></a>
-                            @endforeach
+                            @endforeach --}}
                     @endif
                 </div>
                 <!--end::Description-->

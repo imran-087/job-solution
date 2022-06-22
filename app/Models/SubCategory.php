@@ -34,10 +34,15 @@ class SubCategory extends Model
         return $this->hasMany(Subject::class);
     }
 
-    //subject
+    //question
     public function question()
     {
         return $this->hasMany(Question::class);
+    }
+
+    public function subject_questions()
+    {
+        return $this->hasManyThrough(Question::class, Subject::class);
     }
 
     //generate unique slug

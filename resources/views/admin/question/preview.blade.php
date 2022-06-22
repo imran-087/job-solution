@@ -51,7 +51,7 @@
     <!--begin::Container-->
     <div id="kt_content_container" class="container-xxl">
         <!--begin:Form-->
-        <form id="kk_modal_new_samprotik_form" class="form"  method="POST" action="{{ route('admin.question.store') }}" enctype="multipart/form-data">
+        <form id="kk_modal_new_question_form" class="form"  method="POST" action="{{ route('admin.question.store') }} " enctype="multipart/form-data">
             <div class="messages"></div>
             {{-- csrf token  --}}
             @csrf
@@ -196,7 +196,7 @@
                             <!--begin::Input group-->
                             <div class="row g-9 mb-8">
                                 <input type="hidden" name="type" value="{{ $myForm['type'] }}">
-                               
+                                <input type="hidden" name="total_question" value="{{ $count_question }}">
                                 <!--begin::Col-->
                                 <div class="col-md-12 fv-row">
                                     <!--begin::Label-->
@@ -226,7 +226,7 @@
                                 <div class="col-md-12 fv-row">
                                     <div class="d-flex align-items-center justify-content-center">
                                         
-                                        <input class="form-check-input me-3" type="radio" name="answer[{{ $i }}]"  value="1"
+                                        <input class="form-check-input me-3 " type="radio" name="answer[{{ $i }}]"  value="1"
                                         @if( isset($myForm['answer'][$i]) )
                                             @if($myForm['answer'][$i] == '1') checked @endif 
                                         @endif
@@ -241,7 +241,7 @@
                                 </div>    
                                 <div class="col-md-12 fv-row align-items-center justify-content-center">
                                     <div class="d-flex">
-                                        <input class="form-check-input me-3" type="radio" name="answer[{{ $i }}]"  value="2"
+                                        <input class="form-check-input me-3 " type="radio" name="answer[{{ $i }}]"  value="2"
                                         @if( isset($myForm['answer'][$i]) )
                                             @if($myForm['answer'][$i] == '2') checked @endif
                                         @endif
@@ -256,7 +256,7 @@
                                 </div>  
                                 <div class="col-md-12 fv-row">
                                     <div class="d-flex align-items-center justify-content-center">
-                                        <input class="form-check-input me-3" type="radio" name="answer[{{ $i }}]"  value="3"
+                                        <input class="form-check-input me-3 " type="radio" name="answer[{{ $i }}]"  value="3"
                                         @if( isset($myForm['answer'][$i]) ) 
                                             @if($myForm['answer'][$i] == '3') checked @endif
                                         @endif
@@ -268,7 +268,7 @@
                                 @if(isset($myForm['option_4']))
                                 <div class="col-md-12 fv-row">
                                     <div class="d-flex align-items-center justify-content-center">
-                                        <input class="form-check-input me-3" type="radio" name="answer[{{ $i }}]"  value="4"
+                                        <input class="form-check-input me-3 " type="radio" name="answer[{{ $i }}]"  value="4"
                                         @if( isset($myForm['answer'][$i]) )
                                             @if($myForm['answer'][$i] == '4') checked @endif
                                         @endif
@@ -281,7 +281,7 @@
                                 @if(isset($myForm['option_5']))
                                 <div class="col-md-12 fv-row">
                                     <div class="d-flex align-items-center justify-content-center">
-                                        <input class="form-check-input me-3" type="radio" name="answer[{{ $i }}]"  value="5"
+                                        <input class="form-check-input me-3 " type="radio" name="answer[{{ $i }}]"  value="5"
                                         @if( isset($myForm['answer'][$i]) )
                                             @if($myForm['answer'][$i] == '5') checked @endif
                                         @endif
@@ -298,8 +298,10 @@
             </div>
             @endfor
             <!--begin::Actions-->
+            
             <div class="text-center d-flex justify-content-end py-4 px-4" >
-                <button type="submit" class="btn btn-primary" style="padding: 10px 70px">
+                <span class="btn btn-sm btn-warning me-2 check-btn text-center">Check Before Confirm</span>
+                <button type="submit" class="btn btn-primary" id="kk_modal_new_service_submit" style="padding: 10px 60px">
                     <span class="indicator-label">Confirm</span>
                 </button>
             </div>
@@ -310,8 +312,43 @@
 @endsection
 
 @push('script')
-    <script type="text/javascript">
 
+    <script type="text/javascript">
+        $(document).ready(function(){
+
+            var question_answer_length = ( $('input:radio:checked').length );
+            var total_question = $('input[name=total_question]').val();
+
+            if(total_question == question_answer_length){
+                $('#kk_modal_new_service_submit').attr('disabled' , false);
+            }else{
+                $('#kk_modal_new_service_submit').attr('disabled' , true);
+            }
+
+            
+            $('.check-btn').on('click', function(){
+                var question_answer_length = ( $('input:radio:checked').length );
+                var total_question = $('input[name=total_question]').val();
+
+                if(total_question != question_answer_length){
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'You are not answered all the Question',
+                        footer: '<span disabled>Pls answer all the Question........</span>'
+                    })
+                    $('#kk_modal_new_service_submit').attr('disabled' , true);
+                }else{
+                    toastr.success('All ok.. Now Please confirm..')
+                    $('#kk_modal_new_service_submit').attr('disabled' , false);
+                }
+
+            })
+
+        })
+    </script>
+
+    {{-- <script type="text/javascript">
     $(document).ready(function(){
         //edit
         $('.edit').on('click', function(){
@@ -405,6 +442,5 @@
 
         })
     })
-      
-    </script>
+    </script> --}}
 @endpush
