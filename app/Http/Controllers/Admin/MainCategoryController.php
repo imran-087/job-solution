@@ -59,7 +59,7 @@ class MainCategoryController extends Controller
                             </span>
                             <!--end::Svg Icon-->
                         </a>
-                        <a href="javascript:;" onclick="deleteCategory(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                        <a href="javascript:;" onclick="deleteMainCategory(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 ">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                             <span class="svg-icon svg-icon-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -69,6 +69,9 @@ class MainCategoryController extends Controller
                                 </svg>
                             </span>
                             <!--end::Svg Icon-->
+                        </a>
+                        <a href="javascript:;" onclick="addCategory(' . $row->id . ')" data-id="' . $row->id . '" class="btn btn-light btn-active-color-primary btn-sm addCategory" title="Add Category">
+                            <i class="fas fa-plus">&nbsp;Categoy</i>
                         </a>
                     </div>';
                     return $btn;

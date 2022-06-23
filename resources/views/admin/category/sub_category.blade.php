@@ -159,8 +159,8 @@
 </div>
 
 
-<!--begin::Modal - New Product/Service-->
-<div class="modal fade" id="kk_modal_new_category" tabindex="-1" aria-hidden="true">
+<!--begin::Modal - New Sub Category -->
+<div class="modal fade" id="kk_modal_new_sub_category" tabindex="-1" aria-hidden="true">
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <!--begin::Modal content-->
@@ -186,7 +186,7 @@
             <!--begin::Modal body-->
             <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
                 <!--begin:Form-->
-                <form id="kk_modal_new_category_form" class="form" enctype="multipart/form-data">
+                <form id="kk_modal_new_sub_category_form" class="form" enctype="multipart/form-data">
                     <div class="messages"></div>
                     {{-- csrf token  --}}
                     @csrf
@@ -214,7 +214,7 @@
                                 @foreach ($main_categories as $main_category)
                                     <option value="{{ $main_category->id }}">{{ $main_category->name }}</option>
                                 @endforeach
-                               
+
                                 {{-- <option value="deactive">Deactive</option> --}}
                             </select>
                             <div class="help-block with-errors main_category-error"></div>
@@ -225,15 +225,15 @@
                             <label class="required fs-6 fw-bold mb-2">Select Category</label>
                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                 data-placeholder="Select  category" name="category" id="category">
-                                
-                        
+
+
                             </select>
                             <div class="help-block with-errors category-error"></div>
                         </div>
                         <!--end::Col-->
                     </div>
                     <!--end::Input group-->
-                    
+
                     <!--begin::Input group-->
                     <div class="d-flex flex-column mb-8 fv-row">
                         <!--begin::Label-->
@@ -270,7 +270,7 @@
                         <div class="help-block with-errors job_position-error"></div>
                     </div>
                     <!--end::Input group-->
-                    
+
                     <!--begin::Input group-->
                     <div class="row g-9 mb-8">
                          <!--begin::Col-->
@@ -324,7 +324,7 @@
                                     <span class="input-group-text form-control-solid" id="basic-addon2">hr</span>
                                 </div>
                             </div>
-                           
+
                             <div class="help-block with-errors duration-error"></div>
                         </div>
                         <!--end::Col-->
@@ -360,7 +360,7 @@
                                 @foreach ($years as $year)
                                     <option value="{{ $year->id }}">{{ $year->year }}</option>
                                 @endforeach
-                               
+
                             </select>
                             <div class="help-block with-errors year-error"></div>
                         </div>
@@ -370,7 +370,7 @@
 
                     <!--begin::Actions-->
                     <div class="text-center">
-                        <button type="reset" id="kk_modal_new_service_cancel" class="btn btn-light me-3">Cancel</button>
+                        <button type="reset" id="kk_modal_new_sub_category_cancel" class="btn btn-light me-3">Cancel</button>
                         <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary">
                             <span class="indicator-label">Submit</span>
                             <span class="indicator-progress">Please wait...
@@ -387,7 +387,124 @@
     </div>
     <!--end::Modal dialog-->
 </div>
-<!--end::Modal - New Product/Service-->
+<!--end::Modal - New Sub Category -->
+
+<!--begin::Modal - New Subject-->
+<div class="modal fade" id="kk_modal_new_subject" tabindex="-1" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-850px">
+        <!--begin::Modal content-->
+        <div class="modal-content rounded">
+            <!--begin::Modal header-->
+            <div class="modal-header pb-0 border-0 justify-content-end">
+                <!--begin::Close-->
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                transform="rotate(-45 6 17.3137)" fill="black" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)"
+                                fill="black" />
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                </div>
+                <!--end::Close-->
+            </div>
+            <!--begin::Modal header-->
+            <!--begin::Modal body-->
+            <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+                <!--begin:Form-->
+                <form id="kk_modal_new_subject_form" class="form" enctype="multipart/form-data">
+                    <div class="messages"></div>
+                    {{-- csrf token  --}}
+                    @csrf
+                    <input type="hidden" name="main_category" id="main_cat_id">
+
+                    <!--begin::Heading-->
+                    <div class="mb-13 text-center">
+                        <!--begin::Title-->
+                        <h1 class="mb-3">Add New Subject</h1>
+                        <!--end::Title-->
+                        <!--begin::Description-->
+                        <div class="text-muted fw-bold fs-5">Fill up the form and submit
+                        </div>
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Heading-->
+
+                    <!--begin::Input group-->
+                    <div class="d-flex flex-column mb-3 fv-row">
+                        <!--begin::Label-->
+                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                            <span class="required">Sub Category Name</span>
+                        </label>
+                        <!--end::Label-->
+                        <input type="text" class="form-control form-control-solid" placeholder=""
+                            name="sub_category" id="sub_cat"/>
+                        <div class="help-block with-errors name-error"></div>
+                    </div>
+                    <!--end::Input group-->
+
+                    <!--begin::Input group-->
+                    <div class="d-flex flex-column mb-3 fv-row">
+                        <!--begin::Label-->
+                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                            <span class="required">Subject Name</span>
+                        </label>
+                        <!--end::Label-->
+                        <input type="text" class="form-control form-control-solid" placeholder="Enter subject name"
+                            name="name[]" id="name"/>
+                        <div class="help-block with-errors name-error"></div>
+                    </div>
+                    <!--end::Input group-->
+
+                    <!-- append dynamic input-->
+                    <div  class="newRow"></div>
+                    <!-- append dynamic input-->
+
+                    <div class="col-md-5 mb-5">
+                        <button class="btn btn-info btn-sm addRow" type="button" style="padding: 7px 10px !important"><i class="fas fa-plus"></i>Add Multiple Subject</button>
+                    </div>
+
+                    <!--begin::Input group-->
+                    <div class="row g-9 mb-8">
+                        <!--begin::Col-->
+                        <div class="col-md-12 fv-row">
+                            <label class="required fs-6 fw-bold mb-2">Status</label>
+                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                data-placeholder="Select status" name="status">
+                                <option value="active" selected>Active</option>
+                                <option value="deactive">Deactive</option>
+                            </select>
+                            <div class="help-block with-errors status-error"></div>
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Input group-->
+
+                    <!--begin::Actions-->
+                    <div class="text-center">
+                        <button type="reset" id="kk_modal_new_subject_cancel" class="btn btn-light me-3">Cancel</button>
+                        <button type="submit" id="kk_modal_new_subject_submit" class="btn btn-primary">
+                            <span class="indicator-label">Submit</span>
+                            <span class="indicator-progress">Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                    </div>
+                    <!--end::Actions-->
+                </form>
+                <!--end:Form-->
+            </div>
+            <!--end::Modal body-->
+        </div>
+        <!--end::Modal content-->
+    </div>
+    <!--end::Modal dialog-->
+</div>
+<!--end::Modal - New Subject-->
+
 
 @endsection
 
@@ -429,7 +546,7 @@
                         data: 'status',
                         name: 'status'
                     },
-                   
+
                     {
                         data: 'created_at',
                         name: 'created_at'
@@ -464,9 +581,9 @@
         function addNew(){
             $('input[name="sub_category_id"]').val('')
             $('.with-errors').text('')
-            $('#kk_modal_new_category_form')[0].reset();
+            $('#kk_modal_new_sub_category_form')[0].reset();
             clearAppendData();
-            $('#kk_modal_new_category').modal('show')
+            $('#kk_modal_new_sub_category').modal('show')
         }
 
         //edit category modal
@@ -476,7 +593,7 @@
                 url: "{{ url('admin/category/sub-category/get')}}"+'/'+id,
                 dataType: 'json',
                 success:function(data){
-                   
+
                    $('input[name="sub_category_id"]').val(data.sub_category.id)
                    $('input[name="name"]').val(data.sub_category.name)
                    $('input[name="title"]').val(data.sub_category.title)
@@ -491,21 +608,21 @@
                    $('select[name="year"]').val(data.sub_category.year_id).change()
                    $('select[name="main_category"]').val(data.main_category.id).change();
                    $('select[name="category"]').html('<option value="' + data.sub_category.category_id + '">' + data.sub_category.category.name + '</option>');
-                  
-                   $("#kk_modal_new_category").modal('show');
+
+                   $("#kk_modal_new_sub_category").modal('show');
                 }
           });
         }
 
         //cancel button
-        $('#kk_modal_new_service_cancel').on('click', function(){
-            $('#kk_modal_new_category_form')[0].reset();
+        $('#kk_modal_new_sub_category_cancel').on('click', function(){
+            $('#kk_modal_new_sub_category_form')[0].reset();
             clearAppendData();
-            $("#kk_modal_new_category").modal('hide');
+            $("#kk_modal_new_sub_category").modal('hide');
         })
 
         //new category save
-        $('#kk_modal_new_category_form').on('submit',function(e){
+        $('#kk_modal_new_sub_category_form').on('submit',function(e){
             e.preventDefault()
             $('.with-errors').text('')
             $('.indicator-label').hide()
@@ -529,12 +646,12 @@
                         }
                     }else if(data.error || data.error == 'true'){
                         var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
-                        $('#kk_modal_new_category_form').find('.messages').html(alertBox).show();
+                        $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                     }else{
                         // empty the form
-                        $('#kk_modal_new_category_form')[0].reset();
+                        $('#kk_modal_new_sub_category_form')[0].reset();
                         clearAppendData();
-                        $("#kk_modal_new_category").modal('hide');
+                        $("#kk_modal_new_sub_category").modal('hide');
 
                         Swal.fire({
                                 text: data.message,
@@ -616,6 +733,113 @@
         function clearAppendData(){
             $('select[name="category"]').val('').text('');
         }
+
+        //Add subject into a sub_category
+        function addSubject(id, main_cat_id){
+            console.log(id);
+            console.log(main_cat_id);
+            $('.with-errors').text('');
+            $('#kk_modal_new_subject_form')[0].reset();
+            $('#sub_cat').val(id);
+            $('#main_cat_id').val(main_cat_id);
+            $('#kk_modal_new_subject').modal('show');
+        }
+
+        //cancel button
+        $('#kk_modal_new_subject_cancel').on('click', function(){
+            $('#kk_modal_new_subject_form')[0].reset();
+            $('.indicator-label').show();
+            $('.indicator-progress').hide();
+            $('#kk_modal_new_subject_submit').removeAttr('disabled');
+            $("#kk_modal_new_subject").modal('hide');
+
+        })
+
+        //new subject save
+        $('#kk_modal_new_subject_form').on('submit',function(e){
+            e.preventDefault()
+            $('.with-errors').text('')
+            $('.indicator-label').hide()
+            $('.indicator-progress').show()
+            $('#kk_modal_new_subject_submit').attr('disabled','true')
+
+            var formData = new FormData(this);
+            // formData.append('description', myEditor.getData());
+            $.ajax({
+                type:"POST",
+                url: "{{ url('admin/category/subject/store')}}",
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    if(data.success ==  false || data.success ==  "false"){
+                        var arr = Object.keys(data.errors);
+                        var arr_val = Object.values(data.errors);
+                        for(var i= 0;i < arr.length;i++){
+                        $('.'+arr[i]+'-error').text(arr_val[i][0])
+                        }
+                    }else if(data.error || data.error == 'true'){
+                        var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                        $('#kk_modal_new_subject_form').find('.messages').html(alertBox).show();
+                    }else{
+                        // empty the form
+                        $('#kk_modal_new_subject_form')[0].reset();
+                        clearAppendData()
+                        $("#kk_modal_new_subject").modal('hide');
+                        $('.dynamic-row').remove();
+                        Swal.fire({
+                                text: data.message,
+                                icon: "success",
+                                buttonsStyling: !1,
+                                confirmButtonText: "{{__('Ok, got it!')}}",
+                                customClass: {
+                                    confirmButton: "btn fw-bold btn-primary"
+                                }
+                            }).then((function () {
+                                //refresh datatable
+                                $('#dataTable').DataTable().ajax.reload();
+                            }))
+                    }
+
+                    $('.indicator-label').show()
+                    $('.indicator-progress').hide()
+                    $('#kk_modal_new_subject_submit').removeAttr('disabled')
+
+                }
+          });
+
+        })
+
+        //add new input field
+        $(document).on('click', '.addRow', function() {
+            var html = '';
+            html += '<div class="d-flex flex-column mb-3 fv-row dynamic-row">'
+
+            html += '   <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
+            html += '        <span class="required">Subject Name</span>'
+            html += '    </label>'
+
+            html += '    <div class="row">'
+            html += '        <div class="col-md-11">'
+            html += '            <input type="text" class="form-control form-control-solid" placeholder="Enter subject name" name="name[]" />'
+            html += '            <div class="help-block with-errors name-error"></div>'
+            html += '        </div>'
+            html += '        <div class="col-md-1">'
+            html += '            <button class="btn btn-danger btn-icon btn-sm removeRow" type="button"><i class="fas fa-minus"></i></button>'
+            html += '        </div>'
+            html += '    </div>'
+            html += '</div>'
+
+            $(this).closest('.newRow').append(html);
+            $('.newRow').append(html);
+        });
+
+        // remove row
+        $(document).on('click', '.removeRow', function() {
+            $(this).closest('.dynamic-row').remove();
+            //$(this).remove();
+        });
 
     </script>
 @endpush

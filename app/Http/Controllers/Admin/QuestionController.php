@@ -119,9 +119,9 @@ class QuestionController extends Controller
 
     public function create(Request $request)
     {
-        $main_categories = MainCategory::select('id', 'name')->get();
+
         $years = Year::select('id', 'year')->get();
-        $questions = Question::where('created_user_id', Auth::id())->select('created_user_id')->get();
+        $total_input_by_auth_user = Question::where('created_user_id', Auth::id())->select('created_user_id')->select('id')->get();
 
         if ($request->has('sub_category')) {
             $sub_category = SubCategory::where('id', $request->sub_category)->first();
@@ -130,7 +130,7 @@ class QuestionController extends Controller
                 ->where(['sub_category_id' => $request->sub_category, 'status' => 'active'])
                 ->get();
             if ($subjects->count() > 0) {
-                return view('admin.question.create', compact('sub_category', 'main_categories', 'subjects', 'years', 'questions'));
+                return view('admin.question.create_2', compact('sub_category', 'subjects', 'total_input_by_auth_user'));
             } else {
                 if ($sub_category->category->main_category->id == 1) {
                     $subjects = Subject::with('main_category')
@@ -138,16 +138,17 @@ class QuestionController extends Controller
                         ->get();
                     //dd($subject);
                     return view(
-                        'admin.question.create',
-                        compact('sub_category', 'subjects', 'years', 'main_categories', 'questions')
+                        'admin.question.create_2',
+                        compact('sub_category', 'subjects',  'total_input_by_auth_user')
                     );
                 } else {
                     $subjects = '';
-                    return view('admin.question.create', compact('sub_category', 'main_categories', 'subjects', 'years', 'questions'));
+                    return view('admin.question.create_2', compact('sub_category', 'subjects', 'total_input_by_auth_user'));
                 }
             }
         } else {
-            return view('admin.question.create', compact('main_categories', 'years', 'questions'));
+            $main_categories = MainCategory::select('id', 'name')->get();
+            return view('admin.question.create', compact('main_categories', 'years', 'total_input_by_auth_user'));
         }
     }
 
@@ -367,6 +368,7 @@ class QuestionController extends Controller
         )->with('message', 'Question saved correctly!!!');
     }
 
+    //latest insert question view
     public function show(Request $request)
     {
         $subject = Subject::select('name', 'id')
@@ -455,7 +457,7 @@ class QuestionController extends Controller
     {
         //dd($id);
         $question = Question::find($id);
-        $question_option = QuestionOption::find($question->id);
+        $question_option = QuestionOption::where('question_id', $question->id)->first();
         $question->delete();
         $question_option->delete();
 
@@ -480,9 +482,10 @@ class QuestionController extends Controller
         $sub_categories = SubCategory::where('category_id', $request->id)->select('id', 'name')
             ->withCount('question')
             ->get();
+        //dd($sub_categories);
 
         $subject_analytics = [];
-        foreach ($sub_categories as $sub_category) {
+        foreach ($sub_categories as $key => $sub_category) {
 
             $questions = Question::whereBelongsTo($sub_category)
                 ->select('id', 'subject_id', DB::raw('count(*) as total'))
@@ -490,14 +493,13 @@ class QuestionController extends Controller
                     $query->select('id', 'name');
                 }])
                 ->get();
-            $subject_analytics = $questions;
+            $subject_analytics[$key] = $questions;
         }
-        dump($subject_analytics);
-        dd('end');
+        // dump($subject_analytics);
+        // dd('end');
 
 
-
-        $view = view('admin.mcq.sub_category', compact('sub_categories', 'subject_analytics', 'subject_question_count', 'total_question'))->render();
+        $view = view('admin.mcq.sub_category', compact('sub_categories', 'subject_analytics'))->render();
         return response()->json([
             'success' => true,
             'html' => $view
@@ -507,22 +509,22 @@ class QuestionController extends Controller
     //all question
     public function allQuestion(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
         if ($request->has('sub_category')) {
 
-            $sub_category = SubCategory::find($request->sub_category)->first();
-
+            $sub_category = SubCategory::find($request->sub_category);
+            //dd($sub_category);
             $questions = Question::with('subject')->where([
-                'sub_category_id' => $request->sub_category
+                'sub_category_id' => $request->sub_category,
             ])->groupBy('subject_id')->get();
             $passages = Passage::with('questions')->where('sub_category_id', $request->sub_category)->get();
         } else {
 
-            $sub_category = SubCategory::find($request->sub_cat)->first();
+            $sub_category = SubCategory::find($request->sub_cat);
 
             $questions = Question::with('subject')->where([
                 'sub_category_id' => $request->sub_cat,
-                'subject_id' => $request->subject
+                'subject_id' => $request->subject,
             ])->groupBy('subject_id')->get();
 
             $passages = Passage::with('questions')->where([
@@ -541,7 +543,7 @@ class QuestionController extends Controller
 
     }
 
-    //academy 
+    //academy
     public function academy()
     {
         $data = Category::where('main_category_id', 2)->get();

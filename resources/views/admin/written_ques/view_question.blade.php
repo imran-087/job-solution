@@ -106,31 +106,31 @@
                                     <!--begin::Content-->
                                     <div class="mb-15 text-center">
                                         <!--begin::Title-->
-                                        <h4 class="fs-2x text-gray-800 w-bolder mb-2">{{ $exam_detail->name }}</h4>
+                                        <h4 class="fs-2x text-gray-800 w-bolder mb-2">{{ $exam_detail->name ?? 'No Name' }}</h4>
                                         <!--end::Title-->
                                         <!--begin::Text-->
-                                        <p class="fw-bold fs-4 text-gray-600 mb-2">{{ $exam_detail->title ?? 'Bangladesh Civil Service Exam' }}</p>
+                                        <p class="fw-bold fs-4 text-gray-600 mb-2">{{ $exam_detail->title ?? 'No Title' }}</p>
                                         <!--end::Text-->
                                         <!--begin::Text-->
-                                        <p class="fw-bold fs-4 text-gray-600 mb-2">বিষয় কোড ঃ ১০১ </p>
+                                        <p class="fw-bold fs-4 text-gray-600 mb-2">বিষয় কোড ঃ </p>
                                         <!--end::Text-->
                                         <!--begin::Text-->
-                                        <p class="fw-bold fs-4 text-gray-600 mb-2">নির্ধারিত সময় ঃ ২ ঘণ্টা</p>
-                                        <!--end::Text--> 
+                                        <p class="fw-bold fs-4 text-gray-600 mb-2">নির্ধারিত সময় ঃ </p>
+                                        <!--end::Text-->
                                         <!--begin::Text-->
-                                        <p class="fw-bold fs-4 text-gray-600 mb-2">পূর্ণমান ঃ ২০০</p>
-                                        <!--end::Text--> 
+                                        <p class="fw-bold fs-4 text-gray-600 mb-2">পূর্ণমান ঃ </p>
+                                        <!--end::Text-->
                                     </div>
                                     <!--end::Content-->
                                     <!--begin::Item-->
                                     @if($questions->count() > 0)
-                                   
+
                                     <div class="mb-5">
-                                       
+
                                         @foreach($questions as $parent_question)
                                             <!--begin::Title-->
                                             <div class="m-0" style="margin-left:20px !important">
-                                               
+
                                                 <!--begin::Heading-->
                                                 <div class="d-flex align-items-center collapsible collapsed  py-3 toggle mb-0" data-bs-toggle="collapse" data-bs-target="#kt_job_8_1_{{$parent_question->id}}">
                                                     @if($parent_question->question_instruction == 0)
@@ -172,10 +172,10 @@
                                                     @foreach ($parent_question->descriptions as $description)
                                                     <!--begin::description-->
                                                     <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10 text-center " style="text-align: justify"><b>Description:</b> &nbsp; {{ $description->description ?? '' }} <span class="d-flex justify-content-end cursor-pointer edit-Description" data-id="{{ $description->id }}" data-description="{{ $description->description }}" ><i class="fas fa-edit"></i></span></div>
-                                                    
+
                                                     <!--end::description-->
                                                     @endforeach
-                                                    
+
                                                     <button class="btn btn-sm btn-light  mb-4 addDescription" data-id="{{ $parent_question->id }}"> Add Description</button>
                                                 </div>
                                                 @endif
@@ -185,7 +185,7 @@
                                                 <div class="separator separator-dashed"></div>
                                                 <!--end::Separator-->
                                                 @else
-                                                    @if($parent_question->question_or) 
+                                                    @if($parent_question->question_or)
                                                     <span><b class="text-uppercase" style="font: 800; font-weight:bold; margin-left:35px">{{ $parent_question->question_or }}</b></span>
                                                     @endif
                                                 @endif
@@ -318,9 +318,9 @@
                                                 @endforeach
 
                                             @endforeach
-                                           
+
                                         @endforeach
-                                        
+
                                     </div>
                                     @endif
                                     <!--end::Item-->
@@ -400,7 +400,7 @@
                         <div class="help-block with-errors description-error"></div>
                     </div>
                     <!--end::Input group-->
-                   
+
                     <!--begin::Actions-->
                     <div class="text-center">
                         <button type="reset" id="kk_modal_new_service_cancel" class="btn btn-light me-3 ">Cancel</button>

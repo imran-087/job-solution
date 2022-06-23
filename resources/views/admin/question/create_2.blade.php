@@ -141,50 +141,27 @@
                         <!--begin::Input group-->
                         <div class="row g-9 mb-8">
                             <!--begin::Col-->
-                            <div class="col-md-3 fv-row">
-                                <label class="required fs-6 fw-bold mb-2">Select Main Category</label>
-                                <select class="form-select form-select-solid " data-control="select2"
-                                    data-hide-search="true" data-placeholder="Select main category" name="main_category"
-                                    id="main_category" required>
-                                    <option value="">Choose ...</option>
-
-                                    @foreach ($main_categories as $main_category)
-                                    <option value="{{ $main_category->id }}">{{ $main_category->name }}</option>
-                                    @endforeach
-                                </select>
-                                <div class="help-block with-errors main_category-error"></div>
+                            <div class="col-md-6 fv-row">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span class="required">Sub Category</span>
+                                </label>
+                                <!--end::Label-->
+                                <input class="form-control form-control-solid" type="text" name=""  value="{{ $sub_category->name }}">
+                                <input type="hidden" name="sub_category"  value="{{ $sub_category->id }}" disabled>
                             </div>
                             <!--end::Col-->
                             <!--begin::Col-->
-                            <div class="col-md-3 fv-row">
-                                <label class="required fs-6 fw-bold mb-2">Select Category</label>
-                                <select class="form-select form-select-solid " data-control="select2"
-                                    data-hide-search="true" data-placeholder="Select category" name="category"
-                                    id="category" required>
-
-
-                                </select>
-                                <div class="help-block with-errors catgory-error"></div>
-                            </div>
-                            <!--end::Col-->
-                            <!--begin::Col-->
-                            <div class="col-md-3 fv-row">
-                                <label class="required fs-6 fw-bold mb-2">Select Sub Category</label>
-                                <select class="form-select form-select-solid " data-control="select2"
-                                    data-hide-search="true"  name="sub_category"
-                                    id="sub_category" required>
-
-                                </select>
-                                <div class="help-block with-errors sub_category-error"></div>
-                            </div>
-                            <!--end::Col-->
-                            <!--begin::Col-->
-                            <div class="col-md-3 fv-row">
+                            <div class="col-md-6 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Subject</label>
                                 <select class="form-select form-select-solid" data-control="select2"
                                     data-hide-search="true" name="subject"
                                     id="subject" required>
-
+                                    @isset($subjects)
+                                    @foreach($subjects as $subject)
+                                    <option value="{{ $subject->id }}">{{ $subject->name }} &nbsp;&nbsp; --- &nbsp;&nbsp; <span style="margin-left:10px; !important"> {{ $subject->sub_category->name ?? $subject->main_category->name  }} </span></option>
+                                    @endforeach
+                                    @endisset
                                 </select>
                                 <div class="help-block with-errors subject-error"></div>
                             </div>
@@ -192,25 +169,6 @@
                         </div>
                         <!--end::Input group-->
 
-                        <!--begin::Input group-->
-                        <div class="row g-9 mb-8">
-                            <!--begin::Col-->
-                            <div class="col-md-2 fv-row">
-                                <label class="required fs-6 fw-bold mb-2">Select Year</label>
-                                <select class="form-select form-select-solid " data-control="select2"
-                                    data-hide-search="true" data-placeholder="Select year" name="year"
-                                    id="year" required>
-                                    <option value="">Choose ...</option>
-                                    @foreach ($years as $year)
-                                    <option value="{{ $year->id }}">{{ $year->year }}</option>
-                                    @endforeach
-
-                                </select>
-                                <div class="help-block with-errors year-error"></div>
-                            </div>
-                            <!--end::Col-->
-                        </div>
-                        <!--end::Input group-->
 
                         <!--start::mcq question input-->
                         <div id="input"></div>

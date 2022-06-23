@@ -258,7 +258,7 @@ class SamprotikQuestionController extends Controller
     //deleteQuestion
     public function delete($id)
     {
-        dd($id);
+        //dd($id);
 
         $question = SamprotikQuestion::find($id);
 

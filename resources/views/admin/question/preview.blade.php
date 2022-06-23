@@ -33,12 +33,12 @@
                     <span class="bullet bg-gray-300 w-5px h-2px"></span>
                 </li>
                 <!--end::Item-->
-                
+
             </ul>
             <!--end::Breadcrumb-->
         </div>
         <!--end::Page title-->
-       
+
     </div>
     <!--end::Container-->
 </div>
@@ -77,7 +77,7 @@
                             <select class="form-select form-select-solid " data-control="select2"
                                 data-hide-search="true" data-placeholder="Select main category" name="main_category"
                                 id="main_category" >
-                    
+
                                 @foreach ($main_categories as $main_category)
                                 <option value="{{ $main_category->id }}"
                                     @if($main_category->id == $myForm['main_category']) Selected @endif
@@ -152,13 +152,13 @@
                 </div>
                 <!--end::Heading-->
             </div>
-            
+
             @if($myForm['type'] == 'passage')
             <div class="card" style="margin-top:20px !important; border:7px solid #F2F5F7; border-radius:5px; padding:5px">
                 <div class="card-body pt-4 " style="padding-bottom: 0px !important">
                     <!--begin::Input group-->
-                    <div class="row g-9 pb-4"> 
-                        <div style="" class="mb-5"> 
+                    <div class="row g-9 pb-4">
+                        <div style="" class="mb-5">
                             <!--begin::Input group-->
                             <div class="row g-9 mb-8">
                                 <!--begin::Col-->
@@ -172,7 +172,7 @@
                                     <input type="text" class="form-control form-control-solid mb-2 @error('title') is-invalid @enderror" placeholder="Enter passage title" name="title" value="{{ $myForm['title'] }}"/>
 
                                     <textarea type="text" id="kt_docs_ckeditor_classic" class="form-control form-control-solid h-100px @error('passage') is-invalid @enderror" placeholder="Enter passage" name="passage" >{{ $myForm['passage'] }}</textarea>
-                                
+
                                     @error('passage')
                                         <span class="invalid-feedback" role="alert">
                                             <strong>{{ $message }}</strong>
@@ -186,124 +186,124 @@
                 </div>
             </div>
             @endif
-           
-            @for($i = 0; $i < $count_question; $i++)
-            <div class="card" style="margin-top:20px !important; border:7px solid #F2F5F7; border-radius:5px; padding:5px">
+            <div class="card" style="margin:20px 0px !important;">
                 <div class="card-body pt-4 " style="padding-bottom: 0px !important">
-                    <!--begin::Input group-->
-                    <div class="row g-9 pb-4"> 
-                        <div style="" class="mb-5"> 
+                    @for($i = 0; $i < $count_question; $i++)
+                    <div class="card "  style="margin-top:20px !important; border:7px solid #F2F5F7;  border-radius:5px; padding:5px">
+                        <div class="card-body pt-4 " style="padding-bottom: 0px !important">
                             <!--begin::Input group-->
-                            <div class="row g-9 mb-8">
-                                <input type="hidden" name="type" value="{{ $myForm['type'] }}">
-                                <input type="hidden" name="total_question" value="{{ $count_question }}">
-                                <!--begin::Col-->
-                                <div class="col-md-12 fv-row">
-                                    <!--begin::Label-->
-                                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                        <span class="required text-uppercase fw-bolder" style="font-size: 16px">Question : {{ $i+1 }} </span>
-                                    </label>
-                                   
-                                    <!--end::Label-->
-                                    <input type="text" class="form-control form-control-solid @error('question.*') is-invalid @enderror" placeholder="Enter Question" name="question[]" value="{{ $myForm['question'][$i] }}"/>
-                                    @if($myForm['type'] == 'image')
-                                    <input type="file" class="form-control-file mt-2" id="exampleInputFile" name="question_image[]" multiple>
-                                    @endif
-                                    @error('question.*')
-                                        <span class="invalid-feedback" role="alert">
-                                            <strong>{{ $message }}</strong>
-                                        </span>
-                                    @enderror
+                            <div class="row g-9 pb-4">
+                                <div style="" class="mb-5">
+                                    <!--begin::Input group-->
+                                    <div class="row g-9 mb-8">
+                                        <input type="hidden" name="type" value="{{ $myForm['type'] }}">
+                                        <input type="hidden" name="total_question" value="{{ $count_question }}">
+                                        <!--begin::Col-->
+                                        <div class="col-md-12 fv-row">
+                                            <!--begin::Label-->
+                                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                <span class="required text-uppercase fw-bolder" style="font-size: 16px">Question : {{ $i+1 }} </span>
+                                            </label>
+
+                                            <!--end::Label-->
+
+                                            <input type="text" class="form-control form-control-solid @error('question.*') is-invalid @enderror" placeholder="Enter Question" name="question[]" value="{{ $myForm['question'][$i] }}"/>
+                                            @if($myForm['type'] == 'image')
+                                            <input type="file" class="form-control-file mt-2" id="exampleInputFile" name="question_image[]" multiple>
+                                            @endif
+                                            @error('question.*')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                        </div>
+                                        <!-- end: col-->
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="row g-9">
+                                        <!--begin::Col-->
+                                        {{-- @for($o = 0; $o < 4; $o++)  --}}
+                                        <div class="col-md-12 fv-row">
+                                            <div class="d-flex align-items-center justify-content-center">
+
+                                                <input class="form-check-input me-3 " type="radio" name="answer[{{ $i }}]"  value="1"
+                                                @if( isset($myForm['answer'][$i]) )
+                                                    @if($myForm['answer'][$i] == '1') checked @endif
+                                                @endif
+                                                >
+
+                                                <input type="text" class="form-control form-control-solid" placeholder="Enter option"
+                                                name="option_1[]"  value="{{ $myForm['option_1'][$i] }}"/>
+                                            </div>
+                                            {{-- @if($myForm['type'] == 'image')
+                                            <input type="file" class="form-control-file mt-2" id="exampleInputFile" name="image[]" multiple>
+                                            @endif --}}
+                                        </div>
+                                        <div class="col-md-12 fv-row align-items-center justify-content-center">
+                                            <div class="d-flex">
+                                                <input class="form-check-input me-3 " type="radio" name="answer[{{ $i }}]"  value="2"
+                                                @if( isset($myForm['answer'][$i]) )
+                                                    @if($myForm['answer'][$i] == '2') checked @endif
+                                                @endif
+                                                >
+                                                <input type="text" class="form-control form-control-solid" placeholder="Enter option"
+                                                name="option_2[]"  value="{{ $myForm['option_2'][$i] }}"/>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-12 fv-row">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <input class="form-check-input me-3 " type="radio" name="answer[{{ $i }}]"  value="3"
+                                                @if( isset($myForm['answer'][$i]) )
+                                                    @if($myForm['answer'][$i] == '3') checked @endif
+                                                @endif
+                                                >
+                                                <input type="text" class="form-control form-control-solid" placeholder="Enter option"
+                                                name="option_3[]"  value="{{ $myForm['option_3'][$i] }}"/>
+                                            </div>
+                                        </div>
+                                        @if(isset($myForm['option_4']))
+                                        <div class="col-md-12 fv-row">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <input class="form-check-input me-3 " type="radio" name="answer[{{ $i }}]"  value="4"
+                                                @if( isset($myForm['answer'][$i]) )
+                                                    @if($myForm['answer'][$i] == '4') checked @endif
+                                                @endif
+                                                >
+                                                <input type="text" class="form-control form-control-solid" placeholder="Enter option"
+                                                name="option_4[]"  value="{{ $myForm['option_4'][$i] }}"/>
+                                            </div>
+                                        </div>
+                                        @endif
+                                        @if(isset($myForm['option_5']))
+                                        <div class="col-md-12 fv-row">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <input class="form-check-input me-3 " type="radio" name="answer[{{ $i }}]"  value="5"
+                                                @if( isset($myForm['answer'][$i]) )
+                                                    @if($myForm['answer'][$i] == '5') checked @endif
+                                                @endif
+                                                >
+                                                <input type="text" class="form-control form-control-solid" placeholder="Enter option"
+                                                name="option_5[]"  value="{{ $myForm['option_5'][$i] }}"/>
+                                            </div>
+                                        </div>
+                                        @endif
+                                    </div>
                                 </div>
-                                <!-- end: col-->
                             </div>
-                            <!--end::Input group-->
-                            
-                            <!--begin::Input group-->
-                            <div class="row g-9">
-                                <!--begin::Col-->
-                                {{-- @for($o = 0; $o < 4; $o++)  --}}
-                                <div class="col-md-12 fv-row">
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        
-                                        <input class="form-check-input me-3 " type="radio" name="answer[{{ $i }}]"  value="1"
-                                        @if( isset($myForm['answer'][$i]) )
-                                            @if($myForm['answer'][$i] == '1') checked @endif 
-                                        @endif
-                                        >
-                                        
-                                        <input type="text" class="form-control form-control-solid" placeholder="Enter option"
-                                        name="option_1[]"  value="{{ $myForm['option_1'][$i] }}"/>
-                                    </div>
-                                    {{-- @if($myForm['type'] == 'image')
-                                    <input type="file" class="form-control-file mt-2" id="exampleInputFile" name="image[]" multiple>
-                                    @endif --}}
-                                </div>    
-                                <div class="col-md-12 fv-row align-items-center justify-content-center">
-                                    <div class="d-flex">
-                                        <input class="form-check-input me-3 " type="radio" name="answer[{{ $i }}]"  value="2"
-                                        @if( isset($myForm['answer'][$i]) )
-                                            @if($myForm['answer'][$i] == '2') checked @endif
-                                        @endif
-                                        >
-                                        <input type="text" class="form-control form-control-solid" placeholder="Enter option"
-                                        name="option_2[]"  value="{{ $myForm['option_2'][$i] }}"/>
-                                    </div>
-                                
-                                    {{-- @if($myForm['type'] == 'image')
-                                    <input type="file" class="form-control-file mt-2" id="exampleInputFile" name="image[]" multiple>
-                                    @endif --}}
-                                </div>  
-                                <div class="col-md-12 fv-row">
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <input class="form-check-input me-3 " type="radio" name="answer[{{ $i }}]"  value="3"
-                                        @if( isset($myForm['answer'][$i]) ) 
-                                            @if($myForm['answer'][$i] == '3') checked @endif
-                                        @endif
-                                        >
-                                        <input type="text" class="form-control form-control-solid" placeholder="Enter option"
-                                        name="option_3[]"  value="{{ $myForm['option_3'][$i] }}"/>
-                                    </div>
-                                </div> 
-                                @if(isset($myForm['option_4']))
-                                <div class="col-md-12 fv-row">
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <input class="form-check-input me-3 " type="radio" name="answer[{{ $i }}]"  value="4"
-                                        @if( isset($myForm['answer'][$i]) )
-                                            @if($myForm['answer'][$i] == '4') checked @endif
-                                        @endif
-                                        >
-                                        <input type="text" class="form-control form-control-solid" placeholder="Enter option"
-                                        name="option_4[]"  value="{{ $myForm['option_4'][$i] }}"/>
-                                    </div>
-                                </div>    
-                                @endif   
-                                @if(isset($myForm['option_5']))
-                                <div class="col-md-12 fv-row">
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <input class="form-check-input me-3 " type="radio" name="answer[{{ $i }}]"  value="5"
-                                        @if( isset($myForm['answer'][$i]) )
-                                            @if($myForm['answer'][$i] == '5') checked @endif
-                                        @endif
-                                        >
-                                        <input type="text" class="form-control form-control-solid" placeholder="Enter option"
-                                        name="option_5[]"  value="{{ $myForm['option_5'][$i] }}"/>
-                                    </div>
-                                </div>    
-                                @endif   
-                            </div>
-                        </div> 
+                        </div>
+                    </div>
+                    @endfor
+                    <!--begin::Actions-->
+
+                    <div class="text-center d-flex justify-content-end py-4 px-4" >
+                        <span class="btn btn-sm btn-warning me-2 check-btn text-center">Check Before Confirm</span>
+                        <button type="submit" class="btn btn-primary" id="kk_modal_new_service_submit" style="padding: 10px 60px">
+                            <span class="indicator-label">Confirm</span>
+                        </button>
                     </div>
                 </div>
-            </div>
-            @endfor
-            <!--begin::Actions-->
-            
-            <div class="text-center d-flex justify-content-end py-4 px-4" >
-                <span class="btn btn-sm btn-warning me-2 check-btn text-center">Check Before Confirm</span>
-                <button type="submit" class="btn btn-primary" id="kk_modal_new_service_submit" style="padding: 10px 60px">
-                    <span class="indicator-label">Confirm</span>
-                </button>
             </div>
         </form>
     </div>
@@ -325,7 +325,7 @@
                 $('#kk_modal_new_service_submit').attr('disabled' , true);
             }
 
-            
+
             $('.check-btn').on('click', function(){
                 var question_answer_length = ( $('input:radio:checked').length );
                 var total_question = $('input[name=total_question]').val();
@@ -366,7 +366,7 @@
 
         //cancel button
         $(document).on('click', '#kk_modal_new_service_cancel', function(){
-            
+
             $("#kk_modal_show_question").modal('hide');
         })
 
@@ -436,7 +436,7 @@
                     window.setTimeout(function(){
                         window.location = data.redirect_url;
                     }, 1000);
-                   
+
                 }
             });
 

@@ -3,11 +3,12 @@
 namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
+use App\Models\Year;
 use App\Models\Category;
 use Illuminate\Support\Str;
+use App\Models\MainCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\MainCategory;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -65,7 +66,7 @@ class CategoryController extends Controller
                             </span>
                             <!--end::Svg Icon-->
                         </a>
-                        <a href="javascript:;" onclick="deleteCategory(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                        <a href="javascript:;" onclick="deleteCategory(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                             <span class="svg-icon svg-icon-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -76,6 +77,9 @@ class CategoryController extends Controller
                             </span>
                             <!--end::Svg Icon-->
                         </a>
+                        <a href="javascript:;" onclick="addSubCategory(' . $row->id . ')" data-id="' . $row->id . '" class="btn btn-light btn-active-color-primary btn-sm addCategory" title="Add Category">
+                            <i class="fas fa-plus">&nbsp;Sub-Categoy</i>
+                        </a>
                     </div>';
                     return $btn;
                 })
@@ -84,9 +88,9 @@ class CategoryController extends Controller
         }
 
         //get all min category
-        $main_categories = MainCategory::where('status', 'active')->get();
-
-        return view('admin.category.category', compact('main_categories'));
+        $main_categories = MainCategory::where('status', 'active')->select('id', 'name')->get();
+        $years = Year::select('id', 'year')->get();
+        return view('admin.category.category', compact('main_categories','years'));
     }
 
     //create or update category
@@ -116,7 +120,7 @@ class CategoryController extends Controller
 
                 $category->updated_at = Carbon::now();
 
-                // edited category tracker 
+                // edited category tracker
                 $category->edited_categories()->create([
                     'category' => $request->name,
                     'editor_id' => Auth::guard('admin')->user()->id,

@@ -76,7 +76,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/subject/subject-tree', 'SubjectController@treeView')->name('subject.tree');
         // Route::get('/subject/subject-tree/data', 'SubjectController@treeData')->name('subject.tree_data');
 
-        // test route for create tree 
+        // test route for create tree
         Route::get('tree/create-subject', 'SubjectController@createSubject')->name('subject.create-tree');
         Route::post('/tree/store-subject', 'SubjectController@storeSubject')->name('subject.store_tree');
         // Route::get('tree/create-subject', 'SubjectController@createSubject')->name('subject.create-tree');
@@ -155,7 +155,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('question/edited-question/reject/{id}', 'EditedQuestionController@rejectQuestion')->name('question.edited-question.reject');
         Route::get('question/edited-question/show/{id}', 'EditedQuestionController@showQuestion')->name('question.edited-question.show');
 
-        // add tag 
+        // add tag
         Route::get('/question/add-tag-on-question', 'TagController@index')->name('question.tag');
         Route::get('/question/add-tag-on-question2', 'TagController@index2')->name('question.tag2');
         Route::post('question/tag/search', 'TagController@searchTag')->name('question.search-tag');

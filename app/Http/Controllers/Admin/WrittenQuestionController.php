@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Models\Year;
 use App\Models\Reply;
+use App\Models\Subject;
+use App\Models\Question;
 use App\Models\SubCategory;
 use Illuminate\Support\Str;
 use App\Models\MainCategory;
@@ -18,11 +20,40 @@ use Illuminate\Support\Facades\Validator;
 
 class WrittenQuestionController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $main_categories = MainCategory::all();
-        $years = Year::all();
-        return view('admin.written_ques.index', compact('main_categories', 'years'));
+
+        $years = Year::select('id', 'year')->get();
+        $total_input_by_auth_user = Question::where('created_user_id', Auth::id())->select('created_user_id')->select('id')->get();
+
+        if ($request->has('sub_category')) {
+            $sub_category = SubCategory::where('id', $request->sub_category)->first();
+
+            $subjects = Subject::with('sub_category', 'main_category')
+                ->where(['sub_category_id' => $request->sub_category, 'status' => 'active'])
+                ->get();
+            if ($subjects->count() > 0) {
+                return view('admin.written_ques.create', compact('sub_category', 'subjects', 'total_input_by_auth_user', 'years'));
+            } else {
+                if ($sub_category->category->main_category->id == 1) {
+                    $subjects = Subject::with('main_category')
+                        ->where(['status' => 'active', 'parent_id' => null, 'main_category_id' => 1, 'sub_category_id' => 0])
+                        ->get();
+                    //dd($subject);
+                    return view(
+                        'admin.written_ques.create',
+                        compact('sub_category', 'subjects',  'total_input_by_auth_user' , 'years')
+                    );
+                } else {
+                    $subjects = '';
+                    return view('admin.written_ques.create', compact('sub_category', 'subjects', 'total_input_by_auth_user' , 'years'));
+                }
+            }
+        } else {
+            $main_categories = MainCategory::select('id', 'name')->get();
+            return view('admin.written_ques.index', compact('main_categories', 'years'));
+        }
+
     }
 
 

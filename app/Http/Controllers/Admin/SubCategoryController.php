@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Admin;
 
 use Carbon\Carbon;
+use App\Models\Year;
+use App\Models\Subject;
 use App\Models\Category;
 use App\Models\SubCategory;
 use Illuminate\Support\Str;
 use App\Models\MainCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\Year;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -64,6 +65,9 @@ class SubCategoryController extends Controller
                         <a href="/admin/question/create?sub_category=' . $row->id . '" target="_blank" class="btn btn-bg-light btn-active-color-primary btn-sm me-1">
                             Add Question
                         </a>
+                        <a href="/admin/question/written-question?sub_category=' . $row->id . '" target="_blank" class="btn btn-light btn-active-color-primary btn-sm " title="Add Written Question">
+                            <i class="fas fa-plus">&nbsp;Written Question
+                        </a>
                         <a href="javascript:;" onclick="edit(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                             <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                             <span class="svg-icon svg-icon-3">
@@ -74,7 +78,7 @@ class SubCategoryController extends Controller
                             </span>
                             <!--end::Svg Icon-->
                         </a>
-                        <a href="javascript:;" onclick="deleteCategory(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                        <a href="javascript:;" onclick="deleteCategory(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                             <span class="svg-icon svg-icon-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -85,6 +89,10 @@ class SubCategoryController extends Controller
                             </span>
                             <!--end::Svg Icon-->
                         </a>
+                        <a href="javascript:;" onclick="addSubject(' . $row->id  .', '.$row->category->main_category->id.')" data-id="' . $row->id . '" class="btn btn-light btn-active-color-primary btn-sm addSubject" title="Add Subject">
+                            <i class="fas fa-plus">&nbsp;Subject</i>
+                        </a>
+
                     </div>';
                     return $btn;
                 })
@@ -229,4 +237,6 @@ class SubCategoryController extends Controller
             'message' => 'Category deleted successfully!'
         ], 200);
     }
+
+
 }

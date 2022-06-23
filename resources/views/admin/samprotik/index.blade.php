@@ -68,14 +68,18 @@
                 @include('admin.samprotik.menu-bar')
                 <!--end::Card body-->
             </div>
-            <!--end::Card--> 
-
-            <!--begin::admin.samprotik question-->    
-            <div class="row" id="samprotik_ques">
-                @include('admin.samprotik.samprotik')
+            <!--end::Card-->
+            <div class="card mb-5">
+                <!--begin::Card body-->
+                <div class="card-body pt-10 pb-10 ">
+                    <!--begin::admin.samprotik question-->
+                    <div class="row" id="samprotik_ques">
+                        @include('admin.samprotik.samprotik')
+                    </div>
+                    <!--end::samprotik question-->
+                </div>
             </div>
-            <!--end::samprotik question-->
-           
+
         </div>
         <!--end::Container-->
     </div>
@@ -85,11 +89,11 @@
 
 @push('script')
 <script type="text/javascript">
-	
+
     $(document).ready(function(){
 
         $(document).on('click', '.pagination a', function(event){
-            event.preventDefault(); 
+            event.preventDefault();
             var page = $(this).attr('href').split('page=')[1];
             fetch_data(page);
         });
@@ -104,7 +108,7 @@
                 }
             });
         }
-    
+
     });
 
     $(document).ready( function(){
@@ -163,7 +167,7 @@
                     $("#samprotik_ques").append(data.html);
                 }
             });
-        }) 
+        })
     })
 
     //show description form
@@ -171,13 +175,18 @@
         $(this).closest('div').find('.des-form').toggleClass('d-none');
     })
 
+    //cancel button of add
+    $(document).on('click', '.kk_modal_new_add_cancel', function(){
+        $(this).parent('div.des-form').addClass('d-none');
+
+    })
 
     //add description --save
     $(document).on('submit', '#kk_add_description_form', function(e){
         e.preventDefault()
         //console.log('here')
         $('.with-errors').text('')
-     
+
         var thisaddbtn = $(this);
         var formData = new FormData(this);
         $.ajax({
@@ -219,13 +228,13 @@
         $(this).parent().parent("div").find('.update-des').show();
     })
 
-    
+
     //update description --save
     $(document).on('submit', '#kk_update_description_form', function(e){
         e.preventDefault()
         //console.log('here')
         $('.with-errors').text('')
-       
+
         var thisaddbtn = $(this);
         var formData = new FormData(this);
         $.ajax({
@@ -262,7 +271,7 @@
         var question_id = $(this).data('question_id')
 
         var this_input = $(this)
-            
+
         $.ajax({
             type: "GET",
             url: "{{ url('admin/samprotik-tag/get-tag')}}",
@@ -276,21 +285,21 @@
                 //console.log(data)
                 this_input.hide();
                 this_input.closest('div').find('.tag').html(data);
-                
+
             }
         });
-        
+
     });
 
     //add tag
     $(document).on('change', '.add-tag', function(){
         var sid = $(this).find(':selected').data('sid');
         var qid = $(this).find(':selected').data('qid');
-        
+
         // console.log(sid)
         // console.log(qid)
         var this_input = $(this)
-        
+
         //AJAX is called.
         $.ajax({
             type: "POST",

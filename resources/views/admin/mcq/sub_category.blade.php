@@ -8,7 +8,8 @@
         <!--end::Header-->
         <!--begin::Body-->
         <div class="card-body pt-2">
-            @foreach($sub_categories as $sub_category)
+            @if($sub_categories->count() > 0)
+            @foreach($sub_categories as $key => $sub_category)
             <!--begin::Item-->
             <div class="d-flex align-items-center mb-8">
                 <!--begin::Bullet-->
@@ -16,30 +17,31 @@
                 <!--end::Bullet-->
                 <!--begin::Checkbox-->
                 <div class="form-check form-check-custom form-check-solid mx-5">
-                   
+
                 </div>
                 <!--end::Checkbox-->
                 <!--begin::Description-->
                 <div class="flex-grow-1">
-                    <a href="{{ route('admin.question.all-question',['sub_category' => $sub_category->id]) }}" target="_blank" class="text-gray-800 text-hover-primary fw-bolder fs-6">{{ $sub_category->name }} <span class="badge badge-light-danger fs-6 ms-5">{{ $total_question }}</span></a>
+                    <a href="{{ route('admin.question.all-question',['sub_category' => $sub_category->id]) }}" target="_blank" class="text-gray-800 text-hover-primary fw-bolder fs-6">{{ $sub_category->name }} <span class="badge badge-light-danger fs-6 ms-5">{{ $sub_category->question_count }}</span></a>
                     <br><br>
-                    @if($subjects->count() > 0)
-                        @foreach($subjects as $key => $subject)
-                            {{-- @if($subject->parent_id == null) --}}
-                            <a href="{{ route('admin.question.all-question',['sub_cat' => $sub_category->id, 'subject' => $subject->id]) }}" target="_blank"><span class="badge badge-success fs-8 fw-bolder mb-2 me-2">{{ $subject->name }}<span class="badge badge-light-info ms-2">{{ $subject_question_count[$key] }}</span></span></a>
-                            {{-- @endif --}}
+                    @isset($subject_analytics)
+                    {{-- {{ $subject_analytics[$key] }} --}}
+                        @foreach($subject_analytics[$key] as $key => $subject_analytic)
+                            {{-- {{ $subject_analytic->subject->name }} --}}
+                            <a href="{{ route('admin.question.all-question',['sub_cat' => $sub_category->id, 'subject' => $subject_analytic->subject->id]) }}" target="_blank"><span class="badge badge-success fs-8 fw-bolder mb-2 me-2">{{ $subject_analytic->subject->name }}<span class="badge badge-light-info ms-2">{{ $subject_analytic->total }}</span></span></a>
                         @endforeach
-                            {{-- @else
-                            @foreach($subjects as $subject)
-                            <a href="{{ route('admin.question.all-question',['sub_cat' => $sub_category->id, 'subject' => $subject->id]) }}" target="_blank"><span class="badge badge-light-success fs-8 fw-bolder  mb-2 me-2">{{ $subject->name }}</span></a>
-                            @endforeach --}}
-                    @endif
+                    @endisset
                 </div>
                 <!--end::Description-->
-                
+
             </div>
             <!--end:Item-->
            @endforeach
+           @else
+           <div class="d-flex align-items-center mb-8">
+            <h4 class="text-danger">No sub category found !!!</h4>
+           </div>
+           @endif
         </div>
         <!--end::Body-->
     </div>

@@ -107,7 +107,7 @@
                             <!--end::Select2-->
                         </div>
                         <!--begin::Add product-->
-                        <a href="javascript:;" class="btn btn-sm btn-primary me-3" onclick="addNew()">Add Subject</a>
+                        <a href="javascript:;" class="btn btn-sm btn-primary me-3" onclick="addNew()"><i class="fas fa-plus"></i>Add Subject</a>
                         <!--end::Add product-->
                     </div>
 
@@ -159,8 +159,8 @@
 </div>
 
 
-<!--begin::Modal - New Product/Service-->
-<div class="modal fade" id="kk_modal_new_category" tabindex="-1" aria-hidden="true">
+<!--begin::Modal - New Subject-->
+<div class="modal fade" id="kk_modal_new_subject" tabindex="-1" aria-hidden="true">
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-850px">
         <!--begin::Modal content-->
@@ -186,7 +186,7 @@
             <!--begin::Modal body-->
             <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
                 <!--begin:Form-->
-                <form id="kk_modal_new_category_form" class="form" enctype="multipart/form-data">
+                <form id="kk_modal_new_subject_form" class="form" enctype="multipart/form-data">
                     <div class="messages"></div>
                     {{-- csrf token  --}}
                     @csrf
@@ -214,7 +214,7 @@
                                 @foreach ($main_categories as $main_category)
                                     <option value="{{ $main_category->id }}">{{ $main_category->name }}</option>
                                 @endforeach
-                               
+
                             </select>
                             <div class="help-block with-errors main_category-error"></div>
                         </div>
@@ -223,37 +223,37 @@
                         <div class="col-md-6 fv-row">
                             <label class="required fs-6 fw-bold mb-2">Select Category</label>
                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                name="category" id="category">
-                                
-                        
+                                data-placeholder="Select category"name="category" id="category">
+
+
                             </select>
                             <div class="help-block with-errors category-error"></div>
                         </div>
                         <!--end::Col-->
                     </div>
                     <!--end::Input group-->
-                   
+
                     <!--begin::Input group-->
                     <div class="row g-9 mb-8">
                         <!--begin::Col-->
                         <div class="col-md-6 fv-row">
                             <label class="required fs-6 fw-bold mb-2">Select Sub Category</label>
                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                name="sub_category" id="sub_category">
-                                
-                        
+                                data-placeholder="Select sub category" name="sub_category" id="sub_category">
+
+
                             </select>
                             <div class="help-block with-errors sub_category-error"></div>
                         </div>
                         <!--end::Col-->
-                       
+
                         <!--begin::Col-->
                                 <div class="col-md-6 fv-row">
                                     <label class="fs-6 fw-bold mb-2">Select Parent (optional)</label>
                                     <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                        name="parent" id="parent">
-                                        
-                                
+                                        data-placeholder="Select parent" name="parent" id="parent">
+
+
                                     </select>
                                     <div class="help-block with-errors parent-error"></div>
                                 </div>
@@ -271,8 +271,8 @@
                             <label class="fs-6 fw-bold mb-2">Select Sub Parent (optional)</label>
                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                 data-placeholder="Select sub parent" name="sub_parent" id="sub_parent">
-                                
-                        
+
+
                             </select>
                             <div class="help-block with-errors sub_parent-error"></div>
                         </div>
@@ -280,24 +280,17 @@
                         <!--end::Col-->
                     </div>
                     <!--end::Input group-->
-                   
+
                     <!--begin::Input group-->
-                    <div class="d-flex flex-column mb-8 fv-row">
+                    <div class="d-flex flex-column mb-3 fv-row">
                         <!--begin::Label-->
                         <label class="d-flex align-items-center fs-6 fw-bold mb-2">
                             <span class="required">Subject Name</span>
                         </label>
                         <!--end::Label-->
-                        <div class="row">
-                            <div class="col-md-11">
-                                <input type="text" class="form-control form-control-solid" placeholder="Enter subject name"
-                                    name="name[]" id="name"/>
-                                <div class="help-block with-errors name-error"></div>
-                            </div>
-                            <div class="col-md-1">
-                                <button class="btn btn-info btn-icon btn-sm addRow" type="button"><i class="fas fa-plus"></i></button>
-                            </div>
-                        </div>
+                        <input type="text" class="form-control form-control-solid" placeholder="Enter subject name"
+                            name="name[]" id="name"/>
+                        <div class="help-block with-errors name-error"></div>
                     </div>
                     <!--end::Input group-->
 
@@ -305,30 +298,10 @@
                     <div  class="newRow"></div>
                     <!-- append dynamic input-->
 
-                    <!--begin::Input group-->
-                    <div class="d-flex flex-column mb-8 fv-row">
-                        <!--begin::Label-->
-                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="">Subject Title (optional)</span>
-                        </label>
-                        <!--end::Label-->
-                        <input type="text" class="form-control form-control-solid" placeholder="Enter Title"
-                            name="title" />
-                        <div class="help-block with-errors title-error"></div>
+                    <div class="col-md-5 mb-5">
+                        <button class="btn btn-info btn-sm addRow" type="button" style="padding: 7px 10px !important"><i class="fas fa-plus"></i>Add Multiple Subject</button>
                     </div>
-                    <!--end::Input group-->
-                    <!--begin::Input group-->
-                    <div class="d-flex flex-column mb-8 fv-row">
-                        <!--begin::Label-->
-                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="">Subject Description (optional)</span>
-                        </label>
-                        <!--end::Label-->
-                        <textarea name="description" id="kt_docs_ckeditor_classic" class="form-control form-control-solid h-100px"></textarea>
-                        <div class="help-block with-errors description-error"></div>
-                    </div>
-                    <!--end::Input group-->
-                    
+
                     <!--begin::Input group-->
                     <div class="row g-9 mb-8">
                         <!--begin::Col-->
@@ -347,8 +320,8 @@
 
                     <!--begin::Actions-->
                     <div class="text-center">
-                        <button type="reset" id="kk_modal_new_service_cancel" class="btn btn-light me-3">Cancel</button>
-                        <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary">
+                        <button type="reset" id="kk_modal_new_subject_cancel" class="btn btn-light me-3">Cancel</button>
+                        <button type="submit" id="kk_modal_new_subject_submit" class="btn btn-primary">
                             <span class="indicator-label">Submit</span>
                             <span class="indicator-progress">Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -364,7 +337,7 @@
     </div>
     <!--end::Modal dialog-->
 </div>
-<!--end::Modal - New Product/Service-->
+<!--end::Modal - New Subject-->
 
 @endsection
 
@@ -402,7 +375,7 @@
                         data: 'parent_id',
                         name: 'parent_id'
                     },
-                   
+
                     {
                         data: 'status',
                         name: 'status'
@@ -441,9 +414,9 @@
         function addNew(){
             $('input[name="subject_id"]').val('')
             $('.with-errors').text('')
-            $('#kk_modal_new_category_form')[0].reset();
+            $('#kk_modal_new_subject_form')[0].reset();
             clearAppendData();
-            $('#kk_modal_new_category').modal('show')
+            $('#kk_modal_new_subject').modal('show')
         }
 
         //edit subject modal
@@ -462,32 +435,32 @@
                     $('select[name="main_category"]').val(data.subject.main_category_id).change();
                     $('select[name="category"]').html('<option value="' + data.category.id + '">' + data.category.name + '</option>');
                     $('select[name="sub_category"]').html('<option value="' + data.sub_category.id + '">' + data.sub_category.name + '</option>');
-                    $("#kk_modal_new_category").modal('show');
+                    $("#kk_modal_new_subject").modal('show');
                 }
           });
         }
 
         //cancel button
-        $('#kk_modal_new_service_cancel').on('click', function(){
-            $('#kk_modal_new_category_form')[0].reset();
+        $('#kk_modal_new_subject_cancel').on('click', function(){
+            $('#kk_modal_new_subject_form')[0].reset();
             clearAppendData();
             $('.indicator-label').show()
             $('.indicator-progress').hide()
-            $('#kk_modal_new_service_submit').removeAttr('disabled')
-            $("#kk_modal_new_category").modal('hide');
+            $('#kk_modal_new_subject_submit').removeAttr('disabled')
+            $("#kk_modal_new_subject").modal('hide');
 
         })
 
         //new subject save
-        $('#kk_modal_new_category_form').on('submit',function(e){
+        $('#kk_modal_new_subject_form').on('submit',function(e){
             e.preventDefault()
             $('.with-errors').text('')
             $('.indicator-label').hide()
             $('.indicator-progress').show()
-            $('#kk_modal_new_service_submit').attr('disabled','true')
+            $('#kk_modal_new_subject_submit').attr('disabled','true')
 
             var formData = new FormData(this);
-            formData.append('description', myEditor.getData());
+            // formData.append('description', myEditor.getData());
             $.ajax({
                 type:"POST",
                 url: "{{ url('admin/category/subject/store')}}",
@@ -504,12 +477,12 @@
                         }
                     }else if(data.error || data.error == 'true'){
                         var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
-                        $('#kk_modal_new_category_form').find('.messages').html(alertBox).show();
+                        $('#kk_modal_new_subject_form').find('.messages').html(alertBox).show();
                     }else{
                         // empty the form
-                        $('#kk_modal_new_category_form')[0].reset();
+                        $('#kk_modal_new_subject_form')[0].reset();
                         clearAppendData()
-                        $("#kk_modal_new_category").modal('hide');
+                        $("#kk_modal_new_subject").modal('hide');
                         $('.dynamic-row').remove();
                         Swal.fire({
                                 text: data.message,
@@ -527,7 +500,7 @@
 
                     $('.indicator-label').show()
                     $('.indicator-progress').hide()
-                    $('#kk_modal_new_service_submit').removeAttr('disabled')
+                    $('#kk_modal_new_subject_submit').removeAttr('disabled')
 
                 }
           });
@@ -598,12 +571,12 @@
         //add new input field
         $(document).on('click', '.addRow', function() {
             var html = '';
-            html += '<div class="d-flex flex-column mb-8 fv-row dynamic-row">'
-               
+            html += '<div class="d-flex flex-column mb-3 fv-row dynamic-row">'
+
             html += '   <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
             html += '        <span class="required">Subject Name</span>'
             html += '    </label>'
-               
+
             html += '    <div class="row">'
             html += '        <div class="col-md-11">'
             html += '            <input type="text" class="form-control form-control-solid" placeholder="Enter subject name" name="name[]" />'
@@ -614,7 +587,7 @@
             html += '        </div>'
             html += '    </div>'
             html += '</div>'
-           
+
             $(this).closest('.newRow').append(html);
             $('.newRow').append(html);
         });

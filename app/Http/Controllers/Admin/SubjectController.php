@@ -70,7 +70,7 @@ class SubjectController extends Controller
                             </span>
                             <!--end::Svg Icon-->
                         </a>
-                        <a href="javascript:;" onclick="deleteCategory(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm">
+                        <a href="javascript:;" onclick="deleteCategory(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                             <span class="svg-icon svg-icon-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -81,6 +81,7 @@ class SubjectController extends Controller
                             </span>
                             <!--end::Svg Icon-->
                         </a>
+
                     </div>';
                     return $btn;
                 })
@@ -90,8 +91,8 @@ class SubjectController extends Controller
 
         //get all main category
         $main_categories = MainCategory::where('status', 'active')->get();
-        $parent_subjects = Subject::with('sub_category', 'main_category')->latest()->get();
-        return view('admin.category.subject', compact(['main_categories', 'parent_subjects']));
+
+        return view('admin.category.subject', compact(['main_categories']));
     }
 
     //create or update subject

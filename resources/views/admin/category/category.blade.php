@@ -158,7 +158,7 @@
 </div>
 
 
-<!--begin::Modal - New Product/Service-->
+<!--begin::Modal - New Category -->
 <div class="modal fade" id="kk_modal_new_category" tabindex="-1" aria-hidden="true">
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-650px">
@@ -213,7 +213,7 @@
                                 @foreach ($main_categories as $main_category)
                                     <option value="{{ $main_category->id }}">{{ $main_category->name }}</option>
                                 @endforeach
-                               
+
                             </select>
                             <div class="help-block with-errors main_category-error"></div>
                         </div>
@@ -281,7 +281,219 @@
     </div>
     <!--end::Modal dialog-->
 </div>
-<!--end::Modal - New Product/Service-->
+<!--end::Modal - New Category -->
+
+<!--begin::Modal - New Sub Category -->
+<div class="modal fade" id="kk_modal_new_sub_category" tabindex="-1" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <!--begin::Modal content-->
+        <div class="modal-content rounded">
+            <!--begin::Modal header-->
+            <div class="modal-header pb-0 border-0 justify-content-end">
+                <!--begin::Close-->
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                transform="rotate(-45 6 17.3137)" fill="black" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)"
+                                fill="black" />
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                </div>
+                <!--end::Close-->
+            </div>
+            <!--begin::Modal header-->
+            <!--begin::Modal body-->
+            <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+                <!--begin:Form-->
+                <form id="kk_modal_new_sub_category_form" class="form" enctype="multipart/form-data">
+                    <div class="messages"></div>
+                    {{-- csrf token  --}}
+                    @csrf
+
+                    <!--begin::Heading-->
+                    <div class="mb-13 text-center">
+                        <!--begin::Title-->
+                        <h1 class="mb-3">Add New Sub Category</h1>
+                        <!--end::Title-->
+                        <!--begin::Description-->
+                        <div class="text-muted fw-bold fs-5">Fill up the form and submit
+                        </div>
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Heading-->
+
+                    <!--begin::Input group-->
+                    <div class="d-flex flex-column mb-8 fv-row">
+                        <!--begin::Label-->
+                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                            <span class="required">Category Name</span>
+                        </label>
+                        <!--end::Label-->
+                        <input type="text" class="form-control form-control-solid" placeholder="Enter Service Name"
+                            name="category" />
+                        <div class="help-block with-errors name-error"></div>
+                    </div>
+                    <!--end::Input group-->
+
+                    <!--begin::Input group-->
+                    <div class="d-flex flex-column mb-8 fv-row">
+                        <!--begin::Label-->
+                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                            <span class="required">Sub Category Name</span>
+                        </label>
+                        <!--end::Label-->
+                        <input type="text" class="form-control form-control-solid" placeholder="Enter Service Name"
+                            name="name" />
+                        <div class="help-block with-errors name-error"></div>
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="d-flex flex-column mb-8 fv-row">
+                        <!--begin::Label-->
+                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                            <span class="">Sub Category Title (optional)</span>
+                        </label>
+                        <!--end::Label-->
+                        <input type="text" class="form-control form-control-solid" placeholder="Enter Title"
+                            name="title" />
+                        <div class="help-block with-errors title-error"></div>
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="d-flex flex-column mb-8 fv-row">
+                        <!--begin::Label-->
+                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                            <span class="">Post/Position</span>
+                        </label>
+                        <!--end::Label-->
+                        <input type="text" class="form-control form-control-solid" placeholder="Enter Job Post/Position"
+                            name="job_position" />
+                        <div class="help-block with-errors job_position-error"></div>
+                    </div>
+                    <!--end::Input group-->
+
+                    <!--begin::Input group-->
+                    <div class="row g-9 mb-8">
+                         <!--begin::Col-->
+                        <div class="col-md-4 fv-row">
+                            <label class="required fs-6 fw-bold mb-2">Exam Type</label>
+                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                data-placeholder="Select Type" name="type">
+                                <option value="">Select type</option>
+                                <option value="mcq" >MCQ</option>
+                                <option value="written">Written</option>
+                                <option value="mcq_written">MCQ + Written</option>
+                            </select>
+                            <div class="help-block with-errors type-error"></div>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-md-4 fv-row">
+                            <label class=" fs-6 fw-bold mb-2">Subject Code 1</label>
+                            <input type="text" class="form-control form-control-solid" placeholder="Subject code 1"
+                            name="code_1" />
+                            <div class="help-block with-errors code_1-error"></div>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-md-4 fv-row">
+                            <label class=" fs-6 fw-bold mb-2">Subject Code 2</label>
+                            <input type="text" class="form-control form-control-solid" placeholder="Subject code 2"
+                            name="code_2" />
+                            <div class="help-block with-errors code_2-error"></div>
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="row g-9 mb-8">
+                        <!--begin::Col-->
+                        <div class="col-md-4 fv-row">
+                            <label class="required fs-5 fw-bold mb-2">Mark</label>
+                            <input type="text" class="form-control form-control-solid" placeholder="Total mark"
+                            name="mark" />
+                            <div class="help-block with-errors mark-error"></div>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-md-4 fv-row">
+                            <label class=" fs-6 fw-bold mb-2">Duration</label>
+                            <div class="input-group mb-3">
+                                <input type="text" class="form-control form-control-solid" placeholder="1/2/3/4"
+                                name="duration" aria-label="Exam duration" aria-describedby="basic-addon2">
+                                <div class="input-group-append">
+                                    <span class="input-group-text form-control-solid" id="basic-addon2">hr</span>
+                                </div>
+                            </div>
+
+                            <div class="help-block with-errors duration-error"></div>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-md-4 fv-row">
+                            <label class=" fs-6 fw-bold mb-2">Date</label>
+                            <input type="date" class="form-control form-control-solid" placeholder="Exam date"
+                            name="exam_date" />
+                            <div class="help-block with-errors exam_date-error"></div>
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="row g-9 mb-8">
+                        <!--begin::Col-->
+                        <div class="col-md-6 fv-row">
+                            <label class="required fs-6 fw-bold mb-2">Status</label>
+                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                data-placeholder="Select status" name="status">
+                                <option value="active" selected>Active</option>
+                                <option value="deactive">Deactive</option>
+                            </select>
+                            <div class="help-block with-errors status-error"></div>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-md-6 fv-row">
+                            <label class=" fs-6 fw-bold mb-2">Year (optional)</label>
+                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                data-placeholder="Select exam year" name="year" id="year">
+                                <option value="">Choose ...</option>
+                                @foreach ($years as $year)
+                                    <option value="{{ $year->id }}">{{ $year->year }}</option>
+                                @endforeach
+
+                            </select>
+                            <div class="help-block with-errors year-error"></div>
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Input group-->
+
+                    <!--begin::Actions-->
+                    <div class="text-center">
+                        <button type="reset" id="kk_modal_new_sub_category_cancel" class="btn btn-light me-3">Cancel</button>
+                        <button type="submit" id="kk_modal_new_sub_category_submit" class="btn btn-primary">
+                            <span class="indicator-label">Submit</span>
+                            <span class="indicator-progress">Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                    </div>
+                    <!--end::Actions-->
+                </form>
+                <!--end:Form-->
+            </div>
+            <!--end::Modal body-->
+        </div>
+        <!--end::Modal content-->
+    </div>
+    <!--end::Modal dialog-->
+</div>
+<!--end::Modal - New Sub Category -->
 
 @endsection
 
@@ -489,6 +701,76 @@
 
             }))
         }
+
+        //Add Sub Category
+        function addSubCategory(id){
+            console.log(id);
+            $('.with-errors').text('');
+            $('#kk_modal_new_sub_category_form')[0].reset();
+            $('input[name="category"]').val(id);
+            $('#kk_modal_new_sub_category').modal('show')
+        }
+
+        //cancel button
+        $('#kk_modal_new_sub_category_cancel').on('click', function(){
+            $('.indicator-label').show();
+            $('.indicator-progress').hide();
+            $('#kk_modal_new_sub_category_submit').removeAttr('disabled');
+            $('#kk_modal_new_sub_category_form')[0].reset();
+            $("#kk_modal_new_sub_category").modal('hide');
+        })
+
+         //new sub category save
+         $('#kk_modal_new_sub_category_form').on('submit',function(e){
+            e.preventDefault()
+            $('.with-errors').text('')
+            $('.indicator-label').hide()
+            $('.indicator-progress').show()
+            $('#kk_modal_new_service_submit').attr('disabled','true')
+
+            var formData = new FormData(this);
+            $.ajax({
+                type:"POST",
+                url: "{{ url('admin/category/sub-category/store')}}",
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    if(data.success ==  false || data.success ==  "false"){
+                        var arr = Object.keys(data.errors);
+                        var arr_val = Object.values(data.errors);
+                        for(var i= 0;i < arr.length;i++){
+                        $('.'+arr[i]+'-error').text(arr_val[i][0])
+                        }
+                    }else if(data.error || data.error == 'true'){
+                        var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                        $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
+                    }else{
+                        // empty the form
+                        $('#kk_modal_new_sub_category_form')[0].reset();
+                        $("#kk_modal_new_sub_category").modal('hide');
+
+                        Swal.fire({
+                            text: data.message,
+                            icon: "success",
+                            buttonsStyling: !1,
+                            confirmButtonText: "{{__('Ok, got it!')}}",
+                            customClass: {
+                                confirmButton: "btn fw-bold btn-primary"
+                            }
+                        }).then((function () {
+                            //refresh datatable
+                            $('#dataTable').DataTable().ajax.reload();
+                        }))
+                    }
+
+                    $('.indicator-label').show()
+                    $('.indicator-progress').hide()
+                    $('#kk_modal_new_sub_category_submit').removeAttr('disabled')
+                }
+            });
+        })
 
     </script>
 @endpush
