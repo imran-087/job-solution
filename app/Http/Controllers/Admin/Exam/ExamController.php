@@ -5,11 +5,12 @@ namespace App\Http\Controllers\Admin\Exam;
 use Carbon\Carbon;
 use App\Models\Exam;
 use App\Models\Category;
+use App\Models\ExamDetail;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreExamRequest;
-use App\Models\ExamDetail;
+use Illuminate\Support\Facades\Session;
 use Yajra\DataTables\Facades\DataTables;
 
 class ExamController extends Controller
@@ -124,36 +125,54 @@ class ExamController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
+
         $request->validate([
+            'category' => 'required',
+            'sub_category' => 'required',
+            'name' => 'required',
+            'instruction' => 'required',
+            'examinee_type' => 'required',
+            'exam_mode' => 'required',
+            'duration' => 'required',
+            'total_mark' => 'required',
+            'exam_status' => 'required',
+            //'exam_starting_time' => 'required',
             'number_of_question' => 'required | numeric | max:200'
         ]);
-        $marks = $request->number_of_question * $request->mark;
+        // dd('pass');
 
-        $exam_starting_time = Carbon::parse($request->exam_starting_time)->format('Y-m-d\TH:i');
-
-        $exam = Exam::create([
-            'category_id' => $request->category,
-            'sub_category_id' => $request->sub_category,
-            'user_id' => Auth::guard('admin')->user()->id,
-            'name' => $request->name,
-            'instruction' => $request->instruction,
-            'examinee_type' => $request->examinee_type,
-            'exam_mode' => $request->exam_mode,
-            'duration' => $request->duration,
-            'number_of_question' => $request->number_of_question,
-            'mark' => $marks,
-            'cut_mark' => $request->cut_mark ?? '0',
-            'negative_mark' => $request->negative_mark ?? '0',
-            'required_point' => $request->required_point ?? '0',
-            'exam_price' => $request->price ?? 0,
-            'discount_price' => $request->discount_price ?? 0,
-            'exam_status' => $request->exam_status,
-            'exam_starting_time' => $exam_starting_time,
-        ]);
-        if ($exam) {
-            return redirect()->route('admin.exam-details.create')->with('success', 'Exam created, Now you can add subject to this exam');
+        if ($request->cut_mark > $request->total_mark) {
+            //dd('here');
+            return redirect()->back()->withInput($request->all())->with('cut_mark', 'Cut Mark cannot be greater than total mark');
         } else {
-            return redirect()->back()->with('error', 'Failed!');
+            //$marks = $request->number_of_question * $request->total_mark;
+
+            $exam_starting_time = Carbon::parse($request->exam_starting_time)->format('Y-m-d\TH:i');
+
+            $exam = Exam::create([
+                'category_id' => $request->category,
+                'sub_category_id' => $request->sub_category,
+                'user_id' => Auth::guard('admin')->user()->id,
+                'name' => $request->name,
+                'instruction' => $request->instruction,
+                'examinee_type' => $request->examinee_type,
+                'exam_mode' => $request->exam_mode,
+                'duration' => $request->duration,
+                'number_of_question' => $request->number_of_question,
+                'total_mark' => $request->total_mark,
+                'cut_mark' => $request->cut_mark ?? '0',
+                'negative_mark' => $request->negative_mark ?? '0',
+                'required_point' => $request->required_point ?? '0',
+                'exam_price' => $request->price ?? 0,
+                'discount_price' => $request->discount_price ?? 0,
+                'exam_status' => $request->exam_status,
+                'exam_starting_time' => $exam_starting_time,
+            ]);
+            if ($exam) {
+                return redirect()->route('admin.exam.index')->with('success', 'Exam created, Now you can add subject to this exam');
+            } else {
+                return redirect()->back()->with('error', 'Failed!');
+            }
         }
     }
 
@@ -188,7 +207,7 @@ class ExamController extends Controller
             'exam_mode' => $request->exam_mode,
             'duration' => $request->duration,
             'number_of_question' => $request->number_of_question,
-            'mark' => $request->mark,
+            'total_mark' => $request->mark,
             'cut_mark' => $request->cut_mark ?? '0',
             'negative_mark' => $request->negative_mark ?? '0',
             'required_point' => $request->required_point ?? '0',

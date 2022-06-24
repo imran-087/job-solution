@@ -75,7 +75,7 @@ class Question extends Model
      */
     public function subjects()
     {
-        return $this->morphToMany(Subject::class, 'subjectable');
+        return $this->morphToMany(Subject::class, 'subjectable')->withPivot('created_user_id', 'deleted_at', 'status')->withTimestamps();;
     }
 
 

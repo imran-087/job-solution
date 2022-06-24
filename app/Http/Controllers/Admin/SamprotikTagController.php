@@ -135,27 +135,66 @@ class SamprotikTagController extends Controller
     }
 
     //get all tag
+    // public function getAllTag(Request $request)
+    // {
+
+    //     if ($request->ajax()) {
+    //         //dd($request->all());
+    //         $subjects = Subject::where([
+    //             'parent_id' => null
+    //         ])->get();
+    //         //dd($subjects);
+    //     }
+
+    //     $output = '';
+
+    //     if (count($subjects) > 0) {
+
+    //         $output = '<select class="form-select form-select-solid add-tag ms-2" data-control="select2" data-hide-search="true">
+    //                         <option>Select...</option>
+    //                         ';
+    //         // <option value="subject=' . $row->id . ' question=' . $request->question_id . '" class="fs-6 text-gray-800 text-hover-primary fw-bold">' . $row->name . '</option>
+
+    //         foreach ($subjects as $row) {
+    //             $output .=
+    //                 '<div class="d-flex flex-column">
+    //                         <option data-sid="' . $row->id . '" data-qid="' . $request->question_id . '" class="fs-6 text-gray-800 text-hover-primary fw-bold ">' . $row->name . '</option>
+    //                     </div>';
+    //             //$output .= '<a href="discussion/' . $row->id . '/show"><li class="list-group-item" style=" border-radious:10px">' . $row->title . '</li></a>';
+    //         }
+
+    //         $output .= '</select>';
+    //     } else {
+
+    //         $output .= ' <p  class="fs-6 text-800  fw-bold"
+    //             style="color:red; margin-top:10px; background-color:#F5F8FA; padding:10px; border-radius:5px;"> '
+    //             . 'No Result' .
+    //             '</p>';
+    //     }
+
+    //     return $output;
+    // }
+
+    //get all tag
     public function getAllTag(Request $request)
     {
 
         if ($request->ajax()) {
             //dd($request->all());
-            $subjects = Subject::where([
-                'parent_id' => null
-            ])->get();
+            $sanmprotik_tag = SamprotikTag::select('id', 'name')->get();
             //dd($subjects);
         }
 
         $output = '';
 
-        if (count($subjects) > 0) {
+        if (count($sanmprotik_tag) > 0) {
 
             $output = '<select class="form-select form-select-solid add-tag ms-2" data-control="select2" data-hide-search="true">
                             <option>Select...</option>
                             ';
             // <option value="subject=' . $row->id . ' question=' . $request->question_id . '" class="fs-6 text-gray-800 text-hover-primary fw-bold">' . $row->name . '</option>
 
-            foreach ($subjects as $row) {
+            foreach ($sanmprotik_tag as $row) {
                 $output .=
                     '<div class="d-flex flex-column">
                             <option data-sid="' . $row->id . '" data-qid="' . $request->question_id . '" class="fs-6 text-gray-800 text-hover-primary fw-bold ">' . $row->name . '</option>

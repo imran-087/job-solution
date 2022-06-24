@@ -473,7 +473,19 @@
             var id = $('#exam_id').val();
             console.log(id);
             //getting subject for this exam
-            addSubject(id);
+            //addSubject(id);
+
+            $.ajax({
+                type:"GET",
+                url: "{{ url('/admin/exam-details/get-subject')}}"+'/'+id,
+                dataType: 'json',
+                success:function(data){
+                    $('#exam_name').val(data.exam.name);
+                    $('#exam_id').val(data.exam.id);
+                    subjectSelectInput(data);
+                    $("#kk_modal_add_subject").modal('show');
+                }
+            });
 
             var html = '';
             html += '<div class="row g-9 mb-8 dynamic-row">'

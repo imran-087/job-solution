@@ -44,9 +44,10 @@
         </div>
         <!--end::Page title-->
         <!--begin::Actions-->
-        <div class="d-flex align-items-center py-1">
+        <div class="d-flex align-items-center justify-content-center py-1 fw-bold">
+            <p id="remaining_time" class="mt-2 fw-bold"></p>
             <!--begin::Button-->
-            <a href="{{ url()->previous() }}" class="btn btn-sm btn-primary">Back</a>
+            {{-- <a href="{{ url()->previous() }}" class="btn btn-sm btn-primary ms-2">Back</a> --}}
             <!--end::Button-->
         </div>
         <!--end::Actions-->
@@ -66,16 +67,16 @@
             <div class="col-md-12">
                 <div class="card shadow-sm">
                     <div class="card-header py-10 d-flex flex-column justify-content-center align-items-center">
-                        <h3 class="card-title">Exam Name : {{$exam->name}}</h3>
+                        <h3 class="card-title fw-bold">{{$exam->name}}</h3>
                     </div>
                     <div class="card-header fw-bold d-flex justify-content-between py-3 px-5">
-                        <div class="left">
+                        <div class="left fw-bold">
                             <p>Total Question: {{ $exam->number_of_question }}</p>
-                            <p>Total Mark: {{ $exam->mark }}</p>
+                            <p>Total Mark: {{ $exam->total_mark }}</p>
                             <p>Cut Mark: {{ $exam->cut_mark }}</p>
                             <p>Negative Mark: {{ $exam->negative_mark }}</p>
                         </div>
-                        <div class="right">
+                        <div class="right fw-bold">
                             <p id="time_countdown">Duration: {{ $exam->duration }}</p>
                             <p>Time: {{ Carbon\Carbon::parse($exam->exam_starting_time)->format('g:i:s A') }}</p>
                             <p>Date: {{ Carbon\Carbon::parse($exam->exam_starting_time)->format('d-m-Y ') }}</p>
@@ -157,7 +158,8 @@
                         </div>
                     </div>
                     <div class="card-footer d-flex justify-content-end">
-                        <button class="btn btn-primary btn-sm py-3 px-20 fs-5" id="kk_exam_submit" >Submit</button>
+                        <button class="btn btn-primary btn-sm py-3 px-20 fs-5" id="kk_exam_force_submit" data-text="force_submit">Submit</button>
+                        <button class="btn btn-primary btn-sm py-3 px-20 fs-5 d-none" id="kk_exam_submit" data-text="submit">Submit</button>
                     </div>
                 </div>
             </div>
@@ -214,10 +216,17 @@
             $(this).closest('.row').find('p').off('click').removeClass('cursor-pointer');
             //console.log(click_option);
 
+            // hide show force submit button 
+            if(exam_selected_questions.length == click_count){
+                $("#kk_exam_force_submit").addClass('d-none');
+                $("#kk_exam_submit").removeClass('d-none');
+            }
+
         });
-       
-        //submit 
-        $('#kk_exam_submit').on('click', function(e){
+
+        
+        //force submit
+        $('#kk_exam_force_submit').on('click', function(e){
             e.preventDefault();
 
             var exam_id = $('#exam_id').val();
@@ -249,30 +258,47 @@
                             dataType: 'json',
                             success:function(data){
                                 toastr.success(data.message);
-                                window.location.href = data.url;
+                                location.href = data.url;
+                                // location.href = "http://127.0.0.1:8000/model-test/result";
                             
                             }
                         })
                     }
                 }))
-            }else{
-                $.ajax({
-                    type:"POST",
-                    url: "{{ url('/model-test/submitted-data') }}",
-                    data :{
-                        "_token": "{{ csrf_token() }}",
-                        'submitted_data' : exam_selected_questions,
-                        'exam_id' : exam_id,
-                    },
-                    dataType: 'json',
-                    success:function(data){
-                        toastr.success(data.message);
-                        window.location.href = data.url;
-                    
-                    }
-                })
             }
 
+        })
+       
+        //submit 
+        $('#kk_exam_submit').on('click', function(e){
+            e.preventDefault();
+
+            var exam_id = $('#exam_id').val();
+
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Your exam has been submitted',
+                showConfirmButton: false,
+                timer: 1500
+            })
+
+            $.ajax({
+                type:"POST",
+                url: "{{ url('/model-test/submitted-data') }}",
+                data :{
+                    "_token": "{{ csrf_token() }}",
+                    'submitted_data' : exam_selected_questions,
+                    'exam_id' : exam_id,
+                },
+                dataType: 'json',
+                success:function(data){
+                    toastr.success(data.message);
+                    location.href = data.url;
+                    //location.href = "http://127.0.0.1:8000/model-test/result";
+                }
+            })
+            
         })
 
         //set time interval for auto submit
@@ -301,7 +327,8 @@
             seconds = (seconds < 10) ? '0' + seconds : seconds;
 
             //minutes = (minutes < 10) ?  minutes : minutes;
-            $('#time_countdown').html('<p>Time Remaining  <span style="color:red; font-size:24px;">' + minutes + ':' + seconds +'</span></p>');
+            // $('#time_countdown').html('<p>Time Remaining :  <span style="color:red; font-size:24px;">' + minutes + ':' + seconds +'</span></p>');
+            $('#remaining_time').html('<p ">Time Remaining :  <span style="color:red; font-size:24px;">' + minutes + ':' + seconds +'</span></p>');
             timer2 = minutes + ':' + seconds;
         }, 1000);
         

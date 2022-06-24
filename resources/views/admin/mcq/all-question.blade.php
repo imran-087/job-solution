@@ -8,6 +8,7 @@
     </div>
     @endisset
 
+
     @if($questions->count() > 0)
     @foreach($questions as $key => $question)
         <div class="card card-bordered mb-5 py-3 px-2">

@@ -33,14 +33,14 @@ class TagController extends Controller
                     if ($row->sub_category_id == '') {
                         return '<div class="badge badge-light-info fw-bolder">Current Ques.</div>';
                     } else {
-                        return $row->sub_category->name;
+                        return $row->sub_category->name ?? 'Not Found';
                     }
                 })
                 ->editColumn('subject_id', function ($row) {
                     if ($row->subject == '') {
                         return '<div class="badge badge-light-info fw-bolder">no subject</div>';
                     } else {
-                        return $row->subject->name;
+                        return $row->subject->name ?? 'Not Found';
                     }
                 })
                 ->addColumn('tag', function ($row) {
@@ -65,7 +65,7 @@ class TagController extends Controller
 
                     return $btn;
                 })
-                ->rawColumns(['action', 'sub_category_id', 'subject_id', 'tag', 'add_subject'])
+                ->rawColumns(['action', 'sub_category_id', 'tag', 'subject_id', 'add_subject'])
                 ->make(true);
         }
         $sub_categories = SubCategory::all();

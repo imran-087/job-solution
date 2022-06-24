@@ -153,13 +153,14 @@ class ModelTestController extends Controller
     //MODEL TEST DATA 
     public function submittedData(Request $request)
     {
-        // dd($request->all());
+        //dd($request->all());
+
         $exam = Exam::find($request->exam_id);
 
         $exam_result = ExamResult::create([
             'exam_id' => $exam->id ?? null,
             'sub_category_id' => $exam->sub_category_id ?? $request->sub_category_id,
-            'mark' => $exam->mark ?? $request->mark,
+            'mark' => $exam->total_mark ?? $request->mark,
             'cut_mark' => $exam->cut_mark ?? $request->cut_mark,
             'negative_mark' => $exam->negative_mark ?? $request->negative_mark,
             'user_id' => Auth::user()->id,

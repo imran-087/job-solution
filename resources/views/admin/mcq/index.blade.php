@@ -97,8 +97,8 @@
                                     <!--end::Badge-->
                                     
                                     <!--begin::Text-->
-                                    <div class="fw-bolder timeline-content cursor-pointer ps-3 border p-3 rounded getsubCategory" data-id="{{ $category->id }}" data-main_cat="{{$category->main_category->id}}">
-                                        {{$category->name}}  
+                                    <div class="fw-bolder timeline-content cursor-pointer ps-3 border p-3 rounded getsubCategory data-on-load" data-id="{{ $category->id }}" data-main_cat="{{$category->main_category->id}}">
+                                        <span>{{$category->name}}</span> 
                                     </div>
                                     <!--end::Text-->
                                 </div>
@@ -136,6 +136,12 @@
 
 <script>
 $(document).ready(function(){
+
+    //send a request on page load
+    $(document).ready(function() {
+        $(".getsubCategory").first().trigger('click');
+    });
+
     //render sub category
     $(document).on('click', '.getsubCategory', function(){
         var id = $(this).data('id');

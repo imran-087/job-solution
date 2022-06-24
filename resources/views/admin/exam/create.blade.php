@@ -77,6 +77,13 @@
                             <!--end::Description-->
                         </div>
                         <!--end::Heading-->
+
+                        <div class="col-md-6 offset-3 text-center">
+                            @if(Session::has('cut_mark'))
+                                <p class="alert alert-danger fw-bold text-uppercase">{{ Session::get('cut_mark') }}</p>
+                            @endif
+                        </div>
+
                         <!--begin::Input group-->
                         <div class="row g-9 mb-8">
                              <!--begin::Col-->
@@ -86,7 +93,7 @@
                                     <span class="required">Exam Instruction</span>
                                 </label>
                                 <!--end::Label-->
-                                <textarea class="form-control form-control-solid h-70px @error('instruction') is-invalid @enderror" placeholder="Enter exam instruction" name="instruction" value="{{ old('instruction') }}"></textarea>
+                                <textarea class="form-control form-control-solid h-70px @error('instruction') is-invalid @enderror" placeholder="Enter exam instruction" name="instruction" >{{ old('instruction') }}</textarea>
                                 @error('instruction')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -105,7 +112,7 @@
                                     id="category" required>
                                     <option value="">Choose ...</option>
                                     @foreach ($categories as $category)
-                                    <option value="{{ $category->id }}">{{ $category->name }}</option>
+                                    <option value="{{ $category->id }}" {{ old("category") == $category->id ? "selected":"" }} >{{ $category->name }}</option>
                                     @endforeach
                                 </select>
                                 <div class="help-block with-errors category-error"></div>
@@ -147,8 +154,7 @@
                                 <select class="form-select form-select-solid " data-control="select2"
                                     data-hide-search="true" data-placeholder="Select ..." name="examinee_type"
                                     id="examinee_type" required>
-                                    <option value=""></option>
-                                    <option value="user">User (free)</option>
+                                    <option value="user" selected>User (free)</option>
                                     <option value="subscriber">Subscriber (paid)</option>
                                 </select>
                                 <div class="help-block with-errors examinee_type-error"></div>
@@ -166,7 +172,7 @@
                                 <select class="form-select form-select-solid " data-control="select2"
                                     data-hide-search="true" data-placeholder="Select ..." name="exam_mode"
                                     id="exam_mode" required>
-                                    <option value="public">Public</option>
+                                    <option value="public" selected>Public</option>
                                     <option value="private">Private</option>
                                 </select>
                                 <div class="help-block with-errors exam_mode-error"></div>
@@ -191,12 +197,12 @@
                             <div class="col-md-2 fv-row">
                                 <!--begin::Label-->
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="required">Mark (per Ques.)</span>
+                                    <span class="required">Total Mark</span>
                                 </label>
                                 <!--end::Label-->
                                 <input type="text" class="form-control form-control-solid 
-                                @error('mark') is-invalid @enderror" placeholder="Enter Mark" name="mark" value="{{ old('mark') }}"/>
-                                @error('mark')
+                                @error('total_mark') is-invalid @enderror" placeholder="Enter Mark" name="total_mark" value="{{ old('total_mark') }}"/>
+                                @error('total_mark')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -207,7 +213,7 @@
                             <div class="col-md-2 fv-row">
                                 <!--begin::Label-->
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="required">Cut Mark</span>
+                                    <span class="">Cut Mark</span>
                                 </label>
                                 <!--end::Label-->
                                 <input type="text" class="form-control form-control-solid 
@@ -223,7 +229,7 @@
                             <div class="col-md-2  fv-row">
                                 <!--begin::Label-->
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="required">Price</span>
+                                    <span class="">Price</span>
                                 </label>
                                 <!--end::Label-->
                                 <input type="text" class="form-control form-control-solid 
@@ -239,7 +245,7 @@
                             <div class="col-md-2 fv-row">
                                 <!--begin::Label-->
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="required">Discount Price</span>
+                                    <span class="">Discount Price</span>
                                 </label>
                                 <!--end::Label-->
                                 <input type="text" class="form-control form-control-solid 
@@ -255,7 +261,7 @@
                             <div class="col-md-2 fv-row">
                                 <!--begin::Label-->
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="required">Negative Mark</span>
+                                    <span class="">Negative Mark</span>
                                 </label>
                                 <!--end::Label-->
                                 <input type="text" class="form-control form-control-solid 
@@ -271,7 +277,7 @@
                             <div class="col-md-2 fv-row">
                                 <!--begin::Label-->
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="required">Required Point</span>
+                                    <span class="">Required Point</span>
                                 </label>
                                 <!--end::Label-->
                                 <input type="text" class="form-control form-control-solid 

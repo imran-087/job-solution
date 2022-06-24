@@ -24,7 +24,7 @@ class CreateExamsTable extends Migration
             $table->enum('exam_mode', ['private', 'public']);
             $table->smallInteger('duration')->nullable();
             $table->smallInteger('number_of_question');
-            $table->smallInteger('mark')->default(0);
+            $table->smallInteger('total_mark');
             $table->smallInteger('cut_mark')->default(0);
             $table->float('negative_mark')->default(0);
             $table->smallInteger('exam_price')->default(0);

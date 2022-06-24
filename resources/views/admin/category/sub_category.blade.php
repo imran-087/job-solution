@@ -347,6 +347,7 @@
                                 data-placeholder="Select status" name="status">
                                 <option value="active" selected>Active</option>
                                 <option value="deactive">Deactive</option>
+                                <option value="complete">Complete</option>
                             </select>
                             <div class="help-block with-errors status-error"></div>
                         </div>

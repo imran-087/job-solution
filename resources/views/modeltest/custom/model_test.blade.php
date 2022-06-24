@@ -45,8 +45,9 @@
         <!--end::Page title-->
         <!--begin::Actions-->
         <div class="d-flex align-items-center py-1">
+            <p id="remaining_time" class="mt-2 fw-bold"></p>
             <!--begin::Button-->
-            <a href="{{ url()->previous() }}" class="btn btn-sm btn-primary">Back</a>
+            {{-- <a href="{{ url()->previous() }}" class="btn btn-sm btn-primary">Back</a> --}}
             <!--end::Button-->
         </div>
         <!--end::Actions-->
@@ -76,7 +77,7 @@
                             <p>Negative Mark: {{ request()->negative_mark }}</p>
                         </div>
                         <div class="right">
-                            <p id="time_countdown">Duration:</p>
+                            <p id="time_countdown">Duration: {{ request()->duration }}</p>
                             <p>Time: </p>
                             <p>Date: {{ date('d-m-Y') }} </p>
                         </div>
@@ -160,6 +161,7 @@
                         </div>           
                     </div>
                     <div class="card-footer d-flex justify-content-end">
+                         <button class="btn btn-primary btn-sm py-3 px-20 fs-5" id="kk_exam_force_submit" data-text="force_submit">Submit</button>
                         <button class="btn btn-primary btn-sm py-3 px-10 fs-5" id="kk_exam_submit" >Submit</button>
                     </div>
                 </div>
@@ -228,6 +230,12 @@
             //disable click
             $(this).closest('.row').find('p').off('click').removeClass('cursor-pointer');
 
+            // hide show force submit button 
+            if(exam_selected_questions.length == click_count){
+                $("#kk_exam_force_submit").addClass('d-none');
+                $("#kk_exam_submit").removeClass('d-none');
+            }
+
 
         })
 
@@ -236,7 +244,8 @@
         // }, 5000);
        
       
-        $('#kk_exam_submit').on('click', function(e){
+        //force submit
+        $('#kk_exam_force_submit').on('click', function(e){
             e.preventDefault();
 
             var mark = $('#mark').val();
@@ -277,60 +286,61 @@
                             dataType: 'json',
                             success:function(data){
                                 toastr.success(data.message);
-                                window.location.href = data.url;
+                                location.href = data.url;
                             
                             }
                         })
                     }
                 }))
-            }else{
-                //if all quwstion answer
-                $.ajax({
-                    type:"POST",
-                    url: "{{ url('/model-test/submitted-data') }}",
-                    data :{
-                        "_token": "{{ csrf_token() }}",
-                        'submitted_data' : exam_selected_questions,
-
-                        'mark' : mark,
-                        'cut_mark' : cut_mark,
-                        'negative_mark' : negative_mark,
-                        'sub_category_id' : sub_category_id,
-                    },
-                    dataType: 'json',
-                    success:function(data){
-                        toastr.success(data.message);
-                        window.location.href = data.url;
-                    
-                    }
-                })
             }
    
         })
 
-        // function ajaxSumbit()
-        // {
-        //     $.ajax({
-        //         type:"POST",
-        //         url: "{{ url('/model-test/submitted-data') }}",
-        //         data :{
-        //             "_token": "{{ csrf_token() }}",
-        //             'submitted_data' : exam_selected_questions,
+        //submit
+        $('#kk_exam_submit').on('click', function(e){
+            e.preventDefault();
 
-        //             'mark' : mark,
-        //             'cut_mark' : cut_mark,
-        //             'negative_mark' : negative_mark,
-        //             'sub_category_id' : sub_category_id,
-        //         },
-        //         dataType: 'json',
-        //         success:function(data){
-        //             toastr.success(data.message);
-        //             window.location.href = data.url;
-                   
-        //         }
-        //     })
-        // }
+            var mark = $('#mark').val();
+            var cut_mark = $('#cut_mark').val();
+            var negative_mark = $('#negative_mark').val();
+            var sub_category_id = $('#sub_category').val();
+            var duration = $('#duration').val();
+            //console.log(sub_category_id);
 
+           
+            Swal.fire({
+                position: 'top-end',
+                icon: 'success',
+                title: 'Your exam has been submitted',
+                showConfirmButton: false,
+                timer: 1500
+            })
+           
+            //if all quwstion answer
+            $.ajax({
+                type:"POST",
+                url: "{{ url('/model-test/submitted-data') }}",
+                data :{
+                    "_token": "{{ csrf_token() }}",
+                    'submitted_data' : exam_selected_questions,
+
+                    'mark' : mark,
+                    'cut_mark' : cut_mark,
+                    'negative_mark' : negative_mark,
+                    'sub_category_id' : sub_category_id,
+                },
+                dataType: 'json',
+                success:function(data){
+                    toastr.success(data.message);
+                    location.href = data.url;
+                
+                }
+            })
+        
+   
+        })
+
+       
 
         //set time interval for auto submit
         var exam_duration =  $('#duration').val();
@@ -359,6 +369,7 @@
 
             //minutes = (minutes < 10) ?  minutes : minutes;
             $('#time_countdown').html('<p>Time Remaining  <span style="color:red; font-size:24px;">' + minutes + ':' + seconds +'</span></p>');
+            $('#remaining_time').html('<p ">Time Remaining :  <span style="color:red; font-size:24px;">' + minutes + ':' + seconds +'</span></p>');
             timer2 = minutes + ':' + seconds;
         }, 1000);
     

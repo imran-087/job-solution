@@ -76,7 +76,7 @@
                                             </tr>
                                             <tr>
                                                 <td class="text-muted min-w-125px w-125px">Total Mark</td>
-                                                <td class="text-gray-800">{{ $exam->mark }}</td>
+                                                <td class="text-gray-800">{{ $exam->total_mark }}</td>
                                             </tr>
                                             <tr>
                                                 <td class="text-muted min-w-125px w-125px">Cut Mark</td>

@@ -405,7 +405,7 @@ class QuestionController extends Controller
     //update question
     public function update(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
         $question = Question::where('id', $request->id)->update([
             'subject_id' => $request->subject,
             'sub_category_id' => $request->sub_category,
@@ -424,7 +424,7 @@ class QuestionController extends Controller
             'option_3' => $request->option_3,
             'option_4' => $request->option_4,
             'option_5' => $request->option_5,
-            'answer' => $request->mcq_answer,
+            'answer' => $request->answer,
         ];
 
         $question_option = QuestionOption::where('question_id', $request->id)
@@ -498,7 +498,6 @@ class QuestionController extends Controller
         // dump($subject_analytics);
         // dd('end');
 
-
         $view = view('admin.mcq.sub_category', compact('sub_categories', 'subject_analytics'))->render();
         return response()->json([
             'success' => true,
@@ -509,8 +508,10 @@ class QuestionController extends Controller
     //all question
     public function allQuestion(Request $request)
     {
+        $total_question = $request->total;
         //dd($request->all());
         if ($request->has('sub_category')) {
+
 
             $sub_category = SubCategory::find($request->sub_category);
             //dd($sub_category);
@@ -533,7 +534,7 @@ class QuestionController extends Controller
             ])->get();
         }
         //dd($questions);
-        return view('admin.mcq.view_question', compact('questions', 'passages', 'sub_category'));
+        return view('admin.mcq.view_question', compact('questions', 'passages', 'sub_category', 'total_question'));
 
         // for ajax pagination
         // if ($request->ajax()) {

@@ -171,7 +171,7 @@
                             <div class="col-md-3 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Sub Category</label>
                                 <select class="form-select form-select-solid " data-control="select2"
-                                    data-hide-search="true"  name="sub_category"
+                                    data-hide-search="true" data-placeholder="Select sub category"  name="sub_category"
                                     id="sub_category" required>
 
                                 </select>
@@ -182,7 +182,7 @@
                             <div class="col-md-3 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Subject</label>
                                 <select class="form-select form-select-solid" data-control="select2"
-                                    data-hide-search="true" name="subject"
+                                    data-hide-search="true" data-placeholder="Select Subject" name="subject"
                                     id="subject" required>
 
                                 </select>

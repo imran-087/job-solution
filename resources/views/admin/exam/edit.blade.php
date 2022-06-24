@@ -197,12 +197,12 @@
                             <div class="col-md-2 fv-row">
                                 <!--begin::Label-->
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="required">Mark</span>
+                                    <span class="required">Total Mark</span>
                                 </label>
                                 <!--end::Label-->
                                 <input type="text" class="form-control form-control-solid 
-                                @error('mark') is-invalid @enderror" placeholder="Enter Mark" name="mark" value="{{ $exam->mark }}"/>
-                                @error('mark')
+                                @error('total_mark') is-invalid @enderror" placeholder="Enter Mark" name="total_mark" value="{{ $exam->total_mark }}"/>
+                                @error('total_mark')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
                                     </span>
@@ -213,7 +213,7 @@
                             <div class="col-md-2 fv-row">
                                 <!--begin::Label-->
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="required">Cut Mark</span>
+                                    <span class="">Cut Mark</span>
                                 </label>
                                 <!--end::Label-->
                                 <input type="text" class="form-control form-control-solid 
@@ -229,7 +229,7 @@
                             <div class="col-md-2  fv-row">
                                 <!--begin::Label-->
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="required">Price</span>
+                                    <span class="">Price</span>
                                 </label>
                                 <!--end::Label-->
                                 <input type="text" class="form-control form-control-solid 
@@ -245,7 +245,7 @@
                             <div class="col-md-2 fv-row">
                                 <!--begin::Label-->
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="required">Discount Price</span>
+                                    <span class="">Discount Price</span>
                                 </label>
                                 <!--end::Label-->
                                 <input type="text" class="form-control form-control-solid 
@@ -261,7 +261,7 @@
                             <div class="col-md-2 fv-row">
                                 <!--begin::Label-->
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="required">Negative Mark</span>
+                                    <span class="">Negative Mark</span>
                                 </label>
                                 <!--end::Label-->
                                 <input type="text" class="form-control form-control-solid 
@@ -277,7 +277,7 @@
                             <div class="col-md-2 fv-row">
                                 <!--begin::Label-->
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="required">Required Point</span>
+                                    <span class="">Required Point</span>
                                 </label>
                                 <!--end::Label-->
                                 <input type="text" class="form-control form-control-solid 
