@@ -299,7 +299,7 @@
                     <!--begin::Heading-->
                     <div class="mb-13 text-center">
                         <!--begin::Title-->
-                        <h1 class="mb-3">Add New Category</h1>
+                        <span id="append_text"></span>
                         <!--end::Title-->
                         <!--begin::Description-->
                         <div class="text-muted fw-bold fs-5">Fill up the form and submit
@@ -307,18 +307,11 @@
                         <!--end::Description-->
                     </div>
                     <!--end::Heading-->
-                    <!--begin::Input group-->
-                    <div class="d-flex flex-column mb-8 fv-row">
-                        <!--begin::Label-->
-                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="required">Main Category</span>
-                        </label>
-                        <!--end::Label-->
-                        <input type="text" class="form-control form-control-solid" placeholder="Enter Service Name"
-                            name="main_category" />
-                        <div class="help-block with-errors name-error"></div>
-                    </div>
-                    <!--end::Input group-->
+
+                    {{-- hidden input  --}}
+                    <input type="hidden" name="main_category" />
+                   
+
                     <!--begin::Input group-->
                     <div class="d-flex flex-column mb-8 fv-row">
                         <!--begin::Label-->
@@ -470,6 +463,9 @@
 
         //cancel button
         $('#kk_modal_new_main_category_cancel').on('click', function(){
+            $('.indicator-label').show();
+            $('.indicator-progress').hide();
+            $('#kk_modal_new_main_category_submit').removeAttr('disabled');
             $('#kk_modal_new_main_category_form')[0].reset();
             $("#kk_modal_new_main_category_form").find('h1').text('');
             $("#kk_modal_new_main_category").modal('hide');
@@ -584,16 +580,24 @@
 
 
         // Add New Category
-        function addCategory(id){
-            console.log(id);
+        $(document).on('click', '.addCategory', function(){
+            var id =  $(this).data('id');
+            var name =  $(this).data('name');
+            // console.log(id);
+            // console.log(name);
+           
             $('.with-errors').text('');
             $('#kk_modal_new_category_form')[0].reset();
+            $('#append_text').html('<h1 class="mb-3" id="append_text">Add New Category into '+ name +' </h1>');
             $('input[name="main_category"]').val(id);
             $('#kk_modal_new_category').modal('show')
-        }
+        })
 
         //cancel button
         $('#kk_modal_new_category_cancel').on('click', function(){
+            $('.indicator-label').show();
+            $('.indicator-progress').hide();
+            $('#kk_modal_new_category_submit').removeAttr('disabled');
             $('#kk_modal_new_category_form')[0].reset();
             $("#kk_modal_new_category").modal('hide');
         })

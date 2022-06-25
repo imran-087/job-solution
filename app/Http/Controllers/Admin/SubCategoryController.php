@@ -41,17 +41,19 @@ class SubCategoryController extends Controller
                     }
                     return $btn;
                 })
-                ->editColumn('title', function ($row) {
-                    if ($row->title == '') {
-                        $btn = '<div class="badge badge-light-info fw-bolder">No title available</div>';
-                        return $btn;
-                    } else {
-                        return $row->title;
-                    }
-                })
-                ->editColumn('created_at', function ($row) {
-                    return $row->created_at->diffForHumans();
-                })
+
+                // ->editColumn('title', function ($row) {
+                //     if ($row->title == '') {
+                //         $btn = '<div class="badge badge-light-info fw-bolder">No title available</div>';
+                //         return $btn;
+                //     } else {
+                //         return $row->title;
+                //     }
+                // })
+
+                // ->editColumn('created_at', function ($row) {
+                //     return $row->created_at->diffForHumans();
+                // })
                 ->editColumn('status', function ($row) {
                     if ($row->status == "active") {
                         $btn = '<div class="badge badge-light-success fw-bolder">Active</div>';
@@ -63,11 +65,16 @@ class SubCategoryController extends Controller
                 ->addColumn('action', function ($row) {
                     $btn = '<div class="d-flex justify-content-start flex-shrink-0">
                         <a href="/admin/question/create?sub_category=' . $row->id . '" target="_blank" class="btn btn-bg-light btn-active-color-primary btn-sm me-1">
-                            Add Question
+                            Add MCQ Ques.
                         </a>
-                        <a href="/admin/question/written-question?sub_category=' . $row->id . '" target="_blank" class="btn btn-light btn-active-color-primary btn-sm " title="Add Written Question">
-                            <i class="fas fa-plus">&nbsp;Written Question
+                        <a href="/admin/question/written-question?sub_category=' . $row->id . '" target="_blank" class="btn btn-bg-light btn-active-color-primary btn-sm me-1">
+                            Add Written Ques.
                         </a>
+                        
+                        <a href="javascript:;"  data-main_category="' . $row->category->main_category->id . '" data-id="' . $row->id . '" data-name="' . $row->name . '" class="btn btn-light btn-active-color-primary btn-sm addSubject me-1" title="Add Subject">
+                            <i class="fas fa-plus">&nbsp;Subject</i>
+                        </a>
+
                         <a href="javascript:;" onclick="edit(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                             <!--begin::Svg Icon | path: icons/duotune/art/art005.svg-->
                             <span class="svg-icon svg-icon-3">
@@ -89,14 +96,11 @@ class SubCategoryController extends Controller
                             </span>
                             <!--end::Svg Icon-->
                         </a>
-                        <a href="javascript:;" onclick="addSubject(' . $row->id  .', '.$row->category->main_category->id.')" data-id="' . $row->id . '" class="btn btn-light btn-active-color-primary btn-sm addSubject" title="Add Subject">
-                            <i class="fas fa-plus">&nbsp;Subject</i>
-                        </a>
 
                     </div>';
                     return $btn;
                 })
-                ->rawColumns(['action', 'status', 'created_at', 'year_id', 'title'])
+                ->rawColumns(['action', 'status', 'year_id'])
                 ->make(true);
         }
 
@@ -237,6 +241,4 @@ class SubCategoryController extends Controller
             'message' => 'Category deleted successfully!'
         ], 200);
     }
-
-
 }

@@ -70,7 +70,7 @@ class MainCategoryController extends Controller
                             </span>
                             <!--end::Svg Icon-->
                         </a>
-                        <a href="javascript:;" onclick="addCategory(' . $row->id . ')" data-id="' . $row->id . '" class="btn btn-light btn-active-color-primary btn-sm addCategory" title="Add Category">
+                        <a href="javascript:;"  data-id="' . $row->id . ' " data-name="' . $row->name . '" class="btn btn-light btn-active-color-primary btn-sm addCategory" title="Add Category">
                             <i class="fas fa-plus">&nbsp;Categoy</i>
                         </a>
                     </div>';

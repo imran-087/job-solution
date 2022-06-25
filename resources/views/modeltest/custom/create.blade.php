@@ -63,6 +63,19 @@
                         <!--end::Description-->
                     </div>
                     <!--end::Heading-->
+
+                    <div class="col-md-6 offset-3 text-center mb-10">
+                        @if(Session::has('cut_mark'))
+                            <p class="alert alert-danger fw-bold text-uppercase">{{ Session::get('cut_mark') }}</p>
+                        @endif
+                    </div>
+
+                    <div class="col-md-6 offset-3 text-center mb-10">
+                        @if(Session::has('insufficent_data'))
+                            <p class="alert alert-danger fw-bold text-uppercase">{{ Session::get('insufficent_data') }}</p>
+                        @endif
+                    </div>
+
                     <!--begin::Input group-->
                     <div class="row g-9 mb-8">
                         <!--begin::Col-->
@@ -125,27 +138,61 @@
                                 <span class="required" >Number of Question </span>
                             </label>
                             <!--end::Label-->
-                            <input type="text" class="form-control form-control-solid " placeholder="Number of Ques." name="number_of_question" />
+                            <input type="text" class="form-control form-control-solid  @error('number_of_question') is-invalid @enderror" placeholder="Number of Ques." name="number_of_question" value="{{ old('number_of_question') }}" />
+                             @error('number_of_question')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                        <!--begin::Col-->
+                        <div class="col-md-2 fv-row">
+                            <!--begin::Label-->
+                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                <span class="required">Total Mark</span>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid 
+                            @error('total_mark') is-invalid @enderror" placeholder="Enter Mark" name="total_mark" value="{{ old('total_mark') }}"/>
+                            @error('total_mark')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
+                        </div>
+                       
+                        <!-- end: col-->
+                        <div class="col-md-2 fv-row">
+                            <!--begin::Label-->
+                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                <span class="" >Cut Mark </span>
+                            </label>
+                            <!--end::Label-->
+                            <input type="text" class="form-control form-control-solid " placeholder="Cut mark" name="cut_mark"  value="{{ old('cut_mark') }}" />
                             
                         </div>
                         <!-- end: col-->
                         <div class="col-md-2 fv-row">
                             <!--begin::Label-->
                             <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                <span class="required" >Cut Mark </span>
+                                <span class="" >Negative Mark</span>
                             </label>
                             <!--end::Label-->
-                            <input type="text" class="form-control form-control-solid " placeholder="Cut mark" name="cut_mark" />
-                            
-                        </div>
-                        <!-- end: col-->
-                        <div class="col-md-2 fv-row">
-                            <!--begin::Label-->
-                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                <span class="required" >Negative Mark</span>
-                            </label>
-                            <!--end::Label-->
-                            <input type="text" class="form-control form-control-solid " placeholder="Negative mark" name="negative_mark" />
+                           
+                            <select class="form-select form-select-solid @error('negative_mark') is-invalid @enderror"" data-control="select2"
+                                data-hide-search="true" name="negative_mark"
+                                id="negative_mark" required>
+                                <option value="0" {{ old("negative_mark") == '0' ? "selected":"" }}>0.00</option>
+                                <option value="0.25" {{ old("negative_mark") == '0.25' ? "selected":"" }}>0.25</option>
+                                <option value="0.50" {{ old("negative_mark") == '0.50' ? "selected":"" }}>0.50</option>
+                                <option value="1" {{ old("negative_mark") == '1' ? "selected":"" }}>1.00</option>
+                            </select>
+                        
+                            @error('negative_mark')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                             
                         </div>
                         <!-- end: col-->

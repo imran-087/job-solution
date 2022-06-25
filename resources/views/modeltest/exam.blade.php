@@ -70,13 +70,13 @@
                         <h3 class="card-title fw-bold">{{$exam->name}}</h3>
                     </div>
                     <div class="card-header fw-bold d-flex justify-content-between py-3 px-5">
-                        <div class="left fw-bold">
+                        <div class="left fw-bolder">
                             <p>Total Question: {{ $exam->number_of_question }}</p>
                             <p>Total Mark: {{ $exam->total_mark }}</p>
                             <p>Cut Mark: {{ $exam->cut_mark }}</p>
                             <p>Negative Mark: {{ $exam->negative_mark }}</p>
                         </div>
-                        <div class="right fw-bold">
+                        <div class="right fw-bolder">
                             <p id="time_countdown">Duration: {{ $exam->duration }}</p>
                             <p>Time: {{ Carbon\Carbon::parse($exam->exam_starting_time)->format('g:i:s A') }}</p>
                             <p>Date: {{ Carbon\Carbon::parse($exam->exam_starting_time)->format('d-m-Y ') }}</p>

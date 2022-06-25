@@ -67,24 +67,24 @@
             <div class="col-md-12">
                 <div class="card shadow-sm">
                     <div class="card-header py-10 d-flex flex-column justify-content-center align-items-center">
-                        <h3 class="card-title">Exam Name : Custom Model Test</h3>
+                        <h3 class="card-title fs-2 fw-bolder">Custom Model Test</h3>
                     </div>
                     <div class="card-header fw-bold d-flex justify-content-between py-3 px-5">
-                        <div class="left">
+                        <div class="left fw-bolder">
                             <p>Total Question: {{ request()->number_of_question }}</p>
-                            <p>Total Mark: {{ request()->number_of_question }}</p>
+                            <p>Total Mark: {{ request()->total_mark }}</p>
                             <p>Cut Mark: {{ request()->cut_mark }}</p>
                             <p>Negative Mark: {{ request()->negative_mark }}</p>
                         </div>
-                        <div class="right">
+                        <div class="right fw-bolder">
                             <p id="time_countdown">Duration: {{ request()->duration }}</p>
-                            <p>Time: </p>
+                            <p>Time: {{ date('h:i:s a', time()) }}</p>
                             <p>Date: {{ date('d-m-Y') }} </p>
                         </div>
                     </div>
 
                     {{-- Hidden field  --}}
-                    <input type="hidden" name="mark" id="mark" value="{{ request()->number_of_question }}">
+                    <input type="hidden" name="total_mark" id="mark" value="{{ request()->total_mark }}">
                     <input type="hidden" name="cut_mark" id="cut_mark" value="{{ request()->cut_mark }}">
                     <input type="hidden" name="negative_mark"  id="negative_mark" value="{{ request()->negative_mark }}">
                     <input type="hidden" name="sub_category_id" id="sub_category" value="{{ request()->sub_category }}">
@@ -162,7 +162,7 @@
                     </div>
                     <div class="card-footer d-flex justify-content-end">
                          <button class="btn btn-primary btn-sm py-3 px-20 fs-5" id="kk_exam_force_submit" data-text="force_submit">Submit</button>
-                        <button class="btn btn-primary btn-sm py-3 px-10 fs-5" id="kk_exam_submit" >Submit</button>
+                        <button class="btn btn-primary btn-sm py-3 px-20 fs-5 d-none" id="kk_exam_submit" >Submit</button>
                     </div>
                 </div>
             </div>
@@ -341,7 +341,6 @@
         })
 
        
-
         //set time interval for auto submit
         var exam_duration =  $('#duration').val();
         var exam_time_in_milisecond = exam_duration * 60000;
@@ -368,7 +367,7 @@
             seconds = (seconds < 10) ? '0' + seconds : seconds;
 
             //minutes = (minutes < 10) ?  minutes : minutes;
-            $('#time_countdown').html('<p>Time Remaining  <span style="color:red; font-size:24px;">' + minutes + ':' + seconds +'</span></p>');
+            // $('#time_countdown').html('<p>Time Remaining  <span style="color:red; font-size:24px;">' + minutes + ':' + seconds +'</span></p>');
             $('#remaining_time').html('<p ">Time Remaining :  <span style="color:red; font-size:24px;">' + minutes + ':' + seconds +'</span></p>');
             timer2 = minutes + ':' + seconds;
         }, 1000);

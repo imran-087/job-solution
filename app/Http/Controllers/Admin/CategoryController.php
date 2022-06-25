@@ -77,7 +77,7 @@ class CategoryController extends Controller
                             </span>
                             <!--end::Svg Icon-->
                         </a>
-                        <a href="javascript:;" onclick="addSubCategory(' . $row->id . ')" data-id="' . $row->id . '" class="btn btn-light btn-active-color-primary btn-sm addCategory" title="Add Category">
+                        <a href="javascript:;"  data-id="' . $row->id . '" data-name="' . $row->name . '" class="btn btn-light btn-active-color-primary btn-sm addSubCategory" title="Add Sub Category">
                             <i class="fas fa-plus">&nbsp;Sub-Categoy</i>
                         </a>
                     </div>';
@@ -90,13 +90,13 @@ class CategoryController extends Controller
         //get all min category
         $main_categories = MainCategory::where('status', 'active')->select('id', 'name')->get();
         $years = Year::select('id', 'year')->get();
-        return view('admin.category.category', compact('main_categories','years'));
+        return view('admin.category.category', compact('main_categories', 'years'));
     }
 
     //create or update category
     public function store(Request $request)
     {
-        //dd($request->all());
+        dd($request->all());
         $validator = Validator::make($request->all(), [
             'name' => ['required'],
             'status' => ['required'],

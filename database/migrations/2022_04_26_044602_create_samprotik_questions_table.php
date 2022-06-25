@@ -19,7 +19,7 @@ class CreateSamprotikQuestionsTable extends Migration
             $table->text('question');
             $table->text('answer');
             $table->json('options')->nullable();
-            $table->text('slug')->unique();
+            $table->string('slug');
             $table->integer('created_user_id');
             $table->integer('updated_user_id')->nullable();
             $table->unsignedBigInteger('view_count')->nullable();

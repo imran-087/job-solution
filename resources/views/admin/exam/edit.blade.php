@@ -78,8 +78,15 @@
                         </div>
                         <!--end::Heading-->
 
+                        {{-- hidden field  --}}
                         <input type="hidden" name="exam_id" value="{{ $exam->id }}">
                         <input type="hidden" name="user_id" value="{{ $exam->user_id }}">
+                        
+                        <div class="col-md-6 offset-3 text-center">
+                            @if(Session::has('cut_mark'))
+                                <p class="alert alert-danger fw-bold text-uppercase">{{ Session::get('cut_mark') }}</p>
+                            @endif
+                        </div>
 
                         <!--begin::Input group-->
                         <div class="row g-9 mb-8">
@@ -90,7 +97,7 @@
                                     <span class="required">Exam Instruction</span>
                                 </label>
                                 <!--end::Label-->
-                                <textarea class="form-control form-control-solid h-70px @error('instruction') is-invalid @enderror" placeholder="Enter exam instruction" name="instruction" >{{ $exam->instruction }}</textarea>
+                                <textarea class="form-control form-control-solid h-70px @error('instruction') is-invalid @enderror" placeholder="Enter exam instruction" name="instruction" >{{ old('instruction') ?? $exam->instruction }}</textarea>
                                 @error('instruction')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -138,7 +145,7 @@
                                     <span class="required">Exam Name</span>
                                 </label>
                                 <!--end::Label-->
-                                <input type="text" class="form-control form-control-solid @error('name') is-invalid @enderror" placeholder="Enter exam name" name="name" value="{{ $exam->name }}"/>
+                                <input type="text" class="form-control form-control-solid @error('name') is-invalid @enderror" placeholder="Enter exam name" name="name" value="{{ old('name') ?? $exam->name }}"/>
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -201,7 +208,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <input type="text" class="form-control form-control-solid 
-                                @error('total_mark') is-invalid @enderror" placeholder="Enter Mark" name="total_mark" value="{{ $exam->total_mark }}"/>
+                                @error('total_mark') is-invalid @enderror" placeholder="Enter Mark" name="total_mark" value="{{  old('total_mark') ?? $exam->total_mark }}"/>
                                 @error('total_mark')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -217,7 +224,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <input type="text" class="form-control form-control-solid 
-                                @error('cut_mark') is-invalid @enderror" placeholder="Cut Mark" name="cut_mark" value="{{$exam->cut_mark }}"/>
+                                @error('cut_mark') is-invalid @enderror" placeholder="Cut Mark" name="cut_mark" value="{{  old('cut_mark') ?? $exam->cut_mark }}"/>
                                 @error('cut_mark')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -233,7 +240,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <input type="text" class="form-control form-control-solid 
-                                @error('price') is-invalid @enderror" placeholder="Price" name="price" value="{{ $exam->price }}"/>
+                                @error('price') is-invalid @enderror" placeholder="Price" name="price" value="{{  old('price') ?? $exam->price }}"/>
                                 @error('price')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -249,7 +256,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <input type="text" class="form-control form-control-solid 
-                                @error('discount_price') is-invalid @enderror" placeholder="Discount Price" name="discount_price" value="{{ $exam->discount_price }}"/>
+                                @error('discount_price') is-invalid @enderror" placeholder="Discount Price" name="discount_price" value="{{  old('discount_price') ?? $exam->discount_price }}"/>
                                 @error('discount_price')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -264,8 +271,15 @@
                                     <span class="">Negative Mark</span>
                                 </label>
                                 <!--end::Label-->
-                                <input type="text" class="form-control form-control-solid 
-                                @error('negative_mark') is-invalid @enderror" placeholder="Negative Mark" name="negative_mark" value="{{ $exam->negative_mark }}"/>
+                               <select class="form-select form-select-solid @error('negative_mark') is-invalid @enderror"" data-control="select2"
+                                    data-hide-search="true" name="negative_mark"
+                                    id="negative_mark" required>
+                                    <option value="0" {{ old("negative_mark") == '0' ? "selected":"" }}>0.00</option>
+                                    <option value="0.25" {{ old("negative_mark") == '0.25' ? "selected":"" }}>0.25</option>
+                                    <option value="0.50" {{ old("negative_mark") == '0.50' ? "selected":"" }}>0.50</option>
+                                    <option value="1" {{ old("negative_mark") == '1' ? "selected":"" }}>1.00</option>
+                                </select>
+                            
                                 @error('negative_mark')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -281,7 +295,7 @@
                                 </label>
                                 <!--end::Label-->
                                 <input type="text" class="form-control form-control-solid 
-                                @error('required_point') is-invalid @enderror" placeholder="Required Point" name="required_point" value="{{ $exam->required_point }}"/>
+                                @error('required_point') is-invalid @enderror" placeholder="Required Point" name="required_point" value="{{ old('required_point') ?? $exam->required_point }}"/>
                                 @error('required_point')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -301,7 +315,7 @@
                                 <!--begin::Input group-->
                                 <div class="input-group mb-5">
                                     <input type="text" class="form-control  
-                                    @error('duration') is-invalid @enderror" placeholder="" name="duration" value="{{ $exam->duration }}"/>
+                                    @error('duration') is-invalid @enderror" placeholder="" name="duration" value="{{ old('duration') ?? $exam->duration }}"/>
                                     <span class="input-group-text">min</span>
                                     @error('duration')
                                         <span class="invalid-feedback" role="alert">

@@ -152,10 +152,10 @@
                             <div class="col-md-2  fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Examinee Type</label>
                                 <select class="form-select form-select-solid " data-control="select2"
-                                    data-hide-search="true" data-placeholder="Select ..." name="examinee_type"
+                                    data-hide-search="true" name="examinee_type"
                                     id="examinee_type" required>
-                                    <option value="user" selected>User (free)</option>
-                                    <option value="subscriber">Subscriber (paid)</option>
+                                    <option value="user" {{ old('examinee_type') == 'user' ? 'selected' : '' }}>User (free)</option>
+                                    <option value="subscriber" {{ old('examinee_type') == 'subscriber' ? 'selected' : '' }}>Subscriber (paid)</option>
                                 </select>
                                 <div class="help-block with-errors examinee_type-error"></div>
                             </div>
@@ -170,10 +170,10 @@
                             <div class="col-md-2  fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Exam Mode</label>
                                 <select class="form-select form-select-solid " data-control="select2"
-                                    data-hide-search="true" data-placeholder="Select ..." name="exam_mode"
+                                    data-hide-search="true" name="exam_mode"
                                     id="exam_mode" required>
-                                    <option value="public" selected>Public</option>
-                                    <option value="private">Private</option>
+                                    <option value="public" {{ old('exam_mode') == 'public' ? 'selected' : '' }} >Public</option>
+                                    <option value="private" {{ old('exam_mode') == 'private' ? 'selected' : '' }} >Private</option>
                                 </select>
                                 <div class="help-block with-errors exam_mode-error"></div>
                             </div>
@@ -264,8 +264,15 @@
                                     <span class="">Negative Mark</span>
                                 </label>
                                 <!--end::Label-->
-                                <input type="text" class="form-control form-control-solid 
-                                @error('negative_mark') is-invalid @enderror" placeholder="Negative Mark" name="negative_mark" value="{{ old('negative_mark') }}"/>
+                                <select class="form-select form-select-solid @error('negative_mark') is-invalid @enderror"" data-control="select2"
+                                    data-hide-search="true" name="negative_mark"
+                                    id="negative_mark" required>
+                                    <option value="0" {{ old("negative_mark") == '0' ? "selected":"" }}>0.00</option>
+                                    <option value="0.25" {{ old("negative_mark") == '0.25' ? "selected":"" }}>0.25</option>
+                                    <option value="0.50" {{ old("negative_mark") == '0.50' ? "selected":"" }}>0.50</option>
+                                    <option value="1" {{ old("negative_mark") == '1' ? "selected":"" }}>1.00</option>
+                                </select>
+                            
                                 @error('negative_mark')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -331,11 +338,11 @@
                             <div class="col-md-2  fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Exam Status</label>
                                 <select class="form-select form-select-solid " data-control="select2"
-                                    data-hide-search="true" data-placeholder="Select ..." name="exam_status"
+                                    data-hide-search="true" name="exam_status"
                                     id="exam_status" required>
-                                    <option value="published">Published</option>
-                                    <option value="unpublished">Unpublished</option>
-                                    <option value="closed">Closed</option>
+                                    <option value="published" {{ old("exam_status") == 'published' ? "selected":"" }}>Published</option>
+                                    <option value="unpublished" {{ old("exam_status") == 'unpublished' ? "selected":"" }}>Unpublished</option>
+                                    <option value="closed" {{ old("exam_status") == 'closed' ? "selected":"" }}>Closed</option>
                                 </select>
                                 <div class="help-block with-errors exam_status-error"></div>
                             </div>

@@ -339,6 +339,115 @@
 </div>
 <!--end::Modal - New Subject-->
 
+<!--begin::Modal - New Child Subject-->
+<div class="modal fade" id="kk_modal_new_child_subject" tabindex="-1" aria-hidden="true">
+    <!--begin::Modal dialog-->
+    <div class="modal-dialog modal-dialog-centered mw-650px">
+        <!--begin::Modal content-->
+        <div class="modal-content rounded">
+            <!--begin::Modal header-->
+            <div class="modal-header pb-0 border-0 justify-content-end">
+                <!--begin::Close-->
+                <div class="btn btn-sm btn-icon btn-active-color-primary" data-bs-dismiss="modal">
+                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
+                    <span class="svg-icon svg-icon-1">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <rect opacity="0.5" x="6" y="17.3137" width="16" height="2" rx="1"
+                                transform="rotate(-45 6 17.3137)" fill="black" />
+                            <rect x="7.41422" y="6" width="16" height="2" rx="1" transform="rotate(45 7.41422 6)"
+                                fill="black" />
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                </div>
+                <!--end::Close-->
+            </div>
+            <!--begin::Modal header-->
+            <!--begin::Modal body-->
+            <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
+                <!--begin:Form-->
+                <form id="kk_modal_new_child_subject_form" class="form" enctype="multipart/form-data">
+                    <div class="messages"></div>
+                    {{-- csrf token  --}}
+                    @csrf
+                   
+
+                    <!--begin::Heading-->
+                    <div class="mb-13 text-center">
+                        <!--begin::Title-->
+                        <span id="append_text"></span>
+                        <!--end::Title-->
+                        <!--begin::Description-->
+                        <div class="text-muted fw-bold fs-5">Fill up the form and submit
+                        </div>
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Heading-->
+
+                    {{-- hidden input  --}}
+                    <input type="hidden" name="parent" id="parent_id" />
+                    <input type="hidden" name="sub_category" id="sub_cat"/>
+                    <input type="hidden" name="main_category" id="main_cat"/>
+                    
+
+                    <!--begin::Input group-->
+                    <div class="d-flex flex-column mb-3 fv-row">
+                        <!--begin::Label-->
+                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                            <span class="required">Subject Name</span>
+                        </label>
+                        <!--end::Label-->
+                        <input type="text" class="form-control form-control-solid" placeholder="Enter subject name"
+                            name="name[]" id="name"/>
+                        <div class="help-block with-errors name-error"></div>
+                    </div>
+                    <!--end::Input group-->
+
+                    <!-- append dynamic input-->
+                    <div  class="append_new_row"></div>
+                    <!-- append dynamic input-->
+
+                    <div class="col-md-5 mb-5">
+                        <button class="btn btn-info btn-sm addNewRow" type="button" style="padding: 7px 10px !important"><i class="fas fa-plus"></i>Add Multiple Child Subject</button>
+                    </div>
+
+                    <!--begin::Input group-->
+                    <div class="row g-9 mb-8">
+                        <!--begin::Col-->
+                        <div class="col-md-12 fv-row">
+                            <label class="required fs-6 fw-bold mb-2">Status</label>
+                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                data-placeholder="Select status" name="status">
+                                <option value="active" selected>Active</option>
+                                <option value="deactive">Deactive</option>
+                            </select>
+                            <div class="help-block with-errors status-error"></div>
+                        </div>
+                        <!--end::Col-->
+                    </div>
+                    <!--end::Input group-->
+
+                    <!--begin::Actions-->
+                    <div class="text-center">
+                        <button type="reset" id="kk_modal_new_child_subject_cancel" class="btn btn-light me-3">Cancel</button>
+                        <button type="submit" id="kk_modal_new_child_subject_submit" class="btn btn-primary">
+                            <span class="indicator-label">Submit</span>
+                            <span class="indicator-progress">Please wait...
+                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                        </button>
+                    </div>
+                    <!--end::Actions-->
+                </form>
+                <!--end:Form-->
+            </div>
+            <!--end::Modal body-->
+        </div>
+        <!--end::Modal content-->
+    </div>
+    <!--end::Modal dialog-->
+</div>
+<!--end::Modal - New Child Subject-->
+
 @endsection
 
 
@@ -566,9 +675,10 @@
             $('select[name="sub_category"]').val('').text('');
             $('select[name="parent"]').val('').text('');
             $('#kt_docs_ckeditor_classic').val('').text('');
+            $('.dynamic-row').remove();
         }
 
-        //add new input field
+        //add new dynamic input field
         $(document).on('click', '.addRow', function() {
             var html = '';
             html += '<div class="d-flex flex-column mb-3 fv-row dynamic-row">'
@@ -595,6 +705,123 @@
         // remove row
         $(document).on('click', '.removeRow', function() {
             $(this).closest('.dynamic-row').remove();
+            //$(this).remove();
+        });
+
+
+
+        //Add Child Subject
+        $(document).on('click', '.addChildSubject', function(){
+            var id =  $(this).data('id');
+            var name =  $(this).data('name');
+            var main_category =  $(this).data('main_category');
+            var sub_category =  $(this).data('sub_category');
+            console.log(id);
+            console.log(name);
+           
+            $('.with-errors').text('');
+            $('#kk_modal_new_child_subject_form')[0].reset();
+            $('.dynamic-new-row').remove();
+            $('#parent_id').val(id);
+            $('#main_cat').val(main_category);
+            $('#sub_cat').val(sub_category);
+            $('#append_text').html('<h1 class="mb-3" id="append_text">Add New Child Subject into <span class="text-capitalize"> '+ name +' </span> </h1>');
+            $('#kk_modal_new_child_subject').modal('show');
+        })
+
+        //cancel button
+        $('#kk_modal_new_child_subject_cancel').on('click', function(){
+            $('#kk_modal_new_child_subject_form')[0].reset();
+            $('.indicator-label').show();
+            $('.indicator-progress').hide();
+            $('.dynamic-new-row').remove();
+            $('#kk_modal_new_child_subject_submit').removeAttr('disabled');
+            $("#kk_modal_new_child_subject").modal('hide');
+        })
+
+        //new subject save
+        $('#kk_modal_new_child_subject_form').on('submit',function(e){
+            e.preventDefault()
+            $('.with-errors').text('')
+            $('.indicator-label').hide()
+            $('.indicator-progress').show()
+            $('#kk_modal_new_child_subject_submit').attr('disabled','true')
+
+            var formData = new FormData(this);
+            // formData.append('description', myEditor.getData());
+            $.ajax({
+                type:"POST",
+                url: "{{ url('admin/category/subject/store')}}",
+                data:formData,
+                cache:false,
+                contentType: false,
+                processData: false,
+                success:function(data){
+                    if(data.success ==  false || data.success ==  "false"){
+                        var arr = Object.keys(data.errors);
+                        var arr_val = Object.values(data.errors);
+                        for(var i= 0;i < arr.length;i++){
+                        $('.'+arr[i]+'-error').text(arr_val[i][0])
+                        }
+                    }else if(data.error || data.error == 'true'){
+                        var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                        $('#kk_modal_new_child_subject_form').find('.messages').html(alertBox).show();
+                    }else{
+                        // empty the form
+                        $('#kk_modal_new_child_subject_form')[0].reset();
+                        clearAppendData()
+                        $("#kk_modal_new_child_subject").modal('hide');
+                        $('.dynamic-new-row').remove();
+                        Swal.fire({
+                                text: data.message,
+                                icon: "success",
+                                buttonsStyling: !1,
+                                confirmButtonText: "{{__('Ok, got it!')}}",
+                                customClass: {
+                                    confirmButton: "btn fw-bold btn-primary"
+                                }
+                            }).then((function () {
+                                //refresh datatable
+                                $('#dataTable').DataTable().ajax.reload();
+                            }))
+                    }
+
+                    $('.indicator-label').show()
+                    $('.indicator-progress').hide()
+                    $('#kk_modal_new_child_subject_submit').removeAttr('disabled')
+
+                }
+          });
+
+        })
+
+        //add new input field
+        $(document).on('click', '.addNewRow', function() {
+            var html = '';
+            html += '<div class="d-flex flex-column mb-3 fv-row dynamic-new-row">'
+
+            html += '   <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
+            html += '        <span class="required">Subject Name</span>'
+            html += '    </label>'
+
+            html += '    <div class="row">'
+            html += '        <div class="col-md-11">'
+            html += '            <input type="text" class="form-control form-control-solid" placeholder="Enter subject name" name="name[]" />'
+            html += '            <div class="help-block with-errors name-error"></div>'
+            html += '        </div>'
+            html += '        <div class="col-md-1">'
+            html += '            <button class="btn btn-danger btn-icon btn-sm removeNewRow" type="button"><i class="fas fa-minus"></i></button>'
+            html += '        </div>'
+            html += '    </div>'
+            html += '</div>'
+
+            $(this).closest('.append_new_row').append(html);
+            $('.append_new_row').append(html);
+        });
+
+        // remove row
+        $(document).on('click', '.removeNewRow', function() {
+            $(this).closest('.dynamic-new-row').remove();
             //$(this).remove();
         });
 

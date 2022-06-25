@@ -81,6 +81,9 @@ class SubjectController extends Controller
                             </span>
                             <!--end::Svg Icon-->
                         </a>
+                        <a href="javascript:;"  data-id="' . $row->id . '" data-name="' . $row->name . '" data-sub_category="' . $row->sub_category_id . '" data-main_category="' . $row->main_category_id . '" class="btn btn-light btn-active-color-primary btn-sm addChildSubject" title="Add Child Subject">
+                            <i class="fas fa-plus">&nbsp;Child Subject</i>
+                        </a>
 
                     </div>';
                     return $btn;
@@ -170,7 +173,7 @@ class SubjectController extends Controller
                         'message' => __('Failed!.')
                     ]);
                 }
-            } else { //create new category
+            } else { //create new subject
 
                 foreach ($request->name as $key => $value) {
                     $subject = new Subject();

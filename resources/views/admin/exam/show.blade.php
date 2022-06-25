@@ -67,19 +67,19 @@
                 <div class="col-md-12">
                     <div class="card shadow-sm">
                         <div class="card-header py-10 d-flex flex-column justify-content-center align-items-center">
-                            <h5 class="">Category : {{$exam->category->name}}</h5>
-                            <h6 class=""> {{$exam->sub_category->name}}</h6>
-                            <h3 class="card-title">Exam Name : {{$exam->name}}</h3>
+                            <h5 class="">{{$exam->category->name ?? ''}}</h5>
+                            <h6 class=""> {{$exam->sub_category->name ?? ''}}</h6>
+                            <h3 class="card-title">{{$exam->name ?? ''}}</h3>
                             
                         </div>
                         <div class="card-header fw-bold d-flex justify-content-between py-3 px-5 ">
-                            <div class="left">
+                            <div class="left fw-bolder">
                                 <p>Total Question: {{ $exam->number_of_question }}</p>
                                 <p>Total Mark: {{ $exam->mark }}</p>
                                 <p>Cut Mark: {{ $exam->cut_mark }}</p>
                                 <p>Negative Mark: {{ $exam->negative_mark }}</p>
                             </div>
-                            <div class="right">
+                            <div class="right fw-bolder">
                                 <p>Duration: {{ $exam->duration }}</p>
                                 <p>Time: {{ Carbon\Carbon::parse($exam->exam_starting_time)->format('g:i:s A') }}</p>
                                 <p>Date: {{ Carbon\Carbon::parse($exam->exam_starting_time)->format('d-m-Y ') }}</p>

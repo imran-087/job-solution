@@ -318,7 +318,7 @@
                     <!--begin::Heading-->
                     <div class="mb-13 text-center">
                         <!--begin::Title-->
-                        <h1 class="mb-3">Add New Sub Category</h1>
+                       <span id="append_text"></span>
                         <!--end::Title-->
                         <!--begin::Description-->
                         <div class="text-muted fw-bold fs-5">Fill up the form and submit
@@ -327,19 +327,9 @@
                     </div>
                     <!--end::Heading-->
 
-                    <!--begin::Input group-->
-                    <div class="d-flex flex-column mb-8 fv-row">
-                        <!--begin::Label-->
-                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="required">Category Name</span>
-                        </label>
-                        <!--end::Label-->
-                        <input type="text" class="form-control form-control-solid" placeholder="Enter Service Name"
-                            name="category" />
-                        <div class="help-block with-errors name-error"></div>
-                    </div>
-                    <!--end::Input group-->
-
+                    {{-- hidden input  --}}
+                    <input type="hidden"  name="category" />
+                    
                     <!--begin::Input group-->
                     <div class="d-flex flex-column mb-8 fv-row">
                         <!--begin::Label-->
@@ -347,7 +337,7 @@
                             <span class="required">Sub Category Name</span>
                         </label>
                         <!--end::Label-->
-                        <input type="text" class="form-control form-control-solid" placeholder="Enter Service Name"
+                        <input type="text" class="form-control form-control-solid" placeholder="Enter Sub Category Name"
                             name="name" />
                         <div class="help-block with-errors name-error"></div>
                     </div>
@@ -368,7 +358,7 @@
                     <div class="d-flex flex-column mb-8 fv-row">
                         <!--begin::Label-->
                         <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="">Post/Position</span>
+                            <span class="">Post/Position (optional)</span>
                         </label>
                         <!--end::Label-->
                         <input type="text" class="form-control form-control-solid" placeholder="Enter Job Post/Position"
@@ -382,9 +372,8 @@
                          <!--begin::Col-->
                         <div class="col-md-4 fv-row">
                             <label class="required fs-6 fw-bold mb-2">Exam Type</label>
-                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                data-placeholder="Select Type" name="type">
-                                <option value="">Select type</option>
+                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" name="type">
+                                <option value="">Select Type</option>
                                 <option value="mcq" >MCQ</option>
                                 <option value="written">Written</option>
                                 <option value="mcq_written">MCQ + Written</option>
@@ -414,7 +403,7 @@
                     <div class="row g-9 mb-8">
                         <!--begin::Col-->
                         <div class="col-md-4 fv-row">
-                            <label class="required fs-5 fw-bold mb-2">Mark</label>
+                            <label class="required fs-5 fw-bold mb-2">Total Mark</label>
                             <input type="text" class="form-control form-control-solid" placeholder="Total mark"
                             name="mark" />
                             <div class="help-block with-errors mark-error"></div>
@@ -423,14 +412,15 @@
                         <!--begin::Col-->
                         <div class="col-md-4 fv-row">
                             <label class=" fs-6 fw-bold mb-2">Duration</label>
-                            <div class="input-group mb-3">
-                                <input type="text" class="form-control form-control-solid" placeholder="1/2/3/4"
-                                name="duration" aria-label="Exam duration" aria-describedby="basic-addon2">
-                                <div class="input-group-append">
-                                    <span class="input-group-text form-control-solid" id="basic-addon2">hr</span>
+                            <!--begin::Input group-->
+                                <div class="input-group mb-5">
+                                    <input type="text" class="form-control" 
+                                    placeholder="30" name="duration"/>
+                                    <span class="input-group-text">min</span>
+                                    
                                 </div>
-                            </div>
-
+                            <!--end::Input group-->
+                            
                             <div class="help-block with-errors duration-error"></div>
                         </div>
                         <!--end::Col-->
@@ -462,8 +452,8 @@
                         <div class="col-md-6 fv-row">
                             <label class=" fs-6 fw-bold mb-2">Year (optional)</label>
                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                data-placeholder="Select exam year" name="year" id="year">
-                                <option value="">Choose ...</option>
+                                name="year" id="year">
+                                <option value="">Select exam year</option>
                                 @foreach ($years as $year)
                                     <option value="{{ $year->id }}">{{ $year->year }}</option>
                                 @endforeach
@@ -590,6 +580,9 @@
 
         //cancel button
         $('#kk_modal_new_service_cancel').on('click', function(){
+            $('.indicator-label').show();
+            $('.indicator-progress').hide();
+            $('#kk_modal_new_category_submit').removeAttr('disabled');
             $('#kk_modal_new_category_form')[0].reset();
             $("#kk_modal_new_category").modal('hide');
             $('#main_category').get(0).selectedIndex = 0;
@@ -703,14 +696,20 @@
             }))
         }
 
-        //Add Sub Category
-        function addSubCategory(id){
+
+        //Add New Sub Category
+        $(document).on('click', '.addSubCategory', function(){
+            var id =  $(this).data('id');
+            var name =  $(this).data('name');
             console.log(id);
+            console.log(name);
+
             $('.with-errors').text('');
             $('#kk_modal_new_sub_category_form')[0].reset();
             $('input[name="category"]').val(id);
-            $('#kk_modal_new_sub_category').modal('show')
-        }
+            $('#append_text').html('<h1 class="mb-3" id="append_text">Add New Sub Category into <span class="text-capitalize"> '+ name +' </span> </h1>');
+            $('#kk_modal_new_sub_category').modal('show');
+        })
 
         //cancel button
         $('#kk_modal_new_sub_category_cancel').on('click', function(){

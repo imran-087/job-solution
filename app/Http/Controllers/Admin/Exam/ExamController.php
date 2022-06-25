@@ -195,34 +195,55 @@ class ExamController extends Controller
 
         //dd($request->all());
 
-        $exam_starting_time = Carbon::parse($request->exam_starting_time)->format('Y-m-d\TH:i');
-
-        $exam = Exam::where('id', $request->exam_id)->update([
-            //dd('here'),
-            'category_id' => $request->category,
-            'sub_category_id' => $request->sub_category,
-            'user_id' => $request->user_id,
-            'name' => $request->name,
-            'examinee_type' => $request->examinee_type,
-            'exam_mode' => $request->exam_mode,
-            'duration' => $request->duration,
-            'number_of_question' => $request->number_of_question,
-            'total_mark' => $request->mark,
-            'cut_mark' => $request->cut_mark ?? '0',
-            'negative_mark' => $request->negative_mark ?? '0',
-            'required_point' => $request->required_point ?? '0',
-            'exam_price' => $request->price ?? 0,
-            'discount_price' => $request->discount_price ?? 0,
-            'exam_status' => $request->exam_status,
-            'exam_starting_time' => $exam_starting_time,
-            'discount_price' => $request->discount_price,
-            'updated_user_id' => Auth::guard('admin')->user()->id,
+        $request->validate([
+            'category' => 'required',
+            'sub_category' => 'required',
+            'name' => 'required',
+            'instruction' => 'required',
+            'examinee_type' => 'required',
+            'exam_mode' => 'required',
+            'duration' => 'required',
+            'total_mark' => 'required',
+            'exam_status' => 'required',
+            //'exam_starting_time' => 'required',
+            'number_of_question' => 'required | numeric | max:200'
         ]);
+        // dd('pass');
 
-        if ($exam) {
-            return redirect()->back()->with('success', 'Exam Updated');
+        if ($request->cut_mark > $request->total_mark) {
+            //dd('here');
+            return redirect()->back()->withInput($request->all())->with('cut_mark', 'Cut Mark cannot be greater than total mark');
         } else {
-            return redirect()->back()->with('error', 'Failed!');
+
+            $exam_starting_time = Carbon::parse($request->exam_starting_time)->format('Y-m-d\TH:i');
+
+            $exam = Exam::where('id', $request->exam_id)->update([
+                //dd('here'),
+                'category_id' => $request->category,
+                'sub_category_id' => $request->sub_category,
+                'user_id' => $request->user_id,
+                'name' => $request->name,
+                'examinee_type' => $request->examinee_type,
+                'exam_mode' => $request->exam_mode,
+                'duration' => $request->duration,
+                'number_of_question' => $request->number_of_question,
+                'total_mark' => $request->mark,
+                'cut_mark' => $request->cut_mark ?? '0',
+                'negative_mark' => $request->negative_mark ?? '0',
+                'required_point' => $request->required_point ?? '0',
+                'exam_price' => $request->price ?? 0,
+                'discount_price' => $request->discount_price ?? 0,
+                'exam_status' => $request->exam_status,
+                'exam_starting_time' => $exam_starting_time,
+                'discount_price' => $request->discount_price,
+                'updated_user_id' => Auth::guard('admin')->user()->id,
+            ]);
+
+            if ($exam) {
+                return redirect()->back()->with('success', 'Exam Updated');
+            } else {
+                return redirect()->back()->with('error', 'Failed!');
+            }
         }
     }
 }

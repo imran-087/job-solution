@@ -126,13 +126,11 @@
                                     <!--begin::Table row-->
                                     <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                         <th class="min-w-20px">#</th>
-                                        <th class="min-w-150px">Sub Category Name</th>
-                                        <th class=" min-w-150px">Title</th>
+                                        <th class="min-w-150px">Sub Cat Name</th>
                                         <th class=" min-w-100px">Category Name</th>
-                                        <th class=" min-w-70px">Year</th>
-                                        <th class=" min-w-70px">Status</th>
-                                        <th class=" min-w-100px">Created at</th>
-                                        <th class=" min-w-70px">Actions</th>
+                                        <th class=" min-w-100px">Year</th>
+                                        <th class=" min-w-100px">Status</th>
+                                        <th class=" min-w-150px">Actions</th>
                                     </tr>
                                     <!--end::Table row-->
                                 </thead>
@@ -393,7 +391,7 @@
 <!--begin::Modal - New Subject-->
 <div class="modal fade" id="kk_modal_new_subject" tabindex="-1" aria-hidden="true">
     <!--begin::Modal dialog-->
-    <div class="modal-dialog modal-dialog-centered mw-850px">
+    <div class="modal-dialog modal-dialog-centered mw-650px">
         <!--begin::Modal content-->
         <div class="modal-content rounded">
             <!--begin::Modal header-->
@@ -421,12 +419,12 @@
                     <div class="messages"></div>
                     {{-- csrf token  --}}
                     @csrf
-                    <input type="hidden" name="main_category" id="main_cat_id">
+                   
 
                     <!--begin::Heading-->
                     <div class="mb-13 text-center">
                         <!--begin::Title-->
-                        <h1 class="mb-3">Add New Subject</h1>
+                        <span id="append_text"></span>
                         <!--end::Title-->
                         <!--begin::Description-->
                         <div class="text-muted fw-bold fs-5">Fill up the form and submit
@@ -435,18 +433,10 @@
                     </div>
                     <!--end::Heading-->
 
-                    <!--begin::Input group-->
-                    <div class="d-flex flex-column mb-3 fv-row">
-                        <!--begin::Label-->
-                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="required">Sub Category Name</span>
-                        </label>
-                        <!--end::Label-->
-                        <input type="text" class="form-control form-control-solid" placeholder=""
-                            name="sub_category" id="sub_cat"/>
-                        <div class="help-block with-errors name-error"></div>
-                    </div>
-                    <!--end::Input group-->
+                    {{-- hidden input  --}}
+                    <input type="hidden" name="main_category" id="main_cat_id" />
+                    <input type="hidden" name="sub_category" id="sub_cat"/>
+                    
 
                     <!--begin::Input group-->
                     <div class="d-flex flex-column mb-3 fv-row">
@@ -530,10 +520,10 @@
                         data: 'name',
                         name: 'name'
                     },
-                    {
-                        data: 'title',
-                        name: 'title'
-                    },
+                    // {
+                    //     data: 'title',
+                    //     name: 'title'
+                    // },
                     {
                         data: 'category_id',
                         name: 'category_id'
@@ -548,10 +538,10 @@
                         name: 'status'
                     },
 
-                    {
-                        data: 'created_at',
-                        name: 'created_at'
-                    },
+                    // {
+                    //     data: 'created_at',
+                    //     name: 'created_at'
+                    // },
                     {
                         data: 'action',
                         name: 'action',
@@ -560,9 +550,9 @@
                     },
 
                 ],
-                "order": [
-                    [6, 'desc']
-                ] //created at desc
+                // "order": [
+                //     [6, 'desc']
+                // ] //created at desc
 
             })
 
@@ -736,15 +726,21 @@
         }
 
         //Add subject into a sub_category
-        function addSubject(id, main_cat_id){
-            console.log(id);
-            console.log(main_cat_id);
+        $(document).on('click', '.addSubject', function(){ 
+            var id =  $(this).data('id');
+            var name =  $(this).data('name');
+            var main_cat_id =  $(this).data('main_category');
+            // console.log(id);
+            // console.log(name);
+            // console.log(main_cat_id);
+
             $('.with-errors').text('');
             $('#kk_modal_new_subject_form')[0].reset();
             $('#sub_cat').val(id);
             $('#main_cat_id').val(main_cat_id);
+            $('#append_text').html('<h1 class="mb-3" id="append_text">Add New Subject into <span class="text-capitalize"> '+ name +' </span> </h1>');
             $('#kk_modal_new_subject').modal('show');
-        }
+        })
 
         //cancel button
         $('#kk_modal_new_subject_cancel').on('click', function(){

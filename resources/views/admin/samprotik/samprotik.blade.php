@@ -16,12 +16,7 @@
             </div>
 
         </div>
-        <div class="row">
-            <div class="d-flex justify-content-end">
-                <span data-question_id=" {{ $question->id }}" class="btn btn-sm btn-light btn-active-color-primary ms-2 get-tag cursor-pointer" title="Click" >Add Tag</span>
-                <div class="tag" style="z-index:999"></div>
-            </div>
-        </div>
+        
         @if($question->options != '')
         <div class="card-body">
             <div class="row"  style="font-size: 16px">
@@ -69,12 +64,10 @@
         </div>
         @else
         <div class="card-body">
-
             <div class="row"  style="font-size: 16px">
                <p class="text-gray-800 fw-bold " >
                     <span style="color:green; font-weight:bold">উত্তর:</span> {{$question->answer }}</p>
             </div>
-
             <div class="row">
                 @foreach($question->descriptions as $description)
                     <p class="text-gray-800 fw-bold mt-4 ml-4 cursor-pointer update-des " style="text-align: justify"><b>Description:</b> {{ $description->description }}</p>
@@ -112,6 +105,13 @@
                         </div>
                     </form>
                     <button type="button " class="btn btn-danger btn-sm me-3 kk_modal_new_add_cancel mb-5" style="width:80px; margin-top:-35px">cancel</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="d-flex justify-content-end">
+                    <input type="text"  data-question_id="' . $row->id . '" class="form-control form-control-solid w-150px  search_tag"  placeholder="Type to search tag">
+                    {{-- <span data-question_id=" {{ $question->id }}" class="btn btn-sm btn-light btn-active-color-primary get-tag cursor-pointer" title="Click" >Add Tag</span> --}}
+                    <div class="tag" style="z-index:999"></div>
                 </div>
             </div>
         </div>
