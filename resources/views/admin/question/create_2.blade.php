@@ -147,8 +147,9 @@
                                     <span class="required">Sub Category</span>
                                 </label>
                                 <!--end::Label-->
-                                <input class="form-control form-control-solid" type="text" name=""  value="{{ $sub_category->name }}">
-                                <input type="hidden" name="sub_category"  value="{{ $sub_category->id }}" disabled>
+                                <input class="form-control form-control-solid" type="text" name=""  value="{{ $sub_category->name }}" disabled>
+                                <input type="hidden" name="sub_category"  value="{{ $sub_category->id }}" >
+                                <input type="hidden" name="main_category"  value="{{ $main_category }}" >
                             </div>
                             <!--end::Col-->
                             <!--begin::Col-->
@@ -160,6 +161,7 @@
                                     @isset($subjects)
                                     @foreach($subjects as $subject)
                                     <option value="{{ $subject->id }}">{{ $subject->name }} &nbsp;&nbsp; --- &nbsp;&nbsp; <span style="margin-left:10px; !important"> {{ $subject->sub_category->name ?? $subject->main_category->name  }} </span></option>
+                                    
                                     @endforeach
                                     @endisset
                                 </select>

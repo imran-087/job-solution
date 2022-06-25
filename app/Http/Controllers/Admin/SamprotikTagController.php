@@ -184,12 +184,34 @@ class SamprotikTagController extends Controller
             $data = Subject::where(['main_category_id' => 1, 'sub_category_id' => 0])
                 ->where('name', 'like', '%' . $request->data . '%')
                 ->select('id', 'name')->get();
-            dd($data);
+            //dd($data);
         }
 
         $output = '';
 
+        if (count($data) > 0) {
 
+            // <option value="subject=' . $row->id . ' question=' . $request->question_id . '" class="fs-6 text-gray-800 text-hover-primary fw-bold">' . $row->name . '</option>
+
+            foreach ($data as $row) {
+                $output .=
+                    '<div class="d-flex align-items-center mb-2 "
+                        style="margin-top:10px; background-color:#F5F8FA; border-radius:5px !important; padding:10px;">
+                        <!--begin::Title-->
+                        <div class="d-flex flex-column">
+                            <a href="javascript:;" data-qid="' . $request->question_id . '"  data-sid="' . $row->id . '" class="fs-6 text-gray-800 w-180px text-hover-primary fw-bold add-tag" >' . $row->name . '</a>
+                        </div>
+                        <!--end::Title-->
+                    </div>';
+                //$output .= '<a href="discussion/' . $row->id . '/show"><li class="list-group-item" style=" border-radious:10px">' . $row->title . '</li></a>';
+            }
+        } else {
+
+            $output .= ' <p  class="fs-6 text-800  fw-bold"
+                style="color:red; margin-top:10px; background-color:#F5F8FA; padding:10px; border-radius:5px;"> '
+                . 'No Result' .
+                '</p>';
+        }
 
         return $output;
     }
@@ -207,7 +229,7 @@ class SamprotikTagController extends Controller
             //     array('created_user_id' => Auth::guard('admin')->id(), 'status' => 1)
             // );
 
-            $sync = $question->subjects()->sync($subject->id);
+            $sync = $question->subjects()->sync([$subject->id => ['subject_id' => $subject->id, 'created_user_id' => Auth::user()->id, 'status' => 1]], false);
 
             if ($sync) {
                 return response()->json([

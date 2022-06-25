@@ -95,7 +95,7 @@
                                 data-hide-search="true" data-placeholder="Select category" name="category"
                                 id="category" >
 
-                                <option value="{{ $myForm['category'] }}">{{ getCategory($myForm['category'])->name }}</option>
+                                {{-- <option value="{{ $myForm['category'] }}">{{ getCategory($myForm['category'])->name }}</option> --}}
                             </select>
                             <div class="help-block with-errors catgory-error"></div>
                         </div>
@@ -127,8 +127,8 @@
                     </div>
                     <!--end::Input group-->
 
-                    <!--begin::Input group-->
-                    <div class="row g-9 mb-8">
+                    <!--begin::Input group for year-->
+                    {{-- <div class="row g-9 mb-8">
                         <!--begin::Col-->
                         <div class="col-md-2 fv-row">
                             <label class="required fs-6 fw-bold mb-2">Select Year</label>
@@ -147,7 +147,7 @@
                             <div class="help-block with-errors year-error"></div>
                         </div>
                         <!--end::Col-->
-                    </div>
+                    </div> --}}
                     <!--end::Input group-->
                 </div>
                 <!--end::Heading-->

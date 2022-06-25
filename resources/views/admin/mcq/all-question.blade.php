@@ -148,11 +148,17 @@
                                     @endisset
                                 </div>
 
+                                {{--  Question Tag --}}
+                                @foreach($question->subjects as $tag)
+                                    <span class="badge badge-light mb-3">{{ $tag->name }}</span>
+                                @endforeach
+                                {{-- </div> --}}
+
                                 <div class="row">
                                     <!--end::Input group-->
                                     @if($question->descriptions->count() > 0)
                                         @foreach($question->descriptions as $description)
-                                        <p class="text-gray-800 fw-bold ml-4 cursor-pointer update-des" style="text-align: justify"><b>Description : </b> {{ $description->description }}</p>
+                                        <p class="text-gray-800 fw-bold ml-4 cursor-pointer update-des" style="text-align: justify"><b class="fw-bolder">Description : </b> {{ $description->description }}</p>
 
                                         <div class="d-flex flex-column mt-2 fv-row update-form d-none">
                                             <form id="kk_update_description_form" class="form">
@@ -193,6 +199,11 @@
                                         </form>
                                         <button type="button " class="btn btn-danger btn-sm me-3 kk_modal_new_add_cancel mb-5" style="width:80px; margin-top:-35px">cancel</button>
                                     </div>
+                                </div>
+
+                                <div class="row mt-5">
+                                    <input type="text"  data-question_id="{{ $question->id }}" data-subject_id="{{ $question->subject_id }}" class="form-control form-control-solid w-180px  search_tag"  placeholder="Type to search tag">
+                                    <div class="result" style="z-index:999"></div>
                                 </div>
                             </div>
                         </div>

@@ -286,7 +286,7 @@
 <!--begin::Modal - New Sub Category -->
 <div class="modal fade" id="kk_modal_new_sub_category" tabindex="-1" aria-hidden="true">
     <!--begin::Modal dialog-->
-    <div class="modal-dialog modal-dialog-centered mw-650px">
+    <div class="modal-dialog modal-dialog-centered mw-850px">
         <!--begin::Modal content-->
         <div class="modal-content rounded">
             <!--begin::Modal header-->
@@ -331,46 +331,76 @@
                     <input type="hidden"  name="category" />
                     
                     <!--begin::Input group-->
-                    <div class="d-flex flex-column mb-8 fv-row">
-                        <!--begin::Label-->
-                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="required">Sub Category Name</span>
-                        </label>
-                        <!--end::Label-->
-                        <input type="text" class="form-control form-control-solid" placeholder="Enter Sub Category Name"
-                            name="name" />
-                        <div class="help-block with-errors name-error"></div>
-                    </div>
-                    <!--end::Input group-->
-                    <!--begin::Input group-->
-                    <div class="d-flex flex-column mb-8 fv-row">
-                        <!--begin::Label-->
-                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="">Sub Category Title (optional)</span>
-                        </label>
-                        <!--end::Label-->
-                        <input type="text" class="form-control form-control-solid" placeholder="Enter Title"
-                            name="title" />
-                        <div class="help-block with-errors title-error"></div>
-                    </div>
-                    <!--end::Input group-->
-                    <!--begin::Input group-->
-                    <div class="d-flex flex-column mb-8 fv-row">
-                        <!--begin::Label-->
-                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                            <span class="">Post/Position (optional)</span>
-                        </label>
-                        <!--end::Label-->
-                        <input type="text" class="form-control form-control-solid" placeholder="Enter Job Post/Position"
-                            name="job_position" />
-                        <div class="help-block with-errors job_position-error"></div>
+                    <div class="row g-9 mb-8">
+                        <!--begin::Col-->
+                        <div class="col-md-6 fv-row">
+                            <!--begin::Input group-->
+                            <div class="d-flex flex-column fv-row">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span class="required">Sub Category Name</span>
+                                </label>
+                                <!--end::Label-->
+                                <input type="text" class="form-control form-control-solid" placeholder="Enter Sub Category Name"
+                                    name="name" />
+                                <div class="help-block with-errors name-error"></div>
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+                        <div class="col-md-6 fv-row">
+                            <label class="required fs-6 fw-bold mb-2">Select Institute</label>
+                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                name="institute" id="institute">
+                                <option value="">Select institute</option>
+                                @foreach ($institutes as $institute)
+                                    <option value="{{ $institute->id }}">{{ $institute->name }}</option>
+                                @endforeach
+
+                            </select>
+                            <div class="help-block with-errors isntitute-error"></div>
+                        </div>
+                        <!--end::Col-->
                     </div>
                     <!--end::Input group-->
 
                     <!--begin::Input group-->
                     <div class="row g-9 mb-8">
+                        <!--begin::Col-->
+                        <div class="col-md-6 fv-row">
+                            <!--begin::Input group-->
+                            <div class="d-flex flex-column  fv-row">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span class="">Sub Category Title (optional)</span>
+                                </label>
+                                <!--end::Label-->
+                                <input type="text" class="form-control form-control-solid" placeholder="Enter Title"
+                                    name="title" />
+                                <div class="help-block with-errors title-error"></div>
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+                        <!--begin::Col-->
+                        <div class="col-md-6 fv-row">
+                            <!--begin::Input group-->
+                            <div class="d-flex flex-column  fv-row">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <span class="">Post/Position (optional)</span>
+                                </label>
+                                <!--end::Label-->
+                                <input type="text" class="form-control form-control-solid" placeholder="Enter Job Post/Position"
+                                    name="job_position" />
+                                <div class="help-block with-errors job_position-error"></div>
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+                    </div>
+
+                    <!--begin::Input group-->
+                    <div class="row g-9 mb-8">
                          <!--begin::Col-->
-                        <div class="col-md-4 fv-row">
+                        <div class="col-md-3 fv-row">
                             <label class="required fs-6 fw-bold mb-2">Exam Type</label>
                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true" name="type">
                                 <option value="">Select Type</option>
@@ -382,7 +412,7 @@
                         </div>
                         <!--end::Col-->
                         <!--begin::Col-->
-                        <div class="col-md-4 fv-row">
+                        <div class="col-md-3 fv-row">
                             <label class=" fs-6 fw-bold mb-2">Subject Code 1</label>
                             <input type="text" class="form-control form-control-solid" placeholder="Subject code 1"
                             name="code_1" />
@@ -390,34 +420,33 @@
                         </div>
                         <!--end::Col-->
                         <!--begin::Col-->
-                        <div class="col-md-4 fv-row">
+                        <div class="col-md-3 fv-row">
                             <label class=" fs-6 fw-bold mb-2">Subject Code 2</label>
                             <input type="text" class="form-control form-control-solid" placeholder="Subject code 2"
                             name="code_2" />
                             <div class="help-block with-errors code_2-error"></div>
                         </div>
                         <!--end::Col-->
-                    </div>
-                    <!--end::Input group-->
-                    <!--begin::Input group-->
-                    <div class="row g-9 mb-8">
-                        <!--begin::Col-->
-                        <div class="col-md-4 fv-row">
+                         <!--begin::Col-->
+                        <div class="col-md-3 fv-row">
                             <label class="required fs-5 fw-bold mb-2">Total Mark</label>
                             <input type="text" class="form-control form-control-solid" placeholder="Total mark"
                             name="mark" />
                             <div class="help-block with-errors mark-error"></div>
                         </div>
                         <!--end::Col-->
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="row g-9 ">
                         <!--begin::Col-->
-                        <div class="col-md-4 fv-row">
+                        <div class="col-md-3 fv-row">
                             <label class=" fs-6 fw-bold mb-2">Duration</label>
                             <!--begin::Input group-->
                                 <div class="input-group mb-5">
                                     <input type="text" class="form-control" 
                                     placeholder="30" name="duration"/>
                                     <span class="input-group-text">min</span>
-                                    
                                 </div>
                             <!--end::Input group-->
                             
@@ -425,19 +454,30 @@
                         </div>
                         <!--end::Col-->
                         <!--begin::Col-->
-                        <div class="col-md-4 fv-row">
-                            <label class=" fs-6 fw-bold mb-2">Date</label>
+                        <div class="col-md-3 fv-row">
+                            <label class=" fs-6 fw-bold mb-2">Exam Date</label>
                             <input type="date" class="form-control form-control-solid" placeholder="Exam date"
                             name="exam_date" />
                             <div class="help-block with-errors exam_date-error"></div>
                         </div>
                         <!--end::Col-->
-                    </div>
-                    <!--end::Input group-->
-                    <!--begin::Input group-->
-                    <div class="row g-9 mb-8">
+                        
                         <!--begin::Col-->
-                        <div class="col-md-6 fv-row">
+                        <div class="col-md-3 fv-row">
+                            <label class=" fs-6 fw-bold mb-2">Year (optional)</label>
+                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                name="year" id="year">
+                                <option value="">Select year</option>
+                                @foreach ($years as $year)
+                                    <option value="{{ $year->id }}">{{ $year->year }}</option>
+                                @endforeach
+
+                            </select>
+                            <div class="help-block with-errors year-error"></div>
+                        </div>
+                        <!--end::Col-->
+                        <!--begin::Col-->
+                        <div class="col-md-3 fv-row">
                             <label class="required fs-6 fw-bold mb-2">Status</label>
                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                 data-placeholder="Select status" name="status">
@@ -448,27 +488,13 @@
                             <div class="help-block with-errors status-error"></div>
                         </div>
                         <!--end::Col-->
-                        <!--begin::Col-->
-                        <div class="col-md-6 fv-row">
-                            <label class=" fs-6 fw-bold mb-2">Year (optional)</label>
-                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                name="year" id="year">
-                                <option value="">Select exam year</option>
-                                @foreach ($years as $year)
-                                    <option value="{{ $year->id }}">{{ $year->year }}</option>
-                                @endforeach
-
-                            </select>
-                            <div class="help-block with-errors year-error"></div>
-                        </div>
-                        <!--end::Col-->
                     </div>
                     <!--end::Input group-->
-
+                   
                     <!--begin::Actions-->
                     <div class="text-center">
                         <button type="reset" id="kk_modal_new_sub_category_cancel" class="btn btn-light me-3">Cancel</button>
-                        <button type="submit" id="kk_modal_new_sub_category_submit" class="btn btn-primary">
+                        <button type="submit" id="kk_modal_new_sub_category_submit" class="btn btn-primary py-3 px-10">
                             <span class="indicator-label">Submit</span>
                             <span class="indicator-progress">Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>

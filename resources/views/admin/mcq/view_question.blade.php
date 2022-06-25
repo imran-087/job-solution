@@ -262,6 +262,84 @@
         }))
     })
 
+    //######## TAG ADD ##########
+    //search tag
+    $(document).ready(function() {
+        var timeout = null;
+        $(document).on('keyup', '.search_tag', function() {
+            var question_id = $(this).data('question_id');
+            var subject_id = $(this).data('subject_id');
+            
+            var this_input = $(this);
+            //console.log(id)
+
+            clearTimeout(timeout);
+            timeout = setTimeout(() => {
+                var val = $(this).val();
+                    if (val == "") {
+                    $('.result').html('');
+                }
+            //If val is not empty.
+            else {
+                //AJAX is called.
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('admin/question/tag/search')}}",
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    data: {
+                        //Assigning value of "val" into "search" variable.
+                        search: val,
+                        question_id : question_id,
+                        subject_id : subject_id,
+                    },
+                    //If result found, this funtion will be called.
+                    success: function(data) {
+                        //console.log(data)
+                        this_input.closest('div').find('.result').html(data);
+                        //this_input.closest('#result').hide()
+                        //$('#result').html(data);
+
+                    }
+                });
+            }
+            }, 700);
+
+        });
+    })
+
+    //add tag
+    $(document).ready(function(){
+        $(document).on('click', '.add', function(){
+            var sid = $(this).data('sid')
+            var qid = $(this).data('qid')
+
+            //AJAX is called.
+                $.ajax({
+                    type: "POST",
+                    url: "{{ url('admin/question/tag/tag-added')}}",
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    data: {
+                        //Assigning value of "val" into "search" variable.
+                        subject_id: sid,
+                        question_id : qid,
+                    },
+                    //If result found, this funtion will be called.
+                    success: function(data) {
+                        if(data.success){
+                            toastr.success(data.message);
+                            $('.result').html('');
+                            $('.search_tag').val('');
+                            // $('#dataTable').DataTable().ajax.reload();
+                        }
+                        else{
+                            toastr.error(data.message);
+                        }
+                        
+                    }
+                });
+        })
+    })
+
 </script>
 @endpush
 

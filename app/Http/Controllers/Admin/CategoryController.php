@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use App\Models\MainCategory;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Institute;
 use Illuminate\Support\Facades\Auth;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
@@ -90,7 +91,8 @@ class CategoryController extends Controller
         //get all min category
         $main_categories = MainCategory::where('status', 'active')->select('id', 'name')->get();
         $years = Year::select('id', 'year')->get();
-        return view('admin.category.category', compact('main_categories', 'years'));
+        $institutes = Institute::select('id', 'name')->get();
+        return view('admin.category.category', compact('main_categories', 'years', 'institutes'));
     }
 
     //create or update category

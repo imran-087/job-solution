@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Year;
 use App\Models\Subject;
 use App\Models\Category;
+use App\Models\Institute;
 use App\Models\SubCategory;
 use Illuminate\Support\Str;
 use App\Models\MainCategory;
@@ -64,14 +65,14 @@ class SubCategoryController extends Controller
                 })
                 ->addColumn('action', function ($row) {
                     $btn = '<div class="d-flex justify-content-start flex-shrink-0">
-                        <a href="/admin/question/create?sub_category=' . $row->id . '" target="_blank" class="btn btn-bg-light btn-active-color-primary btn-sm me-1">
+                        <a href="/admin/question/create?sub_category=' . $row->id . '&main_category=' . $row->category->main_category_id . '" target="_blank" class="btn btn-bg-light btn-active-color-primary btn-sm me-1">
                             Add MCQ Ques.
                         </a>
-                        <a href="/admin/question/written-question?sub_category=' . $row->id . '" target="_blank" class="btn btn-bg-light btn-active-color-primary btn-sm me-1">
+                        <a href="/admin/question/written-question?sub_category=' . $row->id . '&main_category=' . $row->category->main_category_id . '" target="_blank" class="btn btn-bg-light btn-active-color-primary btn-sm me-1">
                             Add Written Ques.
                         </a>
                         
-                        <a href="javascript:;"  data-main_category="' . $row->category->main_category->id . '" data-id="' . $row->id . '" data-name="' . $row->name . '" class="btn btn-light btn-active-color-primary btn-sm addSubject me-1" title="Add Subject">
+                        <a href="javascript:;"  data-main_category="' . $row->category->main_category_id . '" data-id="' . $row->id . '" data-name="' . $row->name . '" class="btn btn-light btn-active-color-primary btn-sm addSubject me-1" title="Add Subject">
                             <i class="fas fa-plus">&nbsp;Subject</i>
                         </a>
 
@@ -105,9 +106,10 @@ class SubCategoryController extends Controller
         }
 
         //get all main category
-        $main_categories = MainCategory::where('status', 'active')->get();
-        $years = Year::all();
-        return view('admin.category.sub_category', compact('main_categories', 'years'));
+        $main_categories = MainCategory::where('status', 'active')->select('id', 'name')->get();
+        $years = Year::select('id', 'year')->get();
+        $institutes = Institute::select('id', 'name')->get();
+        return view('admin.category.sub_category', compact('main_categories', 'years', 'institutes'));
     }
 
     //create or update main category
@@ -146,6 +148,7 @@ class SubCategoryController extends Controller
                 $sub_category->title = $request->title;
                 $sub_category->status =  $request->status;
                 $sub_category->category_id =  $request->category;
+                $sub_category->institute_id =  $request->institute;
                 $sub_category->question_type =  $request->type;
                 $sub_category->subject_code_1 =  $request->code_1;
                 $sub_category->subject_code_2 =  $request->code_2;
@@ -184,6 +187,7 @@ class SubCategoryController extends Controller
                 $sub_category->name = $request->name;
                 $sub_category->title = $request->title;
                 $sub_category->category_id =  $request->category;
+                $sub_category->institute_id =  $request->institute;
                 $sub_category->year_id =  $year;
                 $sub_category->question_type =  $request->type;
                 $sub_category->subject_code_1 =  $request->code_1;

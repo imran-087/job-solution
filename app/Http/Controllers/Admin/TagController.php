@@ -90,7 +90,7 @@ class TagController extends Controller
 
                 foreach ($data as $row) {
                     $output .=
-                        '<div class="d-flex align-items-center mb-2"
+                        '<div class="d-flex align-items-center mb-2 "
                             style="margin-top:10px; background-color:#F5F8FA; border-radius:5px !important; padding:10px;">
                             <!--begin::Title-->
                             <div class="d-flex flex-column">
@@ -127,7 +127,7 @@ class TagController extends Controller
             //     array('created_user_id' => Auth::guard('admin')->id(), 'status' => 1)
             // );
 
-            $sync = $question->subjects()->sync([$subject->id => ['created_user_id' => Auth::user()->id]]);
+            $sync = $question->subjects()->sync([$subject->id => ['subject_id' => $subject->id, 'created_user_id' => Auth::user()->id, 'status' => 1]], false);
 
             if ($sync) {
                 return response()->json([

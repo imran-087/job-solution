@@ -268,15 +268,17 @@
 
     //get tag
     $(document).on('keyup', '.get-tag', function() {
+        var timeout = null;
         var question_id = $(this).data('question_id');
         var this_input = $(this);
 
         //request send after .5s delay
-        setTimeout(() => {
+        clearTimeout(timeout);
+        timeout = setTimeout(() => {
             var val = $(this).val();
 
             if (val == "") {
-                $('.result').html('');
+                $('.tag').html('');
             }
             //If val is not empty.
             else {
@@ -293,7 +295,6 @@
                     //If result found, this funtion will be called.
                     success: function(data) {
                         //console.log(data)
-                        this_input.hide();
                         this_input.closest('div').find('.tag').html(data);
 
                     }
@@ -304,13 +305,13 @@
     });
 
     //add tag
-    $(document).on('change', '.add-tag', function(){
-        var sid = $(this).find(':selected').data('sid');
-        var qid = $(this).find(':selected').data('qid');
+    $(document).on('click', '.add-tag', function(){
+        var sid = $(this).data('sid');
+        var qid = $(this).data('qid');
 
         // console.log(sid)
         // console.log(qid)
-        var this_input = $(this)
+        var this_input = $(this);
 
         //AJAX is called.
         $.ajax({
@@ -326,8 +327,9 @@
             success: function(data) {
                 if(data.success){
                     toastr.success(data.message);
-                    this_input.hide();
-                    $('.get-tag').show();
+                    $('.tag').html('');
+                    $('.get-tag').val(''); 
+                                                                       
                 }
                 else{
                     toastr.error(data.message)

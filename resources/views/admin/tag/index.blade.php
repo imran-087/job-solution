@@ -227,7 +227,7 @@
 
         //search tag
         $(document).ready(function() {
-            var timeout = null
+            var timeout = null;
             $(document).on('keyup', '.search_tag', function() {
                 var question_id = $(this).data('question_id')
                 var subject_id = $(this).data('subject_id')

@@ -125,12 +125,12 @@ class QuestionController extends Controller
 
         if ($request->has('sub_category')) {
             $sub_category = SubCategory::where('id', $request->sub_category)->first();
-
+            $main_category = $request->main_category;
             $subjects = Subject::with('sub_category', 'main_category')
                 ->where(['sub_category_id' => $request->sub_category, 'status' => 'active'])
                 ->get();
             if ($subjects->count() > 0) {
-                return view('admin.question.create_2', compact('sub_category', 'subjects', 'total_input_by_auth_user'));
+                return view('admin.question.create_2', compact('sub_category', 'subjects', 'main_category', 'total_input_by_auth_user'));
             } else {
                 if ($sub_category->category->main_category->id == 1) {
                     $subjects = Subject::with('main_category')
@@ -139,11 +139,11 @@ class QuestionController extends Controller
                     //dd($subject);
                     return view(
                         'admin.question.create_2',
-                        compact('sub_category', 'subjects',  'total_input_by_auth_user')
+                        compact('sub_category', 'subjects',  'total_input_by_auth_user', 'main_category')
                     );
                 } else {
                     $subjects = '';
-                    return view('admin.question.create_2', compact('sub_category', 'subjects', 'total_input_by_auth_user'));
+                    return view('admin.question.create_2', compact('sub_category', 'subjects', 'total_input_by_auth_user', 'main_category'));
                 }
             }
         } else {
@@ -214,7 +214,7 @@ class QuestionController extends Controller
     //Question store
     public function store(Request $request)
     {
-        //dd($request->all());
+        // dd($request->all());
 
         //validation
         // $validator = Validator::make($request->all(), [

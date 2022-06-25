@@ -16,7 +16,7 @@ class CreateDescriptionsTable extends Migration
         Schema::create('descriptions', function (Blueprint $table) {
             $table->id();
             $table->morphs('descriptionable');
-            $table->longText('descrption');
+            $table->longText('description');
             $table->integer('best_description')->nullable();
             $table->unsignedBigInteger('vote')->default(0);
             $table->integer('created_user_id');

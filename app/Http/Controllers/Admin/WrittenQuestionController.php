@@ -28,12 +28,12 @@ class WrittenQuestionController extends Controller
 
         if ($request->has('sub_category')) {
             $sub_category = SubCategory::where('id', $request->sub_category)->first();
-
+            $main_category = $request->main_category;
             $subjects = Subject::with('sub_category', 'main_category')
                 ->where(['sub_category_id' => $request->sub_category, 'status' => 'active'])
                 ->get();
             if ($subjects->count() > 0) {
-                return view('admin.written_ques.create', compact('sub_category', 'subjects', 'total_input_by_auth_user', 'years'));
+                return view('admin.written_ques.create', compact('sub_category', 'main_category', 'subjects', 'total_input_by_auth_user', 'years'));
             } else {
                 if ($sub_category->category->main_category->id == 1) {
                     $subjects = Subject::with('main_category')
@@ -42,18 +42,17 @@ class WrittenQuestionController extends Controller
                     //dd($subject);
                     return view(
                         'admin.written_ques.create',
-                        compact('sub_category', 'subjects',  'total_input_by_auth_user' , 'years')
+                        compact('sub_category', 'subjects',  'total_input_by_auth_user', 'main_category', 'years')
                     );
                 } else {
                     $subjects = '';
-                    return view('admin.written_ques.create', compact('sub_category', 'subjects', 'total_input_by_auth_user' , 'years'));
+                    return view('admin.written_ques.create', compact('sub_category', 'main_category', 'subjects', 'total_input_by_auth_user', 'years'));
                 }
             }
         } else {
             $main_categories = MainCategory::select('id', 'name')->get();
             return view('admin.written_ques.index', compact('main_categories', 'years'));
         }
-
     }
 
 
