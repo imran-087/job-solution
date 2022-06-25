@@ -234,12 +234,13 @@
              
                 var this_input = $(this)
                 //console.log(id)
+
                 clearTimeout(timeout);
                 timeout = setTimeout(() => {
                     var val = $(this).val();
-                    if (val == "") {
-                     $('.result').html('');
-                }
+                        if (val == "") {
+                        $('.result').html('');
+                    }
                 //If val is not empty.
                 else {
                     //AJAX is called.

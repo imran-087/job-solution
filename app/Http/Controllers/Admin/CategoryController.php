@@ -96,7 +96,7 @@ class CategoryController extends Controller
     //create or update category
     public function store(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
         $validator = Validator::make($request->all(), [
             'name' => ['required'],
             'status' => ['required'],

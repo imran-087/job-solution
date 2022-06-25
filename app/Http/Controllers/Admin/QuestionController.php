@@ -318,7 +318,7 @@ class QuestionController extends Controller
                 $question->sub_category_id = $request->sub_category;
                 $question->main_category_id = $request->main_category;
                 $question->year_id = $year;
-                $question->passage_id = $passage->id ?? null;
+                $question->passage_id = $passage->id ?? '0';
                 $question->question_type = $request->type;
                 $question->hard_level = 1;
                 $question->mark = 1;
@@ -340,7 +340,7 @@ class QuestionController extends Controller
                     $question_option->option_4 = $request->option_4[$key] ?? null;
                     $question_option->option_5 = $request->option_5[$key] ?? null;
 
-                    $question_option->answer = $request->answer[$key];
+                    $question_option->answer = $request->answer[$key] ?? 0;
 
                     if (isset($chunk_image)) {
                         $question_option->image_option =  $chunk_image[$key];

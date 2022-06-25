@@ -267,27 +267,39 @@
 
 
     //get tag
-    $(document).on('click', '.get-tag', function() {
-        var question_id = $(this).data('question_id')
+    $(document).on('keyup', '.get-tag', function() {
+        var question_id = $(this).data('question_id');
+        var this_input = $(this);
 
-        var this_input = $(this)
+        //request send after .5s delay
+        setTimeout(() => {
+            var val = $(this).val();
 
-        $.ajax({
-            type: "GET",
-            url: "{{ url('admin/samprotik-tag/get-tag')}}",
-            headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
-            data: {
-                //Assigning value of "val" into "search" variable.
-                question_id : question_id,
-            },
-            //If result found, this funtion will be called.
-            success: function(data) {
-                //console.log(data)
-                this_input.hide();
-                this_input.closest('div').find('.tag').html(data);
-
+            if (val == "") {
+                $('.result').html('');
             }
-        });
+            //If val is not empty.
+            else {
+
+                $.ajax({
+                    type: "GET",
+                    url: "{{ url('admin/samprotik-tag/get-tag')}}",
+                    headers: {'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')},
+                    data: {
+                        //Assigning value of "val" into "search" variable.
+                        question_id : question_id,
+                        data : val
+                    },
+                    //If result found, this funtion will be called.
+                    success: function(data) {
+                        //console.log(data)
+                        this_input.hide();
+                        this_input.closest('div').find('.tag').html(data);
+
+                    }
+                });
+            }
+        }, 500);
 
     });
 

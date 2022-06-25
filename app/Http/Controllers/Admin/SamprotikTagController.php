@@ -58,7 +58,7 @@ class SamprotikTagController extends Controller
         return view('admin.samprotik_tag.index');
     }
 
-    //create or update main category
+    //create or update 
     public function store(Request $request)
     {
         //dd($request->all());
@@ -181,35 +181,15 @@ class SamprotikTagController extends Controller
 
         if ($request->ajax()) {
             //dd($request->all());
-            $sanmprotik_tag = SamprotikTag::select('id', 'name')->get();
-            //dd($subjects);
+            $data = Subject::where(['main_category_id' => 1, 'sub_category_id' => 0])
+                ->where('name', 'like', '%' . $request->data . '%')
+                ->select('id', 'name')->get();
+            dd($data);
         }
 
         $output = '';
 
-        if (count($sanmprotik_tag) > 0) {
 
-            $output = '<select class="form-select form-select-solid add-tag ms-2" data-control="select2" data-hide-search="true">
-                            <option>Select...</option>
-                            ';
-            // <option value="subject=' . $row->id . ' question=' . $request->question_id . '" class="fs-6 text-gray-800 text-hover-primary fw-bold">' . $row->name . '</option>
-
-            foreach ($sanmprotik_tag as $row) {
-                $output .=
-                    '<div class="d-flex flex-column">
-                            <option data-sid="' . $row->id . '" data-qid="' . $request->question_id . '" class="fs-6 text-gray-800 text-hover-primary fw-bold ">' . $row->name . '</option>
-                        </div>';
-                //$output .= '<a href="discussion/' . $row->id . '/show"><li class="list-group-item" style=" border-radious:10px">' . $row->title . '</li></a>';
-            }
-
-            $output .= '</select>';
-        } else {
-
-            $output .= ' <p  class="fs-6 text-800  fw-bold"
-                style="color:red; margin-top:10px; background-color:#F5F8FA; padding:10px; border-radius:5px;"> '
-                . 'No Result' .
-                '</p>';
-        }
 
         return $output;
     }

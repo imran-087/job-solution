@@ -109,7 +109,7 @@
             </div>
             <div class="row">
                 <div class="d-flex justify-content-end">
-                    <input type="text"  data-question_id="' . $row->id . '" class="form-control form-control-solid w-150px  search_tag"  placeholder="Type to search tag">
+                    <input type="text"  data-question_id="{{ $question->id }}" class="form-control form-control-solid w-150px  get-tag"  placeholder="Type to search tag">
                     {{-- <span data-question_id=" {{ $question->id }}" class="btn btn-sm btn-light btn-active-color-primary get-tag cursor-pointer" title="Click" >Add Tag</span> --}}
                     <div class="tag" style="z-index:999"></div>
                 </div>
