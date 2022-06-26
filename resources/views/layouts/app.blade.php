@@ -239,6 +239,7 @@
 		<!--end::Scrolltop-->
 
 		<!--begin::Javascript-->
+
 		
 		@include('includes.footer_link')
 		<!--end::Javascript-->

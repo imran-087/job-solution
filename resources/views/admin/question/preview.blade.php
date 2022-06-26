@@ -169,7 +169,7 @@
                                     </label>
                                     <input type="hidden" name="type" value="{{ $myForm['type'] }}">
                                     <!--end::Label-->
-                                    <input type="text" class="form-control form-control-solid mb-2 @error('title') is-invalid @enderror" placeholder="Enter passage title" name="title" value="{{ $myForm['title'] }}"/>
+                                    <input type="text" class="form-control form-control-solid mb-2 @error('title') is-invalid @enderror" placeholder="Enter passage title" name="title" value="{{ $myForm['title'] ?? '' }}"/>
 
                                     <textarea type="text" id="kt_docs_ckeditor_classic" class="form-control form-control-solid h-100px @error('passage') is-invalid @enderror" placeholder="Enter passage" name="passage" >{{ $myForm['passage'] }}</textarea>
 
@@ -235,7 +235,7 @@
                                                 >
 
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter option"
-                                                name="option_1[]"  value="{{ $myForm['option_1'][$i] }}"/>
+                                                name="option_1[]"  value="{{ $myForm['option_1'][$i] ?? '' }}"/>
                                             </div>
                                             {{-- @if($myForm['type'] == 'image')
                                             <input type="file" class="form-control-file mt-2" id="exampleInputFile" name="image[]" multiple>
@@ -249,7 +249,7 @@
                                                 @endif
                                                 >
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter option"
-                                                name="option_2[]"  value="{{ $myForm['option_2'][$i] }}"/>
+                                                name="option_2[]"  value="{{ $myForm['option_2'][$i] ?? '' }}"/>
                                             </div>
                                         </div>
                                         <div class="col-md-12 fv-row">
@@ -260,7 +260,7 @@
                                                 @endif
                                                 >
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter option"
-                                                name="option_3[]"  value="{{ $myForm['option_3'][$i] }}"/>
+                                                name="option_3[]"  value="{{ $myForm['option_3'][$i] ?? '' }}"/>
                                             </div>
                                         </div>
                                         @if(isset($myForm['option_4']))
@@ -272,7 +272,7 @@
                                                 @endif
                                                 >
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter option"
-                                                name="option_4[]"  value="{{ $myForm['option_4'][$i] }}"/>
+                                                name="option_4[]"  value="{{ $myForm['option_4'][$i] ?? '' }}"/>
                                             </div>
                                         </div>
                                         @endif
@@ -285,7 +285,7 @@
                                                 @endif
                                                 >
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter option"
-                                                name="option_5[]"  value="{{ $myForm['option_5'][$i] }}"/>
+                                                name="option_5[]"  value="{{ $myForm['option_5'][$i] ?? '' }}"/>
                                             </div>
                                         </div>
                                         @endif
@@ -296,10 +296,12 @@
                     </div>
                     @endfor
                     <!--begin::Actions-->
+                    <div class="alert alert-danger mt-5 fs-5 text-capitalize text-center fw-bolder" role="alert">
+                        You are not answered all the Question. Please, fill the answer field first & click confirm.
+                    </div>
 
                     <div class="text-center d-flex justify-content-end py-4 px-4" >
-                        <span class="btn btn-sm btn-warning me-2 check-btn text-center">Check Before Confirm</span>
-                        <button type="submit" class="btn btn-primary" id="kk_modal_new_service_submit" style="padding: 10px 60px">
+                        <button type="submit" class="btn btn-primary fs-5" id="kk_modal_new_service_submit" style="padding: 10px 60px">
                             <span class="indicator-label">Confirm</span>
                         </button>
                     </div>
@@ -320,26 +322,20 @@
             var total_question = $('input[name=total_question]').val();
 
             if(total_question == question_answer_length){
-                $('#kk_modal_new_service_submit').attr('disabled' , false);
+                $(".alert-danger").hide();
             }else{
                 $('#kk_modal_new_service_submit').attr('disabled' , true);
             }
 
 
-            $('.check-btn').on('click', function(){
+            $("input[type=radio]").on("change", function () {
                 var question_answer_length = ( $('input:radio:checked').length );
                 var total_question = $('input[name=total_question]').val();
 
                 if(total_question != question_answer_length){
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: 'You are not answered all the Question',
-                        footer: '<span disabled>Pls answer all the Question........</span>'
-                    })
                     $('#kk_modal_new_service_submit').attr('disabled' , true);
                 }else{
-                    toastr.success('All ok.. Now Please confirm..')
+                    $('.alert-danger').hide();
                     $('#kk_modal_new_service_submit').attr('disabled' , false);
                 }
 

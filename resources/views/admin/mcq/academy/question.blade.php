@@ -32,7 +32,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Samprotik Question</li>
+                    <li class="breadcrumb-item text-muted">Academy Question</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -40,7 +40,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Create</li>
+                    <li class="breadcrumb-item text-muted">All</li>
                     <!--end::Item-->
 
                 </ul>
@@ -63,10 +63,11 @@
     <div class="post d-flex flex-column-fluid col-12"  id="kt_post">
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
-            
+            @php $serial_number = 1 ; @endphp
             <div class="card card-bordered mb-5 py-5 px-5">
+                    <h4 class="card-title text-gray-700 fw-bolder text-center py-1 "> {{ $subject->sub_category->name }} </h4>
                     <h3 class="card-title text-gray-700 fw-bolder text-center py-3 " >
-                            <span >বিষয় ঃ {{ $subject->name }} </span>
+                            <span>বিষয় ঃ {{ $subject->name }} </span>
                     </h3>
                     <hr>
                 @if($questions->count() > 0)
@@ -76,7 +77,7 @@
                             <div class="card card-bordered mb-5">
                                 <div class="card-header">
                                     <h3 class="card-title text-gray-700 fw-bolder cursor-pointer mb-0 view" data-id="{{ $question->id }}" style="max-width: 1100px !important; color:#0095E8 !important">
-                                            <span > {{ $question->id }}. {{$question->question}} </span>
+                                            <span > {{ $serial_number }}. {{$question->question}} </span>
                                     </h3>
                                     <div class="card-toolbar">
                                         <!--begin::Menu-->
@@ -210,7 +211,7 @@
                                 </div>
                             </div>
                         </div>
-                        
+                        @php $serial_number++ ; @endphp
                     @endforeach
                     </div>
                
@@ -243,7 +244,7 @@
                                             <div class="card card-bordered mb-5">
                                                 <div class="card-header">
                                                     <h3 class="card-title text-gray-700 fw-bolder cursor-pointer mb-0 view" data-id="{{ $question->id }}" style="max-width: 1100px !important; color:#0095E8 !important">
-                                                            <span > {{ $question->id }}. {{$question->question}} </span>
+                                                            <span > {{ $serial_number }}. {{$question->question}} </span>
                                                     </h3>
                                                     <div class="card-toolbar">
                                                         <!--begin::Menu-->
@@ -298,7 +299,7 @@
                                                 </div>
                                             </div>
                                         </div>
-                                        
+                                        @php $serial_number++ ; @endphp
                                         @endforeach
                                         </div>
                                     </div>

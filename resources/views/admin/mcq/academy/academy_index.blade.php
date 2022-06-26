@@ -31,7 +31,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Samprotik Question</li>
+                    <li class="breadcrumb-item text-muted">Academy Question</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -39,7 +39,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Create</li>
+                    <li class="breadcrumb-item text-muted">List</li>
                     <!--end::Item-->
 
                 </ul>
@@ -77,8 +77,7 @@
                            
                             <label class="required fs-6 fw-bold mb-2">Select </label>
                             <select class="form-select form-select-solid category" data-control="select2" data-hide-search="true"
-                                data-placeholder="Select"  name="category" >
-                                <option value="null">Initial ---</option>
+                                name="category" >
                                 @foreach ($data as $category)
                                     <option value="{{ $category->id }}">{{ $category->name }}</option>
                                 @endforeach
@@ -128,7 +127,15 @@
 
 <script>
 $(document).ready(function(){
-    // Get Category 
+
+    //send a request on page load
+    $(document).ready(function() {
+        $(".category").trigger('change');
+    });
+
+    
+
+    // Get sub Category 
     $('.category').on('change', function () {
         var id = $(this).val();
         if (id) {
@@ -146,6 +153,11 @@ $(document).ready(function(){
         }
     });
 
+    //send a request on page load
+    $(document).ready(function() {
+        $(document).find('.getsubject').first().trigger('click');
+    });
+    
     //render subject
     $(document).on('click', '.getsubject', function(){
         var id = $(this).data('id');

@@ -13,7 +13,7 @@
     
     <!--begin::Text-->
     <div class="fw-bolder timeline-content cursor-pointer ps-3 border p-3 rounded getsubject" data-id="{{ $category->id }}" >
-        {{$category->name}}  
+        <span>{{$category->name}}</span>  
     </div>
     <!--end::Text-->
 </div>

@@ -1,10 +1,9 @@
-@php $serial_number = 1 ; @endphp
 @foreach($questions as $key => $question)
 <div class="col-md-6">
     <div class="card card-bordered mb-5">
         <div class="card-header">
             <h3 class="card-title text-gray-700 fw-bolder cursor-pointer mb-0 view" data-id="{{ $question->id }}" style="max-width: 1100px !important; color:#0095E8 !important">
-                    <span > {{ $serial_number }}. {{$question->question}} </span>
+                    <span > {{ $question->id }}. {{$question->question}} </span>
             </h3>
             <div class="card-toolbar">
                 <!--begin::Menu-->
@@ -78,21 +77,42 @@
 
             <div class="row">
                 @foreach($question->descriptions as $description)
-                    <span class="fw-bolder fs-6">Description:</span><p class="text-gray-800 fw-bold  ml-4 cursor-pointer update-des fs-6" data-description_id={{ $description->id }} style="text-align: justify">{{ $description->description }}</p>
+                    <p class="text-gray-800 fw-bold mt-2 ml-4 cursor-pointer update-des " style="text-align: justify"><b>Description:</b> {{ $description->description }}</p>
+                    <div class="d-flex flex-column mt-2 fv-row update-form d-none">
+                        <form id="kk_update_description_form" class="form">
+                            <div class="messages"></div>
+                            {{-- csrf token  --}}
+                            @csrf
+                            <input type="hidden" name="description_id" value="{{ $description->id }}">
+                            <div class="col-md-12 mb-5">
+                                <textarea name="description" class="form-control form-control-solid h-150px">{{ $description->description }}</textarea>
+                            </div>
+                            <div class="d-flex justify-content-end">
+
+                                <button type="submit" id="kk_modal_new_service_update" class="btn btn-primary btn-sm">update</button>
+                            </div>
+                        </form>
+                        <button type="button " class="btn btn-danger btn-sm me-3 kk_modal_new_update_cancel mb-5" style="width:80px; margin-top:-35px">cancel</button>
+                    </div>
                 @endforeach
 
-                <!-- start: update description -->
-                <div class="d-flex flex-column mt-2 fv-row update-form">
-                    
-                </div>
-                <!-- end: description add -->
+                <span class="add-description cursor-pointer "><i class="fas fa-plus-circle fa-2xl"></i> <b>Description</b> </span>
 
-                <!-- Start: description add -->
-                <span class="add-description cursor-pointer" data-question_id="{{ $question->id }}"><i class="fas fa-plus-circle fa-2xl"></i> <b>Description</b> </span>
-                <div class="d-flex flex-column mt-2 fv-row add-des-form">
-                    
+                <div class="d-flex flex-column mt-2 fv-row des-form d-none">
+                    <form id="kk_add_description_form" class="form">
+                        <div class="messages"></div>
+                        {{-- csrf token  --}}
+                        @csrf
+                        <input type="hidden" name="question" value="{{ $question->id }}">
+                        <div class="col-md-12 mb-5">
+                            <textarea name="description" class="form-control form-control-solid h-100px"></textarea>
+                        </div>
+                        <div class="d-flex justify-content-end">
+                            <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary btn-sm">add</button>
+                        </div>
+                    </form>
+                    <button type="button " class="btn btn-danger btn-sm me-3 kk_modal_new_add_cancel mb-5" style="width:80px; margin-top:-35px">cancel</button>
                 </div>
-                <!-- end: description add -->
             </div>
             <div class="row mt-5">
                 <input type="text"  data-question_id="{{ $question->id }}" class="form-control form-control-solid w-180px  get-tag"  placeholder="Type to search tag">
@@ -104,7 +124,6 @@
 
     </div>
 </div>
-@php $serial_number++ ; @endphp
 @endforeach
 <div>
     {{ $questions->links() }}

@@ -188,47 +188,37 @@ class ExamDetailsController extends Controller
         //dd($request->all());
         $exam = Exam::find($request->exam_id);
         $exam_detail = ExamDetail::where(['exam_id' => $request->exam_id, 'subject_id' => $request->subject])->first();
-        if ($request->question_number == $exam_detail->number_of_question) {
-            //dd('here');
-            $questions = Question::where(['subject_id' => $request->subject, 'sub_category_id' => $exam->sub_category_id])
-                ->inRandomOrder()
-                ->limit($request->question_number)
-                ->select('id as question_id', 'passage_id')
-                ->get();
 
-            foreach ($questions as $question) {
-                $question['passage_id'] = $question->passage_id;
-                $dataSet[] =   $question;
-            }
+        //dd('here');
+        $questions = Question::where(['subject_id' => $request->subject, 'sub_category_id' => $exam->sub_category_id])
+            ->inRandomOrder()
+            ->limit($exam_detail->number_of_question)
+            ->select('id as question_id', 'passage_id')
+            ->get();
 
-            //dd($dataSet);
+        foreach ($questions as $question) {
+            $question['passage_id'] = $question->passage_id;
+            $dataSet[] =   $question;
+        }
 
-            if ($questions->count() == $request->question_number) {
-                //dd('ok');
-                $exam_detail->question_ids = $dataSet;
-                if ($exam_detail->update()) {
-                    return response()->json([
-                        'success' => true,
-                        'message' => 'Random question added to this subject'
-                    ]);
-                }
-            } else {
+        //dd($dataSet);
+
+        if ($questions->count() == $exam_detail->number_of_question) {
+            //dd('ok');
+            $exam_detail->question_ids = $dataSet;
+
+            if ($exam_detail->update()) {
                 return response()->json([
-                    'error' => true,
-                    'message' => 'Too much question'
+                    'success' => true,
+                    'message' => 'Random question added to this subject'
                 ]);
             }
         } else {
             return response()->json([
                 'error' => true,
-                'message' => 'You entered wrong number of question.Pleaase enter ' . $exam_detail->number_of_question
+                'message' => 'Insufficient Question'
             ]);
         }
-
-
-        //dd($dataSet);
-
-
     }
 
     //for select question store

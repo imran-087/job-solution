@@ -22,12 +22,12 @@
                 <!--end::Checkbox-->
                 <!--begin::Description-->
                 <div class="flex-grow-1">
-                    <a href="{{ route('admin.academy-mcq.subject-all',['subject' => $subject->id]) }}" target="_blank" class="text-gray-800 text-hover-primary fw-bolder fs-6">{{ $subject->name }} &nbsp; &nbsp; <span class="text-muted fs-8">{{ $subject->sub_category->name }}</span></a>
-                    <br><br>
-                    
-                    @if($subject->descendants->count() > 0)
-                        @foreach($subject->descendants as $child_subject)
-                            <a href="{{ route('admin.academy-mcq.subject-all',['subject' => $child_subject->id]) }}" target="_blank"><span class="badge badge-light-success fs-8 fw-bolder mb-2 me-2">{{ $child_subject->name }}</span></a>
+                    <a href="{{ route('admin.academy-mcq.subject-all',['subject' => $subject->id, 'sub_category' => $subject->sub_category->id]) }}" target="_blank" class="text-gray-800 text-hover-primary fw-bolder fs-6">{{ $subject->name }} &nbsp; &nbsp; <span class="text-muted fs-8">{{ $subject->sub_category->name }}</span> <span class="badge badge-light-danger fs-6 ms-5">{{ $subject->question_count }}</span></a>
+                    <br>
+    
+                    @if($subject->children->count() > 0)
+                        @foreach($subject->children as $child_subject)
+                            <a href="{{ route('admin.academy-mcq.subject-all',['subject' => $child_subject->id, 'sub_category' => $subject->sub_category->id]) }}" target="_blank"><span class="badge badge-light-success fs-8 fw-bolder mb-2 me-2">{{ $child_subject->name }}</span></a>
                         @endforeach   
                     @endif
                 </div>

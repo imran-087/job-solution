@@ -115,31 +115,57 @@
 <script type="text/javascript">
 
     //show description form
-    $(document).on('dblclick', '.add-description', function(){
-        $(this).closest('div').find('.des-form').toggleClass('d-none');
+    $(document).on('click', '.add-description', function(){
+        $('div.update-form').html('');
+        $('.update-des').show();
+        
+        var question_id = $(this).data('question_id');
+        //console.log(question_id);
+        var html = '';
+
+        html += '<input type="hidden" name="question_id" value="'+ question_id +'"';
+        html += '<span id="kk_add_description_form" class="form">';
+        html +=    '<div class="col-md-12 mb-5">';   
+        html +=          '<textarea name="description" id="textareaDescription" class="form-control form-control-solid h-100px"></textarea>';
+        html +=     '</div>';
+        html +=      '<div class="d-flex justify-content-end">';
+        html +=            '<button type="submit" id="kk_add_description" class="btn btn-primary btn-sm">add</button>';
+        html +=       '</div>';
+        html +=   '</span>';
+        html +=   '<button type="button " class="btn btn-danger btn-sm me-3 kk_modal_new_add_cancel mb-5" style="width:80px; margin-top:-35px">cancel</button>';
+       
+        $(this).closest('div').find('.add-des-form').html(html);
     })
 
     //cancel button of add
     $(document).on('click', '.kk_modal_new_add_cancel', function(){
-        $(this).parent('div.des-form').addClass('d-none');
+        $(this).parent('div.add-des-form').html('');
         
     })
+    
 
     //add description --save
-    $(document).on('submit', '#kk_add_description_form', function(e){
+    $(document).on('click', '#kk_add_description', function(e){
         e.preventDefault()
         //console.log('here')
         $('.with-errors').text('')
-       
+
         var thisaddbtn = $(this);
-        var formData = new FormData(this);
+
+        var question_id = $('input[name=question_id]').val();
+        var description = $('#textareaDescription').val();
+        // console.log(question_id);
+        // console.log(description);
+
         $.ajax({
             type:"POST",
             url: "{{ url('admin/description/question-description/store')}}",
-            data:formData,
-            cache:false,
-            contentType: false,
-            processData: false,
+            data:{
+                "_token": "{{ csrf_token() }}",
+                question : question_id,
+                description : description
+            },
+           dataType: "json",
             success:function(data){
                 if(data.success ==  false || data.success ==  "false"){
                     var arr = Object.keys(data.errors);
@@ -152,7 +178,7 @@
                     $('#kk_modal_new_question_form').find('.messages').html(alertBox).show();
                 }else{
                     toastr.success(data.message);
-                    thisaddbtn.parent().parent("div").find('.des-form').addClass('d-none');
+                    thisaddbtn.parent().parent("div").find('.add-des-form').html('');
                     location.reload();
                 }
 
@@ -160,32 +186,63 @@
         });
     })
 
+
     //show update description form
-    $(document).on('dblclick', '.update-des', function(){
+    $(document).on('click', '.update-des', function(){
         $(this).hide();
-        $(this).closest('div').find('.update-form').toggleClass('d-none');
+        $('div.add-des-form').html('');
+
+        var description_id = $(this).data('description_id');
+        var description = $(this).text();
+        // console.log(description_id);
+        // console.log(description);
+
+        var html = '';
+
+        html += '<input type="hidden" name="description_id" value="'+ description_id +'"';
+        html += '<span id="kk_update_description_form" class="form">';
+        html +=    '<div class="col-md-12 mb-5">';   
+        html +=          '<textarea name="description" id="textareaDescription" class="form-control form-control-solid h-100px">'+ description +'</textarea>';
+        html +=     '</div>';
+        html +=      '<div class="d-flex justify-content-end">';
+        html +=            '<button type="submit" id="kk_update_description" class="btn btn-primary btn-sm">update</button>';
+        html +=       '</div>';
+        html +=   '</span>';
+        html +=   '<button type="button " class="btn btn-danger btn-sm me-3 kk_modal_new_update_cancel mb-5" style="width:80px; margin-top:-35px">cancel</button>';
+       
+
+        $(this).closest('div').find('.update-form').html(html);
     })
 
     //cancel button of update
     $(document).on('click', '.kk_modal_new_update_cancel', function(){
-        $(this).parent('div.update-form').toggleClass('d-none');
-        $(this).parent().parent("div").find('.update-des').show();
+        $(this).parent('div.update-form').html('');
+        $('.update-des').show();
     })
+   
 
     //update description --save
-    $(document).on('submit', '#kk_update_description_form', function(e){
+    $(document).on('click', '#kk_update_description', function(e){
         e.preventDefault()
         //console.log('here')
         $('.with-errors').text('')
+
         var thisaddbtn = $(this);
-        var formData = new FormData(this);
+
+        var description_id = $('input[name=description_id]').val();
+        var description = $('#textareaDescription').val();
+        // console.log(description_id);
+        // console.log(description);
+      
         $.ajax({
             type:"POST",
             url: "{{ url('admin/question-description/update')}}",
-            data:formData,
-            cache:false,
-            contentType: false,
-            processData: false,
+            data:{
+                "_token": "{{ csrf_token() }}",
+                description_id : description_id,
+                description : description
+            },
+           dataType: "json",
             success:function(data){
                 if(data.success ==  false || data.success ==  "false"){
                     var arr = Object.keys(data.errors);
@@ -197,8 +254,8 @@
                     var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
                     $('#kk_modal_new_question_form').find('.messages').html(alertBox).show();
                 }else{
-                    //toastr.success(data.message);
-                    thisaddbtn.parent().parent("div").find('.update-form').addClass('d-none');
+                    toastr.success(data.message);
+                    thisaddbtn.parent().parent("div").find('.update-form').html('');
                     thisaddbtn.parent().parent("div").find('.update-des').show();
                     location.reload();
                 }

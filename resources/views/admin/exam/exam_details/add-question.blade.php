@@ -301,27 +301,9 @@
     $("#ques_type").on('change', function(){
         var val = $(this).val();
         if(val == 'random'){
-            $('#number').removeClass('d-none');
+            $('#number').addClass('d-none');
             $('#manual_input').addClass('d-none');
             $('#table_data').html('');
-
-            //disabled submit button
-            $('#kk_submit_for_question').attr('disabled', true);
-
-
-            //get question_number field value and show submit button
-            $('#question_number').on('keyup', function(){
-                var question_number  = $(this).val();
-                var number_of_question_for_this_subject = $("input[name=number_of_question_for_this_subject]").val();
-                //console.log(number_of_question_for_this_subject);
-                $('#result').text(parseInt(question_number));
-                if(parseInt(question_number) == number_of_question_for_this_subject){
-                    $('#kk_submit_for_question').attr('disabled', false);
-                }else{
-                    $('#kk_submit_for_question').attr('disabled', true);
-                }
-            })
-
 
         } else if(val == 'manual'){
             $('#number').removeClass('d-none');

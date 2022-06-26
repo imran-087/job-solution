@@ -6,22 +6,23 @@ use App\Http\Controllers\FeedController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ResumeController;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\SubjectController;
 use App\Http\Controllers\BookmarkController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\FeedbackController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\DescriptionController;
 use App\Http\Controllers\Forum\ReplyController;
+use App\Http\Controllers\UserActivityController;
 use App\Http\Controllers\UserDashboardController;
 use App\Http\Controllers\RecentQuestionController;
 use App\Http\Controllers\ProfileSettingsController;
 use App\Http\Controllers\Forum\DiscussionController;
-use App\Http\Controllers\ModelTest\CustomModelTestController;
-use App\Http\Controllers\ModelTest\ModelTestController;
-use App\Http\Controllers\ModelTest\ModelTestResultController;
 use App\Http\Controllers\QuestionActivityController;
-use App\Http\Controllers\SubjectController;
-use App\Http\Controllers\UserActivityController;
+use App\Http\Controllers\ModelTest\ModelTestController;
+use App\Http\Controllers\Admin\DependableCategoryController;
+use App\Http\Controllers\ModelTest\CustomModelTestController;
+use App\Http\Controllers\ModelTest\ModelTestResultController;
 
 /*
 |--------------------------------------------------------------------------
@@ -51,6 +52,8 @@ Route::post('/discussion/search', [DiscussionController::class, 'search'])->name
 Route::get('/discussion/view-count/{id}', [DiscussionController::class, 'viewCount'])->name('discussion.view');
 Route::post('/discussion/ckeditor-image-upload', [DiscussionController::class, 'uploadImage'])->name('ckeditor.upload');
 Route::post('/discussion/store', [DiscussionController::class, 'store'])->name('discussion.store');
+
+########### Autheticate Route  #############
 Route::middleware('auth')->group(function () {
 
   Route::get('/discussion/vote/{id}', [DiscussionController::class, 'vote'])->name('discussion.vote');
@@ -175,6 +178,15 @@ Route::get('/feedback/like/{id}', [FeedbackController::class, 'like'])->name('fe
 Route::middleware('auth')->post('/feedback/store', [FeedbackController::class, 'store'])->name('feedback.store');
 
 
+############ Dependable setect input route ###############
+Route::get('/get-category/{id}', [DependableCategoryController::class, 'getCategory']);
+Route::get('/get-sub-category/{id}', [DependableCategoryController::class, 'getSubCategory']);
+Route::get('/get-subject/{id}', [DependableCategoryController::class, 'getSubject']);
+
+
+
+
+#### TEssssssssst #######
 Route::get('/test/matjx', function () {
   return view('category.test-mathjx');
 });

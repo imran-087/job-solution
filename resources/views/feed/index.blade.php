@@ -123,14 +123,7 @@
                             
                         </div>
                         <!--end::Header-->
-                        <!--begin::image-->
-                        <div>
-                            <!--begin::Avatar-->
-                                <div class="symbol symbol-45px me-5">
-                                    <img src="assets/media/avatars/300-21.jpg" alt="">
-                                </div>
-                            <!--end::Avatar-->
-                        </div>
+                       
                         <!--begin::Post-->
                         <div class="mb-7">
                             <!--begin::Text-->

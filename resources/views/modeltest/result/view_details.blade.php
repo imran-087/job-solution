@@ -66,16 +66,16 @@
             <div class="col-md-12">
                 <div class="card shadow-sm">
                     <div class="card-header py-10 d-flex flex-column justify-content-center align-items-center">
-                        <h3 class="card-title">Exam Name : {{$exam_analytics->exam->name ?? 'Custom Exam' }}</h3>
+                        <h2 class="card-title  fw-bolder"> {{$exam_analytics->exam->name ?? 'Custom Exam' }}</h2>
                     </div>
                     <div class="card-header fw-bold d-flex justify-content-between py-3 px-5">
-                        <div class="left">
+                        <div class="left fw-bolder">
                             <p>Total Question: {{ $exam_analytics->total_question ?? '' }}</p>
                             <p>Total Mark: {{ $exam_analytics->total_mark ?? '' }}</p>
                             <p>Cut Mark: {{ $exam_analytics->cut_mark ?? '' }}</p>
                             <p>Negative Mark: {{ $exam_analytics->negative_mark ?? '' }}</p>
                         </div>
-                        <div class="right">
+                        <div class="righ fw-bolder">
                             <p>Duration: {{ $exam_analytics->duration ?? '' }} Min.</p>
                             <p>Time: {{  Carbon\Carbon::parse($exam_analytics->exam_time)->format('g:i:s A')   }}</p>
                             <p>Date: {{  Carbon\Carbon::parse($exam_analytics->exam_time)->format('d-m-Y ')  }}</p>
@@ -96,11 +96,11 @@
                         <div class="row">
                             @foreach($exam_result_collection as $subject_id => $subject_collection)
                             @php $subject = App\Models\Subject::where('id', $subject_id)->value('name') @endphp
-                            <h3> {{ $subject }}</h3>
+                            <h4 class="text-center text-decoration-underline" > {{ $subject }}</h4>
                             <br><br><br>
                                 @foreach( $subject_collection as $passage_id => $passage_collection )
-                                 @php $passage = App\Models\Passage::where('id', $passage_id)->value('passage') @endphp
-                                <h4> {!! $passage !!}</h4>
+                                @php $passage = App\Models\Passage::where('id', $passage_id)->value('passage') @endphp
+                                <p class="fw-7"> {!! $passage !!}</p>
                                     @foreach($passage_collection as $result_data)
                                         @php $result_data = (object) $result_data @endphp
                                         
@@ -210,6 +210,8 @@
                                                             </div>
                                                             @endif
                                                         </div>
+                                                        @isset($result_data->answer == 4)
+                                                            
                                                         <div class="col-md-6">
                                                             <p class="text-gray-800 fw-bold {{ $result_data->answer == 4 ? 'right-answer' : '' }}" > 
                                                                 <span><i 
@@ -240,6 +242,8 @@
                                                             </div>
                                                             @endif
                                                         </div>
+                                                        @endisset
+                                                       
                                                     </div>
                                                 </div>
                                             </div>

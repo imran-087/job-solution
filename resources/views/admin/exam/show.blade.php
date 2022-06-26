@@ -86,6 +86,7 @@
                                
                             </div>
                         </div>
+                        @php $serial_number = 1 ; @endphp
                         <div class="card-body">
                             @foreach ($exam_details as $kay => $exam_detail)
                             <div class="card card-bordered mb-5">
@@ -109,7 +110,7 @@
                                                     <div class="card card-bordered mb-5">
                                                         <div class="card-header card-success">
                                                             <h3 class="card-title text-gray-700 fw-bolder cursor-pointer mb-0">
-                                                                    <span > {{ $loop->index+1 }}. {{$question->question}} </span>
+                                                                    <span > {{ $serial_number }}. {{$question->question}} </span>
                                                             </h3>
                                                         </div>
                                                         <div class="card-body">
@@ -164,6 +165,7 @@
                                                         </div>
                                                     </div>
                                                 </div>
+                                                @php $serial_number++ ; @endphp
                                             @endforeach
                                         </div>  
                                     @endforeach

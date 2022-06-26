@@ -363,6 +363,7 @@ class QuestionController extends Controller
             [
                 'sub_category' => $request->sub_category,
                 'subject' => $request->subject,
+                'passage' => $passage->id ?? null,
                 'latest_input' => $latest_input_record_number
             ]
         )->with('message', 'Question saved correctly!!!');
@@ -371,14 +372,23 @@ class QuestionController extends Controller
     //latest insert question view
     public function show(Request $request)
     {
+        //dd($request->all());
         $subject = Subject::select('name', 'id')
             ->where('id', $request->subject)
             ->with('sub_category')->first();
 
+        if ($request->passage != null) {
+            $passage = Passage::find($request->passage);
+        } else {
+            $passage = '';
+        }
+
+        //dd($passages);
+        //return view('admin.mcq.latest_insert_show', compact('passages', 'subject'));
+
         $questions = Question::with('question_option')
             ->latest()->take($request->latest_input)->get();
-
-        return view('admin.mcq.latest_insert_show', compact('questions', 'subject'));
+        return view('admin.mcq.latest_insert_show', compact('questions', 'subject', 'passage'));
     }
 
 
@@ -512,7 +522,6 @@ class QuestionController extends Controller
         //dd($request->all());
         if ($request->has('sub_category')) {
 
-
             $sub_category = SubCategory::find($request->sub_category);
             //dd($sub_category);
             $questions = Question::with('subject')->where([
@@ -565,7 +574,10 @@ class QuestionController extends Controller
 
     public function academySubject($id)
     {
-        $subjects = Subject::with('sub_category')->where(['sub_category_id' => $id, 'parent_id' => null])->get();
+        $subjects = Subject::with('sub_category')
+            ->where(['sub_category_id' => $id, 'parent_id' => null])
+            ->withCount('question')->get();
+        //dd($subjects);
         $view = view('admin.mcq.academy.subject', compact('subjects'))->render();
         return response()->json([
             'success' => true,
@@ -575,13 +587,17 @@ class QuestionController extends Controller
 
     public function academySubjectMcq(Request $request)
     {
-        $subject = Subject::find($request->subject);
+        $subject = Subject::with('sub_category')->where('id', $request->subject)->first();
         $subjects = Subject::descendantsAndSelf($request->subject)->pluck('id');
         //dd($subject);
-        $questions = Question::whereIn('subject_id', $subjects)->with('question_option', 'descriptions')->get();
+        $questions = Question::whereIn('subject_id', $subjects)
+            ->where('sub_category_id', $request->sub_category)
+            ->with('question_option', 'descriptions')
+            ->get();
         //dd($questions);
         $passages = Passage::with('questions')->where([
-            'subject_id' => $request->subject
+            'subject_id' => $request->subject,
+            'sub_category_id' => $request->sub_category,
         ])->get();
         return view('admin.mcq.academy.question', compact('questions', 'passages', 'subject'));
     }

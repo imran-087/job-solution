@@ -8,7 +8,7 @@
     </div>
     @endisset
 
-
+    @php $serial_number = 1; @endphp
     @if($questions->count() > 0)
     @foreach($questions as $key => $question)
         <div class="card card-bordered mb-5 py-3 px-2">
@@ -29,7 +29,7 @@
                         <div class="card card-bordered mb-5">
                             <div class="card-header">
                                 <h3 class="card-title text-gray-700 fw-bolder cursor-pointer mb-0 view" data-id="{{ $question->id }}" style="max-width: 1100px !important; color:#0095E8 !important">
-                                        <span > {{ $loop->index+1 }}. {{$question->question}} </span>
+                                        <span > {{ $serial_number }}. {{$question->question}} </span>
                                 </h3>
                                 <div class="card-toolbar">
                                     <!--begin::Menu-->
@@ -158,47 +158,23 @@
                                     <!--end::Input group-->
                                     @if($question->descriptions->count() > 0)
                                         @foreach($question->descriptions as $description)
-                                        <p class="text-gray-800 fw-bold ml-4 cursor-pointer update-des" style="text-align: justify"><b class="fw-bolder">Description : </b> {{ $description->description }}</p>
-
-                                        <div class="d-flex flex-column mt-2 fv-row update-form d-none">
-                                            <form id="kk_update_description_form" class="form">
-                                                <div class="messages"></div>
-                                                {{-- csrf token  --}}
-                                                @csrf
-                                                <input type="hidden" name="description_id" value="{{ $description->id }}">
-                                                <div class="col-md-12 mb-5">
-                                                    <textarea name="description" class="form-control form-control-solid h-150px">{{ $description->description }}</textarea>
-                                                </div>
-                                                <div class="d-flex justify-content-end">
-
-                                                    <button type="submit" id="kk_modal_new_service_update" class="btn btn-primary btn-sm">update</button>
-                                                </div>
-                                            </form>
-
-                                            <button type="button " class="btn btn-danger btn-sm me-3 kk_modal_new_update_cancel mb-5" style="width:80px; margin-top:-35px">cancel</button>
-
-                                        </div>
+                                         <span class="fw-bolder fs-6">Description:</span><p class="text-gray-800 fw-bold ml-4 cursor-pointer update-des" data-description_id={{ $description->id }} style="text-align: justify">{{ $description->description }}</p>
                                         @endforeach
                                     @endif
 
-                                    <span class="add-description cursor-pointer "><i class="fas fa-plus-circle fa-2xl"></i> <b>Description</b> </span>
-
-                                    <div class="d-flex flex-column mt-2 fv-row des-form d-none">
-                                        <form id="kk_add_description_form" class="form">
-                                            <div class="messages"></div>
-                                            {{-- csrf token  --}}
-                                            @csrf
-                                            <input type="hidden" name="question" value="{{ $question->id }}">
-                                            <div class="col-md-12 mb-5">
-                                                <textarea name="description" class="form-control form-control-solid h-100px"></textarea>
-                                            </div>
-                                            <div class="d-flex justify-content-end">
-                                                <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary btn-sm">
-                                                <span class="indicator-label">add</span>
-                                            </div>
-                                        </form>
-                                        <button type="button " class="btn btn-danger btn-sm me-3 kk_modal_new_add_cancel mb-5" style="width:80px; margin-top:-35px">cancel</button>
+                                    <!-- start: update description -->
+                                    <div class="d-flex flex-column mt-2 fv-row update-form">
+                                        
                                     </div>
+                                    <!-- end: description add -->
+
+                                   
+                                    <!-- Start: description add -->
+                                    <span class="add-description cursor-pointer" data-question_id="{{ $question->id }}"><i class="fas fa-plus-circle fa-2xl"></i> <span class="fw-bolder fs-5">Description</span> </span>
+                                    <div class="d-flex flex-column mt-2 fv-row add-des-form">
+                                        
+                                    </div>
+                                    <!-- end: description add -->
                                 </div>
 
                                 <div class="row mt-5">
@@ -208,6 +184,7 @@
                             </div>
                         </div>
                     </div>
+                    @php $serial_number++ ; @endphp
                 @endforeach
                 </div>
             </div>
@@ -244,7 +221,7 @@
                                 <div class="card card-bordered mb-5">
                                     <div class="card-header">
                                         <h3 class="card-title text-gray-700 fw-bolder cursor-pointer mb-0 view" data-id="{{ $question->id }}" style="max-width: 1100px !important; color:#0095E8 !important">
-                                                <span > {{ $loop->index+1 }}. {{$question->question}} </span>
+                                                <span > {{ $serial_number }}. {{$question->question}} </span>
                                         </h3>
                                         <div class="card-toolbar">
                                             <!--begin::Menu-->
@@ -299,7 +276,7 @@
                                     </div>
                                 </div>
                             </div>
-
+                            @php $serial_number++ ; @endphp
                             @endforeach
                             </div>
                         </div>

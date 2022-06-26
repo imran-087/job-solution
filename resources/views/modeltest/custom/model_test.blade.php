@@ -278,7 +278,7 @@
                                 "_token": "{{ csrf_token() }}",
                                 'submitted_data' : exam_selected_questions,
 
-                                'mark' : mark,
+                                'total_mark' : mark,
                                 'cut_mark' : cut_mark,
                                 'negative_mark' : negative_mark,
                                 'sub_category_id' : sub_category_id,

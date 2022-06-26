@@ -246,29 +246,93 @@
 
 @push('script')
    <script type="text/javascript">
-    //     $(document).ready(function(){
-    //     $('#kk_custom_model_test_generator_form').on( "submit", function(event) {
-    //         event.preventDefault()
-    //         $('.with-errors').text('')
-    //         $('.indicator-label').hide()
-    //         $('.indicator-progress').show()
-    //         $('#kk_modal_new_service_submit').attr('disabled','true')
+    // Get Category 
+    $('#main_category').on('change', function () {
+        var mainCategoryID = $(this).val();
+        if (mainCategoryID) {
+            $.ajax({
+                url: '/get-category/' + mainCategoryID,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    if (data) {
+                        $('#parent').empty();
+                        $('#category').empty();
+                        $('#category').append('<option value="">Choose...</option>');
+                        $.each(data, function (key, category) {
+                            $('select[name="category"]').append(
+                                '<option value="' + category
+                                .id + '">' + category
+                                .name + '</option>');
+                        });
+                    } else {
+                        $('#category').empty();
+                    }
+                }
+            });
+        } else {
+            $('#category').empty();
+        }
+    });
 
-    //         var formData = new FormData(this);
-    
-    //         $.ajax({
-    //             type: "POST",
-    //             url: "{{ route('admin.question.store') }}",
-    //             data:formData,
-    //             cache:false,
-    //             contentType: false,
-    //             processData: false,
-    //             success:function(data){
-    //                 $('#input').html(data.html)
-    //             }
-    //         });
- 
-    //     });
-    // })
+    // Get Sub Category
+    $('#category').on('change', function () {
+        var categoryID = $(this).val();
+        if (categoryID) {
+            $.ajax({
+                url: '/get-sub-category/' + categoryID,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    if (data) {
+                        $('#sub_category').empty();
+                        $('#sub_category').append('<option value="">Choose...</option>');
+                        $.each(data, function (key, sub_category) {
+                            $('select[name="sub_category"]').append(
+                                '<option value="' + sub_category.id + '">' + sub_category.name + '</option>');
+                        });
+                    }
+                        else {
+                        $('#sub_category').empty(); 
+                    }
+                }
+            });
+        } else {
+            $('#sub_category').empty();
+        }
+    });
+
+   // Get Subject
+    $('#sub_category').on('change', function () {
+        var subCategoryID = $(this).val();
+        if (subCategoryID) {
+            $.ajax({
+                url: '/get-subject/' + subCategoryID,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    if (data) {
+                        $('#subject').empty();
+                        $('#subject').append('<option value="">Choose...</option>');
+                        $.each(data, function (key, subject) {
+                            if(subject.sub_category){
+                                $('select[name="subject"]').append(
+                                '<option value="' + subject.id + '">' + subject.name   + ' - ' + subject.sub_category.name +'</option>');
+                            }else{
+                                $('select[name="subject"]').append(
+                                '<option value="' + subject.id + '">' + subject.name   +' - '+ subject.main_category.name + '</option>');
+                            }
+                            
+                        });
+                    }
+                        else {
+                        $('#subject').empty(); 
+                    }
+                }
+            });
+        } else {
+            $('#subject').empty();
+        }
+    });
    </script>
 @endpush

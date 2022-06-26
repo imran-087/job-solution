@@ -87,8 +87,8 @@ class MainCategoryController extends Controller
     {
         //dd($request->all());
         $validator = Validator::make($request->all(), [
-            'name' => ['required'],
-            'status' => ['required'],
+            'name' => 'required',
+            'status' => 'required'
         ]);
 
         if ($validator->fails()) {

@@ -104,7 +104,7 @@
                         </span>
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-title">Instution List</span>
+                    <span class="menu-title">Institution List</span>
                 </a>
             </div>
 
@@ -123,7 +123,7 @@
                         </span>
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-title">Passages</span>
+                    <span class="menu-title">All Passage </span>
                 </a>
             </div>
 
