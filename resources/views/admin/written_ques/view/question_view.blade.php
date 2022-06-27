@@ -55,71 +55,28 @@
         <!--begin::Container-->
         <div id="kt_content_container" class="container-xxl">
             <div class="row gy-5 g-xl-8">
-                <div class="col-md-4">
-                    <!--begin::FAQ card-->
+                <div class="col-md-12">
                     <div class="card">
                         <!--begin::Body-->
-                        <div class="card-body p-lg-15">
-                            <!--begin::Layout-->
-                            <div class="d-flex flex-column flex-lg-row">
-                                <!--begin::Sidebar-->
-                                <div class="flex-column flex-lg-row-auto w-100 w-lg-275px mb-10 me-lg-20">
-                                    <!--begin::Catigories-->
-                                    <div class="mb-15">
-                                        <h4 class="text-black mb-5">Exam Name</h4>
-                                        <!--begin::Menu-->
-                                        <div class="menu menu-rounded menu-column menu-title-gray-700 menu-state-title-primary menu-active-bg-light-primary fw-bold">
-                                            @foreach($sub_categories as $sub_category)
-                                            <!--begin::Item-->
-                                            <div class="menu-item mb-3">
-                                                <!--begin::Link-->
-                                                <a class="menu-link py-3 active" href="{{ route('admin.written.show', ['sub_category'=> $sub_category->sub_category_id]) }}">{{$sub_category->sub_category->name}}</a>
-                                                <!--end::Link-->
-                                            </div>
-                                            <!--end::Item-->
-                                            @endforeach
-                                        </div>
-                                        <!--end::Menu-->
-                                    </div>
-                                    <!--end::Catigories-->
-
-                                </div>
-                                <!--end::Sidebar-->
-
-                            </div>
-                            <!--end::Layout-->
-
-                        </div>
-                        <!--end::Body-->
-                    </div>
-                    <!--end::FAQ card-->
-                </div>
-
-                @if($load == 'true')
-                <div class="col-md-8">
-                    <div class="card">
-                    <!--begin::Body-->
                         <div class="card-body p-lg-15">
                             <div class="flex-lg-row-fluid">
                                 <!--begin::Extended content-->
                                 <div class="mb-13">
                                     <!--begin::Content-->
-                                    <div class="mb-15 text-center">
-                                        <!--begin::Title-->
-                                        <h4 class="fs-2x text-gray-800 w-bolder mb-2">{{ $exam_detail->name ?? 'No Name' }}</h4>
-                                        <!--end::Title-->
-                                        <!--begin::Text-->
-                                        <p class="fw-bold fs-4 text-gray-600 mb-2">{{ $exam_detail->title ?? 'No Title' }}</p>
-                                        <!--end::Text-->
-                                        <!--begin::Text-->
-                                        <p class="fw-bold fs-4 text-gray-600 mb-2">বিষয় কোড ঃ </p>
-                                        <!--end::Text-->
-                                        <!--begin::Text-->
-                                        <p class="fw-bold fs-4 text-gray-600 mb-2">নির্ধারিত সময় ঃ </p>
-                                        <!--end::Text-->
-                                        <!--begin::Text-->
-                                        <p class="fw-bold fs-4 text-gray-600 mb-2">পূর্ণমান ঃ </p>
-                                        <!--end::Text-->
+                                    <div class="mb-15 d-flex justify-content-between ">
+                                        <div class="let">
+                                            <h4 class="fs-2x text-gray-800 w-bolder mb-2">{{ $detail_of_exam->name ?? 'No Name Found' }}</h4>
+                                            <p class="fw-bold fs-4 text-gray-600 mb-2">{{ $detail_of_exam->title ?? 'No Title Found' }}</p>
+                                            <p class="fw-bold fs-6 text-gray-600 mb-2">{{ $subject ?? '' }}</p>
+                                        </div>
+                                       
+                                        <div class="right">
+                                            <p class="fw-bold fs-4 text-gray-600 mb-2"> @isset($detail_of_exam->subject_code_1)বিষয় কোড ঃ {{ $detail_of_exam->subject_code_1 ?? '' }} @isset($detail_of_exam->subject_code_2) ও {{ $detail_of_exam->subject_code_2 ?? '' }} @endisset @endisset</p>
+                                            <p class="fw-bold fs-4 text-gray-600 mb-2">@isset($detail_of_exam->exam_date)তারিখ ঃ  {{ date('d-m-y', strtotime($detail_of_exam->exam_date))  }}  @endisset</p>
+                                            <p class="fw-bold fs-4 text-gray-600 mb-2">@isset($detail_of_exam->exam_duration)সময় ঃ {{ $detail_of_exam->exam_duration }} মিনিট @endisset</p>
+                                            <p class="fw-bold fs-4 text-gray-600 mb-2">@isset($detail_of_exam->total_marks)পূর্ণমান ঃ {{ $detail_of_exam->total_marks }} @endisset</p>
+                                        
+                                        </div>
                                     </div>
                                     <!--end::Content-->
                                     <!--begin::Item-->
@@ -330,7 +287,6 @@
                         </div>
                     </div>
                 </div>
-                @endif
             </div>
         </div>
         <!--end::Container-->

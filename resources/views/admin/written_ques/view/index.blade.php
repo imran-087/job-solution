@@ -148,7 +148,7 @@ $(document).ready(function(){
         var main_cat = $(this).data('main_cat');
         $.ajax({
              type:"GET",
-                url: "{{ url('admin/question/mcq-question/sub-categories')}}",
+                url: "{{ url('admin/question/written-question/sub-categories')}}",
                 data:{
                     id: id,
                     main_category : main_cat

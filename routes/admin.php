@@ -247,14 +247,18 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/question/written-question', 'WrittenQuestionController@index')->name('written.index');
         Route::get('/question/written-question/create', 'WrittenQuestionController@create')->name('written.create');
         Route::post('/question/written-question/store', 'WrittenQuestionController@store')->name('written.store');
-        Route::get('/question/written-question/show', 'WrittenQuestionController@show')->name('written.show');
         Route::get('/question/written-question/edit/{id}/{type}', 'WrittenQuestionController@edit')->name('written.edit');
         Route::post('/question/written-question/update', 'WrittenQuestionController@update')->name('written.update');
         Route::get('/question/written-question/get-instruction', 'WrittenQuestionController@getInstruction')->name('written.instruction');
 
+        ############## Written Question View ###############
+        Route::get('/question/written-question/show', 'WrittenQuestionViewController@index')->name('written.view.index');
+        Route::get('/question/written-question/sub-categories', 'WrittenQuestionViewController@getSubCategory')->name('written.view.sub-category');
+        Route::get('/question/written-question/view-question', 'WrittenQuestionViewController@getQuestion')->name('written.view.question');
+
         ############## Written Question Test ###############
         Route::get('/question/written-question/test/show', 'WrittenQuestionTestController@getCategory')->name('written.test.show');
-        Route::get('/question/written-question/sub-categories', 'WrittenQuestionTestController@getSubCategory')->name('written.test.sub-categories');
+        Route::get('/question/written-question/test/sub-categories', 'WrittenQuestionTestController@getSubCategory')->name('written.test.sub-categories');
 
         Route::get('/question/written-question/test', 'WrittenQuestionTestController@getQuestion')->name('written.test.question');
 

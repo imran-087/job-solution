@@ -28,7 +28,7 @@
                                 <div class="required">Question </div>
                             </label>
                             <!--end::Label-->
-                            <textarea type="text" class="form-control form-control-solid h-100px"  placeholder="Enter Question or Instruction"
+                            <textarea type="text"  class="form-control form-control-solid h-100px kt_docs_ckeditor_classic"  placeholder="Enter Question or Instruction"
                             name="question[]"> </textarea>
                             {{-- <input type="text" class="form-control form-control-solid" placeholder="Enter Question" name="question[]" />  --}}
                             <div class="help-block with-errors question.*-error"></div>
@@ -67,7 +67,7 @@
                         <span class="required fw-bolder">answer</span> 
                     </label>
                     <!--end::Label-->
-                    <textarea type="text" class="form-control form-control-solid h-150px"  placeholder="Enter answer"
+                    <textarea type="text"  class="form-control form-control-solid h-150px kt_docs_ckeditor_classic"  placeholder="Enter answer"
                             name="answer[]"> </textarea>
                     <div class="help-block with-errors answer-error"></div>
                 </div>
@@ -83,7 +83,7 @@
 <!-- append dynamic input-->
 
 <!--begin::Actions-->
-<div class="text-center d-flex justify-content-between py-4 px-4" >
+<div class="text-center d-flex justify-content-end py-4 px-4" >
     {{-- <button class="btn btn-info btn-sm addRow" type="button" style="padding: 10px 20px">Add Input</button> --}}
     <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary" style="padding: 10px 70px">
         <span class="indicator-label">Submit</span>
@@ -93,7 +93,7 @@
 </div>
 <!--end::Actions-->
 
-   
+
 
 
                        

@@ -24,7 +24,7 @@ class CreateSubCategoriesTable extends Migration
             $table->string('subject_code_3')->nullable();
             $table->string('number_of_question')->nullable();
             $table->string('total_marks')->nullable();
-            $table->string('exam_date')->nullable();
+            $table->dateTime('exam_date')->nullable();
             $table->string('exam_duration')->nullable();
             $table->string('job_position')->nullable();
             $table->string('negative_marks')->nullable();

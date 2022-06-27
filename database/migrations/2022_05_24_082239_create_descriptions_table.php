@@ -20,6 +20,7 @@ class CreateDescriptionsTable extends Migration
             $table->integer('best_description')->nullable();
             $table->unsignedBigInteger('vote')->default(0);
             $table->integer('created_user_id');
+            $table->integer('updated_user_id')->nullable();
             $table->integer('approval_id')->nullable();
             $table->enum('status', ['active', 'pending', 'reject', 'approve'])->default('active');
             $table->softDeletes();

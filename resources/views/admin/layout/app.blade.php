@@ -148,8 +148,8 @@
 		<!--begin::Javascript-->
 		@include('admin.include.toastr')
 
-		<!---- own js ---->
-		<script src="{{ asset('js/custom.js') }}"></script>
+		{{-- <!---- own js ---->
+		<script src="{{ asset('js/custom.js') }}"></script> --}}
 		
 		@include('includes.footer_link')
 		

@@ -130,7 +130,7 @@
                         <!--begin::Heading-->
                         <div class="mb-13 text-center">
                             <!--begin::Title-->
-                            <h1 class="mb-3 mt-3">MCQ Question Input</h1>
+                            <h1 class="mb-3 mt-3 text-capitalize">Add MCQ Question into {{ $sub_category->name }}</h1>
                             <!--end::Title-->
                             <!--begin::Description-->
                             <div class="text-muted fw-bold fs-5">Fill up the form and submit
@@ -138,39 +138,28 @@
                             <!--end::Description-->
                         </div>
                         <!--end::Heading-->
-                        <!--begin::Input group-->
-                        <div class="row g-9 mb-8">
-                            <!--begin::Col-->
-                            <div class="col-md-6 fv-row">
-                                <!--begin::Label-->
-                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="required">Sub Category</span>
-                                </label>
-                                <!--end::Label-->
-                                <input class="form-control form-control-solid" type="text" name=""  value="{{ $sub_category->name }}" disabled>
-                                <input type="hidden" name="sub_category"  value="{{ $sub_category->id }}" >
-                                <input type="hidden" name="main_category"  value="{{ $main_category }}" >
-                            </div>
-                            <!--end::Col-->
-                            <!--begin::Col-->
-                            <div class="col-md-6 fv-row">
-                                <label class="required fs-6 fw-bold mb-2">Select Subject</label>
-                                <select class="form-select form-select-solid" data-control="select2"
-                                    data-hide-search="true" name="subject"
-                                    id="subject" required>
-                                    @isset($subjects)
-                                    @foreach($subjects as $subject)
-                                    <option value="{{ $subject->id }}">{{ $subject->name }} &nbsp;&nbsp; --- &nbsp;&nbsp; <span style="margin-left:10px; !important"> {{ $subject->sub_category->name ?? $subject->main_category->name  }} </span></option>
-                                    
-                                    @endforeach
-                                    @endisset
-                                </select>
-                                <div class="help-block with-errors subject-error"></div>
-                            </div>
-                            <!--end::Col-->
-                        </div>
-                        <!--end::Input group-->
+                        
+                        {{-- hidden input  --}}
+                        <input type="hidden" name="sub_category"  value="{{ $sub_category->id }}">
+                        <input type="hidden" name="main_category"  value="{{ $main_category }}">
 
+                        <!--begin::Col-->
+                        <div class="col-md-6 fv-row pb-5">
+                            <label class="required fs-6 fw-bold mb-2">Select Subject</label>
+                            <select class="form-select form-select-solid" data-control="select2"
+                                data-hide-search="true" name="subject"
+                                id="subject" required>
+                                @isset($subjects)
+                                @foreach($subjects as $subject)
+                                <option value="{{ $subject->id }}">{{ $subject->name }} &nbsp;&nbsp; --- &nbsp;&nbsp; <span style="margin-left:10px; !important"> {{ $subject->sub_category->name ?? $subject->main_category->name  }} </span></option>
+                                
+                                @endforeach
+                                @endisset
+                            </select>
+                            <div class="help-block with-errors subject-error"></div>
+                        </div>
+                        <!--end::Col-->
+                       
 
                         <!--start::mcq question input-->
                         <div id="input"></div>

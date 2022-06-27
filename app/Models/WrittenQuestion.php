@@ -13,9 +13,14 @@ class WrittenQuestion extends Model
 
     protected $guarded = [];
 
-    public function sub_category()
+    public function subCategory()
     {
         return $this->belongsTo(SubCategory::class);
+    }
+
+    public function subject()
+    {
+        return $this->belongsTo(Subject::class);
     }
 
     public function answer()

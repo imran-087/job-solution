@@ -241,8 +241,8 @@
                                             <input type="file" class="form-control-file mt-2" id="exampleInputFile" name="image[]" multiple>
                                             @endif --}}
                                         </div>
-                                        <div class="col-md-12 fv-row align-items-center justify-content-center">
-                                            <div class="d-flex">
+                                        <div class="col-md-12 fv-row ">
+                                            <div class="d-flex align-items-center justify-content-center">
                                                 <input class="form-check-input me-3 " type="radio" name="answer[{{ $i }}]"  value="2"
                                                 @if( isset($myForm['answer'][$i]) )
                                                     @if($myForm['answer'][$i] == '2') checked @endif

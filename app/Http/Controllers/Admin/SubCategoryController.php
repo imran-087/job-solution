@@ -68,7 +68,7 @@ class SubCategoryController extends Controller
                         <a href="/admin/question/create?sub_category=' . $row->id . '&main_category=' . $row->category->main_category_id . '" target="_blank" class="btn btn-bg-light btn-active-color-primary btn-sm me-1">
                             Add MCQ Ques.
                         </a>
-                        <a href="/admin/question/written-question?sub_category=' . $row->id . '&main_category=' . $row->category->main_category_id . '" target="_blank" class="btn btn-bg-light btn-active-color-primary btn-sm me-1">
+                        <a href="/admin/question/written-question?sub_category=' . $row->id . '&category=' . $row->category_id . '&main_category=' . $row->category->main_category_id . '" target="_blank" class="btn btn-bg-light btn-active-color-primary btn-sm me-1">
                             Add Written Ques.
                         </a>
                         
@@ -116,6 +116,7 @@ class SubCategoryController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
+        
         $validator = Validator::make($request->all(), [
             'name' => ['required'],
             'status' => ['required'],
@@ -134,8 +135,9 @@ class SubCategoryController extends Controller
                 'errors' => $validator->errors()
             ], 200);
         } else {
+            $exam_date = Carbon::parse($request->date)->format('Y-m-d');
 
-            if ($request->main_category == 3) {
+            if ($request->main_category == 2) {
                 $year = null;
             } else {
                 $year = $request->year;
@@ -153,7 +155,7 @@ class SubCategoryController extends Controller
                 $sub_category->subject_code_1 =  $request->code_1;
                 $sub_category->subject_code_2 =  $request->code_2;
                 $sub_category->total_marks =  $request->mark;
-                $sub_category->exam_date =  $request->date;
+                $sub_category->exam_date =  $exam_date;
                 $sub_category->exam_duration =  $request->duration;
                 $sub_category->job_position =  $request->job_position;
                 $sub_category->year_id = $year;

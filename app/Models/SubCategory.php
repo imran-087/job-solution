@@ -45,6 +45,12 @@ class SubCategory extends Model
         return $this->hasManyThrough(Question::class, Subject::class);
     }
 
+    //written_question
+    public function written_questions()
+    {
+        return $this->hasMany(WrittenQuestion::class);
+    }
+
     //generate unique slug
     protected static function boot()
     {

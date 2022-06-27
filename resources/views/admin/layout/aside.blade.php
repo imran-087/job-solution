@@ -198,7 +198,7 @@
                                 </a>
                             </div>
                            <div class="menu-item">
-                                <a class="menu-link {{ request()->is('admin/question/written-question/view*') ? 'active' : '' }}" href="{{ route('admin.written.show') }}">
+                                <a class="menu-link {{ request()->is('admin/question/written-question/view*') ? 'active' : '' }}" href="{{ route('admin.written.view.index') }}">
                                     <span class="menu-bullet">
                                         <span class="bullet bullet-dot"></span>
                                     </span>

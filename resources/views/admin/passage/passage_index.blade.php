@@ -425,16 +425,5 @@
         }))
     }
     </script>
-    <script type="text/javascript">
-        
-        ClassicEditor
-        .create(document.querySelector('#kt_docs_ckeditor_classic'))
-        .then(editor => {
-            // console.log( 'Editor was initialized', editor );
-            myEditor = editor;
-        })
-        .catch(error => {
-            console.error(error);
-        });
-    </script>
+    
 @endpush

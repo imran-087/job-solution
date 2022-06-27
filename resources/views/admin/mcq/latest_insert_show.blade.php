@@ -59,19 +59,20 @@
         <div id="kt_content_container" class="container">
             <div class="card card-bordered mb-5 py-2 px-2 ">
                 <div class="card-header d-flex flex-column align-items-center justify-content-center mb-10">
+                    <h4 class="fw-bolder fs-4 text-capitalize py-2 px-2">{{ $sub_category }}</h4>
                     <h3 class="">বিষয় ঃ {{$subject->name}}</h3>
                 </div>
                 @php $serial_number = 1 ; @endphp
                 @isset($questions)
-                    @isset($passage)
+                    @if($passage != null)
                     <div class="row">
                         <div class="col-md-12">
-                            <h5 class="text-justify px-3 text-gray-700  mb-0 view">
+                            <h5 class="text-justify px-3 text-gray-700  mb-0">
                                 <span ><span class="fs-3 fw-bold" style="color: black">Read the passage and answer the following question :</span><br> {!! $passage->passage !!} </span>
                             </h5> 
                         </div>
                     </div>
-                    @endisset
+                    @endif
                     <div class="row">
                         @foreach($questions as $key => $question)
                             <div class="col-md-6 ">
@@ -205,47 +206,24 @@
                                         <div class="row">
                                             <!--end::Input group-->
                                             @if($question->descriptions->count() > 0)
-                                                @foreach($question->descriptions as $description) 
-                                                <p class="text-gray-800 fw-bold mt-4 ml-4 cursor-pointer update-des" style="text-align: justify"><b>Description : </b> {{ $description->description }}</p>
-
-                                                <div class="d-flex flex-column mt-2 fv-row update-form d-none">
-                                                    <form id="kk_update_description_form" class="form">
-                                                        <div class="messages"></div>
-                                                        {{-- csrf token  --}}
-                                                        @csrf
-                                                        <input type="hidden" name="description_id" value="{{ $description->id }}">
-                                                        <div class="col-md-12 mb-5">
-                                                            <textarea name="description" class="form-control form-control-solid h-150px">{{ $description->description }}</textarea>
-                                                        </div>
-                                                        <div class="d-flex justify-content-end">
-                                                            
-                                                            <button type="submit" id="kk_modal_new_service_update" class="btn btn-primary btn-sm">update</button>
-                                                        </div>
-                                                    </form>
-                                                    
-                                                    <button type="button " class="btn btn-danger btn-sm me-3 kk_modal_new_update_cancel mb-5" style="width:80px; margin-top:-35px">cancel</button>
-                                                    
-                                                </div>
+                                                @foreach($question->descriptions as $description)
+                                                <span class="fw-bolder fs-6">Description:</span><p class="text-gray-800 fw-bold ml-4 cursor-pointer update-des" data-description_id={{ $description->id }} style="text-align: justify">{!! $description->description !!}</p>
                                                 @endforeach
                                             @endif
 
-                                            <span class="add-description cursor-pointer "><i class="fas fa-plus-circle fa-2xl"></i> <b>Description</b> </span>
-
-                                            <div class="d-flex flex-column mt-2 fv-row des-form d-none">
-                                                <form id="kk_add_description_form" class="form">
-                                                    <div class="messages"></div>
-                                                    {{-- csrf token  --}}
-                                                    @csrf
-                                                    <input type="hidden" name="question" value="{{ $question->id }}">
-                                                    <div class="col-md-12 mb-5">
-                                                        <textarea name="description" class="form-control form-control-solid h-100px"></textarea>
-                                                    </div>
-                                                    <div class="d-flex justify-content-end">
-                                                        <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary btn-sm">
-                                                        <span class="indicator-label">add</span>
-                                                    </div>
-                                                </form>
+                                            <!-- start: update description -->
+                                            <div class="d-flex flex-column mt-2 fv-row update-form">
+                                                
                                             </div>
+                                            <!-- end: description update -->
+
+                                        
+                                            <!-- Start: description add -->
+                                            <span class="add-description cursor-pointer" data-question_id="{{ $question->id }}"><i class="fas fa-plus-circle fa-2xl"></i> <span class="fw-bolder fs-5">Description</span> </span>
+                                            <div class="d-flex flex-column mt-2 fv-row add-des-form">
+                                                
+                                            </div>
+                                            <!-- end: description add -->
                                         </div>
                                     </div>
                                 </div>
@@ -254,99 +232,7 @@
                         @endforeach
                     </div>
                 @endisset
-                @isset($passages)
-                <div class="row">
-                    <div class="col-md-12">
-                        <!--begin::apassage question-->
-                        <div class="row" >
-                            @foreach($passages as $key => $passage)
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="card card-bordered mb-5">
-                                        <div class="card-header p-10">
-
-                                            <h3 class="card-title text-gray-700  mb-0 view">
-                                                <span ><span class="fs-3 fw-bold" style="color: black">Read the passage and answer the following question :</span><br> {!! $passage->passage !!} </span>
-                                            </h3>
-                                        </div>
-                                       
-                                            <div class="row">
-                                            @foreach($passage->questions as $question)
-
-                                            <div class="col-md-6">
-                                                <div class="card card-bordered mb-5">
-                                                    <div class="card-header">
-                                                        <h3 class="card-title text-gray-700 fw-bolder cursor-pointer mb-0 view" data-id="{{ $question->id }}" style="max-width: 1100px !important; color:#0095E8 !important">
-                                                                <span > {{ $serial_number }}. {{$question->question}} </span>
-                                                        </h3>
-                                                        <div class="card-toolbar">
-                                                            <!--begin::Menu-->
-                                                            <a href="{{route('admin.question.edit', ['id' => $question->id, 'ques' => $question->slug])}}" class="btn btn-sm btn-icon btn-light btn-active-primary fw-bold edit" ><i class="fas fa-edit"></i></a>
-                                                            <!--end::Menu-->
-                                                        </div>
-
-                                                    </div>
-                                                    <div class="card-body">
-                                                        <div class="row"  style="font-size: 16px">
-                                                            <div class="col-md-6">
-                                                                <p class="text-gray-800 fw-bold " >
-                                                                <span >
-                                                                    @if($question->question_option->answer == 1)
-                                                                    <i class="fas fa-check-circle fa-2xl"></i>
-                                                                    @else
-                                                                    <i class="fas fa-dot-circle fa-2xl"></i>
-                                                                    @endif
-                                                                </span> {{$question->question_option->option_1 }}</p>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <p class="text-gray-800 fw-bold " >
-                                                                <span >
-                                                                    @if($question->question_option->answer == 2)
-                                                                    <i class="fas fa-check-circle fa-2xl"></i>
-                                                                    @else
-                                                                    <i class="fas fa-dot-circle fa-2xl"></i>
-                                                                    @endif
-                                                                </span> {{$question->question_option->option_2}}</p>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <p class="text-gray-800 fw-bold " >
-                                                                <span >
-                                                                    @if($question->question_option->answer == 3)
-                                                                    <i class="fas fa-check-circle fa-2xl"></i>
-                                                                    @else
-                                                                    <i class="fas fa-dot-circle fa-2xl"></i>
-                                                                    @endif
-                                                                    </span> {{$question->question_option->option_3 }}</p>
-                                                            </div>
-                                                            <div class="col-md-6">
-                                                                <p class="text-gray-800 fw-bold " >
-                                                                <span >
-                                                                    @if($question->question_option->answer == 4)
-                                                                    <i class="fas fa-check-circle fa-2xl"></i>
-                                                                    @else
-                                                                    <i class="fas fa-dot-circle fa-2xl"></i>
-                                                                    @endif
-                                                                    </span> {{$question->question_option->option_4 }}</p>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            @php $serial_number++ ; @endphp
-                                            @endforeach
-                                            </div>
-                                        </div>
-
-                                    </div>
-
-                                </div>
-                            </div>
-                            @endforeach
-                        </div>
-                        <!--end::passage question-->
-                    </div>
-                </div>
-                @endisset
+               
             </div>
         </div>
         <!--end::Container-->
@@ -357,68 +243,61 @@
 @endsection
 
 @push('script')
-{{-- <script type="text/javascript">
-	var page = 1;
-	$(window).scroll(function() {
-	    if($(window).scrollTop() + $(window).height() >= $(document).height()) {
-	        page++;
-	        loadMoreData(page);
-	    }
-	});
 
-	function loadMoreData(page){
-	  $.ajax(
-	        {
-	            url: '?page=' + page,
-	            type: "get",
-	            beforeSend: function()
-	            {
-	                $('.ajax-load').show();
-	            }
-	        })
-	        .done(function(data)
-	        {
-	            if(data.html == " "){
-	                $('.ajax-load').html("No more records found");
-	                return;
-	            }
-	            $('.ajax-load').hide();
-	            $("#all_question").append(data.html);
-	        })
-	        .fail(function(jqXHR, ajaxOptions, thrownError)
-	        {
-	              alert('server not responding...');
-	        });
-	}
-</script> --}}
 
 <script type="text/javascript">
 
     //show description form
-    $(document).on('dblclick', '.add-description', function(){
-        $(this).closest('div').find('.des-form').toggleClass('d-none');
+    $(document).on('click', '.add-description', function(){
+        $('div.update-form').html('');
+        $('.update-des').show();
+        
+        var question_id = $(this).data('question_id');
+        //console.log(question_id);
+        var html = '';
+
+        html += '<input type="hidden" name="question_id" value="'+ question_id +'"';
+        html += '<span id="kk_add_description_form" class="form">';
+        html +=    '<div class="col-md-12 mb-5">';   
+        html +=          '<textarea name="description" id="textareaDescription" class="form-control form-control-solid h-100px"></textarea>';
+        html +=     '</div>';
+        html +=      '<div class="d-flex justify-content-end">';
+        html +=            '<button type="submit" id="kk_add_description" class="btn btn-primary btn-sm">add</button>';
+        html +=       '</div>';
+        html +=   '</span>';
+        html +=   '<button type="button " class="btn btn-danger btn-sm me-3 kk_modal_new_add_cancel mb-5" style="width:80px; margin-top:-35px">cancel</button>';
+       
+        $(this).closest('div').find('.add-des-form').html(html);
     })
 
     //cancel button of add
-    $(document).on('click', '.kk_add_cancel', function(){
-        $(this).closest('div').find('.des-form').toggleClass('d-none');
+    $(document).on('click', '.kk_modal_new_add_cancel', function(){
+        $(this).parent('div.add-des-form').html('');
+        
     })
 
     //add description --save
-    $(document).on('submit', '#kk_add_description_form', function(e){
+    $(document).on('click', '#kk_add_description', function(e){
         e.preventDefault()
         //console.log('here')
         $('.with-errors').text('')
-       
+
         var thisaddbtn = $(this);
-        var formData = new FormData(this);
+
+        var question_id = $('input[name=question_id]').val();
+        var description = $('#textareaDescription').val();
+        // console.log(question_id);
+        // console.log(description);
+
         $.ajax({
             type:"POST",
             url: "{{ url('admin/description/question-description/store')}}",
-            data:formData,
-            cache:false,
-            contentType: false,
-            processData: false,
+            data:{
+                "_token": "{{ csrf_token() }}",
+                question : question_id,
+                description : description
+            },
+           dataType: "json",
             success:function(data){
                 if(data.success ==  false || data.success ==  "false"){
                     var arr = Object.keys(data.errors);
@@ -431,7 +310,7 @@
                     $('#kk_modal_new_question_form').find('.messages').html(alertBox).show();
                 }else{
                     toastr.success(data.message);
-                    thisaddbtn.parent().parent("div").find('.des-form').addClass('d-none');
+                    thisaddbtn.parent().parent("div").find('.add-des-form').html('');
                     location.reload();
                 }
 
@@ -439,32 +318,63 @@
         });
     })
 
+
     //show update description form
-    $(document).on('dblclick', '.update-des', function(){
+    $(document).on('click', '.update-des', function(){
         $(this).hide();
-        $(this).closest('div').find('.update-form').toggleClass('d-none');
+        $('div.add-des-form').html('');
+
+        var description_id = $(this).data('description_id');
+        var description = $(this).text();
+        // console.log(description_id);
+        // console.log(description);
+
+        var html = '';
+
+        html += '<input type="hidden" name="description_id" value="'+ description_id +'"';
+        html += '<span id="kk_update_description_form" class="form">';
+        html +=    '<div class="col-md-12 mb-5">';   
+        html +=          '<textarea name="description" id="textareaDescription" class="form-control form-control-solid h-100px">'+ description +'</textarea>';
+        html +=     '</div>';
+        html +=      '<div class="d-flex justify-content-end">';
+        html +=            '<button type="submit" id="kk_update_description" class="btn btn-primary btn-sm">update</button>';
+        html +=       '</div>';
+        html +=   '</span>';
+        html +=   '<button type="button " class="btn btn-danger btn-sm me-3 kk_modal_new_update_cancel mb-5" style="width:80px; margin-top:-35px">cancel</button>';
+       
+
+        $(this).closest('div').find('.update-form').html(html);
     })
 
     //cancel button of update
     $(document).on('click', '.kk_modal_new_update_cancel', function(){
-        $(this).parent('div.update-form').toggleClass('d-none');
-        $(this).parent().parent("div").find('.update-des').show();
+        $(this).parent('div.update-form').html('');
+        $('.update-des').show();
     })
+   
 
     //update description --save
-    $(document).on('submit', '#kk_update_description_form', function(e){
+    $(document).on('click', '#kk_update_description', function(e){
         e.preventDefault()
         //console.log('here')
         $('.with-errors').text('')
+
         var thisaddbtn = $(this);
-        var formData = new FormData(this);
+
+        var description_id = $('input[name=description_id]').val();
+        var description = $('#textareaDescription').val();
+        // console.log(description_id);
+        // console.log(description);
+      
         $.ajax({
             type:"POST",
             url: "{{ url('admin/question-description/update')}}",
-            data:formData,
-            cache:false,
-            contentType: false,
-            processData: false,
+            data:{
+                "_token": "{{ csrf_token() }}",
+                description_id : description_id,
+                description : description
+            },
+           dataType: "json",
             success:function(data){
                 if(data.success ==  false || data.success ==  "false"){
                     var arr = Object.keys(data.errors);
@@ -476,8 +386,8 @@
                     var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
                     $('#kk_modal_new_question_form').find('.messages').html(alertBox).show();
                 }else{
-                    //toastr.success(data.message);
-                    thisaddbtn.parent().parent("div").find('.update-form').addClass('d-none');
+                    toastr.success(data.message);
+                    thisaddbtn.parent().parent("div").find('.update-form').html('');
                     thisaddbtn.parent().parent("div").find('.update-des').show();
                     location.reload();
                 }
@@ -522,6 +432,8 @@
                                 //refresh datatable
                                location.reload();
                             }))
+                        }else{
+                            toastr.error(res.message);
                         }
                     }
                 });

@@ -20,6 +20,7 @@ class CreateWrittenQuestionsTable extends Migration
             $table->text('question');
             $table->tinyInteger('question_instruction')->default(0);
             $table->foreignId('main_category_id')->constrained();
+            $table->foreignId('category_id')->constrained();
             $table->foreignId('sub_category_id')->constrained();
             $table->foreignId('subject_id')->nullable()->constrained();
             $table->foreignId('year_id')->nullable()->constrained();

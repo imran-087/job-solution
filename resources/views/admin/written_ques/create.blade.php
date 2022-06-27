@@ -75,7 +75,7 @@
                         <!--begin::Heading-->
                         <div class="mb-13 text-center">
                             <!--begin::Title-->
-                            <h1 class="mb-3 mt-3">Written Question</h1>
+                            <h1 class="mb-3 mt-3 text-capitalize">Add Written Question into {{ $sub_category->name }}</h1>
                             <!--end::Title-->
                             <!--begin::Description-->
                             <div class="text-muted fw-bold fs-5">Fill up the form and submit
@@ -83,20 +83,14 @@
                             <!--end::Description-->
                         </div>
                         <!--end::Heading-->
+
+                        {{-- hidden input  --}}
+                        <input type="hidden" name="sub_category" id="sub_category"  value="{{ $sub_category->id }}">
+                        <input type="hidden" name="main_category"  value="{{ $main_category }}">
+                        <input type="hidden" name="category"  value="{{ $sub_category->category_id }}">
+
                         <!--begin::Input group-->
                         <div class="row g-9 mb-8">
-                            <!--begin::Col-->
-                            <div class="col-md-4 fv-row">
-                                <!--begin::Label-->
-                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="required">Sub Category</span>
-                                </label>
-                                <!--end::Label-->
-                                <input class="form-control form-control-solid" type="text" name=""  value="{{ $sub_category->name }}" disabled>
-                                <input type="hidden" name="sub_category"  value="{{ $sub_category->id }}">
-                                <input type="hidden" name="main_category"  value="{{ $main_category }}">
-                            </div>
-                            <!--end::Col-->
                             <!--begin::Col-->
                             <div class="col-md-6 fv-row">
                                 <label class="required fs-6 fw-bold mb-2">Select Subject</label>
@@ -113,20 +107,16 @@
                             </div>
                             <!--end::Col-->
                             <!--begin::Col-->
-                            <div class="col-md-2 fv-row">
-                                <label class="required fs-6 fw-bold mb-2">Select Year</label>
-                                <select class="form-select form-select-solid " data-control="select2"
-                                    data-hide-search="true" data-placeholder="Select year" name="year"
-                                    id="year" required>
-                                    <option value="">Choose ...</option>
-                                    @foreach ($years as $year)
-                                    <option value="{{ $year->id }}">{{ $year->year }}</option>
-                                    @endforeach
-
-                                </select>
-                                <div class="help-block with-errors year-error"></div>
+                            <div class="col-md-2  fv-row" >
+                                <label class="fs-6 fw-bold mb-2 required">Number of Input</label>
+                                <!--begin:Form-->
+                                <div id="kk_modal_new_number_of_input_form" class="form me-4">
+                                    <input type="text" class="form-control form-control-solid" placeholder="Enter number" name="number" id="number" />
+                                </div>
+                                <!--end:Form-->
                             </div>
                             <!--end::Col-->
+                            
                         </div>
                         <!--end::Input group-->
 
@@ -143,16 +133,7 @@
 
                             </div>
                             <!--end:Col-->
-                            <!--begin::Col-->
-                            <div class="col-md-2  fv-row" >
-                                <label class="fs-6 fw-bold mb-2 required">Number of Input</label>
-                                <!--begin:Form-->
-                                <div id="kk_modal_new_number_of_input_form" class="form me-4">
-                                    <input type="text" class="form-control form-control-solid" placeholder="Enter number" name="number" id="number" />
-                                </div>
-                                <!--end:Form-->
-                            </div>
-                            <!--end::Col-->
+                           
 
                         </div>
 
@@ -175,6 +156,7 @@
 @endsection
 
 @push('script')
+
 <script type="text/javascript">
     $(document).ready(function() {
         $('#kk_modal_new_number_of_input_form').on("keypress", function(event) {
@@ -198,12 +180,17 @@
             }
         });
 
+        //send a request on page load
+        $(document).ready(function() {
+            $("#subject").trigger('change');
+        });
+
         //get question instruction
         $('#subject').on('change', function () {
-            var subCategoryID =  $("#sub_category").find(':selected').val();
+            var subCategoryID =  $("#sub_category").val();
             var subjectID = $(this).val();
-            console.log(subCategoryID);
-            console.log(subjectID)
+            // console.log(subCategoryID);
+            // console.log(subjectID)
             if (subCategoryID && subjectID) {
                 $.ajax({
                     url: "{{ url('admin/question/written-question/get-instruction')}}",
@@ -297,77 +284,78 @@
 
     })
 
+    
     // add row
-    $(document).on('click', '.addRow', function() {
-        var html = '';
-        html += ' <div class="card" style="margin-top:20px !important; border:7px solid #F2F5F7; border-radius:5px; padding:20px">'
-        html += '<div class="card-body pt-4 " style="padding-bottom: 0px !important">'
+    // $(document).on('click', '.addRow', function() {
+    //     var html = '';
+    //     html += ' <div class="card" style="margin-top:20px !important; border:7px solid #F2F5F7; border-radius:5px; padding:20px">'
+    //     html += '<div class="card-body pt-4 " style="padding-bottom: 0px !important">'
 
-        html += '    <div class="row g-9 pb-4">'
+    //     html += '    <div class="row g-9 pb-4">'
 
-        html += '       <div style="" class="mb-5"> '
-        html += ' <div class="row">'
-        html += '  <div class="col-md-1">'
+    //     html += '       <div style="" class="mb-5"> '
+    //     html += ' <div class="row">'
+    //     html += '  <div class="col-md-1">'
 
-        html += '<div class="d-flex flex-column mb-8 fv-row">'
+    //     html += '<div class="d-flex flex-column mb-8 fv-row">'
 
-        html += '       <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
-        html += '    <div class="required">QN</div>'
-        html += '      </label>'
+    //     html += '       <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
+    //     html += '    <div class="required">QN</div>'
+    //     html += '      </label>'
 
-        html += '       <input type="text" class="form-control form-control-solid" placeholder="Q.No." name="question_no[]" />'
-        html += '              </div>'
+    //     html += '       <input type="text" class="form-control form-control-solid" placeholder="Q.No." name="question_no[]" />'
+    //     html += '              </div>'
 
-        html += '         </div>'
-        html += '        <div class="col-md-9">'
+    //     html += '         </div>'
+    //     html += '        <div class="col-md-9">'
 
-        html += '           <div class="d-flex flex-column mb-8 fv-row">'
+    //     html += '           <div class="d-flex flex-column mb-8 fv-row">'
 
-        html += '               <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
-        html += '                    <div class="required">Question </div>'
-        html += '               </label>'
+    //     html += '               <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
+    //     html += '                    <div class="required">Question </div>'
+    //     html += '               </label>'
 
-        html += '               <input type="text" class="form-control form-control-solid" placeholder="Enter Question" name="question[]" /> '
-        html += '           </div>'
+    //     html += '               <input type="text" class="form-control form-control-solid" placeholder="Enter Question" name="question[]" /> '
+    //     html += '           </div>'
 
-        html += '        </div>'
-        html += '       <div class="col-md-1">'
+    //     html += '        </div>'
+    //     html += '       <div class="col-md-1">'
 
-        html += '            <div class="d-flex flex-column mb-8 fv-row">'
+    //     html += '            <div class="d-flex flex-column mb-8 fv-row">'
 
-        html += '                <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
-        html += '                    <div class="">OR</div>'
-        html += '                </label>'
-        html += '               <input type="text" class="form-control form-control-solid" placeholder="অথবা" name="question_or[]" />'
-        html += '           </div>'
-        html += '       </div>'
-        html += '       <div class="col-md-1">'
+    //     html += '                <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
+    //     html += '                    <div class="">OR</div>'
+    //     html += '                </label>'
+    //     html += '               <input type="text" class="form-control form-control-solid" placeholder="অথবা" name="question_or[]" />'
+    //     html += '           </div>'
+    //     html += '       </div>'
+    //     html += '       <div class="col-md-1">'
 
-        html += '            <div class="d-flex flex-column mb-8 fv-row">'
+    //     html += '            <div class="d-flex flex-column mb-8 fv-row">'
 
-        html += '                <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
-        html += '                    <div class="required">Mark</div>'
-        html += '                </label>'
-        html += '               <input type="text" class="form-control form-control-solid" placeholder="5/10" name="mark[]" />'
-        html += '           </div>'
-        html += '       </div>'
-        html += '   </div>'
-        html += '    <div class="d-flex flex-column mb-8 fv-row">'
+    //     html += '                <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
+    //     html += '                    <div class="required">Mark</div>'
+    //     html += '                </label>'
+    //     html += '               <input type="text" class="form-control form-control-solid" placeholder="5/10" name="mark[]" />'
+    //     html += '           </div>'
+    //     html += '       </div>'
+    //     html += '   </div>'
+    //     html += '    <div class="d-flex flex-column mb-8 fv-row">'
 
-        html += '        <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
-        html += '             <span class="required fw-bolder">answer</span>'
-        html += '         </label>'
+    //     html += '        <label class="d-flex align-items-center fs-6 fw-bold mb-2">'
+    //     html += '             <span class="required fw-bolder">answer</span>'
+    //     html += '         </label>'
 
-        html += '        <textarea type="text" class="form-control form-control-solid h-100px"  placeholder="Enter answer" name="answer[]" > </textarea>'
-        html += '        <div class="help-block with-errors answer-error"></div>'
-        html += '     </div>'
-        html += '   </div>'
-        html += '   </div>'
-        html += '   </div>'
-        html += '   </div>'
-        $('.newRow').append(html);
+    //     html += '        <textarea type="text" class="form-control form-control-solid h-100px"  placeholder="Enter answer" name="answer[]" > </textarea>'
+    //     html += '        <div class="help-block with-errors answer-error"></div>'
+    //     html += '     </div>'
+    //     html += '   </div>'
+    //     html += '   </div>'
+    //     html += '   </div>'
+    //     html += '   </div>'
+    //     $('.newRow').append(html);
 
-    });
+    // });
 
 </script>
 @endpush

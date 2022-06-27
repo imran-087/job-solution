@@ -78,7 +78,7 @@ class CategoryController extends Controller
                             </span>
                             <!--end::Svg Icon-->
                         </a>
-                        <a href="javascript:;"  data-id="' . $row->id . '" data-name="' . $row->name . '" class="btn btn-light btn-active-color-primary btn-sm addSubCategory" title="Add Sub Category">
+                        <a href="javascript:;"  data-id="' . $row->id . '"  data-main_cat_id="' . $row->main_category_id . '" data-name="' . $row->name . '" class="btn btn-light btn-active-color-primary btn-sm addSubCategory" title="Add Sub Category">
                             <i class="fas fa-plus">&nbsp;Sub-Categoy</i>
                         </a>
                     </div>';

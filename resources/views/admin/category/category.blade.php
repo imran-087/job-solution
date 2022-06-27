@@ -329,6 +329,7 @@
 
                     {{-- hidden input  --}}
                     <input type="hidden"  name="category" />
+                    <input type="hidden"  name="main_category" id="main_cat_id" />
                     
                     <!--begin::Input group-->
                     <div class="row g-9 mb-8">
@@ -580,8 +581,11 @@
 
         // add new
         function addNew(){
-            $('input[name="category_id"]').val('')
-            $('.with-errors').text('')
+            $('input[name="category_id"]').val('');
+            $('.with-errors').text('');
+            $('.indicator-label').show();
+            $('.indicator-progress').hide();
+            $('#kk_modal_new_category_submit').removeAttr('disabled');
             $('#kk_modal_new_category_form')[0].reset();
             $('#main_category').get(0).selectedIndex = 0;
             $('#kk_modal_new_category').modal('show')
@@ -589,6 +593,9 @@
 
         //edit category modal
         function edit(id){
+            $('.indicator-label').show();
+            $('.indicator-progress').hide();
+            $('#kk_modal_new_category_submit').removeAttr('disabled');
             $.ajax({
                 type:"GET",
                 url: "{{ url('admin/category/category/get')}}"+'/'+id,
@@ -726,13 +733,15 @@
         //Add New Sub Category
         $(document).on('click', '.addSubCategory', function(){
             var id =  $(this).data('id');
+            var main_category =  $(this).data('main_cat_id');
             var name =  $(this).data('name');
-            console.log(id);
-            console.log(name);
+            // console.log(id);
+            // console.log(name);
 
             $('.with-errors').text('');
             $('#kk_modal_new_sub_category_form')[0].reset();
             $('input[name="category"]').val(id);
+            $('#main_cat_id').val(main_category);
             $('#append_text').html('<h1 class="mb-3" id="append_text">Add New Sub Category into <span class="text-capitalize"> '+ name +' </span> </h1>');
             $('#kk_modal_new_sub_category').modal('show');
         })
@@ -746,8 +755,8 @@
             $("#kk_modal_new_sub_category").modal('hide');
         })
 
-         //new sub category save
-         $('#kk_modal_new_sub_category_form').on('submit',function(e){
+        //new sub category save
+        $('#kk_modal_new_sub_category_form').on('submit',function(e){
             e.preventDefault()
             $('.with-errors').text('')
             $('.indicator-label').hide()

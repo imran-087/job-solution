@@ -46,7 +46,7 @@ class WrittenQuestionController extends Controller
                     );
                 } else {
                     $subjects = '';
-                    return view('admin.written_ques.create', compact('sub_category', 'main_category', 'subjects', 'total_input_by_auth_user', 'years'));
+                    return view('admin.written_ques.create', compact('sub_category',  'main_category', 'subjects', 'total_input_by_auth_user', 'years'));
                 }
             }
         } else {
@@ -86,6 +86,7 @@ class WrittenQuestionController extends Controller
         //validation
         $validator = Validator::make($request->all(), [
             'main_category' => ['required'],
+            'category' => ['required'],
             'sub_category' => ['required'],
             'subject' => ['required'],
             // 'year' => [$request->main_category == 3 ? 'nullable' : 'required'],
@@ -107,6 +108,7 @@ class WrittenQuestionController extends Controller
                     $question = new WrittenQuestion();
 
                     $question->main_category_id = $request->main_category;
+                    $question->category_id = $request->category;
                     $question->sub_category_id = $request->sub_category;
                     $question->subject_id = $request->subject;
                     $question->year_id = $request->year;
@@ -148,26 +150,7 @@ class WrittenQuestionController extends Controller
         }
     }
 
-    //show question
-    public function show(Request $request)
-    {
-        $sub_categories = WrittenQuestion::with('sub_category')->groupBy('sub_category_id')->get();
-        $load = 'false';
-        $exam_detail = null;
-        $questions = null;
-        //dd($questions);
-        if ($request->has('sub_category')) {
-            //dd('here');
-            $exam_detail = SubCategory::find($request->sub_category);
-            $questions = WrittenQuestion::with(['answer', 'descriptions'])->where('sub_category_id', $request->sub_category)->get()->toTree();
-
-            $load = 'true';
-        }
-        //dd($parent_instructions);
-        return view('admin.written_ques.view_question', compact('questions', 'sub_categories', 'exam_detail', 'load'));
-    }
-
-
+    
     //edit question
     public function edit($id, $type)
     {
@@ -181,6 +164,7 @@ class WrittenQuestionController extends Controller
         ]);
     }
 
+    //update question
     public function update(Request $request)
     {
         //dd($request->all());
@@ -217,4 +201,23 @@ class WrittenQuestionController extends Controller
             }
         }
     }
+
+    //show question
+    // public function show(Request $request)
+    // {
+    //     $sub_categories = WrittenQuestion::with('sub_category')->groupBy('sub_category_id')->get();
+    //     $load = 'false';
+    //     $exam_detail = null;
+    //     $questions = null;
+    //     //dd($questions);
+    //     if ($request->has('sub_category')) {
+    //         //dd('here');
+    //         $exam_detail = SubCategory::find($request->sub_category);
+    //         $questions = WrittenQuestion::with(['answer', 'descriptions'])->where('sub_category_id', $request->sub_category)->get()->toTree();
+
+    //         $load = 'true';
+    //     }
+    //     //dd($parent_instructions);
+    //     return view('admin.written_ques.view_question', compact('questions', 'sub_categories', 'exam_detail', 'load'));
+    // }
 }

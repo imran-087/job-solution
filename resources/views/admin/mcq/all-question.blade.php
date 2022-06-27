@@ -20,6 +20,7 @@
                 $subject_questions = App\Models\Question::with('question_option', 'descriptions')
                     ->where([
                         'subject_id' => $question->subject_id,
+                        'passage_id' => 0,
                         'sub_category_id' => $sub_category->id
                         ])->get();
                 @endphp
@@ -166,7 +167,7 @@
                                     <div class="d-flex flex-column mt-2 fv-row update-form">
                                         
                                     </div>
-                                    <!-- end: description add -->
+                                    <!-- end: description update -->
 
                                    
                                     <!-- Start: description add -->

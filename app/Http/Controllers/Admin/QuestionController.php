@@ -375,20 +375,18 @@ class QuestionController extends Controller
         //dd($request->all());
         $subject = Subject::select('name', 'id')
             ->where('id', $request->subject)
-            ->with('sub_category')->first();
+            ->first();
+        $sub_category = SubCategory::where('id', $request->sub_category)->value('name');
 
         if ($request->passage != null) {
             $passage = Passage::find($request->passage);
         } else {
-            $passage = '';
+            $passage = null;
         }
 
-        //dd($passages);
-        //return view('admin.mcq.latest_insert_show', compact('passages', 'subject'));
-
-        $questions = Question::with('question_option')
+        $questions = Question::with('question_option', 'descriptions')
             ->latest()->take($request->latest_input)->get();
-        return view('admin.mcq.latest_insert_show', compact('questions', 'subject', 'passage'));
+        return view('admin.mcq.latest_insert_show', compact('questions', 'subject', 'passage', 'sub_category'));
     }
 
 
@@ -466,22 +464,27 @@ class QuestionController extends Controller
     public function deleteQuestion($id)
     {
         //dd($id);
-        $question = Question::find($id);
-        $question_option = QuestionOption::where('question_id', $question->id)->first();
-        $question->delete();
-        $question_option->delete();
+        $question = Question::where('id', $id)->delete();
+        $question_option = QuestionOption::where('question_id', $id)->delete();
 
-        return response()->json([
-            'success' => true,
-            'message' => 'Question deleted successfully!'
-        ], 200);
+        if ($question && $question_option) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Question deleted successfully!'
+            ], 200);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Failed !!!'
+            ], 200);
+        }
     }
 
 
     //new mcq folder
     public function getMainCategory()
     {
-        $data = Category::where('main_category_id', 1)->with('main_category')->get();
+        $data = Category::where('main_category_id', 1)->select('main_category_id', 'id', 'name')->get();
         return view('admin.mcq.index', compact('data'));
     }
 
