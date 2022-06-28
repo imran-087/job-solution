@@ -323,14 +323,28 @@ class QuestionDescriptionController extends Controller
     public function update(Request $request)
     {
         //dd($request->all());
-        $description = Description::find($request->description_id);
-        $description->description = $request->description;
+        $validator = Validator::make($request->all(), [
+            'description' => ['required'],
+        ]);
 
-        if ($description->save()) {
+        if ($validator->fails()) {
             return response()->json([
-                'success' => true,
-                'message' => 'Description updated'
-            ]);
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 200);
+        } else {
+
+            $description = Description::find($request->description_id);
+            $description->description = $request->description;
+            $description->updated_user_id = Auth::guard('admin')->id();
+            $description->updated_at = Carbon::now();
+
+            if ($description->save()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => 'Description updated'
+                ]);
+            }
         }
     }
 }

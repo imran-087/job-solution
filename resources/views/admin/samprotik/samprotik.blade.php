@@ -72,13 +72,17 @@
             
             {{-- Samprotik Question Tag --}}
             @foreach($question->subjects as $tag)
-                <span class="badge badge-light mb-2">{{ $tag->name }}</span>
+                <span class="badge badge-info fs-7 mb-2">{{ $tag->name }}</span>
             @endforeach
             {{-- </div> --}}
 
             <div class="row">
                 @foreach($question->descriptions as $description)
-                    <span class="fw-bolder fs-6">Description:</span><p class="text-gray-800 fw-bold  ml-4 cursor-pointer update-des fs-6" data-description_id={{ $description->id }} style="text-align: justify">{{ $description->description }}</p>
+                    <span class="text-muted d-flex justify-content-between">
+                        <span>added by <span class="text-uppercase fs-7 text-black fw-bolder">{{ $description->created_by->name }}</span></span>
+                        <span> {{ $description->created_at  }}</span>
+                    </span>
+                    <span class="text-gray-800 fw-bold  ml-4 cursor-pointer update-des fs-6 mb-2" data-description_id={{ $description->id }} style="text-align: justify">{{ $description->description }}</span>
                 @endforeach
 
                 <!-- start: update description -->
@@ -94,10 +98,22 @@
                 </div>
                 <!-- end: description add -->
             </div>
-            <div class="row mt-5">
+            <div class="row mt-5 mb-5">
                 <input type="text"  data-question_id="{{ $question->id }}" class="form-control form-control-solid w-180px  get-tag"  placeholder="Type to search tag">
                 {{-- <span data-question_id=" {{ $question->id }}" class="btn btn-sm btn-light btn-active-color-primary get-tag cursor-pointer" title="Click" >Add Tag</span> --}}
                 <div class="tag" style="z-index:999"></div>
+            </div>
+            <div class="row">
+                <span class="text-muted d-flex justify-content-between">
+                    <span>added by <span class="text-uppercase text-black fw-bolder fs-7">{{ $question->created_by->name }}</span></span>
+                    <span> {{ $question->created_at  }}</span>
+                </span>
+                @isset($question->updated_user_id)
+                <span class="text-muted d-flex justify-content-between">
+                    <span>updated by <span class="text-uppercase text-black fw-bolder fs-7">{{ $question->updated_by->name }}</span></span>
+                    <span> {{ $question->updated_at   }}</span>
+                </span>
+                @endisset
             </div>
         </div>
         @endif

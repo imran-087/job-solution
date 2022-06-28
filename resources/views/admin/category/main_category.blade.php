@@ -107,7 +107,7 @@
                             <!--end::Select2-->
                         </div>
                         <!--begin::Add product-->
-                        <a href="javascript:;" class="btn btn-sm btn-primary me-3" onclick="addNew()">Add Main Category</a>
+                        <a href="javascript:;" class="btn btn-sm btn-primary me-3" onclick="addNew()" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Main Category"><i class="fas fa-plus fa-2xl"></i>Main Category</a>
                         <!--end::Add product-->
                     </div>
 
@@ -244,7 +244,7 @@
 
                     <!--begin::Actions-->
                     <div class="text-center">
-                        <button type="reset" id="kk_modal_new_main_category_cancel" class="btn btn-light me-3">Cancel</button>
+                        <button type="reset" id="kk_modal_new_main_category_cancel" class="btn btn-light btn-active-color-danger me-3">Cancel</button>
                         <button type="submit" id="kk_modal_new_main_category_submit" class="btn btn-primary">
                             <span class="indicator-label">Submit</span>
                             <span class="indicator-progress">Please wait...

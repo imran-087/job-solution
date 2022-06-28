@@ -100,9 +100,9 @@ class CategoryController extends Controller
     {
         //dd($request->all());
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
             'status' => 'required',
-            'main_category' => 'required'
+            'main_category' => 'required',
+            'name' => ['required', $request->category_id == null ? 'unique:categories' : '']
         ]);
 
         if ($validator->fails()) {

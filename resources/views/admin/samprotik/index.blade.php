@@ -229,6 +229,7 @@
         html += '<span id="kk_add_description_form" class="form">';
         html +=    '<div class="col-md-12 mb-5">';   
         html +=          '<textarea name="description" id="textareaDescription" class="form-control form-control-solid h-100px"></textarea>';
+        html +=           '<div class="help-block with-errors description-error"></div>'
         html +=     '</div>';
         html +=      '<div class="d-flex justify-content-end">';
         html +=            '<button type="submit" id="kk_add_description" class="btn btn-primary btn-sm">add</button>';
@@ -304,6 +305,7 @@
         html += '<span id="kk_update_description_form" class="form">';
         html +=    '<div class="col-md-12 mb-5">';   
         html +=          '<textarea name="description" id="textareaDescription" class="form-control form-control-solid h-100px">'+ description +'</textarea>';
+        html +=           '<div class="help-block with-errors description-error"></div>'
         html +=     '</div>';
         html +=      '<div class="d-flex justify-content-end">';
         html +=            '<button type="submit" id="kk_update_description" class="btn btn-primary btn-sm">update</button>';
@@ -429,7 +431,7 @@
                     toastr.success(data.message);
                     $('.tag').html('');
                     $('.get-tag').val(''); 
-                                                                       
+                    location.reload();                                     
                 }
                 else{
                     toastr.error(data.message)

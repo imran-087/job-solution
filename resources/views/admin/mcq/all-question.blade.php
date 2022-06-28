@@ -151,7 +151,7 @@
 
                                 {{--  Question Tag --}}
                                 @foreach($question->subjects as $tag)
-                                    <span class="badge badge-light mb-3">{{ $tag->name }}</span>
+                                    <span class="badge badge-success fs-7 mb-3 tag">{{ $tag->name }}<span class="ms-2 cursor-pointer d-none text-danger fs-5 X" data-id={{ $tag->id }}>X</span></span>
                                 @endforeach
                                 {{-- </div> --}}
 
@@ -159,7 +159,11 @@
                                     <!--end::Input group-->
                                     @if($question->descriptions->count() > 0)
                                         @foreach($question->descriptions as $description)
-                                         <span class="fw-bolder fs-6">Description:</span><p class="text-gray-800 fw-bold ml-4 cursor-pointer update-des" data-description_id={{ $description->id }} style="text-align: justify">{{ $description->description }}</p>
+                                        <span class="text-muted d-flex justify-content-between">
+                                            <span>added by <span class="text-uppercase text-black fw-bolder fs-7">{{ $description->created_by->name }}</span></span>
+                                            <span> {{ $description->created_at  }}</span>
+                                        </span>
+                                        <span class="text-gray-800 fw-bold ml-4 cursor-pointer update-des" data-description_id={{ $description->id }} style="text-align: justify">{{ $description->description }}</span>
                                         @endforeach
                                     @endif
 
@@ -178,9 +182,21 @@
                                     <!-- end: description add -->
                                 </div>
 
-                                <div class="row mt-5">
+                                <div class="row mt-5 mb-5">
                                     <input type="text"  data-question_id="{{ $question->id }}" data-subject_id="{{ $question->subject_id }}" class="form-control form-control-solid w-180px  search_tag"  placeholder="Type to search tag">
                                     <div class="result" style="z-index:999"></div>
+                                </div>
+                                <div class="row">
+                                    <span class="text-muted d-flex justify-content-between">
+                                        <span>added by <span class="text-uppercase text-black fw-bolder fs-7">{{ $question->created_by->name }}</span></span>
+                                        <span> {{ $question->created_at  }}</span>
+                                    </span>
+                                    @isset($question->updated_user_id)
+                                    <span class="text-muted d-flex justify-content-between">
+                                        <span>updated by <span class="text-uppercase text-black fw-bolder fs-7">{{ $question->updated_by->name }}</span></span>
+                                        <span> {{ $question->updated_at   }}</span>
+                                    </span>
+                                    @endisset
                                 </div>
                             </div>
                         </div>

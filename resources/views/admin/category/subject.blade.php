@@ -107,7 +107,7 @@
                             <!--end::Select2-->
                         </div>
                         <!--begin::Add product-->
-                        <a href="javascript:;" class="btn btn-sm btn-primary me-3" onclick="addNew()"><i class="fas fa-plus"></i>Add Subject</a>
+                        <a href="javascript:;" class="btn btn-sm btn-primary me-3" onclick="addNew()" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Subject"><i class="fas fa-plus"></i>Add Subject</a>
                         <!--end::Add product-->
                     </div>
 

@@ -38,6 +38,16 @@ class Question extends Model
         return $this->belongsTo(Passage::class);
     }
 
+    public function created_by()
+    {
+        return $this->belongsTo(Admin::class, 'created_user_id');
+    }
+
+    public function updated_by()
+    {
+        return $this->belongsTo(Admin::class, 'updated_user_id');
+    }
+
     //pivot relation
     public function pivotsubject()
     {

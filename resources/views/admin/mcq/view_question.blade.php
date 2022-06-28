@@ -127,6 +127,7 @@
         html += '<span id="kk_add_description_form" class="form">';
         html +=    '<div class="col-md-12 mb-5">';   
         html +=          '<textarea name="description" id="textareaDescription" class="form-control form-control-solid h-100px"></textarea>';
+        html +=           '<div class="help-block with-errors description-error"></div>'
         html +=     '</div>';
         html +=      '<div class="d-flex justify-content-end">';
         html +=            '<button type="submit" id="kk_add_description" class="btn btn-primary btn-sm">add</button>';
@@ -203,6 +204,7 @@
         html += '<span id="kk_update_description_form" class="form">';
         html +=    '<div class="col-md-12 mb-5">';   
         html +=          '<textarea name="description" id="textareaDescription" class="form-control form-control-solid h-100px">'+ description +'</textarea>';
+        html +=           '<div class="help-block with-errors description-error"></div>'
         html +=     '</div>';
         html +=      '<div class="d-flex justify-content-end">';
         html +=            '<button type="submit" id="kk_update_description" class="btn btn-primary btn-sm">update</button>';
@@ -265,7 +267,7 @@
     })
 
     //delete Question
-     $(document).on('click', '.delete', function(){
+    $(document).on('click', '.delete', function(){
         var id = $(this).data('id');
 
         Swal.fire({
@@ -386,7 +388,7 @@
                             toastr.success(data.message);
                             $('.result').html('');
                             $('.search_tag').val('');
-                            // $('#dataTable').DataTable().ajax.reload();
+                            location.reload();
                         }
                         else{
                             toastr.error(data.message);
@@ -396,6 +398,72 @@
                 });
         })
     })
+
+    //tag delete btn show on hover
+    $(".tag").hover(
+        function () {
+            $(this).find('.X').removeClass("d-none");
+        },
+        function () {
+            $(this).find('.X').addClass("d-none");
+        }
+    );
+
+    //delete tag
+    $(document).on('click', '.X', function(){
+        var id = $(this).data('id');
+
+        Swal.fire({
+            text: "Are you sure you want delete this tag?",
+            icon: "warning",
+            showCancelButton: !0,
+            buttonsStyling: !1,
+            confirmButtonText: "Confirm",
+            cancelButtonText: "No, cancel",
+            customClass: {
+                confirmButton: "btn fw-bold btn-danger",
+                cancelButton: "btn fw-bold btn-active-light-primary"
+            }
+        }).then((function (o) {
+            if(o.value){ //if agree
+                $.ajax({
+                    type: "GET",
+                    url: "{{ url('admin/question/tag/tag-delete') }}"+'/'+id,
+                    data: {},
+                    success: function (res)
+                    {
+                        if(res.success){
+                            Swal.fire({
+                                text: res.message,
+                                icon: "success",
+                                buttonsStyling: !1,
+                                confirmButtonText: "Ok, got it!",
+                                customClass: {
+                                    confirmButton: "btn fw-bold btn-primary"
+                                }
+                            }).then((function () {
+                                //refresh datatable
+                               location.reload();
+                            }))
+                        }
+                    }
+                });
+
+            }else{ //if cancel
+                Swal.fire({
+                    text: "Item has not been deleted",
+                    icon: "error",
+                    buttonsStyling: !1,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn fw-bold btn-primary"
+                    }
+                })
+            }
+
+        }))
+    })
+
 
 </script>
 @endpush

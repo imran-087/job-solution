@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\SamprotikQuestion;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Yajra\DataTables\Facades\DataTables;
 use Illuminate\Support\Facades\Validator;
 
@@ -221,26 +222,39 @@ class SamprotikTagController extends Controller
     {
         if ($request->ajax()) {
             //dd($request->all());
-            $question = SamprotikQuestion::find($request->question_id);
-
-            $subject = Subject::find($request->subject_id);
-
-            // $insert = DB::table('subjectables')->insert(
-            //     array('created_user_id' => Auth::guard('admin')->id(), 'status' => 1)
-            // );
-
-            $sync = $question->subjects()->sync([$subject->id => ['subject_id' => $subject->id, 'created_user_id' => Auth::user()->id, 'status' => 1]], false);
-
-            if ($sync) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Tag added'
-                ], 200);
-            } else {
+            $exists = DB::table('subjectables')->where([
+                'subjectable_type' => 'App\Models\SamprotikQuestion',
+                'subjectable_id' => $request->question_id,
+                'subject_id' => $request->subject_id
+            ])->exists();
+            if($exists){
                 return response()->json([
                     'error' => true,
-                    'message' => 'Failed'
-                ], 303);
+                    'message' => 'This tag is already exists'
+                ], 200);
+            }else{
+
+                $question = SamprotikQuestion::find($request->question_id);
+
+                $subject = Subject::find($request->subject_id);
+
+                // $insert = DB::table('subjectables')->insert(
+                //     array('created_user_id' => Auth::guard('admin')->id(), 'status' => 1)
+                // );
+
+                $sync = $question->subjects()->sync([$subject->id => ['subject_id' => $subject->id, 'created_user_id' => Auth::user()->id, 'status' => 1]], false);
+
+                if ($sync) {
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Tag added'
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'error' => true,
+                        'message' => 'Failed'
+                    ], 200);
+                }
             }
         }
     }

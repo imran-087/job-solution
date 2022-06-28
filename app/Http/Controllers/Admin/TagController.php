@@ -33,7 +33,7 @@ class TagController extends Controller
                     if ($row->sub_category_id == '') {
                         return '<div class="badge badge-light-info fw-bolder">Current Ques.</div>';
                     } else {
-                        return $row->sub_category->name ?? 'Not Found';
+                        return $row->subCategory->name ?? 'Not Found';
                     }
                 })
                 ->editColumn('subject_id', function ($row) {
@@ -44,9 +44,11 @@ class TagController extends Controller
                     }
                 })
                 ->addColumn('tag', function ($row) {
-                    foreach ($row->pivotsubject as $tag) {
-                        return '<div class="badge badge-success">' . $tag->name . '</div>';
+                    $val = '';
+                    foreach ($row->subjects as $tag) {
+                        $val.= '<div class="badge badge-success mb-2 me-2">' . $tag->name . '</div>';
                     }
+                    return $val;
                 })
 
                 ->addColumn('add_subject', function ($row) {
@@ -119,28 +121,45 @@ class TagController extends Controller
     {
         if ($request->ajax()) {
             //dd($request->all());
-            $question = Question::find($request->question_id);
-
-            $subject = Subject::find($request->subject_id);
-
-            // $insert = DB::table('subjectables')->insert(
-            //     array('created_user_id' => Auth::guard('admin')->id(), 'status' => 1)
-            // );
-
-            $sync = $question->subjects()->sync([$subject->id => ['subject_id' => $subject->id, 'created_user_id' => Auth::user()->id, 'status' => 1]], false);
-
-            if ($sync) {
-                return response()->json([
-                    'success' => true,
-                    'message' => 'Tag added'
-                ], 200);
-            } else {
+            $exists = DB::table('subjectables')->where([
+                'subjectable_type' => 'App\Models\Question',
+                'subjectable_id' => $request->question_id,
+                'subject_id' => $request->subject_id
+            ])->exists();
+            if ($exists) {
                 return response()->json([
                     'error' => true,
-                    'message' => 'Failed'
-                ], 303);
+                    'message' => 'This tag is already exists'
+                ], 200);
+            } else {
+
+                $question = Question::find($request->question_id);
+                $subject = Subject::find($request->subject_id);
+
+                // $insert = DB::table('subjectables')->insert(
+                //     array('created_user_id' => Auth::guard('admin')->id(), 'status' => 1)
+                // );
+
+                $sync = $question->subjects()->sync([$subject->id => ['subject_id' => $subject->id, 'created_user_id' => Auth::user()->id, 'status' => 1]], false);
+
+                if ($sync) {
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Tag added'
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'error' => true,
+                        'message' => 'Failed'
+                    ], 303);
+                }
             }
         }
+    }
+
+    //delete tag
+    public function delete($id){
+        dd($id);
     }
 
     //get subject

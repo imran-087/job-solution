@@ -118,14 +118,10 @@ class SubCategoryController extends Controller
         //dd($request->all());
         
         $validator = Validator::make($request->all(), [
-            'name' => ['required'],
-            'status' => ['required'],
             'category' => ['required'],
-            // 'duration' => ['numeric'],
-            // 'code_1' => ['numeric'],
-            // 'code_2' => ['numeric'],
-            // 'mark' => ['numeric'],
+            'status' => ['required'],
             'year' => [$request->main_category == 2 ? 'nullable' : 'required'],
+            'name' => ['required', $request->sub_category_id == null ? 'unique:sub_categories' : '']
 
         ]);
 

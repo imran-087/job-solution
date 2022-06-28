@@ -32,6 +32,7 @@ class Subject extends Model
     {
         return $this->belongsTo(SubCategory::class);
     }
+    
     public function main_category()
     {
         return $this->belongsTo(MainCategory::class);

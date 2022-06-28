@@ -93,7 +93,7 @@
                     <div class="card-toolbar flex-row-fluid justify-content-end gap-5"
                         data-select2-id="select2-data-123-0tix">
                         
-                        <div class="w-100 mw-150px" data-select2-id="select2-data-122-mhmq">
+                        <div class="w-100 mw-200px" data-select2-id="select2-data-122-mhmq">
                             <!--begin::Select2-->
                             <select class="form-select form-select-solid select2-hidden-accessible kk-datatable-filter"
                                 data-control="select2" data-hide-search="true" data-placeholder="Category"
@@ -125,12 +125,12 @@
                                     <!--begin::Table row-->
                                     <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                         <th class="min-w-20px">#</th>
-                                        <th class="min-w-100px">Sub Category</th>
-                                        <th class="min-w-100px">Subject</th>
+                                        <th class="min-w-120px" style="width: 120px !important">Sub Category</th>
+                                        <th class="min-w-70px">Subject</th>
                                         <th class="min-w-100px">Add Subject</th>
-                                        <th class=" min-w-300px">Question</th>
-                                        <th class=" min-w-100px">Tag</th>
-                                        <th class=" min-w-80px">Add Tag</th>
+                                        <th class="min-w-300px">Question</th>
+                                        <th class="min-w-100px">Tag</th>
+                                        <th class="min-w-90px">Add Tag</th>
                                     </tr>
                                     <!--end::Table row-->
                                 </thead>

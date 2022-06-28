@@ -29,7 +29,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('password/reset', 'Auth\ResetPasswordController@resetPassword')->name('password.update');
 
     ############ Route For Authenticate User #############
-    Route::middleware('auth:admin')->group(function () {
+    Route::middleware('auth:admin')->group( function () {
         Route::post('logout', 'Auth\LoginController@logout')->name('logout');
 
         ############ Admin Profile ##############
@@ -97,6 +97,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/year/get/{id}', 'YearController@getYear')->name('year.get');
         Route::get('/year/delete/{id}', 'YearController@deleteYear')->name('year.delete');
 
+        ############ Role Route #############
+        Route::get('/role/index', 'RoleController@index')->name('role.index');
+        Route::post('/role/store', 'RoleController@store')->name('role.store');
+        Route::get('/role/get/{id}', 'RoleController@getRole')->name('role.get');
+        Route::get('/role/delete/{id}', 'RoleController@deleteRole')->name('role.delete');
+
         ############ BookmarkType Route #############
         Route::get('/bookmark-type/index', 'BookmarkTypeController@index')->name('bookmark-type.index');
         Route::post('/bookmark-type/store', 'BookmarkTypeController@store')->name('bookmark-type.store');
@@ -160,6 +166,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/question/add-tag-on-question2', 'TagController@index2')->name('question.tag2');
         Route::post('question/tag/search', 'TagController@searchTag')->name('question.search-tag');
         Route::post('question/tag/tag-added', 'TagController@addTag')->name('question.add-tag');
+        Route::get('question/tag/tag-delete/{id}', 'TagController@delete')->name('question.delete-tag');
         //add subject
         Route::get('question/subject/get-subject', 'TagController@getSubject')->name('question.get-subject');
         Route::post('question/subject/add-subject', 'TagController@addSubject')->name('question.add-subject');

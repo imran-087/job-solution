@@ -19,6 +19,16 @@ class SamprotikQuestion extends Model
         return $this->hasMany(SamprotikBookmarks::class);
     }
 
+    public function created_by()
+    {
+        return $this->belongsTo(Admin::class, 'created_user_id');
+    }
+
+    public function updated_by()
+    {
+        return $this->belongsTo(Admin::class, 'updated_user_id');
+    }
+
     ####* Polymorphic Relation Start *####
 
     /**
@@ -52,4 +62,6 @@ class SamprotikQuestion extends Model
     {
         return $this->morphToMany(Subject::class, 'subjectable')->withPivot('created_user_id', 'deleted_at', 'status', )->withTimestamps();
     }
+
+    
 }

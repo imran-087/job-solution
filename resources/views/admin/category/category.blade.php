@@ -107,7 +107,7 @@
                             <!--end::Select2-->
                         </div>
                         <!--begin::Add product-->
-                        <a href="javascript:;" class="btn btn-sm btn-primary me-3" onclick="addNew()">Add Category</a>
+                        <a href="javascript:;" class="btn btn-sm btn-primary me-3" onclick="addNew()" data-bs-toggle="tooltip" data-bs-placement="top" title="Add Category"><i class="fas fa-plus fa-2xl"></i>Category</a>
                         <!--end::Add product-->
                     </div>
 
@@ -265,7 +265,7 @@
                     <!--begin::Actions-->
                     <div class="text-center">
                         <button type="reset" id="kk_modal_new_service_cancel" class="btn btn-light me-3">Cancel</button>
-                        <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary">
+                        <button type="submit" id="kk_modal_new_category_submit" class="btn btn-primary">
                             <span class="indicator-label">Submit</span>
                             <span class="indicator-progress">Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -412,23 +412,8 @@
                             <div class="help-block with-errors type-error"></div>
                         </div>
                         <!--end::Col-->
+                        
                         <!--begin::Col-->
-                        <div class="col-md-3 fv-row">
-                            <label class=" fs-6 fw-bold mb-2">Subject Code 1</label>
-                            <input type="text" class="form-control form-control-solid" placeholder="Subject code 1"
-                            name="code_1" />
-                            <div class="help-block with-errors code_1-error"></div>
-                        </div>
-                        <!--end::Col-->
-                        <!--begin::Col-->
-                        <div class="col-md-3 fv-row">
-                            <label class=" fs-6 fw-bold mb-2">Subject Code 2</label>
-                            <input type="text" class="form-control form-control-solid" placeholder="Subject code 2"
-                            name="code_2" />
-                            <div class="help-block with-errors code_2-error"></div>
-                        </div>
-                        <!--end::Col-->
-                         <!--begin::Col-->
                         <div class="col-md-3 fv-row">
                             <label class="required fs-5 fw-bold mb-2">Total Mark</label>
                             <input type="text" class="form-control form-control-solid" placeholder="Total mark"
@@ -436,15 +421,11 @@
                             <div class="help-block with-errors mark-error"></div>
                         </div>
                         <!--end::Col-->
-                    </div>
-                    <!--end::Input group-->
-                    <!--begin::Input group-->
-                    <div class="row g-9 ">
                         <!--begin::Col-->
                         <div class="col-md-3 fv-row">
                             <label class=" fs-6 fw-bold mb-2">Duration</label>
                             <!--begin::Input group-->
-                                <div class="input-group mb-5">
+                                <div class="input-group">
                                     <input type="text" class="form-control" 
                                     placeholder="30" name="duration"/>
                                     <span class="input-group-text">min</span>
@@ -462,7 +443,10 @@
                             <div class="help-block with-errors exam_date-error"></div>
                         </div>
                         <!--end::Col-->
-                        
+                    </div>
+                    <!--end::Input group-->
+                    <!--begin::Input group-->
+                    <div class="row g-9 mb-8">
                         <!--begin::Col-->
                         <div class="col-md-3 fv-row">
                             <label class=" fs-6 fw-bold mb-2">Year (optional)</label>
@@ -494,9 +478,9 @@
                    
                     <!--begin::Actions-->
                     <div class="text-center">
-                        <button type="reset" id="kk_modal_new_sub_category_cancel" class="btn btn-light me-3">Cancel</button>
+                        <button type="reset" id="kk_modal_new_sub_category_cancel" class="btn btn-light btn-active-color-danger me-3">Cancel</button>
                         <button type="submit" id="kk_modal_new_sub_category_submit" class="btn btn-primary py-3 px-10">
-                            <span class="indicator-label">Submit</span>
+                            <span class="indicator-label px-7 py-3">Submit</span>
                             <span class="indicator-progress">Please wait...
                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                         </button>

@@ -17,4 +17,14 @@ class Description extends Model
     {
         return $this->morphTo();
     }
+
+    public function created_by()
+    {
+        return $this->belongsTo(Admin::class, 'created_user_id');
+    }
+
+    public function updated_by()
+    {
+        return $this->belongsTo(Admin::class, 'updated_user_id');
+    }
 }

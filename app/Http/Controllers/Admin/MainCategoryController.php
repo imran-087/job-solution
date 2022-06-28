@@ -59,7 +59,7 @@ class MainCategoryController extends Controller
                             </span>
                             <!--end::Svg Icon-->
                         </a>
-                        <a href="javascript:;" onclick="deleteMainCategory(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1 ">
+                        <a href="javascript:;" onclick="deleteMainCategory(' . $row->id . ')" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1">
                             <!--begin::Svg Icon | path: icons/duotune/general/gen027.svg-->
                             <span class="svg-icon svg-icon-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
@@ -87,8 +87,8 @@ class MainCategoryController extends Controller
     {
         //dd($request->all());
         $validator = Validator::make($request->all(), [
-            'name' => 'required',
-            'status' => 'required'
+            'status' => 'required',
+            'name' => ['required', $request->main_category_id == null ? 'unique:main_categories' : '']
         ]);
 
         if ($validator->fails()) {
