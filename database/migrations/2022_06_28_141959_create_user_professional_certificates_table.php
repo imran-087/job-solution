@@ -15,6 +15,11 @@ class CreateUserProfessionalCertificatesTable extends Migration
     {
         Schema::create('user_professional_certificates', function (Blueprint $table) {
             $table->id();
+            $table->string('certificate_name');
+            $table->string('institute');
+            $table->string('address');
+            $table->timestamp('start_date');
+            $table->timestamp('end_date');
             $table->timestamps();
         });
     }

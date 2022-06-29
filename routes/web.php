@@ -19,6 +19,7 @@ use App\Http\Controllers\RecentQuestionController;
 use App\Http\Controllers\ProfileSettingsController;
 use App\Http\Controllers\Forum\DiscussionController;
 use App\Http\Controllers\QuestionActivityController;
+use App\Http\Controllers\Resume\UserDetailsController;
 use App\Http\Controllers\ModelTest\ModelTestController;
 use App\Http\Controllers\Admin\DependableCategoryController;
 use App\Http\Controllers\ModelTest\CustomModelTestController;
@@ -148,7 +149,7 @@ Route::middleware('auth')->name('user.')->group(function () {
 });
 
 
-########### Satt Exam ############
+########### Start Satt Exam ############
 #******* Model test **********#
 Route::get('/model-test', [ModelTestController::class, 'index'])->name('model-test.index');
 Route::get('/model-test/exam-details', [ModelTestController::class, 'show'])->name('model-test.exam-details');
@@ -164,6 +165,11 @@ Route::get('custom/model-test/data', [CustomModelTestController::class, 'getData
 Route::get('/model-test/result', [ModelTestResultController::class, 'index'])->name('result.index');
 Route::get('/model-test/details-view', [ModelTestResultController::class, 'show'])->name('model-test.details-view');
 
+########### End Satt Exam ############
+
+########### Resume Route ############
+Route::get('/resume/personal', [UserDetailsController::class, 'personal'])->name('resume.personal');
+Route::get('/resume/education-training', [UserDetailsController::class, 'education'])->name('resume.education');
 
 ######***News Feed ***#######
 Route::get('/news-feed', [FeedController::class, 'index'])->name('news-feed');

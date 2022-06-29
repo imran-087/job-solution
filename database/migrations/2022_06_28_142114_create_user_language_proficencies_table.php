@@ -15,6 +15,10 @@ class CreateUserLanguageProficenciesTable extends Migration
     {
         Schema::create('user_language_proficencies', function (Blueprint $table) {
             $table->id();
+            $table->string('language');
+            $table->enum('reading', ['low', 'medium', 'high']);
+            $table->enum('writting', ['low', 'medium', 'high']);
+            $table->enum('speaking', ['low', 'medium', 'high']);
             $table->timestamps();
         });
     }

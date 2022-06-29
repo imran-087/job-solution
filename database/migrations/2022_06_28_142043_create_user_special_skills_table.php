@@ -15,6 +15,10 @@ class CreateUserSpecialSkillsTable extends Migration
     {
         Schema::create('user_special_skills', function (Blueprint $table) {
             $table->id();
+            $table->json('skills');
+            $table->string('learning_media');
+            $table->string('description');
+            $table->string('extracurricular');
             $table->timestamps();
         });
     }

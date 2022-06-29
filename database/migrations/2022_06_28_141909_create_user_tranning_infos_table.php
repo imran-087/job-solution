@@ -15,6 +15,12 @@ class CreateUserTranningInfosTable extends Migration
     {
         Schema::create('user_tranning_infos', function (Blueprint $table) {
             $table->id();
+            $table->string('training_title');
+            $table->json('topic_covered');
+            $table->string('institute');
+            $table->string('duration');
+            $table->string('year');
+            $table->string('address');
             $table->timestamps();
         });
     }

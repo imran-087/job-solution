@@ -230,8 +230,7 @@
                         </div>
                         <!--end::Col-->
                     </div>
-                    <!--end::Input group-->
-
+                    
                     <!--begin::Input group-->
                     <div class="row g-9 mb-8">
                         <!--begin::Col-->
@@ -265,6 +264,7 @@
                         <!--end::Col-->
                     </div>
                     <!--end::Input group-->
+
                     <!--begin::Input group-->
                     <div class="row g-9 mb-8">
                         <!--begin::Col-->

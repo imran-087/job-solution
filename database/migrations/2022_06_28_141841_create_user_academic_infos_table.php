@@ -15,6 +15,16 @@ class CreateUserAcademicInfosTable extends Migration
     {
         Schema::create('user_academic_infos', function (Blueprint $table) {
             $table->id();
+            $table->enum('level_of_education', ['school', 'college', 'versity']);
+            $table->enum('degree', ['ssc', 'hsc', 'bsc_honours', 'msc', 'phd']);
+            $table->string('major_group');
+            $table->string('institute_name');
+            $table->float('result')->nullable();
+            $table->float('cgpa')->nullable();
+            $table->float('scale')->nullable();
+            $table->string('passing_year', 10)->nullable();
+            $table->smallInteger('course_duration')->nullable();
+            $table->string('achivement')->nullable();
             $table->timestamps();
         });
     }
