@@ -24,6 +24,11 @@ use App\Http\Controllers\ModelTest\ModelTestController;
 use App\Http\Controllers\Admin\DependableCategoryController;
 use App\Http\Controllers\ModelTest\CustomModelTestController;
 use App\Http\Controllers\ModelTest\ModelTestResultController;
+use App\Http\Controllers\Resume\EducationController;
+use App\Http\Controllers\Resume\EmploymentController;
+use App\Http\Controllers\Resume\OtherInformationController;
+use App\Http\Controllers\Resume\PersonalDetailsController;
+use App\Http\Controllers\Resume\PhotographController;
 
 /*
 |--------------------------------------------------------------------------
@@ -168,8 +173,36 @@ Route::get('/model-test/details-view', [ModelTestResultController::class, 'show'
 ########### End Satt Exam ############
 
 ########### Resume Route ############
-Route::get('/resume/personal', [UserDetailsController::class, 'personal'])->name('resume.personal');
-Route::get('/resume/education-training', [UserDetailsController::class, 'education'])->name('resume.education');
+//personal details
+Route::get('/resume/step_01/personal-details', [PersonalDetailsController::class, 'create'])->name('resume.personal');
+Route::post('/resume/step_01/personal_detail/store', [PersonalDetailsController::class, 'personalDetailStore'])->name('resume.personal_detail.store');
+Route::post('/resume/step_01/address_detail/store', [PersonalDetailsController::class, 'addressDetailStore'])->name('resume.address_detail.store');
+Route::post('/resume/step_01/career_application/store', [PersonalDetailsController::class, 'careerApplicationInfoStore'])->name('resume.career_application-info.store');
+Route::post('/resume/step_01/other_relevent_info/store', [PersonalDetailsController::class, 'otherReleventInfoStore'])->name('resume.other_relavent-info.store');
+Route::post('/resume/step_01/disability_info/store', [PersonalDetailsController::class, 'disabilitInfoStore'])->name('resume.disability_info.store');
+
+//educationandtraining
+Route::get('/resume/step_02/education-training', [EducationController::class, 'create'])->name('resume.education');
+Route::post('/resume/step_02/academic-summary/store', [EducationController::class, 'academicSummaryStore'])->name('resume.academic.store');
+Route::post('/resume/step_02/training-summary/store', [EducationController::class, 'trainingSummaryStore'])->name('resume.training.store');
+Route::post('/resume/step_02/professional-summary/store', [EducationController::class, 'professionalSummaryStore'])->name('resume.professional.store');
+
+//employmentHistory
+Route::get('/resume/step_03/employment-history', [EmploymentController::class, 'create'])->name('resume.employment');
+Route::post('/resume/step_03/employment-history/store', [EmploymentController::class, 'employmentHistoryStore'])->name('resume.employment_history.store');
+
+//otherinformation
+Route::get('/resume/step_04/other-inforamtion', [OtherInformationController::class, 'create'])->name('resume.other_info');
+Route::post('/resume/step_04/specialization-skill/store', [OtherInformationController::class, 'skillStore'])->name('resume.skill.store');
+Route::post('/resume/step_04/description/store', [OtherInformationController::class, 'descriptionStore'])->name('resume.description.store');
+Route::post('/resume/step_04/extracaricular/store', [OtherInformationController::class, 'extracaricularStore'])->name('resume.extracaricular.store');
+Route::post('/resume/step_04/language-proficency/store', [OtherInformationController::class, 'languageStore'])->name('resume.language.store');
+Route::post('/resume/step_04/references/store', [OtherInformationController::class, 'referencesStore'])->name('resume.references.store');
+
+//photograph
+Route::get('/resume/step_05/photograph', [PhotographController::class, 'create'])->name('resume.photo');
+Route::post('/resume/step_05/photograph/store', [PhotographController::class, 'photographStore'])->name('resume.photograph.store');
+
 
 ######***News Feed ***#######
 Route::get('/news-feed', [FeedController::class, 'index'])->name('news-feed');

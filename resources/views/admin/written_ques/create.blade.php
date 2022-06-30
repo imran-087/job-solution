@@ -277,7 +277,7 @@
     //answer field show hidden
     $(document).on('change', '.instruction', function(){
         let val = $(this).val();
-        console.log(val);
+        //console.log(val);
         if(val == 'yes'){
            $(this).closest('div').find('.written-answer').toggleClass('d-none');
         }
