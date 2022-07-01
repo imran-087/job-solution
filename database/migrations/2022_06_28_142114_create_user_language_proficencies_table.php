@@ -15,6 +15,7 @@ class CreateUserLanguageProficenciesTable extends Migration
     {
         Schema::create('user_language_proficencies', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
             $table->string('language');
             $table->enum('reading', ['low', 'medium', 'high']);
             $table->enum('writting', ['low', 'medium', 'high']);

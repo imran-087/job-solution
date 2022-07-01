@@ -15,6 +15,7 @@ class CreateFunctionalJobCategoriesTable extends Migration
     {
         Schema::create('functional_job_categories', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->timestamps();
         });
     }

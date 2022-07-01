@@ -334,16 +334,14 @@
                                             <label class="required fs-6 fw-bold mb-2">Blood Group</label>
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                                 data-placeholder="Select blood group" name="blood_group">
-                                                <option value="a+">A+</option>
-                                                <option value="a-" >A-</option>
-                                                <option value="b+">B+</option>
-                                                <option value="b-">B-</option>
-                                                <option value="c+">c+</option>
-                                                <option value="c-">c-</option>
-                                                <option value="o+">o+</option>
-                                                <option value="o-">o-</option>
-                                                <option value="ab+">AB+</option>
-                                                <option value="ab-">AB-</option>
+                                                <option value="a+">A(+ve)</option>
+                                                <option value="a-" >A(-ve)</option>
+                                                <option value="b+">B(+ve)</option>
+                                                <option value="b-">B(-ve)</option>
+                                                <option value="o+">O(+ve)</option>
+                                                <option value="o-">O(-ve)</option>
+                                                <option value="ab+">AB(+ve)</option>
+                                                <option value="ab-">AB(-ve)</option>
                                             </select>
                                             <div class="help-block with-errors blood_group-error"></div>    
                                         </div>

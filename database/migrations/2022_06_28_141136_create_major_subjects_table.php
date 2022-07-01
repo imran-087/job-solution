@@ -15,6 +15,7 @@ class CreateMajorSubjectsTable extends Migration
     {
         Schema::create('major_subjects', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->timestamps();
         });
     }

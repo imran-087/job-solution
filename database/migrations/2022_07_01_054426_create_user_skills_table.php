@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateUserSpecialSkillsTable extends Migration
+class CreateUserSkillsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateUserSpecialSkillsTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_special_skills', function (Blueprint $table) {
+        Schema::create('user_skills', function (Blueprint $table) {
             $table->id();
-            $table->json('skills');
+            $table->foreignId('user_id')->constrained();
+            $table->string('skill');
             $table->string('learning_media');
-            $table->string('description');
-            $table->string('extracurricular');
             $table->timestamps();
+           
         });
     }
 
@@ -30,6 +30,6 @@ class CreateUserSpecialSkillsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('user_special_skills');
+        Schema::dropIfExists('user_skills');
     }
 }

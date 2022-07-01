@@ -18,6 +18,7 @@ class CreateBdUpazilasTable extends Migration
             $table->foreignId('city_id')->constrained();
             $table->string('name');
             $table->string('bn_name');
+            $table->string('city_name');
             $table->timestamps();
         });
     }

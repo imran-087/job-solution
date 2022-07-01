@@ -15,12 +15,13 @@ class CreateUserTranningInfosTable extends Migration
     {
         Schema::create('user_tranning_infos', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
             $table->string('training_title');
-            $table->json('topic_covered');
+            $table->json('topic_covered')->nullable();
             $table->string('institute');
             $table->string('duration');
             $table->string('year');
-            $table->string('address');
+            $table->string('address')->nullable();
             $table->timestamps();
         });
     }

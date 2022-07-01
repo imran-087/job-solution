@@ -15,11 +15,14 @@ class CreateUserAcademicInfosTable extends Migration
     {
         Schema::create('user_academic_infos', function (Blueprint $table) {
             $table->id();
-            $table->enum('level_of_education', ['school', 'college', 'versity']);
-            $table->enum('degree', ['ssc', 'hsc', 'bsc_honours', 'msc', 'phd']);
-            $table->string('major_group');
+            $table->foreignId('user_id')->constrained();
+            $table->enum('degree_level', ['psc', 'jsc', 'sceondery', 'higersecondery', 'diploma', 'bechelor', 'masters', 'phd']);
+            $table->string('degree_type');
+            $table->string('major');
             $table->string('institute_name');
+            $table->string('board');
             $table->float('result')->nullable();
+            $table->float('marks')->nullable();  // %
             $table->float('cgpa')->nullable();
             $table->float('scale')->nullable();
             $table->string('passing_year', 10)->nullable();

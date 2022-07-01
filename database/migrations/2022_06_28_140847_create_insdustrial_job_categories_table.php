@@ -15,6 +15,7 @@ class CreateInsdustrialJobCategoriesTable extends Migration
     {
         Schema::create('insdustrial_job_categories', function (Blueprint $table) {
             $table->id();
+            $table->string('name');
             $table->timestamps();
         });
     }

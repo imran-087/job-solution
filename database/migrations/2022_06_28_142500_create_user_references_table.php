@@ -15,13 +15,16 @@ class CreateUserReferencesTable extends Migration
     {
         Schema::create('user_references', function (Blueprint $table) {
             $table->id();
+            $table->foreignId('user_id')->constrained();
             $table->string('name');
             $table->string('designation');
             $table->string('organization');
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->string('mobile');
-            $table->string('relation');
-            $table->string('address');
+            $table->string('phone_res')->nullable();
+            $table->string('phone_off')->nullable();
+            $table->string('relation')->nullable();
+            $table->string('address')->nullable();
             $table->timestamps();
         });
     }
