@@ -17,8 +17,8 @@ class CreateUserReferencesTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('name');
-            $table->string('designation');
-            $table->string('organization');
+            $table->string('designation')->nullable();
+            $table->string('organization')->nullable();
             $table->string('email')->nullable();
             $table->string('mobile');
             $table->string('phone_res')->nullable();

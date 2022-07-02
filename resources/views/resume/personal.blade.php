@@ -93,7 +93,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter First Name"
-                                                    name="first_name" />
+                                                    name="first_name" value="{{ old('first_name') ?? $user_detail->first_name }}"/>
                                                 <div class="help-block with-errors first_name-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -108,7 +108,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter Last Name"
-                                                    name="last_name" />
+                                                    name="last_name" value="{{ old('last_name') ?? $user_detail->last_name }}"/>
                                                 <div class="help-block with-errors last_name-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -127,7 +127,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter Father Name"
-                                                    name="father_name" />
+                                                    name="father_name" value="{{ old('father_name') ?? $user_detail->father_name }}"/>
                                                 <div class="help-block with-errors father_name-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -142,7 +142,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter Mother Name"
-                                                    name="mother_name" />
+                                                    name="mother_name" value="{{ old('mother_name') ?? $user_detail->mother_name }}" />
                                                 <div class="help-block with-errors mother_name-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -161,7 +161,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control form-control-solid" placeholder="Date of birth"
-                                                    name="date_of_birth" />
+                                                    name="date_of_birth" value="{{ old('date_of_birth') ?? \Carbon\Carbon::parse($user_detail->date_of_birth)->format('d-M-Y')}}"/>
                                                 <div class="help-block with-errors date_of_birth-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -170,10 +170,11 @@
                                         <div class="col-md-6 fv-row">
                                             <label class="required fs-6 fw-bold mb-2">Gender</label>
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                data-placeholder="Select Gender" name="gender">
-                                                <option value="male">Male</option>
-                                                <option value="female" >Female</option>
-                                                <option value="other">Other</option>
+                                                name="gender">
+                                                <option value="">Select gender</option>
+                                                <option value="male" {{ $user_detail->gender == 'male' ? 'selected' : '' }}>Male</option>
+                                                <option value="female" {{ $user_detail->gender == 'female' ? 'selected' : '' }}>Female</option>
+                                                <option value="other" {{ $user_detail->gender == 'other' ? 'selected' : '' }}>Other</option>
                                             </select>
                                             <div class="help-block with-errors gender-error"></div>    
                                         </div>
@@ -185,13 +186,14 @@
                                         <div class="col-md-6 fv-row">
                                             <label class="required fs-6 fw-bold mb-2">Religion</label>
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                data-placeholder="Select Religion" name="religion">
-                                                <option value="islam">Islam</option>
-                                                <option value="hinduism" >Hinduism </option>
-                                                <option value="christianity">Christianity</option>
-                                                <option value="buddhism">Buddhism </option>
-                                                <option value="judaism">Judaism</option>
-                                                <option value="other">Other</option>
+                                               name="religion">
+                                               <option value="">Select </option>
+                                                <option value="islam" {{ $user_detail->religion == 'islam' ? 'selected' : '' }}>Islam</option>
+                                                <option value="hinduism" {{ $user_detail->religion == 'hinduism' ? 'selected' : '' }}>Hinduism </option>
+                                                <option value="christianity" {{ $user_detail->religion == 'christianity' ? 'selected' : '' }}>Christianity</option>
+                                                <option value="buddhism" {{ $user_detail->religion == 'buddhism' ? 'selected' : '' }}>Buddhism </option>
+                                                <option value="judaism" {{ $user_detail->religion == 'judaism' ? 'selected' : '' }}>Judaism</option>
+                                                <option value="other" {{ $user_detail->religion == 'other' ? 'selected' : '' }}>Other</option>
                                             </select>
                                             <div class="help-block with-errors religion-error"></div>    
                                         </div>
@@ -202,8 +204,8 @@
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                                 name="marital_status">
                                                 <option value="">Select</option>
-                                                <option value="unmarried">Unmarried</option>
-                                                <option value="married" >Married </option>
+                                                <option value="unmarried" {{ $user_detail->marital_status == 'unmarried' ? 'selected' : '' }}>Unmarried</option>
+                                                <option value="married" {{ $user_detail->marital_status == 'married' ? 'selected' : '' }}>Married </option>
                                             </select>
                                             <div class="help-block with-errors marital_status-error"></div>    
                                         </div>
@@ -222,7 +224,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter your nationality"
-                                                    name="nationality" />
+                                                    name="nationality" value="{{ old('nationality') ?? $user_detail->nationality }}"/>
                                                 <div class="help-block with-errors nationality-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -237,7 +239,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter NID No."
-                                                    name="national_id" />
+                                                    name="national_id" value="{{ old('national_id') ?? $user_detail->national_id }}" />
                                                 <div class="help-block with-errors national_id-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -256,7 +258,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter passport no"
-                                                    name="passport_no" />
+                                                    name="passport_no" value="{{ old('passport_no') ?? $user_detail->passport_no }}"/>
                                                 <div class="help-block with-errors passport_no-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -271,7 +273,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control form-control-solid" placeholder="Enter passport issue date."
-                                                    name="passport_issue_date" />
+                                                    name="passport_issue_date" value="{{ old('passport_issue_date') ?? \Carbon\Carbon::parse($user_detail->passport_issue_date)->format('d-M-Y')}}"/>
                                                 <div class="help-block with-errors passport_issue_date-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -290,7 +292,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter your primary mobile no. "
-                                                    name="primary_mobile" />
+                                                    name="primary_mobile" value="{{ old('primary_mobile') ?? $user_detail->primary_mobile }}"/>
                                                 <div class="help-block with-errors primary_mobile-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -305,7 +307,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter your secondary mobile no."
-                                                    name="secondary_mobile" />
+                                                    name="secondary_mobile" value="{{ old('secondary_mobile') ?? $user_detail->secondary_mobile }}"/>
                                                 <div class="help-block with-errors secondary_mobile-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -324,7 +326,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter email address"
-                                                    name="email" />
+                                                    name="email" value="{{ old('email') ?? $user_detail->email }}" />
                                                 <div class="help-block with-errors email-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -333,15 +335,16 @@
                                         <div class="col-md-6 fv-row">
                                             <label class="required fs-6 fw-bold mb-2">Blood Group</label>
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                data-placeholder="Select blood group" name="blood_group">
-                                                <option value="a+">A(+ve)</option>
-                                                <option value="a-" >A(-ve)</option>
-                                                <option value="b+">B(+ve)</option>
-                                                <option value="b-">B(-ve)</option>
-                                                <option value="o+">O(+ve)</option>
-                                                <option value="o-">O(-ve)</option>
-                                                <option value="ab+">AB(+ve)</option>
-                                                <option value="ab-">AB(-ve)</option>
+                                                name="blood_group">
+                                                <option value="">Select blood group</option>
+                                                <option value="a+" {{$user_detail->blood_group == 'a+' ? 'selected' : '' }}>A(+ve)</option>
+                                                <option value="a-" {{$user_detail->blood_group == 'a-' ? 'selected' : '' }} >A(-ve)</option>
+                                                <option value="b+" {{$user_detail->blood_group == 'b+' ? 'selected' : '' }}>B(+ve)</option>
+                                                <option value="b-" {{$user_detail->blood_group == 'b-' ? 'selected' : '' }}>B(-ve)</option>
+                                                <option value="o+" {{$user_detail->blood_group == 'o+' ? 'selected' : '' }}>O(+ve)</option>
+                                                <option value="o-" {{$user_detail->blood_group == 'o-' ? 'selected' : '' }}>O(-ve)</option>
+                                                <option value="ab+" {{$user_detail->blood_group == 'ab+' ? 'selected' : '' }}>AB(+ve)</option>
+                                                <option value="ab-" {{$user_detail->blood_group == 'ab-' ? 'selected' : '' }}>AB(-ve)</option>
                                             </select>
                                             <div class="help-block with-errors blood_group-error"></div>    
                                         </div>
@@ -365,7 +368,7 @@
                     <div class="accordion-item mb-8" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
                         <h2 class="accordion-header" id="kt_accordion_1_header_2">
                             <button class="accordion-button fs-4 fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#kt_accordion_1_body_2" aria-expanded="false" aria-controls="kt_accordion_1_body_2">
-                            Address Details
+                                Address Details
                             </button>
                         </h2>
                         <div id="kt_accordion_1_body_2" class="accordion-collapse collapse " aria-labelledby="kt_accordion_1_header_2" data-bs-parent="#kt_accordion_1">
@@ -374,6 +377,7 @@
                                 <form id="kk_address_details_form" class="form" enctype="multipart/form-data">
                                     @csrf
                                     <div class="messages"></div>
+                                
                                     <!--begin::Heading-->
                                     <div class="mb-5">
                                         <!--begin::Description-->
@@ -391,7 +395,8 @@
                                         <div class="col-md-4 fv-row">
                                             <label class="required fs-6 fw-bold mb-2">Country</label>
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                data-placeholder="Select country" name="p_country">
+                                                name="p_country">
+                                                <option value="">Select country</option>
                                                 <option value="bangladesh">Bangladesh</option>
                                                 
                                             </select>
@@ -402,7 +407,8 @@
                                         <div class="col-md-4 fv-row">
                                             <label class="required fs-6 fw-bold mb-2">State</label>
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                data-placeholder="Select state" name="p_state">
+                                                name="p_state">
+                                                <option value="">Select state</option>
                                                 <option value="rajshahi">Rajshahi</option>
                                                 
                                             </select>
@@ -413,7 +419,8 @@
                                         <div class="col-md-4 fv-row">
                                             <label class="required fs-6 fw-bold mb-2">City</label>
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                data-placeholder="Select city" name="p_city">
+                                                name="p_city">
+                                                <option value="">Select city</option>
                                                 <option value="rajshahi">Rajshahi</option>
                                                 
                                             </select>
@@ -435,8 +442,8 @@
                                             <span>Permanent Address</span> 
         
                                             <div class="form-check form-check-custom form-check-solid text-black">
-                                                <input class="form-check-input" type="checkbox" value="same" id="permanent_address">
-                                                <label class="form-check-label ms-3" for="permanent_address">Same as Present Address</label>
+                                                <input class="form-check-input" type="checkbox" value="same" name="present_permanent" id="permanent_address">
+                                                <label class="form-check-label ms-3"  for="permanent_address">Same as Present Address</label>
                                             </div>
                                             
                                         </div>
@@ -457,7 +464,8 @@
                                             <div class="col-md-4 fv-row">
                                                 <label class="required fs-6 fw-bold mb-2">Country</label>
                                                 <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                    data-placeholder="Select country" name="country">
+                                                    name="country">
+                                                    <option value="">Select country</option>
                                                     <option value="bangladesh">Bangladesh</option>
                                                     
                                                 </select>
@@ -468,7 +476,8 @@
                                             <div class="col-md-4 fv-row">
                                                 <label class="required fs-6 fw-bold mb-2">State</label>
                                                 <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                    data-placeholder="Select state" name="state">
+                                                    name="state">
+                                                    <option value="">Select state</option>
                                                     <option value="rajshahi">Rajshahi</option>
                                                     
                                                 </select>
@@ -479,7 +488,8 @@
                                             <div class="col-md-4 fv-row">
                                                 <label class="required fs-6 fw-bold mb-2">City</label>
                                                 <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                    data-placeholder="Select city" name="city">
+                                                    name="city">
+                                                    <option value="">Select city</option>
                                                     <option value="rajshahi">Rajshahi</option>
                                                     
                                                 </select>
@@ -493,17 +503,18 @@
                                             <input type="text" class="form-control form-control-solid" placeholder="Type your house no/road no/village" name="address" />
                                         </div>
                                         <!-- end: col-->
-                                        <!--begin::Actions-->
-                                        <div class="d-flex justify-content-between">
-                                            <button type="reset" id="kk_address_detail_cancel" class="btn btn-light btn-active-color-danger me-3">Close</button>
-                                            <button type="submit" id="kk_address_detail_submit" class="btn btn-primary">
-                                                <span class="indicator-label py-3 px-7">Save</span>
-                                                <span class="indicator-progress">Please wait...
-                                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                            </button>
-                                        </div>
-                                        <!--end::Actions-->
+                                        
                                     </span>
+                                    <!--begin::Actions-->
+                                    <div class="d-flex justify-content-between">
+                                        <button type="reset" id="kk_address_detail_cancel" class="btn btn-light btn-active-color-danger me-3">Close</button>
+                                        <button type="submit" id="kk_address_detail_submit" class="btn btn-primary">
+                                            <span class="indicator-label py-3 px-7">Save</span>
+                                            <span class="indicator-progress">Please wait...
+                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                        </button>
+                                    </div>
+                                    <!--end::Actions-->
                                 </form>
                             </div>
                         </div>
@@ -541,7 +552,7 @@
                                             <div class="d-flex flex-column fv-row">
                                                 <!--begin::Label-->
                                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                                    <span class="required">Current Salary</span>
+                                                    <span class="">Current Salary</span>
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Your current salary"
@@ -602,9 +613,9 @@
                                                 <div class="fs-6 fw-bold">
                                                     <input class="form-check-input mb-3 me-1" type="radio" name="job_nature"  value="full_time"> <span class="me-3"> Full Time</span>
                                                     <input class="form-check-input mb-3 me-1" type="radio" name="job_nature"  value="part_time"> <span class="me-3"> Part Time</span>
-                                                    <input class="form-check-input mb-3 me-1" type="radio" name="job_nature"  value="contact"> <span class="me-3 "> Contract</span> <br>
+                                                    <input class="form-check-input mb-3 me-1" type="radio" name="job_nature"  value="contract"> <span class="me-3 "> Contract</span> <br>
                                                     <input class="form-check-input me-1" type="radio" name="job_nature"  value="internship"> <span class="me-3"> Internship</span>
-                                                    <input class="form-check-input me-1" type="radio" name="job_nature"  value="freelenace"> <span class=""> Freelance</span>
+                                                    <input class="form-check-input me-1" type="radio" name="job_nature"  value="freelance"> <span class=""> Freelance</span>
                                                 </div>
                                                 <div class="help-block with-errors job_nature-error"></div>
                                             </div>
@@ -647,7 +658,7 @@
                                             <span class="">Career Summary</span>
                                         </label>
                                         <!--end::Label-->
-                                        <textarea class="form-control form-control-solid h-100px" placeholder="Enter carrer summary" name="carrer_summery"></textarea>
+                                        <textarea class="form-control form-control-solid h-100px" placeholder="Enter carrer summary" name="carrer_summary"></textarea>
                                         <div class="help-block with-errors carrer_summery-error"></div>   
                                     </div>
                                     <!-- end: col-->
@@ -705,8 +716,8 @@
                                     <div class="text-muted fw-bold fs-5 mb-5 required">Do you have National Disability ID Number?</div>
                                     <!--end::Description-->
                                     <div class="fs-6 fw-bold">
-                                        <input class="form-check-input disability_id" type="radio" name="radiobtn"  value="yes"> <span class="me-3">Yes</span>
-                                        <input class="form-check-input disability_id" type="radio" name="radiobtn"  value="no" checked> No
+                                        <input class="form-check-input disability" type="radio" name="radiobtn"  value="yes"> <span class="me-3">Yes</span>
+                                        <input class="form-check-input disability" type="radio" name="radiobtn"  value="no" checked> No
                                     </div>
                                 </div>
                                 <!--end::Heading-->
@@ -719,6 +730,8 @@
                                     @csrf
                                     <div class="messages"></div>
 
+                                    {{-- hidden input  --}}
+                                    <input type="hidden" name="disability" id="disability">
                                     <!--begin::Input group-->
                                     <div class="row g-9 mb-8 mt-5">
                                         <!--begin::Col-->
@@ -762,7 +775,8 @@
                                         <div class="col-md-6 fv-row">
                                             <label class="required fs-6 fw-bold mb-2">Difficulty to see</label>
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                data-placeholder="Select" name="see">
+                                                name="see">
+                                                <option value="">Select</option>
                                                 <option value="some">Some Difficulty</option>
                                                 <option value="lot" >A lot of Difficulty</option>
                                                 <option value="cannot">Can not do at all</option>
@@ -773,7 +787,8 @@
                                         <div class="col-md-6 fv-row">
                                             <label class="required fs-6 fw-bold mb-2">Difficulty to Hear</label>
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                data-placeholder="Select" name="hear">
+                                                name="hear">
+                                                <option value="">Select</option>
                                                 <option value="some">Some Difficulty</option>
                                                 <option value="lot" >A lot of Difficulty</option>
                                                 <option value="cannot">Can not do at all</option>
@@ -789,7 +804,8 @@
                                         <div class="col-md-6 fv-row">
                                             <label class="required fs-6 fw-bold mb-2">Difficulty to Concentrate or remember  </label>
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                data-placeholder="Select" name="remember">
+                                                name="remember">
+                                                <option value="">Select</option>
                                                 <option value="some">Some Difficulty</option>
                                                 <option value="lot" >A lot of Difficulty</option>
                                                 <option value="cannot">Can not do at all</option>
@@ -800,7 +816,8 @@
                                         <div class="col-md-6 fv-row">
                                             <label class="required fs-6 fw-bold mb-2">Difficulty to Sit, Stand, Walk or Climb Stairs </label>
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                data-placeholder="Select" name="walk">
+                                                name="physical">
+                                                <option value="">Select</option>
                                                 <option value="some">Some Difficulty</option>
                                                 <option value="lot" >A lot of Difficulty</option>
                                                 <option value="cannot">Can not do at all</option>
@@ -889,32 +906,28 @@
                     for(var i= 0;i < arr.length;i++){
                     $('.'+arr[i]+'-error').text(arr_val[i][0])
                     }
-                }else if(data.error || data.error == 'true'){
+                }else if(data.error == true || data.error == 'true'){
                     var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
                     $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                 }else{
-                    // empty the form
-                    $('#kk_modal_new_sub_category_form')[0].reset();
-                    clearAppendData();
-                    $("#kk_modal_new_sub_category").modal('hide');
-
+                    //empty the form
                     Swal.fire({
-                            text: data.message,
-                            icon: "success",
-                            buttonsStyling: !1,
-                            confirmButtonText: "{{__('Ok, got it!')}}",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary"
-                            }
-                        }).then((function () {
-                            //refresh datatable
-                            $('#dataTable').DataTable().ajax.reload();
-                        }))
+                        text: data.message,
+                        icon: "success",
+                        buttonsStyling: !1,
+                        confirmButtonText: "{{__('Ok, got it!')}}",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary"
+                        }
+                    }).then((function () {
+                        //refresh datatable
+                        $('#dataTable').DataTable().ajax.reload();
+                    }))
                 }
 
-            $('.indicator-label').show();
-            $('.indicator-progress').hide();
-            $('#kk_modal_new_service_submit').removeAttr('disabled');
+                $('.indicator-label').show();
+                $('.indicator-progress').hide();
+                $('#kk_modal_new_service_submit').removeAttr('disabled');
 
             }
         });
@@ -959,10 +972,7 @@
                     $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                 }else{
                     // empty the form
-                    $('#kk_modal_new_sub_category_form')[0].reset();
-                    clearAppendData();
-                    $("#kk_modal_new_sub_category").modal('hide');
-
+                  
                     Swal.fire({
                             text: data.message,
                             icon: "success",
@@ -1017,10 +1027,7 @@
                     $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                 }else{
                     // empty the form
-                    $('#kk_modal_new_sub_category_form')[0].reset();
-                    clearAppendData();
-                    $("#kk_modal_new_sub_category").modal('hide');
-
+                
                     Swal.fire({
                             text: data.message,
                             icon: "success",
@@ -1075,10 +1082,7 @@
                     $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                 }else{
                     // empty the form
-                    $('#kk_modal_new_sub_category_form')[0].reset();
-                    clearAppendData();
-                    $("#kk_modal_new_sub_category").modal('hide');
-
+                   
                     Swal.fire({
                             text: data.message,
                             icon: "success",
@@ -1104,10 +1108,11 @@
 
     
     //disability form show hide
-    $(".disability_id").on('click', function(){
+    $(".disability").on('click', function(){
         let val = $(this).val();
-        console.log(val);
+        //console.log(val);
         if(val == 'yes'){
+            $("#disability").val(val);
             $("#kk_disability_info_form").removeClass('d-none');
             $(".no_disability").addClass('d-none');
         }else{

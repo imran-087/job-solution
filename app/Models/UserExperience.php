@@ -8,4 +8,10 @@ use Illuminate\Database\Eloquent\Model;
 class UserExperience extends Model
 {
     use HasFactory;
+
+    protected $casts = [
+        'area_of_expertise' => 'json'
+    ];
+
+    protected $guarded = [];
 }

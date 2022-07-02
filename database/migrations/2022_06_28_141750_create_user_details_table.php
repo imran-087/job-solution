@@ -27,10 +27,10 @@ class CreateUserDetailsTable extends Migration
             $table->enum('marital_status', ['married', 'unmarried', 'single'])->nullable();
             $table->string('nationality')->default('bangladeshi');
             $table->string('national_id')->nullable();
-            $table->string('passport_number')->nullable();
+            $table->string('passport_no')->nullable();
             $table->string('passport_issue_date')->nullable();
-            $table->string('mobile_no_primary', 15)->nullable();
-            $table->string('mobile_no_secondary', 15)->nullable();
+            $table->string('primary_mobile', 15)->nullable();
+            $table->string('secondary_mobile', 15)->nullable();
             $table->string('emergency_contact', 15)->nullable();
             $table->enum('blood_group', ['a+', 'a-', 'b+', 'b-', 'o+', 'o-', 'ab+', 'ab-'])->nullable();
             $table->json('present_address')->nullable();
@@ -40,7 +40,7 @@ class CreateUserDetailsTable extends Migration
             $table->string('photo_path')->nullable();
 
             //disability information
-            $table->enum('disability', ['yes', 'no'])->default('no');
+            $table->enum('show_on_resume', ['yes', 'no'])->default('no');
             $table->string('disability_id')->nullable();
             $table->enum('disability_see', ['some', 'lot', 'cannot'])->nullable();
             $table->enum('disability_hear', ['some', 'lot', 'cannot'])->nullable();

@@ -476,6 +476,39 @@
  
                 </div>
             </div>
+
+            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/description*') ? 'show menu-accordion' : '' }}">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Resume Management</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion  menu-active-bg">
+        
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/skill/index*') ? 'active' : '' }}" href="{{ route('admin.skill.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <i class="fas fa-plus fa-2xl "></i> <span class="menu-title ms-2"> Skill</span>
+                        </a>
+                    </div>
+                   
+ 
+                </div>
+            </div>
             
             <div class="menu-item">
                 <a class="menu-link {{ request()->is('admin/subject/subject-tree*') ? 'active' : '' }}" href="{{ route('admin.subject.tree') }}" >

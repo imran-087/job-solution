@@ -23,6 +23,7 @@ class CreateUserExperiencesTable extends Migration
             $table->timestamp('from_date'); //employment_period
             $table->timestamp('to_date')->nullable(); //employment_period
             $table->enum('currently_working', ['yes', 'no']); //employment_period
+            $table->text('responsibilities')->nullable();
             $table->json('area_of_expertise'); //area name, number of month
             $table->string('address');
 

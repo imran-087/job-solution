@@ -71,13 +71,14 @@
                     <form id="kk_photograph_form" class="form" enctype="multipart/form-data">
                         @csrf
                         <div class="messages"></div>
+                           
                         <!--begin::Col-->
                         <div class="col-lg-12 text-center">
                             <div class="fs-6 fw-bold mt-2 mb-8">Upload your photo</div>
                             <!--begin::Image input-->
-                            <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url('/metronic8/demo1/assets/media/svg/avatars/blank.svg')">
+                            <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url({{ asset($user_avatar->photo_path) }})">
                                 <!--begin::Preview existing avatar-->
-                                <div class="image-input-wrapper w-125px h-125px bgi-position-center" style="background-size: 75%; background-image: url('/metronic8/demo1/assets/media/svg/brand-logos/volicity-9.svg')"></div>
+                                <div class="image-input-wrapper w-125px h-125px bgi-position-center" style="background-size: 75%; background-image: url({{ asset($user_avatar->photo_path) }})"></div>
                                 <!--end::Preview existing avatar-->
                                 <!--begin::Label-->
                                 <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="Change avatar">
@@ -159,10 +160,7 @@
                     $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                 }else{
                     // empty the form
-                    $('#kk_modal_new_sub_category_form')[0].reset();
-                    clearAppendData();
-                    $("#kk_modal_new_sub_category").modal('hide');
-
+                
                     Swal.fire({
                             text: data.message,
                             icon: "success",
@@ -177,9 +175,9 @@
                         }))
                 }
 
-            $('.indicator-label').show();
-            $('.indicator-progress').hide();
-            $('#kk_address_detail_submit').removeAttr('disabled');
+                $('.indicator-label').show();
+                $('.indicator-progress').hide();
+                $('#kk_address_detail_submit').removeAttr('disabled');
 
             }
         });

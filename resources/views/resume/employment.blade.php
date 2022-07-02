@@ -97,7 +97,7 @@
                                             <div class="d-flex flex-column fv-row">
                                                 <!--begin::Label-->
                                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                                    <span class="">Company Name</span>
+                                                    <span class="required">Company Name</span>
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter company name"
@@ -132,7 +132,7 @@
                                             <div class="d-flex flex-column fv-row">
                                                 <!--begin::Label-->
                                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                                    <span class="">Designation</span>
+                                                    <span class="required">Designation</span>
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter your designation"
@@ -170,30 +170,25 @@
                                                     <span class="">Employment Period</span>
                                                 </label>
                                                 <!--end::Label-->
-                                                <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control form-control-solid" placeholder="Joining date"
-                                                    name="start_date" />
-                                                    <span>start date</span>
-                                                <div class="help-block with-errors start_date-error"></div>
+                                              <div class="row">
+                                                    <div class="col-md-6 ">
+                                                        <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" placeholder="Start date" name="start_date" value=""/>
+                                                        <span class="required">Start Date</span>
+                                                        <div class="help-block with-errors start_date-error"></div>
+                                                    </div>
+                                                    
+                                                    <div class="col-md-6">
+                                                        <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" placeholder="Start date" name="end_date" value=""/>
+                                                        <span>End Date</span>
+                                                        <div class="help-block with-errors end_date-error"></div>
+                                                    </div>
+                                                    
+                                                </div>
+                                               
                                             </div>
                                             <!--end::Input group-->
                                             <!--end::Input group-->
-                                            <input class="form-check-input me-2" type="checkbox" value="" id="currently_working" >Currently Working
-                                        </div>
-                                        <!--begin::Col-->
-                                        <div class="col-md-6 fv-row">
-                                            <!--begin::Input group-->
-                                            <div class="d-flex flex-column fv-row">
-                                                <!--begin::Label-->
-                                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                                    <span class="required"></span>
-                                                </label>
-                                                <!--end::Label-->
-                                                <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control form-control-solid" placeholder="End date"
-                                                    name="end_date" />
-                                                    <span>End date</span>
-                                                <div class="help-block with-errors end_date-error"></div>
-                                            </div>
-                                           
+                                            <input class="form-check-input me-2" type="checkbox" value="yes" name="currently_working" id="currently_working" >Currently Working
                                         </div>
                                        
                                     </div>
@@ -237,7 +232,7 @@
                                                 <!--end::Label-->
                                                 <!--begin::Input group-->
                                                 <div class="input-group mb-5">
-                                                    <input type="text" class="form-control" placeholder="Time period" name="duration" value=""/>
+                                                    <input type="text" class="form-control" placeholder="10/12" name="duration" value=""/>
                                                     <span class="input-group-text">Months</span>
                                                     <div class="help-block with-errors month-error"></div>
                                                 </div>
@@ -475,10 +470,7 @@
                     $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                 }else{
                     // empty the form
-                    $('#kk_modal_new_sub_category_form')[0].reset();
-                    clearAppendData();
-                    $("#kk_modal_new_sub_category").modal('hide');
-
+                  
                     Swal.fire({
                             text: data.message,
                             icon: "success",
@@ -493,9 +485,9 @@
                         }))
                 }
 
-            $('.indicator-label').show();
-            $('.indicator-progress').hide();
-            $('#kk_address_detail_submit').removeAttr('disabled');
+                $('.indicator-label').show();
+                $('.indicator-progress').hide();
+                $('#kk_address_detail_submit').removeAttr('disabled');
 
             }
         });

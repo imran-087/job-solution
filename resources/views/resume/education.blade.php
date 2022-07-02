@@ -295,7 +295,7 @@
                                             <div class="d-flex flex-column fv-row">
                                                 <!--begin::Label-->
                                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                                    <span class="required">Topics Covered</span>
+                                                    <span class="">Topics Covered</span>
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Topic covered"
@@ -308,7 +308,8 @@
                                         <div class="col-md-6 fv-row">
                                             <label class="required fs-6 fw-bold mb-2">Training year</label>
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                data-placeholder="Select year" name="training_year">
+                                                name="training_year">
+                                                <option value="">Select year</option>
                                                 <option value="1999">1999</option>
                                                 <option value="2020" >2020</option>
                                                 
@@ -361,7 +362,7 @@
                                             <div class="d-flex flex-column fv-row">
                                                 <!--begin::Label-->
                                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                                    <span class="required">Location/Address </span>
+                                                    <span class="">Location/Address </span>
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter address"
@@ -408,7 +409,7 @@
                                     <!--begin::Heading-->
                                     <div class="mb-5">
                                         <!--begin::Description-->
-                                        <div class="text-muted fw-bold fs-5 mb-5 required">Professional Certification</div>
+                                        <div class="text-muted fw-bold fs-4 mb-5 ">Professional Certification</div>
                                     </div>
                                     <!--end::Heading-->
                                    
@@ -436,7 +437,7 @@
                                             <div class="d-flex flex-column fv-row">
                                                 <!--begin::Label-->
                                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                                    <span class="">Institute</span>
+                                                    <span class="required">Institute</span>
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter institute name"
@@ -477,9 +478,9 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <div class="row">
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6 ">
                                                         <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" placeholder="Start date" name="start_date" value=""/>
-                                                        <span>Start Date</span>
+                                                        <span class="required">Start Date</span>
                                                         <div class="help-block with-errors start_date-error"></div>
                                                     </div>
                                                     
@@ -613,10 +614,7 @@
                     $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                 }else{
                     // empty the form
-                    $('#kk_modal_new_sub_category_form')[0].reset();
-                    clearAppendData();
-                    $("#kk_modal_new_sub_category").modal('hide');
-
+                  
                     Swal.fire({
                             text: data.message,
                             icon: "success",
@@ -671,10 +669,7 @@
                     $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                 }else{
                     // empty the form
-                    $('#kk_modal_new_sub_category_form')[0].reset();
-                    clearAppendData();
-                    $("#kk_modal_new_sub_category").modal('hide');
-
+                  
                     Swal.fire({
                             text: data.message,
                             icon: "success",
@@ -689,9 +684,9 @@
                         }))
                 }
 
-            $('.indicator-label').show();
-            $('.indicator-progress').hide();
-            $('#kk_address_detail_submit').removeAttr('disabled');
+                $('.indicator-label').show();
+                $('.indicator-progress').hide();
+                $('#kk_address_detail_submit').removeAttr('disabled');
 
             }
         });

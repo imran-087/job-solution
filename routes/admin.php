@@ -322,6 +322,20 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         /*
         |--------------------------------------------------------------------------
+        | Resume
+        |--------------------------------------------------------------------------
+        */
+        ############ Skill Route #############
+        Route::get('/skill/index', 'Resume\SkillController@index')->name('skill.index');
+        Route::post('/skill/store', 'Resume\SkillController@store')->name('skill.store');
+        Route::get('/skill/get/{id}', 'Resume\SkillController@getSkill')->name('skill.get');
+        Route::get('/skill/delete/{id}', 'Resume\SkillController@deleteSkill')->name('skill.delete');
+
+
+
+
+        /*
+        |--------------------------------------------------------------------------
         | Discussion Forum
         |--------------------------------------------------------------------------
         */

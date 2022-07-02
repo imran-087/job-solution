@@ -8,4 +8,11 @@ use Illuminate\Database\Eloquent\Model;
 class UserDetail extends Model
 {
     use HasFactory;
+
+    protected $casts = [
+        'present_address' => 'json',
+        'permanent_address' => 'json'
+    ];
+    
+    protected $guarded = [];
 }

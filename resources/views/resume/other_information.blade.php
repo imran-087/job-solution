@@ -82,7 +82,7 @@
                                     @csrf
                                     <div class="messages"></div>
                                     <!--begin::Heading-->
-                                    <div class="mb-13">
+                                    <div class="mb-9">
                                         <!--begin::Title-->
                                         <h1 class="mb-3 fs-4 text-muted">Skill</h1>
                                         <!--end::Title-->
@@ -114,10 +114,10 @@
                                             </label>
                                             <!--end::Label-->
                                             <div class="">
-                                                <input class="form-check-input me-1" name="learning_method" type="checkbox" value="self"  > Self &nbsp;&nbsp;
-                                                <input class="form-check-input me-1" name="learning_method" type="checkbox" value="job"  >Job &nbsp;&nbsp;
-                                                <input class="form-check-input me-1" name="learning_method" type="checkbox" value="education" >Educational &nbsp;&nbsp;
-                                                <input class="form-check-input me-1" name="learning_method" type="checkbox" value="training"  >Professional Training
+                                                <input class="form-check-input me-1" name="learning_method[]" type="checkbox" value="self"  > Self &nbsp;&nbsp;
+                                                <input class="form-check-input me-1" name="learning_method[]" type="checkbox" value="job"  >Job &nbsp;&nbsp;
+                                                <input class="form-check-input me-1" name="learning_method[]" type="checkbox" value="education" >Educational &nbsp;&nbsp;
+                                                <input class="form-check-input me-1" name="learning_method[]" type="checkbox" value="training"  >Professional Training
                                             </div>
                                             <div class="help-block with-errors learning_method-error"></div>
                                         </div>
@@ -179,9 +179,9 @@
                                                 <span class="">Extracurricular Activities</span>
                                             </label>
                                             <!--end::Label-->
-                                            <textarea  class="form-control form-control-solid h-100px"  name="extracaricular" placeholder="Extracurricular Activities"></textarea>
+                                            <textarea  class="form-control form-control-solid h-100px"  name="extracurricular" placeholder="Extracurricular Activities"></textarea>
                                               
-                                            <div class="help-block with-errors extracaricular-error"></div>
+                                            <div class="help-block with-errors extracurricular-error"></div>
                                         </div>
                                         <!--end::Input group-->
                                     </div>
@@ -343,7 +343,7 @@
                                             <div class="d-flex flex-column fv-row">
                                                 <!--begin::Label-->
                                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                                    <span class="required">Designation</span>
+                                                    <span class="">Designation</span>
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter designation"
@@ -363,7 +363,7 @@
                                             <div class="d-flex flex-column fv-row">
                                                 <!--begin::Label-->
                                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                                    <span class="required">Organization </span>
+                                                    <span class="">Organization </span>
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter organization"
@@ -397,7 +397,7 @@
                                     <div class="row g-9 mb-8">
                                          <!--begin::Col-->
                                         <div class="col-md-6 fv-row">
-                                            <label class="required fs-6 fw-bold mb-2">Relation</label>
+                                            <label class="fs-6 fw-bold mb-2">Relation</label>
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                                 data-placeholder="Select" name="relation">
                                                 <option value="relative">Relative</option>
@@ -414,7 +414,7 @@
                                             <!--begin::Input group-->
                                             <div class="d-flex flex-column fv-row">
                                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                                    <span class="">Mobile</span>
+                                                    <span class="required">Mobile</span>
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter mobile no."
@@ -427,6 +427,45 @@
                                         
                                     </div>
                                     <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    <div class="row g-9 mb-8">
+                                        <!--begin::Col-->
+                                        <div class="col-md-6 fv-row">
+                                            <!--begin::Label-->
+                                            <!--begin::Input group-->
+                                            <div class="d-flex flex-column fv-row">
+                                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                    <span class="required">Phone (Res.)</span>
+                                                </label>
+                                                <!--end::Label-->
+                                                <input type="text" class="form-control form-control-solid" placeholder="Enter mobile no."
+                                                    name="phone_res" />
+                                                   
+                                                <div class="help-block with-errors phone_res-error"></div>
+                                            </div>
+                                          
+                                        </div>
+                                        <!--begin::Col-->
+                                        <div class="col-md-6 fv-row">
+                                            <!--begin::Label-->
+                                            <!--begin::Input group-->
+                                            <div class="d-flex flex-column fv-row">
+                                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                    <span class="required">Phone (office)</span>
+                                                </label>
+                                                <!--end::Label-->
+                                                <input type="text" class="form-control form-control-solid" placeholder="Enter mobile no."
+                                                    name="phone_off" />
+                                                   
+                                                <div class="help-block with-errors phone_off-error"></div>
+                                            </div>
+                                          
+                                        </div>
+                                        
+                                    </div>
+                                    <!--end::Input group-->
+
                                     <!--begin::Col-->
                                     <div class="col-md-12 fv-row mb-9">
                                         <!--begin::Label-->
@@ -504,10 +543,7 @@
                     $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                 }else{
                     // empty the form
-                    $('#kk_modal_new_sub_category_form')[0].reset();
-                    clearAppendData();
-                    $("#kk_modal_new_sub_category").modal('hide');
-
+                  
                     Swal.fire({
                             text: data.message,
                             icon: "success",
@@ -561,10 +597,7 @@
                     $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                 }else{
                     // empty the form
-                    $('#kk_modal_new_sub_category_form')[0].reset();
-                    clearAppendData();
-                    $("#kk_modal_new_sub_category").modal('hide');
-
+                   
                     Swal.fire({
                             text: data.message,
                             icon: "success",
@@ -619,10 +652,7 @@
                     $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                 }else{
                     // empty the form
-                    $('#kk_modal_new_sub_category_form')[0].reset();
-                    clearAppendData();
-                    $("#kk_modal_new_sub_category").modal('hide');
-
+                  
                     Swal.fire({
                             text: data.message,
                             icon: "success",
@@ -677,10 +707,7 @@
                     $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                 }else{
                     // empty the form
-                    $('#kk_modal_new_sub_category_form')[0].reset();
-                    clearAppendData();
-                    $("#kk_modal_new_sub_category").modal('hide');
-
+                    
                     Swal.fire({
                             text: data.message,
                             icon: "success",
@@ -695,9 +722,9 @@
                         }))
                 }
 
-            $('.indicator-label').show();
-            $('.indicator-progress').hide();
-            $('#kk_address_detail_submit').removeAttr('disabled');
+                $('.indicator-label').show();
+                $('.indicator-progress').hide();
+                $('#kk_address_detail_submit').removeAttr('disabled');
 
             }
         });
@@ -735,22 +762,19 @@
                     $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                 }else{
                     // empty the form
-                    $('#kk_modal_new_sub_category_form')[0].reset();
-                    clearAppendData();
-                    $("#kk_modal_new_sub_category").modal('hide');
-
+                 
                     Swal.fire({
-                            text: data.message,
-                            icon: "success",
-                            buttonsStyling: !1,
-                            confirmButtonText: "{{__('Ok, got it!')}}",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary"
-                            }
-                        }).then((function () {
-                            //refresh datatable
-                            $('#dataTable').DataTable().ajax.reload();
-                        }))
+                        text: data.message,
+                        icon: "success",
+                        buttonsStyling: !1,
+                        confirmButtonText: "{{__('Ok, got it!')}}",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary"
+                        }
+                    }).then((function () {
+                        //refresh datatable
+                        $('#dataTable').DataTable().ajax.reload();
+                    }))
                 }
 
             $('.indicator-label').show();

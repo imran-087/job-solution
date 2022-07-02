@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers\Resume;
 
-use App\Http\Controllers\Controller;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use App\Models\UserExperience;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Validator;
 
 class EmploymentController extends Controller
 {
@@ -15,7 +19,68 @@ class EmploymentController extends Controller
     //employmentHistoryStore
     public function employmentHistoryStore(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
+
+        $validator = Validator::make($request->all(), [
+            'company_name' => 'required',
+            'designation' => 'required',
+            'start_date' => 'required',
+            'end_date' => [ $request->currently_working == 'yes' ? 'nullable' : 'required' ],
+            'expertise' => 'required',
+            'duration' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 200);
+        } else {
+
+            if (Auth::check()) {
+
+                $from_date = Carbon::parse($request->start_date)->format('Y-m-d');
+                $to_date = Carbon::parse($request->end_date)->format('Y-m-d');
+
+                $area_of_expertise = [
+                    'expertise' => $request->expertise,
+                    'duration' => $request->duration
+                ];
+
+                $user_experience = UserExperience::Create(
+                    [
+                        'user_id' => Auth::id(),
+                        'company_name' => $request->company_name,
+                        'company_business' => $request->company_business,
+                        'designation' => $request->designation,
+                        'department' => $request->department,
+                        'responsibilities' => $request->responsibilities,
+                        'from_date' => $from_date,
+                        'to_date' => $to_date,
+                        'area_of_expertise' => $area_of_expertise,
+                        'currently_working' => $request->currently_working,
+                        'address' => $request->address
+                    ]
+                );
+
+                if ($user_experience) {
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Experience info save successfully'
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'error' => true,
+                        'message' => 'Failed !!!'
+                    ], 200);
+                }
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'unauthenticate user! please, login to complete this action'
+                ], 401);
+            }
+        }
     }
 
 }
