@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Resume;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\UserAcademicInfo;
+use App\Models\UserEducationDegree;
 use App\Models\UserProfessionalCertificate;
 use App\Models\UserTranningInfo;
 use Carbon\Carbon;
@@ -20,7 +22,56 @@ class EducationController extends Controller
     //academicSummaryStore
     public function academicSummaryStore(Request $request)
     {
-        dd($request->all());
+        //dd($request->all());
+
+        $validator = Validator::make($request->all(), [
+            'level_of_education' => 'required',
+            'degree' => 'required'
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 200);
+        } else {
+
+            if (Auth::check()) {
+                $academic_info = UserAcademicInfo::create([
+                    'user_id' => Auth::id(),
+                    'degree_level' => $request->level_of_education,
+                    'degree_name' => $request->degree,
+                    'major' => $request->major,
+                    'institute_name' => $request->institute_name,
+                    'board' => $request->board,
+                    'result' => $request->result,
+                    'marks' => $request->mark,
+                    'cgpa' => $request->cgpa,
+                    'scale' => $request->scale,
+                    'passing_year' => $request->passing_year,
+                    'course_duration' => $request->course_duration,
+                    'achivement' => $request->achievement,
+                ]);
+
+                if ($academic_info) {
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Training info save successfully'
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'error' => true,
+                        'message' => 'Failed !!!'
+                    ], 200);
+                }
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'unauthenticate user! please, login to complete this action'
+                ], 401);
+            }
+        }
+
     }
 
     //trainingSummaryStore
@@ -131,5 +182,13 @@ class EducationController extends Controller
             }
         }
 
+    }
+
+    ///getEducationDegree
+    public function getEducationDegree(Request $request)
+    {
+       // dd($request->all());
+        $degree = UserEducationDegree::where('level', $request->education_level)->get();
+        return response()->json($degree);
     }
 }

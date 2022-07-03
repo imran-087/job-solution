@@ -16,7 +16,7 @@ class CreateUserCareerInfosTable extends Migration
         Schema::create('user_career_infos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
-            $table->string('objective');
+            $table->text('objective');
             $table->string('present_salary')->nullable();
             $table->string('expected_salary')->nullable();
             $table->enum('job_level',['entry', 'mid', 'top']);
@@ -24,7 +24,7 @@ class CreateUserCareerInfosTable extends Migration
             $table->string('job_categories')->nullable(); //functional category & industrial category
             $table->string('special_skill')->nullable(); 
             $table->string('prefferd_city')->nullable();
-            $table->string('carrer_summary')->nullable();
+            $table->text('career_summary')->nullable();
             $table->string('special_qualification')->nullable();
             $table->string('keyword')->nullable();
             $table->timestamps();

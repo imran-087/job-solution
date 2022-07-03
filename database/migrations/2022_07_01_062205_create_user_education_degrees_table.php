@@ -15,7 +15,6 @@ class CreateUserEducationDegreesTable extends Migration
     {
         Schema::create('user_education_degrees', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained();
             $table->string('level');
             $table->string('name');
             $table->timestamps();

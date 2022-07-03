@@ -17,11 +17,11 @@ class CreateUserAcademicInfosTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->enum('degree_level', ['psc', 'jsc', 'sceondery', 'higersecondery', 'diploma', 'bechelor', 'masters', 'phd']);
-            $table->string('degree_type');
-            $table->string('major');
-            $table->string('institute_name');
-            $table->string('board');
-            $table->float('result')->nullable();
+            $table->string('degree_name');
+            $table->string('major')->nullable();
+            $table->string('institute_name')->nullable();
+            $table->string('board')->nullable();
+            $table->string('result', 20)->nullable();
             $table->float('marks')->nullable();  // %
             $table->float('cgpa')->nullable();
             $table->float('scale')->nullable();

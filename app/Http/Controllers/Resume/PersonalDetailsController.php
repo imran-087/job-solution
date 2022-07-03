@@ -15,7 +15,9 @@ class PersonalDetailsController extends Controller
     public function create()
     {
         $user_detail = UserDetail::where('user_id', Auth::id())->first();
-        return view('resume.personal', compact('user_detail'));
+        $career_info = UserCareerInfo::where('user_id', Auth::id())->first();
+
+        return view('resume.personal', compact(['user_detail', 'career_info']));
     }
 
     //personal details store
@@ -162,7 +164,7 @@ class PersonalDetailsController extends Controller
         //dd($request->all());
 
         $validator = Validator::make($request->all(), [
-            'carrer_objective' => 'required',
+            'career_objective' => 'required',
             'job_level' => 'required',
             'job_nature' => 'required',
             // 'present_salary' => 'numeric',
@@ -178,10 +180,10 @@ class PersonalDetailsController extends Controller
         } else {
             if (Auth::check()) {
 
-                $user_career_info= UserCareerInfo::updateOrCreate(
+                $user_career_info = UserCareerInfo::updateOrCreate(
                     ['user_id' => Auth::id()],
                     [
-                        'objective' => $request->carrer_objective,
+                        'objective' => $request->career_objective,
                         'present_salary' => $request->present_salary,
                         'expected_salary' => $request->expected_salary,
                         'job_level' => $request->job_level,
@@ -220,7 +222,7 @@ class PersonalDetailsController extends Controller
             $user_career_info = UserCareerInfo::updateOrCreate(
                 ['user_id' => Auth::id()],
                 [
-                    'carrer_summary' => $request->carrer_summary,
+                    'career_summary' => $request->career_summary,
                     'special_qualification' => $request->special_qualification,
                     'keyword' => $request->keyword,
                    
@@ -252,13 +254,7 @@ class PersonalDetailsController extends Controller
         //dd($request->all());
 
         $validator = Validator::make($request->all(), [
-            'disability_id' => [$request->disability == 'yes' ? 'required' : 'nullable'],
-            'see' => [$request->disability == 'yes' ? 'required' : 'nullable'],
-            'hear' => [$request->disability == 'yes' ? 'required' : 'nullable'],
-            'remember' => [$request->disability == 'yes' ? 'required' : 'nullable'],
-            'physical' => [$request->disability == 'yes' ? 'required' : 'nullable'],
-            'communicate' => [$request->disability == 'yes' ? 'required' : 'nullable'],
-            'take_care' => [$request->disability == 'yes' ? 'required' : 'nullable'],
+            'disability_id' => [$request->disability == 'yes' ? 'required' : 'nullable']
             
         ]);
 
@@ -273,6 +269,7 @@ class PersonalDetailsController extends Controller
                 $user_career_info = UserDetail::updateOrCreate(
                     ['user_id' => Auth::id()],
                     [
+                        'disability' => $request->disability ?? 'no',
                         'show_on_resume' => $request->show_on_resume ?? 'no',
                         'disability_id' => $request->disability_id,
                         'disability_see' => $request->see,

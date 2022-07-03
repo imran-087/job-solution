@@ -93,7 +93,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter First Name"
-                                                    name="first_name" value="{{ old('first_name') ?? $user_detail->first_name }}"/>
+                                                    name="first_name" value="{{  $user_detail->first_name ?? ''}}"/>
                                                 <div class="help-block with-errors first_name-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -108,7 +108,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter Last Name"
-                                                    name="last_name" value="{{ old('last_name') ?? $user_detail->last_name }}"/>
+                                                    name="last_name" value="{{ $user_detail->last_name ?? '' }}"/>
                                                 <div class="help-block with-errors last_name-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -127,7 +127,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter Father Name"
-                                                    name="father_name" value="{{ old('father_name') ?? $user_detail->father_name }}"/>
+                                                    name="father_name" value="{{ $user_detail->father_name ?? ''}}"/>
                                                 <div class="help-block with-errors father_name-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -142,7 +142,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter Mother Name"
-                                                    name="mother_name" value="{{ old('mother_name') ?? $user_detail->mother_name }}" />
+                                                    name="mother_name" value="{{  $user_detail->mother_name ?? '' }}" />
                                                 <div class="help-block with-errors mother_name-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -161,7 +161,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control form-control-solid" placeholder="Date of birth"
-                                                    name="date_of_birth" value="{{ old('date_of_birth') ?? \Carbon\Carbon::parse($user_detail->date_of_birth)->format('d-M-Y')}}"/>
+                                                    name="date_of_birth" value="{{  \Carbon\Carbon::parse($user_detail->date_of_birth ?? '')->format('d-M-Y') }}"/>
                                                 <div class="help-block with-errors date_of_birth-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -172,9 +172,11 @@
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                                 name="gender">
                                                 <option value="">Select gender</option>
-                                                <option value="male" {{ $user_detail->gender == 'male' ? 'selected' : '' }}>Male</option>
-                                                <option value="female" {{ $user_detail->gender == 'female' ? 'selected' : '' }}>Female</option>
-                                                <option value="other" {{ $user_detail->gender == 'other' ? 'selected' : '' }}>Other</option>
+                                                
+                                                <option value="male" @isset($user_detail->gender) {{  $user_detail->gender == 'male' ? 'selected' : '' }}  @endisset>Male</option>
+                                                <option value="female" @isset($user_detail->gender) {{ $user_detail->gender == 'female' ? 'selected' : '' }} @endisset>Female</option>
+                                                <option value="other" @isset($user_detail->gender) {{ $user_detail->gender == 'other' ? 'selected' : '' }} @endisset>Other</option>
+                                                
                                             </select>
                                             <div class="help-block with-errors gender-error"></div>    
                                         </div>
@@ -188,12 +190,14 @@
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                                name="religion">
                                                <option value="">Select </option>
-                                                <option value="islam" {{ $user_detail->religion == 'islam' ? 'selected' : '' }}>Islam</option>
-                                                <option value="hinduism" {{ $user_detail->religion == 'hinduism' ? 'selected' : '' }}>Hinduism </option>
-                                                <option value="christianity" {{ $user_detail->religion == 'christianity' ? 'selected' : '' }}>Christianity</option>
-                                                <option value="buddhism" {{ $user_detail->religion == 'buddhism' ? 'selected' : '' }}>Buddhism </option>
-                                                <option value="judaism" {{ $user_detail->religion == 'judaism' ? 'selected' : '' }}>Judaism</option>
-                                                <option value="other" {{ $user_detail->religion == 'other' ? 'selected' : '' }}>Other</option>
+                                               
+                                                <option value="islam" @isset($user_detail->religion ){{ $user_detail->religion == 'islam' ? 'selected' : '' }} @endisset>Islam</option>
+                                                <option value="hinduism" @isset($user_detail->religion ){{ $user_detail->religion == 'hinduism' ? 'selected' : '' }} @endisset>Hinduism </option>
+                                                <option value="christianity" @isset($user_detail->religion ){{ $user_detail->religion == 'christianity' ? 'selected' : '' }} @endisset>Christianity</option>
+                                                <option value="buddhism" @isset($user_detail->religion ){{ $user_detail->religion == 'buddhism' ? 'selected' : '' }} @endisset>Buddhism </option>
+                                                <option value="judaism" @isset($user_detail->religion ){{ $user_detail->religion == 'judaism' ? 'selected' : '' }} @endisset>Judaism</option>
+                                                <option value="other" @isset($user_detail->religion ){{ $user_detail->religion == 'other' ? 'selected' : '' }}  @endisset>Other</option>
+                                               
                                             </select>
                                             <div class="help-block with-errors religion-error"></div>    
                                         </div>
@@ -204,8 +208,10 @@
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                                 name="marital_status">
                                                 <option value="">Select</option>
-                                                <option value="unmarried" {{ $user_detail->marital_status == 'unmarried' ? 'selected' : '' }}>Unmarried</option>
-                                                <option value="married" {{ $user_detail->marital_status == 'married' ? 'selected' : '' }}>Married </option>
+                                                
+                                                <option value="unmarried" @isset($user_detail->marital_status ) {{ $user_detail->marital_status == 'unmarried' ? 'selected' : '' }} @endisset >Unmarried</option>
+                                                <option value="married" @isset($user_detail->marital_status ) {{ $user_detail->marital_status == 'married' ? 'selected' : '' }} @endisset >Married </option>
+                                                
                                             </select>
                                             <div class="help-block with-errors marital_status-error"></div>    
                                         </div>
@@ -224,7 +230,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter your nationality"
-                                                    name="nationality" value="{{ old('nationality') ?? $user_detail->nationality }}"/>
+                                                    name="nationality" value="{{ $user_detail->nationality ?? '' }}"/>
                                                 <div class="help-block with-errors nationality-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -239,7 +245,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter NID No."
-                                                    name="national_id" value="{{ old('national_id') ?? $user_detail->national_id }}" />
+                                                    name="national_id" value="{{ $user_detail->national_id ?? '' }}" />
                                                 <div class="help-block with-errors national_id-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -258,7 +264,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter passport no"
-                                                    name="passport_no" value="{{ old('passport_no') ?? $user_detail->passport_no }}"/>
+                                                    name="passport_no" value="{{ $user_detail->passport_no ?? '' }}"/>
                                                 <div class="help-block with-errors passport_no-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -273,7 +279,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control form-control-solid" placeholder="Enter passport issue date."
-                                                    name="passport_issue_date" value="{{ old('passport_issue_date') ?? \Carbon\Carbon::parse($user_detail->passport_issue_date)->format('d-M-Y')}}"/>
+                                                    name="passport_issue_date" value="{{ \Carbon\Carbon::parse($user_detail->passport_issue_date ?? '')->format('d-M-Y')}}"/>
                                                 <div class="help-block with-errors passport_issue_date-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -292,7 +298,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter your primary mobile no. "
-                                                    name="primary_mobile" value="{{ old('primary_mobile') ?? $user_detail->primary_mobile }}"/>
+                                                    name="primary_mobile" value="{{ $user_detail->primary_mobile ?? '' }}"/>
                                                 <div class="help-block with-errors primary_mobile-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -307,7 +313,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter your secondary mobile no."
-                                                    name="secondary_mobile" value="{{ old('secondary_mobile') ?? $user_detail->secondary_mobile }}"/>
+                                                    name="secondary_mobile" value="{{ $user_detail->secondary_mobile ?? '' }}"/>
                                                 <div class="help-block with-errors secondary_mobile-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -326,7 +332,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter email address"
-                                                    name="email" value="{{ old('email') ?? $user_detail->email }}" />
+                                                    name="email" value="{{ $user_detail->email ?? '' }}" />
                                                 <div class="help-block with-errors email-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -337,14 +343,16 @@
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                                 name="blood_group">
                                                 <option value="">Select blood group</option>
-                                                <option value="a+" {{$user_detail->blood_group == 'a+' ? 'selected' : '' }}>A(+ve)</option>
-                                                <option value="a-" {{$user_detail->blood_group == 'a-' ? 'selected' : '' }} >A(-ve)</option>
-                                                <option value="b+" {{$user_detail->blood_group == 'b+' ? 'selected' : '' }}>B(+ve)</option>
-                                                <option value="b-" {{$user_detail->blood_group == 'b-' ? 'selected' : '' }}>B(-ve)</option>
-                                                <option value="o+" {{$user_detail->blood_group == 'o+' ? 'selected' : '' }}>O(+ve)</option>
-                                                <option value="o-" {{$user_detail->blood_group == 'o-' ? 'selected' : '' }}>O(-ve)</option>
-                                                <option value="ab+" {{$user_detail->blood_group == 'ab+' ? 'selected' : '' }}>AB(+ve)</option>
-                                                <option value="ab-" {{$user_detail->blood_group == 'ab-' ? 'selected' : '' }}>AB(-ve)</option>
+                                               
+                                                <option value="a+"  @isset($user_detail->blood_group) {{$user_detail->blood_group == 'a+' ? 'selected' : '' }} @endisset>A(+ve)</option>
+                                                <option value="a-"  @isset($user_detail->blood_group) {{$user_detail->blood_group == 'a-' ? 'selected' : '' }} @endisset >A(-ve)</option>
+                                                <option value="b+"  @isset($user_detail->blood_group) {{$user_detail->blood_group == 'b+' ? 'selected' : '' }} @endisset>B(+ve)</option>
+                                                <option value="b-"  @isset($user_detail->blood_group) {{$user_detail->blood_group == 'b-' ? 'selected' : '' }} @endisset>B(-ve)</option>
+                                                <option value="o+"  @isset($user_detail->blood_group) {{$user_detail->blood_group == 'o+' ? 'selected' : '' }} @endisset>O(+ve)</option>
+                                                <option value="o-"  @isset($user_detail->blood_group) {{$user_detail->blood_group == 'o-' ? 'selected' : '' }} @endisset>O(-ve)</option>
+                                                <option value="ab+"  @isset($user_detail->blood_group) {{$user_detail->blood_group == 'ab+' ? 'selected' : '' }} @endisset>AB(+ve)</option>
+                                                <option value="ab-"  @isset($user_detail->blood_group) {{$user_detail->blood_group == 'ab-' ? 'selected' : '' }} @endisset>AB(-ve)</option>
+                                               
                                             </select>
                                             <div class="help-block with-errors blood_group-error"></div>    
                                         </div>
@@ -365,6 +373,7 @@
                         </div>
                     </div>
 
+                    <!--start: Address Details -->
                     <div class="accordion-item mb-8" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
                         <h2 class="accordion-header" id="kt_accordion_1_header_2">
                             <button class="accordion-button fs-4 fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#kt_accordion_1_body_2" aria-expanded="false" aria-controls="kt_accordion_1_body_2">
@@ -381,12 +390,12 @@
                                     <!--begin::Heading-->
                                     <div class="mb-5">
                                         <!--begin::Description-->
-                                        <div class="text-muted fw-bold fs-5 mb-5 required">Present Address</div>
+                                        <div class="text-muted fw-bold fs-5 mb-5">Present Address</div>
                                         <!--end::Description-->
-                                        <div class="fs-6 fw-bold">
+                                        {{-- <div class="fs-6 fw-bold">
                                             <input class="form-check-input" type="radio" name="p_radiobtn"  value="bangladesh"> <span class="me-3">Inside Bangladesh</span>
                                             <input class="form-check-input" type="radio" name="p_radiobtn"  value="other"> Outside Bangladesh
-                                        </div>
+                                        </div> --}}
                                     </div>
                                     <!--end::Heading-->
                                     <!--begin::Input group-->
@@ -453,10 +462,10 @@
                                     <!--end::Heading-->
                                     <span id="permanent_address_field">
                                         <div class="col-md-6 fv-row mb-5">
-                                            <div class="fs-6 fw-bold">
+                                            {{-- <div class="fs-6 fw-bold">
                                                 <input class="form-check-input" type="radio" name="radiobtn"  value="bangladesh"> <span class="me-3">Inside Bangladesh</span>
                                                 <input class="form-check-input" type="radio" name="radiobtn"  value="other"> Outside Bangladesh
-                                            </div>
+                                            </div> --}}
                                         </div>
                                         <!--begin::Input group-->
                                         <div class="row g-9 mb-4">
@@ -519,7 +528,9 @@
                             </div>
                         </div>
                     </div>
+                    <!--end: Address Details -->
 
+                    <!--start:  Career and Application Information -->
                     <div class="accordion-item mb-8" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
                         <h2 class="accordion-header" id="kt_accordion_1_header_3">
                             <button class="accordion-button fs-4 fw-bold collapsed show" type="button" data-bs-toggle="collapse" data-bs-target="#kt_accordion_1_body_3" aria-expanded="false" aria-controls="kt_accordion_1_body_3">
@@ -539,8 +550,8 @@
                                             <span class="required">Objective</span>
                                         </label>
                                         <!--end::Label-->
-                                        <textarea class="form-control form-control-solid h-100px" placeholder="Career objective" name="carrer_objective"></textarea>
-                                        <div class="help-block with-errors carrer_objective-error"></div>   
+                                        <textarea class="form-control form-control-solid h-100px" placeholder="Career objective" name="career_objective">{{  $career_info->objective ?? '' }}</textarea>
+                                        <div class="help-block with-errors career_objective-error"></div>   
                                     </div>
                                     <!-- end: col-->
 
@@ -556,7 +567,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Your current salary"
-                                                    name="present_salary" />
+                                                    name="present_salary" value="{{ $career_info->present_salary ?? ''}}"/>
                                                     <span class="fs-7">Tk/Month</span>
                                                 <div class="help-block with-errors present_salary-error"></div>
                                             </div>
@@ -572,7 +583,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Your expected salary"
-                                                    name="expected_salary" />
+                                                    name="expected_salary" value="{{ $career_info->expected_salary ?? '' }}" />
                                                     <span class="fs-7">Tk/Month</span>
                                                 <div class="help-block with-errors expected_salary-error"></div>
                                             </div>
@@ -593,9 +604,11 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <div class="fs-6 fw-bold">
-                                                    <input class="form-check-input me-1" type="radio" name="job_level"  value="entry"> <span class="me-3"> Entry Level</span>
-                                                    <input class="form-check-input me-1" type="radio" name="job_level"  value="mid"> <span class="me-3"> Mid Level</span>
-                                                    <input class="form-check-input me-1" type="radio" name="job_level"  value="top"> <span class=""> Top Level</span>
+                                                   
+                                                    <input class="form-check-input me-1" type="radio" name="job_level"  value="entry"  @isset($career_info->job_level) {{ $career_info->job_level == 'entry' ? 'checked' : '' }} @endisset> <span class="me-3"> Entry Level</span>
+                                                    <input class="form-check-input me-1" type="radio" name="job_level"  value="mid" @isset($career_info->job_level){{ $career_info->job_level == 'mid' ? 'checked' : '' }} @endisset> <span class="me-3"> Mid Level</span>
+                                                    <input class="form-check-input me-1" type="radio" name="job_level"  value="top" @isset($career_info->job_level) {{ $career_info->job_level == 'top' ? 'checked' : '' }} @endisset> <span class=""> Top Level</span>
+                                                   
                                                 </div>
                                                 <div class="help-block with-errors job_level-error"></div>
                                             </div>
@@ -611,11 +624,13 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <div class="fs-6 fw-bold">
-                                                    <input class="form-check-input mb-3 me-1" type="radio" name="job_nature"  value="full_time"> <span class="me-3"> Full Time</span>
-                                                    <input class="form-check-input mb-3 me-1" type="radio" name="job_nature"  value="part_time"> <span class="me-3"> Part Time</span>
-                                                    <input class="form-check-input mb-3 me-1" type="radio" name="job_nature"  value="contract"> <span class="me-3 "> Contract</span> <br>
-                                                    <input class="form-check-input me-1" type="radio" name="job_nature"  value="internship"> <span class="me-3"> Internship</span>
-                                                    <input class="form-check-input me-1" type="radio" name="job_nature"  value="freelance"> <span class=""> Freelance</span>
+                                                   
+                                                    <input class="form-check-input mb-3 me-1" type="radio" name="job_nature"  value="full_time"  @isset($career_info->job_nature) {{ $career_info->job_nature == 'full_time' ? 'checked' : '' }} @endisset> <span class="me-3"> Full Time</span>
+                                                    <input class="form-check-input mb-3 me-1" type="radio" name="job_nature"  value="part_time"  @isset($career_info->job_nature) {{ $career_info->job_nature == 'part_time' ? 'checked' : '' }} @endisset> <span class="me-3"> Part Time</span>
+                                                    <input class="form-check-input mb-3 me-1" type="radio" name="job_nature"  value="contract"  @isset($career_info->job_nature) {{ $career_info->job_nature == 'contract' ? 'checked' : '' }} @endisset> <span class="me-3 "> Contract</span> <br>
+                                                    <input class="form-check-input me-1" type="radio" name="job_nature"  value="internship"  @isset($career_info->job_nature) {{ $career_info->job_nature == 'internship' ? 'checked' : '' }} @endisset> <span class="me-3"> Internship</span>
+                                                    <input class="form-check-input me-1" type="radio" name="job_nature"  value="freelance"  @isset($career_info->job_nature) {{ $career_info->job_nature == 'freelance' ? 'checked' : '' }} @endisset> <span class=""> Freelance</span>
+                                                    
                                                 </div>
                                                 <div class="help-block with-errors job_nature-error"></div>
                                             </div>
@@ -638,7 +653,9 @@
                             </div>
                         </div>
                     </div>
+                    <!--end:  Career and Application Information -->
 
+                    <!--strat:  Other Relevent Information -->
                     <div class="accordion-item mb-8" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
                         <h2 class="accordion-header" id="kt_accordion_1_header_4">
                             <button class="accordion-button fs-4 fw-bold collapsed show" type="button" data-bs-toggle="collapse" data-bs-target="#kt_accordion_1_body_4" aria-expanded="false" aria-controls="kt_accordion_1_body_4">
@@ -658,8 +675,8 @@
                                             <span class="">Career Summary</span>
                                         </label>
                                         <!--end::Label-->
-                                        <textarea class="form-control form-control-solid h-100px" placeholder="Enter carrer summary" name="carrer_summary"></textarea>
-                                        <div class="help-block with-errors carrer_summery-error"></div>   
+                                        <textarea class="form-control form-control-solid h-100px" placeholder="Enter carrer summary" name="career_summary">{{  $career_info->career_summary ?? '' }}</textarea>
+                                        <div class="help-block with-errors career_summary-error"></div>   
                                     </div>
                                     <!-- end: col-->
                                     <!--begin::Col-->
@@ -669,7 +686,7 @@
                                             <span class="">Special Qualification</span>
                                         </label>
                                         <!--end::Label-->
-                                        <textarea class="form-control form-control-solid h-100px" placeholder="Enter Special Qualification" name="special_qualification"></textarea>
+                                        <textarea class="form-control form-control-solid h-100px" placeholder="Enter Special Qualification" name="special_qualification">{{ $career_info->special_qualification ?? '' }}</textarea>
                                         <div class="help-block with-errors special_qualification-error"></div>   
                                     </div>
                                     <!-- end: col-->
@@ -680,7 +697,7 @@
                                             <span class="">Keyword</span>
                                         </label>
                                         <!--end::Label-->
-                                        <input type="text" class="form-control form-control-solid " placeholder="Enter keyword" name="keyword">
+                                        <input type="text" class="form-control form-control-solid " placeholder="Enter keyword" name="keyword" value="{{ $career_info->keyword ?? '' }}">
                                         <div class="help-block with-errors keyword-error"></div>   
                                     </div>
                                     <!-- end: col-->
@@ -700,7 +717,9 @@
                             </div>
                         </div>
                     </div>
+                    <!--end:  Other Relevent Information -->
 
+                    <!--start:  Disability Information (if any) -->
                     <div class="accordion-item mb-8" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
                         <h2 class="accordion-header" id="kt_accordion_1_header_5">
                             <button class="accordion-button fs-4 fw-bold collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#kt_accordion_1_body_5" aria-expanded="false" aria-controls="kt_accordion_1_body_5">
@@ -716,16 +735,20 @@
                                     <div class="text-muted fw-bold fs-5 mb-5 required">Do you have National Disability ID Number?</div>
                                     <!--end::Description-->
                                     <div class="fs-6 fw-bold">
-                                        <input class="form-check-input disability" type="radio" name="radiobtn"  value="yes"> <span class="me-3">Yes</span>
+                        
+                                        <input class="form-check-input disability" type="radio" name="radiobtn"  value="yes" > <span class="me-3">Yes</span>
                                         <input class="form-check-input disability" type="radio" name="radiobtn"  value="no" checked> No
+                                      
                                     </div>
                                 </div>
                                 <!--end::Heading-->
-                                
+                               
                                 <div class="border rounded mt-2 mb-8 no_disability">
+                                
                                     <p class="py-3 px-3 fs-6">If you are a person with disability and have no Disability ID Number, please contact i2i support +88 01730369802 by Call/ SMS/ WhatsApp</p>
                                 </div>
                                 <!--begin:Form-->
+                                
                                 <form id="kk_disability_info_form" class="form d-none" enctype="multipart/form-data">
                                     @csrf
                                     <div class="messages"></div>
@@ -744,7 +767,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter First Name"
-                                                    name="disability_id" />
+                                                    name="disability_id" value="{{ $user_detail->disability_id ?? '' }}"/>
                                                 <div class="help-block with-errors disability_id-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -759,8 +782,10 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <div class="fs-6 fw-bold">
-                                                    <input class="form-check-input" type="radio" name="show_on"  value="yes"> <span class="me-3">Yes</span>
-                                                    <input class="form-check-input" type="radio" name="show_on"  value="no"> No
+                                                    @isset( $user_detail->show_on_resume )
+                                                    <input class="form-check-input" type="radio" name="show_on"  value="yes" {{ $user_detail->show_on_resume == 'yes' ? 'checked' : '' }}> <span class="me-3">Yes</span>
+                                                    <input class="form-check-input" type="radio" name="show_on"  value="no" {{ $user_detail->show_on_resume == 'no' ? 'checked' : '' }}> No
+                                                    @endisset
                                                 </div>
                                                 <div class="help-block with-errors show_on-error"></div>
                                             </div>
@@ -777,9 +802,11 @@
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                                 name="see">
                                                 <option value="">Select</option>
-                                                <option value="some">Some Difficulty</option>
-                                                <option value="lot" >A lot of Difficulty</option>
-                                                <option value="cannot">Can not do at all</option>
+                                                @isset( $user_detail->disability_see )
+                                                <option value="some" {{ $user_detail->disability_see == 'some' ? 'selected' : '' }}>Some Difficulty</option>
+                                                <option value="lot" {{ $user_detail->disability_see == 'lot' ? 'selected' : '' }}>A lot of Difficulty</option>
+                                                <option value="cannot" {{ $user_detail->disability_see == 'canot' ? 'selected' : '' }}>Can not do at all</option>
+                                                @endisset
                                             </select>
                                             <div class="help-block with-errors see-error"></div>    
                                         </div>
@@ -789,9 +816,11 @@
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                                 name="hear">
                                                 <option value="">Select</option>
-                                                <option value="some">Some Difficulty</option>
-                                                <option value="lot" >A lot of Difficulty</option>
-                                                <option value="cannot">Can not do at all</option>
+                                                @isset( $user_detail->disability_hear )
+                                                <option value="some" {{ $user_detail->disability_hear == 'some' ? 'selected' : '' }}>Some Difficulty</option>
+                                                <option value="lot" {{ $user_detail->disability_hear == 'lot' ? 'selected' : '' }}>A lot of Difficulty</option>
+                                                <option value="cannot" {{ $user_detail->disability_hear == 'canot' ? 'selected' : '' }}>Can not do at all</option>
+                                                @endisset
                                             </select>
                                             <div class="help-block with-errors hear-error"></div>    
                                         </div>
@@ -806,9 +835,11 @@
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                                 name="remember">
                                                 <option value="">Select</option>
-                                                <option value="some">Some Difficulty</option>
-                                                <option value="lot" >A lot of Difficulty</option>
-                                                <option value="cannot">Can not do at all</option>
+                                                @isset( $user_detail->disability_remember )
+                                                <option value="some" {{ $user_detail->disability_remember == 'some' ? 'selected' : '' }}>Some Difficulty</option>
+                                                <option value="lot" {{ $user_detail->disability_remember == 'lot' ? 'selected' : '' }}>A lot of Difficulty</option>
+                                                <option value="cannot" {{ $user_detail->disability_remember == 'canot' ? 'selected' : '' }}>Can not do at all</option>
+                                                @endisset
                                             </select>
                                             <div class="help-block with-errors remember-error"></div>    
                                         </div>
@@ -818,11 +849,13 @@
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                                 name="physical">
                                                 <option value="">Select</option>
-                                                <option value="some">Some Difficulty</option>
-                                                <option value="lot" >A lot of Difficulty</option>
-                                                <option value="cannot">Can not do at all</option>
+                                                @isset( $user_detail->disability_physical )
+                                                <option value="some" {{ $user_detail->disability_physical == 'some' ? 'selected' : '' }}>Some Difficulty</option>
+                                                <option value="lot" {{ $user_detail->disability_physical == 'lot' ? 'selected' : '' }}>A lot of Difficulty</option>
+                                                <option value="cannot" {{ $user_detail->disability_physical == 'canot' ? 'selected' : '' }}>Can not do at all</option>
+                                                @endisset
                                             </select>
-                                            <div class="help-block with-errors other-error"></div>    
+                                            <div class="help-block with-errors physical-error"></div>    
                                         </div>
                                     </div>
                                     <!--end::Input group-->
@@ -833,9 +866,11 @@
                                             <label class="required fs-6 fw-bold mb-2">Difficulty to Communicate </label>
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                                 data-placeholder="Select" name="communicate">
-                                                <option value="some">Some Difficulty</option>
-                                                <option value="lot" >A lot of Difficulty</option>
-                                                <option value="cannot">Can not do at all</option>
+                                                @isset( $user_detail->disability_communicate )
+                                                <option value="some" {{ $user_detail->disability_communicate == 'some' ? 'selected' : '' }}>Some Difficulty</option>
+                                                <option value="lot" {{ $user_detail->disability_communicate == 'lot' ? 'selected' : '' }}>A lot of Difficulty</option>
+                                                <option value="cannot" {{ $user_detail->disability_communicate == 'canot' ? 'selected' : '' }}>Can not do at all</option>
+                                                @endisset
                                             </select>
                                             <div class="help-block with-errors communicate-error"></div>    
                                         </div>
@@ -844,9 +879,11 @@
                                             <label class="required fs-6 fw-bold mb-2">Difficulty of Taking Care (example: shower, wearing clothes)</label>
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                                 data-placeholder="Select" name="take_care">
-                                                <option value="some">Some Difficulty</option>
-                                                <option value="lot" >A lot of Difficulty</option>
-                                                <option value="cannot">Can not do at all</option>
+                                                @isset( $user_detail->disability_care )
+                                                <option value="some" {{ $user_detail->disability_care == 'some' ? 'selected' : '' }}>Some Difficulty</option>
+                                                <option value="lot" {{ $user_detail->disability_care == 'lot' ? 'selected' : '' }}>A lot of Difficulty</option>
+                                                <option value="cannot" {{ $user_detail->disability_care == 'canot' ? 'selected' : '' }}>Can not do at all</option>
+                                                @endisset
                                             </select>
                                             <div class="help-block with-errors take_care-error"></div>    
                                         </div>
@@ -865,6 +902,7 @@
                                     </div>
                                     <!--end::Actions-->
                                 </form>
+                               
                             </div>
                         </div>
                     </div>
@@ -1152,10 +1190,7 @@
                     $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                 }else{
                     // empty the form
-                    $('#kk_modal_new_sub_category_form')[0].reset();
-                    clearAppendData();
-                    $("#kk_modal_new_sub_category").modal('hide');
-
+                  
                     Swal.fire({
                             text: data.message,
                             icon: "success",

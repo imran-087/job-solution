@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Resume;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\UserDetail;
 use App\Models\UserExperience;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -80,6 +81,69 @@ class EmploymentController extends Controller
                     'message' => 'unauthenticate user! please, login to complete this action'
                 ], 401);
             }
+        }
+    }
+
+    //retiredArmyStore
+    public function retiredArmyStore(Request $request)
+    {
+        //dd($request->all());
+
+        $validator = Validator::make($request->all(), [
+            'ba_no' => 'required',
+            'number' => 'required',
+            'ranks' => 'required',
+            'type' => 'required',
+            'arms' => 'required',
+            'comission_date' => 'required',
+            'retirement_date' => 'required',
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 200);
+        } else {
+
+            if (Auth::check()) {
+
+                $retirement_date = Carbon::parse($request->retirement_date)->format('Y-m-d');
+                $comission_date = Carbon::parse($request->comission_date)->format('Y-m-d');
+
+                $user_detail = UserDetail::updateOrcreate(
+                    ['user_id' => Auth::id()],
+                    [
+                        'ba_no' => $request->ba_no,
+                        'number' => $request->number,
+                        'ranks' => $request->ranks,
+                        'type' => $request->type,
+                        'arms' => $request->arms,
+                        'trade' => $request->trade,
+                        'course' => $request->course,
+                        'date_of_retirement' => $retirement_date,
+                        'date_of_commision' => $comission_date,
+
+                    ]
+                );
+                if ($user_detail) {
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Experience info save successfully'
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'error' => true,
+                        'message' => 'Failed !!!'
+                    ], 200);
+                }
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'unauthenticate user! please, login to complete this action'
+                ], 401);
+            }
+            
         }
     }
 

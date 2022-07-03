@@ -278,45 +278,56 @@
                         <div id="kt_accordion_1_body_5" class="accordion-collapse collapse " aria-labelledby="kt_accordion_1_header_2" data-bs-parent="#kt_accordion_1">
                             <div class="accordion-body">
                                 <!--begin:Form-->
-                                {{-- <form id="kk_modal_new_sub_category_form" class="form" enctype="multipart/form-data">
+                                <form id="kk_modal_new_retired_army_person_form" class="form" enctype="multipart/form-data">
+                                    @csrf
                                     <div class="messages"></div>
                                     <!--begin::Heading-->
                                     <div class="mb-5">
                                         <!--begin::Description-->
-                                        <div class="text-muted fw-bold fs-5 mb-5 required">Training</div>
+                                        <div class="text-muted fw-bold fs-5 mb-5 required">Retired Army Person</div>
                                     </div>
                                     <!--end::Heading-->
                                     <!--begin::Input group-->
                                     <div class="row g-9 mb-5">
                                         <!--begin::Col-->
                                         <div class="col-md-6 fv-row">
-                                            <!--begin::Input group-->
-                                            <div class="d-flex flex-column fv-row">
-                                                <!--begin::Label-->
-                                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                                    <span class="required">Training Title </span>
-                                                </label>
-                                                <!--end::Label-->
-                                                <input type="text" class="form-control form-control-solid" placeholder="Enter title"
-                                                    name="training_title" />
-                                                <div class="help-block with-errors training_title-error"></div>
+                                             <label class="required fs-6 fw-bold mb-2">BA No.</label>
+                                            <div class="row">
+                                                <div class="col-md-4">
+                                                    <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                                        data-placeholder="Select ba_no" name="ba_no">
+                                                        <option value=""></option>
+                                                        <option value="ba">BA</option>
+                                                        <option value="bss">BSS</option>
+                                                        <option value="jss">JSS</option>
+                                                    
+                                                    </select>
+                                                    <div class="help-block with-errors ba_no-error"></div>    
+                                                </div>
+                                                <div class="col-md-8">
+                                                    <div class="d-flex flex-column fv-row">
+                                                        <!--end::Label-->
+                                                        <input type="text" class="form-control form-control-solid" placeholder="Enter number"
+                                                            name="number" />
+                                                        <div class="help-block with-errors number-error"></div>
+                                                    </div>
+                                                    <!--end::Input group-->
+                                                </div>
                                             </div>
-                                            <!--end::Input group-->
                                         </div>
                                         <!--begin::Col-->
                                         <div class="col-md-6 fv-row">
-                                            <!--begin::Input group-->
-                                            <div class="d-flex flex-column fv-row">
-                                                <!--begin::Label-->
-                                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                                    <span class="">Country</span>
-                                                </label>
-                                                <!--end::Label-->
-                                                <input type="text" class="form-control form-control-solid" placeholder="Enter Achievement"
-                                                    name="country" />
-                                                <div class="help-block with-errors country-error"></div>
-                                            </div>
-                                            <!--end::Input group-->
+                                            <label class="required fs-6 fw-bold mb-2">Ranks</label>
+                                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                                data-placeholder="Select ranks" name="ranks">
+                                                 <option value=""></option>
+                                                <option value="2lt">2lt</option>
+                                                <option value="capt" >Captain</option>
+                                                <option value="maj" >Major</option>
+                                                <option value="engr" >engr</option>
+                                                
+                                            </select>
+                                            <div class="help-block with-errors ranks-error"></div>    
                                         </div>
                                         
                                     </div>
@@ -325,104 +336,117 @@
                                     <div class="row g-9 mb-5">
                                         <!--begin::Col-->
                                         <div class="col-md-6 fv-row">
-                                            <!--begin::Input group-->
-                                            <div class="d-flex flex-column fv-row">
-                                                <!--begin::Label-->
-                                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                                    <span class="required">Topics Covered</span>
-                                                </label>
-                                                <!--end::Label-->
-                                                <input type="text" class="form-control form-control-solid" placeholder="Topic Covered"
-                                                    name="topic_covered" />
-                                                <div class="help-block with-errors topic_covered-error"></div>
-                                            </div>
-                                            <!--end::Input group-->
+                                            <label class="required fs-6 fw-bold mb-2">Type</label>
+                                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                                data-placeholder="Select arms" name="type">
+                                                <option value=""></option>
+                                                <option value="officer">Officer</option>
+                                                <option value="jco" >JCO</option>
+                                                <option value="nco" >NCO</option>
+                                              
+                 
+                                            </select>
+                                            <div class="help-block with-errors type-error"></div>    
                                         </div>
                                         <!--begin::Col-->
                                         <div class="col-md-6 fv-row">
-                                            <label class="required fs-6 fw-bold mb-2">Training year</label>
+                                            <label class="required fs-6 fw-bold mb-2">Arms</label>
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                data-placeholder="Select" name="training_year">
-                                                <option value="1999">1999</option>
-                                                <option value="2020" >2020</option>
+                                                data-placeholder="Select arms" name="arms">
+                                                 <option value=""></option>
+                                                <option value="ac">AC</option>
+                                                <option value="eb" >EB</option>
+                                                <option value="bir" >BIR</option>
+                                                <option value="engr" >engr</option>
                                                 
                                             </select>
-                                            <div class="help-block with-errors training-error"></div>    
-                                        </div>
-                                        
-                                    </div>
-                                    <!--end::Input group-->
-                                     <!--begin::Input group-->
-                                    <div class="row g-9 mb-5">
-                                        <!--begin::Col-->
-                                        <div class="col-md-6 fv-row">
-                                            <!--begin::Input group-->
-                                            <div class="d-flex flex-column fv-row">
-                                                <!--begin::Label-->
-                                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                                    <span class="required">Institute</span>
-                                                </label>
-                                                <!--end::Label-->
-                                                <input type="text" class="form-control form-control-solid" placeholder="Enter Institute"
-                                                    name="institute" />
-                                                <div class="help-block with-errors institute-error"></div>
-                                            </div>
-                                            <!--end::Input group-->
-                                        </div>
-                                        <!--begin::Col-->
-                                        <div class="col-md-6 fv-row">
-                                            <!--begin::Input group-->
-                                            <div class="d-flex flex-column fv-row">
-                                                <!--begin::Label-->
-                                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                                    <span class="required">Duration</span>
-                                                </label>
-                                                <!--end::Label-->
-                                                <input type="text" class="form-control form-control-solid" placeholder="Enter Achievement"
-                                                    name="country" />
-                                                <div class="help-block with-errors country-error"></div>
-                                            </div>
-                                            <!--end::Input group-->
-                                        </div>
-                                        
-                                    </div>
-                                    <!--end::Input group-->
-                                     <!--begin::Input group-->
-                                    <div class="row g-9 mb-5">
-                                        <!--begin::Col-->
-                                        <div class="col-md-6 fv-row">
-                                            <!--begin::Input group-->
-                                            <div class="d-flex flex-column fv-row">
-                                                <!--begin::Label-->
-                                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                                    <span class="required">Location/Address </span>
-                                                </label>
-                                                <!--end::Label-->
-                                                <input type="text" class="form-control form-control-solid" placeholder="Enter address"
-                                                    name="address" />
-                                                <div class="help-block with-errors address-error"></div>
-                                            </div>
-                                            <!--end::Input group-->
-                                        </div>
-                                        <!--begin::Col-->
-                                        <div class="col-md-6 fv-row">
-                                           
+                                            <div class="help-block with-errors arms-error"></div>    
                                         </div>
                                         
                                     </div>
                                     <!--end::Input group-->
                                     
+                                    <!--begin::Input group-->
+                                    <div class="row g-9 mb-5">
+                                        <!--begin::Col-->
+                                        <div class="col-md-6 fv-row">
+                                            <!--begin::Input group-->
+                                            <div class="d-flex flex-column fv-row">
+                                                <!--begin::Label-->
+                                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                    <span class="required">Trade</span>
+                                                </label>
+                                                <!--end::Label-->
+                                                <input type="text" class="form-control form-control-solid" placeholder="Enter Institute"
+                                                    name="trade" />
+                                                <div class="help-block with-errors trade-error"></div>
+                                            </div>
+                                            <!--end::Input group-->
+                                        </div>
+                                        <!--begin::Col-->
+                                        <div class="col-md-6 fv-row">
+                                            <!--begin::Input group-->
+                                            <div class="d-flex flex-column fv-row">
+                                                <!--begin::Label-->
+                                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                    <span class="required">Course</span>
+                                                </label>
+                                                <!--end::Label-->
+                                                <input type="text" class="form-control form-control-solid" placeholder="Enter Achievement"
+                                                    name="course" />
+                                                <div class="help-block with-errors course-error"></div>
+                                            </div>
+                                            <!--end::Input group-->
+                                        </div>
+                                        
+                                    </div>
+                                    <!--end::Input group-->
+                                    <!--begin::Input group-->
+                                    <div class="row g-9 mb-8">
+                                        <!--begin::Col-->
+                                        <div class="col-md-6 fv-row">
+                                            <!--begin::Input group-->
+                                            <div class="d-flex flex-column fv-row">
+                                                <!--begin::Label-->
+                                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                    <span class="">Date of Commission</span>
+                                                </label>
+                                                <!--end::Label-->
+                                                <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control form-control-solid" placeholder="Enter passport issue date."
+                                                    name="comission_date" value="{{ \Carbon\Carbon::parse($user_detail->comission_date ?? '')->format('d-M-Y')}}"/>
+                                                <div class="help-block with-errors comission_date-error"></div>
+                                            </div>
+                                            <!--end::Input group-->
+                                        </div>
+                                        <!--begin::Col-->
+                                        <div class="col-md-6 fv-row">
+                                            <!--begin::Input group-->
+                                            <div class="d-flex flex-column fv-row">
+                                                <!--begin::Label-->
+                                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                    <span class="">Date of Retirement</span>
+                                                </label>
+                                                <!--end::Label-->
+                                                <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control form-control-solid" placeholder="Enter passport issue date."
+                                                    name="retirement_date" value="{{ \Carbon\Carbon::parse($user_detail->retirement_date ?? '')->format('d-M-Y')}}"/>
+                                                <div class="help-block with-errors retirement_date-error"></div>
+                                            </div>
+                                            <!--end::Input group-->
+                                        </div>
+                                    </div>
+                                    <!--end::Input group-->
+                                    
                                     <!--begin::Actions-->
                                     <div class="d-flex justify-content-between">
-                                        <button type="reset" id="kk_modal_new_sub_category_cancel" class="btn btn-light btn-active-color-danger me-3">Close</button>
-                                        <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary">
+                                        <button type="reset" id="kk_modal_army_retired_cancel" class="btn btn-light btn-active-color-danger me-3">Close</button>
+                                        <button type="submit" id="kk_modal_army_retired_submit" class="btn btn-primary">
                                             <span class="indicator-label py-3 px-7">Save</span>
                                             <span class="indicator-progress">Please wait...
                                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                         </button>
                                     </div>
                                     <!--end::Actions-->
-                                </form> --}}
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -454,6 +478,60 @@
         $.ajax({
             type:"POST",
             url: "{{ url('/resume/step_03/employment-history/store')}}",
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                if(data.success ==  false || data.success ==  "false"){
+                    var arr = Object.keys(data.errors);
+                    var arr_val = Object.values(data.errors);
+                    for(var i= 0;i < arr.length;i++){
+                    $('.'+arr[i]+'-error').text(arr_val[i][0])
+                    }
+                }else if(data.error || data.error == 'true'){
+                    var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                    $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
+                }else{
+                    // empty the form
+                  
+                    Swal.fire({
+                            text: data.message,
+                            icon: "success",
+                            buttonsStyling: !1,
+                            confirmButtonText: "{{__('Ok, got it!')}}",
+                            customClass: {
+                                confirmButton: "btn fw-bold btn-primary"
+                            }
+                        }).then((function () {
+                            //refresh datatable
+                            $('#dataTable').DataTable().ajax.reload();
+                        }))
+                }
+
+                $('.indicator-label').show();
+                $('.indicator-progress').hide();
+                $('#kk_address_detail_submit').removeAttr('disabled');
+
+            }
+        });
+
+    })
+
+    //save employment history
+    $('#kk_modal_new_retired_army_person_form').on('submit',function(e){
+        e.preventDefault();
+        //alert('ok');
+        // $('.with-errors').text('');
+        // $('.indicator-label').hide();
+        // $('.indicator-progress').show();
+        // $('#kk_address_detail_submit').attr('disabled','true');
+
+        var formData = new FormData(this);
+        //console.log(formData);
+        $.ajax({
+            type:"POST",
+            url: "{{ url('/resume/step_03/retired-army/store')}}",
             data:formData,
             cache:false,
             contentType: false,

@@ -502,11 +502,42 @@
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
-                            <i class="fas fa-plus fa-2xl "></i> <span class="menu-title ms-2"> Skill</span>
+                           <span class="menu-title ms-2">Skills</span>
                         </a>
                     </div>
-                   
- 
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/functional-job-cartegory/index*') ? 'active' : '' }}" href="{{ route('admin.functional-job-category.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                           <span class="menu-title ms-2">Functional Job Category</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/industrial-job-cartegory/index*') ? 'active' : '' }}" href="{{ route('admin.industrial-job-category.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                           <span class="menu-title ms-2">Industrial Job Category</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/major-subject/index*') ? 'active' : '' }}" href="{{ route('admin.major-subject.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                           <span class="menu-title ms-2">Major Subject</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/education-degree/index*') ? 'active' : '' }}" href="{{ route('admin.education-degree.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                           <span class="menu-title ms-2">Education Degree</span>
+                        </a>
+                    </div>
+                  
                 </div>
             </div>
             

@@ -95,14 +95,16 @@
                                         <div class="col-md-6 fv-row">
                                             <label class="required fs-6 fw-bold mb-2">Level of Education</label>
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                data-placeholder="Select level" name="level_of_education">
-                                                <option value="psc">PSC</option>
-                                                <option value="jsc">JSC</option>
-                                                <option value="ssc">SSC</option>
-                                                <option value="hsc">HSC</option>
-                                                <option value="bsc">BSC/Honours</option>
-                                                <option value="msc">MSC</option>
-                                                <option value="phd">PHD</option>
+                                                data-placeholder="Select level" name="level_of_education" id="level_of_education">
+                                                <option value=""></option>
+                                                <option value="psc">PSC/5 Pass</option>
+                                                <option value="jsc">JSC/JDC/8</option>
+                                                <option value="ssc">Secondary</option>
+                                                <option value="hsc">Higher Secondary</option>
+                                                <option value="diploma">Diploma</option>
+                                                <option value="bsc">Bachelor/Honours</option>
+                                                <option value="msc">Masters</option>
+                                                <option value="phd">PhD (Doctor of Philosophy)</option>
                                             </select>
                                             <div class="help-block with-errors level_of_education-error"></div>    
                                         </div>
@@ -110,23 +112,17 @@
                                         <div class="col-md-6 fv-row">
                                             <label class="required fs-6 fw-bold mb-2">Exam/Degree title</label>
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                data-placeholder="Select degree" name="degree">
-                                                <option value="psc">PSC</option>
-                                                <option value="jsc">JSC</option>
-                                                <option value="ssc">SSC</option>
-                                                <option value="hsc">HSC</option>
-                                                <option value="bsc">BSC/Honours</option>
-                                                <option value="msc">MSC</option>
-                                                <option value="phd">PHD</option>
+                                                data-placeholder="Select exam degree" name="degree" id="degree">
+                                                
                                             </select>
                                             <div class="help-block with-errors degree-error"></div>    
                                         </div>
                                     </div>
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
-                                    <div class="row g-9 mb-5">
+                                    <div class="row g-9 mb-5" >
                                         <!--begin::Col-->
-                                        <div class="col-md-6 fv-row">
+                                        <div class="col-md-6 fv-row" id="major">
                                             <!--begin::Input group-->
                                             <div class="d-flex flex-column fv-row">
                                                 <!--begin::Label-->
@@ -139,6 +135,28 @@
                                                 <div class="help-block with-errors major-error"></div>
                                             </div>
                                             <!--end::Input group-->
+                                        </div>
+                                        <!--begin::Col-->
+                                        <div class="col-md-6 fv-row" id="board">
+                                            <label class="required fs-6 fw-bold mb-2">Board</label>
+                                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                                name="board">
+                                                <option value="">Select board</option>
+                                                <option value="dhaka">Dhaka</option>
+                                                <option value="chattagram">Chattagram</option>
+                                                <option value="rajshahi">Rajshahi</option>
+                                                <option value="khulna">Khulna</option>
+                                                <option value="barishal">Barishal</option>
+                                                <option value="jessore">Jessore</option>
+                                                <option value="cumilla">Cumilla</option>
+                                                <option value="dinajpur">Dinajpur</option>
+                                                <option value="mymensingh">Mymensingh</option>
+                                                <option value="sylhet">Sylhet</option>
+                                                <option value="madrasha">Madrasha</option>
+                                                <option value="technical">Technical</option>
+                                                <option value="bou">BOU</option>
+                                            </select>
+                                            <div class="help-block with-errors board-error"></div>    
                                         </div>
                                         
                                     </div>
@@ -164,24 +182,67 @@
                                         <div class="col-md-6 fv-row">
                                             <label class="required fs-6 fw-bold mb-2">Result</label>
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                data-placeholder="Select result" name="result">
-                                                <option value="first">First Division</option>
-                                                <option value="second">Second Division</option>
-                                                <option value="third">third Division</option>
+                                                data-placeholder="Select result" name="result" id="result">
+                                                <option value=""></option>
+                                                <option value="first">First Division/Class</option>
+                                                <option value="second">Second Division/Class</option>
+                                                <option value="third">Third Division/Class</option>
+                                                <option value="grade">Grade</option>
+                                                <option value="appeared">Appeared</option>
+                                                <option value="enrolled">Enrolled</option>
+                                                <option value="awarded">Awarded</option>
+                                                <option value="pass">pass</option>
+                                                <option value="donotmention">Don not mention</option>
                                             </select>
                                             <div class="help-block with-errors result-error"></div>    
                                         </div>
+                                        
+                                    {{-- </div>
+                                    <!--end::Input group--> --}}
+                                  
                                         <!--begin::Col-->
-                                        <div class="col-md-6 fv-row">
-                                            <label class="required fs-6 fw-bold mb-2">Year of passing </label>
+                                        <div class="col-md-6 fv-row d-none" id="marks">
+                                            <!--begin::Input group-->
+                                            <div class="d-flex flex-column fv-row">
+                                                <!--begin::Label-->
+                                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                    <span class="required mark_text" >Marks(%)</span>
+                                                </label>
+                                                <!--end::Label-->
+                                                <input type="text" class="form-control form-control-solid" placeholder=""
+                                                    name="mark" />
+                                                <div class="help-block with-errors mark-error"></div>
+                                            </div>
+                                            <!--end::Input group-->
+                                        </div>
+                                        <!--begin::Col-->
+                                        <div class="col-md-6 fv-row d-none" id="scale">
+                                            <!--begin::Input group-->
+                                            <div class="d-flex flex-column fv-row">
+                                                <!--begin::Label-->
+                                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                    <span class="required">Scale</span>
+                                                </label>
+                                                <!--end::Label-->
+                                                <input type="text" class="form-control form-control-solid" placeholder="Enter scale"
+                                                    name="scale" />
+                                                <div class="help-block with-errors scale-error"></div>
+                                            </div>
+                                            <!--end::Input group-->
+                                        </div>
+                                        <!--begin::Col-->
+                                        <div class="col-md-6 fv-row" >
+                                            <label class="required fs-6 fw-bold mb-2">Year of passing</label>
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                                 data-placeholder="Select year" name="passing_year">
+                                                <option value=""></option>
                                                 <option value="1999">1999</option>
                                                 <option value="2020" >2020</option>
                                                 
                                             </select>
                                             <div class="help-block with-errors passing_year-error"></div>    
                                         </div>
+                                        
                                     </div>
                                     <!--end::Input group-->
                                     <!--begin::Input group-->
@@ -557,10 +618,7 @@
                     $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                 }else{
                     // empty the form
-                    $('#kk_modal_new_sub_category_form')[0].reset();
-                    clearAppendData();
-                    $("#kk_modal_new_sub_category").modal('hide');
-
+                  
                     Swal.fire({
                             text: data.message,
                             icon: "success",
@@ -692,5 +750,70 @@
         });
 
     })
+
+
+    //hide and show major and board field
+    $('#level_of_education').on('change', function () {
+        let val = $(this).val();
+        if(val == 'psc' || val == 'jsc'){
+            $("#major").addClass('d-none');
+             $("#board").removeClass('d-none');
+        }
+        else if(val == 'ssc' || val == 'hsc'){
+            $("#board").removeClass('d-none');
+            $("#major").removeClass('d-none');
+        }else{
+            $("#major").removeClass('d-none');
+            $("#board").addClass('d-none');
+        }
+    })
+
+    //hide and show result field
+    $('#result').on('change', function () {
+        let val = $(this).val();
+        if(val == 'first' || val == 'second' || val == 'third'){
+            $('#marks').removeClass('d-none');
+            $(".mark_text").text('Marks(%)');
+            $("#scale").addClass('d-none');
+        }else if( val == 'grade'){
+            $("#scale").removeClass('d-none');
+            $('#marks').removeClass('d-none');
+            $(".mark_text").text('CGPA');
+        }else{
+            $("#scale").addClass('d-none');
+            $('#marks').addClass('d-none');
+        }
+    })
+
+    //get education degree based on education level
+    $('#level_of_education').on('change', function () {
+        var education_level = $(this).val();
+        if (education_level) {
+            $.ajax({
+                url: '/resume/step_02/get-education-degree/',
+                type: "GET",
+                data: {
+                    education_level : education_level
+                },
+                dataType: "json",
+                success: function (data) {
+                    if (data) {
+                        $('#degree').empty();
+                        $('#degree').append('<option value="">Choose...</option>');
+                        $.each(data, function (key, degree) {
+                            $('select[name="degree"]').append(
+                                '<option value="' + degree
+                                .name + '">' + degree
+                                .name + '</option>');
+                        });
+                    } else {
+                        $('#degree').empty();
+                    }
+                }
+            });
+        } else {
+            $('#degree').empty();
+        }
+    });
     </script>
 @endpush

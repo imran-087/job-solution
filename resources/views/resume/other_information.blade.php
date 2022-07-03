@@ -114,10 +114,10 @@
                                             </label>
                                             <!--end::Label-->
                                             <div class="">
-                                                <input class="form-check-input me-1" name="learning_method[]" type="checkbox" value="self"  > Self &nbsp;&nbsp;
-                                                <input class="form-check-input me-1" name="learning_method[]" type="checkbox" value="job"  >Job &nbsp;&nbsp;
-                                                <input class="form-check-input me-1" name="learning_method[]" type="checkbox" value="education" >Educational &nbsp;&nbsp;
-                                                <input class="form-check-input me-1" name="learning_method[]" type="checkbox" value="training"  >Professional Training
+                                                <input class="form-check-input me-1" name="learning_method[]" type="checkbox" value="self"> Self &nbsp;&nbsp;
+                                                <input class="form-check-input me-1" name="learning_method[]" type="checkbox" value="job">Job &nbsp;&nbsp;
+                                                <input class="form-check-input me-1" name="learning_method[]" type="checkbox" value="education">Educational &nbsp;&nbsp;
+                                                <input class="form-check-input me-1" name="learning_method[]" type="checkbox" value="training">Professional Training
                                             </div>
                                             <div class="help-block with-errors learning_method-error"></div>
                                         </div>
@@ -149,7 +149,7 @@
                                                 <span class="">Skill Description</span>
                                             </label>
                                             <!--end::Label-->
-                                            <textarea  class="form-control form-control-solid h-100px"  name="description" placeholder="Skill description ......."></textarea>
+                                            <textarea  class="form-control form-control-solid h-100px"  name="description" placeholder="Skill description ......."> {{ $user_detail->skill_description ?? '' }}</textarea>
                                               
                                             <div class="help-block with-errors description-error"></div>
                                         </div>
@@ -179,7 +179,7 @@
                                                 <span class="">Extracurricular Activities</span>
                                             </label>
                                             <!--end::Label-->
-                                            <textarea  class="form-control form-control-solid h-100px"  name="extracurricular" placeholder="Extracurricular Activities"></textarea>
+                                            <textarea  class="form-control form-control-solid h-100px"  name="extracurricular" placeholder="Extracurricular Activities">{{ $user_detail->extracurricular ?? '' }}</textarea>
                                               
                                             <div class="help-block with-errors extracurricular-error"></div>
                                         </div>

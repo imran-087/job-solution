@@ -330,6 +330,30 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/skill/store', 'Resume\SkillController@store')->name('skill.store');
         Route::get('/skill/get/{id}', 'Resume\SkillController@getSkill')->name('skill.get');
         Route::get('/skill/delete/{id}', 'Resume\SkillController@deleteSkill')->name('skill.delete');
+       
+        ############ Functional Job Category Route #############
+        Route::get('/functional-job-category/index', 'Resume\FunctionalJobCatController@index')->name('functional-job-category.index');
+        Route::post('/functional-job-category/store', 'Resume\FunctionalJobCatController@store')->name('functional-job-category.store');
+        Route::get('/functional-job-category/get/{id}', 'Resume\FunctionalJobCatController@get')->name('functional-job-category.get');
+        Route::get('/functional-job-category/delete/{id}', 'Resume\FunctionalJobCatController@delete')->name('functional-job-category.delete');
+        
+        ############ Industrial Job Category Route #############
+        Route::get('/industrial-job-category/index', 'Resume\IndustrialJobCatController@index')->name('industrial-job-category.index');
+        Route::post('/industrial-job-category/store', 'Resume\IndustrialJobCatController@store')->name('industrial-job-category.store');
+        Route::get('/industrial-job-category/get/{id}', 'Resume\IndustrialJobCatController@get')->name('industrial-job-category.get');
+        Route::get('/industrial-job-category/delete/{id}', 'Resume\IndustrialJobCatController@delete')->name('industrial-job-category.delete');
+        
+        ############ Major subject  Route #############
+        Route::get('/major-subject/index', 'Resume\MajorSubjectController@index')->name('major-subject.index');
+        Route::post('/major-subject/store', 'Resume\MajorSubjectController@store')->name('major-subject.store');
+        Route::get('/major-subject/get/{id}', 'Resume\MajorSubjectController@get')->name('major-subject.get');
+        Route::get('/major-subject/delete/{id}', 'Resume\MajorSubjectController@delete')->name('major-subject.delete');
+       
+        ############ Education Degree  Route #############
+        Route::get('/education-degree/index', 'Resume\EducationDegreeController@index')->name('education-degree.index');
+        Route::post('/education-degree/store', 'Resume\EducationDegreeController@store')->name('education-degree.store');
+        Route::get('/education-degree/get/{id}', 'Resume\EducationDegreeController@get')->name('education-degree.get');
+        Route::get('/education-degree/delete/{id}', 'Resume\EducationDegreeController@delete')->name('education-degree.delete');
 
 
 

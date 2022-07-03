@@ -13,7 +13,7 @@ class CreateInsdustrialJobCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('insdustrial_job_categories', function (Blueprint $table) {
+        Schema::create('industrial_job_categories', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->timestamps();

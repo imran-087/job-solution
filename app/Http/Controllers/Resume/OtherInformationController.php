@@ -15,7 +15,8 @@ class OtherInformationController extends Controller
 {
     public function create()
     {
-        return view('resume.other_information');
+        $user_detail = UserDetail::select('skill_description', 'extracurricular')->where('user_id', Auth::id())->first();
+        return view('resume.other_information', compact('user_detail'));
     }
 
     //skillStore

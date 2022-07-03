@@ -40,6 +40,7 @@ class CreateUserDetailsTable extends Migration
             $table->string('photo_path')->nullable();
 
             //disability information
+            $table->enum('disability', ['yes', 'no'])->default('no');
             $table->enum('show_on_resume', ['yes', 'no'])->default('no');
             $table->string('disability_id')->nullable();
             $table->enum('disability_see', ['some', 'lot', 'cannot'])->nullable();
@@ -57,6 +58,7 @@ class CreateUserDetailsTable extends Migration
 
             //retired_army person
             $table->string('ba_no')->nullable();
+            $table->string('number')->nullable();
             $table->string('ranks')->nullable();
             $table->string('type')->nullable();
             $table->string('arms')->nullable();
