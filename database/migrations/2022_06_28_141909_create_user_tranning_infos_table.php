@@ -13,7 +13,7 @@ class CreateUserTranningInfosTable extends Migration
      */
     public function up()
     {
-        Schema::create('user_tranning_infos', function (Blueprint $table) {
+        Schema::create('user_training_infos', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('training_title');

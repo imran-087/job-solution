@@ -7,7 +7,7 @@ use App\Http\Controllers\Controller;
 use App\Models\UserAcademicInfo;
 use App\Models\UserEducationDegree;
 use App\Models\UserProfessionalCertificate;
-use App\Models\UserTranningInfo;
+use App\Models\UserTrainingInfo;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -96,7 +96,7 @@ class EducationController extends Controller
 
             if (Auth::check()) {
              
-                $training_info = UserTranningInfo::Create(
+                $training_info = UserTrainingInfo::Create(
                     [
                         'user_id' => Auth::id(),
                         'training_title' => $request->title,

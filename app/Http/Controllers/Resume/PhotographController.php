@@ -14,6 +14,7 @@ class PhotographController extends Controller
     public function create()
     {
         $user_avatar = UserDetail::where('user_id', Auth::id())->select('photo_path')->first();
+        
         return view('resume.photograph', compact('user_avatar'));
     }
 

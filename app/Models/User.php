@@ -42,4 +42,50 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    // define realtion 
+    public function detail()
+    {
+        return $this->hasOne(UserDetail::class);
+    }
+
+    public function career_info()
+    {
+        return $this->hasOne(UserCareerInfo::class);
+    }
+
+    public function academic_infos()
+    {
+        return $this->hasMany(UserAcademicInfo::class);
+    }
+
+    public function experiences()
+    {
+        return $this->hasMany(UserExperience::class);
+    }
+
+    public function language_proficencies()
+    {
+        return $this->hasMany(UserLanguageProficency::class);
+    }
+
+    public function professional_certificates()
+    {
+        return $this->hasMany(UserProfessionalCertificate::class);
+    }
+
+    public function references()
+    {
+        return $this->hasMany(UserReference::class);
+    }
+
+    public function skills()
+    {
+        return $this->hasMany(UserSkill::class);
+    }
+
+    public function training_infos()
+    {
+        return $this->hasMany(UserTrainingInfo::class);
+    }
 }

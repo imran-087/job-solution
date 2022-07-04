@@ -5,9 +5,11 @@ namespace App\Http\Controllers\Resume;
 use Carbon\Carbon;
 use App\Models\UserDetail;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\UserCareerInfo;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Models\FunctionalJobCategory;
+use App\Models\Skill;
 use Illuminate\Support\Facades\Validator;
 
 class PersonalDetailsController extends Controller
@@ -17,7 +19,10 @@ class PersonalDetailsController extends Controller
         $user_detail = UserDetail::where('user_id', Auth::id())->first();
         $career_info = UserCareerInfo::where('user_id', Auth::id())->first();
 
-        return view('resume.personal', compact(['user_detail', 'career_info']));
+        $functional_job_categories = FunctionalJobCategory::select('name', 'id')->get();
+        $special_skills = Skill::select('name', 'id')->where('type', 'special_skill')->get();
+
+        return view('resume.personal', compact(['user_detail', 'career_info', 'functional_job_categories', 'special_skills']));
     }
 
     //personal details store
@@ -155,6 +160,51 @@ class PersonalDetailsController extends Controller
                 ], 401);
             }
             
+        }
+    }
+
+    //prefferedJobCatStore
+    public function prefferedJobCatStore(Request $request)
+    {
+        //dd($request->all());
+
+        $validator = Validator::make($request->all(), [
+            
+        ]);
+
+        if ($validator->fails()) {
+            return response()->json([
+                'success' => false,
+                'errors' => $validator->errors()
+            ], 200);
+        } else {
+            if (Auth::check()) {
+              
+                $user_career_info = UserCareerInfo::updateOrCreate(
+                    ['user_id' => Auth::id()],
+                    [
+                        'job_categories' => $request->functional,
+                        'special_skill' => $request->skill,
+                        'prefferd_city' => $request->area
+                    ]
+                );
+                if ($user_career_info) {
+                    return response()->json([
+                        'success' => true,
+                        'message' => 'Carrer info save successfully'
+                    ], 200);
+                } else {
+                    return response()->json([
+                        'error' => true,
+                        'message' => 'Failed !!!'
+                    ], 200);
+                }
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => 'unauthenticate user! please, login to complete this action'
+                ], 401);
+            }
         }
     }
 

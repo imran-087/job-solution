@@ -96,7 +96,7 @@ class EmploymentController extends Controller
             'type' => 'required',
             'arms' => 'required',
             'comission_date' => 'required',
-            'retirement_date' => 'required',
+            'retirement_date' => 'required'
         ]);
 
         if ($validator->fails()) {

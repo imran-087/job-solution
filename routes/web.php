@@ -29,6 +29,7 @@ use App\Http\Controllers\Resume\EmploymentController;
 use App\Http\Controllers\Resume\OtherInformationController;
 use App\Http\Controllers\Resume\PersonalDetailsController;
 use App\Http\Controllers\Resume\PhotographController;
+use App\Http\Controllers\Resume\ResumeViewController;
 
 /*
 |--------------------------------------------------------------------------
@@ -174,10 +175,12 @@ Route::middleware('auth')->name('user.')->group(function () {
 
   ########### Resume Route ############
   Route::middleware('auth')->group( function() {
+
       //personal details
       Route::get('/resume/step_01/personal-details', [PersonalDetailsController::class, 'create'])->name('resume.personal');
       Route::post('/resume/step_01/personal_detail/store', [PersonalDetailsController::class, 'personalDetailStore'])->name('resume.personal_detail.store');
       Route::post('/resume/step_01/address_detail/store', [PersonalDetailsController::class, 'addressDetailStore'])->name('resume.address_detail.store');
+      Route::post('/resume/step_01/preffered-job-cat/store', [PersonalDetailsController::class, 'prefferedJobCatStore'])->name('resume.preffered-job-cat.store');
       Route::post('/resume/step_01/career_application/store', [PersonalDetailsController::class, 'careerApplicationInfoStore'])->name('resume.career_application-info.store');
       Route::post('/resume/step_01/other_relevent_info/store', [PersonalDetailsController::class, 'otherReleventInfoStore'])->name('resume.other_relavent-info.store');
       Route::post('/resume/step_01/disability_info/store', [PersonalDetailsController::class, 'disabilitInfoStore'])->name('resume.disability_info.store');
@@ -205,6 +208,9 @@ Route::middleware('auth')->name('user.')->group(function () {
       //photograph
       Route::get('/resume/step_05/photograph', [PhotographController::class, 'create'])->name('resume.photo');
       Route::post('/resume/step_05/photograph/store', [PhotographController::class, 'photographStore'])->name('resume.photograph.store');
+
+  ####### Resume View ##
+  Route::get('/resume-view', [ResumeViewController::class, 'index'])->name('resume.view.index');
 
 });
 

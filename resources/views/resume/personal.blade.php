@@ -451,8 +451,9 @@
                                             <span>Permanent Address</span> 
         
                                             <div class="form-check form-check-custom form-check-solid text-black">
-                                                <input class="form-check-input" type="checkbox" value="same" name="present_permanent" id="permanent_address">
-                                                <label class="form-check-label ms-3"  for="permanent_address">Same as Present Address</label>
+                                                <input class="form-check-input" type="checkbox" value="same" name="present_permanent" id="permanent_address" 
+                                                @isset($user_detail->permanent_address)  {{ $user_detail->permanent_address == 'sameaspresent' ? 'checked' : '' }} @endisset >
+                                                <label class="form-check-label ms-3"  for="permanent_address">Same as Present</label>
                                             </div>
                                             
                                         </div>
@@ -460,6 +461,7 @@
                                        
                                     </div>
                                     <!--end::Heading-->
+                                   
                                     <span id="permanent_address_field">
                                         <div class="col-md-6 fv-row mb-5">
                                             {{-- <div class="fs-6 fw-bold">
@@ -514,6 +516,7 @@
                                         <!-- end: col-->
                                         
                                     </span>
+                                   
                                     <!--begin::Actions-->
                                     <div class="d-flex justify-content-between">
                                         <button type="reset" id="kk_address_detail_cancel" class="btn btn-light btn-active-color-danger me-3">Close</button>
@@ -654,6 +657,140 @@
                         </div>
                     </div>
                     <!--end:  Career and Application Information -->
+
+                    <!--start:  Preffered Areas -->
+                    <div class="accordion-item mb-8" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
+                        <h2 class="accordion-header" id="kt_accordion_1_header_6">
+                            <button class="accordion-button fs-4 fw-bold collapsed show" type="button" data-bs-toggle="collapse" data-bs-target="#kt_accordion_1_body_6" aria-expanded="false" aria-controls="kt_accordion_1_body_6">
+                                Preffered Areas
+                            </button>
+                        </h2>
+                        <div id="kt_accordion_1_body_6" class="accordion-collapse collapse" aria-labelledby="kt_accordion_1_header_6" data-bs-parent="#kt_accordion_1">
+                            <div class="accordion-body">
+                                <!--begin:Form-->
+                                <form id="kk_preffered_job_category_form" class="form" enctype="multipart/form-data">
+                                    @csrf
+                                    <div class="messages"></div>
+
+                                    <!--begin::Heading-->
+                                    <div class="mb-8">
+                                        <!--begin::Description-->
+                                        <div class="text-muted fw-bold mb-5 "><span class="fs-5 required">Preferred Job Categoriesrequired</span>  <br>
+                                        <p> Preferred job categories represents your desired sector(s) to work (at least 1 category any of section) </p></div>
+                                        <!--end::Description-->
+                                     
+                                    </div>
+                                    <!--end::Heading-->
+                               
+                                    <!--begin::Input group-->
+                                    <div class="row g-9 mb-8">
+                                        <!--begin::Col-->
+                                        <div class="col-md-6 fv-row" >
+                                            <!--begin::Input group-->
+                                            <div class="d-flex flex-column fv-row" >
+                                                <!--begin::Label-->
+                                                <label class="d-flex align-items-center fs-6 fw-bold mb-3">
+                                                    <span class="required">Functional (max 3)</span>
+                                                    
+                                                </label>
+                                                <!--end::Label-->
+                                                <span class="border py-4 px-4" style="min-height: 150px; max-height: 150px">
+                                                 @foreach($functional_job_categories as $key => $job_category)
+                                                    <div class="form-check form-check-custom form-check-solid text-black mb-2">
+                                                        <input class="form-check-input functional" type="checkbox" value="{{$job_category->name}}" @isset( $career_info->job_categories[$key]) {{ $career_info->job_categories[$key] == $job_category->name ? 'checked' : '' }} @endisset name="functional[]" >
+                                                        <label class="form-check-label ms-3"  for="functional">{{$job_category->name}}</label>
+                                                    </div>
+                                                    @endforeach  
+                                                      
+                                                    <div class="help-block with-errors present_salary-error"></div>
+                                                </span>
+                                            </div>
+                                            <!--end::Input group-->
+                                        </div>
+                                        <!--begin::Col-->
+                                        <div class="col-md-6 fv-row">
+                                            <!--begin::Input group-->
+                                            <div class="d-flex flex-column fv-row">
+                                                <!--begin::Label-->
+                                                <label class="d-flex align-items-center fs-6 fw-bold mb-3">
+                                                    <span class="required">Special Skill (max 3)</span>
+                                                    {{-- {{ $career_info->special_skill[0] }} --}}
+                                                </label>
+                                                <!--end::Label-->
+                                                <span class="border py-4 px-4" style="min-height: 150px; max-height: 150px">
+                                                 @foreach($special_skills as $key => $skill)
+                                                    <div class="form-check form-check-custom form-check-solid text-black mb-2">
+                                                        
+                                                        <input class="form-check-input skill" type="checkbox" value="{{ $skill->name }}" @isset( $career_info->special_skill[$key]) {{ $career_info->special_skill[$key] == $skill->name ? 'checked' : '' }} @endisset name="skill[]" >
+                                                        <label class="form-check-label ms-3"  for="skill">{{$skill->name}}</label>
+                                                    </div>
+                                                    @endforeach  
+                                                      
+                                                    <div class="help-block with-errors skill-error"></div>
+                                                </span>
+                                            </div>
+                                            <!--end::Input group-->
+                                        </div>
+                                    </div>
+                                    <!--end::Input group-->
+                                    
+                                    <!--begin::Input group-->
+                                    <div class="row g-9 mb-8">
+                                        <!--begin::Col-->
+                                        <div class="col-md-12 fv-row">
+                                            <!--begin::Input group-->
+                                            <div class="d-flex flex-column fv-row">
+                                                <!--begin::Label-->
+                                                <label class="d-flex align-items-center fs-6 fw-bold mb-3">
+                                                    <span class="required">Preferred Job Location</span>
+                                                </label>
+                                                 <p class="text-muted"> Preferred Job Location defines the geographical place where you prefer to work. i.e. 1st: Dhaka, 2nd: Sylhet, 3rd: Khulna. </p>
+                                                <!--end::Label-->
+                                                <input type="text" class="form-control form-control-solid" name="area" id="area">
+                                                <div class="help-block with-errors area-error"></div>
+                                            </div>
+                                            <!--end::Input group-->
+                                        </div>
+                                        
+                                    </div>
+                                    <!--end::Input group-->
+
+                                    <!--begin::Input group-->
+                                    {{-- <div class="row g-9 mb-8">
+                                        <!--begin::Col-->
+                                        <div class="col-md-12 fv-row">
+                                            <!--begin::Input group-->
+                                            <div class="d-flex flex-column fv-row">
+                                                <!--begin::Label-->
+                                                <label class="d-flex align-items-center fs-6 fw-bold mb-3">
+                                                    <span class="required">Add your preferred organization type (max 12)</span>
+                                                </label>
+                                                <!--end::Label-->
+                                                <input type="text" class="form-control form-control-solid" name="organization_type" id="organization">
+                                                <div class="help-block with-errors organization_type-error"></div>
+                                            </div>
+                                            <!--end::Input group-->
+                                        </div>
+                                        
+                                    </div> --}}
+                                    <!--end::Input group-->
+
+                                    <!--begin::Actions-->
+                                    <div class="d-flex justify-content-between">
+                                        <button type="reset" id="kk_preffered_area_cancel" class="btn btn-light btn-active-color-danger me-3">Close</button>
+                                        <button type="submit" id="kk_preffered_area_submit" class="btn btn-primary">
+                                            <span class="indicator-label py-3 px-7">Save</span>
+                                            <span class="indicator-progress">Please wait...
+                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                        </button>
+                                    </div>
+                                    <!--end::Actions-->
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!--end:  Preffered Areas -->
 
                     <!--strat:  Other Relevent Information -->
                     <div class="accordion-item mb-8" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
@@ -802,11 +939,11 @@
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                                 name="see">
                                                 <option value="">Select</option>
-                                                @isset( $user_detail->disability_see )
-                                                <option value="some" {{ $user_detail->disability_see == 'some' ? 'selected' : '' }}>Some Difficulty</option>
-                                                <option value="lot" {{ $user_detail->disability_see == 'lot' ? 'selected' : '' }}>A lot of Difficulty</option>
-                                                <option value="cannot" {{ $user_detail->disability_see == 'canot' ? 'selected' : '' }}>Can not do at all</option>
-                                                @endisset
+                                                
+                                                <option value="some" @isset( $user_detail->disability_see )  {{ $user_detail->disability_see == 'some' ? 'selected' : '' }} @endisset >Some Difficulty</option>
+                                                <option value="lot" @isset( $user_detail->disability_see ) {{ $user_detail->disability_see == 'lot' ? 'selected' : '' }} @endisset >A lot of Difficulty</option>
+                                                <option value="cannot" @isset( $user_detail->disability_see ) {{ $user_detail->disability_see == 'canot' ? 'selected' : '' }}@endisset >Can not do at all</option>
+                                                
                                             </select>
                                             <div class="help-block with-errors see-error"></div>    
                                         </div>
@@ -816,11 +953,11 @@
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                                 name="hear">
                                                 <option value="">Select</option>
-                                                @isset( $user_detail->disability_hear )
-                                                <option value="some" {{ $user_detail->disability_hear == 'some' ? 'selected' : '' }}>Some Difficulty</option>
-                                                <option value="lot" {{ $user_detail->disability_hear == 'lot' ? 'selected' : '' }}>A lot of Difficulty</option>
-                                                <option value="cannot" {{ $user_detail->disability_hear == 'canot' ? 'selected' : '' }}>Can not do at all</option>
-                                                @endisset
+                                                
+                                                <option value="some" @isset( $user_detail->disability_hear ) {{ $user_detail->disability_hear == 'some' ? 'selected' : '' }} @endisset >Some Difficulty</option>
+                                                <option value="lot" @isset( $user_detail->disability_hear ) {{ $user_detail->disability_hear == 'lot' ? 'selected' : '' }} @endisset >A lot of Difficulty</option>
+                                                <option value="cannot" @isset( $user_detail->disability_hear ) {{ $user_detail->disability_hear == 'canot' ? 'selected' : '' }} @endisset >Can not do at all</option>
+                                               
                                             </select>
                                             <div class="help-block with-errors hear-error"></div>    
                                         </div>
@@ -835,11 +972,11 @@
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                                 name="remember">
                                                 <option value="">Select</option>
-                                                @isset( $user_detail->disability_remember )
-                                                <option value="some" {{ $user_detail->disability_remember == 'some' ? 'selected' : '' }}>Some Difficulty</option>
-                                                <option value="lot" {{ $user_detail->disability_remember == 'lot' ? 'selected' : '' }}>A lot of Difficulty</option>
-                                                <option value="cannot" {{ $user_detail->disability_remember == 'canot' ? 'selected' : '' }}>Can not do at all</option>
-                                                @endisset
+                                               
+                                                <option value="some" @isset( $user_detail->disability_remember ) {{ $user_detail->disability_remember == 'some' ? 'selected' : '' }}@endisset >Some Difficulty</option>
+                                                <option value="lot" @isset( $user_detail->disability_remember ) {{ $user_detail->disability_remember == 'lot' ? 'selected' : '' }}@endisset >A lot of Difficulty</option>
+                                                <option value="cannot" @isset( $user_detail->disability_remember ) {{ $user_detail->disability_remember == 'canot' ? 'selected' : '' }}@endisset >Can not do at all</option>
+                                                
                                             </select>
                                             <div class="help-block with-errors remember-error"></div>    
                                         </div>
@@ -849,11 +986,11 @@
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                                 name="physical">
                                                 <option value="">Select</option>
-                                                @isset( $user_detail->disability_physical )
-                                                <option value="some" {{ $user_detail->disability_physical == 'some' ? 'selected' : '' }}>Some Difficulty</option>
-                                                <option value="lot" {{ $user_detail->disability_physical == 'lot' ? 'selected' : '' }}>A lot of Difficulty</option>
-                                                <option value="cannot" {{ $user_detail->disability_physical == 'canot' ? 'selected' : '' }}>Can not do at all</option>
-                                                @endisset
+                                              
+                                                <option value="some" @isset( $user_detail->disability_physical ) {{ $user_detail->disability_physical == 'some' ? 'selected' : '' }} @endisset>Some Difficulty</option>
+                                                <option value="lot" @isset( $user_detail->disability_physical ) {{ $user_detail->disability_physical == 'lot' ? 'selected' : '' }} @endisset>A lot of Difficulty</option>
+                                                <option value="cannot" @isset( $user_detail->disability_physical ) {{ $user_detail->disability_physical == 'canot' ? 'selected' : '' }} @endisset>Can not do at all</option>
+                                                
                                             </select>
                                             <div class="help-block with-errors physical-error"></div>    
                                         </div>
@@ -866,11 +1003,11 @@
                                             <label class="required fs-6 fw-bold mb-2">Difficulty to Communicate </label>
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                                 data-placeholder="Select" name="communicate">
-                                                @isset( $user_detail->disability_communicate )
-                                                <option value="some" {{ $user_detail->disability_communicate == 'some' ? 'selected' : '' }}>Some Difficulty</option>
-                                                <option value="lot" {{ $user_detail->disability_communicate == 'lot' ? 'selected' : '' }}>A lot of Difficulty</option>
-                                                <option value="cannot" {{ $user_detail->disability_communicate == 'canot' ? 'selected' : '' }}>Can not do at all</option>
-                                                @endisset
+                                               
+                                                <option value="some"  @isset( $user_detail->disability_communicate ) {{ $user_detail->disability_communicate == 'some' ? 'selected' : '' }} @endisset >Some Difficulty</option>
+                                                <option value="lot"  @isset( $user_detail->disability_communicate ) {{ $user_detail->disability_communicate == 'lot' ? 'selected' : '' }}  @endisset>A lot of Difficulty</option>
+                                                <option value="cannot"  @isset( $user_detail->disability_communicate ) {{ $user_detail->disability_communicate == 'canot' ? 'selected' : '' }}  @endisset>Can not do at all</option>
+                                               
                                             </select>
                                             <div class="help-block with-errors communicate-error"></div>    
                                         </div>
@@ -879,11 +1016,11 @@
                                             <label class="required fs-6 fw-bold mb-2">Difficulty of Taking Care (example: shower, wearing clothes)</label>
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                                 data-placeholder="Select" name="take_care">
-                                                @isset( $user_detail->disability_care )
-                                                <option value="some" {{ $user_detail->disability_care == 'some' ? 'selected' : '' }}>Some Difficulty</option>
-                                                <option value="lot" {{ $user_detail->disability_care == 'lot' ? 'selected' : '' }}>A lot of Difficulty</option>
-                                                <option value="cannot" {{ $user_detail->disability_care == 'canot' ? 'selected' : '' }}>Can not do at all</option>
-                                                @endisset
+                                               
+                                                <option value="some" @isset( $user_detail->disability_care ) {{ $user_detail->disability_care == 'some' ? 'selected' : '' }}  @endisset >Some Difficulty</option>
+                                                <option value="lot" @isset( $user_detail->disability_care ) {{ $user_detail->disability_care == 'lot' ? 'selected' : '' }} @endisset>A lot of Difficulty</option>
+                                                <option value="cannot" @isset( $user_detail->disability_care ) {{ $user_detail->disability_care == 'canot' ? 'selected' : '' }} @endisset>Can not do at all</option>
+                                                
                                             </select>
                                             <div class="help-block with-errors take_care-error"></div>    
                                         </div>
@@ -922,14 +1059,9 @@
     //save personal details
     $('#kk_personal_details_form').on('submit',function(e){
         e.preventDefault();
-        //alert('ok');
-        // $('.with-errors').text('');
-        // $('.indicator-label').hide();
-        // $('.indicator-progress').show();
-        // $('#kk_modal_new_service_submit').attr('disabled','true');
-
+        
         var formData = new FormData(this);
-        //console.log(formData);
+    
         $.ajax({
             type:"POST",
             url: "{{ url('resume/step_01/personal_detail/store')}}",
@@ -949,18 +1081,8 @@
                     $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                 }else{
                     //empty the form
-                    Swal.fire({
-                        text: data.message,
-                        icon: "success",
-                        buttonsStyling: !1,
-                        confirmButtonText: "{{__('Ok, got it!')}}",
-                        customClass: {
-                            confirmButton: "btn fw-bold btn-primary"
-                        }
-                    }).then((function () {
-                        //refresh datatable
-                        $('#dataTable').DataTable().ajax.reload();
-                    }))
+                    toastr.success(data.message);
+                    location.reload();
                 }
 
                 $('.indicator-label').show();
@@ -971,6 +1093,11 @@
         });
 
     })
+
+    //disable enable permanent adress field on page load
+    if ($('#permanent_address').is(':checked') == true) {
+        $("#permanent_address_field").addClass('d-none');
+    }
 
     //disable enable permanent adress field
     $("#permanent_address").on('change', function(){
@@ -983,14 +1110,9 @@
     //save address details
     $('#kk_address_details_form').on('submit',function(e){
         e.preventDefault();
-        //alert('ok');
-        // $('.with-errors').text('');
-        // $('.indicator-label').hide();
-        // $('.indicator-progress').show();
-        // $('#kk_address_detail_submit').attr('disabled','true');
-
+        
         var formData = new FormData(this);
-        //console.log(formData);
+       
         $.ajax({
             type:"POST",
             url: "{{ url('resume/step_01/address_detail/store')}}",
@@ -1009,43 +1131,66 @@
                     var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
                     $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                 }else{
-                    // empty the form
+                    // refresh
+                    toastr.success(data.message);
+                    location.reload()
                   
-                    Swal.fire({
-                            text: data.message,
-                            icon: "success",
-                            buttonsStyling: !1,
-                            confirmButtonText: "{{__('Ok, got it!')}}",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary"
-                            }
-                        }).then((function () {
-                            //refresh datatable
-                            $('#dataTable').DataTable().ajax.reload();
-                        }))
                 }
 
-            $('.indicator-label').show();
-            $('.indicator-progress').hide();
-            $('#kk_address_detail_submit').removeAttr('disabled');
-
+                $('.indicator-label').show();
+                $('.indicator-progress').hide();
+                $('#kk_address_detail_submit').removeAttr('disabled');
             }
         });
 
     })
 
 
+    //save preffered job category
+    $('#kk_preffered_job_category_form').on('submit',function(e){
+        e.preventDefault();
+       
+        var formData = new FormData(this);
+      
+        $.ajax({
+            type:"POST",
+            url: "{{ url('/resume/step_01/preffered-job-cat/store')}}",
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                if(data.success ==  false || data.success ==  "false"){
+                    var arr = Object.keys(data.errors);
+                    var arr_val = Object.values(data.errors);
+                    for(var i= 0;i < arr.length;i++){
+                    $('.'+arr[i]+'-error').text(arr_val[i][0])
+                    }
+                }else if(data.error || data.error == 'true'){
+                    var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                    $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
+                }else{
+                    // refresh
+                    toastr.success(data.message);
+                    location.reload();
+                   
+                }
+
+                $('.indicator-label').show();
+                $('.indicator-progress').hide();
+                $('#kk_address_detail_submit').removeAttr('disabled');
+
+            }
+        });
+
+    })
+
     //save career and application information
     $('#kk_career_application_info_form').on('submit',function(e){
         e.preventDefault();
-        //alert('ok');
-        // $('.with-errors').text('');
-        // $('.indicator-label').hide();
-        // $('.indicator-progress').show();
-        // $('#kk_address_detail_submit').attr('disabled','true');
-
+       
         var formData = new FormData(this);
-        //console.log(formData);
+      
         $.ajax({
             type:"POST",
             url: "{{ url('/resume/step_01/career_application/store')}}",
@@ -1064,25 +1209,15 @@
                     var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
                     $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                 }else{
-                    // empty the form
-                
-                    Swal.fire({
-                            text: data.message,
-                            icon: "success",
-                            buttonsStyling: !1,
-                            confirmButtonText: "{{__('Ok, got it!')}}",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary"
-                            }
-                        }).then((function () {
-                            //refresh datatable
-                            $('#dataTable').DataTable().ajax.reload();
-                        }))
+                    // refresh
+                    toastr.success(data.message);
+                    location.reload();
+                   
                 }
 
-            $('.indicator-label').show();
-            $('.indicator-progress').hide();
-            $('#kk_address_detail_submit').removeAttr('disabled');
+                $('.indicator-label').show();
+                $('.indicator-progress').hide();
+                $('#kk_address_detail_submit').removeAttr('disabled');
 
             }
         });
@@ -1094,13 +1229,9 @@
     $('#kk_other_relavent_info_form').on('submit',function(e){
         e.preventDefault();
         //alert('ok');
-        // $('.with-errors').text('');
-        // $('.indicator-label').hide();
-        // $('.indicator-progress').show();
-        // $('#kk_address_detail_submit').attr('disabled','true');
-
+       
         var formData = new FormData(this);
-        //console.log(formData);
+    
         $.ajax({
             type:"POST",
             url: "{{ url('/resume/step_01/other_relevent_info/store')}}",
@@ -1119,25 +1250,14 @@
                     var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
                     $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                 }else{
-                    // empty the form
-                   
-                    Swal.fire({
-                            text: data.message,
-                            icon: "success",
-                            buttonsStyling: !1,
-                            confirmButtonText: "{{__('Ok, got it!')}}",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary"
-                            }
-                        }).then((function () {
-                            //refresh datatable
-                            $('#dataTable').DataTable().ajax.reload();
-                        }))
+                     // refresh
+                    toastr.success(data.message);
+                    location.reload();
                 }
 
-            $('.indicator-label').show();
-            $('.indicator-progress').hide();
-            $('#kk_address_detail_submit').removeAttr('disabled');
+                $('.indicator-label').show();
+                $('.indicator-progress').hide();
+                $('#kk_address_detail_submit').removeAttr('disabled');
 
             }
         });
@@ -1164,11 +1284,7 @@
     $('#kk_disability_info_form').on('submit',function(e){
         e.preventDefault();
         //alert('ok');
-        // $('.with-errors').text('');
-        // $('.indicator-label').hide();
-        // $('.indicator-progress').show();
-        // $('#kk_address_detail_submit').attr('disabled','true');
-
+       
         var formData = new FormData(this);
         //console.log(formData);
         $.ajax({
@@ -1189,25 +1305,14 @@
                     var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
                     $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                 }else{
-                    // empty the form
-                  
-                    Swal.fire({
-                            text: data.message,
-                            icon: "success",
-                            buttonsStyling: !1,
-                            confirmButtonText: "{{__('Ok, got it!')}}",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary"
-                            }
-                        }).then((function () {
-                            //refresh datatable
-                            $('#dataTable').DataTable().ajax.reload();
-                        }))
+                     // refresh
+                    toastr.success(data.message);
+                    location.reload();
                 }
 
-            $('.indicator-label').show();
-            $('.indicator-progress').hide();
-            $('#kk_address_detail_submit').removeAttr('disabled');
+                $('.indicator-label').show();
+                $('.indicator-progress').hide();
+                $('#kk_address_detail_submit').removeAttr('disabled');
 
             }
         });

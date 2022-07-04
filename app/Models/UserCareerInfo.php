@@ -9,5 +9,10 @@ class UserCareerInfo extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'job_categories' => 'json',
+        'special_skill' => 'json'
+    ];
+
     protected $guarded = [];
 }

@@ -517,13 +517,9 @@
     $('#kk_specialization_skill_form').on('submit',function(e){
         e.preventDefault();
         //alert('ok');
-        // $('.with-errors').text('');
-        // $('.indicator-label').hide();
-        // $('.indicator-progress').show();
-        // $('#kk_address_detail_submit').attr('disabled','true');
-
+        
         var formData = new FormData(this);
-        //console.log(formData);
+     
         $.ajax({
             type:"POST",
             url: "{{ url('/resume/step_04/specialization-skill/store')}}",
@@ -542,25 +538,14 @@
                     var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
                     $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                 }else{
-                    // empty the form
-                  
-                    Swal.fire({
-                            text: data.message,
-                            icon: "success",
-                            buttonsStyling: !1,
-                            confirmButtonText: "{{__('Ok, got it!')}}",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary"
-                            }
-                        }).then((function () {
-                            //refresh datatable
-                            $('#dataTable').DataTable().ajax.reload();
-                        }))
+                    // refresh
+                    toastr.success(data.message);
+                    location.reload();
                 }
 
-            $('.indicator-label').show();
-            $('.indicator-progress').hide();
-            $('#kk_address_detail_submit').removeAttr('disabled');
+                $('.indicator-label').show();
+                $('.indicator-progress').hide();
+                $('#kk_address_detail_submit').removeAttr('disabled');
 
             }
         });
@@ -571,13 +556,9 @@
     $('#kk_specialization_description_form').on('submit',function(e){
         e.preventDefault();
         //alert('ok');
-        // $('.with-errors').text('');
-        // $('.indicator-label').hide();
-        // $('.indicator-progress').show();
-        // $('#kk_address_detail_submit').attr('disabled','true');
-
+       
         var formData = new FormData(this);
-        //console.log(formData);
+      
         $.ajax({
             type:"POST",
             url: "{{ url('/resume/step_04/description/store')}}",
@@ -596,25 +577,14 @@
                     var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
                     $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                 }else{
-                    // empty the form
-                   
-                    Swal.fire({
-                            text: data.message,
-                            icon: "success",
-                            buttonsStyling: !1,
-                            confirmButtonText: "{{__('Ok, got it!')}}",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary"
-                            }
-                        }).then((function () {
-                            //refresh datatable
-                            $('#dataTable').DataTable().ajax.reload();
-                        }))
+                    // refresh
+                    toastr.success(data.message);
+                    location.reload();
                 }
 
-            $('.indicator-label').show();
-            $('.indicator-progress').hide();
-            $('#kk_address_detail_submit').removeAttr('disabled');
+                $('.indicator-label').show();
+                $('.indicator-progress').hide();
+                $('#kk_address_detail_submit').removeAttr('disabled');
 
             }
         });
@@ -626,13 +596,9 @@
     $('#kk_specialization_extracaricular_form').on('submit',function(e){
         e.preventDefault();
         //alert('ok');
-        // $('.with-errors').text('');
-        // $('.indicator-label').hide();
-        // $('.indicator-progress').show();
-        // $('#kk_address_detail_submit').attr('disabled','true');
-
+       
         var formData = new FormData(this);
-        //console.log(formData);
+     
         $.ajax({
             type:"POST",
             url: "{{ url('/resume/step_04/extracaricular/store')}}",
@@ -651,25 +617,14 @@
                     var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
                     $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                 }else{
-                    // empty the form
-                  
-                    Swal.fire({
-                            text: data.message,
-                            icon: "success",
-                            buttonsStyling: !1,
-                            confirmButtonText: "{{__('Ok, got it!')}}",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary"
-                            }
-                        }).then((function () {
-                            //refresh datatable
-                            $('#dataTable').DataTable().ajax.reload();
-                        }))
+                   // refresh
+                    toastr.success(data.message);
+                    location.reload();
                 }
 
-            $('.indicator-label').show();
-            $('.indicator-progress').hide();
-            $('#kk_address_detail_submit').removeAttr('disabled');
+                $('.indicator-label').show();
+                $('.indicator-progress').hide();
+                $('#kk_address_detail_submit').removeAttr('disabled');
 
             }
         });
@@ -681,13 +636,9 @@
     $('#kk_language_proficency_form').on('submit',function(e){
         e.preventDefault();
         //alert('ok');
-        // $('.with-errors').text('');
-        // $('.indicator-label').hide();
-        // $('.indicator-progress').show();
-        // $('#kk_address_detail_submit').attr('disabled','true');
-
+      
         var formData = new FormData(this);
-        //console.log(formData);
+       
         $.ajax({
             type:"POST",
             url: "{{ url('/resume/step_04/language-proficency/store')}}",
@@ -706,20 +657,9 @@
                     var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
                     $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                 }else{
-                    // empty the form
-                    
-                    Swal.fire({
-                            text: data.message,
-                            icon: "success",
-                            buttonsStyling: !1,
-                            confirmButtonText: "{{__('Ok, got it!')}}",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary"
-                            }
-                        }).then((function () {
-                            //refresh datatable
-                            $('#dataTable').DataTable().ajax.reload();
-                        }))
+                    // refresh
+                    toastr.success(data.message);
+                    location.reload();
                 }
 
                 $('.indicator-label').show();
@@ -736,13 +676,9 @@
     $('#kk_references_form').on('submit',function(e){
         e.preventDefault();
         //alert('ok');
-        // $('.with-errors').text('');
-        // $('.indicator-label').hide();
-        // $('.indicator-progress').show();
-        // $('#kk_address_detail_submit').attr('disabled','true');
-
+     
         var formData = new FormData(this);
-        //console.log(formData);
+      
         $.ajax({
             type:"POST",
             url: "{{ url('/resume/step_04/references/store')}}",
@@ -761,25 +697,14 @@
                     var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
                     $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                 }else{
-                    // empty the form
-                 
-                    Swal.fire({
-                        text: data.message,
-                        icon: "success",
-                        buttonsStyling: !1,
-                        confirmButtonText: "{{__('Ok, got it!')}}",
-                        customClass: {
-                            confirmButton: "btn fw-bold btn-primary"
-                        }
-                    }).then((function () {
-                        //refresh datatable
-                        $('#dataTable').DataTable().ajax.reload();
-                    }))
+                    // refresh
+                    toastr.success(data.message);
+                    location.reload();
                 }
 
-            $('.indicator-label').show();
-            $('.indicator-progress').hide();
-            $('#kk_address_detail_submit').removeAttr('disabled');
+                $('.indicator-label').show();
+                $('.indicator-progress').hide();
+                $('#kk_address_detail_submit').removeAttr('disabled');
 
             }
         });

@@ -134,11 +134,7 @@
     $('#kk_photograph_form').on('submit',function(e){
         e.preventDefault();
         //alert('ok');
-        // $('.with-errors').text('');
-        // $('.indicator-label').hide();
-        // $('.indicator-progress').show();
-        // $('#kk_address_detail_submit').attr('disabled','true');
-
+        
         var formData = new FormData(this);
         //console.log(formData);
         $.ajax({
@@ -159,20 +155,9 @@
                     var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
                     $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
                 }else{
-                    // empty the form
-                
-                    Swal.fire({
-                            text: data.message,
-                            icon: "success",
-                            buttonsStyling: !1,
-                            confirmButtonText: "{{__('Ok, got it!')}}",
-                            customClass: {
-                                confirmButton: "btn fw-bold btn-primary"
-                            }
-                        }).then((function () {
-                            //refresh datatable
-                            $('#dataTable').DataTable().ajax.reload();
-                        }))
+                    // refresh
+                    toastr.success(data.message);
+                    location.reload();
                 }
 
                 $('.indicator-label').show();

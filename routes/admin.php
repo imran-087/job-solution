@@ -356,8 +356,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/education-degree/delete/{id}', 'Resume\EducationDegreeController@delete')->name('education-degree.delete');
 
 
-
-
+       
         /*
         |--------------------------------------------------------------------------
         | Discussion Forum

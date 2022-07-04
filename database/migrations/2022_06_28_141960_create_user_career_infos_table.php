@@ -21,8 +21,8 @@ class CreateUserCareerInfosTable extends Migration
             $table->string('expected_salary')->nullable();
             $table->enum('job_level',['entry', 'mid', 'top']);
             $table->enum('job_nature',['full_time', 'part_time', 'contract', 'internship', 'freelance']);
-            $table->string('job_categories')->nullable(); //functional category & industrial category
-            $table->string('special_skill')->nullable(); 
+            $table->json('job_categories')->nullable(); //functional category & industrial category
+            $table->json('special_skill')->nullable(); 
             $table->string('prefferd_city')->nullable();
             $table->text('career_summary')->nullable();
             $table->string('special_qualification')->nullable();
