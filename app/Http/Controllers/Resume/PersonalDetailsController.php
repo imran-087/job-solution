@@ -22,6 +22,7 @@ class PersonalDetailsController extends Controller
         $functional_job_categories = FunctionalJobCategory::select('name', 'id')->get();
         $special_skills = Skill::select('name', 'id')->where('type', 'special_skill')->get();
 
+
         return view('resume.personal', compact(['user_detail', 'career_info', 'functional_job_categories', 'special_skills']));
     }
 

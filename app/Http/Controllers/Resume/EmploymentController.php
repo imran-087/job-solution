@@ -14,7 +14,10 @@ class EmploymentController extends Controller
 {
     public function create()
     {
-        return view('resume.employment');
+        $user_detail = UserDetail::select('ba_no', 'number', 'ranks', 'type', 'trade', 'course', 'date_of_commision', 'date_of_retirement')
+            ->where('user_id', Auth::id())->first();
+            //dd(Auth::id());
+        return view('resume.employment', compact('user_detail'));
     }
 
     //employmentHistoryStore

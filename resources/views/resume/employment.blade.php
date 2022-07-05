@@ -276,10 +276,99 @@
                             </button>
                         </h2>
                         <div id="kt_accordion_1_body_5" class="accordion-collapse collapse " aria-labelledby="kt_accordion_1_header_2" data-bs-parent="#kt_accordion_1">
-                            <div class="accordion-body">
+                            <div class="accordion-body retired_army_person">
+
+                                <div class="card card-flush pt-3 mb-5 mb-lg-10 retired_army_person_data" data-kt-subscriptions-form="pricing">
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0">
+                                        <div class="d-flex justify-content-end">
+                                            <span class="btn btn-active-color-primary btn-light " id="edit_retired_army_person_data"><i class="fas fa-edit"></i>Edit</span>
+                                        </div>
+                                        <!--begin::Options-->
+                                        <div id="kt_create_new_payment_method">
+                                            <!--begin::Option-->
+                                            <div class="py-1">
+                                                <!--begin::Body-->
+                                                <div id="kt_create_new_payment_method_1" class="fs-6 ps-10 collapse show" style="">
+                                                    <!--begin::Details-->
+                                                    @isset($user_detail)
+                                                    <div class="d-flex flex-wrap py-5">
+                                                        <!--begin::Col-->
+                                                        <div class="flex-equal me-5">
+                                                            <table class="table table-flush fw-bold gy-1">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">BA No.</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->ba_no ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">BA Number</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->number ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Ranks</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->ranks ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Type</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->type ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Arms</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->arms }}</td>
+                                                                    </tr>
+                                                                    
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <!--end::Col-->
+                                                        <!--begin::Col-->
+                                                        <div class="flex-equal">
+                                                            <table class="table table-flush fw-bold gy-1">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Trade</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->trade ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Course</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->course ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Date of commission</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->date_of_commission ?? '' }} </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Date of Retirement</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->date_of_retirement ?? '' }} </td>
+                                                                    </tr>
+                                                                    
+                                                                   
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <!--end::Details-->
+                                                    @endisset
+                                                </div>
+                                                <!--end::Body-->
+                                            </div>
+                                            <!--end::Option-->
+                                            <div class="separator separator-dashed"></div>
+                                            
+                                        </div>
+                                        <!--end::Options-->
+                                    </div>
+                                    <!--end::Card body-->
+                                </div>
+
                                 <!--begin:Form-->
-                                <form id="kk_modal_new_retired_army_person_form" class="form" enctype="multipart/form-data">
+                                <form id="kk_modal_new_retired_army_person_form" class="form d-none" enctype="multipart/form-data">
                                     @csrf
+                                    <div class="d-flex justify-content-end mb-4">
+                                        <span class="btn btn-active-color-danger btn-light " id="cancel_edit_retired_army_person_data"><i class="fas fa-times"></i>Cancel</span>
+                                    </div>
                                     <div class="messages"></div>
                                     <!--begin::Heading-->
                                     <div class="mb-5">
@@ -503,7 +592,7 @@
 
     })
 
-    //save employment history
+    //save employment history for retired army person
     $('#kk_modal_new_retired_army_person_form').on('submit',function(e){
         e.preventDefault();
         //alert('ok');
@@ -542,5 +631,31 @@
         });
 
     })
+
+
+    /// Personal Detail show hide
+    $(document).ready( function() {
+        // Personal detail Section :: start 
+        //edit button
+        $("#edit_retired_army_person_data").on('click', function(){
+            $(this).parents(".retired_army_person").find('div.retired_army_person_data').addClass('d-none');
+            $(this).parents(".retired_army_person").find('form#kk_modal_new_retired_army_person_form').removeClass('d-none');
+        })
+        //cancel button
+        $("#cancel_edit_retired_army_person_data").on('click', function(){
+            $(this).parents(".retired_army_person").find('form#kk_modal_new_retired_army_person_form').addClass('d-none');
+            $(this).parents(".retired_army_person").find('div.retired_army_person_data').removeClass('d-none');
+        })
+
+        // Personal detail Section :: end
+
+        
+
+
+       
+
+
+    })
+
     </script>
 @endpush

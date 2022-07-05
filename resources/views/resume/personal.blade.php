@@ -77,6 +77,7 @@
                         </h2>
                         <div id="kt_accordion_1_body_1" class="accordion-collapse collapse show" aria-labelledby="kt_accordion_1_header_1" data-bs-parent="#kt_accordion_1">
                             <div class="accordion-body personal_detail">
+
                                 <div class="card card-flush pt-3 mb-5 mb-lg-10 personal_detail_data" data-kt-subscriptions-form="pricing">
                                     <!--begin::Card body-->
                                     <div class="card-body pt-0">
@@ -96,35 +97,35 @@
                                                             <table class="table table-flush fw-bold gy-1">
                                                                 <tbody>
                                                                     <tr>
-                                                                        <td class="text-muted min-w-125px w-125px">First Name</td>
+                                                                        <td class="text-muted min-w-125px w-130px">First Name</td>
                                                                         <td class="text-gray-800">{{ $user_detail->first_name ?? '' }}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="text-muted min-w-125px w-125px">Last Name</td>
+                                                                        <td class="text-muted min-w-125px w-130px">Last Name</td>
                                                                         <td class="text-gray-800">{{ $user_detail->last_name ?? '' }}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="text-muted min-w-125px w-125px">Father Name</td>
+                                                                        <td class="text-muted min-w-125px w-130px">Father Name</td>
                                                                         <td class="text-gray-800">{{ $user_detail->father_name ?? '' }}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="text-muted min-w-125px w-125px">Mother Name</td>
+                                                                        <td class="text-muted min-w-125px w-130px">Mother Name</td>
                                                                         <td class="text-gray-800">{{ $user_detail->mother_name ?? '' }}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="text-muted min-w-125px w-125px">Date of Birth</td>
+                                                                        <td class="text-muted min-w-125px w-130px">Date of Birth</td>
                                                                         <td class="text-gray-800">{{ $user_detail->date_of_birth }}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="text-muted min-w-125px w-125px">Gender</td>
+                                                                        <td class="text-muted min-w-125px w-130px">Gender</td>
                                                                         <td class="text-gray-800">{{ $user_detail->gender }}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="text-muted min-w-125px w-125px">Religion</td>
+                                                                        <td class="text-muted min-w-125px w-130px">Religion</td>
                                                                         <td class="text-gray-800">{{ $user_detail->religion }}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="text-muted min-w-125px w-125px">Marital Status</td>
+                                                                        <td class="text-muted min-w-125px w-130px">Marital Status</td>
                                                                         <td class="text-gray-800">{{ $user_detail->marital_status }}</td>
                                                                     </tr>
                                                                 </tbody>
@@ -136,35 +137,35 @@
                                                             <table class="table table-flush fw-bold gy-1">
                                                                 <tbody>
                                                                     <tr>
-                                                                        <td class="text-muted min-w-125px w-125px">Nationality</td>
+                                                                        <td class="text-muted min-w-125px w-130px">Nationality</td>
                                                                         <td class="text-gray-800">{{ $user_detail->nationality ?? '' }}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="text-muted min-w-125px w-125px">National ID</td>
+                                                                        <td class="text-muted min-w-125px w-130px">National ID</td>
                                                                         <td class="text-gray-800">{{ $user_detail->national_id ?? '' }}</td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="text-muted min-w-125px w-125px">Passport Number</td>
+                                                                        <td class="text-muted min-w-125px w-130px">Passport Number</td>
                                                                         <td class="text-gray-800">{{ $user_detail->passport_number ?? '' }} </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="text-muted min-w-125px w-125px">Passport Issue Date</td>
+                                                                        <td class="text-muted min-w-125px w-130px">Passport Issue Date</td>
                                                                         <td class="text-gray-800">{{ $user_detail->passport_issue_date ?? '' }} </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="text-muted min-w-125px w-125px">Primary Number</td>
+                                                                        <td class="text-muted min-w-125px w-130px">Contact -1</td>
                                                                         <td class="text-gray-800">{{ $user_detail->primary_mobile ?? ''  }} </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="text-muted min-w-125px w-125px">Secondary Mobile</td>
-                                                                        <td class="text-gray-800">{{ $user_detail->secondary_mobile ?? '' }} (%)</td>
+                                                                        <td class="text-muted min-w-125px w-130px">Contact -2</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->secondary_mobile ?? '' }} </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="text-muted min-w-125px w-125px">Email</td>
+                                                                        <td class="text-muted min-w-125px w-130px">Email</td>
                                                                         <td class="text-gray-800">{{ $user_detail->email ?? '' }} </td>
                                                                     </tr>
                                                                     <tr>
-                                                                        <td class="text-muted min-w-125px w-125px">Blood Group</td>
+                                                                        <td class="text-muted min-w-125px w-130px">Blood Group</td>
                                                                         <td class="text-gray-800">{{ $user_detail->glood_group ?? '' }} </td>
                                                                     </tr>
                                                                    
@@ -186,10 +187,11 @@
                                     </div>
                                     <!--end::Card body-->
                                 </div>
+
                                 <!--begin:Form-->
-                                <form id="kk_personal_details_form" class="form d-none" enctype="multipart/form-data">
+                                <form id="kk_personal_details_form" class="form d-none py-5 px-4" enctype="multipart/form-data">
                                     @csrf
-                                    <div class="d-flex justify-content-end">
+                                    <div class="d-flex justify-content-end mb-4">
                                         <span class="btn btn-active-color-danger btn-light " id="cancel_edit_personal_detail"><i class="fas fa-times"></i>Cancel</span>
                                     </div>
                                     <div class="messages"></div>
@@ -494,11 +496,96 @@
                             </button>
                         </h2>
                         <div id="kt_accordion_1_body_2" class="accordion-collapse collapse " aria-labelledby="kt_accordion_1_header_2" data-bs-parent="#kt_accordion_1">
-                            <div class="accordion-body">
+                            <div class="accordion-body address_detail">
                                 
+                                <div class="card card-flush pt-3 mb-5 mb-lg-10 address_detail_data" data-kt-subscriptions-form="pricing">
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0">
+                                        <div class="d-flex justify-content-end">
+                                            <span class="btn btn-active-color-primary btn-light " id="edit_address_detail"><i class="fas fa-edit"></i>Edit</span>
+                                        </div>
+                                        <!--begin::Options-->
+                                        <div id="kt_create_new_payment_method">
+                                            <!--begin::Option-->
+                                            <div class="py-1">
+                                                <!--begin::Body-->
+                                                <div id="kt_create_new_payment_method_1" class="fs-6 ps-10 collapse show" style="">
+                                                    <!--begin::Details-->
+                                                    <div class="py-5">
+                                                        <!--begin::Col-->
+                                                        <div class="mb-8">
+                                                            <table class="table table-flush fw-bold gy-1">
+                                                                <span class="fs-4 mb-3">Present Address</span>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Country</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->present_address['country'] ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">State</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->present_address['state'] ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">City</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->present_address['city'] ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Address</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->present_address['address'] ?? '' }}</td>
+                                                                    </tr>
+                                                                    
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <!--end::Col-->
+                                                        @isset($user_detail->permanent_address)
+                                                        <!--begin::Col-->
+                                                        <div class="">
+                                                            <table class="table table-flush fw-bold gy-1">
+                                                                <span class="fs-4 mb-3">Permanent Address</span>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Country</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->permanent_address['country'] ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">State</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->permanent_address['state'] ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">City</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->permanent_address['city'] ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Address</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->permanent_address['address'] ?? '' }}</td>
+                                                                    </tr>
+                                                                    
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        @endisset
+                                                    </div>
+                                                    <!--end::Details-->
+                                                    
+                                                </div>
+                                                <!--end::Body-->
+                                            </div>
+                                            <!--end::Option-->
+                                            <div class="separator separator-dashed"></div>
+                                            
+                                        </div>
+                                        <!--end::Options-->
+                                    </div>
+                                    <!--end::Card body-->
+                                </div>
+
                                 <!--begin:Form-->
-                                <form id="kk_address_details_form" class="form" enctype="multipart/form-data">
+                                <form id="kk_address_details_form" class="form d-none py-5 px-4" enctype="multipart/form-data">
                                     @csrf
+                                    <div class="d-flex justify-content-end mb-4">
+                                        <span class="btn btn-active-color-danger btn-light " id="cancel_edit_address_detail"><i class="fas fa-times"></i>Cancel</span>
+                                    </div>
                                     <div class="messages"></div>
                                 
                                     <!--begin::Heading-->
@@ -656,10 +743,70 @@
                             </button>
                         </h2>
                         <div id="kt_accordion_1_body_3" class="accordion-collapse collapse" aria-labelledby="kt_accordion_1_header_3" data-bs-parent="#kt_accordion_1">
-                            <div class="accordion-body">
+                            <div class="accordion-body career_application">
+
+                                <div class="card card-flush pt-3 mb-5 mb-lg-10 career_application_data" data-kt-subscriptions-form="pricing">
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0">
+                                        <div class="d-flex justify-content-end">
+                                            <span class="btn btn-active-color-primary btn-light " id="edit_career_application"><i class="fas fa-edit"></i>Edit</span>
+                                        </div>
+                                        <!--begin::Options-->
+                                        <div id="kt_create_new_payment_method">
+                                            <!--begin::Option-->
+                                            <div class="py-1">
+                                                <!--begin::Body-->
+                                                <div id="kt_create_new_payment_method_1" class="fs-6 ps-10 collapse show" style="">
+                                                    <!--begin::Details-->
+                                                    <div class="py-5">
+                                                        <!--begin::Col-->
+                                                        <div class="mb-8">
+                                                            <table class="table table-flush fw-bold gy-1">
+                                                                <span class="fs-4 mb-3">Career Application Information</span>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Objective</td>
+                                                                        <td class="text-gray-800">{{  $career_info->objective ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Present Salary</td>
+                                                                        <td class="text-gray-800">{{ $career_info->present_salary ?? ''}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Job Level</td>
+                                                                        <td class="text-gray-800">{{ $career_info->job_level ?? ''}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Job Nature</td>
+                                                                        <td class="text-gray-800">{{ $career_info->job_nature ?? '' }}</td>
+                                                                    </tr>
+                                                                    
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <!--end::Col-->
+                                                       
+                                                    </div>
+                                                    <!--end::Details-->
+                                                    
+                                                </div>
+                                                <!--end::Body-->
+                                            </div>
+                                            <!--end::Option-->
+                                            <div class="separator separator-dashed"></div>
+                                            
+                                        </div>
+                                        <!--end::Options-->
+                                    </div>
+                                    <!--end::Card body-->
+                                </div>
+
                                 <!--begin:Form-->
-                                <form id="kk_career_application_info_form" class="form" enctype="multipart/form-data">
+                                <form id="kk_career_application_info_form" class="form d-none py-5 px-4" enctype="multipart/form-data">
                                     @csrf
+                                    <div class="d-flex justify-content-end mb-4">
+                                        <span class="btn btn-active-color-danger btn-light " id="cancel_edit_career_application"><i class="fas fa-times"></i>Cancel</span>
+                                    </div>
                                     <div class="messages"></div>
                                     <!--begin::Col-->
                                     <div class="col-md-12 fv-row mb-5">
@@ -768,6 +915,7 @@
                                     <!--end::Actions-->
                                     
                                 </form>
+
                             </div>
                         </div>
                     </div>
@@ -915,10 +1063,68 @@
                             </button>
                         </h2>
                         <div id="kt_accordion_1_body_4" class="accordion-collapse collapse" aria-labelledby="kt_accordion_1_header_4" data-bs-parent="#kt_accordion_1">
-                            <div class="accordion-body">
+                            <div class="accordion-body other_relevent_info">
+
+                                <div class="card card-flush pt-3 mb-5 mb-lg-10 other_relevent_info_data" data-kt-subscriptions-form="pricing">
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0">
+                                        <div class="d-flex justify-content-end">
+                                            <span class="btn btn-active-color-primary btn-light " id="edit_other_relevent_info"><i class="fas fa-edit"></i>Edit</span>
+                                        </div>
+                                        <!--begin::Options-->
+                                        <div id="kt_create_new_payment_method">
+                                            <!--begin::Option-->
+                                            <div class="py-1">
+                                                <!--begin::Body-->
+                                                <div id="kt_create_new_payment_method_1" class="fs-6 ps-10 collapse show" style="">
+                                                    <!--begin::Details-->
+                                                    <div class="py-5">
+                                                        <!--begin::Col-->
+                                                        <div class="mb-8">
+                                                            <table class="table table-flush fw-bold gy-1">
+                                                                <span class="fs-4 mb-3">Other Relevent Info</span>
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Career Summary</td>
+                                                                        <td class="text-gray-800">{{  $career_info->career_summary ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Special Qualification</td>
+                                                                        <td class="text-gray-800">{{ $career_info->special_qualification ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Keyword</td>
+                                                                        <td class="text-gray-800">{{ $career_info->keyword ?? '' }}</td>
+                                                                    </tr>
+                                                                   
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <!--end::Col-->
+                                                       
+                                                    </div>
+                                                    <!--end::Details-->
+                                                    
+                                                </div>
+                                                <!--end::Body-->
+                                            </div>
+                                            <!--end::Option-->
+                                            <div class="separator separator-dashed"></div>
+                                            
+                                        </div>
+                                        <!--end::Options-->
+                                    </div>
+                                    <!--end::Card body-->
+                                </div>
+
                                 <!--begin:Form-->
-                                <form id="kk_other_relavent_info_form" class="form" enctype="multipart/form-data">
-                                    @csrf  
+                                <form id="kk_other_relavent_info_form" class="form d-none py-5 px-4" enctype="multipart/form-data">
+                                    @csrf
+                                    
+                                    <div class="d-flex justify-content-end mb-4">
+                                        <span class="btn btn-active-color-danger btn-light " id="cancel_edit_other_relevent_info"><i class="fas fa-times"></i>Cancel</span>
+                                    </div>
+                                    
                                     <div class="messages"></div>
                                     <!--begin::Col-->
                                     <div class="col-md-12 fv-row mb-5">
@@ -1449,6 +1655,50 @@
         })
 
         // Personal detail Section :: end
+
+        // Address detail Section :: start 
+        //edit button
+        $("#edit_address_detail").on('click', function(){
+            $(this).parents(".address_detail").find('div.address_detail_data').addClass('d-none');
+            $(this).parents(".address_detail").find('form#kk_address_details_form').removeClass('d-none');
+        })
+        //cancel button
+        $("#cancel_edit_address_detail").on('click', function(){
+            $(this).parents(".address_detail").find('form#kk_address_details_form').addClass('d-none');
+            $(this).parents(".address_detail").find('div.address_detail_data').removeClass('d-none');
+        })
+
+        // Address detail Section :: end
+
+
+        // Career And Application info Section :: start 
+        //edit button
+        $("#edit_career_application").on('click', function(){
+            $(this).parents(".career_application").find('div.career_application_data').addClass('d-none');
+            $(this).parents(".career_application").find('form#kk_career_application_info_form').removeClass('d-none');
+        })
+        //cancel button
+        $("#cancel_edit_career_application").on('click', function(){
+            $(this).parents(".career_application").find('form#kk_career_application_info_form').addClass('d-none');
+            $(this).parents(".career_application").find('div.career_application_data').removeClass('d-none');
+        })
+
+        // Career And Application info Section :: end
+
+
+        // Other Relavent  info Section :: start 
+        //edit button
+        $("#edit_other_relevent_info").on('click', function(){
+            $(this).parents(".other_relevent_info").find('div.other_relevent_info_data').addClass('d-none');
+            $(this).parents(".other_relevent_info").find('form#kk_other_relavent_info_form').removeClass('d-none');
+        })
+        //cancel button
+        $("#cancel_edit_other_relevent_info").on('click', function(){
+            $(this).parents(".other_relevent_info").find('form#kk_other_relavent_info_form').addClass('d-none');
+            $(this).parents(".other_relevent_info").find('div.other_relevent_info_data').removeClass('d-none');
+        })
+
+        // Other Relavent  info Section :: end
     })
 
 </script>
