@@ -354,6 +354,12 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('/education-degree/store', 'Resume\EducationDegreeController@store')->name('education-degree.store');
         Route::get('/education-degree/get/{id}', 'Resume\EducationDegreeController@get')->name('education-degree.get');
         Route::get('/education-degree/delete/{id}', 'Resume\EducationDegreeController@delete')->name('education-degree.delete');
+        
+        ############ Education Degree  Route #############
+        Route::get('/country/index', 'Resume\CountryController@index')->name('country.index');
+        Route::post('/country/store', 'Resume\CountryController@store')->name('country.store');
+        Route::get('/country/get/{id}', 'Resume\CountryController@get')->name('country.get');
+        Route::get('/country/delete/{id}', 'Resume\CountryController@delete')->name('country.delete');
 
 
        
