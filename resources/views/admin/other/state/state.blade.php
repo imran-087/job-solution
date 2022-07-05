@@ -1,5 +1,5 @@
 @extends('admin.layout.app')
-@section('title', 'Country')
+@section('title', 'Major Subject')
 
 @section('content')
 
@@ -13,7 +13,7 @@
                 data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
                 class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                 <!--begin::Title-->
-                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Country</h1>
+                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Major Subject</h1>
                 <!--end::Title-->
                 <!--begin::Separator-->
                 <span class="h-20px border-gray-200 border-start mx-4"></span>
@@ -31,7 +31,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-muted">Country Management</li>
+                    <li class="breadcrumb-item text-muted">Major subject Management</li>
                     <!--end::Item-->
                     <!--begin::Item-->
                     <li class="breadcrumb-item">
@@ -39,7 +39,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-dark">Country List</li>
+                    <li class="breadcrumb-item text-dark">Major subject List</li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -84,7 +84,7 @@
                             </span>
                             <!--end::Svg Icon-->
                             <input type="text" data-kk-product-table-filter="search"
-                                class="form-control form-control-solid w-250px ps-14" placeholder="Search subject">
+                                class="form-control form-control-solid w-250px ps-14" placeholder="Search state">
                         </div>
                         <!--end::Search-->
                     </div>
@@ -93,7 +93,7 @@
                     <div class="card-toolbar flex-row-fluid justify-content-end gap-5"
                         data-select2-id="select2-data-123-0tix">
                         <!--begin::Add product-->
-                        <a href="javascript:;" class="btn btn-sm btn-primary me-3" onclick="addNew()"> <i class="fas fa-plus"></i> Add Country</a>
+                        <a href="javascript:;" class="btn btn-sm btn-primary me-3" onclick="addNew()"> <i class="fas fa-plus"></i> Add State</a>
                         <!--end::Add product-->
                     </div>
 
@@ -112,9 +112,15 @@
                                     <!--begin::Table row-->
                                     <tr class="text-start text-gray-400 fw-bolder fs-7 text-uppercase gs-0">
                                         <th class="min-w-20px">#</th>
+                                        <th class="min-w-150px">Name</th>
                                         <th class="min-w-150px">Country Name</th>
-                                        <th class="min-w-100px">Created at</th>
-                                        <th class="min-w-70px">Actions</th>
+                                        <th class="min-w-150px">Country Code</th>
+                                        <th class="min-w-150px">State Code</th>
+                                        <th class="min-w-150px">Type</th>
+                                        <th class="min-w-150px">lattitude</th>
+                                        <th class="min-w-150px">Longitude</th>
+                                        <th class=" min-w-100px">Created at</th>
+                                        <th class=" min-w-70px">Actions</th>
                                     </tr>
                                     <!--end::Table row-->
                                 </thead>
@@ -142,7 +148,7 @@
 
 
 <!--begin::Modal - New Product/Service-->
-<div class="modal fade" id="kk_modal_new_country" tabindex="-1" aria-hidden="true">
+<div class="modal fade" id="kk_modal_new_state" tabindex="-1" aria-hidden="true">
     <!--begin::Modal dialog-->
     <div class="modal-dialog modal-dialog-centered mw-650px">
         <!--begin::Modal content-->
@@ -168,16 +174,16 @@
             <!--begin::Modal body-->
             <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
                 <!--begin:Form-->
-                <form id="kk_modal_new_country_form" class="form" enctype="multipart/form-data">
+                <form id="kk_modal_new_state_form" class="form" enctype="multipart/form-data">
                     <div class="messages"></div>
                     {{-- csrf token  --}}
                     @csrf
-                    <input type="hidden" name="country_id">
+                    <input type="hidden" name="state_id">
 
                     <!--begin::Heading-->
                     <div class="mb-13 text-center">
                         <!--begin::Title-->
-                        <h1 class="mb-3">Create or Update Country</h1>
+                        <h1 class="mb-3">Create or Update State</h1>
                         <!--end::Title-->
                         <!--begin::Description-->
                         <div class="text-muted fw-bold fs-5">Fill up the form and submit
@@ -185,72 +191,66 @@
                         <!--end::Description-->
                     </div>
                     <!--end::Heading-->
+                    <!--begin::Input group-->
+                    <div class="d-flex flex-column mb-8 fv-row">
+                        <!--begin::Label-->
+                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                            <span class="required">State Name</span>
+                        </label>
+                        <!--end::Label-->
+                        <input type="text" class="form-control form-control-solid" placeholder="Enter subject name"
+                            name="name" />
+                        <div class="help-block with-errors name-error"></div>
+                    </div>
+                    <!--end::Input group-->
 
                     <!--begin::Input group-->
                     <div class="row g-9 mb-8">
                         <!--begin::Col-->
-                        <div class="col-md-3 fv-row">
-                            <div class="d-flex flex-column fv-row">
-                                <!--begin::Label-->
-                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="required">Country Name</span>
-                                </label>
-                                <!--end::Label-->
-                                <input type="text" class="form-control form-control-solid" placeholder="Enter country name"
-                                    name="name" />
-                                <div class="help-block with-errors name-error"></div>
-                            </div>
-                        </div>
-                        <!--end::Col-->
-
-                        <!--begin::Col-->
-                        <div class="col-md-3 fv-row">
-                            <!--begin::Input group-->
-                            <div class="d-flex flex-column fv-row">
-                                <!--begin::Label-->
-                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="required">Nationality</span>
-                                </label>
-                                <!--end::Label-->
-                                <input type="text" class="form-control form-control-solid" placeholder="Enter nationality "
-                                    name="nationality" />
-                                <div class="help-block with-errors nationality-error"></div>
-                            </div>
-                            <!--end::Input group-->
+                        <div class="col-md-12 fv-row">
+                            <label class="required fs-6 fw-bold mb-2">Country</label>
+                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                data-placeholder="Select country" name="country_id">
+                                @foreach($countries as $country)
+                                <option value="{{ $country->id }}">{{$country->name}}</option>
+                                
+                                @endforeach
+                            </select>
+                            <div class="help-block with-errors status-error"></div>
                         </div>
                         <!--end::Col-->
                     </div>
                     <!--end::Input group-->
-                    
+
                     <!--begin::Input group-->
                     <div class="row g-9 mb-8">
                         <!--begin::Col-->
-                        <div class="col-md-3 fv-row">
+                        <div class="col-md-6 fv-row">
                             <div class="d-flex flex-column fv-row">
                                 <!--begin::Label-->
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="">iso2</span>
+                                    <span class="required">State Code</span>
                                 </label>
                                 <!--end::Label-->
-                                <input type="text" class="form-control form-control-solid" placeholder="Enter iso2"
-                                    name="iso2" />
-                                <div class="help-block with-errors iso2-error"></div>
+                                <input type="text" class="form-control form-control-solid" placeholder="Enter state code"
+                                    name="state_code" />
+                                <div class="help-block with-errors state_code-error"></div>
                             </div>
                         </div>
                         <!--end::Col-->
 
                         <!--begin::Col-->
-                        <div class="col-md-3 fv-row">
+                        <div class="col-md-6 fv-row">
                             <!--begin::Input group-->
                             <div class="d-flex flex-column fv-row">
                                 <!--begin::Label-->
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="">iso3</span>
+                                    <span class="">Type</span>
                                 </label>
                                 <!--end::Label-->
-                                <input type="text" class="form-control form-control-solid" placeholder="Enter iso3"
-                                    name="iso3" />
-                                <div class="help-block with-errors iso3-error"></div>
+                                <input type="text" class="form-control form-control-solid" placeholder="Enter type"
+                                    name="type" />
+                                <div class="help-block with-errors type-error"></div>
                             </div>
                             <!--end::Input group-->
                         </div>
@@ -261,68 +261,32 @@
                     <!--begin::Input group-->
                     <div class="row g-9 mb-8">
                         <!--begin::Col-->
-                        <div class="col-md-3 fv-row">
+                        <div class="col-md-6 fv-row">
                             <div class="d-flex flex-column fv-row">
                                 <!--begin::Label-->
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="required">Phone code</span>
+                                    <span class="required">lattitude</span>
                                 </label>
                                 <!--end::Label-->
-                                <input type="text" class="form-control form-control-solid" placeholder="Enter phone code"
-                                    name="phone_code" />
-                                <div class="help-block with-errors phone_code-error"></div>
+                                <input type="text" class="form-control form-control-solid" placeholder="Enter lattitude"
+                                    name="lattitude" />
+                                <div class="help-block with-errors lattitude-error"></div>
                             </div>
                         </div>
                         <!--end::Col-->
 
                         <!--begin::Col-->
-                        <div class="col-md-3 fv-row">
+                        <div class="col-md-6 fv-row">
                             <!--begin::Input group-->
                             <div class="d-flex flex-column fv-row">
                                 <!--begin::Label-->
                                 <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="">Numeric code</span>
+                                    <span class="">Longitude</span>
                                 </label>
                                 <!--end::Label-->
-                                <input type="text" class="form-control form-control-solid" placeholder="Enter numeric_code"
-                                    name="numeric_code" />
-                                <div class="help-block with-errors numeric_code-error"></div>
-                            </div>
-                            <!--end::Input group-->
-                        </div>
-                        <!--end::Col-->
-                    </div>
-                    <!--end::Input group-->
-                    
-                    <!--begin::Input group-->
-                    <div class="row g-9 mb-8">
-                        <!--begin::Col-->
-                        <div class="col-md-3 fv-row">
-                            <div class="d-flex flex-column fv-row">
-                                <!--begin::Label-->
-                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="required">Phone code</span>
-                                </label>
-                                <!--end::Label-->
-                                <input type="text" class="form-control form-control-solid" placeholder="Enter phone code"
-                                    name="phone_code" />
-                                <div class="help-block with-errors phone_code-error"></div>
-                            </div>
-                        </div>
-                        <!--end::Col-->
-
-                        <!--begin::Col-->
-                        <div class="col-md-3 fv-row">
-                            <!--begin::Input group-->
-                            <div class="d-flex flex-column fv-row">
-                                <!--begin::Label-->
-                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                    <span class="">Numeric code</span>
-                                </label>
-                                <!--end::Label-->
-                                <input type="text" class="form-control form-control-solid" placeholder="Enter numeric_code"
-                                    name="numeric_code" />
-                                <div class="help-block with-errors numeric_code-error"></div>
+                                <input type="text" class="form-control form-control-solid" placeholder="Enter longitude"
+                                    name="longitude" />
+                                <div class="help-block with-errors longitude-error"></div>
                             </div>
                             <!--end::Input group-->
                         </div>
@@ -362,7 +326,7 @@
                 processing: true,
                 responsive: true,
                 serverSide: true,
-                ajax: "{{ url('admin/major-subject/index') }}",
+                ajax: "{{ url('admin/state/index') }}",
                 columns: [
                     {
                         data: 'DT_RowIndex',
@@ -373,6 +337,30 @@
                     {
                         data: 'name',
                         name: 'name'
+                    },
+                    {
+                        data: 'country_name',
+                        name: 'country_name'
+                    },
+                    {
+                        data: 'country_code',
+                        name: 'country_code'
+                    },
+                    {
+                        data: 'state_code',
+                        name: 'state_code'
+                    },
+                    {
+                        data: 'type',
+                        name: 'type'
+                    },
+                    {
+                        data: 'lattitude',
+                        name: 'lattitude'
+                    },
+                    {
+                        data: 'longitude',
+                        name: 'longitude'
                     },
 
                     {
@@ -402,25 +390,31 @@
 
         // add new
         function addNew(){
-            $('input[name="country_id"]').val('');
+            $('input[name="state_id"]').val('');
             $('.with-errors').text('');
             $('.indicator-label').show();
             $('.indicator-progress').hide();
             $('#kk_modal_new_service_submit').removeAttr('disabled');
-            $('#kk_modal_new_country_form')[0].reset();
-            $('#kk_modal_new_country').modal('show');
+            $('#kk_modal_new_state_form')[0].reset();
+            $('#kk_modal_new_state').modal('show');
         }
 
         //edit category modal
         function edit(id){
             $.ajax({
                 type:"GET",
-                url: "{{ url('admin/major-subject/get')}}"+'/'+id,
+                url: "{{ url('admin/state/get')}}"+'/'+id,
                 dataType: 'json',
                 success:function(data){
-                   $('input[name="country_id"]').val(data.id);
-                   $('input[name="name"]').val(data.name);
-                   $("#kk_modal_new_country").modal('show');
+                   $('input[name="state_id"]').val(data.id);
+                   $('select[name="country_id".chnage()]').val(data.country_id).chnage();
+                   $('input[name="country_name"]').val(data.country_name);
+                   $('input[name="country_code"]').val(data.country_code);
+                   $('input[name="state_code"]').val(data.state_code);
+                   $('input[name="type"]').val(data.type);
+                   $('input[name="lattitude"]').val(data.lattitude);
+                   $('input[name="longitude"]').val(data.longitude);
+                   $("#kk_modal_new_state").modal('show');
                 }
           });
         }
@@ -430,12 +424,12 @@
             $('.indicator-label').show();
             $('.indicator-progress').hide();
             $('#kk_modal_new_service_submit').removeAttr('disabled');
-            $('#kk_modal_new_country_form')[0].reset();
-            $("#kk_modal_new_country").modal('hide');
+            $('#kk_modal_new_state_form')[0].reset();
+            $("#kk_modal_new_state").modal('hide');
         })
 
         //new category save
-        $('#kk_modal_new_country_form').on('submit',function(e){
+        $('#kk_modal_new_state_form').on('submit',function(e){
             e.preventDefault()
             $('.with-errors').text('');
             $('.indicator-label').hide();
@@ -445,7 +439,7 @@
             var formData = new FormData(this);
             $.ajax({
                 type:"POST",
-                url: "{{ url('admin/major-subject/store')}}",
+                url: "{{ url('admin/state/store')}}",
                 data:formData,
                 cache:false,
                 contentType: false,
@@ -459,11 +453,11 @@
                         }
                     }else if(data.error || data.error == 'true'){
                         var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
-                        $('#kk_modal_new_country_form').find('.messages').html(alertBox).show();
+                        $('#kk_modal_new_state_form').find('.messages').html(alertBox).show();
                     }else{
                         // empty the form
-                        $('#kk_modal_new_country_form')[0].reset();
-                        $("#kk_modal_new_country").modal('hide');
+                        $('#kk_modal_new_state_form')[0].reset();
+                        $("#kk_modal_new_state").modal('hide');
 
                         Swal.fire({
                                 text: data.message,
@@ -489,7 +483,7 @@
         })
 
     //deleteCategory
-    function deleteSub(id){
+    function deleteState(id){
         Swal.fire({
             text: "Are you sure you want delete this?",
             icon: "warning",
@@ -505,7 +499,7 @@
             if(o.value){ //if agree
                 $.ajax({
                     type: "GET",
-                    url: "{{ url('admin/major-subject/delete') }}"+'/'+id,
+                    url: "{{ url('admin/state/delete') }}"+'/'+id,
                     data: {},
                     success: function (res)
                     {

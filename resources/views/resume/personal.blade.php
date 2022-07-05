@@ -76,10 +76,122 @@
                             </button>
                         </h2>
                         <div id="kt_accordion_1_body_1" class="accordion-collapse collapse show" aria-labelledby="kt_accordion_1_header_1" data-bs-parent="#kt_accordion_1">
-                            <div class="accordion-body">
+                            <div class="accordion-body personal_detail">
+                                <div class="card card-flush pt-3 mb-5 mb-lg-10 personal_detail_data" data-kt-subscriptions-form="pricing">
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0">
+                                        <div class="d-flex justify-content-end">
+                                            <span class="btn btn-active-color-primary btn-light " id="edit_personal_detail"><i class="fas fa-edit"></i>Edit</span>
+                                        </div>
+                                        <!--begin::Options-->
+                                        <div id="kt_create_new_payment_method">
+                                            <!--begin::Option-->
+                                            <div class="py-1">
+                                                <!--begin::Body-->
+                                                <div id="kt_create_new_payment_method_1" class="fs-6 ps-10 collapse show" style="">
+                                                    <!--begin::Details-->
+                                                    <div class="d-flex flex-wrap py-5">
+                                                        <!--begin::Col-->
+                                                        <div class="flex-equal me-5">
+                                                            <table class="table table-flush fw-bold gy-1">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-125px">First Name</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->first_name ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-125px">Last Name</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->last_name ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-125px">Father Name</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->father_name ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-125px">Mother Name</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->mother_name ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-125px">Date of Birth</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->date_of_birth }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-125px">Gender</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->gender }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-125px">Religion</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->religion }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-125px">Marital Status</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->marital_status }}</td>
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <!--end::Col-->
+                                                        <!--begin::Col-->
+                                                        <div class="flex-equal">
+                                                            <table class="table table-flush fw-bold gy-1">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-125px">Nationality</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->nationality ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-125px">National ID</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->national_id ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-125px">Passport Number</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->passport_number ?? '' }} </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-125px">Passport Issue Date</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->passport_issue_date ?? '' }} </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-125px">Primary Number</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->primary_mobile ?? ''  }} </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-125px">Secondary Mobile</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->secondary_mobile ?? '' }} (%)</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-125px">Email</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->email ?? '' }} </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-125px">Blood Group</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->glood_group ?? '' }} </td>
+                                                                    </tr>
+                                                                   
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <!--end::Details-->
+                                                    
+                                                </div>
+                                                <!--end::Body-->
+                                            </div>
+                                            <!--end::Option-->
+                                            <div class="separator separator-dashed"></div>
+                                            
+                                        </div>
+                                        <!--end::Options-->
+                                    </div>
+                                    <!--end::Card body-->
+                                </div>
                                 <!--begin:Form-->
-                                <form id="kk_personal_details_form" class="form" enctype="multipart/form-data">
+                                <form id="kk_personal_details_form" class="form d-none" enctype="multipart/form-data">
                                     @csrf
+                                    <div class="d-flex justify-content-end">
+                                        <span class="btn btn-active-color-danger btn-light " id="cancel_edit_personal_detail"><i class="fas fa-times"></i>Cancel</span>
+                                    </div>
                                     <div class="messages"></div>
                                     <!--begin::Input group-->
                                     <div class="row g-9 mb-8">
@@ -369,6 +481,7 @@
                                     </div>
                                     <!--end::Actions-->
                                 </form>
+                                <!--end:Form-->
                             </div>
                         </div>
                     </div>
@@ -382,6 +495,7 @@
                         </h2>
                         <div id="kt_accordion_1_body_2" class="accordion-collapse collapse " aria-labelledby="kt_accordion_1_header_2" data-bs-parent="#kt_accordion_1">
                             <div class="accordion-body">
+                                
                                 <!--begin:Form-->
                                 <form id="kk_address_details_form" class="form" enctype="multipart/form-data">
                                     @csrf
@@ -528,6 +642,7 @@
                                     </div>
                                     <!--end::Actions-->
                                 </form>
+                                <!--end:Form-->
                             </div>
                         </div>
                     </div>
@@ -1319,5 +1434,24 @@
 
     })
 
+    /// Personal Detail show hide
+    $(document).ready( function() {
+        // Personal detail Section :: start 
+        //edit button
+        $("#edit_personal_detail").on('click', function(){
+            $(this).parents(".personal_detail").find('div.personal_detail_data').addClass('d-none');
+            $(this).parents(".personal_detail").find('form#kk_personal_details_form').removeClass('d-none');
+        })
+        //cancel button
+        $("#cancel_edit_personal_detail").on('click', function(){
+            $(this).parents(".personal_detail").find('form#kk_personal_details_form').addClass('d-none');
+            $(this).parents(".personal_detail").find('div.personal_detail_data').removeClass('d-none');
+        })
+
+        // Personal detail Section :: end
+    })
+
 </script>
+
+
 @endpush

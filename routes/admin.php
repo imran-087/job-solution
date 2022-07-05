@@ -355,11 +355,39 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('/education-degree/get/{id}', 'Resume\EducationDegreeController@get')->name('education-degree.get');
         Route::get('/education-degree/delete/{id}', 'Resume\EducationDegreeController@delete')->name('education-degree.delete');
         
-        ############ Education Degree  Route #############
-        Route::get('/country/index', 'Resume\CountryController@index')->name('country.index');
-        Route::post('/country/store', 'Resume\CountryController@store')->name('country.store');
-        Route::get('/country/get/{id}', 'Resume\CountryController@get')->name('country.get');
-        Route::get('/country/delete/{id}', 'Resume\CountryController@delete')->name('country.delete');
+
+
+        ############ Country  Route #############
+        Route::get('/country/index', 'Other\CountryController@index')->name('country.index');
+        Route::post('/country/store', 'Other\CountryController@store')->name('country.store');
+        Route::get('/country/get/{id}', 'Other\CountryController@get')->name('country.get');
+        Route::get('/country/delete/{id}', 'Other\CountryController@delete')->name('country.delete');
+
+        ############ State  Route #############
+        Route::get('/state/index', 'Other\StateController@index')->name('state.index');
+        Route::post('/state/store', 'Other\StateController@store')->name('state.store');
+        Route::get('/state/get/{id}', 'Other\StateController@get')->name('state.get');
+        Route::get('/state/delete/{id}', 'Other\StateController@delete')->name('state.delete');
+
+
+        ############ City  Route #############
+        Route::get('/city/index', 'Other\CityController@index')->name('city.index');
+        Route::post('/city/store', 'Other\CityController@store')->name('city.store');
+        Route::get('/city/get/{id}', 'Other\CityController@get')->name('city.get');
+        Route::get('/city/delete/{id}', 'Other\CityController@delete')->name('city.delete');
+
+        ############ Upazila  Route #############
+        Route::get('/upazila/index', 'Other\UpazilaController@index')->name('upazila.index');
+        Route::post('/upazila/store', 'Other\UpazilaController@store')->name('upazila.store');
+        Route::get('/upazila/get/{id}', 'Other\UpazilaController@get')->name('upazila.get');
+        Route::get('/upazila/delete/{id}', 'Other\UpazilaController@delete')->name('upazila.delete');
+
+
+        ############ Post  Route #############
+        Route::get('/post-codes/index', 'Other\PostController@index')->name('post.index');
+        Route::post('/post-codes/store', 'Other\PostController@store')->name('post.store');
+        Route::get('/post-codes/get/{id}', 'Other\PostController@get')->name('post.get');
+        Route::get('/post-codes/delete/{id}', 'Other\PostController@delete')->name('post.delete');
 
 
        
