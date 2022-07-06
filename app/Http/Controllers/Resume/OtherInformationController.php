@@ -15,8 +15,12 @@ class OtherInformationController extends Controller
 {
     public function create()
     {
-        $user_detail = UserDetail::select('skill_description', 'extracurricular')->where('user_id', Auth::id())->first();
-        return view('resume.other_information', compact('user_detail'));
+        $user_detail = UserDetail::select('id','skill_description', 'extracurricular')->where('user_id', Auth::id())->first();
+        $languages = UserLanguageProficency::where('user_id', Auth::id())->get();
+        $references = UserReference::where('user_id', Auth::id())->get();
+        $user_skills = UserSkill::where('user_id', Auth::id())->get();
+
+        return view('resume.other_information', compact('user_detail', 'languages', 'references', 'user_skills'));
     }
 
     //skillStore
@@ -224,6 +228,73 @@ class OtherInformationController extends Controller
                     'message' => 'unauthenticate user! please, login to complete this action'
                 ], 401);
             }
+        }
+    }
+
+    //deleteSkill
+    public function deleteSkill($id)
+    {
+        $skill = UserSkill::find($id);
+
+        if($skill->delete()){
+            return response()->json([
+                'success' => true,
+                'message' => 'Skill deleted successfully!'
+            ], 200);
+        }else{
+            return response()->json([
+                'error' => true,
+                'message' => 'Failed!'
+            ], 200);
+        }
+   
+    }
+
+    //deleteDescription
+    public function deleteDescription($id)
+    {
+       dd($id);
+    }
+
+    //deleteExtracurricular
+    public function deleteExtracurricular($id)
+    {
+       dd($id);
+    }
+
+    //deleteReference
+    public function deleteReference($id)
+    {
+        $reference = UserReference::find($id);
+
+        if ($reference->delete()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Skill deleted successfully!'
+            ], 200);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Failed!'
+            ], 200);
+        }
+    }
+
+    //deleteLanguage
+    public function deleteLanguage($id)
+    {
+        $language = UserLanguageProficency::find($id);
+
+        if ($language->delete()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Skill deleted successfully!'
+            ], 200);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Failed!'
+            ], 200);
         }
     }
 }

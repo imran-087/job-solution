@@ -76,10 +76,72 @@
                             </button>
                         </h2>
                         <div id="kt_accordion_1_body_1" class="accordion-collapse collapse show" aria-labelledby="kt_accordion_1_header_1" data-bs-parent="#kt_accordion_1">
-                            <div class="accordion-body">
+                            <div class="accordion-body specialization">
+
+                                <div class="card card-flush pt-3 mb-5 mb-lg-10 skill_data" data-kt-subscriptions-form="pricing">
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0">
+                                        @foreach($user_skills as $key => $skill)
+                                        <div class="d-flex justify-content-end">
+                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2" id="edit_skill"><i class="fas fa-edit"></i>Edit</span>
+                                            <span class="btn btn-active-color-danger btn-sm btn-light delete_skill" data-id="{{ $skill->id }}" ><i class="fas fa-trash"></i>Delete</span>
+                                        </div>
+                                        <!--begin::Options-->
+                                        <div id="kt_create_new_payment_method">
+                                            <!--begin::Option-->
+                                            <div class="py-1">
+                                                <!--begin::Body-->
+                                                <div id="kt_create_new_payment_method_1" class="fs-6 ps-10 collapse show" style="">
+                                                    <!--begin::Details-->
+                                                    <div class="py-5">
+                                                        <!--begin::Col-->
+                                                        <div class="mb-8">
+                                                            <Span class="fw-bolder fs-4">Skill {{ $key+1 }}</Span>
+                                                            <table class="table table-flush fw-bold gy-1">
+                                                                
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="fw-bold fs-6">{{  $skill->skill ?? '' }}</td>
+                                                                        
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td>Learning Media : <span class="fw-bold">{{  $skill->learning_media ?? '' }}</span></td>
+                                                                        
+                                                                    </tr>
+                                                                    
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <!--end::Col-->
+                                                       
+                                                    </div>
+                                                    <!--end::Details-->
+                                                    
+                                                </div>
+                                                <!--end::Body-->
+                                            </div>
+                                            <!--end::Option-->
+                                            <div class="separator separator-dashed"></div>
+                                            
+                                        </div>
+                                        <!--end::Options-->
+                                        @endforeach
+                                    </div>
+                                    <!--end::Card body-->
+                                </div>
+                                 
+                                <div class="d-flex justify-content-start mb-8">
+                                    <span class="btn btn-sm btn-primary " id="add_skill"><i class="fas fa-plus"></i>Add Skill</span>
+                                </div>
+
                                 <!--begin:Form-->
-                                <form id="kk_specialization_skill_form" class="form" enctype="multipart/form-data">
+                                <form id="kk_specialization_skill_form" class="form d-none" enctype="multipart/form-data">
                                     @csrf
+
+                                    <div class="d-flex justify-content-end">
+                                        <span class="btn btn-active-color-danger btn-sm btn-light " id="cancel_edit_skill"><i class="fas fa-times"></i>Cancel</span>
+                                    </div>
+
                                     <div class="messages"></div>
                                     <!--begin::Heading-->
                                     <div class="mb-9">
@@ -125,18 +187,66 @@
                                     </div>
                                     <!--begin::Actions-->
                                     <div class="d-flex justify-content-start mb-9 mt-3">
-                                        <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary me-3">
+                                        <button type="submit" id="kk_skill_submit" class="btn btn-primary me-3">
                                             <span class="indicator-label py-3 px-7">Save</span>
                                             <span class="indicator-progress">Please wait...
                                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                         </button>
-                                        <button type="reset" id="kk_modal_new_sub_category_cancel" class="btn btn-light btn-active-color-danger me-3">Close</button>
+                                        <button type="reset" id="kk_skill_cancel" class="btn btn-light btn-active-color-danger me-3">Close</button>
                                         
                                     </div>
                                     <!--end::Actions-->
                                 </form>
 
-                                <form id="kk_specialization_description_form" class="form mb-8" enctype="multipart/form-data">
+                                <!--- start::description --->
+                                <div class="card card-flush pt-3 mb-5 mb-lg-10 description_data" data-kt-subscriptions-form="pricing">
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0">
+                                      
+                                        <div class="d-flex justify-content-end">
+                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2" id="edit_description"><i class="fas fa-edit"></i>{{ $user_detail->skill_description == null ? 'Add' : 'Edit' }}</span>
+                                            {{-- <span class="btn btn-active-color-danger btn-sm btn-light delete_description" data-id="{{ $user_detail->id }}" ><i class="fas fa-trash"></i>Delete</span> --}}
+                                        </div>
+                                        <!--begin::Options-->
+                                        <div id="kt_create_new_payment_method">
+                                            <!--begin::Option-->
+                                            <div class="py-1">
+                                                <!--begin::Body-->
+                                                <div id="kt_create_new_payment_method_1" class="fs-6 ps-10 collapse show" style="">
+                                                    <!--begin::Details-->
+                                                    <div class="py-5">
+                                                        <!--begin::Col-->
+                                                        <div class="mb-8">
+                                                            <span class="fw-bolder fs-4">Skill Description</span>
+                                                            <table class="table table-flush fw-bold gy-1">
+                                                                
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="text-gray-800">{{  $user_detail->skill_description ?? '' }}</td>
+                                                                    </tr>
+                                                                    
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <!--end::Col-->
+                                                       
+                                                    </div>
+                                                    <!--end::Details-->
+                                                    
+                                                </div>
+                                                <!--end::Body-->
+                                            </div>
+                                            <!--end::Option-->
+                                            <div class="separator separator-dashed"></div>
+                                            
+                                        </div>
+                                        <!--end::Options-->
+                                      
+                                    </div>
+                                    <!--end::Card body-->
+                                </div>
+
+                                <form id="kk_specialization_description_form" class="form mb-8 d-none" enctype="multipart/form-data">
                                     @csrf
                                     <div class="messages"></div>
                                     
@@ -167,7 +277,59 @@
                                     </div>
                                     <!--end::Actions-->
                                 </form>
-                                <form id="kk_specialization_extracaricular_form" class="form" enctype="multipart/form-data">
+                                <!--- end::description --->
+
+                                <!--- start::extracaricular --->
+                                <div class="card card-flush pt-3 mb-5 mb-lg-10 extracurricular_data" data-kt-subscriptions-form="pricing">
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0">
+                                      
+                                        <div class="d-flex justify-content-end">
+                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2" id="edit_extracurricular"><i class="fas fa-edit"></i>{{ $user_detail->extracurricular == null ? 'Add' : 'Edit' }}</span>
+                                            {{-- <span class="btn btn-active-color-danger btn-sm btn-light delete_extracurricular" data-id="{{ $user_detail->id }}" ><i class="fas fa-trash"></i>Delete</span> --}}
+
+                                        </div>
+                                        <!--begin::Options-->
+                                        <div id="kt_create_new_payment_method">
+                                            <!--begin::Option-->
+                                            <div class="py-1">
+                                                <!--begin::Body-->
+                                                <div id="kt_create_new_payment_method_1" class="fs-6 ps-10 collapse show" style="">
+                                                    <!--begin::Details-->
+                                                    <div class="py-5">
+                                                        <!--begin::Col-->
+                                                        <div class="mb-8">
+                                                            <span class="fw-bolder fs-4">Extracurricular Activites</span>
+                                                            <table class="table table-flush fw-bold gy-1">
+                                                                
+                                                                <tbody>
+                                                                    <tr>
+                                                                       
+                                                                        <td class="text-gray-800">{{  $user_detail->extracurricular ?? '' }}</td>
+                                                                    </tr>
+                                                                    
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <!--end::Col-->
+                                                       
+                                                    </div>
+                                                    <!--end::Details-->
+                                                    
+                                                </div>
+                                                <!--end::Body-->
+                                            </div>
+                                            <!--end::Option-->
+                                            <div class="separator separator-dashed"></div>
+                                            
+                                        </div>
+                                        <!--end::Options-->
+                                      
+                                    </div>
+                                    <!--end::Card body-->
+                                </div>
+                            
+                                <form id="kk_specialization_extracaricular_form" class="form d-none"  enctype="multipart/form-data">
                                     @csrf
                                     <div class="messages"></div>
                                     <!--begin::Col-->
@@ -198,6 +360,7 @@
                                     <!--end::Actions-->
                                     
                                 </form>
+                                <!--- end::extracaricular --->
                             </div>
                         </div>
                     </div>
@@ -209,10 +372,77 @@
                             </button>
                         </h2>
                         <div id="kt_accordion_1_body_5" class="accordion-collapse collapse " aria-labelledby="kt_accordion_1_header_2" data-bs-parent="#kt_accordion_1">
-                            <div class="accordion-body">
+                            <div class="accordion-body language">
+
+                                <div class="card card-flush pt-3 mb-5 mb-lg-10 language_data" data-kt-subscriptions-form="pricing">
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0">
+                                        @foreach($languages as $language)
+                                        <div class="d-flex justify-content-end">
+                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2" id="edit_language"><i class="fas fa-edit"></i>Edit</span>
+                                            <span class="btn btn-active-color-danger btn-sm btn-light delete_language" data-id="{{ $language->id }}" ><i class="fas fa-trash"></i>Delete</span>
+                                        </div>
+                                        <!--begin::Options-->
+                                        <div id="kt_create_new_payment_method">
+                                            <!--begin::Option-->
+                                            <div class="py-1">
+                                                <!--begin::Body-->
+                                                <div id="kt_create_new_payment_method_1" class="fs-6 ps-10 collapse show" style="">
+                                                    <!--begin::Details-->
+                                                    <div class="py-5">
+                                                        <!--begin::Col-->
+                                                        <div class="mb-8">
+                                                            <table class="table table-flush fw-bold gy-1">
+                                                                
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Language</td>
+                                                                        <td class="text-gray-800">{{  $language->language ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Reading</td>
+                                                                        <td class="text-gray-800">{{ $language->reading ?? ''}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Writting</td>
+                                                                        <td class="text-gray-800">{{ $language->writting ?? ''}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Speaking</td>
+                                                                        <td class="text-gray-800">{{ $language->speaking ?? '' }}</td>
+                                                                    </tr>
+                                                                    
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <!--end::Col-->
+                                                       
+                                                    </div>
+                                                    <!--end::Details-->
+                                                    
+                                                </div>
+                                                <!--end::Body-->
+                                            </div>
+                                            <!--end::Option-->
+                                            <div class="separator separator-dashed mb-2"></div>
+                                            
+                                        </div>
+                                        <!--end::Options-->
+                                        @endforeach
+                                    </div>
+                                    <!--end::Card body-->
+                                </div>
+
+                                <div class="d-flex justify-content-start">
+                                    <span class="btn btn-primary btn-sm " id="add_language"><i class="fas fa-plus"></i>Add language</span>
+                                </div>
+
                                 <!--begin:Form-->
-                                <form id="kk_language_proficency_form" class="form" enctype="multipart/form-data">
+                                <form id="kk_language_proficency_form" class="form d-none" enctype="multipart/form-data">
                                     @csrf
+                                    <div class="d-flex justify-content-end">
+                                        <span class="btn btn-active-color-danger btn-sm btn-light " id="cancel_edit_language"><i class="fas fa-times"></i>Cancel</span>
+                                    </div>
                                     <div class="messages"></div>
                                     <!--begin::Heading-->
                                     <div class="mb-5">
@@ -306,10 +536,104 @@
                             </button>
                         </h2>
                         <div id="kt_accordion_1_body_3" class="accordion-collapse collapse" aria-labelledby="kt_accordion_1_header_3" data-bs-parent="#kt_accordion_1">
-                            <div class="accordion-body">
+                            <div class="accordion-body references">
+
+                                <div class="card card-flush pt-3 mb-5 mb-lg-10 references_data" data-kt-subscriptions-form="pricing">
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0">
+                                        @foreach($references as $reference)
+                                        <div class="d-flex justify-content-end">
+                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2" id="edit_references"><i class="fas fa-edit"></i>Edit</span>
+                                            <span class="btn btn-active-color-danger btn-sm btn-light delete_reference" data-id="{{ $reference->id }}" ><i class="fas fa-trash"></i>Delete</span>
+                                        </div>
+                                        <!--begin::Options-->
+                                        <div id="kt_create_new_payment_method">
+                                           
+                                            <!--begin::Option-->
+                                            <div class="py-1">
+                                                <!--begin::Body-->
+                                                <div id="kt_create_new_payment_method_1" class="fs-6 ps-10 collapse show" style="">
+                                                    <!--begin::Details-->
+                                                    <div class="d-flex flex-wrap py-5">
+                                                        <!--begin::Col-->
+                                                        <div class="flex-equal me-5">
+                                                            <table class="table table-flush fw-bold gy-1">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Name</td>
+                                                                        <td class="text-gray-800">{{ $reference->name ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Designation</td>
+                                                                        <td class="text-gray-800">{{ $reference->designation ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Organization</td>
+                                                                        <td class="text-gray-800">{{ $reference->organization ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Address</td>
+                                                                        <td class="text-gray-800">{{ $reference->address ?? '' }}</td>
+                                                                    </tr>
+                                                                   
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <!--end::Col-->
+                                                        <!--begin::Col-->
+                                                        <div class="flex-equal">
+                                                            <table class="table table-flush fw-bold gy-1">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Phone (Res)</td>
+                                                                        <td class="text-gray-800">{{ $reference->phone_res ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Phone (off)</td>
+                                                                        <td class="text-gray-800">{{ $reference->phone_off ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Email</td>
+                                                                        <td class="text-gray-800">{{ $reference->email ?? '' }} </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Relation</td>
+                                                                        <td class="text-gray-800">{{ $academy->relation ?? '' }} </td>
+                                                                    </tr>
+                                                                    
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <!--end::Details-->
+                                                    
+                                                </div>
+                                                <!--end::Body-->
+                                            </div>
+                                            <!--end::Option-->
+                                           
+                                            <div class="separator separator-dashed mb-2"></div>
+                                           
+                                        </div>
+                                        <!--end::Options-->
+                                        @endforeach
+                                    </div>
+                                    <!--end::Card body-->
+                                </div>
+
+                                <div class="d-flex justify-content-start">
+                                    <span class="btn btn-sm btn-primary " id="add_reference"><i class="fas fa-plus"></i>Add New</span>
+                                </div>
+
                                 <!--begin:Form-->
-                                <form id="kk_references_form" class="form" enctype="multipart/form-data">
+                                <form id="kk_references_form" class="form d-none" enctype="multipart/form-data">
                                     @csrf
+
+                                    <div class="d-flex justify-content-end">
+                                        <span class="btn btn-active-color-danger btn-sm btn-light " id="cancel_edit_references"><i class="fas fa-times"></i>Cancel</span>
+                                    </div>
+
                                     <div class="messages"></div>
                                     <!--begin::Heading-->
                                     <div class="mb-5">
@@ -710,6 +1034,342 @@
         });
 
     })
+
+
+    $(document).ready(function(){
+
+        //start:: Skill  Section
+        //add button
+        $("#add_skill").on('click', function(){
+            $(this).hide();
+            $(this).parents(".specialization").find('div.skill_data').addClass('d-none');
+            $(this).parents(".specialization").find('form#kk_specialization_skill_form').removeClass('d-none');
+        })
+        //cancel button
+        $("#cancel_edit_skill").on('click', function(){
+
+            $(this).parents(".specialization").find('form#kk_specialization_skill_form').addClass('d-none');
+            $(this).parents(".specialization").find('div.skill_data').removeClass('d-none');
+            $('#add_skill').show();
+        })
+        $("#kk_skill_cancel").on('click', function(){
+            $(this).parents(".specialization").find('form#kk_specialization_skill_form').addClass('d-none');
+            $(this).parents(".specialization").find('div.skill_data').removeClass('d-none');
+            $('#add_skill').show();
+        })
+        // Skill  Section :: end
+
+        // description Activities Section :: start 
+        //edit button
+        $("#edit_description").on('click', function(){
+            $(this).parents(".specialization").find('div.description_data').addClass('d-none');
+            $(this).parents(".specialization").find('form#kk_specialization_description_form').removeClass('d-none');
+        })
+      
+        //cancel button
+        $("#kk_description_cancel").on('click', function(){
+            $(this).parents(".specialization").find('form#kk_specialization_description_form').addClass('d-none');
+            $(this).parents(".specialization").find('div.description_data').removeClass('d-none');
+        })
+        // description Activities Section :: end
+
+        // Extracurricular Activities Section :: start 
+        //edit button
+        $("#edit_extracurricular").on('click', function(){
+            $(this).parents(".specialization").find('div.extracurricular_data').addClass('d-none');
+            $(this).parents(".specialization").find('form#kk_specialization_extracaricular_form').removeClass('d-none');
+        })
+       
+        //cancel button
+        $("#kk_extracurricular_cancel").on('click', function(){
+            $(this).parents(".specialization").find('form#kk_specialization_extracaricular_form').addClass('d-none');
+            $(this).parents(".specialization").find('div.extracurricular_data').removeClass('d-none');
+        })
+        // Extracurricular Activities Section :: end
+
+        //start:: language information  form show hide
+        //add button
+        $("#add_language").on('click', function(){
+            $(this).hide();
+            $(this).parents(".language").find('div.language_data').addClass('d-none');
+            $(this).parents(".language").find('form#kk_language_proficency_form').removeClass('d-none');
+        })
+        //cancel button
+        $("#cancel_edit_language").on('click', function(){
+
+            $(this).parents(".language").find('form#kk_language_proficency_form').addClass('d-none');
+            $(this).parents(".language").find('div.language_data').removeClass('d-none');
+            $('#add_language').show();
+        })
+        $("#kk_language_proficency_cancel").on('click', function(){
+            $(this).parents(".language").find('form#kk_language_proficency_form').addClass('d-none');
+            $(this).parents(".language").find('div.language_data').removeClass('d-none');
+            $('#add_language').show();
+        })
+        // language information  Section :: end
+
+        //start:: References  form show hide
+        //add button
+        $("#add_reference").on('click', function(){
+            $(this).hide();
+            $(this).parents(".references").find('div.references_data').addClass('d-none');
+            $(this).parents(".references").find('form#kk_references_form').removeClass('d-none');
+        })
+        //cancel button
+        $("#cancel_edit_references").on('click', function(){
+
+            $(this).parents(".references").find('form#kk_references_form').addClass('d-none');
+            $(this).parents(".references").find('div.references_data').removeClass('d-none');
+            $('#add_reference').show();
+        })
+        $("#kk_references_cancel").on('click', function(){
+            $(this).parents(".references").find('form#kk_references_form').addClass('d-none');
+            $(this).parents(".references").find('div.references_data').removeClass('d-none');
+            $('#add_reference').show();
+        })
+        // References  Section :: end
+    })
+
+    //Delete Skill
+    $('.delete_skill').on('click', function(){
+        var id = $(this).data('id');
+        console.log(id);
+
+        Swal.fire({
+            text: "Are you sure you want delete this?",
+            icon: "warning",
+            showCancelButton: !0,
+            buttonsStyling: !1,
+            confirmButtonText: "Confirm",
+            cancelButtonText: "No, cancel",
+            customClass: {
+                confirmButton: "btn fw-bold btn-danger",
+                cancelButton: "btn fw-bold btn-active-light-primary"
+            }
+        }).then((function (o) {
+            if(o.value){ //if agree
+                $.ajax({
+                    type: "GET",
+                    url: "{{ url('resume/step_4/delete-skill') }}"+'/'+id,
+                    data: {},
+                    success: function (data)
+                    {
+                        if(data.success){
+                           toastr.success(data.message);
+                           location.reload();
+                        }else{
+                            toastr.error(data.message)
+                        }
+                    }
+                });
+
+            }else{ //if cancel
+                Swal.fire({
+                    text: "Item has not been deleted",
+                    icon: "error",
+                    buttonsStyling: !1,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn fw-bold btn-primary"
+                    }
+                })
+            }
+
+        }))
+    })
+
+    //Delete Description
+    $('.delete_description').on('click', function(){
+        var id = $(this).data('id');
+        console.log(id);
+
+        Swal.fire({
+            text: "Are you sure you want delete this?",
+            icon: "warning",
+            showCancelButton: !0,
+            buttonsStyling: !1,
+            confirmButtonText: "Confirm",
+            cancelButtonText: "No, cancel",
+            customClass: {
+                confirmButton: "btn fw-bold btn-danger",
+                cancelButton: "btn fw-bold btn-active-light-primary"
+            }
+        }).then((function (o) {
+            if(o.value){ //if agree
+                $.ajax({
+                    type: "GET",
+                    url: "{{ url('resume/step_4/delete-description') }}"+'/'+id,
+                    data: {},
+                    success: function (data)
+                    {
+                        if(data.success){
+                           toastr.success(data.message);
+                           location.reload();
+                        }else{
+                            toastr.error(data.message)
+                        }
+                    }
+                });
+
+            }else{ //if cancel
+                Swal.fire({
+                    text: "Item has not been deleted",
+                    icon: "error",
+                    buttonsStyling: !1,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn fw-bold btn-primary"
+                    }
+                })
+            }
+
+        }))
+    })
+
+    //Extracurricular delete
+    $('.delete_extracurricular').on('click', function(){
+        var id = $(this).data('id');
+        console.log(id);
+
+        Swal.fire({
+            text: "Are you sure you want delete this?",
+            icon: "warning",
+            showCancelButton: !0,
+            buttonsStyling: !1,
+            confirmButtonText: "Confirm",
+            cancelButtonText: "No, cancel",
+            customClass: {
+                confirmButton: "btn fw-bold btn-danger",
+                cancelButton: "btn fw-bold btn-active-light-primary"
+            }
+        }).then((function (o) {
+            if(o.value){ //if agree
+                $.ajax({
+                    type: "GET",
+                    url: "{{ url('resume/step_4/delete-extracurricular') }}"+'/'+id,
+                    data: {},
+                    success: function (data)
+                    {
+                        if(data.success){
+                           toastr.success(data.message);
+                           location.reload();
+                        }else{
+                            toastr.error(data.message)
+                        }
+                    }
+                });
+
+            }else{ //if cancel
+                Swal.fire({
+                    text: "Item has not been deleted",
+                    icon: "error",
+                    buttonsStyling: !1,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn fw-bold btn-primary"
+                    }
+                })
+            }
+
+        }))
+    })
+
+    //delete_reference 
+    $('.delete_reference').on('click', function(){
+        var id = $(this).data('id');
+        console.log(id);
+
+        Swal.fire({
+            text: "Are you sure you want delete this?",
+            icon: "warning",
+            showCancelButton: !0,
+            buttonsStyling: !1,
+            confirmButtonText: "Confirm",
+            cancelButtonText: "No, cancel",
+            customClass: {
+                confirmButton: "btn fw-bold btn-danger",
+                cancelButton: "btn fw-bold btn-active-light-primary"
+            }
+        }).then((function (o) {
+            if(o.value){ //if agree
+                $.ajax({
+                    type: "GET",
+                    url: "{{ url('resume/step_4/delete-reference') }}"+'/'+id,
+                    data: {},
+                    success: function (data)
+                    {
+                        if(data.success){
+                           toastr.success(data.message);
+                           location.reload();
+                        }else{
+                            toastr.error(data.message)
+                        }
+                    }
+                });
+
+            }else{ //if cancel
+                Swal.fire({
+                    text: "Item has not been deleted",
+                    icon: "error",
+                    buttonsStyling: !1,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn fw-bold btn-primary"
+                    }
+                })
+            }
+
+        }))
+    })
+
+    //delete language
+    $('.delete_language').on('click', function(){
+        var id = $(this).data('id');
+        console.log(id);
+
+        Swal.fire({
+            text: "Are you sure you want delete this?",
+            icon: "warning",
+            showCancelButton: !0,
+            buttonsStyling: !1,
+            confirmButtonText: "Confirm",
+            cancelButtonText: "No, cancel",
+            customClass: {
+                confirmButton: "btn fw-bold btn-danger",
+                cancelButton: "btn fw-bold btn-active-light-primary"
+            }
+        }).then((function (o) {
+            if(o.value){ //if agree
+                $.ajax({
+                    type: "GET",
+                    url: "{{ url('resume/step_4/delete-language') }}"+'/'+id,
+                    data: {},
+                    success: function (data)
+                    {
+                        if(data.success){
+                           toastr.success(data.message);
+                           location.reload();
+                        }else{
+                            toastr.error(data.message)
+                        }
+                    }
+                });
+
+            }else{ //if cancel
+                Swal.fire({
+                    text: "Item has not been deleted",
+                    icon: "error",
+                    buttonsStyling: !1,
+                    confirmButtonText: "Ok, got it!",
+                    customClass: {
+                        confirmButton: "btn fw-bold btn-primary"
+                    }
+                })
+            }
+
+        }))
+    })
+
     </script>
 @endpush
 

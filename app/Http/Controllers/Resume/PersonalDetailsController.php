@@ -351,4 +351,40 @@ class PersonalDetailsController extends Controller
             }
         }
     }
+
+    //deletePersonalDetail
+    public function deletePersonalDetail($id)
+    {
+        $user_detail = UserDetail::find($id);
+
+        if ($user_detail->delete()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'User Personal detail deleted successfully!'
+            ], 200);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Failed!'
+            ], 200);
+        }
+    }
+
+    //deleteCareerApplication
+    public function deleteCareerApplication($id)
+    {
+        $career_info = UserCareerInfo::find($id);
+
+        if ($career_info->delete()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'User Career information deleted successfully!'
+            ], 200);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Failed!'
+            ], 200);
+        }
+    }
 }

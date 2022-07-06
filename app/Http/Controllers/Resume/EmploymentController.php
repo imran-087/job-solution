@@ -16,8 +16,9 @@ class EmploymentController extends Controller
     {
         $user_detail = UserDetail::select('ba_no', 'number', 'ranks', 'type', 'trade', 'course', 'date_of_commision', 'date_of_retirement')
             ->where('user_id', Auth::id())->first();
-            //dd(Auth::id());
-        return view('resume.employment', compact('user_detail'));
+        $employment_history = UserExperience::where('user_id', Auth::id())->get();
+
+        return view('resume.employment', compact('user_detail', 'employment_history'));
     }
 
     //employmentHistoryStore
@@ -62,7 +63,7 @@ class EmploymentController extends Controller
                         'from_date' => $from_date,
                         'to_date' => $to_date,
                         'area_of_expertise' => $area_of_expertise,
-                        'currently_working' => $request->currently_working,
+                        'currently_working' => $request->currently_working ?? 'no',
                         'address' => $request->address
                     ]
                 );
@@ -147,6 +148,25 @@ class EmploymentController extends Controller
                 ], 401);
             }
             
+        }
+    }
+
+
+    //deleteExperience
+    public function deleteExperience($id)
+    {
+        $experience = UserExperience::find($id);
+
+        if ($experience->delete()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Experience deleted successfully!'
+            ], 200);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Failed!'
+            ], 200);
         }
     }
 

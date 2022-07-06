@@ -8,6 +8,7 @@ use App\Models\UserAcademicInfo;
 use App\Models\UserEducationDegree;
 use App\Models\UserProfessionalCertificate;
 use App\Models\UserTrainingInfo;
+use App\Models\Year;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -16,7 +17,13 @@ class EducationController extends Controller
 {
     public function create()
     {
-        return view('resume.education');
+        $years = Year::select('year')->get();
+
+        $academic_infos = UserAcademicInfo::where('user_id', Auth::id())->get();
+        $training_infos = UserTrainingInfo::where('user_id', Auth::id())->get();
+        $professional_certificate = UserProfessionalCertificate::where('user_id', Auth::id())->get();
+
+        return view('resume.education', compact('academic_infos','training_infos', 'years', 'professional_certificate'));
     }
 
     //academicSummaryStore
@@ -190,5 +197,60 @@ class EducationController extends Controller
        // dd($request->all());
         $degree = UserEducationDegree::where('level', $request->education_level)->get();
         return response()->json($degree);
+    }
+
+
+    //deleteAcademy
+    public function deleteAcademy($id)
+    {
+        $academy = UserAcademicInfo::find($id);
+
+        if ($academy->delete()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Academy deleted successfully!'
+            ], 200);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Failed!'
+            ], 200);
+        }
+    }
+
+    //deleteTraining
+    public function deleteTraining($id)
+    {
+        $training = UserTrainingInfo::find($id);
+
+        if ($training->delete()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Training deleted successfully!'
+            ], 200);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Failed!'
+            ], 200);
+        }
+    }
+
+    //deleteCertificate
+    public function deleteCertificate($id)
+    {
+        $certificate = UserProfessionalCertificate::find($id);
+
+        if ($certificate->delete()) {
+            return response()->json([
+                'success' => true,
+                'message' => 'Certificate deleted successfully!'
+            ], 200);
+        } else {
+            return response()->json([
+                'error' => true,
+                'message' => 'Failed!'
+            ], 200);
+        }
     }
 }

@@ -82,7 +82,8 @@
                                     <!--begin::Card body-->
                                     <div class="card-body pt-0">
                                         <div class="d-flex justify-content-end">
-                                            <span class="btn btn-active-color-primary btn-light " id="edit_personal_detail"><i class="fas fa-edit"></i>Edit</span>
+                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2" id="edit_personal_detail"><i class="fas fa-edit"></i>Edit</span>
+                                            <span class="btn btn-active-color-danger btn-sm btn-light delete_personal_detail" data-id="{{ $user_detail->id }}" ><i class="fas fa-trash"></i>Delete</span>
                                         </div>
                                         <!--begin::Options-->
                                         <div id="kt_create_new_payment_method">
@@ -146,7 +147,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="text-muted min-w-125px w-130px">Passport Number</td>
-                                                                        <td class="text-gray-800">{{ $user_detail->passport_number ?? '' }} </td>
+                                                                        <td class="text-gray-800">{{ $user_detail->passport_no ?? '' }} </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="text-muted min-w-125px w-130px">Passport Issue Date</td>
@@ -192,7 +193,7 @@
                                 <form id="kk_personal_details_form" class="form d-none py-5 px-4" enctype="multipart/form-data">
                                     @csrf
                                     <div class="d-flex justify-content-end mb-4">
-                                        <span class="btn btn-active-color-danger btn-light " id="cancel_edit_personal_detail"><i class="fas fa-times"></i>Cancel</span>
+                                        <span class="btn btn-active-color-danger btn-sm btn-light " id="cancel_edit_personal_detail"><i class="fas fa-times"></i>Cancel</span>
                                     </div>
                                     <div class="messages"></div>
                                     <!--begin::Input group-->
@@ -474,7 +475,7 @@
                                     <!--end::Input group-->
                                     <!--begin::Actions-->
                                     <div class="d-flex justify-content-between">
-                                        <button type="reset" id="kk_modal_new_sub_category_cancel" class="btn btn-light btn-active-color-danger me-3">Close</button>
+                                        <button type="reset" id="kk_modal_new_sub_category_cancel" class="btn btn-light btn-active-color-danger btn-sm me-3">Close</button>
                                         <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary">
                                             <span class="indicator-label py-3 px-7">Save</span>
                                             <span class="indicator-progress">Please wait...
@@ -502,7 +503,8 @@
                                     <!--begin::Card body-->
                                     <div class="card-body pt-0">
                                         <div class="d-flex justify-content-end">
-                                            <span class="btn btn-active-color-primary btn-light " id="edit_address_detail"><i class="fas fa-edit"></i>Edit</span>
+                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2" id="edit_address_detail"><i class="fas fa-edit"></i>Edit</span>
+
                                         </div>
                                         <!--begin::Options-->
                                         <div id="kt_create_new_payment_method">
@@ -584,7 +586,7 @@
                                 <form id="kk_address_details_form" class="form d-none py-5 px-4" enctype="multipart/form-data">
                                     @csrf
                                     <div class="d-flex justify-content-end mb-4">
-                                        <span class="btn btn-active-color-danger btn-light " id="cancel_edit_address_detail"><i class="fas fa-times"></i>Cancel</span>
+                                        <span class="btn btn-active-color-danger btn-sm btn-light " id="cancel_edit_address_detail"><i class="fas fa-times"></i>Cancel</span>
                                     </div>
                                     <div class="messages"></div>
                                 
@@ -720,7 +722,7 @@
                                    
                                     <!--begin::Actions-->
                                     <div class="d-flex justify-content-between">
-                                        <button type="reset" id="kk_address_detail_cancel" class="btn btn-light btn-active-color-danger me-3">Close</button>
+                                        <button type="reset" id="kk_address_detail_cancel" class="btn btn-light btn-active-color-danger btn-sm me-3">Close</button>
                                         <button type="submit" id="kk_address_detail_submit" class="btn btn-primary">
                                             <span class="indicator-label py-3 px-7">Save</span>
                                             <span class="indicator-progress">Please wait...
@@ -749,7 +751,9 @@
                                     <!--begin::Card body-->
                                     <div class="card-body pt-0">
                                         <div class="d-flex justify-content-end">
-                                            <span class="btn btn-active-color-primary btn-light " id="edit_career_application"><i class="fas fa-edit"></i>Edit</span>
+                                            <span class="btn btn-active-color-primary btn-sm btn-light " id="edit_career_application"><i class="fas fa-edit"></i>Edit</span>
+                                            <span class="btn btn-active-color-danger btn-sm btn-light delete_career_application" data-id="{{ $career_info->id }}" ><i class="fas fa-trash"></i>Delete</span>
+
                                         </div>
                                         <!--begin::Options-->
                                         <div id="kt_create_new_payment_method">
@@ -771,6 +775,10 @@
                                                                     <tr>
                                                                         <td class="text-muted min-w-125px w-130px">Present Salary</td>
                                                                         <td class="text-gray-800">{{ $career_info->present_salary ?? ''}}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Expected Salary</td>
+                                                                        <td class="text-gray-800">{{ $career_info->expected_salary ?? ''}}</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="text-muted min-w-125px w-130px">Job Level</td>
@@ -805,7 +813,7 @@
                                 <form id="kk_career_application_info_form" class="form d-none py-5 px-4" enctype="multipart/form-data">
                                     @csrf
                                     <div class="d-flex justify-content-end mb-4">
-                                        <span class="btn btn-active-color-danger btn-light " id="cancel_edit_career_application"><i class="fas fa-times"></i>Cancel</span>
+                                        <span class="btn btn-active-color-danger btn-sm btn-light " id="cancel_edit_career_application"><i class="fas fa-times"></i>Cancel</span>
                                     </div>
                                     <div class="messages"></div>
                                     <!--begin::Col-->
@@ -905,7 +913,7 @@
                                     <!--end::Input group-->
                                     <!--begin::Actions-->
                                     <div class="d-flex justify-content-between">
-                                        <button type="reset" id="kk_career_application_cancel" class="btn btn-light btn-active-color-danger me-3">Close</button>
+                                        <button type="reset" id="kk_career_application_cancel" class="btn btn-light btn-active-color-danger btn-sm me-3">Close</button>
                                         <button type="submit" id="kk_career_application_submit" class="btn btn-primary">
                                             <span class="indicator-label py-3 px-7">Save</span>
                                             <span class="indicator-progress">Please wait...
@@ -929,16 +937,81 @@
                             </button>
                         </h2>
                         <div id="kt_accordion_1_body_6" class="accordion-collapse collapse" aria-labelledby="kt_accordion_1_header_6" data-bs-parent="#kt_accordion_1">
-                            <div class="accordion-body">
+                            <div class="accordion-body preffered_area">
+
+                                <div class="card card-flush pt-3 mb-5 mb-lg-10 preffered_area_data" data-kt-subscriptions-form="pricing">
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0">
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fs-4 fw-bolder">Preffered Job Area</span>
+                                            <span class="btn btn-active-color-primary btn-sm btn-light " id="edit_preffered_area"><i class="fas fa-edit"></i>Edit</span>
+                                        </div>
+                                        <!--begin::Options-->
+                                        <div id="kt_create_new_payment_method">
+                                            <!--begin::Option-->
+                                            <div class="py-1">
+                                                <!--begin::Body-->
+                                                <div id="kt_create_new_payment_method_1" class="fs-6 ps-10 collapse show" style="">
+                                                    <!--begin::Details-->
+                                                    <div class="py-5">
+                                                        <!--begin::Col-->
+                                                        <div class="mb-8">
+                                                            <table class="table table-flush fw-bold gy-1">
+                                                                
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Job Category</td>
+                                                                        <td class="text-gray-800 fw-bolder">
+                                                                            @foreach($career_info->job_categories as $category)
+                                                                            {{  $category ?? '' }} &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                            @endforeach
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Special Skill</td>
+                                                                        <td class="text-gray-800 fw-bolder">
+                                                                            @foreach($career_info->special_skill as $skill)
+                                                                            {{  $skill ?? '' }} &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                            @endforeach
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Preffered City</td>
+                                                                        <td class="text-gray-800">{{ $career_info->prefferd_city ?? 'No choosen city' }}</td>
+                                                                    </tr>
+                                                                   
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <!--end::Col-->
+                                                       
+                                                    </div>
+                                                    <!--end::Details-->
+                                                    
+                                                </div>
+                                                <!--end::Body-->
+                                            </div>
+                                            <!--end::Option-->
+                                            <div class="separator separator-dashed"></div>
+                                            
+                                        </div>
+                                        <!--end::Options-->
+                                    </div>
+                                    <!--end::Card body-->
+                                </div>
+
                                 <!--begin:Form-->
-                                <form id="kk_preffered_job_category_form" class="form" enctype="multipart/form-data">
+                                <form id="kk_preffered_job_category_form" class="form d-none" enctype="multipart/form-data">
                                     @csrf
+                                    <div class="d-flex justify-content-end mb-4">
+                                        <span class="btn btn-active-color-danger btn-sm btn-light " id="cancel_edit_preffered_area"><i class="fas fa-times"></i>Cancel</span>
+                                    </div>
                                     <div class="messages"></div>
 
                                     <!--begin::Heading-->
                                     <div class="mb-8">
                                         <!--begin::Description-->
-                                        <div class="text-muted fw-bold mb-5 "><span class="fs-5 required">Preferred Job Categoriesrequired</span>  <br>
+                                        <div class="text-muted fw-bold mb-5 "><span class="fs-5 required">Preferred Job Categories</span>  <br>
                                         <p> Preferred job categories represents your desired sector(s) to work (at least 1 category any of section) </p></div>
                                         <!--end::Description-->
                                      
@@ -958,14 +1031,14 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <span class="border py-4 px-4" style="min-height: 150px; max-height: 150px">
-                                                 @foreach($functional_job_categories as $key => $job_category)
+                                                    @foreach($functional_job_categories as $key => $job_category)
                                                     <div class="form-check form-check-custom form-check-solid text-black mb-2">
                                                         <input class="form-check-input functional" type="checkbox" value="{{$job_category->name}}" @isset( $career_info->job_categories[$key]) {{ $career_info->job_categories[$key] == $job_category->name ? 'checked' : '' }} @endisset name="functional[]" >
                                                         <label class="form-check-label ms-3"  for="functional">{{$job_category->name}}</label>
                                                     </div>
                                                     @endforeach  
-                                                      
-                                                    <div class="help-block with-errors present_salary-error"></div>
+                                                     
+                                                    <div class="help-block with-errors functional-error"></div>
                                                 </span>
                                             </div>
                                             <!--end::Input group-->
@@ -977,18 +1050,18 @@
                                                 <!--begin::Label-->
                                                 <label class="d-flex align-items-center fs-6 fw-bold mb-3">
                                                     <span class="required">Special Skill (max 3)</span>
-                                                    {{-- {{ $career_info->special_skill[0] }} --}}
+                                                    
                                                 </label>
                                                 <!--end::Label-->
                                                 <span class="border py-4 px-4" style="min-height: 150px; max-height: 150px">
-                                                 @foreach($special_skills as $key => $skill)
+                                                    @foreach($special_skills as $key => $skill)
+                                                    {{-- {{ $career_info->special_skill[0] == $skill->name ? 'true' : 'false' }}  --}}
                                                     <div class="form-check form-check-custom form-check-solid text-black mb-2">
-                                                        
                                                         <input class="form-check-input skill" type="checkbox" value="{{ $skill->name }}" @isset( $career_info->special_skill[$key]) {{ $career_info->special_skill[$key] == $skill->name ? 'checked' : '' }} @endisset name="skill[]" >
                                                         <label class="form-check-label ms-3"  for="skill">{{$skill->name}}</label>
                                                     </div>
                                                     @endforeach  
-                                                      
+                                                   
                                                     <div class="help-block with-errors skill-error"></div>
                                                 </span>
                                             </div>
@@ -1040,7 +1113,7 @@
 
                                     <!--begin::Actions-->
                                     <div class="d-flex justify-content-between">
-                                        <button type="reset" id="kk_preffered_area_cancel" class="btn btn-light btn-active-color-danger me-3">Close</button>
+                                        <button type="reset" id="kk_preffered_area_cancel" class="btn btn-light btn-active-color-danger btn-sm me-3">Close</button>
                                         <button type="submit" id="kk_preffered_area_submit" class="btn btn-primary">
                                             <span class="indicator-label py-3 px-7">Save</span>
                                             <span class="indicator-progress">Please wait...
@@ -1069,7 +1142,7 @@
                                     <!--begin::Card body-->
                                     <div class="card-body pt-0">
                                         <div class="d-flex justify-content-end">
-                                            <span class="btn btn-active-color-primary btn-light " id="edit_other_relevent_info"><i class="fas fa-edit"></i>Edit</span>
+                                            <span class="btn btn-active-color-primary btn-sm btn-light " id="edit_other_relevent_info"><i class="fas fa-edit"></i>Edit</span>
                                         </div>
                                         <!--begin::Options-->
                                         <div id="kt_create_new_payment_method">
@@ -1122,7 +1195,7 @@
                                     @csrf
                                     
                                     <div class="d-flex justify-content-end mb-4">
-                                        <span class="btn btn-active-color-danger btn-light " id="cancel_edit_other_relevent_info"><i class="fas fa-times"></i>Cancel</span>
+                                        <span class="btn btn-active-color-danger btn-sm btn-light " id="cancel_edit_other_relevent_info"><i class="fas fa-times"></i>Cancel</span>
                                     </div>
                                     
                                     <div class="messages"></div>
@@ -1162,7 +1235,7 @@
                                     
                                     <!--begin::Actions-->
                                     <div class="d-flex justify-content-between">
-                                        <button type="reset" id="kk_other_relevent_info_cancel" class="btn btn-light btn-active-color-danger me-3">Close</button>
+                                        <button type="reset" id="kk_other_relevent_info_cancel" class="btn btn-light btn-active-color-danger btn-sm me-3">Close</button>
                                         <button type="submit" id="kk_other_relevent_info_submit" class="btn btn-primary">
                                             <span class="indicator-label py-3 px-7">Save</span>
                                             <span class="indicator-progress">Please wait...
@@ -1185,8 +1258,82 @@
                             </button>
                         </h2>
                         <div id="kt_accordion_1_body_5" class="accordion-collapse collapse " aria-labelledby="kt_accordion_1_header_5" data-bs-parent="#kt_accordion_1">
-                            <div class="accordion-body">
-                               
+                            <div class="accordion-body disability_info">
+                                @if($user_detail->disability == 'yes')
+                                <div class="card card-flush pt-3 mb-5 mb-lg-10 disability_info_data" data-kt-subscriptions-form="pricing">
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0">
+                                        <div class="d-flex justify-content-between">
+                                             <span class="fs-4 fw-bolder">Disability Info</span>
+                                            <span class="btn btn-active-color-primary btn-sm btn-light " id="edit_disability_info"><i class="fas fa-edit"></i>Edit</span>
+                                        </div>
+                                        <!--begin::Options-->
+                                        <div id="kt_create_new_payment_method">
+                                            <!--begin::Option-->
+                                            <div class="py-1">
+                                                <!--begin::Body-->
+                                                <div id="kt_create_new_payment_method_1" class="fs-6 ps-10 collapse show" style="">
+                                                    <!--begin::Details-->
+                                                    <div class="py-5">
+                                                        <!--begin::Col-->
+                                                        <div class="mb-8">
+                                                           
+                                                            <table class="table table-flush fw-bold gy-1">
+                                                                
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Disability ID</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->disability_id ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Show on Resume</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->show_on ?? 'No' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Disability to see</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->disability_see ?? 'No Disability' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Disability Hear</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->disability_hear ?? 'No Disability' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Disability Physical</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->disability_physical ?? 'No Disability' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Disability Remember</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->disability_remember ?? 'No Disability' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Disability Communicate</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->disability_communicate ?? 'No Disability' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Disability Care</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->disability_care ?? 'No Disability' }}</td>
+                                                                    </tr>
+                                                                   
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <!--end::Col-->
+                                                       
+                                                    </div>
+                                                    <!--end::Details-->
+                                                    
+                                                </div>
+                                                <!--end::Body-->
+                                            </div>
+                                            <!--end::Option-->
+                                            <div class="separator separator-dashed"></div>
+                                            
+                                        </div>
+                                        <!--end::Options-->
+                                    </div>
+                                    <!--end::Card body-->
+                                </div>
+                                @else
                                 <!--begin::Heading-->
                                 <div class="mb-8">
                                     <!--begin::Description-->
@@ -1206,9 +1353,12 @@
                                     <p class="py-3 px-3 fs-6">If you are a person with disability and have no Disability ID Number, please contact i2i support +88 01730369802 by Call/ SMS/ WhatsApp</p>
                                 </div>
                                 <!--begin:Form-->
-                                
+                                @endif
                                 <form id="kk_disability_info_form" class="form d-none" enctype="multipart/form-data">
                                     @csrf
+                                    <div class="d-flex justify-content-end mb-4">
+                                        <span class="btn btn-active-color-danger btn-sm btn-light " id="cancel_edit_disability_info"><i class="fas fa-times"></i>Cancel</span>
+                                    </div>
                                     <div class="messages"></div>
 
                                     {{-- hidden input  --}}
@@ -1351,7 +1501,7 @@
                                     
                                     <!--begin::Actions-->
                                     <div class="d-flex justify-content-between">
-                                        <button type="reset" id="kk_modal_new_sub_category_cancel" class="btn btn-light btn-active-color-danger me-3">Close</button>
+                                        <button type="reset" id="kk_modal_new_sub_category_cancel" class="btn btn-light btn-active-color-danger btn-sm me-3">Close</button>
                                         <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary">
                                             <span class="indicator-label py-3 px-7">Save</span>
                                             <span class="indicator-progress">Please wait...
@@ -1640,7 +1790,7 @@
 
     })
 
-    /// Personal Detail show hide
+    
     $(document).ready( function() {
         // Personal detail Section :: start 
         //edit button
@@ -1653,7 +1803,6 @@
             $(this).parents(".personal_detail").find('form#kk_personal_details_form').addClass('d-none');
             $(this).parents(".personal_detail").find('div.personal_detail_data').removeClass('d-none');
         })
-
         // Personal detail Section :: end
 
         // Address detail Section :: start 
@@ -1667,8 +1816,21 @@
             $(this).parents(".address_detail").find('form#kk_address_details_form').addClass('d-none');
             $(this).parents(".address_detail").find('div.address_detail_data').removeClass('d-none');
         })
-
         // Address detail Section :: end
+
+
+        // Preffered Area Section :: start 
+        //edit button
+        $("#edit_preffered_area").on('click', function(){
+            $(this).parents(".preffered_area").find('div.preffered_area_data').addClass('d-none');
+            $(this).parents(".preffered_area").find('form#kk_preffered_job_category_form').removeClass('d-none');
+        })
+        //cancel button
+        $("#cancel_edit_preffered_area").on('click', function(){
+            $(this).parents(".preffered_area").find('form#kk_preffered_job_category_form').addClass('d-none');
+            $(this).parents(".preffered_area").find('div.preffered_area_data').removeClass('d-none');
+        })
+        // Preffered Area Section :: end
 
 
         // Career And Application info Section :: start 
@@ -1682,7 +1844,6 @@
             $(this).parents(".career_application").find('form#kk_career_application_info_form').addClass('d-none');
             $(this).parents(".career_application").find('div.career_application_data').removeClass('d-none');
         })
-
         // Career And Application info Section :: end
 
 
@@ -1697,8 +1858,118 @@
             $(this).parents(".other_relevent_info").find('form#kk_other_relavent_info_form').addClass('d-none');
             $(this).parents(".other_relevent_info").find('div.other_relevent_info_data').removeClass('d-none');
         })
-
         // Other Relavent  info Section :: end
+
+        // Disability  info Section :: start 
+        //edit button
+        $("#edit_disability_info").on('click', function(){
+            $(this).parents(".disability_info").find('div.disability_info_data').addClass('d-none');
+            $(this).parents(".disability_info").find('form#kk_disability_info_form').removeClass('d-none');
+        })
+        //cancel button
+        $("#cancel_edit_disability_info").on('click', function(){
+            $(this).parents(".disability_info").find('form#kk_disability_info_form').addClass('d-none');
+            $(this).parents(".disability_info").find('div.disability_info_data').removeClass('d-none');
+        })
+        // Disability  info Section :: end
+
+
+        //delete personal detail
+        $('.delete_personal_detail').on('click', function(){
+            var id = $(this).data('id');
+            console.log(id);
+
+            Swal.fire({
+                text: "Are you sure you want delete this?",
+                icon: "warning",
+                showCancelButton: !0,
+                buttonsStyling: !1,
+                confirmButtonText: "Confirm",
+                cancelButtonText: "No, cancel",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-danger",
+                    cancelButton: "btn fw-bold btn-active-light-primary"
+                }
+            }).then((function (o) {
+                if(o.value){ //if agree
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ url('resume/step_1/delete-personal-detail') }}"+'/'+id,
+                        data: {},
+                        success: function (data)
+                        {
+                            if(data.success){
+                            toastr.success(data.message);
+                            location.reload();
+                            }else{
+                                toastr.error(data.message)
+                            }
+                        }
+                    });
+
+                }else{ //if cancel
+                    Swal.fire({
+                        text: "Item has not been deleted",
+                        icon: "error",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary"
+                        }
+                    })
+                }
+
+            }))
+        })
+
+        //delete_career_application
+        $('.delete_career_application').on('click', function(){
+            var id = $(this).data('id');
+            console.log(id);
+
+            Swal.fire({
+                text: "Are you sure you want delete this?",
+                icon: "warning",
+                showCancelButton: !0,
+                buttonsStyling: !1,
+                confirmButtonText: "Confirm",
+                cancelButtonText: "No, cancel",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-danger",
+                    cancelButton: "btn fw-bold btn-active-light-primary"
+                }
+            }).then((function (o) {
+                if(o.value){ //if agree
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ url('resume/step_1/delete-career-application') }}"+'/'+id,
+                        data: {},
+                        success: function (data)
+                        {
+                            if(data.success){
+                            toastr.success(data.message);
+                            location.reload();
+                            }else{
+                                toastr.error(data.message)
+                            }
+                        }
+                    });
+
+                }else{ //if cancel
+                    Swal.fire({
+                        text: "Item has not been deleted",
+                        icon: "error",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary"
+                        }
+                    })
+                }
+
+            }))
+        })
+
     })
 
 </script>

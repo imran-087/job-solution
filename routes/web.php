@@ -185,6 +185,10 @@ Route::middleware('auth')->name('user.')->group(function () {
       Route::post('/resume/step_01/other_relevent_info/store', [PersonalDetailsController::class, 'otherReleventInfoStore'])->name('resume.other_relavent-info.store');
       Route::post('/resume/step_01/disability_info/store', [PersonalDetailsController::class, 'disabilitInfoStore'])->name('resume.disability_info.store');
 
+      //step_1 delete route
+      Route::get('resume/step_1/delete-personal-detail/{id}', [PersonalDetailsController::class, 'deletePersonalDetail'])->name('resume.personal_detail-delete');
+      Route::get('resume/step_1/delete-career-application/{id}', [PersonalDetailsController::class, 'deleteCareerApplication'])->name('resume.career_application-delete');
+
       //educationandtraining
       Route::get('/resume/step_02/education-training', [EducationController::class, 'create'])->name('resume.education');
       Route::post('/resume/step_02/academic-summary/store', [EducationController::class, 'academicSummaryStore'])->name('resume.academic.store');
@@ -192,10 +196,19 @@ Route::middleware('auth')->name('user.')->group(function () {
       Route::post('/resume/step_02/professional-summary/store', [EducationController::class, 'professionalSummaryStore'])->name('resume.professional.store');
       Route::get('/resume/step_02/get-education-degree', [EducationController::class, 'getEducationDegree'])->name('resume.education-degree');
 
+      //step_2 delete route
+      Route::get('resume/step_2/delete-academy/{id}', [EducationController::class, 'deleteAcademy'])->name('resume.academy-delete');
+      Route::get('resume/step_2/delete-training/{id}', [EducationController::class, 'deleteTraining'])->name('resume.training-delete');
+      Route::get('resume/step_2/delete-certificate/{id}', [EducationController::class, 'deleteCertificate'])->name('resume.certificate-delete');
+
       //employmentHistory
       Route::get('/resume/step_03/employment-history', [EmploymentController::class, 'create'])->name('resume.employment');
       Route::post('/resume/step_03/employment-history/store', [EmploymentController::class, 'employmentHistoryStore'])->name('resume.employment_history.store');
       Route::post('/resume/step_03/retired-army/store', [EmploymentController::class, 'retiredArmyStore'])->name('resume.retired_army.store');
+
+      //step_3 delete route
+      Route::get('resume/step_3/delete-experience/{id}', [EmploymentController::class, 'deleteExperience'])->name('resume.experience-delete');
+      
 
       //otherinformation
       Route::get('/resume/step_04/other-inforamtion', [OtherInformationController::class, 'create'])->name('resume.other_info');
@@ -205,12 +218,19 @@ Route::middleware('auth')->name('user.')->group(function () {
       Route::post('/resume/step_04/language-proficency/store', [OtherInformationController::class, 'languageStore'])->name('resume.language.store');
       Route::post('/resume/step_04/references/store', [OtherInformationController::class, 'referencesStore'])->name('resume.references.store');
 
+      //step_4 delete route
+      Route::get('resume/step_4/delete-skill/{id}', [OtherInformationController::class, 'deleteSkill'])->name('resume.skill-delete');
+      Route::get('resume/step_4/delete-description/{id}', [OtherInformationController::class, 'deleteDescription'])->name('resume.description-delete');
+      Route::get('resume/step_4/delete-extracurricular/{id}', [OtherInformationController::class, 'deleteExtracurricular'])->name('resume.extracurricular-delete');
+      Route::get('resume/step_4/delete-reference/{id}', [OtherInformationController::class, 'deleteReference'])->name('resume.reference-delete');
+      Route::get('resume/step_4/delete-language/{id}', [OtherInformationController::class, 'deleteLanguage'])->name('resume.language-delete');
+
       //photograph
       Route::get('/resume/step_05/photograph', [PhotographController::class, 'create'])->name('resume.photo');
       Route::post('/resume/step_05/photograph/store', [PhotographController::class, 'photographStore'])->name('resume.photograph.store');
 
-  ####### Resume View ##
-  Route::get('/resume-view', [ResumeViewController::class, 'index'])->name('resume.view.index');
+    ####### Resume View ##
+    Route::get('/resume-view', [ResumeViewController::class, 'index'])->name('resume.view.index');
 
 });
 

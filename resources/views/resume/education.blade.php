@@ -76,10 +76,118 @@
                             </button>
                         </h2>
                         <div id="kt_accordion_1_body_1" class="accordion-collapse collapse show" aria-labelledby="kt_accordion_1_header_1" data-bs-parent="#kt_accordion_1">
-                            <div class="accordion-body">
+                            <div class="accordion-body academic_summary">
+
+                                <div class="card card-flush pt-3 mb-5 mb-lg-10 academic_summary_data" data-kt-subscriptions-form="pricing">
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0">
+                                        @foreach($academic_infos as $academy)
+                                        <div class="d-flex justify-content-end">
+                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2" id="edit_academic_summary"><i class="fas fa-edit"></i>Edit</span>
+                                            <span class="btn btn-active-color-danger btn-sm btn-light delete_academy" data-id="{{ $academy->id }}" ><i class="fas fa-trash"></i>Delete</span>
+                                        </div>
+                                        <!--begin::Options-->
+                                        <div id="kt_create_new_payment_method">
+                                           
+                                            <!--begin::Option-->
+                                            <div class="py-1">
+                                                <!--begin::Body-->
+                                                <div id="kt_create_new_payment_method_1" class="fs-6 ps-10 collapse show" style="">
+                                                    <!--begin::Details-->
+                                                    <div class="d-flex flex-wrap py-5">
+                                                        <!--begin::Col-->
+                                                        <div class="flex-equal me-5">
+                                                            <table class="table table-flush fw-bold gy-1">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Education Level</td>
+                                                                        <td class="text-gray-800">{{ $academy->degree_level ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Degree Name</td>
+                                                                        <td class="text-gray-800">{{ $academy->degree_name ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Major/Group</td>
+                                                                        <td class="text-gray-800">{{ $academy->major ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Institute Name</td>
+                                                                        <td class="text-gray-800">{{ $academy->institute_name ?? '' }}</td>
+                                                                    </tr>
+                                                                   
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <!--end::Col-->
+                                                        <!--begin::Col-->
+                                                        <div class="flex-equal">
+                                                            <table class="table table-flush fw-bold gy-1">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Board</td>
+                                                                        <td class="text-gray-800">{{ $academy->board ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Result</td>
+                                                                        <td class="text-gray-800">{{ $academy->result ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">CGPA</td>
+                                                                        <td class="text-gray-800">{{ $academy->cgpa ?? '' }} </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Marks</td>
+                                                                        <td class="text-gray-800">{{ $academy->marks ?? '' }} </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Scale</td>
+                                                                        <td class="text-gray-800">{{ $academy->scale ?? ''  }} </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Passing Year</td>
+                                                                        <td class="text-gray-800">{{ $academy->passing_year ?? '' }} </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Course Duration</td>
+                                                                        <td class="text-gray-800">{{ $academy->course_duration ?? '' }} </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Achievement</td>
+                                                                        <td class="text-gray-800">{{ $academy->achievement ?? '' }} </td>
+                                                                    </tr>
+                                                                   
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <!--end::Details-->
+                                                    
+                                                </div>
+                                                <!--end::Body-->
+                                            </div>
+                                            <!--end::Option-->
+                                           
+                                            <div class="separator separator-dashed mb-2"></div>
+                                           
+                                        </div>
+                                        <!--end::Options-->
+                                        @endforeach
+                                    </div>
+                                    <!--end::Card body-->
+                                </div>
+
+                                <div class="d-flex justify-content-start">
+                                    <span class="btn btn-sm btn-primary " id="add_academic_info"><i class="fas fa-plus"></i>Add New</span>
+                                </div>
+
                                 <!--begin:Form-->
-                                <form id="kk_academic_summary_form" class="form" enctype="multipart/form-data">
+                                <form id="kk_academic_summary_form" class="form d-none" enctype="multipart/form-data">
                                     @csrf
+                                    <div class="d-flex justify-content-end">
+                                            <span class="btn btn-active-color-danger btn-sm btn-light " id="cancel_edit_academic_summary"><i class="fas fa-times"></i>Cancel</span>
+                                    </div>
                                     <div class="messages"></div>
                                     <!--begin::Heading-->
                                     <div class="mb-13">
@@ -235,9 +343,10 @@
                                             <label class="required fs-6 fw-bold mb-2">Year of passing</label>
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                                 data-placeholder="Select year" name="passing_year">
-                                                <option value=""></option>
-                                                <option value="1999">1999</option>
-                                                <option value="2020" >2020</option>
+                                                <option value="">Select year</option>
+                                                @foreach($years as $year)
+                                                <option value="{{$year->year}}">{{$year->year}}</option>
+                                                @endforeach
                                                 
                                             </select>
                                             <div class="help-block with-errors passing_year-error"></div>    
@@ -302,15 +411,97 @@
                             </button>
                         </h2>
                         <div id="kt_accordion_1_body_5" class="accordion-collapse collapse " aria-labelledby="kt_accordion_1_header_2" data-bs-parent="#kt_accordion_1">
-                            <div class="accordion-body">
+                            <div class="accordion-body training_summary">
+                                
+                                <div class="card card-flush pt-3 mb-5 mb-lg-10 training_summary_data" data-kt-subscriptions-form="pricing">
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0">
+                                       @foreach($training_infos as $training)
+                                        <!--begin::Options-->
+                                        <div id="kt_create_new_payment_method " class="">
+                                            <div class="d-flex justify-content-end">
+                                                <span class="btn btn-active-color-primary btn-sm btn-light edit_training_summary me-2" id=""><i class="fas fa-edit"></i>Edit</span>
+                                                <span class="btn btn-active-color-danger btn-sm btn-light delete_training" data-id="{{ $training->id }}" ><i class="fas fa-trash"></i>Delete</span>
+
+                                            </div>
+                                            <!--begin::Option-->
+                                            <div class="py-1">
+                                                <!--begin::Body-->
+                                                <div id="kt_create_new_payment_method_1" class="fs-6 ps-10 collapse show" style="">
+                                                    <!--begin::Details-->
+                                                    <div class="py-5">
+                                                        <!--begin::Col-->
+                                                        <div class="mb-8">
+                                                            <table class="table table-flush fw-bold gy-1">
+                                                                
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Training Title</td>
+                                                                        <td class="text-gray-800 fw-bolder">
+                                                                            {{ $training->training_title ?? '' }}
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Tpoic Covered</td>
+                                                                        <td class="text-gray-800 fw-bolder">
+                                                                            {{ $training->topic_covered ?? '' }}
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Institute</td>
+                                                                        <td class="text-gray-800">{{ $training->institute ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Duration</td>
+                                                                        <td class="text-gray-800">{{ $training->duration ?? '' }} (hr)</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Year</td>
+                                                                        <td class="text-gray-800">{{ $training->year ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Address</td>
+                                                                        <td class="text-gray-800">{{ $training->address ?? '' }}</td>
+                                                                    </tr>
+                                                                   
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <!--end::Col-->
+                                                       
+                                                    </div>
+                                                    <!--end::Details-->
+                                                    
+                                                </div>
+                                                <!--end::Body-->
+                                            </div>
+                                            <!--end::Option-->
+                                            <div class="separator separator-dashed mb-2"></div>
+                                            
+                                        </div>
+                                        <!--end::Options-->
+                                       
+                                        @endforeach
+                                    </div>
+                                    <!--end::Card body-->
+                                </div>
+                               
+                                <div class="d-flex justify-content-start">
+                                    <span class="btn btn-sm btn-primary " id="add_training_summary"><i class="fas fa-plus"></i>Add New</span>
+                                </div>
                                 <!--begin:Form-->
-                                <form id="kk_training_summary_form" class="form" enctype="multipart/form-data">
+                                <form id="kk_training_summary_form" class="form d-none" enctype="multipart/form-data">
                                     @csrf
+
+                                    <div class="d-flex justify-content-end">
+                                        <span class="btn btn-active-color-danger btn-light " id="cancel_edit_training_summary"><i class="fas fa-times"></i>Cancel</span>
+                                    </div>
+
                                     <div class="messages"></div>
                                     <!--begin::Heading-->
-                                    <div class="mb-5">
+                                    <div class="mb-8">
                                         <!--begin::Description-->
-                                        <div class="text-muted fw-bold fs-5 mb-5 required">Training</div>
+                                        <div class="fw-bold fs-4 mb-5 ">Training Information</div>
                                     </div>
                                     <!--end::Heading-->
                                     <!--begin::Input group-->
@@ -325,7 +516,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter training title"
-                                                    name="title" />
+                                                    name="title" value="" />
                                                 <div class="help-block with-errors title-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -340,7 +531,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter country"
-                                                    name="country" />
+                                                    name="country" value=""  />
                                                 <div class="help-block with-errors country-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -360,7 +551,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Topic covered"
-                                                    name="topic_covered" />
+                                                    name="topic_covered" value=""  />
                                                 <div class="help-block with-errors topic_covered-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -371,16 +562,16 @@
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
                                                 name="training_year">
                                                 <option value="">Select year</option>
-                                                <option value="1999">1999</option>
-                                                <option value="2020" >2020</option>
-                                                
+                                                @foreach($years as $year)
+                                                <option value="{{$year->year}}">{{$year->year}}</option>
+                                                @endforeach
                                             </select>
                                             <div class="help-block with-errors training_year-error"></div>    
                                         </div>
                                         
                                     </div>
                                     <!--end::Input group-->
-                                     <!--begin::Input group-->
+                                    <!--begin::Input group-->
                                     <div class="row g-9 mb-5">
                                         <!--begin::Col-->
                                         <div class="col-md-6 fv-row">
@@ -392,7 +583,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter institute name"
-                                                    name="institute" />
+                                                    name="institute"  />
                                                 <div class="help-block with-errors institute-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -407,7 +598,7 @@
                                                 </label>
                                                 <!--end::Label-->
                                                 <input type="text" class="form-control form-control-solid" placeholder="Enter training duration"
-                                                    name="duration" />
+                                                    name="duration"  />
                                                 <div class="help-block with-errors duration-error"></div>
                                             </div>
                                             <!--end::Input group-->
@@ -415,7 +606,7 @@
                                         
                                     </div>
                                     <!--end::Input group-->
-                                     <!--begin::Input group-->
+                                    <!--begin::Input group-->
                                     <div class="row g-9 mb-5">
                                         <!--begin::Col-->
                                         <div class="col-md-6 fv-row">
@@ -434,7 +625,7 @@
                                         </div>
                                         <!--begin::Col-->
                                         <div class="col-md-6 fv-row">
-                                           
+                                        
                                         </div>
                                         
                                     </div>
@@ -451,6 +642,7 @@
                                     </div>
                                     <!--end::Actions-->
                                 </form>
+                                <!--end:Form-->   
                             </div>
                         </div>
                     </div>
@@ -462,10 +654,86 @@
                             </button>
                         </h2>
                         <div id="kt_accordion_1_body_3" class="accordion-collapse collapse" aria-labelledby="kt_accordion_1_header_3" data-bs-parent="#kt_accordion_1">
-                            <div class="accordion-body">
+                            <div class="accordion-body professional_certificate">
+
+                                <div class="card card-flush pt-3 mb-5 mb-lg-10 professional_certificate_data" data-kt-subscriptions-form="pricing">
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0">
+                                       @foreach($professional_certificate as $pro_certificate)
+                                        <!--begin::Options-->
+                                        <div id="kt_create_new_payment_method " >
+                                            <div class="d-flex justify-content-end">
+                                                <span class="btn btn-active-color-primary btn-sm btn-light edit_professional_certificate me-2" id=""><i class="fas fa-edit"></i>Edit</span>
+                                                <span class="btn btn-active-color-danger btn-sm btn-light delete_pro_certificate" data-id="{{ $pro_certificate->id }}" ><i class="fas fa-trash"></i>Delete</span>
+
+                                            </div>
+                                            <!--begin::Option-->
+                                            <div class="py-1">
+                                                <!--begin::Body-->
+                                                <div id="kt_create_new_payment_method_1" class="fs-6 ps-10 collapse show" style="">
+                                                    <!--begin::Details-->
+                                                    <div class="py-5">
+                                                        <!--begin::Col-->
+                                                        <div class="mb-8">
+                                                            <table class="table table-flush fw-bold gy-1">
+                                                                
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Certificate Name</td>
+                                                                        <td class="text-gray-800 fw-bolder">
+                                                                            {{ $pro_certificate->certificate_name ?? '' }}
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Institute</td>
+                                                                        <td class="text-gray-800">{{ $pro_certificate->institute ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Address</td>
+                                                                        <td class="text-gray-800">{{ $pro_certificate->address ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Start Date</td>
+                                                                        <td class="text-gray-800">{{ $pro_certificate->start_date ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">End Date</td>
+                                                                        <td class="text-gray-800">{{ $pro_certificate->end_date ?? '' }}</td>
+                                                                    </tr>
+                                                                   
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <!--end::Col-->
+                                                       
+                                                    </div>
+                                                    <!--end::Details-->
+                                                    
+                                                </div>
+                                                <!--end::Body-->
+                                            </div>
+                                            <!--end::Option-->
+                                            <div class="separator separator-dashed mb-2"></div>
+                                            
+                                        </div>
+                                        <!--end::Options-->
+                                       
+                                        @endforeach
+                                    </div>
+                                    <!--end::Card body-->
+                                </div>
+                               
+                                <div class="d-flex justify-content-start">
+                                    <span class="btn btn-sm btn-primary " id="add_professional_certificate"><i class="fas fa-plus"></i>Add New</span>
+                                </div>
+
                                 <!--begin:Form-->
-                                <form id="kk_professional_certificate_form" class="form" enctype="multipart/form-data">
+                                <form id="kk_professional_certificate_form" class="form d-none" enctype="multipart/form-data">
                                     @csrf
+                                    <div class="d-flex justify-content-end">
+                                        <span class="btn btn-sm btn-active-color-danger btn-light " id="cancel_edit_professional_certificate"><i class="fas fa-times"></i>Cancel</span>
+                                    </div>
+
                                     <div class="messages"></div>
                                     <!--begin::Heading-->
                                     <div class="mb-5">
@@ -570,6 +838,7 @@
                                     <!--end::Actions-->
                                     
                                 </form>
+
                             </div>
                         </div>
                     </div>
@@ -770,5 +1039,215 @@
             $('#degree').empty();
         }
     });
+
+
+    $(document).ready(function(){
+        //start:: Academy information  form show hide
+        //add button
+        $("#add_academic_info").on('click', function(){
+            $(this).hide();
+            $(this).parents(".academic_summary").find('div.academic_summary_data').addClass('d-none');
+            $(this).parents(".academic_summary").find('form#kk_academic_summary_form').removeClass('d-none');
+        })
+        //cancel button
+        $("#cancel_edit_academic_summary").on('click', function(){
+
+            $(this).parents(".academic_summary").find('form#kk_academic_summary_form').addClass('d-none');
+            $(this).parents(".academic_summary").find('div.academic_summary_data').removeClass('d-none');
+            $('#add_academic_info').show();
+        })
+        $("#kk_academic_summary_cancel").on('click', function(){
+            $(this).parents(".academic_summary").find('form#kk_academic_summary_form').addClass('d-none');
+            $(this).parents(".academic_summary").find('div.academic_summary_data').removeClass('d-none');
+            $('#add_academic_info').show();
+        })
+        // Academy information  Section :: end
+
+        //add button
+        $("#add_training_summary").on('click', function(){
+            $(this).hide();
+            $(this).parents(".training_summary").find('div.training_summary_data').addClass('d-none');
+            $(this).parents(".training_summary").find('form#kk_training_summary_form').removeClass('d-none');
+        })
+        //cancel button
+        $("#cancel_edit_training_summary").on('click', function(){
+
+            $(this).parents(".training_summary").find('form#kk_training_summary_form').addClass('d-none');
+            $(this).parents(".training_summary").find('div.training_summary_data').removeClass('d-none');
+            $('#add_training_summary').show();
+        })
+        $("#kk_training_summary_cancel").on('click', function(){
+            $(this).parents(".training_summary").find('form#kk_training_summary_form').addClass('d-none');
+            $(this).parents(".training_summary").find('div.training_summary_data').removeClass('d-none');
+            $('#add_training_summary').show();
+        })
+        // Training info  Section :: end
+
+        //start:: Professional certificate  form show hide
+        //add button
+        $("#add_professional_certificate").on('click', function(){
+            $(this).hide();
+            $(this).parents(".professional_certificate").find('div.professional_certificate_data').addClass('d-none');
+            $(this).parents(".professional_certificate").find('form#kk_professional_certificate_form').removeClass('d-none');
+        })
+        //cancel button
+        $("#cancel_edit_professional_certificate").on('click', function(){
+            $(this).parents(".professional_certificate").find('form#kk_professional_certificate_form').addClass('d-none');
+            $(this).parents(".professional_certificate").find('div.professional_certificate_data').removeClass('d-none');
+            $('#add_professional_certificate').show();
+        })
+        $("#kk_professional_summary_cancel").on('click', function(){
+            $(this).parents(".professional_certificate").find('form#kk_professional_certificate_form').addClass('d-none');
+            $(this).parents(".professional_certificate").find('div.professional_certificate_data').removeClass('d-none');
+            $('#add_professional_certificate').show();
+        })
+        // Training info  Section :: end
+
+
+        //delete_academy
+        $('.delete_academy').on('click', function(){
+            var id = $(this).data('id');
+            console.log(id);
+
+            Swal.fire({
+                text: "Are you sure you want delete this?",
+                icon: "warning",
+                showCancelButton: !0,
+                buttonsStyling: !1,
+                confirmButtonText: "Confirm",
+                cancelButtonText: "No, cancel",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-danger",
+                    cancelButton: "btn fw-bold btn-active-light-primary"
+                }
+            }).then((function (o) {
+                if(o.value){ //if agree
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ url('resume/step_2/delete-academy') }}"+'/'+id,
+                        data: {},
+                        success: function (data)
+                        {
+                            if(data.success){
+                            toastr.success(data.message);
+                            location.reload();
+                            }else{
+                                toastr.error(data.message)
+                            }
+                        }
+                    });
+
+                }else{ //if cancel
+                    Swal.fire({
+                        text: "Item has not been deleted",
+                        icon: "error",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary"
+                        }
+                    })
+                }
+
+            }))
+        })
+
+        //delete_training
+        $('.delete_training').on('click', function(){
+            var id = $(this).data('id');
+            console.log(id);
+
+            Swal.fire({
+                text: "Are you sure you want delete this?",
+                icon: "warning",
+                showCancelButton: !0,
+                buttonsStyling: !1,
+                confirmButtonText: "Confirm",
+                cancelButtonText: "No, cancel",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-danger",
+                    cancelButton: "btn fw-bold btn-active-light-primary"
+                }
+            }).then((function (o) {
+                if(o.value){ //if agree
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ url('resume/step_2/delete-training') }}"+'/'+id,
+                        data: {},
+                        success: function (data)
+                        {
+                            if(data.success){
+                            toastr.success(data.message);
+                            location.reload();
+                            }else{
+                                toastr.error(data.message)
+                            }
+                        }
+                    });
+
+                }else{ //if cancel
+                    Swal.fire({
+                        text: "Item has not been deleted",
+                        icon: "error",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary"
+                        }
+                    })
+                }
+
+            }))
+        })
+
+        //delete_pro_certificate
+        $('.delete_pro_certificate').on('click', function(){
+            var id = $(this).data('id');
+            console.log(id);
+
+            Swal.fire({
+                text: "Are you sure you want delete this?",
+                icon: "warning",
+                showCancelButton: !0,
+                buttonsStyling: !1,
+                confirmButtonText: "Confirm",
+                cancelButtonText: "No, cancel",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-danger",
+                    cancelButton: "btn fw-bold btn-active-light-primary"
+                }
+            }).then((function (o) {
+                if(o.value){ //if agree
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ url('resume/step_2/delete-certificate') }}"+'/'+id,
+                        data: {},
+                        success: function (data)
+                        {
+                            if(data.success){
+                            toastr.success(data.message);
+                            location.reload();
+                            }else{
+                                toastr.error(data.message)
+                            }
+                        }
+                    });
+
+                }else{ //if cancel
+                    Swal.fire({
+                        text: "Item has not been deleted",
+                        icon: "error",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary"
+                        }
+                    })
+                }
+
+            }))
+        })
+
+    })
     </script>
 @endpush

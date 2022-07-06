@@ -76,10 +76,110 @@
                             </button>
                         </h2>
                         <div id="kt_accordion_1_body_1" class="accordion-collapse collapse show" aria-labelledby="kt_accordion_1_header_1" data-bs-parent="#kt_accordion_1">
-                            <div class="accordion-body">
+                            <div class="accordion-body employment_history">
+
+                                <div class="card card-flush pt-3 mb-5 mb-lg-10 employment_history_data" data-kt-subscriptions-form="pricing">
+                                    <!--begin::Card body-->
+                                    <div class="card-body pt-0">
+                                        @foreach($employment_history as $experience)
+                                        <div class="d-flex justify-content-end">
+                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2" id="edit_employment_history"><i class="fas fa-edit"></i>Edit</span>
+                                            <span class="btn btn-active-color-danger btn-sm btn-light delete_experience" data-id="{{ $experience->id }}" ><i class="fas fa-trash"></i>Delete</span>
+                                        </div>
+                                        <!--begin::Options-->
+                                        <div id="kt_create_new_payment_method">
+                                           
+                                            <!--begin::Option-->
+                                            <div class="py-1">
+                                                <!--begin::Body-->
+                                                <div id="kt_create_new_payment_method_1" class="fs-6 ps-10 collapse show" style="">
+                                                    <!--begin::Details-->
+                                                    <div class="d-flex flex-wrap py-5">
+                                                        <!--begin::Col-->
+                                                        <div class="flex-equal me-5">
+                                                            <table class="table table-flush fw-bold gy-1">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Company Name</td>
+                                                                        <td class="text-gray-800">{{ $experience->company_name ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Company Business</td>
+                                                                        <td class="text-gray-800">{{ $experience->company_business ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Designation</td>
+                                                                        <td class="text-gray-800">{{ $experience->designation ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Department</td>
+                                                                        <td class="text-gray-800">{{ $experience->department ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Strat Date</td>
+                                                                        <td class="text-gray-800">{{ $experience->from_date ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">End Date</td>
+                                                                        <td class="text-gray-800">{{ $experience->end_date ?? '' }}</td>
+                                                                    </tr>
+                                                                   
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        <!--end::Col-->
+                                                        <!--begin::Col-->
+                                                        <div class="flex-equal">
+                                                            <table class="table table-flush fw-bold gy-1">
+                                                                <tbody>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Responsibilites</td>
+                                                                        <td class="text-gray-800">{{ $experience->responsibilities ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Area of Expertise</td>
+                                                                        <td class="text-gray-800">{{ $experience->area_of_expertise['expertise'] ?? '' }}</td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Duration</td>
+                                                                        <td class="text-gray-800">{{ $experience->area_of_expertise['duration'] ?? ''}} </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td class="text-muted min-w-125px w-130px">Address</td>
+                                                                        <td class="text-gray-800">{{ $experience->address ?? '' }} </td>
+                                                                    </tr>
+                                                                    
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                    <!--end::Details-->
+                                                    
+                                                </div>
+                                                <!--end::Body-->
+                                            </div>
+                                            <!--end::Option-->
+                                           
+                                            <div class="separator separator-dashed mb-2"></div>
+                                           
+                                        </div>
+                                        <!--end::Options-->
+                                        @endforeach
+                                    </div>
+                                    <!--end::Card body-->
+                                </div>
+
+                                <div class="d-flex justify-content-start">
+                                    <span class="btn btn-sm btn-primary " id="add_employment_history"><i class="fas fa-plus"></i>Add New</span>
+                                </div>
+
                                 <!--begin:Form-->
-                                <form id="kk_employment_history_form" class="form" enctype="multipart/form-data">
+                                <form id="kk_employment_history_form" class="form d-none" enctype="multipart/form-data">
                                     @csrf
+                                    <div class="d-flex justify-content-end">
+                                        <span class="btn btn-sm btn-active-color-danger btn-light " id="cancel_edit_employment_history"><i class="fas fa-times"></i>Cancel</span>
+                                    </div>
                                     <div class="messages"></div>
                                     <!--begin::Heading-->
                                     <div class="mb-13">
@@ -282,7 +382,7 @@
                                     <!--begin::Card body-->
                                     <div class="card-body pt-0">
                                         <div class="d-flex justify-content-end">
-                                            <span class="btn btn-active-color-primary btn-light " id="edit_retired_army_person_data"><i class="fas fa-edit"></i>Edit</span>
+                                            <span class="btn btn-active-color-primary btn-sm btn-light " id="edit_retired_army_person_data"><i class="fas fa-edit"></i>Edit</span>
                                         </div>
                                         <!--begin::Options-->
                                         <div id="kt_create_new_payment_method">
@@ -367,7 +467,7 @@
                                 <form id="kk_modal_new_retired_army_person_form" class="form d-none" enctype="multipart/form-data">
                                     @csrf
                                     <div class="d-flex justify-content-end mb-4">
-                                        <span class="btn btn-active-color-danger btn-light " id="cancel_edit_retired_army_person_data"><i class="fas fa-times"></i>Cancel</span>
+                                        <span class="btn btn-active-color-danger btn-sm btn-light " id="cancel_edit_retired_army_person_data"><i class="fas fa-times"></i>Cancel</span>
                                     </div>
                                     <div class="messages"></div>
                                     <!--begin::Heading-->
@@ -633,9 +733,31 @@
     })
 
 
-    /// Personal Detail show hide
+
     $(document).ready( function() {
-        // Personal detail Section :: start 
+        // Work Experiences Section :: start 
+         //add button
+        $("#add_employment_history").on('click', function(){
+            $(this).hide();
+            $(this).parents(".employment_history").find('div.employment_history_data').addClass('d-none');
+            $(this).parents(".employment_history").find('form#kk_employment_history_form').removeClass('d-none');
+        })
+        //cancel button
+        $("#cancel_edit_employment_history").on('click', function(){
+
+            $(this).parents(".employment_history").find('form#kk_employment_history_form').addClass('d-none');
+            $(this).parents(".employment_history").find('div.employment_history_data').removeClass('d-none');
+            $('#add_employment_history').show();
+        })
+        $("#kk_employment_history_cancel").on('click', function(){
+            $(this).parents(".employment_history").find('form#kk_employment_history_form').addClass('d-none');
+            $(this).parents(".employment_history").find('div.employment_history_data').removeClass('d-none');
+            $('#add_employment_history').show();
+        })
+
+        // Work Experiences Section :: end
+
+        // Retired army person Section :: start 
         //edit button
         $("#edit_retired_army_person_data").on('click', function(){
             $(this).parents(".retired_army_person").find('div.retired_army_person_data').addClass('d-none');
@@ -647,14 +769,61 @@
             $(this).parents(".retired_army_person").find('div.retired_army_person_data').removeClass('d-none');
         })
 
-        // Personal detail Section :: end
+        // Retired army person Section :: end
 
         
 
+        //DElete Start
+        //delete_experience 
+        $('.delete_experience').on('click', function(){
+            var id = $(this).data('id');
+            console.log(id);
 
-       
+            Swal.fire({
+                text: "Are you sure you want delete this?",
+                icon: "warning",
+                showCancelButton: !0,
+                buttonsStyling: !1,
+                confirmButtonText: "Confirm",
+                cancelButtonText: "No, cancel",
+                customClass: {
+                    confirmButton: "btn fw-bold btn-danger",
+                    cancelButton: "btn fw-bold btn-active-light-primary"
+                }
+            }).then((function (o) {
+                if(o.value){ //if agree
+                    $.ajax({
+                        type: "GET",
+                        url: "{{ url('resume/step_3/delete-experience') }}"+'/'+id,
+                        data: {},
+                        success: function (data)
+                        {
+                            if(data.success){
+                            toastr.success(data.message);
+                            location.reload();
+                            }else{
+                                toastr.error(data.message)
+                            }
+                        }
+                    });
+
+                }else{ //if cancel
+                    Swal.fire({
+                        text: "Item has not been deleted",
+                        icon: "error",
+                        buttonsStyling: !1,
+                        confirmButtonText: "Ok, got it!",
+                        customClass: {
+                            confirmButton: "btn fw-bold btn-primary"
+                        }
+                    })
+                }
+
+            }))
+        })
 
 
+    
     })
 
     </script>
