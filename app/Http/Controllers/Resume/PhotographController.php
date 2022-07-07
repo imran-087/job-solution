@@ -42,7 +42,7 @@ class PhotographController extends Controller
                     $image = $request->file('avatar');
                     $image_name = time() . '.' . $image->getClientOriginalExtension();
 
-                    $destinationPath = \public_path('/uploads/avatar');
+                    $destinationPath = \public_path('/uploads/resume/');
 
                     //resize image
                     $imgFile = Image::make($image->getRealPath());
@@ -50,8 +50,7 @@ class PhotographController extends Controller
                         $constraint->aspectRatio();
                     })->save($destinationPath . $image_name, 80);
 
-                    // $image->move($destinationPath, $image_name);
-                    //dd($user->avatar);
+                   
                     //unlink old image
                     // $photo_path = \base_path() . '/public' . $user->avatar;
                     // //dd($photo_path);
@@ -62,7 +61,7 @@ class PhotographController extends Controller
                     $photograph  = UserDetail::updateOrCreate([
                         'user_id' => Auth::id()
                         ],[
-                            'photo_path' => '/uploads/avatar/' . $image_name
+                            'photo_path' => '/uploads/resume/' . $image_name
                         ]
                     );
                     if($photograph){

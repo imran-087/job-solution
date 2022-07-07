@@ -80,10 +80,10 @@
 
                                 <div class="card card-flush pt-3 mb-5 mb-lg-10 skill_data" data-kt-subscriptions-form="pricing">
                                     <!--begin::Card body-->
-                                    <div class="card-body pt-0">
+                                    <div class="card-body pt-0 skill_data_body">
                                         @foreach($user_skills as $key => $skill)
                                         <div class="d-flex justify-content-end">
-                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2" id="edit_skill"><i class="fas fa-edit"></i>Edit</span>
+                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2 edit_skill" data-id="{{ $skill->id }}"><i class="fas fa-edit"></i>Edit</span>
                                             <span class="btn btn-active-color-danger btn-sm btn-light delete_skill" data-id="{{ $skill->id }}" ><i class="fas fa-trash"></i>Delete</span>
                                         </div>
                                         <!--begin::Options-->
@@ -105,7 +105,12 @@
                                                                         
                                                                     </tr>
                                                                     <tr>
-                                                                        <td>Learning Media : <span class="fw-bold">{{  $skill->learning_media ?? '' }}</span></td>
+                                                                        <td>Learning Method : <span class="fw-bolder fs-5">
+                                                                            &nbsp;{{  $skill->learning_media['self'] ?? '' }} &nbsp;
+                                                                            {{  $skill->learning_media['job'] ?? '' }} &nbsp;
+                                                                            {{  $skill->learning_media['education'] ?? '' }} &nbsp;
+                                                                            {{  $skill->learning_media['training'] ?? '' }} &nbsp;
+                                                                        </span></td>
                                                                         
                                                                     </tr>
                                                                     
@@ -121,13 +126,77 @@
                                                 <!--end::Body-->
                                             </div>
                                             <!--end::Option-->
-                                            <div class="separator separator-dashed"></div>
+                                            <div class="separator separator-dashed mb-2"></div>
                                             
                                         </div>
                                         <!--end::Options-->
                                         @endforeach
+
+                                        
                                     </div>
                                     <!--end::Card body-->
+                                    <!--begin:Form-->
+                                    <form id="kk_specialization_skill_update_form" class="form d-none" enctype="multipart/form-data">
+                                        @csrf
+
+                                        <div class="messages"></div>
+                                        <!--begin::Heading-->
+                                        <div class="mb-9">
+                                            <!--begin::Title-->
+                                            <h1 class="mb-3 fs-4 text-muted">Skill</h1>
+                                            <!--end::Title-->
+                                        </div>
+                                        <!--end::Heading-->
+
+                                        {{-- hidden input  --}}
+                                        <input type="hidden" name="skill_id">
+                                        <!--begin::Col-->
+                                        <div class="col-md-12 fv-row mb-5">
+                                            <!--begin::Input group-->
+                                            <div class="d-flex flex-column fv-row">
+                                                <!--begin::Label-->
+                                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                    <span class="required">Skill</span>
+                                                </label>
+                                                <!--end::Label-->
+                                                <input type="text" class="form-control form-control-solid" placeholder="Name of the skill"
+                                                    name="skill_name" />
+                                                <div class="help-block with-errors skill_name-error"></div>
+                                            </div>
+                                            <!--end::Input group-->
+                                        </div>
+                                        
+                                        <!--begin::Col-->
+                                        <div class="col-md-6 fv-row">
+                                            <!--begin::Input group-->
+                                            <div class="d-flex flex-column fv-row">
+                                                <!--begin::Label-->
+                                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                    <span class="required">How did you learn the skill?</span>
+                                                </label>
+                                                <!--end::Label-->
+                                                <div class="">
+                                                    <input class="form-check-input me-1" name="self" type="checkbox" value="self"> Self &nbsp;&nbsp;
+                                                    <input class="form-check-input me-1" name="job" type="checkbox" value="job">Job &nbsp;&nbsp;
+                                                    <input class="form-check-input me-1" name="education" type="checkbox" value="education">Educational &nbsp;&nbsp;
+                                                    <input class="form-check-input me-1" name="training" type="checkbox" value="training">Professional Training
+                                                </div>
+                                                <div class="help-block with-errors learning_method-error"></div>
+                                            </div>
+                                            <!--end::Input group-->
+                                        </div>
+                                        <!--begin::Actions-->
+                                        <div class="d-flex justify-content-start mb-9 mt-3">
+                                            <button type="submit" id="kk_skill_submit" class="btn btn-primary me-3">
+                                                <span class="indicator-label py-3 px-7">Save</span>
+                                                <span class="indicator-progress">Please wait...
+                                                    <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                            </button>
+                                            <button type="reset" id="kk_skill_update_cancel" class="btn btn-light btn-active-color-danger me-3">Close</button>
+                                            
+                                        </div>
+                                        <!--end::Actions-->
+                                    </form>
                                 </div>
                                  
                                 <div class="d-flex justify-content-start mb-8">
@@ -176,10 +245,10 @@
                                             </label>
                                             <!--end::Label-->
                                             <div class="">
-                                                <input class="form-check-input me-1" name="learning_method[]" type="checkbox" value="self"> Self &nbsp;&nbsp;
-                                                <input class="form-check-input me-1" name="learning_method[]" type="checkbox" value="job">Job &nbsp;&nbsp;
-                                                <input class="form-check-input me-1" name="learning_method[]" type="checkbox" value="education">Educational &nbsp;&nbsp;
-                                                <input class="form-check-input me-1" name="learning_method[]" type="checkbox" value="training">Professional Training
+                                                <input class="form-check-input me-1" name="self" type="checkbox" value="self"> Self &nbsp;&nbsp;
+                                                <input class="form-check-input me-1" name="job" type="checkbox" value="job">Job &nbsp;&nbsp;
+                                                <input class="form-check-input me-1" name="education" type="checkbox" value="education">Educational &nbsp;&nbsp;
+                                                <input class="form-check-input me-1" name="training" type="checkbox" value="training">Professional Training
                                             </div>
                                             <div class="help-block with-errors learning_method-error"></div>
                                         </div>
@@ -376,10 +445,10 @@
 
                                 <div class="card card-flush pt-3 mb-5 mb-lg-10 language_data" data-kt-subscriptions-form="pricing">
                                     <!--begin::Card body-->
-                                    <div class="card-body pt-0">
+                                    <div class="card-body pt-0 language_data_body" >
                                         @foreach($languages as $language)
                                         <div class="d-flex justify-content-end">
-                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2" id="edit_language"><i class="fas fa-edit"></i>Edit</span>
+                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2 edit_language" data-id="{{ $language->id }}" ><i class="fas fa-edit"></i>Edit</span>
                                             <span class="btn btn-active-color-danger btn-sm btn-light delete_language" data-id="{{ $language->id }}" ><i class="fas fa-trash"></i>Delete</span>
                                         </div>
                                         <!--begin::Options-->
@@ -431,6 +500,8 @@
                                         @endforeach
                                     </div>
                                     <!--end::Card body-->
+                                    <!--begin:Form-->
+                                    
                                 </div>
 
                                 <div class="d-flex justify-content-start">
@@ -450,6 +521,10 @@
                                         <div class="text-muted fw-bold fs-4 mb-5">Language</div>
                                     </div>
                                     <!--end::Heading-->
+
+                                    {{-- hidden  --}}
+                                    <input type="hidden" name="language_id">
+
                                     <!--begin::Input group-->
                                     <div class="row g-9 mb-5">
                                         <!--begin::Col-->
@@ -543,7 +618,7 @@
                                     <div class="card-body pt-0">
                                         @foreach($references as $reference)
                                         <div class="d-flex justify-content-end">
-                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2" id="edit_references"><i class="fas fa-edit"></i>Edit</span>
+                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2 edit_references" data-id="{{ $reference->id }}"><i class="fas fa-edit"></i>Edit</span>
                                             <span class="btn btn-active-color-danger btn-sm btn-light delete_reference" data-id="{{ $reference->id }}" ><i class="fas fa-trash"></i>Delete</span>
                                         </div>
                                         <!--begin::Options-->
@@ -598,7 +673,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="text-muted min-w-125px w-130px">Relation</td>
-                                                                        <td class="text-gray-800">{{ $academy->relation ?? '' }} </td>
+                                                                        <td class="text-gray-800">{{ $reference->relation ?? '' }} </td>
                                                                     </tr>
                                                                     
                                                                 </tbody>
@@ -641,6 +716,8 @@
                                         <div class="text-muted fw-bold fs-4 mb-5">Reference</div>
                                     </div>
                                     <!--end::Heading-->
+                                    {{-- hidden  --}}
+                                    <input type="hidden" name="reference_id">
                                    
                                     <!--begin::Input group-->
                                     <div class="row g-9 mb-8">
@@ -1035,7 +1112,146 @@
 
     })
 
+    /*########### Edit ##############*/
+    //edit skill
+    $('.edit_skill').on('click', function(){
+        var id = $(this).data('id');
+        var thisbtn = $(this);
+        $.ajax({
+            url:"{{ route('resume.get_skill') }}",
+            type:"GET",
+            data:{
+                'skill_id': id
+            },
+            success:function (data) {
+                $('input[name="skill_id"]').val(data.id);
+                $('input[name="skill_name"]').val(data.skill);
+                if($('input[name="self"]').val() == data.learning_media['self']){
+                    $('input[name="self"]').prop( "checked", true );
+                }
+                if($('input[name="job"]').val() == data.learning_media['job']){
+                    $('input[name="job"]').prop( "checked", true );
+                }
+                if($('input[name="education"]').val() == data.learning_media['education']){
+                    $('input[name="education"]').prop( "checked", true );
+                }
+                if($('input[name="training"]').val() == data.learning_media['training']){
+                    $('input[name="training"]').prop( "checked", true );
+                }
+                thisbtn.parents(".specialization").find('div.skill_data_body').addClass('d-none');
+                $('#kk_specialization_skill_update_form').removeClass('d-none');
+            }
+        })
+        // end of ajax call
+          
+    })
 
+    $('#kk_skill_update_cancel').on('click', function(){
+        $('#kk_specialization_skill_update_form').addClass('d-none');
+        $('.skill_data_body').removeClass('d-none');
+    })
+
+    //updatespecialization skill
+    $('#kk_specialization_skill_update_form').on('submit',function(e){
+        e.preventDefault();
+        //alert('ok');
+        
+        var formData = new FormData(this);
+     
+        $.ajax({
+            type:"POST",
+            url: "{{ url('/resume/step_04/specialization-skill/update')}}",
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                if(data.success ==  false || data.success ==  "false"){
+                    var arr = Object.keys(data.errors);
+                    var arr_val = Object.values(data.errors);
+                    for(var i= 0;i < arr.length;i++){
+                    $('.'+arr[i]+'-error').text(arr_val[i][0])
+                    }
+                }else if(data.error || data.error == 'true'){
+                    var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                    $('#kk_modal_new_sub_category_form').find('.messages').html(alertBox).show();
+                }else{
+                    // refresh
+                    toastr.success(data.message);
+                    location.reload();
+                }
+
+                $('.indicator-label').show();
+                $('.indicator-progress').hide();
+                $('#kk_address_detail_submit').removeAttr('disabled');
+
+            }
+        });
+
+    })
+
+
+    /*########### Edit ##############*/
+    //language profiency
+    $('.edit_language').on('click', function(){
+        var id = $(this).data('id');
+        var thisbtn = $(this);
+        $.ajax({
+            url:"{{ route('resume.get_language') }}",
+            type:"GET",
+            data:{
+                'id': id
+            },
+            success:function (data) {
+                
+                $('input[name="language_id"]').val(data.id);
+                $('input[name="language"]').val(data.language);
+                $('select[name="reading"]').val(data.reading).change();
+                $('select[name="writting"]').val(data.writting).change();
+                $('select[name="speaking"]').val(data.speaking).change();
+                thisbtn.parents(".language").find('div.language_data').addClass('d-none');
+                $("#add_language").hide();
+                $('#kk_language_proficency_form').removeClass('d-none');
+            }
+        })
+        // end of ajax call
+          
+    })
+
+    /*########### Edit ##############*/
+    //Reference
+    $('.edit_references').on('click', function(){
+        var id = $(this).data('id');
+        var thisbtn = $(this);
+        $.ajax({
+            url:"{{ route('resume.get_references') }}",
+            type:"GET",
+            data:{
+                'id': id
+            },
+            success:function (data) {
+                
+                $('input[name="reference_id"]').val(data.id);
+                $('input[name="name"]').val(data.name);
+                $('input[name="designation"]').val(data.designation);
+                $('input[name="organization"]').val(data.organization);
+                $('input[name="email"]').val(data.email);
+                $('input[name="mobile"]').val(data.mobile);
+                $('input[name="phone_off"]').val(data.phone_off);
+                $('input[name="phone_res"]').val(data.phone_res);
+                $('input[name="relation"]').val(data.relation);
+                $('input[name="address"]').val(data.address);
+                thisbtn.parents(".references").find('div.references_data').addClass('d-none');
+                $("#add_reference").hide();
+                $('#kk_references_form').removeClass('d-none');
+            }
+        })
+        // end of ajax call
+          
+    })
+
+
+    /*########### From Hide show ##############*/
     $(document).ready(function(){
 
         //start:: Skill  Section
@@ -1047,7 +1263,6 @@
         })
         //cancel button
         $("#cancel_edit_skill").on('click', function(){
-
             $(this).parents(".specialization").find('form#kk_specialization_skill_form').addClass('d-none');
             $(this).parents(".specialization").find('div.skill_data').removeClass('d-none');
             $('#add_skill').show();
@@ -1091,6 +1306,7 @@
         //add button
         $("#add_language").on('click', function(){
             $(this).hide();
+            $('input[name="language_id"]').val('');
             $(this).parents(".language").find('div.language_data').addClass('d-none');
             $(this).parents(".language").find('form#kk_language_proficency_form').removeClass('d-none');
         })
@@ -1112,6 +1328,7 @@
         //add button
         $("#add_reference").on('click', function(){
             $(this).hide();
+            $('input[name="reference_id"]').val();
             $(this).parents(".references").find('div.references_data').addClass('d-none');
             $(this).parents(".references").find('form#kk_references_form').removeClass('d-none');
         })

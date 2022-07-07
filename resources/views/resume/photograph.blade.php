@@ -107,7 +107,7 @@
 
                             <!--begin::Actions-->
                             <div class="d-flex justify-content-center">
-                                <button type="reset" id="kk_modal_new_sub_category_cancel" class="btn btn-light btn-active-color-danger me-3">Close</button>
+                               
                                 <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary">
                                     <span class="indicator-label py-3 px-7">Save</span>
                                     <span class="indicator-progress">Please wait...

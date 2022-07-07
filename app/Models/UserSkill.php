@@ -9,6 +9,9 @@ class UserSkill extends Model
 {
     use HasFactory;
 
+    protected $casts = [
+        'learning_media' => 'json'
+    ];
     
     protected $guarded = [];
 }

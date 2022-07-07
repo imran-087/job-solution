@@ -17,7 +17,7 @@ class CreateUserSkillsTable extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained();
             $table->string('skill');
-            $table->string('learning_media');
+            $table->json('learning_media');
             $table->timestamps();
            
         });

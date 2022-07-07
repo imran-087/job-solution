@@ -83,7 +83,7 @@
                                     <div class="card-body pt-0">
                                         @foreach($academic_infos as $academy)
                                         <div class="d-flex justify-content-end">
-                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2" id="edit_academic_summary"><i class="fas fa-edit"></i>Edit</span>
+                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2 edit_academic_summary" data-id="{{ $academy->id }}" ><i class="fas fa-edit"></i>Edit</span>
                                             <span class="btn btn-active-color-danger btn-sm btn-light delete_academy" data-id="{{ $academy->id }}" ><i class="fas fa-trash"></i>Delete</span>
                                         </div>
                                         <!--begin::Options-->
@@ -196,6 +196,8 @@
                                         <!--end::Title-->
                                     </div>
                                     <!--end::Heading-->
+                                    {{-- hidden  --}}
+                                    <input type="hidden" name="academy_id"> 
                                     <!--begin::Input group-->
                                     <div class="row g-9 mb-5">
                                         
@@ -420,7 +422,7 @@
                                         <!--begin::Options-->
                                         <div id="kt_create_new_payment_method " class="">
                                             <div class="d-flex justify-content-end">
-                                                <span class="btn btn-active-color-primary btn-sm btn-light edit_training_summary me-2" id=""><i class="fas fa-edit"></i>Edit</span>
+                                                <span class="btn btn-active-color-primary btn-sm btn-light edit_training_summary me-2" data-id="{{ $training->id }}"><i class="fas fa-edit"></i>Edit</span>
                                                 <span class="btn btn-active-color-danger btn-sm btn-light delete_training" data-id="{{ $training->id }}" ><i class="fas fa-trash"></i>Delete</span>
 
                                             </div>
@@ -504,6 +506,10 @@
                                         <div class="fw-bold fs-4 mb-5 ">Training Information</div>
                                     </div>
                                     <!--end::Heading-->
+
+                                     {{-- hidden  --}}
+                                    <input type="hidden" name="training_id">
+
                                     <!--begin::Input group-->
                                     <div class="row g-9 mb-5">
                                         <!--begin::Col-->
@@ -560,7 +566,7 @@
                                         <div class="col-md-6 fv-row">
                                             <label class="required fs-6 fw-bold mb-2">Training year</label>
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                name="training_year">
+                                                name="result">
                                                 <option value="">Select year</option>
                                                 @foreach($years as $year)
                                                 <option value="{{$year->year}}">{{$year->year}}</option>
@@ -663,7 +669,7 @@
                                         <!--begin::Options-->
                                         <div id="kt_create_new_payment_method " >
                                             <div class="d-flex justify-content-end">
-                                                <span class="btn btn-active-color-primary btn-sm btn-light edit_professional_certificate me-2" id=""><i class="fas fa-edit"></i>Edit</span>
+                                                <span class="btn btn-active-color-primary btn-sm btn-light edit_professional_certificate me-2" data-id="{{ $pro_certificate->id }}"  ><i class="fas fa-edit"></i>Edit</span>
                                                 <span class="btn btn-active-color-danger btn-sm btn-light delete_pro_certificate" data-id="{{ $pro_certificate->id }}" ><i class="fas fa-trash"></i>Delete</span>
 
                                             </div>
@@ -742,6 +748,8 @@
                                     </div>
                                     <!--end::Heading-->
                                    
+                                    {{-- hidden  --}}
+                                    <input type="hidden" name="certificate_id">
                                     <!--begin::Input group-->
                                     <div class="row g-9 mb-8">
                                         <!--begin::Col-->
@@ -1041,11 +1049,105 @@
     });
 
 
+    /*########### Edit ##############*/
+    //Professional Certification
+    $('.edit_professional_certificate').on('click', function(){
+        var id = $(this).data('id');
+        var thisbtn = $(this);
+        $.ajax({
+            url:"{{ route('resume.get_certificate') }}",
+            type:"GET",
+            data:{
+                'id': id
+            },
+            success:function (data) {
+    
+                $('input[name="certificate_id"]').val(data.id);
+                $('input[name="certification"]').val(data.certificate_name);
+                $('input[name="institute"]').val(data.institute);
+                $('input[name="address"]').val(data.address);
+                $('input[name="start_date"]').val(data.start_date);
+                $('input[name="end_date"]').val(data.end_date);
+                thisbtn.parents(".professional_certificate").find('div.professional_certificate_data').addClass('d-none');
+                $("#add_professional_certificate").hide();
+                $('#kk_professional_certificate_form').removeClass('d-none');
+            }
+        })
+        // end of ajax call
+          
+    })
+
+    /*########### Edit ##############*/
+    //Training Info
+    $('.edit_training_summary').on('click', function(){
+        var id = $(this).data('id');
+        var thisbtn = $(this);
+        $.ajax({
+            url:"{{ route('resume.get_training_info') }}",
+            type:"GET",
+            data:{
+                'id': id
+            },
+            success:function (data) {
+    
+                $('input[name="training_id"]').val(data.id);
+                $('input[name="title"]').val(data.training_title);
+                $('input[name="topic_covered"]').val(data.topic_covered);
+                $('input[name="address"]').val(data.address);
+                $('input[name="duration"]').val(data.duration);
+                $('input[name="institute"]').val(data.institute);
+                $('select[name="training_year"]').val(data.year).change();
+                thisbtn.parents(".training_summary").find('div.training_summary_data').addClass('d-none');
+                $("#add_training_summary").hide();
+                $('#kk_training_summary_form').removeClass('d-none');
+            }
+        })
+        // end of ajax call
+          
+    })
+
+    /*########### Edit ##############*/
+    //Academic Summary
+    $('.edit_academic_summary').on('click', function(){
+        var id = $(this).data('id');
+        var thisbtn = $(this);
+        $.ajax({
+            url:"{{ route('resume.get_academic_info') }}",
+            type:"GET",
+            data:{
+                'id': id
+            },
+            success:function (data) {
+    
+                $('input[name="academy_id"]').val(data.id);
+                $('select[name="level_of_education"]').val(data.degree_level).change();
+                $('select[name="degree"]').val(data.degree_name).change();
+                $('input[name="major"]').val(data.major);
+                $('input[name="institute_name"]').val(data.institute_name);
+                $('select[name="board"]').val(data.board).change();
+                $('select[name="result"]').val(data.result).change();
+                $('input[name="marks"]').val(data.marks);
+                $('input[name="cgpa"]').val(data.cgpa);
+                $('input[name="scale"]').val(data.scale);
+                $('input[name="achivement"]').val(data.achivement);
+                $('input[name="course_duration"]').val(data.course_duration);
+                $('select[name="passing_year"]').val(data.passing_year).change();
+                thisbtn.parents(".academic_summary").find('div.academic_summary_data').addClass('d-none');
+                $("#add_academic_info").hide();
+                $('#kk_academic_summary_form').removeClass('d-none');
+            }
+        })
+        // end of ajax call
+          
+    })
+
+
     $(document).ready(function(){
         //start:: Academy information  form show hide
         //add button
         $("#add_academic_info").on('click', function(){
             $(this).hide();
+            $('input[name="academy_id"]').val('');
             $(this).parents(".academic_summary").find('div.academic_summary_data').addClass('d-none');
             $(this).parents(".academic_summary").find('form#kk_academic_summary_form').removeClass('d-none');
         })
@@ -1066,6 +1168,7 @@
         //add button
         $("#add_training_summary").on('click', function(){
             $(this).hide();
+            $('input[name="training_id"]').val('');
             $(this).parents(".training_summary").find('div.training_summary_data').addClass('d-none');
             $(this).parents(".training_summary").find('form#kk_training_summary_form').removeClass('d-none');
         })
@@ -1087,6 +1190,7 @@
         //add button
         $("#add_professional_certificate").on('click', function(){
             $(this).hide();
+            $('input[name="certificate_id"]').val('');
             $(this).parents(".professional_certificate").find('div.professional_certificate_data').addClass('d-none');
             $(this).parents(".professional_certificate").find('form#kk_professional_certificate_form').removeClass('d-none');
         })

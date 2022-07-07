@@ -83,7 +83,7 @@
                                     <div class="card-body pt-0">
                                         @foreach($employment_history as $experience)
                                         <div class="d-flex justify-content-end">
-                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2" id="edit_employment_history"><i class="fas fa-edit"></i>Edit</span>
+                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2 edit_employment_history" data-id="{{ $experience->id }}" ><i class="fas fa-edit"></i>Edit</span>
                                             <span class="btn btn-active-color-danger btn-sm btn-light delete_experience" data-id="{{ $experience->id }}" ><i class="fas fa-trash"></i>Delete</span>
                                         </div>
                                         <!--begin::Options-->
@@ -188,7 +188,10 @@
                                         <!--end::Title-->
                                     </div>
                                     <!--end::Heading-->
-                                   
+
+                                    {{-- hidden  --}}
+                                    <input type="hidden" name="employment_id">
+
                                     <!--begin::Input group-->
                                     <div class="row g-9 mb-5">
                                         <!--begin::Col-->
@@ -277,7 +280,7 @@
                                                         <div class="help-block with-errors start_date-error"></div>
                                                     </div>
                                                     
-                                                    <div class="col-md-6">
+                                                    <div class="col-md-6" id="end_date">
                                                         <input type="text" onfocus="(this.type='date')" onblur="(this.type='text')" class="form-control" placeholder="Start date" name="end_date" value=""/>
                                                         <span>End Date</span>
                                                         <div class="help-block with-errors end_date-error"></div>
@@ -732,13 +735,58 @@
 
     })
 
+   
+    //End date show hide
+    $("#currently_working").on('change', function(){
+        let val = $(this).val();
+        if(val == 'yes'){
+            $("#end_date").toggleClass('d-none');
+        }
+    })
 
+    /*########### Edit ##############*/
+    //Academic Summary
+    $('.edit_employment_history').on('click', function(){
+        var id = $(this).data('id');
+        var thisbtn = $(this);
+        $.ajax({
+            url:"{{ route('resume.get_employment_info') }}",
+            type:"GET",
+            data:{
+                'id': id
+            },
+            success:function (data) {
+    
+                $('input[name="employment_id"]').val(data.id);
+                $('input[name="company_name"]').val(data.company_name);
+                $('input[name="company_business"]').val(data.company_business);
+                $('input[name="designation"]').val(data.designation);
+                $('input[name="department"]').val(data.department);
+                $('input[name="responsibilities"]').val(data.responsibilities);
+                $('input[name="from_date"]').val(data.from_date);
+                $('input[name="to_date"]').val(data.to_date);
+                $('input[name="expertise"]').val(data.area_of_expertise.expertise);
+                $('input[name="duration"]').val(data.area_of_expertise.duration);
+                $('input[name="currently_working"]').val(data.currently_working);
+                $('input[name="address"]').val(data.address);
+
+                thisbtn.parents(".employment_history").find('div.employment_history_data').addClass('d-none');
+                $("#add_employment_history").hide();
+                $('#kk_employment_history_form').removeClass('d-none');
+            }
+        })
+        // end of ajax call
+          
+    })
+
+    
 
     $(document).ready( function() {
         // Work Experiences Section :: start 
          //add button
         $("#add_employment_history").on('click', function(){
             $(this).hide();
+            $('input[name="employment_id"]').val('');
             $(this).parents(".employment_history").find('div.employment_history_data').addClass('d-none');
             $(this).parents(".employment_history").find('form#kk_employment_history_form').removeClass('d-none');
         })
@@ -765,6 +813,10 @@
         })
         //cancel button
         $("#cancel_edit_retired_army_person_data").on('click', function(){
+            $(this).parents(".retired_army_person").find('form#kk_modal_new_retired_army_person_form').addClass('d-none');
+            $(this).parents(".retired_army_person").find('div.retired_army_person_data').removeClass('d-none');
+        })
+        $("#kk_modal_army_retired_cancel").on('click', function(){
             $(this).parents(".retired_army_person").find('form#kk_modal_new_retired_army_person_form').addClass('d-none');
             $(this).parents(".retired_army_person").find('div.retired_army_person_data').removeClass('d-none');
         })

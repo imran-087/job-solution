@@ -7,6 +7,7 @@ use App\Models\UserDetail;
 use Illuminate\Http\Request;
 use App\Models\UserCareerInfo;
 use App\Http\Controllers\Controller;
+use App\Models\Country;
 use Illuminate\Support\Facades\Auth;
 use App\Models\FunctionalJobCategory;
 use App\Models\Skill;
@@ -23,7 +24,10 @@ class PersonalDetailsController extends Controller
         $special_skills = Skill::select('name', 'id')->where('type', 'special_skill')->get();
 
 
-        return view('resume.personal', compact(['user_detail', 'career_info', 'functional_job_categories', 'special_skills']));
+        $countries = Country::select('id', 'name')->get(); 
+
+
+        return view('resume.personal', compact(['user_detail', 'career_info', 'functional_job_categories', 'special_skills', 'countries']));
     }
 
     //personal details store
@@ -186,7 +190,7 @@ class PersonalDetailsController extends Controller
                     [
                         'job_categories' => $request->functional,
                         'special_skill' => $request->skill,
-                        'prefferd_city' => $request->area
+                        'prefferd_city' => $request->area,
                     ]
                 );
                 if ($user_career_info) {

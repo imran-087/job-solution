@@ -21,6 +21,15 @@ class EmploymentController extends Controller
         return view('resume.employment', compact('user_detail', 'employment_history'));
     }
 
+    ///getEmploymentHistory
+    public function getEmploymentHistory(Request $request)
+    {
+        //dd($request->id);
+        $employment = UserExperience::find($request->id);
+        return response()->json($employment);
+    }
+
+
     //employmentHistoryStore
     public function employmentHistoryStore(Request $request)
     {
@@ -30,7 +39,7 @@ class EmploymentController extends Controller
             'company_name' => 'required',
             'designation' => 'required',
             'start_date' => 'required',
-            'end_date' => [ $request->currently_working == 'yes' ? 'nullable' : 'required' ],
+            //'end_date' => [ $request->currently_working == 'yes' ? 'nullable' : 'required' ],
             'expertise' => 'required',
             'duration' => 'required',
         ]);
@@ -52,33 +61,63 @@ class EmploymentController extends Controller
                     'duration' => $request->duration
                 ];
 
-                $user_experience = UserExperience::Create(
-                    [
-                        'user_id' => Auth::id(),
-                        'company_name' => $request->company_name,
-                        'company_business' => $request->company_business,
-                        'designation' => $request->designation,
-                        'department' => $request->department,
-                        'responsibilities' => $request->responsibilities,
-                        'from_date' => $from_date,
-                        'to_date' => $to_date,
-                        'area_of_expertise' => $area_of_expertise,
-                        'currently_working' => $request->currently_working ?? 'no',
-                        'address' => $request->address
-                    ]
-                );
+                if (isset($request->employment_id) &&  $employment = UserExperience::find($request->employment_id)) { //update
+                    //dd($request->main_category_id);
+                    $employment->user_id = Auth::id();
+                    $employment->company_name = $request->company_name;
+                    $employment->company_business = $request->company_business;
+                    $employment->designation = $request->designation;
+                    $employment->department = $request->department;
+                    $employment->responsibilities =  $request->responsibilities;
+                    $employment->from_date =  $from_date;
+                    $employment->to_date =  $to_date;
+                    $employment->area_of_expertise =  $area_of_expertise;
+                    $employment->currently_working  =  $request->currently_working ?? 'no';
+                    $employment->address =  $request->address;
 
-                if ($user_experience) {
-                    return response()->json([
-                        'success' => true,
-                        'message' => 'Experience info save successfully'
-                    ], 200);
-                } else {
-                    return response()->json([
-                        'error' => true,
-                        'message' => 'Failed !!!'
-                    ], 200);
-                }
+                    $employment->updated_at = Carbon::now();
+
+                    if ($employment->update()) {
+                        return response()->json([
+                            'success' => true,
+                            'message' => __('Employment info updated successfully!')
+                        ], 200);
+                    } else {
+                        return response()->json([
+                            'error' => true,
+                            'message' => __('Failed!.')
+                        ]);
+                    }
+                } else { //create new language proficency
+
+                    $user_experience = UserExperience::Create(
+                        [
+                            'user_id' => Auth::id(),
+                            'company_name' => $request->company_name,
+                            'company_business' => $request->company_business,
+                            'designation' => $request->designation,
+                            'department' => $request->department,
+                            'responsibilities' => $request->responsibilities,
+                            'from_date' => $from_date,
+                            'to_date' => $to_date,
+                            'area_of_expertise' => $area_of_expertise,
+                            'currently_working' => $request->currently_working ?? 'no',
+                            'address' => $request->address
+                        ]
+                    );
+
+                    if ($user_experience) {
+                        return response()->json([
+                            'success' => true,
+                            'message' => 'Experience info save successfully'
+                        ], 200);
+                    } else {
+                        return response()->json([
+                            'error' => true,
+                            'message' => 'Failed !!!'
+                        ], 200);
+                    }
+                } 
             } else {
                 return response()->json([
                     'error' => true,

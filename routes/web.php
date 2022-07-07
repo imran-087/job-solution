@@ -24,6 +24,7 @@ use App\Http\Controllers\ModelTest\ModelTestController;
 use App\Http\Controllers\Admin\DependableCategoryController;
 use App\Http\Controllers\ModelTest\CustomModelTestController;
 use App\Http\Controllers\ModelTest\ModelTestResultController;
+use App\Http\Controllers\Resume\CountryStateCityUpazilaPostController;
 use App\Http\Controllers\Resume\EducationController;
 use App\Http\Controllers\Resume\EmploymentController;
 use App\Http\Controllers\Resume\OtherInformationController;
@@ -189,12 +190,26 @@ Route::middleware('auth')->name('user.')->group(function () {
       Route::get('resume/step_1/delete-personal-detail/{id}', [PersonalDetailsController::class, 'deletePersonalDetail'])->name('resume.personal_detail-delete');
       Route::get('resume/step_1/delete-career-application/{id}', [PersonalDetailsController::class, 'deleteCareerApplication'])->name('resume.career_application-delete');
 
+      //step_1 get state
+      Route::get('/resume/step_1/get-state/{id}', [CountryStateCityUpazilaPostController::class, 'stateData']);
+      Route::get('/resume/step_1/get-city/{id}', [CountryStateCityUpazilaPostController::class, 'cityData']);
+      Route::get('/resume/step_1/get-upazila/{id}', [CountryStateCityUpazilaPostController::class, 'upazilaData']);
+      Route::get('/resume/step_1/get-post/{id}', [CountryStateCityUpazilaPostController::class, 'postData']);
+      Route::get('/resume/step_1/search-city', [CountryStateCityUpazilaPostController::class, 'getMatchCityData'])->name('resume.searchcity');
+      Route::get('/resume/step_1/search-organization', [CountryStateCityUpazilaPostController::class, 'getMatchOrganizationData'])->name('resume.searchorgazation');
+
+
       //educationandtraining
       Route::get('/resume/step_02/education-training', [EducationController::class, 'create'])->name('resume.education');
       Route::post('/resume/step_02/academic-summary/store', [EducationController::class, 'academicSummaryStore'])->name('resume.academic.store');
       Route::post('/resume/step_02/training-summary/store', [EducationController::class, 'trainingSummaryStore'])->name('resume.training.store');
       Route::post('/resume/step_02/professional-summary/store', [EducationController::class, 'professionalSummaryStore'])->name('resume.professional.store');
       Route::get('/resume/step_02/get-education-degree', [EducationController::class, 'getEducationDegree'])->name('resume.education-degree');
+
+      ///Edit Step_02
+      Route::get('/resume/step_02/get-professional-summary', [EducationController::class, 'getProfessionalCertificate'])->name('resume.get_certificate');
+      Route::get('/resume/step_02/get-training-data', [EducationController::class, 'getTrainingData'])->name('resume.get_training_info');
+      Route::get('/resume/step_02/get-academic-data', [EducationController::class, 'getAcademicData'])->name('resume.get_academic_info');
 
       //step_2 delete route
       Route::get('resume/step_2/delete-academy/{id}', [EducationController::class, 'deleteAcademy'])->name('resume.academy-delete');
@@ -206,6 +221,9 @@ Route::middleware('auth')->name('user.')->group(function () {
       Route::post('/resume/step_03/employment-history/store', [EmploymentController::class, 'employmentHistoryStore'])->name('resume.employment_history.store');
       Route::post('/resume/step_03/retired-army/store', [EmploymentController::class, 'retiredArmyStore'])->name('resume.retired_army.store');
 
+      //edit step_03
+      Route::get('/resume/step_03/get-employment-data', [EmploymentController::class, 'getEmploymentHistory'])->name('resume.get_employment_info');
+      
       //step_3 delete route
       Route::get('resume/step_3/delete-experience/{id}', [EmploymentController::class, 'deleteExperience'])->name('resume.experience-delete');
       
@@ -217,6 +235,12 @@ Route::middleware('auth')->name('user.')->group(function () {
       Route::post('/resume/step_04/extracaricular/store', [OtherInformationController::class, 'extracaricularStore'])->name('resume.extracaricular.store');
       Route::post('/resume/step_04/language-proficency/store', [OtherInformationController::class, 'languageStore'])->name('resume.language.store');
       Route::post('/resume/step_04/references/store', [OtherInformationController::class, 'referencesStore'])->name('resume.references.store');
+
+      //step_4 edit route
+      Route::get('resume/step_04/get-skill', [OtherInformationController::class, 'getSkill'])->name('resume.get_skill');
+      Route::post('/resume/step_04/specialization-skill/update', [OtherInformationController::class, 'skillUpdate'])->name('resume.skill.update');
+      Route::get('resume/step_04/get-language', [OtherInformationController::class, 'getLanguage'])->name('resume.get_language');
+      Route::get('resume/step_04/get-references', [OtherInformationController::class, 'getReferences'])->name('resume.get_references');
 
       //step_4 delete route
       Route::get('resume/step_4/delete-skill/{id}', [OtherInformationController::class, 'deleteSkill'])->name('resume.skill-delete');

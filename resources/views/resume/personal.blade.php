@@ -412,9 +412,24 @@
                                                     <span class="required">Primary Mobile</span>
                                                 </label>
                                                 <!--end::Label-->
-                                                <input type="text" class="form-control form-control-solid" placeholder="Enter your primary mobile no. "
-                                                    name="primary_mobile" value="{{ $user_detail->primary_mobile ?? '' }}"/>
-                                                <div class="help-block with-errors primary_mobile-error"></div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                                            name="blood_group">
+                                                         
+                                                            <option value="+880" selected>+880</option>
+                                                            <option value="+087" >+087</option>
+                                                            <option value="+180" >+180</option>
+                                                        
+                                                        </select>
+                                                        <div class="help-block with-errors blood_group-error"></div>  
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" class="form-control form-control-solid" placeholder="Enter your primary mobile no. "
+                                                            name="primary_mobile" value="{{ $user_detail->primary_mobile ?? '' }}"/>
+                                                        <div class="help-block with-errors primary_mobile-error"></div>
+                                                    </div>
+                                                </div>
                                             </div>
                                             <!--end::Input group-->
                                         </div>
@@ -427,9 +442,26 @@
                                                     <span class="">Secondary Mobile</span>
                                                 </label>
                                                 <!--end::Label-->
-                                                <input type="text" class="form-control form-control-solid" placeholder="Enter your secondary mobile no."
-                                                    name="secondary_mobile" value="{{ $user_detail->secondary_mobile ?? '' }}"/>
-                                                <div class="help-block with-errors secondary_mobile-error"></div>
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                    
+                                                        <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                                            name="blood_group">
+                                                         
+                                                            <option value="+880" selected>+880</option>
+                                                            <option value="+087" >+087</option>
+                                                            <option value="+180" >+180</option>
+                                                        
+                                                        </select>
+                                                        <div class="help-block with-errors blood_group-error"></div>  
+                                                    </div>
+                                                    <div class="col-md-8">
+                                                        <input type="text" class="form-control form-control-solid" placeholder="Enter your secondary mobile no."
+                                                            name="secondary_mobile" value="{{ $user_detail->secondary_mobile ?? '' }}"/>
+                                                        <div class="help-block with-errors secondary_mobile-error"></div>
+                                                    </div>
+                                                </div>
+                                               
                                             </div>
                                             <!--end::Input group-->
                                         </div>
@@ -475,8 +507,8 @@
                                     <!--end::Input group-->
                                     <!--begin::Actions-->
                                     <div class="d-flex justify-content-between">
-                                        <button type="reset" id="kk_modal_new_sub_category_cancel" class="btn btn-light btn-active-color-danger btn-sm me-3">Close</button>
-                                        <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary">
+                                        <button type="reset" id="kk_personal_detail_cancel" class="btn btn-light btn-active-color-danger btn-sm me-3">Close</button>
+                                        <button type="submit" id="kk_personal_detail_submit" class="btn btn-primary">
                                             <span class="indicator-label py-3 px-7">Save</span>
                                             <span class="indicator-progress">Please wait...
                                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -499,11 +531,12 @@
                         <div id="kt_accordion_1_body_2" class="accordion-collapse collapse " aria-labelledby="kt_accordion_1_header_2" data-bs-parent="#kt_accordion_1">
                             <div class="accordion-body address_detail">
                                 
-                                <div class="card card-flush pt-3 mb-5 mb-lg-10 address_detail_data" data-kt-subscriptions-form="pricing">
+                                <div class="card card-flush pt-3 mb-5 mb-lg-10 address_detail_data " data-kt-subscriptions-form="pricing">
                                     <!--begin::Card body-->
                                     <div class="card-body pt-0">
-                                        <div class="d-flex justify-content-end">
-                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2" id="edit_address_detail"><i class="fas fa-edit"></i>Edit</span>
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fs-4 fw-bolder">Address</span>
+                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2" id="edit_address_detail"><i class="fas fa-edit"></i>{{ $user_detail->present_address == null ? 'Add' : 'Edit' }}</span>
 
                                         </div>
                                         <!--begin::Options-->
@@ -517,7 +550,7 @@
                                                         <!--begin::Col-->
                                                         <div class="mb-8">
                                                             <table class="table table-flush fw-bold gy-1">
-                                                                <span class="fs-4 mb-3">Present Address</span>
+                                                               <span class="fs-4 mb-3">Present Address</span>
                                                                 <tbody>
                                                                     <tr>
                                                                         <td class="text-muted min-w-125px w-130px">Country</td>
@@ -604,48 +637,71 @@
                                     <!--begin::Input group-->
                                     <div class="row g-9 mb-4">
                                         <!--begin::Col-->
-                                        <div class="col-md-4 fv-row">
+                                        <div class="col-md-3 fv-row">
                                             <label class="required fs-6 fw-bold mb-2">Country</label>
-                                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                name="p_country">
-                                                <option value="">Select country</option>
-                                                <option value="bangladesh">Bangladesh</option>
+                                            <select class="form-select form-select-solid country" data-control="select2" data-hide-search="true"
+                                                name="p_country" id="p_country">
+                                                @foreach($countries as $country)
+                                                <option value="{{ $country->id }}" selected>{{$country->name}}</option>
+                                                @endforeach
                                                 
                                             </select>
                                             <div class="help-block with-errors p_country-error"></div>    
                                         </div>
                                         <!--begin::Col-->
                                         <!--begin::Col-->
-                                        <div class="col-md-4 fv-row">
+                                        <div class="col-md-3 fv-row">
                                             <label class="required fs-6 fw-bold mb-2">State</label>
-                                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                name="p_state">
-                                                <option value="">Select state</option>
-                                                <option value="rajshahi">Rajshahi</option>
+                                            <select class="form-select form-select-solid state" data-control="select2" data-hide-search="true"
+                                                name="p_state" id="p_state">
                                                 
                                             </select>
                                             <div class="help-block with-errors p_state-error"></div>    
                                         </div>
                                         <!--begin::Col-->
                                         <!--begin::Col-->
-                                        <div class="col-md-4 fv-row">
+                                        <div class="col-md-3 fv-row">
                                             <label class="required fs-6 fw-bold mb-2">City</label>
                                             <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                name="p_city">
+                                                name="p_city" id="p_city">
                                                 <option value="">Select city</option>
-                                                <option value="rajshahi">Rajshahi</option>
-                                                
+                                               
                                             </select>
                                             <div class="help-block with-errors p_city-error"></div>    
                                         </div>
                                         <!--begin::Col-->
+                                        <!--begin::Col-->
+                                        <div class="col-md-3 fv-row">
+                                            <label class="required fs-6 fw-bold mb-2">Upazila</label>
+                                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                                name="p_upazila" id="p_upazila">
+                                                <option value="">Select upazila</option>
+                                         
+                                            </select>
+                                            <div class="help-block with-errors p_upazila-error"></div>    
+                                        </div>
+                                        <!--begin::Col-->
                                     </div>
                                     <!--end::Input group-->
-                                    <!--begin::Col-->
-                                    <div class="col-md-12 fv-row mb-12">
-                                        <input type="text" class="form-control form-control-solid" placeholder="Type your house no/road no/village" name="p_address" />
+                                    <!--begin::Input group-->
+                                    <div class="row g-9 mb-4">
+                                        <!--begin::Col-->
+                                        <div class="col-md-3 fv-row">
+                                            <label class="required fs-6 fw-bold mb-2">Post</label>
+                                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                                name="p_post" id="p_post">
+                                                <option value="">Select post</option>
+                                            </select>
+                                            <div class="help-block with-errors p_post-error"></div>    
+                                        </div>
+                                        
+                                        <!--begin::Col-->
+                                        <div class="col-md-9 fv-row mb-12">
+                                            <label class=" fs-6 fw-bold mb-2">House No. / Village name etc</label>
+                                            <input type="text" class="form-control form-control-solid" placeholder="Type your house no/road no/village" name="p_address" />
+                                        </div>
+                                        <!-- end: col-->
                                     </div>
-                                    <!-- end: col-->
 
                                     <!--begin::Heading-->
                                     <div class="mb-5">
@@ -675,49 +731,74 @@
                                         <!--begin::Input group-->
                                         <div class="row g-9 mb-4">
                                             <!--begin::Col-->
-                                            <div class="col-md-4 fv-row">
+                                            <div class="col-md-3 fv-row">
                                                 <label class="required fs-6 fw-bold mb-2">Country</label>
-                                                <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                    name="country">
-                                                    <option value="">Select country</option>
-                                                    <option value="bangladesh">Bangladesh</option>
-                                                    
+                                                <select class="form-select form-select-solid country" data-control="select2" data-hide-search="true"
+                                                    name="country" id="country">
+                                                    @foreach($countries as $country)
+                                                    <option value="{{ $country->id }}" selected>{{$country->name}}</option>
+                                                    @endforeach
                                                 </select>
                                                 <div class="help-block with-errors country-error"></div>    
                                             </div>
                                             <!--begin::Col-->
                                             <!--begin::Col-->
-                                            <div class="col-md-4 fv-row">
+                                            <div class="col-md-3 fv-row">
                                                 <label class="required fs-6 fw-bold mb-2">State</label>
-                                                <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                    name="state">
+                                                <select class="form-select form-select-solid state" data-control="select2" data-hide-search="true"
+                                                    name="state" id="state">
                                                     <option value="">Select state</option>
-                                                    <option value="rajshahi">Rajshahi</option>
                                                     
                                                 </select>
                                                 <div class="help-block with-errors state-error"></div>    
                                             </div>
                                             <!--begin::Col-->
                                             <!--begin::Col-->
-                                            <div class="col-md-4 fv-row">
+                                            <div class="col-md-3 fv-row">
                                                 <label class="required fs-6 fw-bold mb-2">City</label>
                                                 <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                    name="city">
+                                                    name="city" id="city">
                                                     <option value="">Select city</option>
-                                                    <option value="rajshahi">Rajshahi</option>
+                                                   
                                                     
                                                 </select>
                                                 <div class="help-block with-errors city-error"></div>    
                                             </div>
                                             <!--begin::Col-->
+                                            <!--begin::Col-->
+                                            <div class="col-md-3 fv-row">
+                                                <label class="required fs-6 fw-bold mb-2">Upazila</label>
+                                                <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                                    name="upazila" id="upazila">
+                                                    <option value="">Select upazila</option>
+                                                 
+                                                    
+                                                </select>
+                                                <div class="help-block with-errors upazila-error"></div>    
+                                            </div>
+                                            <!--begin::Col-->
                                         </div>
                                         <!--end::Input group-->
-                                        <!--begin::Col-->
-                                        <div class="col-md-12 fv-row mb-9">
-                                            <input type="text" class="form-control form-control-solid" placeholder="Type your house no/road no/village" name="address" />
+                                        <!--begin::Input group-->
+                                        <div class="row g-9 mb-4">
+                                            <!--begin::Col-->
+                                            <div class="col-md-3 fv-row">
+                                                <label class="required fs-6 fw-bold mb-2">Post</label>
+                                                <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                                    name="post" id="post">
+                                                    <option value="">Select post</option>
+                                                </select>
+                                                <div class="help-block with-errors post-error"></div>    
+                                            </div>
+                                            
+                                            <!--begin::Col-->
+                                            <div class="col-md-9 fv-row mb-9">
+                                                <label class=" fs-6 fw-bold mb-2">House No. / Village name etc</label>
+                                                <input type="text" class="form-control form-control-solid" placeholder="Type your house no/road no/village" name="address" />
+                                            </div>
+                                            <!-- end: col-->
                                         </div>
-                                        <!-- end: col-->
-                                        
+                                        <!--end::Input group-->  
                                     </span>
                                    
                                     <!--begin::Actions-->
@@ -751,7 +832,7 @@
                                     <!--begin::Card body-->
                                     <div class="card-body pt-0">
                                         <div class="d-flex justify-content-end">
-                                            <span class="btn btn-active-color-primary btn-sm btn-light " id="edit_career_application"><i class="fas fa-edit"></i>Edit</span>
+                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2 " id="edit_career_application"><i class="fas fa-edit"></i>Edit</span>
                                             <span class="btn btn-active-color-danger btn-sm btn-light delete_career_application" data-id="{{ $career_info->id }}" ><i class="fas fa-trash"></i>Delete</span>
 
                                         </div>
@@ -1073,17 +1154,36 @@
                                     <!--begin::Input group-->
                                     <div class="row g-9 mb-8">
                                         <!--begin::Col-->
-                                        <div class="col-md-12 fv-row">
+                                        <div class="col-md-6 fv-row">
                                             <!--begin::Input group-->
                                             <div class="d-flex flex-column fv-row">
                                                 <!--begin::Label-->
                                                 <label class="d-flex align-items-center fs-6 fw-bold mb-3">
                                                     <span class="required">Preferred Job Location</span>
                                                 </label>
-                                                 <p class="text-muted"> Preferred Job Location defines the geographical place where you prefer to work. i.e. 1st: Dhaka, 2nd: Sylhet, 3rd: Khulna. </p>
+                                                <p class="text-muted"> Preferred Job Location defines the geographical place where you prefer to work. i.e. 1st: Dhaka, 2nd: Sylhet, 3rd: Khulna. </p>
                                                 <!--end::Label-->
-                                                <input type="text" class="form-control form-control-solid" name="area" id="area">
+                                                <input type="text" class="form-control form-control-solid" name="area" id="search_city">
                                                 <div class="help-block with-errors area-error"></div>
+                                                <div id="city_"></div>
+                                                <div id="city_list"></div> 
+                                            </div>
+                                            <!--end::Input group-->
+
+                                        </div>
+                                        <!--begin::Col-->
+                                        <div class="col-md-6 fv-row">
+                                            <!--begin::Input group-->
+                                            <div class="d-flex flex-column fv-row mt-16">
+                                                <!--begin::Label-->
+                                                <label class="d-flex align-items-center fs-6 fw-bold mb-3">
+                                                    <span class="required">Add your preferred organization type </span>
+                                                </label>
+                                                <!--end::Label-->
+                                                <input type="text" class="form-control form-control-solid " name="organization_type" id="organization">
+                                                <div class="help-block with-errors organization_type-error"></div>
+                                                <div id="organization_"></div>
+                                                <div id="organization_list"></div> 
                                             </div>
                                             <!--end::Input group-->
                                         </div>
@@ -1091,25 +1191,7 @@
                                     </div>
                                     <!--end::Input group-->
 
-                                    <!--begin::Input group-->
-                                    {{-- <div class="row g-9 mb-8">
-                                        <!--begin::Col-->
-                                        <div class="col-md-12 fv-row">
-                                            <!--begin::Input group-->
-                                            <div class="d-flex flex-column fv-row">
-                                                <!--begin::Label-->
-                                                <label class="d-flex align-items-center fs-6 fw-bold mb-3">
-                                                    <span class="required">Add your preferred organization type (max 12)</span>
-                                                </label>
-                                                <!--end::Label-->
-                                                <input type="text" class="form-control form-control-solid" name="organization_type" id="organization">
-                                                <div class="help-block with-errors organization_type-error"></div>
-                                            </div>
-                                            <!--end::Input group-->
-                                        </div>
-                                        
-                                    </div> --}}
-                                    <!--end::Input group-->
+                                   
 
                                     <!--begin::Actions-->
                                     <div class="d-flex justify-content-between">
@@ -1165,10 +1247,10 @@
                                                                         <td class="text-muted min-w-125px w-130px">Special Qualification</td>
                                                                         <td class="text-gray-800">{{ $career_info->special_qualification ?? '' }}</td>
                                                                     </tr>
-                                                                    <tr>
+                                                                    {{-- <tr>
                                                                         <td class="text-muted min-w-125px w-130px">Keyword</td>
                                                                         <td class="text-gray-800">{{ $career_info->keyword ?? '' }}</td>
-                                                                    </tr>
+                                                                    </tr> --}}
                                                                    
                                                                 </tbody>
                                                             </table>
@@ -1221,17 +1303,7 @@
                                         <div class="help-block with-errors special_qualification-error"></div>   
                                     </div>
                                     <!-- end: col-->
-                                    <!--begin::Col-->
-                                    <div class="col-md-12 fv-row mb-5">
-                                        <!--begin::Label-->
-                                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                            <span class="">Keyword</span>
-                                        </label>
-                                        <!--end::Label-->
-                                        <input type="text" class="form-control form-control-solid " placeholder="Enter keyword" name="keyword" value="{{ $career_info->keyword ?? '' }}">
-                                        <div class="help-block with-errors keyword-error"></div>   
-                                    </div>
-                                    <!-- end: col-->
+                                    
                                     
                                     <!--begin::Actions-->
                                     <div class="d-flex justify-content-between">
@@ -1501,8 +1573,8 @@
                                     
                                     <!--begin::Actions-->
                                     <div class="d-flex justify-content-between">
-                                        <button type="reset" id="kk_modal_new_sub_category_cancel" class="btn btn-light btn-active-color-danger btn-sm me-3">Close</button>
-                                        <button type="submit" id="kk_modal_new_service_submit" class="btn btn-primary">
+                                        <button type="reset" id="kk_disability_info_cancel" class="btn btn-light btn-active-color-danger btn-sm me-3">Close</button>
+                                        <button type="submit" id="kk_disability_info_submit" class="btn btn-primary">
                                             <span class="indicator-label py-3 px-7">Save</span>
                                             <span class="indicator-progress">Please wait...
                                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
@@ -1790,7 +1862,7 @@
 
     })
 
-    
+    /*############# From/Date Hide show ########## */
     $(document).ready( function() {
         // Personal detail Section :: start 
         //edit button
@@ -1800,6 +1872,11 @@
         })
         //cancel button
         $("#cancel_edit_personal_detail").on('click', function(){
+            $(this).parents(".personal_detail").find('form#kk_personal_details_form').addClass('d-none');
+            $(this).parents(".personal_detail").find('div.personal_detail_data').removeClass('d-none');
+        })
+        //cancel button
+        $("#kk_personal_detail_cancel").on('click', function(){
             $(this).parents(".personal_detail").find('form#kk_personal_details_form').addClass('d-none');
             $(this).parents(".personal_detail").find('div.personal_detail_data').removeClass('d-none');
         })
@@ -1813,6 +1890,10 @@
         })
         //cancel button
         $("#cancel_edit_address_detail").on('click', function(){
+            $(this).parents(".address_detail").find('form#kk_address_details_form').addClass('d-none');
+            $(this).parents(".address_detail").find('div.address_detail_data').removeClass('d-none');
+        })
+        $("#kk_address_detail_cancel").on('click', function(){
             $(this).parents(".address_detail").find('form#kk_address_details_form').addClass('d-none');
             $(this).parents(".address_detail").find('div.address_detail_data').removeClass('d-none');
         })
@@ -1830,6 +1911,10 @@
             $(this).parents(".preffered_area").find('form#kk_preffered_job_category_form').addClass('d-none');
             $(this).parents(".preffered_area").find('div.preffered_area_data').removeClass('d-none');
         })
+        $("#kk_preffered_area_cancel").on('click', function(){
+            $(this).parents(".preffered_area").find('form#kk_preffered_job_category_form').addClass('d-none');
+            $(this).parents(".preffered_area").find('div.preffered_area_data').removeClass('d-none');
+        })
         // Preffered Area Section :: end
 
 
@@ -1841,6 +1926,10 @@
         })
         //cancel button
         $("#cancel_edit_career_application").on('click', function(){
+            $(this).parents(".career_application").find('form#kk_career_application_info_form').addClass('d-none');
+            $(this).parents(".career_application").find('div.career_application_data').removeClass('d-none');
+        })
+        $("#kk_career_application_cancel").on('click', function(){
             $(this).parents(".career_application").find('form#kk_career_application_info_form').addClass('d-none');
             $(this).parents(".career_application").find('div.career_application_data').removeClass('d-none');
         })
@@ -1858,6 +1947,10 @@
             $(this).parents(".other_relevent_info").find('form#kk_other_relavent_info_form').addClass('d-none');
             $(this).parents(".other_relevent_info").find('div.other_relevent_info_data').removeClass('d-none');
         })
+        $("#kk_other_relevent_info_cancel").on('click', function(){
+            $(this).parents(".other_relevent_info").find('form#kk_other_relavent_info_form').addClass('d-none');
+            $(this).parents(".other_relevent_info").find('div.other_relevent_info_data').removeClass('d-none');
+        })
         // Other Relavent  info Section :: end
 
         // Disability  info Section :: start 
@@ -1868,6 +1961,10 @@
         })
         //cancel button
         $("#cancel_edit_disability_info").on('click', function(){
+            $(this).parents(".disability_info").find('form#kk_disability_info_form').addClass('d-none');
+            $(this).parents(".disability_info").find('div.disability_info_data').removeClass('d-none');
+        })
+        $("#kk_disability_info_cancel").on('click', function(){
             $(this).parents(".disability_info").find('form#kk_disability_info_form').addClass('d-none');
             $(this).parents(".disability_info").find('div.disability_info_data').removeClass('d-none');
         })
@@ -1972,6 +2069,288 @@
 
     })
 
+
+    /*############# Getting state city upazila post ########## */
+    $(document).ready(function(){
+
+        /*############# Present Address  ########## */
+        //state
+        var country_id = $('#p_country').find(":selected").val();
+        if (country_id) {
+            $.ajax({
+                url: '/resume/step_1/get-state/' + country_id,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    if (data) {
+                        $('#p_state').empty();
+                        $('#p_state').append('<option value="">Choose...</option>');
+                        $.each(data, function (key, p_state) {
+                            $('select[name="p_state"]').append(
+                                '<option value="' + p_state.id + '">' + p_state.name + '</option>'
+                            );
+                        });
+                    } else {
+                        $('#p_state').empty();
+                    }
+                }
+            });
+        } else {
+            $('#p_state').empty();
+        }
+        
+        //city
+        $('#p_state').on('change', function () {
+            var state_id = $(this).val();
+            if (state_id) {
+                $.ajax({
+                    url: '/resume/step_1/get-city/' + state_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data) {
+                            $('#p_city').empty();
+                            $('#p_city').append('<option value="">Choose...</option>');
+                            $.each(data, function (key, p_city) {
+                                $('select[name="p_city"]').append(
+                                    '<option value="' + p_city.id + '">' + p_city.name + '</option>'
+                                );
+                            });
+                        } else {
+                            $('#p_city').empty();
+                        }
+                    }
+                });
+            } else {
+                $('#p_city').empty();
+            }
+        });
+
+        //upazila
+        $('#p_city').on('change', function () {
+            var city_id = $(this).val();
+            if (city_id) {
+                $.ajax({
+                    url: '/resume/step_1/get-upazila/' + city_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data) {
+                            $('#p_upazila').empty();
+                            $('#p_upazila').append('<option value="">Choose...</option>');
+                            $.each(data, function (key, p_upazila) {
+                                $('select[name="p_upazila"]').append(
+                                    '<option value="' + p_upazila.id + '">' + p_upazila.name + '</option>'
+                                );
+                            });
+                        } else {
+                            $('#p_upazila').empty();
+                        }
+                    }
+                });
+            } else {
+                $('#p_upazila').empty();
+            }
+        });
+
+        //post
+        $('#p_upazila').on('change', function () {
+            var upazila_id = $(this).val();
+            if (upazila_id) {
+                $.ajax({
+                    url: '/resume/step_1/get-post/' + upazila_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data) {
+                            $('#p_post').empty();
+                            $('#p_post').append('<option value="">Choose...</option>');
+                            $.each(data, function (key, p_post) {
+                                $('select[name="p_post"]').append(
+                                    '<option value="' + p_post.id + '">' + p_post.post_office + '</option>'
+                                );
+                            });
+                        } else {
+                            $('#p_post').empty();
+                        }
+                    }
+                });
+            } else {
+                $('#p_post').empty();
+            }
+        });
+
+        /*############# Permanent Address  ########## */
+        //state
+        var country_id = $('#country').find(":selected").val();
+        if (country_id) {
+            $.ajax({
+                url: '/resume/step_1/get-state/' + country_id,
+                type: "GET",
+                dataType: "json",
+                success: function (data) {
+                    if (data) {
+                        $('#state').empty();
+                        $('#state').append('<option value="">Choose...</option>');
+                        $.each(data, function (key, state) {
+                            $('select[name="state"]').append(
+                                '<option value="' + state.id + '">' + state.name + '</option>'
+                            );
+                        });
+                    } else {
+                        $('#state').empty();
+                    }
+                }
+            });
+        } else {
+            $('#state').empty();
+        }
+        
+        //city
+        $('#state').on('change', function () {
+            var state_id = $(this).val();
+            if (state_id) {
+                $.ajax({
+                    url: '/resume/step_1/get-city/' + state_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data) {
+                            $('#city').empty();
+                            $('#city').append('<option value="">Choose...</option>');
+                            $.each(data, function (key, city) {
+                                $('select[name="city"]').append(
+                                    '<option value="' + city.id + '">' + city.name + '</option>'
+                                );
+                            });
+                        } else {
+                            $('#city').empty();
+                        }
+                    }
+                });
+            } else {
+                $('#city').empty();
+            }
+        });
+
+        //upazila
+        $('#city').on('change', function () {
+            var city_id = $(this).val();
+            if (city_id) {
+                $.ajax({
+                    url: '/resume/step_1/get-upazila/' + city_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data) {
+                            $('#upazila').empty();
+                            $('#upazila').append('<option value="">Choose...</option>');
+                            $.each(data, function (key, upazila) {
+                                $('select[name="upazila"]').append(
+                                    '<option value="' + upazila.id + '">' + upazila.name + '</option>'
+                                );
+                            });
+                        } else {
+                            $('#upazila').empty();
+                        }
+                    }
+                });
+            } else {
+                $('#upazila').empty();
+            }
+        });
+
+        //post
+        $('#upazila').on('change', function () {
+            var upazila_id = $(this).val();
+            if (upazila_id) {
+                $.ajax({
+                    url: '/resume/step_1/get-post/' + upazila_id,
+                    type: "GET",
+                    dataType: "json",
+                    success: function (data) {
+                        if (data) {
+                            $('#post').empty();
+                            $('#post').append('<option value="">Choose...</option>');
+                            $.each(data, function (key, post) {
+                                $('select[name="post"]').append(
+                                    '<option value="' + post.id + '">' + post.post_office + '</option>'
+                                );
+                            });
+                        } else {
+                            $('#post').empty();
+                        }
+                    }
+                });
+            } else {
+                $('#post').empty();
+            }
+        });
+
+        /*############# Live search  ########## */
+        $('#search_city').on('keyup',function() {
+            var query = $(this).val(); 
+            if (query == "") {
+                $('#city_list').html('');
+            }else{
+                $.ajax({
+                    url:"{{ route('resume.searchcity') }}",
+                    type:"GET",
+                    data:{
+                        'data': query
+                    },
+                    success:function (data) {
+                        $('#city_list').html(data);
+                    }
+                })
+                // end of ajax call
+            }
+            
+        });
+
+        $(document).on('click', '.city', function(){
+            
+            var value = $(this).text();
+            var html = '<span class="badge badge-info ">'+ value +'</span>'
+            $('#city_').html(html);
+            $('#search_city').val('');
+            $('#city_list').html("");
+            $('input[name="area"]').val(value);
+        });
+
+
+        $('#organization').on('keyup',function() {
+            var query = $(this).val(); 
+            if (query == "") {
+                $('#organization_list').html('');
+            }else{
+                $.ajax({
+                    url:"{{ route('resume.searchorgazation') }}",
+                    type:"GET",
+                    data:{
+                        'data': query
+                    },
+                    success:function (data) {
+                        $('#organization_list').html(data);
+                    }
+                })
+                // end of ajax call
+            }
+            
+        });
+
+        $(document).on('click', '.organization', function(){
+            
+            var value = $(this).text();
+            var html = '<span class="badge badge-light ">'+ value +'</span>'
+            $('#organization_').html(html);
+            $('#organization').val('');
+            $('#organization_list').html("");
+            $('input[name="organization_type"]').val(value);
+        });
+
+    })
+    
 </script>
 
 

@@ -80,23 +80,23 @@
                           
                       </div>
                       <div class="col-sm-2">
-                          <img class="img-thumbnail" style= "margin-bottom: .25rem;" src="https://my.bdjobs.com/photos/2450001-2475000/992463805b0v1y.jpg?var=306202220" height="140" width="140" alt="my photo">
+                          <img class="img-thumbnail" style= "margin-bottom: .25rem;" src="{{ asset($user->detail->photo_path) }}" height="140" width="140" alt="my photo">
                       </div>
         <div>
             <hr style="width:100%;left;margin-top:15px; opacity: .50;">
         </div>
         
-        <div>
-            <h5 style="background-color: #E6E6E6; "class=" text-black py-1 px-2 ">Carirrer Obejct:</h5>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, impedit eos incidunt natus libero optio officia ratione esse, velit enim distinctio? Voluptatum, nobis? Suscipit corporis doloremque reprehenderit ex, voluptate voluptatem!</p> 
+        <div class="mb-8">
+            <h5 style="background-color: #E6E6E6; "class=" text-black py-1 px-2">Carirrer Obejct:</h5>
+                <p>{{ $user->career_info->objective }}</p> 
         </div> 
-        <div>
-            <h5 style="background-color: #E6E6E6; "class=" text-black py-1 px-2">Career Summary:</h5>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, impedit eos incidunt natus libero optio officia ratione esse, velit enim distinctio? Voluptatum, nobis? Suscipit corporis doloremque reprehenderit ex, voluptate voluptatem!</p> 
+        <div class="mb-8">
+            <h5 style="background-color: #E6E6E6; "class=" text-black py-1 px-2 ">Career Summary:</h5>
+                <p>{{ $user->career_info->career_summary }}</p> 
         </div> 
-        <div>
+        <div class="mb-8">
             <h5 style="background-color: #E6E6E6; "class=" text-black py-1 px-2">Special Qualification:</h5>
-                <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga, impedit eos incidunt natus libero optio officia ratione esse, velit enim distinctio? Voluptatum, nobis? Suscipit corporis doloremque reprehenderit ex, voluptate voluptatem!</p> 
+                <p>{{ $user->career_info->special_qualification}}</p> 
         </div> 
         <div>
             <h5 style="background-color: #E6E6E6; "class=" text-black py-1 px-2">Employment History:</h5>
