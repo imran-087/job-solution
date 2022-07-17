@@ -204,7 +204,7 @@
                                 </div>
 
                                 <!--begin:Form-->
-                                <form id="kk_specialization_skill_form" class="form d-none" enctype="multipart/form-data">
+                                <form id="kk_specialization_skill_form" class="form d-none px-5" enctype="multipart/form-data">
                                     @csrf
 
                                     <div class="d-flex justify-content-end">
@@ -509,7 +509,7 @@
                                 </div>
 
                                 <!--begin:Form-->
-                                <form id="kk_language_proficency_form" class="form d-none" enctype="multipart/form-data">
+                                <form id="kk_language_proficency_form" class="form d-none px-5" enctype="multipart/form-data">
                                     @csrf
                                     <div class="d-flex justify-content-end">
                                         <span class="btn btn-active-color-danger btn-sm btn-light " id="cancel_edit_language"><i class="fas fa-times"></i>Cancel</span>
@@ -702,7 +702,7 @@
                                 </div>
 
                                 <!--begin:Form-->
-                                <form id="kk_references_form" class="form d-none" enctype="multipart/form-data">
+                                <form id="kk_references_form" class="form d-none px-5" enctype="multipart/form-data">
                                     @csrf
 
                                     <div class="d-flex justify-content-end">
@@ -1258,7 +1258,7 @@
         //add button
         $("#add_skill").on('click', function(){
             $(this).hide();
-            $(this).parents(".specialization").find('div.skill_data').addClass('d-none');
+            // $(this).parents(".specialization").find('div.skill_data').addClass('d-none');
             $(this).parents(".specialization").find('form#kk_specialization_skill_form').removeClass('d-none');
         })
         //cancel button
@@ -1307,7 +1307,7 @@
         $("#add_language").on('click', function(){
             $(this).hide();
             $('input[name="language_id"]').val('');
-            $(this).parents(".language").find('div.language_data').addClass('d-none');
+            // $(this).parents(".language").find('div.language_data').addClass('d-none');
             $(this).parents(".language").find('form#kk_language_proficency_form').removeClass('d-none');
         })
         //cancel button
@@ -1329,7 +1329,7 @@
         $("#add_reference").on('click', function(){
             $(this).hide();
             $('input[name="reference_id"]').val();
-            $(this).parents(".references").find('div.references_data').addClass('d-none');
+            // $(this).parents(".references").find('div.references_data').addClass('d-none');
             $(this).parents(".references").find('form#kk_references_form').removeClass('d-none');
         })
         //cancel button

@@ -81,5 +81,12 @@ return array (
   'aponalohit' => array(
     'normal' => $fontDir . '/aponalohit_normal_10a70c2e3c960a613611b2f15174faee',
   ),
+  'poppins' => array(
+    '300' => $fontDir . '/poppins_300_999a4088f0da952988730996a4bec1d8',
+    'normal' => $fontDir . '/poppins_normal_ee697d7869cb745ccf3ccccc013145ad',
+    '500' => $fontDir . '/poppins_500_fce53b208cddccda1573b7620b579598',
+    '600' => $fontDir . '/poppins_600_9623fbc18c38938c2057a9aae8390a42',
+    'bold' => $fontDir . '/poppins_bold_8fe618268f56b4b8f1e70e87a9e99fc0',
+  ),
 );
 }; ?>

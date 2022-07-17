@@ -255,6 +255,7 @@ Route::middleware('auth')->name('user.')->group(function () {
 
     ####### Resume View ##
     Route::get('/resume-view', [ResumeViewController::class, 'index'])->name('resume.view.index');
+    Route::get('/resume/pdf', [ResumeViewController::class, 'createPDF'])->name('resume.pdf');
 
 });
 

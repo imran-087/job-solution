@@ -61,8 +61,8 @@ class EducationController extends Controller
                     $academy->institute_name = $request->institute_name;
                     $academy->board = $request->board;
                     $academy->result =  $request->result;
-                    $academy->marks =  $request->marks;
-                    $academy->cgpa =  $request->cgpa;
+                    $academy->marks = $request->result == 'grade' ? 'null' : $request->mark;
+                    $academy->cgpa = $request->result == 'grade' ? $request->mark : 'null';
                     $academy->scale =  $request->scale;
                     $academy->passing_year =  $request->passing_year;
                     $academy->course_duration =  $request->course_duration;
@@ -90,8 +90,8 @@ class EducationController extends Controller
                         'institute_name' => $request->institute_name,
                         'board' => $request->board,
                         'result' => $request->result,
-                        'marks' => $request->mark,
-                        'cgpa' => $request->cgpa,
+                        'marks' => $request->result == 'grade' ? 'null' : $request->mark,
+                        'cgpa' => $request->result == 'grade' ? $request->mark : 'null',
                         'scale' => $request->scale,
                         'passing_year' => $request->passing_year,
                         'course_duration' => $request->course_duration,

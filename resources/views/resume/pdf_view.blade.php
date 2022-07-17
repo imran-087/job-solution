@@ -63,7 +63,6 @@
     <div id="kt_content_container" class="container-xxl">
          
         @include('resume.menubar')
-        
         <div class="card card-flush mb-9" id="html-content-holder">
             <div class="card-body">
                 <div class="row mb-9">
@@ -232,10 +231,10 @@
                 </div>
             </div>
         </div>
-
+        
         <div class="text-center m-3">
             <button class="btn btn-sm btn-info text-center" id="btnConvert1">Download</button>
-            {{-- <a class="btn btn-primary btn-sm" href="{{ route('resume.pdf') }}">Export to PDF</a> --}}
+            <a class="btn btn-primary" href="{{ route('resume.pdf') }}">Export to PDF</a>
         </div>
 
 

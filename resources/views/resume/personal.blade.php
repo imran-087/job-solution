@@ -167,7 +167,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="text-muted min-w-125px w-130px">Blood Group</td>
-                                                                        <td class="text-gray-800">{{ $user_detail->glood_group ?? '' }} </td>
+                                                                        <td class="text-gray-800">{{ Str::ucfirst($user_detail->blood_group) ?? '' }} </td>
                                                                     </tr>
                                                                    
                                                                 </tbody>
@@ -415,14 +415,14 @@
                                                 <div class="row">
                                                     <div class="col-md-4">
                                                         <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                            name="blood_group">
+                                                            name="country_phone_code">
                                                          
                                                             <option value="+880" selected>+880</option>
                                                             <option value="+087" >+087</option>
                                                             <option value="+180" >+180</option>
                                                         
                                                         </select>
-                                                        <div class="help-block with-errors blood_group-error"></div>  
+                                                        <div class="help-block with-errors country_phone_code-error"></div>  
                                                     </div>
                                                     <div class="col-md-8">
                                                         <input type="text" class="form-control form-control-solid" placeholder="Enter your primary mobile no. "
@@ -446,14 +446,14 @@
                                                     <div class="col-md-4">
                                                     
                                                         <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                            name="blood_group">
+                                                            name="country_phone_code">
                                                          
                                                             <option value="+880" selected>+880</option>
                                                             <option value="+087" >+087</option>
                                                             <option value="+180" >+180</option>
                                                         
                                                         </select>
-                                                        <div class="help-block with-errors blood_group-error"></div>  
+                                                        <div class="help-block with-errors country_phone_code-error"></div>  
                                                     </div>
                                                     <div class="col-md-8">
                                                         <input type="text" class="form-control form-control-solid" placeholder="Enter your secondary mobile no."
@@ -536,9 +536,16 @@
                                     <div class="card-body pt-0">
                                         <div class="d-flex justify-content-between">
                                             <span class="fs-4 fw-bolder">Address</span>
-                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2" id="edit_address_detail"><i class="fas fa-edit"></i>{{ $user_detail->present_address == null ? 'Add' : 'Edit' }}</span>
+                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2" id="edit_address_detail">
+                                                @if($user_detail->present_address == null ) <i class="fas fa-plus"></i> Add @else <i class="fas fa-edit"></i> Edit @endif
+                                            </span>
 
                                         </div>
+                                        @if($user_detail->present_address == null )
+                                        <span class="d-flex justify-content-center align-content-center text-muted fs-4 text-capitalize">
+                                            No addess found
+                                        </span>
+                                        @else
                                         <!--begin::Options-->
                                         <div id="kt_create_new_payment_method">
                                             <!--begin::Option-->
@@ -573,7 +580,11 @@
                                                             </table>
                                                         </div>
                                                         <!--end::Col-->
-                                                        @isset($user_detail->permanent_address)
+                                                        @if($user_detail->permanent_address == 'sameaspresent')
+                                                        <span class="d-flex  align-content-start fw-bolder fs-5 text-capitalize">
+                                                           Permanent address is same as present address
+                                                        </span>
+                                                        @else
                                                         <!--begin::Col-->
                                                         <div class="">
                                                             <table class="table table-flush fw-bold gy-1">
@@ -599,7 +610,7 @@
                                                                 </tbody>
                                                             </table>
                                                         </div>
-                                                        @endisset
+                                                        @endif
                                                     </div>
                                                     <!--end::Details-->
                                                     
@@ -611,6 +622,7 @@
                                             
                                         </div>
                                         <!--end::Options-->
+                                        @endif
                                     </div>
                                     <!--end::Card body-->
                                 </div>
@@ -831,11 +843,19 @@
                                 <div class="card card-flush pt-3 mb-5 mb-lg-10 career_application_data" data-kt-subscriptions-form="pricing">
                                     <!--begin::Card body-->
                                     <div class="card-body pt-0">
-                                        <div class="d-flex justify-content-end">
-                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2 " id="edit_career_application"><i class="fas fa-edit"></i>Edit</span>
-                                            <span class="btn btn-active-color-danger btn-sm btn-light delete_career_application" data-id="{{ $career_info->id }}" ><i class="fas fa-trash"></i>Delete</span>
-
+                                       
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fs-4 fw-bolder">Career Application inforamtion</span>
+                                          
+                                            <div>
+                                                <span class="btn btn-active-color-primary btn-sm btn-light me-2 " id="edit_career_application">
+                                                    @if($career_info) <i class="fas fa-edit"></i> Edit @else <i class="fas fa-plus"></i> Add @endif
+                                                </span>
+                                                <span class="btn btn-active-color-danger btn-sm btn-light delete_career_application" @isset($career_info) data-id="{{ $career_info->id }}" @endisset ><i class="fas fa-trash"></i>Delete</span>
+                                            </div>
+                                           
                                         </div>
+                                        @if($career_info)
                                         <!--begin::Options-->
                                         <div id="kt_create_new_payment_method">
                                             <!--begin::Option-->
@@ -847,7 +867,6 @@
                                                         <!--begin::Col-->
                                                         <div class="mb-8">
                                                             <table class="table table-flush fw-bold gy-1">
-                                                                <span class="fs-4 mb-3">Career Application Information</span>
                                                                 <tbody>
                                                                     <tr>
                                                                         <td class="text-muted min-w-125px w-130px">Objective</td>
@@ -886,6 +905,11 @@
                                             
                                         </div>
                                         <!--end::Options-->
+                                        @else
+                                        <span class="d-flex justify-content-center align-content-center text-muted fs-4 text-capitalize">
+                                            No carrer application info available
+                                        </span>
+                                        @endif
                                     </div>
                                     <!--end::Card body-->
                                 </div>
@@ -1025,8 +1049,12 @@
                                     <div class="card-body pt-0">
                                         <div class="d-flex justify-content-between">
                                             <span class="fs-4 fw-bolder">Preffered Job Area</span>
-                                            <span class="btn btn-active-color-primary btn-sm btn-light " id="edit_preffered_area"><i class="fas fa-edit"></i>Edit</span>
+                                            <span class="btn btn-active-color-primary btn-sm btn-light " id="edit_preffered_area">
+                                                @if($career_info->job_categories || $career_info->special_skill || $career_info->prefferd_city )<i class="fas fa-edit"></i>Edit
+                                                @else <i class="fas fa-plus"></i> Add @endif
+                                            </span>
                                         </div>
+                                        @if($career_info->job_categories || $career_info->special_skill || $career_info->prefferd_city )
                                         <!--begin::Options-->
                                         <div id="kt_create_new_payment_method">
                                             <!--begin::Option-->
@@ -1043,22 +1071,26 @@
                                                                     <tr>
                                                                         <td class="text-muted min-w-125px w-130px">Job Category</td>
                                                                         <td class="text-gray-800 fw-bolder">
+                                                                            @isset($career_info->job_categories)
                                                                             @foreach($career_info->job_categories as $category)
-                                                                            {{  $category ?? '' }} &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                            {{  $category ?? 'not available' }} &nbsp;&nbsp;&nbsp;&nbsp;
                                                                             @endforeach
+                                                                            @endisset
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="text-muted min-w-125px w-130px">Special Skill</td>
                                                                         <td class="text-gray-800 fw-bolder">
+                                                                            @isset($career_info->special_skill)
                                                                             @foreach($career_info->special_skill as $skill)
-                                                                            {{  $skill ?? '' }} &nbsp;&nbsp;&nbsp;&nbsp;
+                                                                            {{  $skill ?? 'not available' }} &nbsp;&nbsp;&nbsp;&nbsp;
                                                                             @endforeach
+                                                                            @endisset
                                                                         </td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="text-muted min-w-125px w-130px">Preffered City</td>
-                                                                        <td class="text-gray-800">{{ $career_info->prefferd_city ?? 'No choosen city' }}</td>
+                                                                        <td class="text-gray-800">{{ $career_info->prefferd_city ?? 'no choosen city' }}</td>
                                                                     </tr>
                                                                    
                                                                 </tbody>
@@ -1077,6 +1109,11 @@
                                             
                                         </div>
                                         <!--end::Options-->
+                                        @else
+                                        <span class="d-flex justify-content-center align-content-center text-muted fs-4 text-capitalize">
+                                           No prefferd job area or category
+                                        </span>
+                                        @endif
                                     </div>
                                     <!--end::Card body-->
                                 </div>
@@ -1224,8 +1261,16 @@
                                     <!--begin::Card body-->
                                     <div class="card-body pt-0">
                                         <div class="d-flex justify-content-end">
-                                            <span class="btn btn-active-color-primary btn-sm btn-light " id="edit_other_relevent_info"><i class="fas fa-edit"></i>Edit</span>
+                                            
                                         </div>
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fs-4 fw-bolder">Other Relevent Info</span>
+                                           <span class="btn btn-active-color-primary btn-sm btn-light " id="edit_other_relevent_info">
+                                                @if( $career_info->career_summary || $career_info->special_qualification )<i class="fas fa-edit"></i> Edit
+                                                @else <i class="fas fa-plus"></i> Add @endif
+                                            </span>
+                                        </div>
+                                        @if( $career_info->career_summary || $career_info->special_qualification )
                                         <!--begin::Options-->
                                         <div id="kt_create_new_payment_method">
                                             <!--begin::Option-->
@@ -1237,7 +1282,7 @@
                                                         <!--begin::Col-->
                                                         <div class="mb-8">
                                                             <table class="table table-flush fw-bold gy-1">
-                                                                <span class="fs-4 mb-3">Other Relevent Info</span>
+                                                                
                                                                 <tbody>
                                                                     <tr>
                                                                         <td class="text-muted min-w-125px w-130px">Career Summary</td>
@@ -1268,6 +1313,12 @@
                                             
                                         </div>
                                         <!--end::Options-->
+                                        @else
+                                        <span class="d-flex justify-content-center align-content-center text-muted fs-4 text-capitalize">
+                                           Not available
+                                        </span>
+                                        
+                                        @endif
                                     </div>
                                     <!--end::Card body-->
                                 </div>

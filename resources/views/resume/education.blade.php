@@ -183,7 +183,7 @@
                                 </div>
 
                                 <!--begin:Form-->
-                                <form id="kk_academic_summary_form" class="form d-none" enctype="multipart/form-data">
+                                <form id="kk_academic_summary_form" class="form d-none px-5" enctype="multipart/form-data">
                                     @csrf
                                     <div class="d-flex justify-content-end">
                                             <span class="btn btn-active-color-danger btn-sm btn-light " id="cancel_edit_academic_summary"><i class="fas fa-times"></i>Cancel</span>
@@ -492,7 +492,7 @@
                                     <span class="btn btn-sm btn-primary " id="add_training_summary"><i class="fas fa-plus"></i>Add New</span>
                                 </div>
                                 <!--begin:Form-->
-                                <form id="kk_training_summary_form" class="form d-none" enctype="multipart/form-data">
+                                <form id="kk_training_summary_form" class="form d-none px-5" enctype="multipart/form-data">
                                     @csrf
 
                                     <div class="d-flex justify-content-end">
@@ -734,7 +734,7 @@
                                 </div>
 
                                 <!--begin:Form-->
-                                <form id="kk_professional_certificate_form" class="form d-none" enctype="multipart/form-data">
+                                <form id="kk_professional_certificate_form" class="form d-none px-5" enctype="multipart/form-data">
                                     @csrf
                                     <div class="d-flex justify-content-end">
                                         <span class="btn btn-sm btn-active-color-danger btn-light " id="cancel_edit_professional_certificate"><i class="fas fa-times"></i>Cancel</span>
@@ -1148,7 +1148,7 @@
         $("#add_academic_info").on('click', function(){
             $(this).hide();
             $('input[name="academy_id"]').val('');
-            $(this).parents(".academic_summary").find('div.academic_summary_data').addClass('d-none');
+            // $(this).parents(".academic_summary").find('div.academic_summary_data').addClass('d-none');
             $(this).parents(".academic_summary").find('form#kk_academic_summary_form').removeClass('d-none');
         })
         //cancel button
@@ -1169,7 +1169,7 @@
         $("#add_training_summary").on('click', function(){
             $(this).hide();
             $('input[name="training_id"]').val('');
-            $(this).parents(".training_summary").find('div.training_summary_data').addClass('d-none');
+            // $(this).parents(".training_summary").find('div.training_summary_data').addClass('d-none');
             $(this).parents(".training_summary").find('form#kk_training_summary_form').removeClass('d-none');
         })
         //cancel button
@@ -1191,7 +1191,7 @@
         $("#add_professional_certificate").on('click', function(){
             $(this).hide();
             $('input[name="certificate_id"]').val('');
-            $(this).parents(".professional_certificate").find('div.professional_certificate_data').addClass('d-none');
+            // $(this).parents(".professional_certificate").find('div.professional_certificate_data').addClass('d-none');
             $(this).parents(".professional_certificate").find('form#kk_professional_certificate_form').removeClass('d-none');
         })
         //cancel button

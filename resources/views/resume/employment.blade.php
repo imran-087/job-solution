@@ -175,7 +175,7 @@
                                 </div>
 
                                 <!--begin:Form-->
-                                <form id="kk_employment_history_form" class="form d-none" enctype="multipart/form-data">
+                                <form id="kk_employment_history_form" class="form d-none px-5" enctype="multipart/form-data">
                                     @csrf
                                     <div class="d-flex justify-content-end">
                                         <span class="btn btn-sm btn-active-color-danger btn-light " id="cancel_edit_employment_history"><i class="fas fa-times"></i>Cancel</span>
@@ -184,7 +184,7 @@
                                     <!--begin::Heading-->
                                     <div class="mb-13">
                                         <!--begin::Title-->
-                                        <h1 class="mb-3 text-muted fs-3">Add Experience</h1>
+                                        <h1 class="mb-3 text-muted fs-4">Add Experience</h1>
                                         <!--end::Title-->
                                     </div>
                                     <!--end::Heading-->
@@ -385,7 +385,13 @@
                                     <!--begin::Card body-->
                                     <div class="card-body pt-0">
                                         <div class="d-flex justify-content-end">
-                                            <span class="btn btn-active-color-primary btn-sm btn-light " id="edit_retired_army_person_data"><i class="fas fa-edit"></i>Edit</span>
+                                            <span class="btn btn-active-color-primary btn-sm btn-light " id="edit_retired_army_person_data">
+                                                @if($user_detail->ba_no)
+                                                <i class="fas fa-edit"></i> Edit
+                                                @else
+                                                <i class="fas fa-plus"></i> Add
+                                                @endif
+                                            </span>
                                         </div>
                                         <!--begin::Options-->
                                         <div id="kt_create_new_payment_method">
@@ -787,7 +793,7 @@
         $("#add_employment_history").on('click', function(){
             $(this).hide();
             $('input[name="employment_id"]').val('');
-            $(this).parents(".employment_history").find('div.employment_history_data').addClass('d-none');
+            // $(this).parents(".employment_history").find('div.employment_history_data').addClass('d-none');
             $(this).parents(".employment_history").find('form#kk_employment_history_form').removeClass('d-none');
         })
         //cancel button
