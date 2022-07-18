@@ -308,7 +308,7 @@
                                     </div>
                                     <!-- end: col-->
                                     <!--begin::Input group-->
-                                    <div class="row g-9 mb-5">
+                                    <div class="row g-9">
                                         <!--begin::Col-->
                                         <div class="col-md-6 fv-row">
                                             <!--begin::Input group-->
@@ -346,6 +346,15 @@
                                         
                                     </div>
                                     <!--end::Input group-->
+
+                                    {{-- <!-- append dynamic input-->
+                                    <div  class="newRow"></div>
+                                    <!-- append dynamic input-->
+
+                                    <div class="col-md-5 mb-5">
+                                        <button class="btn btn-info btn-sm addRow" type="button" style="padding: 7px 10px !important"><i class="fas fa-plus"></i>Add </button>
+                                    </div> --}}
+
                                     <!--begin::Col-->
                                     <div class="col-md-12 fv-row mb-5">
                                         <!--begin::Label-->
@@ -386,13 +395,12 @@
                                     <div class="card-body pt-0">
                                         <div class="d-flex justify-content-end">
                                             <span class="btn btn-active-color-primary btn-sm btn-light " id="edit_retired_army_person_data">
-                                                @if($user_detail->ba_no)
-                                                <i class="fas fa-edit"></i> Edit
-                                                @else
-                                                <i class="fas fa-plus"></i> Add
-                                                @endif
+                                                @if($user_detail)
+                                                    @if($user_detail->ba_no)<i class="fas fa-edit"></i> Edit @endif
+                                                @else <i class="fas fa-plus"></i> Add @endif
                                             </span>
                                         </div>
+                                        @isset($user_detail)
                                         <!--begin::Options-->
                                         <div id="kt_create_new_payment_method">
                                             <!--begin::Option-->
@@ -400,7 +408,6 @@
                                                 <!--begin::Body-->
                                                 <div id="kt_create_new_payment_method_1" class="fs-6 ps-10 collapse show" style="">
                                                     <!--begin::Details-->
-                                                    @isset($user_detail)
                                                     <div class="d-flex flex-wrap py-5">
                                                         <!--begin::Col-->
                                                         <div class="flex-equal me-5">
@@ -459,7 +466,7 @@
                                                         
                                                     </div>
                                                     <!--end::Details-->
-                                                    @endisset
+                                                    
                                                 </div>
                                                 <!--end::Body-->
                                             </div>
@@ -468,6 +475,7 @@
                                             
                                         </div>
                                         <!--end::Options-->
+                                        @endisset
                                     </div>
                                     <!--end::Card body-->
                                 </div>

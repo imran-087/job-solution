@@ -68,7 +68,7 @@
             <div class="card-body">
                 <!--begin::Accordion-->
                 <div class="accordion" id="kt_accordion_1">
-
+                    <!--start:: Personal Details -->
                     <div class="accordion-item mb-8" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
                         <h2 class="accordion-header" id="kt_accordion_1_header_1">
                             <button class="accordion-button fs-4 fw-bold" type="button" data-bs-toggle="collapse" data-bs-target="#kt_accordion_1_body_1" aria-expanded="true" aria-controls="kt_accordion_1_body_1">
@@ -82,9 +82,15 @@
                                     <!--begin::Card body-->
                                     <div class="card-body pt-0">
                                         <div class="d-flex justify-content-end">
-                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2" id="edit_personal_detail"><i class="fas fa-edit"></i>Edit</span>
-                                            <span class="btn btn-active-color-danger btn-sm btn-light delete_personal_detail" data-id="{{ $user_detail->id }}" ><i class="fas fa-trash"></i>Delete</span>
+                                           
+                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2" id="edit_personal_detail">
+                                                @if($user_detail) <i class="fas fa-edit"></i>Edit
+                                                @else <i class="fas fa-plus"> Add</i> @endif
+                                            </span> 
+                                            @isset($user_detail) <span class="btn btn-active-color-danger btn-sm btn-light delete_personal_detail"  data-id="{{ $user_detail->id }}"><i class="fas fa-trash"></i>Delete</span> @endisset
+                                           
                                         </div>
+                                        @if($user_detail)
                                         <!--begin::Options-->
                                         <div id="kt_create_new_payment_method">
                                             <!--begin::Option-->
@@ -115,19 +121,19 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="text-muted min-w-125px w-130px">Date of Birth</td>
-                                                                        <td class="text-gray-800">{{ $user_detail->date_of_birth }}</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->date_of_birth ?? '' }}</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="text-muted min-w-125px w-130px">Gender</td>
-                                                                        <td class="text-gray-800">{{ $user_detail->gender }}</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->gender ?? '' }}</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="text-muted min-w-125px w-130px">Religion</td>
-                                                                        <td class="text-gray-800">{{ $user_detail->religion }}</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->religion ?? '' }}</td>
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="text-muted min-w-125px w-130px">Marital Status</td>
-                                                                        <td class="text-gray-800">{{ $user_detail->marital_status }}</td>
+                                                                        <td class="text-gray-800">{{ $user_detail->marital_status ?? '' }}</td>
                                                                     </tr>
                                                                 </tbody>
                                                             </table>
@@ -167,7 +173,7 @@
                                                                     </tr>
                                                                     <tr>
                                                                         <td class="text-muted min-w-125px w-130px">Blood Group</td>
-                                                                        <td class="text-gray-800">{{ Str::ucfirst($user_detail->blood_group) ?? '' }} </td>
+                                                                        <td class="text-gray-800">{{ Str::ucfirst($user_detail->blood_group ?? '' ) }} </td>
                                                                     </tr>
                                                                    
                                                                 </tbody>
@@ -185,6 +191,11 @@
                                             
                                         </div>
                                         <!--end::Options-->
+                                        @else
+                                        <span class="d-flex justify-content-center align-content-center text-muted fs-4 text-capitalize">
+                                            No detail available
+                                        </span>
+                                        @endif
                                     </div>
                                     <!--end::Card body-->
                                 </div>
@@ -520,7 +531,8 @@
                             </div>
                         </div>
                     </div>
-
+                    <!--end:: personal details -->
+                    
                     <!--start: Address Details -->
                     <div class="accordion-item mb-8" style="box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;">
                         <h2 class="accordion-header" id="kt_accordion_1_header_2">
@@ -537,91 +549,100 @@
                                         <div class="d-flex justify-content-between">
                                             <span class="fs-4 fw-bolder">Address</span>
                                             <span class="btn btn-active-color-primary btn-sm btn-light me-2" id="edit_address_detail">
-                                                @if($user_detail->present_address == null ) <i class="fas fa-plus"></i> Add @else <i class="fas fa-edit"></i> Edit @endif
+                                                @if($user_detail)
+                                                    @if($user_detail->present_address != null ) <i class="fas fa-edit"></i> Edit 
+                                                    @else <i class="fas fa-plus"></i> Add @endif
+                                                @else <i class="fas fa-plus"></i> Add @endif
                                             </span>
 
                                         </div>
-                                        @if($user_detail->present_address == null )
+                                        @if($user_detail)
+                                            @if($user_detail->present_address == null )
+                                            <span class="d-flex justify-content-center align-content-center text-muted fs-4 text-capitalize">
+                                                No addess found
+                                            </span>
+                                            @else
+                                            <!--begin::Options-->
+                                            <div id="kt_create_new_payment_method">
+                                                <!--begin::Option-->
+                                                <div class="py-1">
+                                                    <!--begin::Body-->
+                                                    <div id="kt_create_new_payment_method_1" class="fs-6 ps-10 collapse show" style="">
+                                                        <!--begin::Details-->
+                                                        <div class="py-5">
+                                                            <!--begin::Col-->
+                                                            <div class="mb-8">
+                                                                <table class="table table-flush fw-bold gy-1">
+                                                                <span class="fs-4 mb-3">Present Address</span>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td class="text-muted min-w-125px w-130px">Country</td>
+                                                                            <td class="text-gray-800">{{ $user_detail->present_address['country'] ?? '' }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="text-muted min-w-125px w-130px">State</td>
+                                                                            <td class="text-gray-800">{{ $user_detail->present_address['state'] ?? '' }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="text-muted min-w-125px w-130px">City</td>
+                                                                            <td class="text-gray-800">{{ $user_detail->present_address['city'] ?? '' }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="text-muted min-w-125px w-130px">Address</td>
+                                                                            <td class="text-gray-800">{{ $user_detail->present_address['address'] ?? '' }}</td>
+                                                                        </tr>
+                                                                        
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <!--end::Col-->
+                                                            @if($user_detail->permanent_address == 'sameaspresent')
+                                                            <span class="d-flex  align-content-start fw-bolder fs-5 text-capitalize">
+                                                            Permanent address is same as present address
+                                                            </span>
+                                                            @else
+                                                            <!--begin::Col-->
+                                                            <div class="">
+                                                                <table class="table table-flush fw-bold gy-1">
+                                                                    <span class="fs-4 mb-3">Permanent Address</span>
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td class="text-muted min-w-125px w-130px">Country</td>
+                                                                            <td class="text-gray-800">{{ $user_detail->permanent_address['country'] ?? '' }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="text-muted min-w-125px w-130px">State</td>
+                                                                            <td class="text-gray-800">{{ $user_detail->permanent_address['state'] ?? '' }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="text-muted min-w-125px w-130px">City</td>
+                                                                            <td class="text-gray-800">{{ $user_detail->permanent_address['city'] ?? '' }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="text-muted min-w-125px w-130px">Address</td>
+                                                                            <td class="text-gray-800">{{ $user_detail->permanent_address['address'] ?? '' }}</td>
+                                                                        </tr>
+                                                                        
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            @endif
+                                                        </div>
+                                                        <!--end::Details-->
+                                                        
+                                                    </div>
+                                                    <!--end::Body-->
+                                                </div>
+                                                <!--end::Option-->
+                                                <div class="separator separator-dashed"></div>
+                                                
+                                            </div>
+                                            <!--end::Options-->
+                                            @endif
+                                        @else 
                                         <span class="d-flex justify-content-center align-content-center text-muted fs-4 text-capitalize">
                                             No addess found
                                         </span>
-                                        @else
-                                        <!--begin::Options-->
-                                        <div id="kt_create_new_payment_method">
-                                            <!--begin::Option-->
-                                            <div class="py-1">
-                                                <!--begin::Body-->
-                                                <div id="kt_create_new_payment_method_1" class="fs-6 ps-10 collapse show" style="">
-                                                    <!--begin::Details-->
-                                                    <div class="py-5">
-                                                        <!--begin::Col-->
-                                                        <div class="mb-8">
-                                                            <table class="table table-flush fw-bold gy-1">
-                                                               <span class="fs-4 mb-3">Present Address</span>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td class="text-muted min-w-125px w-130px">Country</td>
-                                                                        <td class="text-gray-800">{{ $user_detail->present_address['country'] ?? '' }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="text-muted min-w-125px w-130px">State</td>
-                                                                        <td class="text-gray-800">{{ $user_detail->present_address['state'] ?? '' }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="text-muted min-w-125px w-130px">City</td>
-                                                                        <td class="text-gray-800">{{ $user_detail->present_address['city'] ?? '' }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="text-muted min-w-125px w-130px">Address</td>
-                                                                        <td class="text-gray-800">{{ $user_detail->present_address['address'] ?? '' }}</td>
-                                                                    </tr>
-                                                                    
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                        <!--end::Col-->
-                                                        @if($user_detail->permanent_address == 'sameaspresent')
-                                                        <span class="d-flex  align-content-start fw-bolder fs-5 text-capitalize">
-                                                           Permanent address is same as present address
-                                                        </span>
-                                                        @else
-                                                        <!--begin::Col-->
-                                                        <div class="">
-                                                            <table class="table table-flush fw-bold gy-1">
-                                                                <span class="fs-4 mb-3">Permanent Address</span>
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td class="text-muted min-w-125px w-130px">Country</td>
-                                                                        <td class="text-gray-800">{{ $user_detail->permanent_address['country'] ?? '' }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="text-muted min-w-125px w-130px">State</td>
-                                                                        <td class="text-gray-800">{{ $user_detail->permanent_address['state'] ?? '' }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="text-muted min-w-125px w-130px">City</td>
-                                                                        <td class="text-gray-800">{{ $user_detail->permanent_address['city'] ?? '' }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="text-muted min-w-125px w-130px">Address</td>
-                                                                        <td class="text-gray-800">{{ $user_detail->permanent_address['address'] ?? '' }}</td>
-                                                                    </tr>
-                                                                    
-                                                                </tbody>
-                                                            </table>
-                                                        </div>
-                                                        @endif
-                                                    </div>
-                                                    <!--end::Details-->
-                                                    
-                                                </div>
-                                                <!--end::Body-->
-                                            </div>
-                                            <!--end::Option-->
-                                            <div class="separator separator-dashed"></div>
-                                            
-                                        </div>
-                                        <!--end::Options-->
                                         @endif
                                     </div>
                                     <!--end::Card body-->
@@ -851,7 +872,7 @@
                                                 <span class="btn btn-active-color-primary btn-sm btn-light me-2 " id="edit_career_application">
                                                     @if($career_info) <i class="fas fa-edit"></i> Edit @else <i class="fas fa-plus"></i> Add @endif
                                                 </span>
-                                                <span class="btn btn-active-color-danger btn-sm btn-light delete_career_application" @isset($career_info) data-id="{{ $career_info->id }}" @endisset ><i class="fas fa-trash"></i>Delete</span>
+                                                @isset($career_info) <span class="btn btn-active-color-danger btn-sm btn-light delete_career_application"  data-id="{{ $career_info->id }}" ><i class="fas fa-trash"></i>Delete</span> @endisset 
                                             </div>
                                            
                                         </div>
@@ -1050,10 +1071,12 @@
                                         <div class="d-flex justify-content-between">
                                             <span class="fs-4 fw-bolder">Preffered Job Area</span>
                                             <span class="btn btn-active-color-primary btn-sm btn-light " id="edit_preffered_area">
-                                                @if($career_info->job_categories || $career_info->special_skill || $career_info->prefferd_city )<i class="fas fa-edit"></i>Edit
-                                                @else <i class="fas fa-plus"></i> Add @endif
+                                                @if($career_info)
+                                                    @if($career_info->job_categories || $career_info->special_skill || $career_info->prefferd_city )<i class="fas fa-edit"></i>Edit @endif
+                                                @else <i class="fas fa-plus"></i> Add @endif  
                                             </span>
                                         </div>
+                                        @isset($career_info)
                                         @if($career_info->job_categories || $career_info->special_skill || $career_info->prefferd_city )
                                         <!--begin::Options-->
                                         <div id="kt_create_new_payment_method">
@@ -1114,6 +1137,7 @@
                                            No prefferd job area or category
                                         </span>
                                         @endif
+                                        @endisset
                                     </div>
                                     <!--end::Card body-->
                                 </div>
@@ -1144,11 +1168,11 @@
                                             <div class="d-flex flex-column fv-row" >
                                                 <!--begin::Label-->
                                                 <label class="d-flex align-items-center fs-6 fw-bold mb-3">
-                                                    <span class="required">Functional (max 3)</span>
+                                                    <span class="required">Functional</span>
                                                     
                                                 </label>
                                                 <!--end::Label-->
-                                                <span class="border py-4 px-4" style="min-height: 150px; max-height: 150px">
+                                                <span class="border py-4 px-4 h-150px" style="overflow: scroll">
                                                     @foreach($functional_job_categories as $key => $job_category)
                                                     <div class="form-check form-check-custom form-check-solid text-black mb-2">
                                                         <input class="form-check-input functional" type="checkbox" value="{{$job_category->name}}" @isset( $career_info->job_categories[$key]) {{ $career_info->job_categories[$key] == $job_category->name ? 'checked' : '' }} @endisset name="functional[]" >
@@ -1167,11 +1191,11 @@
                                             <div class="d-flex flex-column fv-row">
                                                 <!--begin::Label-->
                                                 <label class="d-flex align-items-center fs-6 fw-bold mb-3">
-                                                    <span class="required">Special Skill (max 3)</span>
+                                                    <span class="required">Special Skill </span>
                                                     
                                                 </label>
                                                 <!--end::Label-->
-                                                <span class="border py-4 px-4" style="min-height: 150px; max-height: 150px">
+                                                <span class="border py-4 px-4 h-150px" style="overflow: scroll">
                                                     @foreach($special_skills as $key => $skill)
                                                     {{-- {{ $career_info->special_skill[0] == $skill->name ? 'true' : 'false' }}  --}}
                                                     <div class="form-check form-check-custom form-check-solid text-black mb-2">
@@ -1266,10 +1290,13 @@
                                         <div class="d-flex justify-content-between">
                                             <span class="fs-4 fw-bolder">Other Relevent Info</span>
                                            <span class="btn btn-active-color-primary btn-sm btn-light " id="edit_other_relevent_info">
-                                                @if( $career_info->career_summary || $career_info->special_qualification )<i class="fas fa-edit"></i> Edit
+                                                @if($career_info)
+                                                    @if( $career_info->career_summary || $career_info->special_qualification )<i class="fas fa-edit"></i> Edit 
+                                                    @else <i class="fas fa-plus"></i> Add @endif
                                                 @else <i class="fas fa-plus"></i> Add @endif
                                             </span>
                                         </div>
+                                        @isset($career_info)
                                         @if( $career_info->career_summary || $career_info->special_qualification )
                                         <!--begin::Options-->
                                         <div id="kt_create_new_payment_method">
@@ -1317,8 +1344,8 @@
                                         <span class="d-flex justify-content-center align-content-center text-muted fs-4 text-capitalize">
                                            Not available
                                         </span>
-                                        
                                         @endif
+                                        @endisset
                                     </div>
                                     <!--end::Card body-->
                                 </div>
@@ -1382,262 +1409,444 @@
                         </h2>
                         <div id="kt_accordion_1_body_5" class="accordion-collapse collapse " aria-labelledby="kt_accordion_1_header_5" data-bs-parent="#kt_accordion_1">
                             <div class="accordion-body disability_info">
-                                @if($user_detail->disability == 'yes')
+                               
                                 <div class="card card-flush pt-3 mb-5 mb-lg-10 disability_info_data" data-kt-subscriptions-form="pricing">
                                     <!--begin::Card body-->
                                     <div class="card-body pt-0">
                                         <div class="d-flex justify-content-between">
-                                             <span class="fs-4 fw-bolder">Disability Info</span>
-                                            <span class="btn btn-active-color-primary btn-sm btn-light " id="edit_disability_info"><i class="fas fa-edit"></i>Edit</span>
+                                            <span class="fs-4 fw-bolder">Disability Info</span>
+                                            @isset($user_detail)
+                                            @if($user_detail->disability == 'yes')
+                                            <span class="btn btn-active-color-primary btn-sm btn-light " id="edit_disability_info">
+                                                <i class="fas fa-edit"></i>Edit 
+                                            </span>
+                                            @endif
+                                            @endisset
                                         </div>
-                                        <!--begin::Options-->
-                                        <div id="kt_create_new_payment_method">
-                                            <!--begin::Option-->
-                                            <div class="py-1">
-                                                <!--begin::Body-->
-                                                <div id="kt_create_new_payment_method_1" class="fs-6 ps-10 collapse show" style="">
-                                                    <!--begin::Details-->
-                                                    <div class="py-5">
-                                                        <!--begin::Col-->
-                                                        <div class="mb-8">
-                                                           
-                                                            <table class="table table-flush fw-bold gy-1">
-                                                                
-                                                                <tbody>
-                                                                    <tr>
-                                                                        <td class="text-muted min-w-125px w-130px">Disability ID</td>
-                                                                        <td class="text-gray-800">{{ $user_detail->disability_id ?? '' }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="text-muted min-w-125px w-130px">Show on Resume</td>
-                                                                        <td class="text-gray-800">{{ $user_detail->show_on ?? 'No' }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="text-muted min-w-125px w-130px">Disability to see</td>
-                                                                        <td class="text-gray-800">{{ $user_detail->disability_see ?? 'No Disability' }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="text-muted min-w-125px w-130px">Disability Hear</td>
-                                                                        <td class="text-gray-800">{{ $user_detail->disability_hear ?? 'No Disability' }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="text-muted min-w-125px w-130px">Disability Physical</td>
-                                                                        <td class="text-gray-800">{{ $user_detail->disability_physical ?? 'No Disability' }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="text-muted min-w-125px w-130px">Disability Remember</td>
-                                                                        <td class="text-gray-800">{{ $user_detail->disability_remember ?? 'No Disability' }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="text-muted min-w-125px w-130px">Disability Communicate</td>
-                                                                        <td class="text-gray-800">{{ $user_detail->disability_communicate ?? 'No Disability' }}</td>
-                                                                    </tr>
-                                                                    <tr>
-                                                                        <td class="text-muted min-w-125px w-130px">Disability Care</td>
-                                                                        <td class="text-gray-800">{{ $user_detail->disability_care ?? 'No Disability' }}</td>
-                                                                    </tr>
-                                                                   
-                                                                </tbody>
-                                                            </table>
+                                        @if($user_detail)
+                                            @if($user_detail->disability == 'yes')
+                                            <!--begin::Options-->
+                                            <div id="kt_create_new_payment_method">
+                                                <!--begin::Option-->
+                                                <div class="py-1">
+                                                    <!--begin::Body-->
+                                                    <div id="kt_create_new_payment_method_1" class="fs-6 ps-10 collapse show" style="">
+                                                        <!--begin::Details-->
+                                                        <div class="py-5">
+                                                            <!--begin::Col-->
+                                                            <div class="mb-8">
+                                                            
+                                                                <table class="table table-flush fw-bold gy-1">
+                                                                    
+                                                                    <tbody>
+                                                                        <tr>
+                                                                            <td class="text-muted min-w-125px w-130px">Disability ID</td>
+                                                                            <td class="text-gray-800">{{ $user_detail->disability_id ?? '' }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="text-muted min-w-125px w-130px">Show on Resume</td>
+                                                                            <td class="text-gray-800">{{ $user_detail->show_on ?? 'No' }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="text-muted min-w-125px w-130px">Disability to see</td>
+                                                                            <td class="text-gray-800">{{ $user_detail->disability_see ?? 'No Disability' }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="text-muted min-w-125px w-130px">Disability Hear</td>
+                                                                            <td class="text-gray-800">{{ $user_detail->disability_hear ?? 'No Disability' }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="text-muted min-w-125px w-130px">Disability Physical</td>
+                                                                            <td class="text-gray-800">{{ $user_detail->disability_physical ?? 'No Disability' }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="text-muted min-w-125px w-130px">Disability Remember</td>
+                                                                            <td class="text-gray-800">{{ $user_detail->disability_remember ?? 'No Disability' }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="text-muted min-w-125px w-130px">Disability Communicate</td>
+                                                                            <td class="text-gray-800">{{ $user_detail->disability_communicate ?? 'No Disability' }}</td>
+                                                                        </tr>
+                                                                        <tr>
+                                                                            <td class="text-muted min-w-125px w-130px">Disability Care</td>
+                                                                            <td class="text-gray-800">{{ $user_detail->disability_care ?? 'No Disability' }}</td>
+                                                                        </tr>
+                                                                    
+                                                                    </tbody>
+                                                                </table>
+                                                            </div>
+                                                            <!--end::Col-->
+                                                        
                                                         </div>
-                                                        <!--end::Col-->
-                                                       
+                                                        <!--end::Details-->
+                                                        
                                                     </div>
-                                                    <!--end::Details-->
-                                                    
+                                                    <!--end::Body-->
                                                 </div>
-                                                <!--end::Body-->
+                                                <!--end::Option-->
+                                                <div class="separator separator-dashed"></div>
+                                                
                                             </div>
-                                            <!--end::Option-->
-                                            <div class="separator separator-dashed"></div>
+                                            <!--end::Options-->
+                                            @else
+                                            <!--begin::Heading-->
+                                            <div class="mb-8">
+                                                <!--begin::Description-->
+                                                <div class="text-muted fw-bold fs-5 mb-5 required">Do you have National Disability ID Number?</div>
+                                                <!--end::Description-->
+                                                <div class="fs-6 fw-bold">
+                                    
+                                                    <input class="form-check-input disability" type="radio" name="radiobtn"  value="yes" > <span class="me-3">Yes</span>
+                                                    <input class="form-check-input disability" type="radio" name="radiobtn" id="checked_no_disa"  value="no" checked> No
+                                                
+                                                </div>
+                                            </div>
+                                            <!--end::Heading-->
+                                        
+                                            <div class="border rounded mt-2 mb-8 no_disability">
+                                                <p class="py-3 px-3 fs-6">If you are a person with disability and have no Disability ID Number, please contact i2i support +88 01730369802 by Call/ SMS/ WhatsApp</p>
+                                            </div>
+
+                                            <!--begin:Form-->
+                                            <form id="kk_disability_info_form" class="form d-none" enctype="multipart/form-data">
+                                                @csrf
+                                                {{-- <div class="d-flex justify-content-end mb-4">
+                                                    <span class="btn btn-active-color-danger btn-sm btn-light " id="cancel_edit_disability_info"><i class="fas fa-times"></i>Cancel</span>
+                                                </div> --}}
+                                                <div class="messages"></div>
+
+                                                {{-- hidden input  --}}
+                                                <input type="hidden" name="disability" id="disability">
+
+                                                <!--begin::Input group-->
+                                                <div class="row g-9 mb-8 mt-5">
+                                                    <!--begin::Col-->
+                                                    <div class="col-md-6 fv-row">
+                                                        <!--begin::Input group-->
+                                                        <div class="d-flex flex-column fv-row">
+                                                            <!--begin::Label-->
+                                                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                                <span class="required">National Disability ID</span>
+                                                            </label>
+                                                            <!--end::Label-->
+                                                            <input type="text" class="form-control form-control-solid" placeholder="Enter First Name"
+                                                                name="disability_id" value="{{ $user_detail->disability_id ?? '' }}"/>
+                                                            <div class="help-block with-errors disability_id-error"></div>
+                                                        </div>
+                                                        <!--end::Input group-->
+                                                    </div>
+                                                    <!--begin::Col-->
+                                                    <div class="col-md-6 fv-row">
+                                                        <!--begin::Input group-->
+                                                        <div class="d-flex flex-column fv-row">
+                                                            <!--begin::Label-->
+                                                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                                <span class="">Show On Resume</span>
+                                                            </label>
+                                                            <!--end::Label-->
+                                                            <div class="fs-6 fw-bold">
+                                                                <input class="form-check-input" type="radio" name="show_on"  value="yes"   @isset( $user_detail->show_on_resume ) {{ $user_detail->show_on_resume == 'yes' ? 'checked' : '' }} @endisset> <span class="me-3">Yes</span>
+                                                                <input class="form-check-input" type="radio" name="show_on"  value="no"   @isset( $user_detail->show_on_resume ) {{ $user_detail->show_on_resume == 'no' ? 'checked' : '' }} @endisset> No   
+                                                            </div>
+                                                            <div class="help-block with-errors show_on-error"></div>
+                                                        </div>
+                                                        <!--end::Input group-->
+                                                    </div>
+                                                </div>
+                                                <!--end::Input group-->
+                                                
+                                                <!--begin::Input group-->
+                                                <div class="row g-9 mb-8">
+                                                    <!--begin::Col-->
+                                                    <div class="col-md-6 fv-row">
+                                                        <label class="required fs-6 fw-bold mb-2">Difficulty to see</label>
+                                                        <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                                            name="see">
+                                                            <option value="">Select</option>
+                                                            
+                                                            <option value="some" @isset( $user_detail->disability_see )  {{ $user_detail->disability_see == 'some' ? 'selected' : '' }} @endisset >Some Difficulty</option>
+                                                            <option value="lot" @isset( $user_detail->disability_see ) {{ $user_detail->disability_see == 'lot' ? 'selected' : '' }} @endisset >A lot of Difficulty</option>
+                                                            <option value="cannot" @isset( $user_detail->disability_see ) {{ $user_detail->disability_see == 'canot' ? 'selected' : '' }}@endisset >Can not do at all</option>
+                                                            
+                                                        </select>
+                                                        <div class="help-block with-errors see-error"></div>    
+                                                    </div>
+                                                    <!--begin::Col-->
+                                                    <div class="col-md-6 fv-row">
+                                                        <label class="required fs-6 fw-bold mb-2">Difficulty to Hear</label>
+                                                        <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                                            name="hear">
+                                                            <option value="">Select</option>
+                                                            
+                                                            <option value="some" @isset( $user_detail->disability_hear ) {{ $user_detail->disability_hear == 'some' ? 'selected' : '' }} @endisset >Some Difficulty</option>
+                                                            <option value="lot" @isset( $user_detail->disability_hear ) {{ $user_detail->disability_hear == 'lot' ? 'selected' : '' }} @endisset >A lot of Difficulty</option>
+                                                            <option value="cannot" @isset( $user_detail->disability_hear ) {{ $user_detail->disability_hear == 'canot' ? 'selected' : '' }} @endisset >Can not do at all</option>
+                                                        
+                                                        </select>
+                                                        <div class="help-block with-errors hear-error"></div>    
+                                                    </div>
+                                                </div>
+                                                <!--end::Input group-->
+                                                
+                                                <!--begin::Input group-->
+                                                <div class="row g-9 mb-8">
+                                                    <!--begin::Col-->
+                                                    <div class="col-md-6 fv-row">
+                                                        <label class="required fs-6 fw-bold mb-2">Difficulty to Concentrate or remember  </label>
+                                                        <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                                            name="remember">
+                                                            <option value="">Select</option>
+                                                        
+                                                            <option value="some" @isset( $user_detail->disability_remember ) {{ $user_detail->disability_remember == 'some' ? 'selected' : '' }}@endisset >Some Difficulty</option>
+                                                            <option value="lot" @isset( $user_detail->disability_remember ) {{ $user_detail->disability_remember == 'lot' ? 'selected' : '' }}@endisset >A lot of Difficulty</option>
+                                                            <option value="cannot" @isset( $user_detail->disability_remember ) {{ $user_detail->disability_remember == 'canot' ? 'selected' : '' }}@endisset >Can not do at all</option>
+                                                            
+                                                        </select>
+                                                        <div class="help-block with-errors remember-error"></div>    
+                                                    </div>
+                                                    <!--begin::Col-->
+                                                    <div class="col-md-6 fv-row">
+                                                        <label class="required fs-6 fw-bold mb-2">Difficulty to Sit, Stand, Walk or Climb Stairs </label>
+                                                        <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                                            name="physical">
+                                                            <option value="">Select</option>
+                                                        
+                                                            <option value="some" @isset( $user_detail->disability_physical ) {{ $user_detail->disability_physical == 'some' ? 'selected' : '' }} @endisset>Some Difficulty</option>
+                                                            <option value="lot" @isset( $user_detail->disability_physical ) {{ $user_detail->disability_physical == 'lot' ? 'selected' : '' }} @endisset>A lot of Difficulty</option>
+                                                            <option value="cannot" @isset( $user_detail->disability_physical ) {{ $user_detail->disability_physical == 'canot' ? 'selected' : '' }} @endisset>Can not do at all</option>
+                                                            
+                                                        </select>
+                                                        <div class="help-block with-errors physical-error"></div>    
+                                                    </div>
+                                                </div>
+                                                <!--end::Input group-->
+                                                <!--begin::Input group-->
+                                                <div class="row g-9 mb-8">
+                                                    <!--begin::Col-->
+                                                    <div class="col-md-6 fv-row">
+                                                        <label class="required fs-6 fw-bold mb-2">Difficulty to Communicate </label>
+                                                        <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                                        name="communicate">
+                                                            <option value="">Select</option>
+                                                            <option value="some"  @isset( $user_detail->disability_communicate ) {{ $user_detail->disability_communicate == 'some' ? 'selected' : '' }} @endisset >Some Difficulty</option>
+                                                            <option value="lot"  @isset( $user_detail->disability_communicate ) {{ $user_detail->disability_communicate == 'lot' ? 'selected' : '' }}  @endisset>A lot of Difficulty</option>
+                                                            <option value="cannot"  @isset( $user_detail->disability_communicate ) {{ $user_detail->disability_communicate == 'canot' ? 'selected' : '' }}  @endisset>Can not do at all</option>
+                                                        
+                                                        </select>
+                                                        <div class="help-block with-errors communicate-error"></div>    
+                                                    </div>
+                                                    <!--begin::Col-->
+                                                    <div class="col-md-6 fv-row">
+                                                        <label class="required fs-6 fw-bold mb-2">Difficulty of Taking Care (example: shower, wearing clothes)</label>
+                                                        <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                                        name="take_care">
+                                                            <option value="">Select</option>
+                                                            <option value="some" @isset( $user_detail->disability_care ) {{ $user_detail->disability_care == 'some' ? 'selected' : '' }}  @endisset >Some Difficulty</option>
+                                                            <option value="lot" @isset( $user_detail->disability_care ) {{ $user_detail->disability_care == 'lot' ? 'selected' : '' }} @endisset>A lot of Difficulty</option>
+                                                            <option value="cannot" @isset( $user_detail->disability_care ) {{ $user_detail->disability_care == 'canot' ? 'selected' : '' }} @endisset>Can not do at all</option>
+                                                            
+                                                        </select>
+                                                        <div class="help-block with-errors take_care-error"></div>    
+                                                    </div>
+                                                </div>
+                                                <!--end::Input group-->
+                                                
+                                                
+                                                <!--begin::Actions-->
+                                                <div class="d-flex justify-content-between">
+                                                    <button type="reset" id="kk_disability_info_cancel" class="btn btn-light btn-active-color-danger btn-sm me-3">Close</button>
+                                                    <button type="submit" id="kk_disability_info_submit" class="btn btn-primary">
+                                                        <span class="indicator-label py-3 px-7">Save</span>
+                                                        <span class="indicator-progress">Please wait...
+                                                            <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                                    </button>
+                                                </div>
+                                                <!--end::Actions-->
+                                            </form>
+                                            @endif
+                                        @else
+                                        <!--begin::Heading-->
+                                        <div class="mb-8">
+                                            <!--begin::Description-->
+                                            <div class="text-muted fw-bold fs-5 mb-5 required">Do you have National Disability ID Number?</div>
+                                            <!--end::Description-->
+                                            <div class="fs-6 fw-bold">
+                                
+                                                <input class="form-check-input disability" type="radio" name="radiobtn"  value="yes" > <span class="me-3">Yes</span>
+                                                <input class="form-check-input disability" type="radio" name="radiobtn" id="checked_no_disa"  value="no" checked> No
                                             
+                                            </div>
                                         </div>
-                                        <!--end::Options-->
+                                        <!--end::Heading-->
+                                       
+                                        <div class="border rounded mt-2 mb-8 no_disability">
+                                            <p class="py-3 px-3 fs-6">If you are a person with disability and have no Disability ID Number, please contact i2i support +88 01730369802 by Call/ SMS/ WhatsApp</p>
+                                        </div>
+
+                                        <!--begin:Form-->
+                                        <form id="kk_disability_info_form" class="form d-none" enctype="multipart/form-data">
+                                            @csrf
+                                            {{-- <div class="d-flex justify-content-end mb-4">
+                                                <span class="btn btn-active-color-danger btn-sm btn-light " id="cancel_edit_disability_info"><i class="fas fa-times"></i>Cancel</span>
+                                            </div> --}}
+                                            <div class="messages"></div>
+
+                                            {{-- hidden input  --}}
+                                            <input type="hidden" name="disability" id="disability">
+
+                                            <!--begin::Input group-->
+                                            <div class="row g-9 mb-8 mt-5">
+                                                <!--begin::Col-->
+                                                <div class="col-md-6 fv-row">
+                                                    <!--begin::Input group-->
+                                                    <div class="d-flex flex-column fv-row">
+                                                        <!--begin::Label-->
+                                                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                            <span class="required">National Disability ID</span>
+                                                        </label>
+                                                        <!--end::Label-->
+                                                        <input type="text" class="form-control form-control-solid" placeholder="Enter First Name"
+                                                            name="disability_id" value="{{ $user_detail->disability_id ?? '' }}"/>
+                                                        <div class="help-block with-errors disability_id-error"></div>
+                                                    </div>
+                                                    <!--end::Input group-->
+                                                </div>
+                                                <!--begin::Col-->
+                                                <div class="col-md-6 fv-row">
+                                                    <!--begin::Input group-->
+                                                    <div class="d-flex flex-column fv-row">
+                                                        <!--begin::Label-->
+                                                        <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                                            <span class="">Show On Resume</span>
+                                                        </label>
+                                                        <!--end::Label-->
+                                                        <div class="fs-6 fw-bold">
+                                                            <input class="form-check-input" type="radio" name="show_on"  value="yes"   @isset( $user_detail->show_on_resume ) {{ $user_detail->show_on_resume == 'yes' ? 'checked' : '' }} @endisset> <span class="me-3">Yes</span>
+                                                            <input class="form-check-input" type="radio" name="show_on"  value="no"   @isset( $user_detail->show_on_resume ) {{ $user_detail->show_on_resume == 'no' ? 'checked' : '' }} @endisset> No   
+                                                        </div>
+                                                        <div class="help-block with-errors show_on-error"></div>
+                                                    </div>
+                                                    <!--end::Input group-->
+                                                </div>
+                                            </div>
+                                            <!--end::Input group-->
+                                            
+                                            <!--begin::Input group-->
+                                            <div class="row g-9 mb-8">
+                                                <!--begin::Col-->
+                                                <div class="col-md-6 fv-row">
+                                                    <label class="required fs-6 fw-bold mb-2">Difficulty to see</label>
+                                                    <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                                        name="see">
+                                                        <option value="">Select</option>
+                                                        
+                                                        <option value="some" @isset( $user_detail->disability_see )  {{ $user_detail->disability_see == 'some' ? 'selected' : '' }} @endisset >Some Difficulty</option>
+                                                        <option value="lot" @isset( $user_detail->disability_see ) {{ $user_detail->disability_see == 'lot' ? 'selected' : '' }} @endisset >A lot of Difficulty</option>
+                                                        <option value="cannot" @isset( $user_detail->disability_see ) {{ $user_detail->disability_see == 'canot' ? 'selected' : '' }}@endisset >Can not do at all</option>
+                                                        
+                                                    </select>
+                                                    <div class="help-block with-errors see-error"></div>    
+                                                </div>
+                                                <!--begin::Col-->
+                                                <div class="col-md-6 fv-row">
+                                                    <label class="required fs-6 fw-bold mb-2">Difficulty to Hear</label>
+                                                    <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                                        name="hear">
+                                                        <option value="">Select</option>
+                                                        
+                                                        <option value="some" @isset( $user_detail->disability_hear ) {{ $user_detail->disability_hear == 'some' ? 'selected' : '' }} @endisset >Some Difficulty</option>
+                                                        <option value="lot" @isset( $user_detail->disability_hear ) {{ $user_detail->disability_hear == 'lot' ? 'selected' : '' }} @endisset >A lot of Difficulty</option>
+                                                        <option value="cannot" @isset( $user_detail->disability_hear ) {{ $user_detail->disability_hear == 'canot' ? 'selected' : '' }} @endisset >Can not do at all</option>
+                                                    
+                                                    </select>
+                                                    <div class="help-block with-errors hear-error"></div>    
+                                                </div>
+                                            </div>
+                                            <!--end::Input group-->
+                                            
+                                            <!--begin::Input group-->
+                                            <div class="row g-9 mb-8">
+                                                <!--begin::Col-->
+                                                <div class="col-md-6 fv-row">
+                                                    <label class="required fs-6 fw-bold mb-2">Difficulty to Concentrate or remember  </label>
+                                                    <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                                        name="remember">
+                                                        <option value="">Select</option>
+                                                    
+                                                        <option value="some" @isset( $user_detail->disability_remember ) {{ $user_detail->disability_remember == 'some' ? 'selected' : '' }}@endisset >Some Difficulty</option>
+                                                        <option value="lot" @isset( $user_detail->disability_remember ) {{ $user_detail->disability_remember == 'lot' ? 'selected' : '' }}@endisset >A lot of Difficulty</option>
+                                                        <option value="cannot" @isset( $user_detail->disability_remember ) {{ $user_detail->disability_remember == 'canot' ? 'selected' : '' }}@endisset >Can not do at all</option>
+                                                        
+                                                    </select>
+                                                    <div class="help-block with-errors remember-error"></div>    
+                                                </div>
+                                                <!--begin::Col-->
+                                                <div class="col-md-6 fv-row">
+                                                    <label class="required fs-6 fw-bold mb-2">Difficulty to Sit, Stand, Walk or Climb Stairs </label>
+                                                    <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                                        name="physical">
+                                                        <option value="">Select</option>
+                                                    
+                                                        <option value="some" @isset( $user_detail->disability_physical ) {{ $user_detail->disability_physical == 'some' ? 'selected' : '' }} @endisset>Some Difficulty</option>
+                                                        <option value="lot" @isset( $user_detail->disability_physical ) {{ $user_detail->disability_physical == 'lot' ? 'selected' : '' }} @endisset>A lot of Difficulty</option>
+                                                        <option value="cannot" @isset( $user_detail->disability_physical ) {{ $user_detail->disability_physical == 'canot' ? 'selected' : '' }} @endisset>Can not do at all</option>
+                                                        
+                                                    </select>
+                                                    <div class="help-block with-errors physical-error"></div>    
+                                                </div>
+                                            </div>
+                                            <!--end::Input group-->
+                                            <!--begin::Input group-->
+                                            <div class="row g-9 mb-8">
+                                                <!--begin::Col-->
+                                                <div class="col-md-6 fv-row">
+                                                    <label class="required fs-6 fw-bold mb-2">Difficulty to Communicate </label>
+                                                    <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                                       name="communicate">
+                                                        <option value="">Select</option>
+                                                        <option value="some"  @isset( $user_detail->disability_communicate ) {{ $user_detail->disability_communicate == 'some' ? 'selected' : '' }} @endisset >Some Difficulty</option>
+                                                        <option value="lot"  @isset( $user_detail->disability_communicate ) {{ $user_detail->disability_communicate == 'lot' ? 'selected' : '' }}  @endisset>A lot of Difficulty</option>
+                                                        <option value="cannot"  @isset( $user_detail->disability_communicate ) {{ $user_detail->disability_communicate == 'canot' ? 'selected' : '' }}  @endisset>Can not do at all</option>
+                                                    
+                                                    </select>
+                                                    <div class="help-block with-errors communicate-error"></div>    
+                                                </div>
+                                                <!--begin::Col-->
+                                                <div class="col-md-6 fv-row">
+                                                    <label class="required fs-6 fw-bold mb-2">Difficulty of Taking Care (example: shower, wearing clothes)</label>
+                                                    <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
+                                                       name="take_care">
+                                                        <option value="">Select</option>
+                                                        <option value="some" @isset( $user_detail->disability_care ) {{ $user_detail->disability_care == 'some' ? 'selected' : '' }}  @endisset >Some Difficulty</option>
+                                                        <option value="lot" @isset( $user_detail->disability_care ) {{ $user_detail->disability_care == 'lot' ? 'selected' : '' }} @endisset>A lot of Difficulty</option>
+                                                        <option value="cannot" @isset( $user_detail->disability_care ) {{ $user_detail->disability_care == 'canot' ? 'selected' : '' }} @endisset>Can not do at all</option>
+                                                        
+                                                    </select>
+                                                    <div class="help-block with-errors take_care-error"></div>    
+                                                </div>
+                                            </div>
+                                            <!--end::Input group-->
+                                            
+                                            
+                                            <!--begin::Actions-->
+                                            <div class="d-flex justify-content-between">
+                                                <button type="reset" id="kk_disability_info_cancel" class="btn btn-light btn-active-color-danger btn-sm me-3">Close</button>
+                                                <button type="submit" id="kk_disability_info_submit" class="btn btn-primary">
+                                                    <span class="indicator-label py-3 px-7">Save</span>
+                                                    <span class="indicator-progress">Please wait...
+                                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
+                                                </button>
+                                            </div>
+                                            <!--end::Actions-->
+                                        </form>
+                                        @endif
+                                        
                                     </div>
                                     <!--end::Card body-->
                                 </div>
-                                @else
-                                <!--begin::Heading-->
-                                <div class="mb-8">
-                                    <!--begin::Description-->
-                                    <div class="text-muted fw-bold fs-5 mb-5 required">Do you have National Disability ID Number?</div>
-                                    <!--end::Description-->
-                                    <div class="fs-6 fw-bold">
-                        
-                                        <input class="form-check-input disability" type="radio" name="radiobtn"  value="yes" > <span class="me-3">Yes</span>
-                                        <input class="form-check-input disability" type="radio" name="radiobtn"  value="no" checked> No
-                                      
-                                    </div>
-                                </div>
-                                <!--end::Heading-->
-                               
-                                <div class="border rounded mt-2 mb-8 no_disability">
-                                
-                                    <p class="py-3 px-3 fs-6">If you are a person with disability and have no Disability ID Number, please contact i2i support +88 01730369802 by Call/ SMS/ WhatsApp</p>
-                                </div>
-                                <!--begin:Form-->
-                                @endif
-                                <form id="kk_disability_info_form" class="form d-none" enctype="multipart/form-data">
-                                    @csrf
-                                    <div class="d-flex justify-content-end mb-4">
-                                        <span class="btn btn-active-color-danger btn-sm btn-light " id="cancel_edit_disability_info"><i class="fas fa-times"></i>Cancel</span>
-                                    </div>
-                                    <div class="messages"></div>
-
-                                    {{-- hidden input  --}}
-                                    <input type="hidden" name="disability" id="disability">
-                                    <!--begin::Input group-->
-                                    <div class="row g-9 mb-8 mt-5">
-                                        <!--begin::Col-->
-                                        <div class="col-md-6 fv-row">
-                                            <!--begin::Input group-->
-                                            <div class="d-flex flex-column fv-row">
-                                                <!--begin::Label-->
-                                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                                    <span class="required">National Disability ID</span>
-                                                </label>
-                                                <!--end::Label-->
-                                                <input type="text" class="form-control form-control-solid" placeholder="Enter First Name"
-                                                    name="disability_id" value="{{ $user_detail->disability_id ?? '' }}"/>
-                                                <div class="help-block with-errors disability_id-error"></div>
-                                            </div>
-                                            <!--end::Input group-->
-                                        </div>
-                                        <!--begin::Col-->
-                                        <div class="col-md-6 fv-row">
-                                            <!--begin::Input group-->
-                                            <div class="d-flex flex-column fv-row">
-                                                <!--begin::Label-->
-                                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                                                    <span class="">Show On Resume</span>
-                                                </label>
-                                                <!--end::Label-->
-                                                <div class="fs-6 fw-bold">
-                                                    @isset( $user_detail->show_on_resume )
-                                                    <input class="form-check-input" type="radio" name="show_on"  value="yes" {{ $user_detail->show_on_resume == 'yes' ? 'checked' : '' }}> <span class="me-3">Yes</span>
-                                                    <input class="form-check-input" type="radio" name="show_on"  value="no" {{ $user_detail->show_on_resume == 'no' ? 'checked' : '' }}> No
-                                                    @endisset
-                                                </div>
-                                                <div class="help-block with-errors show_on-error"></div>
-                                            </div>
-                                            <!--end::Input group-->
-                                        </div>
-                                    </div>
-                                    <!--end::Input group-->
-                                    
-                                    <!--begin::Input group-->
-                                    <div class="row g-9 mb-8">
-                                        <!--begin::Col-->
-                                        <div class="col-md-6 fv-row">
-                                            <label class="required fs-6 fw-bold mb-2">Difficulty to see</label>
-                                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                name="see">
-                                                <option value="">Select</option>
-                                                
-                                                <option value="some" @isset( $user_detail->disability_see )  {{ $user_detail->disability_see == 'some' ? 'selected' : '' }} @endisset >Some Difficulty</option>
-                                                <option value="lot" @isset( $user_detail->disability_see ) {{ $user_detail->disability_see == 'lot' ? 'selected' : '' }} @endisset >A lot of Difficulty</option>
-                                                <option value="cannot" @isset( $user_detail->disability_see ) {{ $user_detail->disability_see == 'canot' ? 'selected' : '' }}@endisset >Can not do at all</option>
-                                                
-                                            </select>
-                                            <div class="help-block with-errors see-error"></div>    
-                                        </div>
-                                        <!--begin::Col-->
-                                        <div class="col-md-6 fv-row">
-                                            <label class="required fs-6 fw-bold mb-2">Difficulty to Hear</label>
-                                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                name="hear">
-                                                <option value="">Select</option>
-                                                
-                                                <option value="some" @isset( $user_detail->disability_hear ) {{ $user_detail->disability_hear == 'some' ? 'selected' : '' }} @endisset >Some Difficulty</option>
-                                                <option value="lot" @isset( $user_detail->disability_hear ) {{ $user_detail->disability_hear == 'lot' ? 'selected' : '' }} @endisset >A lot of Difficulty</option>
-                                                <option value="cannot" @isset( $user_detail->disability_hear ) {{ $user_detail->disability_hear == 'canot' ? 'selected' : '' }} @endisset >Can not do at all</option>
-                                               
-                                            </select>
-                                            <div class="help-block with-errors hear-error"></div>    
-                                        </div>
-                                    </div>
-                                    <!--end::Input group-->
-                                    
-                                    <!--begin::Input group-->
-                                    <div class="row g-9 mb-8">
-                                        <!--begin::Col-->
-                                        <div class="col-md-6 fv-row">
-                                            <label class="required fs-6 fw-bold mb-2">Difficulty to Concentrate or remember  </label>
-                                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                name="remember">
-                                                <option value="">Select</option>
-                                               
-                                                <option value="some" @isset( $user_detail->disability_remember ) {{ $user_detail->disability_remember == 'some' ? 'selected' : '' }}@endisset >Some Difficulty</option>
-                                                <option value="lot" @isset( $user_detail->disability_remember ) {{ $user_detail->disability_remember == 'lot' ? 'selected' : '' }}@endisset >A lot of Difficulty</option>
-                                                <option value="cannot" @isset( $user_detail->disability_remember ) {{ $user_detail->disability_remember == 'canot' ? 'selected' : '' }}@endisset >Can not do at all</option>
-                                                
-                                            </select>
-                                            <div class="help-block with-errors remember-error"></div>    
-                                        </div>
-                                        <!--begin::Col-->
-                                        <div class="col-md-6 fv-row">
-                                            <label class="required fs-6 fw-bold mb-2">Difficulty to Sit, Stand, Walk or Climb Stairs </label>
-                                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                name="physical">
-                                                <option value="">Select</option>
-                                              
-                                                <option value="some" @isset( $user_detail->disability_physical ) {{ $user_detail->disability_physical == 'some' ? 'selected' : '' }} @endisset>Some Difficulty</option>
-                                                <option value="lot" @isset( $user_detail->disability_physical ) {{ $user_detail->disability_physical == 'lot' ? 'selected' : '' }} @endisset>A lot of Difficulty</option>
-                                                <option value="cannot" @isset( $user_detail->disability_physical ) {{ $user_detail->disability_physical == 'canot' ? 'selected' : '' }} @endisset>Can not do at all</option>
-                                                
-                                            </select>
-                                            <div class="help-block with-errors physical-error"></div>    
-                                        </div>
-                                    </div>
-                                    <!--end::Input group-->
-                                    <!--begin::Input group-->
-                                    <div class="row g-9 mb-8">
-                                        <!--begin::Col-->
-                                        <div class="col-md-6 fv-row">
-                                            <label class="required fs-6 fw-bold mb-2">Difficulty to Communicate </label>
-                                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                data-placeholder="Select" name="communicate">
-                                               
-                                                <option value="some"  @isset( $user_detail->disability_communicate ) {{ $user_detail->disability_communicate == 'some' ? 'selected' : '' }} @endisset >Some Difficulty</option>
-                                                <option value="lot"  @isset( $user_detail->disability_communicate ) {{ $user_detail->disability_communicate == 'lot' ? 'selected' : '' }}  @endisset>A lot of Difficulty</option>
-                                                <option value="cannot"  @isset( $user_detail->disability_communicate ) {{ $user_detail->disability_communicate == 'canot' ? 'selected' : '' }}  @endisset>Can not do at all</option>
-                                               
-                                            </select>
-                                            <div class="help-block with-errors communicate-error"></div>    
-                                        </div>
-                                        <!--begin::Col-->
-                                        <div class="col-md-6 fv-row">
-                                            <label class="required fs-6 fw-bold mb-2">Difficulty of Taking Care (example: shower, wearing clothes)</label>
-                                            <select class="form-select form-select-solid" data-control="select2" data-hide-search="true"
-                                                data-placeholder="Select" name="take_care">
-                                               
-                                                <option value="some" @isset( $user_detail->disability_care ) {{ $user_detail->disability_care == 'some' ? 'selected' : '' }}  @endisset >Some Difficulty</option>
-                                                <option value="lot" @isset( $user_detail->disability_care ) {{ $user_detail->disability_care == 'lot' ? 'selected' : '' }} @endisset>A lot of Difficulty</option>
-                                                <option value="cannot" @isset( $user_detail->disability_care ) {{ $user_detail->disability_care == 'canot' ? 'selected' : '' }} @endisset>Can not do at all</option>
-                                                
-                                            </select>
-                                            <div class="help-block with-errors take_care-error"></div>    
-                                        </div>
-                                    </div>
-                                    <!--end::Input group-->
-                                    
-                                    
-                                    <!--begin::Actions-->
-                                    <div class="d-flex justify-content-between">
-                                        <button type="reset" id="kk_disability_info_cancel" class="btn btn-light btn-active-color-danger btn-sm me-3">Close</button>
-                                        <button type="submit" id="kk_disability_info_submit" class="btn btn-primary">
-                                            <span class="indicator-label py-3 px-7">Save</span>
-                                            <span class="indicator-progress">Please wait...
-                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
-                                        </button>
-                                    </div>
-                                    <!--end::Actions-->
-                                </form>
-                               
                             </div>
                         </div>
                     </div>
-
                 </div>
                 <!--end::Accordion-->
             </div>
@@ -2016,8 +2225,10 @@
             $(this).parents(".disability_info").find('div.disability_info_data').removeClass('d-none');
         })
         $("#kk_disability_info_cancel").on('click', function(){
+            
             $(this).parents(".disability_info").find('form#kk_disability_info_form').addClass('d-none');
             $(this).parents(".disability_info").find('div.disability_info_data').removeClass('d-none');
+            $('#checked_no_disa').prop('checked', true);
         })
         // Disability  info Section :: end
 

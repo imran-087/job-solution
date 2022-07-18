@@ -267,13 +267,22 @@
                                     <!--end::Actions-->
                                 </form>
 
+                                <div class="separator separator-dashed mb-13"></div>
+
                                 <!--- start::description --->
                                 <div class="card card-flush pt-3 mb-5 mb-lg-10 description_data" data-kt-subscriptions-form="pricing">
                                     <!--begin::Card body-->
                                     <div class="card-body pt-0">
                                       
-                                        <div class="d-flex justify-content-end">
-                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2" id="edit_description"><i class="fas fa-edit"></i>{{ $user_detail->skill_description == null ? 'Add' : 'Edit' }}</span>
+                                        <div class="d-flex justify-content-between">
+                                             <span class="fw-bolder fs-4">Skill Description</span>
+                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2" id="edit_description">
+                                                @if($user_detail)
+                                                    @if($user_detail->skill_description != null)  <i class="fas fa-edit"></i> Edit 
+                                                    @else <i class="fas fa-plus"></i> Add @endif
+                                                @else <i class="fas fa-plus"></i> Add @endif 
+                                            </span>
+                                               
                                             {{-- <span class="btn btn-active-color-danger btn-sm btn-light delete_description" data-id="{{ $user_detail->id }}" ><i class="fas fa-trash"></i>Delete</span> --}}
                                         </div>
                                         <!--begin::Options-->
@@ -286,7 +295,7 @@
                                                     <div class="py-5">
                                                         <!--begin::Col-->
                                                         <div class="mb-8">
-                                                            <span class="fw-bolder fs-4">Skill Description</span>
+                                                           
                                                             <table class="table table-flush fw-bold gy-1">
                                                                 
                                                                 <tbody>
@@ -353,8 +362,14 @@
                                     <!--begin::Card body-->
                                     <div class="card-body pt-0">
                                       
-                                        <div class="d-flex justify-content-end">
-                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2" id="edit_extracurricular"><i class="fas fa-edit"></i>{{ $user_detail->extracurricular == null ? 'Add' : 'Edit' }}</span>
+                                        <div class="d-flex justify-content-between">
+                                            <span class="fw-bolder fs-4">Extracurricular Activites</span>
+                                            <span class="btn btn-active-color-primary btn-sm btn-light me-2" id="edit_extracurricular">
+                                                 @if($user_detail)
+                                                    @if($user_detail->extracurricular != null)  <i class="fas fa-edit"></i> Edit 
+                                                    @else <i class="fas fa-plus"></i> Add @endif
+                                                @else <i class="fas fa-plus"></i> Add @endif 
+                                               
                                             {{-- <span class="btn btn-active-color-danger btn-sm btn-light delete_extracurricular" data-id="{{ $user_detail->id }}" ><i class="fas fa-trash"></i>Delete</span> --}}
 
                                         </div>
@@ -368,7 +383,7 @@
                                                     <div class="py-5">
                                                         <!--begin::Col-->
                                                         <div class="mb-8">
-                                                            <span class="fw-bolder fs-4">Extracurricular Activites</span>
+                                                            
                                                             <table class="table table-flush fw-bold gy-1">
                                                                 
                                                                 <tbody>

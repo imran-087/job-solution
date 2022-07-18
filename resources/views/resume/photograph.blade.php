@@ -76,9 +76,9 @@
                         <div class="col-lg-12 text-center">
                             <div class="fs-6 fw-bold mt-2 mb-8">Upload your photo</div>
                             <!--begin::Image input-->
-                            <div class="image-input image-input-outline" data-kt-image-input="true" style="background-image: url({{ asset($user_avatar->photo_path) }})">
+                            <div class="image-input image-input-outline" data-kt-image-input="true" @isset($user_avatar->photo_path) style="background-image: url({{ asset($user_avatar->photo_path) }})" @endisset>
                                 <!--begin::Preview existing avatar-->
-                                <div class="image-input-wrapper w-125px h-125px bgi-position-center" style="background-size: 75%; background-image: url({{ asset($user_avatar->photo_path) }})"></div>
+                                <div class="image-input-wrapper w-125px h-125px bgi-position-center" @isset($user_avatar->photo_path) style="background-size: 75%; background-image: url({{ asset($user_avatar->photo_path) }})" @endisset></div>
                                 <!--end::Preview existing avatar-->
                                 <!--begin::Label-->
                                 <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-white shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="Change avatar">

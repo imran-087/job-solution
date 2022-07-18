@@ -126,7 +126,7 @@
         html += '<input type="hidden" name="question_id" value="'+ question_id +'"';
         html += '<span id="kk_add_description_form" class="form">';
         html +=    '<div class="col-md-12 mb-5">';   
-        html +=          '<textarea name="description" id="textareaDescription" class="form-control form-control-solid h-100px"></textarea>';
+        html +=          '<textarea name="description" id="textareaDescription" class="form-control form-control-solid h-100px example"></textarea>';
         html +=           '<div class="help-block with-errors description-error"></div>'
         html +=     '</div>';
         html +=      '<div class="d-flex justify-content-end">';
@@ -203,7 +203,7 @@
         html += '<input type="hidden" name="description_id" value="'+ description_id +'"';
         html += '<span id="kk_update_description_form" class="form">';
         html +=    '<div class="col-md-12 mb-5">';   
-        html +=          '<textarea name="description" id="textareaDescription" class="form-control form-control-solid h-100px">'+ description +'</textarea>';
+        html +=          '<textarea name="description" id="textareaDescription" class="form-control form-control-solid h-100px example">'+ description +'</textarea>';
         html +=           '<div class="help-block with-errors description-error"></div>'
         html +=     '</div>';
         html +=      '<div class="d-flex justify-content-end">';
@@ -464,8 +464,9 @@
         }))
     })
 
-
 </script>
+
+
 @endpush
 
 

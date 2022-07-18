@@ -21,6 +21,6 @@
         "sass-loader": "^11.0.1"
     },
     "dependencies": {
-        "@wiris/mathtype-ckeditor5": "^7.28.1"
+        "@wiris/mathtype-ckeditor5": "^7.29.0"
     }
 }

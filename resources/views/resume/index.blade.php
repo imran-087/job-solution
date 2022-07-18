@@ -63,9 +63,11 @@
     <div id="kt_content_container" class="container-xxl">
          
         @include('resume.menubar')
-        
+
+        @if($user->detail || $user->academic_infos || $user->training_infos || $user->career_info)
         <div class="card card-flush mb-9" id="html-content-holder">
             <div class="card-body">
+                @if($user->detail->count() > 0)
                 <div class="row mb-9">
                     <div class="col-md-6">
                         <div class="name mb-9">
@@ -87,6 +89,9 @@
                         </div>
                     </div>
                 </div>
+                @endif
+
+                @if($user->academic_infos->count() > 0)
                 <div class="row mb-9">
                     <div class="p-3 fw-bolder fs-5 mb-4" style="background: #E6E6E6;">
                         <span class="" >Academic Qualification</span>
@@ -126,6 +131,9 @@
                         </div>
                     </div>
                 </div>
+                @endif
+
+                @if($user->training_infos->count() > 0)
                 <div class="row mb-9">
                     <div class="p-3 fw-bolder fs-5 mb-4" style="background: #E6E6E6;">
                         <span class="" >Training Summary</span>
@@ -153,12 +161,15 @@
                                 <td>{{ $training->year }}</td>
                                 <td>{{ $training->address }} </td>
                             </tr>
-                           @endforeach
+                            @endforeach
                             </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
+                @endif
+
+                @if($user->career_info)
                 <div class="row mb-9">
                     <div class="p-3 fw-bolder fs-5 mb-4" style="background: #E6E6E6;">
                         <span class="" >Career and Application Information</span>
@@ -184,6 +195,23 @@
                         </table>
                     </div>
                 </div>
+                @endif
+                @if($user->skills->count() > 0)
+                <div class="row mb-9">
+                    <div class="p-3 fw-bolder fs-5 mb-4" style="background: #E6E6E6;">
+                        <span class="" >Specialization:</span>
+                    </div>
+                    <div class="special-skill">
+                        <ul>
+                            @foreach($user->skills as $skill)
+                            <li>{{ $skill->skill }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                </div>
+                @endif
+
+                @if($user->detail->count() > 0)
                 <div class="row mb-9">
                     <div class="p-3 fw-bolder fs-5 mb-4" style="background: #E6E6E6;">
                         <span class="" >Personal Details</span>
@@ -217,11 +245,13 @@
                                 <tr>
                                     <td class="text-muted min-w-105px w-120px">Permanent Address</td>
                                     <td class="text-gray-800 fw-bolder">: &nbsp;&nbsp;
-                                        @if($user->detail->permanent_address == 'sameaspresent')
-                                        {{  $user->detail->present_address['address']  }} 
-                                        @else
-                                        {{  $user->detail->permanent_address['address']  }} 
-                                        @endif
+                                        @isset($user->detail->present_address)
+                                            @if($user->detail->permanent_address == 'sameaspresent')
+                                            {{  $user->detail->present_address['address']  }} 
+                                            @else
+                                            {{  $user->detail->permanent_address['address']  }} 
+                                            @endif
+                                        @endisset
                                         &nbsp;&nbsp;
                                     </td>
                                 </tr>
@@ -230,15 +260,22 @@
                         </table>
                     </div>
                 </div>
+                @endif
             </div>
+           
         </div>
-
         <div class="text-center m-3">
             <button class="btn btn-sm btn-info text-center" id="btnConvert1">Download</button>
             {{-- <a class="btn btn-primary btn-sm" href="{{ route('resume.pdf') }}">Export to PDF</a> --}}
         </div>
-
-
+        
+        @else
+        <div class="card card-flush" >
+            <div class="card-body d-flex justify-content-center">
+                <span class="text-center border rounded py-2 px-8 fw-bolder fs-4 text-capitalize">No data found</span>
+            </div>
+        </div>
+        @endif
     </div>
     <!--end::Container-->
 </div>
