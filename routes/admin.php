@@ -413,5 +413,23 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         ######### Image Converter #########
         Route::get('/jobs-samprotik-image-generate', 'HtmlToImagePdfController@samprotikToImage')->name('image.samprotik');
+
+
+        /*
+        |--------------------------------------------------------------------------
+        | Settings
+        |--------------------------------------------------------------------------
+        */
+        Route::get('/settings', 'SettingsController@index')->name('setting.index');
+        Route::post('/settings', 'SettingsController@storeorupdate')->name('setting.store_or_update');
+
+        #######  Page Setting  #########
+        Route::get('/pages', 'PagesController@index')->name('pages');
+        Route::get('/page/create', 'PagesController@create')->name('page.create');
+        Route::post('/page/store', 'PagesController@store')->name('page.store');
+        Route::get('/page={page}/id={id}/edit', 'PagesController@edit')->name('page.edit');
+        Route::post('/page/update', 'PagesController@update')->name('page.update');
+        Route::get('/page/delete/{id}', 'PagesController@delete')->name('page.delete');
+
     });
 });

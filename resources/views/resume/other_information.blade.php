@@ -345,12 +345,12 @@
                                     </div>
                                     <!--begin::Actions-->
                                     <div class="d-flex justify-content-start">
-                                        <button type="submit" id="kk_description_submit" class="btn btn-primary me-3">
-                                            <span class="indicator-label py-3 px-7">Save</span>
+                                        <button type="submit" id="kk_description_submit" class="btn btn-sm btn-primary me-3">
+                                            <span class="indicator-label">Save</span>
                                             <span class="indicator-progress">Please wait...
                                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                         </button>
-                                        <button type="reset" id="kk_description_cancel" class="btn btn-light btn-active-color-danger me-3">Close</button>
+                                        <button type="reset" id="kk_description_cancel" class="btn btn-sm btn-light btn-active-color-danger me-3">Close</button>
                                         
                                     </div>
                                     <!--end::Actions-->
@@ -433,12 +433,12 @@
                                     </div>
                                     <!--begin::Actions-->
                                     <div class="d-flex justify-content-start mb-5">
-                                        <button type="submit" id="kk_extracurricular_submit" class="btn btn-primary me-3">
-                                            <span class="indicator-label py-3 px-7">Save</span>
+                                        <button type="submit" id="kk_extracurricular_submit" class="btn btn-primary me-3 btn-sm">
+                                            <span class="indicator-label ">Save</span>
                                             <span class="indicator-progress">Please wait...
                                                 <span class="spinner-border spinner-border-sm align-middle ms-2"></span></span>
                                         </button>
-                                        <button type="reset" id="kk_extracurricular_cancel" class="btn btn-light btn-active-color-danger me-3">Close</button>
+                                        <button type="reset" id="kk_extracurricular_cancel" class="btn btn-light btn-sm btn-active-color-danger me-3">Close</button>
                                         
                                     </div>
                                     <!--end::Actions-->

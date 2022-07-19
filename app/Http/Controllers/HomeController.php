@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MainCategory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class HomeController extends Controller
 {
@@ -27,4 +28,6 @@ class HomeController extends Controller
         //dd(MainCategory::with('categories')->get());
         return view('home');
     }
+
+   
 }

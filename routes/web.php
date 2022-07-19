@@ -24,6 +24,7 @@ use App\Http\Controllers\ModelTest\ModelTestController;
 use App\Http\Controllers\Admin\DependableCategoryController;
 use App\Http\Controllers\ModelTest\CustomModelTestController;
 use App\Http\Controllers\ModelTest\ModelTestResultController;
+use App\Http\Controllers\NewsletterController;
 use App\Http\Controllers\Resume\CountryStateCityUpazilaPostController;
 use App\Http\Controllers\Resume\EducationController;
 use App\Http\Controllers\Resume\EmploymentController;
@@ -46,6 +47,8 @@ use App\Http\Controllers\Resume\ResumeViewController;
 Route::get('/', function () {
   return view('index');
 });
+
+Route::post('newsletter-subscriber/store', [NewsletterController::class, 'store'])->name('subscriber-store');
 
 Auth::routes();
 Route::get('/home', [HomeController::class, 'index'])->name('home');

@@ -1799,24 +1799,19 @@
             </div>
             <!--end::Row-->
             <!--begin::Highlight-->
-            <div class="d-flex flex-stack flex-wrap flex-md-nowrap card-rounded shadow p-8 p-lg-12 mb-n5 mb-lg-n13"
+            <div class="d-flex flex-row justify-content-center card-rounded shadow p-8 p-lg-12 mb-n5 mb-lg-n13"
                 style="background: linear-gradient(90deg, #20AA3E 0%, #03A588 100%);">
                 <!--begin::Content-->
                 <div class="my-2 me-5">
-                    <!--begin::Title-->
-                    <div class="fs-1 fs-lg-2qx fw-bolder text-white mb-2">Start With Metronic Today,
-                        <span class="fw-normal">Speed Up Development!</span></div>
-                    <!--end::Title-->
-                    <!--begin::Description-->
-                    <div class="fs-6 fs-lg-5 text-white fw-bold opacity-75">Join over 100,000 Professionals Community to
-                        Stay Ahead</div>
-                    <!--end::Description-->
+                    <input type="text" id="subscriber_email" class="form-control form-control-solid w-500px" name="email" placeholder="Subscribe to our newsletter !! Enter email">
+                    <div class="text-white help-block with-errors email-error"></div>
                 </div>
                 <!--end::Content-->
                 <!--begin::Link-->
-                <a href="https://1.envato.market/EA4JP"
-                    class="btn btn-lg btn-outline border-2 btn-outline-white flex-shrink-0 my-2">Purchase on
-                    Themeforest</a>
+                <div>
+                    <button type="submit" id="kk_newsletter_subscriber"  class="btn  btn-outline border-2 btn-outline-white flex-shrink-0 my-2">Subscribe</button>
+                </div>
+                
                 <!--end::Link-->
             </div>
             <!--end::Highlight-->
@@ -2033,7 +2028,48 @@
 		<script src="{{ asset('assets') }}/js/custom/landing.js"></script>
 		<script src="{{ asset('assets') }}/js/custom/pages/pricing/general.js"></script>
 		<!--end::Page Custom Javascript-->
+
 		<!--end::Javascript-->
+        <script type="text/javascript">
+            //Newsletter Subscriber
+            $(document).on('click', '#kk_newsletter_subscriber', function(e){
+                e.preventDefault()
+                //console.log('here')
+                $('.with-errors').text('')
+
+                var thisaddbtn = $(this);
+
+                var email = $('input[name=email]').val();
+                // console.log(email);
+
+                $.ajax({
+                    type:"POST",
+                    url: "{{ url('newsletter-subscriber/store')}}",
+                    data:{
+                        "_token": "{{ csrf_token() }}",
+                        email : email,
+                    },
+                dataType: "json",
+                    success:function(data){
+                        if(data.success ==  false || data.success ==  "false"){
+                            var arr = Object.keys(data.errors);
+                            var arr_val = Object.values(data.errors);
+                            for(var i= 0;i < arr.length;i++){
+                            $('.'+arr[i]+'-error').text(arr_val[i][0])
+                            }
+                        }else if(data.error || data.error == 'true'){
+                            var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                            $('#kk_modal_new_question_form').find('.messages').html(alertBox).show();
+                        }else{
+                            toastr.success(data.message);
+                            $("#subscriber_email").val('');
+                        }
+
+                    }
+                });
+            })
+
+        </script>
 	</body>
 	<!--end::Body-->
 </html>
