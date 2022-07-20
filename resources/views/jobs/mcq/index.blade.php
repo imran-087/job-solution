@@ -92,9 +92,7 @@
                                             <a href="{{route('admin.question.edit', ['id' => $question->id, 'ques' => $question->slug])}}" target="_blank" class="btn btn-sm btn-icon btn-light btn-active-primary fw-bold edit me-1" ><i class="fas fa-edit"></i></a>
                                             <!--end::Menu-->
 
-                                            <!--begin::Menu-->
-                                            <a href="javascript:;" data-id="{{ $question->id }}" class="btn btn-sm btn-icon btn-light btn-active-primary fw-bold delete"><i class="fas fa-trash"></i></a>
-                                            <!--end::Menu-->
+                                            
                                         </div>
                                     </div>
                                     <div class="card-body">

@@ -61,7 +61,7 @@
                     <div class="d-flex align-items-center px-3 rounded  mb-7">
                         <div class="d-flex align-items-center">
                             <div class="symbol symbol-50px me-3">
-                                <img src="{{ asset('assets') }}/media/avatars/300-3.jpg" class="" alt="">
+                                <img src="{{ asset('assets') }}/media/avatars/300-11.jpg" class="" alt="">
                             </div>
                             <div class="d-flex justify-content-start flex-column">
                                 <a href="{{ route('job.category',['category' => $category->id]) }}" class="fw-bolder text-hover-primary mb-1 fs-4">{{$category->name}}</a>
