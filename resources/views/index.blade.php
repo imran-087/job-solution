@@ -1799,20 +1799,25 @@
             </div>
             <!--end::Row-->
             <!--begin::Highlight-->
-            <div class="d-flex flex-row justify-content-center card-rounded shadow p-8 p-lg-12 mb-n5 mb-lg-n13"
+            <div class="card-rounded shadow p-8 p-lg-12 mb-n5 mb-lg-n13 text-center"
                 style="background: linear-gradient(90deg, #20AA3E 0%, #03A588 100%);">
-                <!--begin::Content-->
-                <div class="my-2 me-5">
-                    <input type="text" id="subscriber_email" class="form-control form-control-solid w-500px" name="email" placeholder="Subscribe to our newsletter !! Enter email">
-                    <div class="text-white help-block with-errors email-error"></div>
-                </div>
-                <!--end::Content-->
-                <!--begin::Link-->
-                <div>
-                    <button type="submit" id="kk_newsletter_subscriber"  class="btn  btn-outline border-2 btn-outline-white flex-shrink-0 my-2">Subscribe</button>
+
+                <span class="fs-1 fs-lg-2qx fw-bold text-white mb-4 ">Subscribe to our newsletter</span>
+
+                <div class="d-flex flex-row justify-content-center ">
+                    <!--begin::Content-->
+                    <div class="my-2 me-5">
+                        <input type="text" id="subscriber_email" class="form-control form-control-solid w-500px" name="email" placeholder="example@gmail.com">
+                        <div class="text-white help-block with-errors email-error"></div>
+                    </div>
+                    <!--end::Content-->
+                    <!--begin::Link-->
+                    <div>
+                        <button type="submit" id="kk_newsletter_subscriber"  class="btn  btn-outline border-2 btn-outline-white flex-shrink-0 my-2">Subscribe</button>
+                    </div>
+                    <!--end::Link-->
                 </div>
                 
-                <!--end::Link-->
             </div>
             <!--end::Highlight-->
         </div>
@@ -1906,7 +1911,7 @@
                                 <h4 class="fw-bolder text-gray-400 mb-6">Stay Connected</h4>
                                 <!--end::Subtitle-->
                                 <!--begin::Link-->
-                                <a href="https://www.facebook.com/keenthemes" class="mb-6">
+                                <a href="{{ url($setting->social_link['facebook']) }}" class="mb-6">
                                     <img src="{{ asset('assets') }}/media/svg/brand-logos/facebook-4.svg"
                                         class="h-20px me-2" alt="" />
                                     <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Facebook</span>
@@ -1974,7 +1979,7 @@
                     <!--begin::Menu-->
                     <ul class="menu menu-gray-600 menu-hover-primary fw-bold fs-6 fs-md-5 order-1 mb-5 mb-md-0">
                         <li class="menu-item">
-                            <a href="https://keenthemes.com" target="_blank" class="menu-link px-2">About</a>
+                            <a href="{{ route('page', 'about-us') }}" target="_blank" class="menu-link px-2">About</a>
                         </li>
                         <li class="menu-item mx-5">
                             <a href="https://devs.keenthemes.com" target="_blank" class="menu-link px-2">Support</a>

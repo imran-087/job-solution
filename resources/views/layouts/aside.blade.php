@@ -32,24 +32,17 @@
             
             <div class="menu-item">
                 <div class="menu-content pt-8 pb-2">
-                    <span class="menu-section text-muted text-uppercase fs-8 ls-1">Job Solution</span>
+                    <span class="menu-section text-muted text-uppercase fs-8 ls-1">Category</span>
                 </div>
             </div>
-             @guest
-                @php
-                    $main_categories = App\Models\MainCategory::with('categories')->where('status', 'active')->get();
-                @endphp
-            @endguest  
-                
-            @auth
-                @php
-                    $main_categories = App\Models\MainCategory::with('categories')->where(['status' => 'active', 'slug' => Auth::user()->user_type])->get() ;
-                @endphp
-            @endauth
-                
+           
+            @php
+                $main_categories = App\Models\MainCategory::where('status', 'active')->get();
+            @endphp
+                  
             @foreach($main_categories as $main_category)
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                <a href="{{ url('job-solution', $main_category->slug) }}">
+                <a href="{{ route('job.category') }}">
                 <span class="menu-link">
                     <span class="menu-icon">
                         <!--begin::Svg Icon | path: icons/duotune/art/art009.svg-->
@@ -69,7 +62,7 @@
             </div>
             @endforeach
 
-            <div class="menu-item">
+            {{-- <div class="menu-item">
                 <a class="menu-link {{ request()->is('/job-solutions/subject/*') ? 'active' : '' }}" href="{{ route('subject.subject') }}"  >
                     <span class="menu-icon">
                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
@@ -105,7 +98,7 @@
                     </span>
                     <span class="menu-title">Recent Question</span>
                 </a>
-            </div>
+            </div> --}}
             
             <div class="menu-item">
                 <div class="menu-content pt-8 pb-2">

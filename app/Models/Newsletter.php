@@ -9,5 +9,5 @@ class Newsletter extends Model
 {
     use HasFactory;
 
-    protected $
+    protected $guarded = [];
 }

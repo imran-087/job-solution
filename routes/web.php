@@ -22,9 +22,12 @@ use App\Http\Controllers\QuestionActivityController;
 use App\Http\Controllers\Resume\UserDetailsController;
 use App\Http\Controllers\ModelTest\ModelTestController;
 use App\Http\Controllers\Admin\DependableCategoryController;
+use App\Http\Controllers\JobMcqQuestionController;
+use App\Http\Controllers\JobsController;
 use App\Http\Controllers\ModelTest\CustomModelTestController;
 use App\Http\Controllers\ModelTest\ModelTestResultController;
 use App\Http\Controllers\NewsletterController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\Resume\CountryStateCityUpazilaPostController;
 use App\Http\Controllers\Resume\EducationController;
 use App\Http\Controllers\Resume\EmploymentController;
@@ -44,9 +47,8 @@ use App\Http\Controllers\Resume\ResumeViewController;
 |
 */
 
-Route::get('/', function () {
-  return view('index');
-});
+Route::get('/', [PageController::class, 'landingPage'])->name('landingpage');
+// Route::get('/{page}', [PageController::class, 'page'])->name('page');
 
 Route::post('newsletter-subscriber/store', [NewsletterController::class, 'store'])->name('subscriber-store');
 
@@ -75,8 +77,22 @@ Route::middleware('auth')->group(function () {
 });
 
 /*****************
+  job route
+********************/
+Route::get('/jobs', [JobsController::class, 'jobCategory'])->name('job.category');
+
+##### Job McQ Question route
+Route::get('/jobs/mcq-question', [JobMcqQuestionController::class, 'jobMcqQuestion'])->name('job.mcq-question');
+
+
+
+
+
+
+
+/*****************
   Category Route
- ********************/
+********************/
 //get category
 Route::get('/job-solution/{main_category}', [CategoryController::class, 'getCategory']);
 //get sub category
