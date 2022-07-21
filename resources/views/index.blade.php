@@ -158,7 +158,7 @@
             </div>
             <!--end::Header-->
             <!--begin::Landing hero-->
-            <div class="d-flex flex-column flex-center w-100 min-h-350px min-h-lg-500px px-9">
+            <div class="d-flex flex-column flex-center w-100 min-h-350px min-h-lg-400px px-9">
                 <!--begin::Heading-->
                 <div class="text-center mb-5 mb-lg-10 py-10 py-lg-20">
                     <!--begin::Title-->
@@ -182,72 +182,74 @@
                 
 
             </div>
-            <div class="tns tns-default mw-80">
-                <!--begin::Slider-->
-                <div
-                    data-tns="true"
-                    data-tns-loop="true"
-                    data-tns-swipe-angle="false"
-                    data-tns-speed="2000"
-                    data-tns-autoplay="true"
-                    data-tns-autoplay-timeout="5000"
-                    data-tns-controls="true"
-                    data-tns-nav="false"
-                    data-tns-items="3"
-                    data-tns-center="false"
-                    data-tns-dots="false"
-                    data-tns-prev-button="#kt_team_slider_prev2"
-                    data-tns-next-button="#kt_team_slider_next2"
-                >
+            <div class="col-md-6 offset-3">
+                <div class="tns tns-default">
+                    <!--begin::Slider-->
+                    <div
+                        data-tns="true"
+                        data-tns-loop="true"
+                        data-tns-swipe-angle="false"
+                        data-tns-speed="2000"
+                        data-tns-autoplay="true"
+                        data-tns-autoplay-timeout="5000"
+                        data-tns-controls="true"
+                        data-tns-nav="false"
+                        data-tns-items="3"
+                        data-tns-center="false"
+                        data-tns-dots="false"
+                        data-tns-prev-button="#kt_team_slider_prev2"
+                        data-tns-next-button="#kt_team_slider_next2"
+                    >
 
-                    <!--begin::Item-->
-                    <div class="text-center px-5 py-5">
-                        <img src="assets/media/stock/600x400/img-1.jpg" class="card-rounded mw-100" alt=""/>
+                        <!--begin::Item-->
+                        <div class="text-center px-5 py-5">
+                            <img src="assets/media/stock/600x400/img-1.jpg" class="card-rounded mw-100" alt=""/>
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <div class="text-center px-5 py-5">
+                            <img src="assets/media/stock/600x400/img-1.jpg" class="card-rounded mw-100" alt="" />
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <div class="text-center px-5 py-5">
+                            <img src="assets/media/stock/600x400/img-1.jpg" class="card-rounded mw-100" alt=""/>
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <div class="text-center px-5 py-5">
+                            <img src="assets/media/stock/600x400/img-1.jpg" class="card-rounded mw-100" alt=""/>
+                        </div>
+                        <!--end::Item-->
+                        <!--begin::Item-->
+                        <div class="text-center px-5 py-5">
+                            <img src="assets/media/stock/600x400/img-1.jpg" class="card-rounded mw-100" alt=""/>
+                        </div>
+                        <!--end::Item-->
+                        
                     </div>
-                    <!--end::Item-->
-                    <!--begin::Item-->
-                    <div class="text-center px-5 py-5">
-                        <img src="assets/media/stock/600x400/img-1.jpg" class="card-rounded mw-100" alt="" />
-                    </div>
-                    <!--end::Item-->
-                    <!--begin::Item-->
-                    <div class="text-center px-5 py-5">
-                        <img src="assets/media/stock/600x400/img-1.jpg" class="card-rounded mw-100" alt=""/>
-                    </div>
-                    <!--end::Item-->
-                    <!--begin::Item-->
-                    <div class="text-center px-5 py-5">
-                        <img src="assets/media/stock/600x400/img-1.jpg" class="card-rounded mw-100" alt=""/>
-                    </div>
-                    <!--end::Item-->
-                    <!--begin::Item-->
-                    <div class="text-center px-5 py-5">
-                        <img src="assets/media/stock/600x400/img-1.jpg" class="card-rounded mw-100" alt=""/>
-                    </div>
-                    <!--end::Item-->
-                    
+                    <!--end::Slider-->
+
+                    <!--begin::Slider button-->
+                    <button class="btn btn-icon btn-color-light" id="kt_team_slider_prev2">
+                        <span class="svg-icon svg-icon-3x">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor"></path>
+                            </svg>
+                        </span>
+                    </button>
+                    <!--end::Slider button-->
+
+                    <!--begin::Slider button-->
+                    <button class="btn btn-icon btn-color-light" id="kt_team_slider_next2">
+                        <span class="svg-icon svg-icon-3x">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor"></path>
+                            </svg>
+                        </span>
+                    </button>
+                    <!--end::Slider button-->
                 </div>
-                <!--end::Slider-->
-
-                <!--begin::Slider button-->
-                <button class="btn btn-icon btn-color-light" id="kt_team_slider_prev2">
-                    <span class="svg-icon svg-icon-3x">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor"></path>
-                        </svg>
-                    </span>
-                </button>
-                <!--end::Slider button-->
-
-                <!--begin::Slider button-->
-                <button class="btn btn-icon btn-color-light" id="kt_team_slider_next2">
-                    <span class="svg-icon svg-icon-3x">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor"></path>
-                        </svg>
-                    </span>
-                </button>
-                <!--end::Slider button-->
             </div>
             
             <!--end::Landing hero-->
