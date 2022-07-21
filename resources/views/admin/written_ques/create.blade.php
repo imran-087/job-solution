@@ -153,6 +153,8 @@
     <!--end::Post-->
 </div>
 
+
+
 @endsection
 
 @push('script')
@@ -230,6 +232,10 @@
         $('#kk_modal_new_service_submit').attr('disabled','true')
 
         var formData = new FormData(this);
+        formData.append('question[]', myEditor[].getData());
+        formData.append('answer[]', myEditor[].getData());
+
+
         $.ajax({
             type:"POST",
             url: "{{ route('admin.written.store') }}",

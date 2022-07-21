@@ -116,6 +116,7 @@
                                                     <!--begin::Title-->
                                                     <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">{{ $parent_question->question_no }} | {{ $parent_question->question }}</h4>
                                                     <a href="javascript:;" data-id="{{ $parent_question->id }}" data-type="{{$parent_question->question_instruction}}" class="btn btn-sm btn-icon edit" style="margin-right: 15px !important"><i class="fas fa-edit"></i></a>
+                                                    <a href="javascript:;" data-id="{{ $parent_question->id }}" data-type="{{$parent_question->question_instruction}}" class="btn btn-sm btn-icon delete" style="margin-right: 15px !important"><i class="fas fa-trash"></i></a>
                                                     <!--end::Title-->
 
                                                 </div>
@@ -128,7 +129,15 @@
                                                     <!--end::Text-->
                                                     @foreach ($parent_question->descriptions as $description)
                                                     <!--begin::description-->
-                                                    <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10 text-center " style="text-align: justify"><b>Description:</b> &nbsp; {{ $description->description ?? '' }} <span class="d-flex justify-content-end cursor-pointer edit-Description" data-id="{{ $description->id }}" data-description="{{ $description->description }}" ><i class="fas fa-edit"></i></span></div>
+                                                    <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10 text-center " style="text-align: justify">
+                                                        <b>Description:</b> &nbsp; {{ $description->description ?? '' }} 
+                                                        <span class="d-flex justify-content-end cursor-pointer">
+                                                            <span class="edit-Description" data-id="{{ $description->id }}" data-description="{{ $description->description }}" ><i class="fas fa-edit"></i></span>
+                                                            <span class="edit-Description" data-id="{{ $description->id }}"><i class="fas fa-trash"></i></span>
+                                                        </span>
+                                                        
+                                                    </div>
+                                                    
 
                                                     <!--end::description-->
                                                     @endforeach
@@ -179,7 +188,11 @@
                                                         @endif
                                                         <!--begin::Title-->
                                                         <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">{{ $child_question->question_no }} | {{ $child_question->question }}</h4>
-                                                        <a href="javascript:;" data-id="{{ $child_question->id }}" data-type="{{ $child_question->question_instruction }}" class="btn btn-sm btn-icon edit" style="margin-right: 15px !important"><i class="fas fa-edit"></i></a>
+                                                        <span class="d-flex justify-content-end">
+                                                            <a href="javascript:;" data-id="{{ $child_question->id }}" data-type="{{ $child_question->question_instruction }}" class="btn btn-sm btn-icon edit" style="margin-right: 15px !important"><i class="fas fa-edit"></i></a>
+                                                            <a href="javascript:;" data-id="{{ $child_question->id }}" class="btn btn-sm btn-icon delete" ><i class="fas fa-trash"></i></a>
+                                                        </span>
+                                                        
                                                         <!--end::Title-->
 
                                                     </div>
@@ -193,6 +206,7 @@
                                                         @foreach ($child_question->descriptions as $description)
                                                         <!--begin::description-->
                                                         <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10 text-center" style="text-align: justify"><b>Description:</b> &nbsp; {{ $description->description ?? '' }} <span class="d-flex justify-content-end cursor-pointer edit-Description" data-id="{{ $description->id }}" data-description="{{ $description->description }}" ><i class="fas fa-edit"></i></span></div>
+                                                        <div class="mb-4 text-gray-600 fw-bold fs-6  text-center" style="text-align: justify"><b>Description:</b> &nbsp; {{ $description->description ?? '' }} <span class="d-flex justify-content-end cursor-pointer delete-Description" data-id="{{ $description->id }}" data-description="{{ $description->description }}" ><i class="fas fa-trash"></i></span></div>
                                                         <!--end::description-->
                                                         @endforeach
                                                        <button class="btn btn-sm btn-light btn-hover-color-primary  mb-4 addDescription" data-id="{{ $child_question->id }}"> Add Description</button>
@@ -242,6 +256,7 @@
                                                         <!--begin::Title-->
                                                         <h4 class="text-gray-700 fw-bolder cursor-pointer mb-0">{{ $grand_child_question->question_no }} | {{ $grand_child_question->question }}</h4>
                                                         <a href="javascript:;" data-id="{{ $grand_child_question->id }}" data-type="{{ $grand_child_question->question_instruction }}" class="btn btn-sm btn-icon edit" style="margin-right: 15px !important"><i class="fas fa-edit"></i></a>
+                                                        <a href="javascript:;" data-id="{{ $grand_child_question->id }}" data-type="{{ $grand_child_question->question_instruction }}" class="btn btn-sm btn-icon delete" style=""><i class="fas fa-trash"></i></a>
                                                         <!--end::Title-->
 
                                                     </div>
@@ -255,6 +270,7 @@
                                                         @foreach ($grand_child_question->descriptions as $description)
                                                         <!--begin::description-->
                                                         <div class="mb-4 text-gray-600 fw-bold fs-6 ps-10" style="text-align: justify"><b>Description:</b> &nbsp; {{ $description->description ?? '' }} <span class="d-flex justify-content-end cursor-pointer edit-Description" data-id="{{ $description->id }}" data-description="{{ $description->description }}" ><i class="fas fa-edit"></i></span></div>
+                                                        <div class="mb-4 text-gray-600 fw-bold fs-6 " style="text-align: justify"><b>Description:</b> &nbsp; {{ $description->description ?? '' }} <span class="d-flex justify-content-end cursor-pointer delete-Description" data-id="{{ $description->id }}" data-description="{{ $description->description }}" ><i class="fas fa-trash"></i></span></div>
                                                         <!--end::description-->
                                                         @endforeach
                                                         <button class="btn btn-sm btn-light btn-hover-color-primary mb-4 addDescription" data-id="{{ $grand_child_question->id }}"> Add Description</button>

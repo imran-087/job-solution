@@ -40,14 +40,29 @@
                 <input type="hidden" name="type" value="{{ $type }}">
                 <!--begin::Input group-->
                 <div class="d-flex flex-column mb-8 fv-row">
-                    <!--begin::Label-->
-                    <label class="d-flex align-items-center fs-6 fw-bold mb-2">
-                        <span> {{ $type == 0 ? 'Question' : 'Instruction' }}</span>
-                    </label>
-                    <!--end::Label-->
-                    <input type="text" class="form-control form-control-solid" 
-                        name="question" value="{{ $question->question }}"/>
-                   
+                    <div class="row">
+                        <div class="col-md-2">
+                            <!--begin::Input group-->
+                            <div class="d-flex flex-column mb-4 fv-row">
+                                <!--begin::Label-->
+                                <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                    <div class="required">QN. </div>
+                                </label>
+                                <!--end::Label-->
+                                <input type="text" class="form-control form-control-solid" placeholder="No." name="question_no" /> 
+                            </div>
+                            <!--end::Input group-->
+                        </div>
+                        <div class="col-md-10">
+                            <!--begin::Label-->
+                            <label class="d-flex align-items-center fs-6 fw-bold mb-2">
+                                <span> {{ $type == 0 ? 'Question' : 'Instruction' }}</span>
+                            </label>
+                            <!--end::Label-->
+                            <textarea class="form-control form-control-solid ckeditor_classic" 
+                                name="question" >{{ $question->question }}</textarea>
+                        </div>
+                    </div> 
                 </div>
                 @if($type == 0)
                 <!--end::Input group-->
@@ -56,7 +71,7 @@
                         <span>Question Answer</span>
                     </label>
                     <div class="col-md-12 mb-5">
-                        <textarea name="answer" id="kt_docs_ckeditor_classic" class="form-control form-control-solid h-100px">{{ $question->answer->answer }}</textarea>
+                        <textarea name="answer"  class="form-control form-control-solid ckeditor_classic">{{ $question->answer->answer }}</textarea>
                     </div>
                    
                 </div>
@@ -82,3 +97,13 @@
 </div>
 <!--end::Modal dialog-->
 
+{{-- <script type="text/javascript">
+    var myEditor;
+
+    ClassicEditor
+    .create(document.querySelector('.ckeditor_classic'))
+    .then(editor => {
+        //console.log( 'Editor was initialized', editor );
+        myEditor = editor;
+    })
+</script> --}}

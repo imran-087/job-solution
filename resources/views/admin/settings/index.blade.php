@@ -134,6 +134,18 @@
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-bold fs-6">Company Title</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                    <input type="text" name="title" class="form-control form-control-lg form-control-solid" placeholder="Company title" value="{{ old('title', $setting->title ?? '') }}">
+                                <div class="fv-plugins-message-container title-feedback"></div></div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
                                 <label class="col-lg-4 col-form-label required fw-bold fs-6">Company Motto</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->

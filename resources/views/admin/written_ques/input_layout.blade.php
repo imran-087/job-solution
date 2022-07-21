@@ -28,7 +28,7 @@
                                 <div class="required">Question </div>
                             </label>
                             <!--end::Label-->
-                            <textarea type="text"  class="form-control form-control-solid h-100px kt_docs_ckeditor_classic"  placeholder="Enter Question or Instruction"
+                            <textarea type="text"  class="form-control form-control-solid ckeditor"  placeholder="Enter Question or Instruction"
                             name="question[]"> </textarea>
                             {{-- <input type="text" class="form-control form-control-solid" placeholder="Enter Question" name="question[]" />  --}}
                             <div class="help-block with-errors question.*-error"></div>
@@ -67,7 +67,7 @@
                         <span class="required fw-bolder">answer</span> 
                     </label>
                     <!--end::Label-->
-                    <textarea type="text"  class="form-control form-control-solid h-150px kt_docs_ckeditor_classic"  placeholder="Enter answer"
+                    <textarea type="text"  class="form-control form-control-solid ckeditor"  placeholder="Enter answer"
                             name="answer[]"> </textarea>
                     <div class="help-block with-errors answer-error"></div>
                 </div>
@@ -76,6 +76,10 @@
         <!--end::Input group-->
     </div>
 </div>
+
+
+
+
 @endfor
 
 <!-- append dynamic input-->
@@ -93,7 +97,18 @@
 </div>
 <!--end::Actions-->
 
+{{-- CkEditor  --}}
+<script type="text/javascript">
+   
+    var myEditor = {};
+    document.querySelectorAll( '.ckeditor' ).forEach( ( node, index ) => {
+        ClassicEditor
+        .create( node )
+        .then( newEditor => {
+            myEditor[index] = newEditor;
+        } );
+    });
 
-
+</script>
 
                        

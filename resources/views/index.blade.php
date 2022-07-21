@@ -162,71 +162,94 @@
                 <!--begin::Heading-->
                 <div class="text-center mb-5 mb-lg-10 py-10 py-lg-20">
                     <!--begin::Title-->
-                    <h1 class="text-white lh-base fw-bolder fs-2x fs-lg-3x mb-15">Build An Outstanding Solutions
-                        <br />with
+                    <h1 class="text-white lh-base fw-bolder fs-2x fs-lg-3x mb-15">{{ $setting->title }}
+                        <br />
                         <span
                             style="background: linear-gradient(to right, #12CE5D 0%, #FFD80C 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
-                            <span id="kt_landing_hero_text">The Best Theme Ever</span>
+                            <span id="kt_landing_hero_text">{{ $setting->motto }}</span>
                         </span></h1>
                     <!--end::Title-->
                     <!--begin::Action-->
-                    <a href="/metronic8/demo1/../demo1/index.html" class="btn btn-primary">Try Metronic</a>
+                    <a href="/metronic8/demo1/../demo1/index.html" class="btn btn-primary">ক্লিক</a>
                     <!--end::Action-->
                 </div>
                 <!--end::Heading-->
                 <!--begin::Clients-->
-                <div class="d-flex flex-center flex-wrap position-relative px-5">
-                    <!--begin::Client-->
-                    <div class="d-flex flex-center m-3 m-md-6" data-bs-toggle="tooltip" title="Fujifilm">
-                        <img src="{{ asset('assets') }}/media/svg/brand-logos/fujifilm.svg" class="mh-30px mh-lg-40px"
-                            alt="" />
-                    </div>
-                    <!--end::Client-->
-                    <!--begin::Client-->
-                    <div class="d-flex flex-center m-3 m-md-6" data-bs-toggle="tooltip" title="Vodafone">
-                        <img src="{{ asset('assets') }}/media/svg/brand-logos/vodafone.svg" class="mh-30px mh-lg-40px"
-                            alt="" />
-                    </div>
-                    <!--end::Client-->
-                    <!--begin::Client-->
-                    <div class="d-flex flex-center m-3 m-md-6" data-bs-toggle="tooltip" title="KPMG International">
-                        <img src="{{ asset('assets') }}/media/svg/brand-logos/kpmg.svg" class="mh-30px mh-lg-40px"
-                            alt="" />
-                    </div>
-                    <!--end::Client-->
-                    <!--begin::Client-->
-                    <div class="d-flex flex-center m-3 m-md-6" data-bs-toggle="tooltip" title="Nasa">
-                        <img src="{{ asset('assets') }}/media/svg/brand-logos/nasa.svg" class="mh-30px mh-lg-40px"
-                            alt="" />
-                    </div>
-                    <!--end::Client-->
-                    <!--begin::Client-->
-                    <div class="d-flex flex-center m-3 m-md-6" data-bs-toggle="tooltip" title="Aspnetzero">
-                        <img src="{{ asset('assets') }}/media/svg/brand-logos/aspnetzero.svg" class="mh-30px mh-lg-40px"
-                            alt="" />
-                    </div>
-                    <!--end::Client-->
-                    <!--begin::Client-->
-                    <div class="d-flex flex-center m-3 m-md-6" data-bs-toggle="tooltip" title="AON - Empower Results">
-                        <img src="{{ asset('assets') }}/media/svg/brand-logos/aon.svg" class="mh-30px mh-lg-40px"
-                            alt="" />
-                    </div>
-                    <!--end::Client-->
-                    <!--begin::Client-->
-                    <div class="d-flex flex-center m-3 m-md-6" data-bs-toggle="tooltip" title="Hewlett-Packard">
-                        <img src="{{ asset('assets') }}/media/svg/brand-logos/hp-3.svg" class="mh-30px mh-lg-40px"
-                            alt="" />
-                    </div>
-                    <!--end::Client-->
-                    <!--begin::Client-->
-                    <div class="d-flex flex-center m-3 m-md-6" data-bs-toggle="tooltip" title="Truman">
-                        <img src="{{ asset('assets') }}/media/svg/brand-logos/truman.svg" class="mh-30px mh-lg-40px"
-                            alt="" />
-                    </div>
-                    <!--end::Client-->
-                </div>
+                {{-- <div class="d-flex flex-center flex-wrap position-relative"> --}}
+                    
+                {{-- </div> --}}
                 <!--end::Clients-->
+                
+
             </div>
+            <div class="tns tns-default mw-80">
+                <!--begin::Slider-->
+                <div
+                    data-tns="true"
+                    data-tns-loop="true"
+                    data-tns-swipe-angle="false"
+                    data-tns-speed="2000"
+                    data-tns-autoplay="true"
+                    data-tns-autoplay-timeout="5000"
+                    data-tns-controls="true"
+                    data-tns-nav="false"
+                    data-tns-items="3"
+                    data-tns-center="false"
+                    data-tns-dots="false"
+                    data-tns-prev-button="#kt_team_slider_prev2"
+                    data-tns-next-button="#kt_team_slider_next2"
+                >
+
+                    <!--begin::Item-->
+                    <div class="text-center px-5 py-5">
+                        <img src="assets/media/stock/600x400/img-1.jpg" class="card-rounded mw-100" alt=""/>
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <div class="text-center px-5 py-5">
+                        <img src="assets/media/stock/600x400/img-1.jpg" class="card-rounded mw-100" alt="" />
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <div class="text-center px-5 py-5">
+                        <img src="assets/media/stock/600x400/img-1.jpg" class="card-rounded mw-100" alt=""/>
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <div class="text-center px-5 py-5">
+                        <img src="assets/media/stock/600x400/img-1.jpg" class="card-rounded mw-100" alt=""/>
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <div class="text-center px-5 py-5">
+                        <img src="assets/media/stock/600x400/img-1.jpg" class="card-rounded mw-100" alt=""/>
+                    </div>
+                    <!--end::Item-->
+                    
+                </div>
+                <!--end::Slider-->
+
+                <!--begin::Slider button-->
+                <button class="btn btn-icon btn-color-light" id="kt_team_slider_prev2">
+                    <span class="svg-icon svg-icon-3x">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor"></path>
+                        </svg>
+                    </span>
+                </button>
+                <!--end::Slider button-->
+
+                <!--begin::Slider button-->
+                <button class="btn btn-icon btn-color-light" id="kt_team_slider_next2">
+                    <span class="svg-icon svg-icon-3x">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor"></path>
+                        </svg>
+                    </span>
+                </button>
+                <!--end::Slider button-->
+            </div>
+            
             <!--end::Landing hero-->
         </div>
         <!--end::Wrapper-->
@@ -248,12 +271,10 @@
             <!--begin::Heading-->
             <div class="text-center mb-17">
                 <!--begin::Title-->
-                <h3 class="fs-2hx text-dark mb-5" id="how-it-works" data-kt-scroll-offset="{default: 100, lg: 150}">How
-                    it Works</h3>
+                <h3 class="fs-2hx text-dark mb-5" id="how-it-works" data-kt-scroll-offset="{default: 100, lg: 150}">নিজের শেখা নিজেই গুছিয়ে <br> নেয়ার যাত্রা শুরু হোক</h3>
                 <!--end::Title-->
                 <!--begin::Text-->
-                <div class="fs-5 text-muted fw-bold">Save thousands to millions of bucks by using single tool
-                    <br />for different amazing and great useful admin</div>
+                <div class="fs-4 text-dark fw-bold">যেকোনো বিষয়ের যেকোনো টপিকে পড়ালেখা করতে চলে যাও তোমার পছন্দের সেকশনে</div>
                 <!--end::Text-->
             </div>
             <!--end::Heading-->
@@ -270,17 +291,16 @@
                         <!--begin::Heading-->
                         <div class="d-flex flex-center mb-5">
                             <!--begin::Badge-->
-                            <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3">1</span>
+                            {{-- <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3"></span> --}}
                             <!--end::Badge-->
                             <!--begin::Title-->
-                            <div class="fs-5 fs-lg-3 fw-bolder text-dark">Jane Miller</div>
+                            <div class="fs-5 fs-lg-3 fw-bolder text-dark">চাকুরী প্রস্তুতি</div>
                             <!--end::Title-->
                         </div>
                         <!--end::Heading-->
                         <!--begin::Description-->
-                        <div class="fw-bold fs-6 fs-lg-4 text-muted">Save thousands to millions of bucks
-                            <br />by using single tool for different
-                            <br />amazing and great</div>
+                        <div class="fw-bold fs-6 fs-lg-4 text-muted">শেখো নিজের ইচ্ছেমতো, পেয়ে 
+                            যাও ১ <br> লক্ষেরও বেশি প্রশ্নের সমাহার</div>
                         <!--end::Description-->
                     </div>
                     <!--end::Story-->
@@ -297,17 +317,16 @@
                         <!--begin::Heading-->
                         <div class="d-flex flex-center mb-5">
                             <!--begin::Badge-->
-                            <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3">2</span>
+                            {{-- <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3">2</span> --}}
                             <!--end::Badge-->
                             <!--begin::Title-->
-                            <div class="fs-5 fs-lg-3 fw-bolder text-dark">Setup Your App</div>
+                            <div class="fs-5 fs-lg-3 fw-bolder text-dark">বিশ্ববিদ্যালয় ভর্তি যুদ্ধের প্রস্তুতি</div>
                             <!--end::Title-->
                         </div>
                         <!--end::Heading-->
                         <!--begin::Description-->
-                        <div class="fw-bold fs-6 fs-lg-4 text-muted">Save thousands to millions of bucks
-                            <br />by using single tool for different
-                            <br />amazing and great</div>
+                        <div class="fw-bold fs-6 fs-lg-4 text-muted">শেখো নিজের ইচ্ছেমতো, পেয়ে 
+                            যাও ১ <br> লক্ষেরও বেশি প্রশ্নের সমাহার</div>
                         <!--end::Description-->
                     </div>
                     <!--end::Story-->
@@ -324,17 +343,99 @@
                         <!--begin::Heading-->
                         <div class="d-flex flex-center mb-5">
                             <!--begin::Badge-->
-                            <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3">3</span>
+                            {{-- <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3">3</span> --}}
                             <!--end::Badge-->
                             <!--begin::Title-->
-                            <div class="fs-5 fs-lg-3 fw-bolder text-dark">Enjoy Nautica App</div>
+                            <div class="fs-5 fs-lg-3 fw-bolder text-dark">মেডিকেল/ডেন্টাল প্রস্তুতি</div>
                             <!--end::Title-->
                         </div>
                         <!--end::Heading-->
                         <!--begin::Description-->
-                        <div class="fw-bold fs-6 fs-lg-4 text-muted">Save thousands to millions of bucks
-                            <br />by using single tool for different
-                            <br />amazing and great</div>
+                        <div class="fw-bold fs-6 fs-lg-4 text-muted">শেখো নিজের ইচ্ছেমতো, পেয়ে 
+                            যাও ১ <br> লক্ষেরও বেশি প্রশ্নের সমাহার</div>
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Story-->
+                </div>
+                <!--end::Col-->
+            </div>
+            <!--end::Row-->
+            <!--begin::Row-->
+            <div class="row w-100 gy-10 mb-md-20">
+                <!--begin::Col-->
+                <div class="col-md-4 px-5">
+                    <!--begin::Story-->
+                    <div class="text-center mb-10 mb-md-0">
+                        <!--begin::Illustration-->
+                        <img src="{{ asset('assets') }}/media/illustrations/sketchy-1/2.png" class="mh-125px mb-9"
+                            alt="" />
+                        <!--end::Illustration-->
+                        <!--begin::Heading-->
+                        <div class="d-flex flex-center mb-5">
+                            <!--begin::Badge-->
+                            {{-- <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3"></span> --}}
+                            <!--end::Badge-->
+                            <!--begin::Title-->
+                            <div class="fs-5 fs-lg-3 fw-bolder text-dark">অনলাইন এক্সাম</div>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Heading-->
+                        <!--begin::Description-->
+                        <div class="fw-bold fs-6 fs-lg-4 text-muted">শেখো নিজের ইচ্ছেমতো, পেয়ে 
+                            যাও ১ <br> লক্ষেরও বেশি প্রশ্নের সমাহার</div>
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Story-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-md-4 px-5">
+                    <!--begin::Story-->
+                    <div class="text-center mb-10 mb-md-0">
+                        <!--begin::Illustration-->
+                        <img src="{{ asset('assets') }}/media/illustrations/sketchy-1/8.png" class="mh-125px mb-9"
+                            alt="" />
+                        <!--end::Illustration-->
+                        <!--begin::Heading-->
+                        <div class="d-flex flex-center mb-5">
+                            <!--begin::Badge-->
+                            {{-- <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3">2</span> --}}
+                            <!--end::Badge-->
+                            <!--begin::Title-->
+                            <div class="fs-5 fs-lg-3 fw-bolder text-dark">স্কিল ডেভেলপমেন্ট</div>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Heading-->
+                       <!--begin::Description-->
+                        <div class="fw-bold fs-6 fs-lg-4 text-muted">শেখো নিজের ইচ্ছেমতো, পেয়ে 
+                            যাও ১ <br> লক্ষেরও বেশি প্রশ্নের সমাহার</div>
+                        <!--end::Description-->
+                        <!--end::Description-->
+                    </div>
+                    <!--end::Story-->
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-md-4 px-5">
+                    <!--begin::Story-->
+                    <div class="text-center mb-10 mb-md-0">
+                        <!--begin::Illustration-->
+                        <img src="{{ asset('assets') }}/media/illustrations/sketchy-1/12.png" class="mh-125px mb-9"
+                            alt="" />
+                        <!--end::Illustration-->
+                        <!--begin::Heading-->
+                        <div class="d-flex flex-center mb-5">
+                            <!--begin::Badge-->
+                            {{-- <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3">3</span> --}}
+                            <!--end::Badge-->
+                            <!--begin::Title-->
+                            <div class="fs-5 fs-lg-3 fw-bolder text-dark">বাংলা কোরআন ও হাদিস</div>
+                            <!--end::Title-->
+                        </div>
+                        <!--end::Heading-->
+                       <!--begin::Description-->
+                        <div class="fw-bold fs-6 fs-lg-4 text-muted">শেখো নিজের ইচ্ছেমতো, পেয়ে 
+                            যাও ১ <br> লক্ষেরও বেশি প্রশ্নের সমাহার</div>
                         <!--end::Description-->
                     </div>
                     <!--end::Story-->
@@ -425,11 +526,10 @@
                 <!--begin::Heading-->
                 <div class="text-center mt-15 mb-18" id="achievements" data-kt-scroll-offset="{default: 100, lg: 150}">
                     <!--begin::Title-->
-                    <h3 class="fs-2hx text-white fw-bolder mb-5">We Make Things Better</h3>
+                    <h2 class="fs-2hx text-white fw-bolder mb-5" style="background: linear-gradient(to right, #12CE5D 0%, #FFD80C 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">স্যাটের অর্জন সমূহ</h2>
                     <!--end::Title-->
                     <!--begin::Description-->
-                    <div class="fs-5 text-gray-700 fw-bold">Save thousands to millions of bucks by using single tool
-                        <br />for different amazing and great useful admin</div>
+                    <div class="fs-4 text-white fw-bold" >ওয়েব সার্ভিস হলো ওয়েব সম্পর্কিত সেবাসমূহ অর্থাৎ নেটওয়ার্ক সংযুক্ত বিভিন্ন কম্পিউটারে চালু <br> থাকা বিভিন্ন সফটওয়ারের মধ্যে আন্তক্রিয়ার একটি ব্যবস্থা। </div>
                     <!--end::Description-->
                 </div>
                 <!--end::Heading-->
@@ -462,7 +562,7 @@
                                 </div>
                                 <!--end::Value-->
                                 <!--begin::Label-->
-                                <span class="text-gray-600 fw-bold fs-5 lh-0">Known Companies</span>
+                                <span class="text-white fw-bolder fs-5 lh-0">সর্বমোট প্রশ্ন</span>
                                 <!--end::Label-->
                             </div>
                             <!--end::Info-->
@@ -498,7 +598,7 @@
                                 </div>
                                 <!--end::Value-->
                                 <!--begin::Label-->
-                                <span class="text-gray-600 fw-bold fs-5 lh-0">Statistic Reports</span>
+                                <span class="text-white fw-bolder fs-5 lh-0">সর্বমোট শিক্ষার্থী</span>
                                 <!--end::Label-->
                             </div>
                             <!--end::Info-->
@@ -534,7 +634,7 @@
                                 </div>
                                 <!--end::Value-->
                                 <!--begin::Label-->
-                                <span class="text-gray-600 fw-bold fs-5 lh-0">Secure Payments</span>
+                                <span class="text-white fw-bolder fs-5 lh-0">সাবস্ক্রাইবার</span>
                                 <!--end::Label-->
                             </div>
                             <!--end::Info-->
@@ -545,18 +645,17 @@
                 </div>
                 <!--end::Statistics-->
                 <!--begin::Testimonial-->
-                <div class="fs-2 fw-bold text-muted text-center mb-3">
-                    <span class="fs-1 lh-1 text-gray-700">“</span>When you care about your topic, you’ll write about it
-                    in a
+                <div class="fs-2 fw-bold text-white text-center mb-3">
+                    <span class="fs-1 lh-1 text-white">“</span>আমাদের হাল ছেড়ে দেয়া উচিত নয় এবং সমস্যা গুলোকে আমাদের 
+                    
                     <br />
-                    <span class="text-gray-700 me-1">more powerful</span>, emotionally expressive way
-                    <span class="fs-1 lh-1 text-gray-700">“</span></div>
+                    <span class="text-danger me-1">পরাজিত করার </span>,সুযোগ দেয়া উচিত নয়
+                    <span class="fs-1 lh-1 text-white">“</span></div>
                 <!--end::Testimonial-->
                 <!--begin::Author-->
                 <div class="fs-2 fw-bold text-muted text-center">
-                    <a href="/metronic8/demo1/../demo1/account/security.html" class="link-primary fs-4 fw-bolder">Marcus
-                        Levy,</a>
-                    <span class="fs-4 fw-bolder text-gray-600">KeenThemes CEO</span>
+                    <a href="https://facebook.com/azizbbl255" class="link-primary fs-4 fw-bolder">আজিজুর রহমান আজিজ </a>
+                    <span class="fs-4 fw-bolder text-white"> &nbsp;স্যাটের প্রতিষ্ঠাতা</span>
                 </div>
                 <!--end::Author-->
             </div>
@@ -581,13 +680,12 @@
             <!--begin::Heading-->
             <div class="text-center mb-12">
                 <!--begin::Title-->
-                <h3 class="fs-2hx text-dark mb-5" id="team" data-kt-scroll-offset="{default: 100, lg: 150}">Our Great
-                    Team</h3>
+                <h3 class="fs-2hx text-dark mb-5" id="team" data-kt-scroll-offset="{default: 100, lg: 150}">আমাদের বেস্ট ফিচার সমূহ</h3>
                 <!--end::Title-->
                 <!--begin::Sub-title-->
-                <div class="fs-5 text-muted fw-bold">It’s no doubt that when a development takes longer to complete,
-                    additional costs to
-                    <br />integrate and test each extra feature creeps up and haunts most of us.</div>
+                <div class="fs-5 text-muted fw-bold">ওয়েব সার্ভিস হলো ওয়েব সম্পর্কিত সেবাসমূহ অর্থাৎ নেটওয়ার্ক সংযুক্ত বিভিন্ন কম্পিউটারে চালু
+
+                    <br />থাকা বিভিন্ন সফটওয়ারের মধ্যে আন্তক্রিয়ার একটি ব্যবস্থা।</div>
                 <!--end::Sub-title=-->
             </div>
             <!--end::Heading-->
@@ -781,7 +879,7 @@
                         <ul class="nav border-transparent flex-center fs-5 fw-bold">
                             <li class="nav-item">
                                 <a class="nav-link text-gray-500 text-active-primary px-3 px-lg-6 active" href="#"
-                                    data-bs-toggle="tab" data-bs-target="#kt_landing_projects_latest">Latest</a>
+                                    data-bs-toggle="tab" data-bs-target="#kt_landing_projects_latest">জব সলিউশন</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-gray-500 text-active-primary px-3 px-lg-6" href="#"
@@ -807,86 +905,24 @@
                         <div class="tab-pane fade show active" id="kt_landing_projects_latest">
                             <!--begin::Row-->
                             <div class="row g-10">
+                                @foreach($categories as $category)
                                 <!--begin::Col-->
-                                <div class="col-lg-6">
-                                    <!--begin::Item-->
-                                    <a class="d-block card-rounded overlay h-lg-100" data-fslightbox="lightbox-projects"
-                                        href="{{ asset('assets') }}/media/stock/600x600/img-23.jpg">
-                                        <!--begin::Image-->
-                                        <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-lg-100 min-h-250px"
-                                            style="background-image:url('{{ asset('assets') }}/media/stock/600x600/img-23.jpg')">
+                                <div class="col-md-3 card pt-5 me-4 mb-4 pb-0" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;">
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">{{ $category->name }}</a>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <!--end::Image-->
-                                        <!--begin::Action-->
-                                        <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
-                                            <i class="bi bi-eye-fill fs-3x text-white"></i>
-                                        </div>
-                                        <!--end::Action-->
                                     </a>
-                                    <!--end::Item-->
                                 </div>
                                 <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-lg-6">
-                                    <!--begin::Row-->
-                                    <div class="row g-10 mb-10">
-                                        <!--begin::Col-->
-                                        <div class="col-lg-6">
-                                            <!--begin::Item-->
-                                            <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects"
-                                                href="{{ asset('assets') }}/media/stock/600x600/img-22.jpg">
-                                                <!--begin::Image-->
-                                                <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px"
-                                                    style="background-image:url('{{ asset('assets') }}/media/stock/600x600/img-22.jpg')">
-                                                </div>
-                                                <!--end::Image-->
-                                                <!--begin::Action-->
-                                                <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
-                                                    <i class="bi bi-eye-fill fs-3x text-white"></i>
-                                                </div>
-                                                <!--end::Action-->
-                                            </a>
-                                            <!--end::Item-->
-                                        </div>
-                                        <!--end::Col-->
-                                        <!--begin::Col-->
-                                        <div class="col-lg-6">
-                                            <!--begin::Item-->
-                                            <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects"
-                                                href="{{ asset('assets') }}/media/stock/600x600/img-21.jpg">
-                                                <!--begin::Image-->
-                                                <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px"
-                                                    style="background-image:url('{{ asset('assets') }}/media/stock/600x600/img-21.jpg')">
-                                                </div>
-                                                <!--end::Image-->
-                                                <!--begin::Action-->
-                                                <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
-                                                    <i class="bi bi-eye-fill fs-3x text-white"></i>
-                                                </div>
-                                                <!--end::Action-->
-                                            </a>
-                                            <!--end::Item-->
-                                        </div>
-                                        <!--end::Col-->
-                                    </div>
-                                    <!--end::Row-->
-                                    <!--begin::Item-->
-                                    <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects"
-                                        href="{{ asset('assets') }}/media/stock/600x400/img-20.jpg">
-                                        <!--begin::Image-->
-                                        <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px"
-                                            style="background-image:url('{{ asset('assets') }}/media/stock/600x600/img-20.jpg')">
-                                        </div>
-                                        <!--end::Image-->
-                                        <!--begin::Action-->
-                                        <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
-                                            <i class="bi bi-eye-fill fs-3x text-white"></i>
-                                        </div>
-                                        <!--end::Action-->
-                                    </a>
-                                    <!--end::Item-->
-                                </div>
-                                <!--end::Col-->
+                                @endforeach
                             </div>
                             <!--end::Row-->
                         </div>

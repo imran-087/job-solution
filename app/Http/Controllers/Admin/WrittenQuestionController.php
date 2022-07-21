@@ -81,7 +81,7 @@ class WrittenQuestionController extends Controller
     // //Written Question store
     public function store(Request $request)
     {
-        //dd($request->all());
+        dd($request->all());
 
         //validation
         $validator = Validator::make($request->all(), [
@@ -171,6 +171,7 @@ class WrittenQuestionController extends Controller
 
         $written_question = WrittenQuestion::find($request->question_id);
         $written_question->question = $request->question;
+        $written_question->question_no = $request->question_no;
 
         if ($request->type == 0) {
             $written_ans = WrittenAnswer::where('written_question_id', $request->question_id)->first();

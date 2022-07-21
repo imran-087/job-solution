@@ -28,6 +28,7 @@ class SettingsController extends Controller
         if (isset($request->id) &&  $setting = Setting::find($request->id)) { //update
 
             $setting->company_name = $request->name;
+            $setting->title = $request->title;
             $setting->motto = $request->motto;
             $setting->email = $request->email;
             $setting->phone = $request->phone;
@@ -72,6 +73,7 @@ class SettingsController extends Controller
             $setting = new Setting();
 
             $setting->company_name = $request->name;
+            $setting->title = $request->title;
             $setting->motto = $request->motto;
             $setting->email = $request->email;
             $setting->phone = $request->phone;
