@@ -95,7 +95,7 @@
                                     <!--begin::Menu item-->
                                     <div class="menu-item">
                                         <!--begin::Menu link-->
-                                        <a class="menu-link nav-link active py-3 px-4 px-xxl-6" href="url('/home')"
+                                        <a class="menu-link nav-link active py-3 px-4 px-xxl-6" href="{{ url('/') }}"
                                             data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Home</a>
                                         <!--end::Menu link-->
                                     </div>
@@ -103,7 +103,7 @@
                                     <!--begin::Menu item-->
                                     <div class="menu-item">
                                         <!--begin::Menu link-->
-                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="{{ '/home' }}"
+                                        <a class="menu-link nav-link py-3 px-4 px-xxl-6" href="{{ url('/home')  }}"
                                             data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">Job Solution</a>
                                         <!--end::Menu link-->
                                     </div>
@@ -162,11 +162,11 @@
                 <!--begin::Heading-->
                 <div class="text-center mb-5 mb-lg-10 py-10 py-lg-20">
                     <!--begin::Title-->
-                    <h1 class="text-white lh-base fw-bolder fs-2x fs-lg-3x mb-15">{{ $setting->title }}
+                    <h1 class="text-white lh-base fw-bolder fs-2x fs-lg-3x mb-15">{{ $setting->title ?? 'Company Title' }}
                         <br />
                         <span
                             style="background: linear-gradient(to right, #12CE5D 0%, #FFD80C 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
-                            <span id="kt_landing_hero_text">{{ $setting->motto }}</span>
+                            <span id="kt_landing_hero_text">{{ $setting->motto ?? 'Company Motto' }}</span>
                         </span></h1>
                     <!--end::Title-->
                     <!--begin::Action-->
@@ -871,40 +871,38 @@
                     <div class="text-center mb-5 mb-lg-10">
                         <!--begin::Title-->
                         <h3 class="fs-2hx text-dark mb-5" id="portfolio"
-                            data-kt-scroll-offset="{default: 100, lg: 150}">Our Projects</h3>
+                            data-kt-scroll-offset="{default: 100, lg: 150}">Explore</h3>
                         <!--end::Title-->
                     </div>
                     <!--end::Heading-->
                     <!--begin::Tabs wrapper-->
                     <div class="d-flex flex-center mb-5 mb-lg-15">
                         <!--begin::Tabs-->
-                        <ul class="nav border-transparent flex-center fs-5 fw-bold">
-                            <li class="nav-item">
-                                <a class="nav-link text-gray-500 text-active-primary px-3 px-lg-6 active" href="#"
-                                    data-bs-toggle="tab" data-bs-target="#kt_landing_projects_latest">জব সলিউশন</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-gray-500 text-active-primary px-3 px-lg-6" href="#"
-                                    data-bs-toggle="tab" data-bs-target="#kt_landing_projects_web_design">Web Design</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-gray-500 text-active-primary px-3 px-lg-6" href="#"
-                                    data-bs-toggle="tab" data-bs-target="#kt_landing_projects_mobile_apps">Mobile
-                                    Apps</a>
-                            </li>
-                            <li class="nav-item">
-                                <a class="nav-link text-gray-500 text-active-primary px-3 px-lg-6" href="#"
-                                    data-bs-toggle="tab"
-                                    data-bs-target="#kt_landing_projects_development">Development</a>
-                            </li>
-                        </ul>
+                        <div class="mb-5 hover-scroll-x">
+                            <div class="d-grid">
+                                <ul class="nav nav-tabs flex-center flex-nowrap text-nowrap mb-2 fw-bolder fs-5">
+                                    <li class="nav-item">
+                                        <a class="nav-link text-gray-500 text-active-primary px-3 px-lg-6 active" href="#"
+                                            data-bs-toggle="tab" data-bs-target="#kt_landing_projects_latest">Latest</a>
+                                    </li>
+                                    @foreach($main_categories as $main_category)
+                                    <li class="nav-item">
+                                        <a class="nav-link text-gray-500 text-active-primary px-3 px-lg-6" href="#"
+                                            data-bs-toggle="tab" data-bs-target="#kt_landing_projects_{{$main_category->id}}">{{$main_category->name}}</a>
+                                    </li>
+                                    @endforeach
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                        
                         <!--end::Tabs-->
                     </div>
                     <!--end::Tabs wrapper-->
                     <!--begin::Tabs content-->
                     <div class="tab-content">
                         <!--begin::Tab pane-->
-                        <div class="tab-pane fade show active" id="kt_landing_projects_latest">
+                        <div class="tab-pane show active" id="kt_landing_projects_latest">
                             <!--begin::Row-->
                             <div class="row g-10">
                                 @foreach($categories as $category)
@@ -929,270 +927,35 @@
                             <!--end::Row-->
                         </div>
                         <!--end::Tab pane-->
+                        @foreach($main_categories as $key => $main_category)
                         <!--begin::Tab pane-->
-                        <div class="tab-pane fade" id="kt_landing_projects_web_design">
+                        <div class="tab-pane fade" id="kt_landing_projects_{{ $main_category->id  }}">
                             <!--begin::Row-->
                             <div class="row g-10">
+                                @foreach($main_category->categories as $category)
                                 <!--begin::Col-->
-                                <div class="col-lg-6">
-                                    <!--begin::Item-->
-                                    <a class="d-block card-rounded overlay h-lg-100" data-fslightbox="lightbox-projects"
-                                        href="{{ asset('assets') }}/media/stock/600x600/img-11.jpg">
-                                        <!--begin::Image-->
-                                        <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-lg-100 min-h-250px"
-                                            style="background-image:url('{{ asset('assets') }}/media/stock/600x600/img-11.jpg')">
+                                <div class="col-md-3 card pt-5 me-4 mb-4 pb-0" style="box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;">
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">{{ $category->name }}</a>
+                                                </div>
+                                            </div>
                                         </div>
-                                        <!--end::Image-->
-                                        <!--begin::Action-->
-                                        <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
-                                            <i class="bi bi-eye-fill fs-3x text-white"></i>
-                                        </div>
-                                        <!--end::Action-->
                                     </a>
-                                    <!--end::Item-->
                                 </div>
                                 <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-lg-6">
-                                    <!--begin::Row-->
-                                    <div class="row g-10 mb-10">
-                                        <!--begin::Col-->
-                                        <div class="col-lg-6">
-                                            <!--begin::Item-->
-                                            <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects"
-                                                href="{{ asset('assets') }}/media/stock/600x600/img-12.jpg">
-                                                <!--begin::Image-->
-                                                <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px"
-                                                    style="background-image:url('{{ asset('assets') }}/media/stock/600x600/img-12.jpg')">
-                                                </div>
-                                                <!--end::Image-->
-                                                <!--begin::Action-->
-                                                <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
-                                                    <i class="bi bi-eye-fill fs-3x text-white"></i>
-                                                </div>
-                                                <!--end::Action-->
-                                            </a>
-                                            <!--end::Item-->
-                                        </div>
-                                        <!--end::Col-->
-                                        <!--begin::Col-->
-                                        <div class="col-lg-6">
-                                            <!--begin::Item-->
-                                            <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects"
-                                                href="{{ asset('assets') }}/media/stock/600x600/img-21.jpg">
-                                                <!--begin::Image-->
-                                                <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px"
-                                                    style="background-image:url('{{ asset('assets') }}/media/stock/600x600/img-21.jpg')">
-                                                </div>
-                                                <!--end::Image-->
-                                                <!--begin::Action-->
-                                                <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
-                                                    <i class="bi bi-eye-fill fs-3x text-white"></i>
-                                                </div>
-                                                <!--end::Action-->
-                                            </a>
-                                            <!--end::Item-->
-                                        </div>
-                                        <!--end::Col-->
-                                    </div>
-                                    <!--end::Row-->
-                                    <!--begin::Item-->
-                                    <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects"
-                                        href="{{ asset('assets') }}/media/stock/600x400/img-20.jpg">
-                                        <!--begin::Image-->
-                                        <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px"
-                                            style="background-image:url('{{ asset('assets') }}/media/stock/600x600/img-20.jpg')">
-                                        </div>
-                                        <!--end::Image-->
-                                        <!--begin::Action-->
-                                        <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
-                                            <i class="bi bi-eye-fill fs-3x text-white"></i>
-                                        </div>
-                                        <!--end::Action-->
-                                    </a>
-                                    <!--end::Item-->
-                                </div>
-                                <!--end::Col-->
+                                @endforeach
                             </div>
                             <!--end::Row-->
                         </div>
                         <!--end::Tab pane-->
-                        <!--begin::Tab pane-->
-                        <div class="tab-pane fade" id="kt_landing_projects_mobile_apps">
-                            <!--begin::Row-->
-                            <div class="row g-10">
-                                <!--begin::Col-->
-                                <div class="col-lg-6">
-                                    <!--begin::Row-->
-                                    <div class="row g-10 mb-10">
-                                        <!--begin::Col-->
-                                        <div class="col-lg-6">
-                                            <!--begin::Item-->
-                                            <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects"
-                                                href="{{ asset('assets') }}/media/stock/600x600/img-16.jpg">
-                                                <!--begin::Image-->
-                                                <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px"
-                                                    style="background-image:url('{{ asset('assets') }}/media/stock/600x600/img-16.jpg')">
-                                                </div>
-                                                <!--end::Image-->
-                                                <!--begin::Action-->
-                                                <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
-                                                    <i class="bi bi-eye-fill fs-3x text-white"></i>
-                                                </div>
-                                                <!--end::Action-->
-                                            </a>
-                                            <!--end::Item-->
-                                        </div>
-                                        <!--end::Col-->
-                                        <!--begin::Col-->
-                                        <div class="col-lg-6">
-                                            <!--begin::Item-->
-                                            <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects"
-                                                href="{{ asset('assets') }}/media/stock/600x600/img-12.jpg">
-                                                <!--begin::Image-->
-                                                <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px"
-                                                    style="background-image:url('{{ asset('assets') }}/media/stock/600x600/img-12.jpg')">
-                                                </div>
-                                                <!--end::Image-->
-                                                <!--begin::Action-->
-                                                <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
-                                                    <i class="bi bi-eye-fill fs-3x text-white"></i>
-                                                </div>
-                                                <!--end::Action-->
-                                            </a>
-                                            <!--end::Item-->
-                                        </div>
-                                        <!--end::Col-->
-                                    </div>
-                                    <!--end::Row-->
-                                    <!--begin::Item-->
-                                    <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects"
-                                        href="{{ asset('assets') }}/media/stock/600x400/img-15.jpg">
-                                        <!--begin::Image-->
-                                        <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px"
-                                            style="background-image:url('{{ asset('assets') }}/media/stock/600x600/img-15.jpg')">
-                                        </div>
-                                        <!--end::Image-->
-                                        <!--begin::Action-->
-                                        <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
-                                            <i class="bi bi-eye-fill fs-3x text-white"></i>
-                                        </div>
-                                        <!--end::Action-->
-                                    </a>
-                                    <!--end::Item-->
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-lg-6">
-                                    <!--begin::Item-->
-                                    <a class="d-block card-rounded overlay h-lg-100" data-fslightbox="lightbox-projects"
-                                        href="{{ asset('assets') }}/media/stock/600x600/img-23.jpg">
-                                        <!--begin::Image-->
-                                        <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-lg-100 min-h-250px"
-                                            style="background-image:url('{{ asset('assets') }}/media/stock/600x600/img-23.jpg')">
-                                        </div>
-                                        <!--end::Image-->
-                                        <!--begin::Action-->
-                                        <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
-                                            <i class="bi bi-eye-fill fs-3x text-white"></i>
-                                        </div>
-                                        <!--end::Action-->
-                                    </a>
-                                    <!--end::Item-->
-                                </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Row-->
-                        </div>
-                        <!--end::Tab pane-->
-                        <!--begin::Tab pane-->
-                        <div class="tab-pane fade" id="kt_landing_projects_development">
-                            <!--begin::Row-->
-                            <div class="row g-10">
-                                <!--begin::Col-->
-                                <div class="col-lg-6">
-                                    <!--begin::Item-->
-                                    <a class="d-block card-rounded overlay h-lg-100" data-fslightbox="lightbox-projects"
-                                        href="{{ asset('assets') }}/media/stock/600x600/img-15.jpg">
-                                        <!--begin::Image-->
-                                        <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-lg-100 min-h-250px"
-                                            style="background-image:url('{{ asset('assets') }}/media/stock/600x600/img-15.jpg')">
-                                        </div>
-                                        <!--end::Image-->
-                                        <!--begin::Action-->
-                                        <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
-                                            <i class="bi bi-eye-fill fs-3x text-white"></i>
-                                        </div>
-                                        <!--end::Action-->
-                                    </a>
-                                    <!--end::Item-->
-                                </div>
-                                <!--end::Col-->
-                                <!--begin::Col-->
-                                <div class="col-lg-6">
-                                    <!--begin::Row-->
-                                    <div class="row g-10 mb-10">
-                                        <!--begin::Col-->
-                                        <div class="col-lg-6">
-                                            <!--begin::Item-->
-                                            <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects"
-                                                href="{{ asset('assets') }}/media/stock/600x600/img-22.jpg">
-                                                <!--begin::Image-->
-                                                <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px"
-                                                    style="background-image:url('{{ asset('assets') }}/media/stock/600x600/img-22.jpg')">
-                                                </div>
-                                                <!--end::Image-->
-                                                <!--begin::Action-->
-                                                <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
-                                                    <i class="bi bi-eye-fill fs-3x text-white"></i>
-                                                </div>
-                                                <!--end::Action-->
-                                            </a>
-                                            <!--end::Item-->
-                                        </div>
-                                        <!--end::Col-->
-                                        <!--begin::Col-->
-                                        <div class="col-lg-6">
-                                            <!--begin::Item-->
-                                            <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects"
-                                                href="{{ asset('assets') }}/media/stock/600x600/img-21.jpg">
-                                                <!--begin::Image-->
-                                                <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px"
-                                                    style="background-image:url('{{ asset('assets') }}/media/stock/600x600/img-21.jpg')">
-                                                </div>
-                                                <!--end::Image-->
-                                                <!--begin::Action-->
-                                                <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
-                                                    <i class="bi bi-eye-fill fs-3x text-white"></i>
-                                                </div>
-                                                <!--end::Action-->
-                                            </a>
-                                            <!--end::Item-->
-                                        </div>
-                                        <!--end::Col-->
-                                    </div>
-                                    <!--end::Row-->
-                                    <!--begin::Item-->
-                                    <a class="d-block card-rounded overlay" data-fslightbox="lightbox-projects"
-                                        href="{{ asset('assets') }}/media/stock/600x400/img-14.jpg">
-                                        <!--begin::Image-->
-                                        <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded h-250px"
-                                            style="background-image:url('{{ asset('assets') }}/media/stock/600x600/img-14.jpg')">
-                                        </div>
-                                        <!--end::Image-->
-                                        <!--begin::Action-->
-                                        <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
-                                            <i class="bi bi-eye-fill fs-3x text-white"></i>
-                                        </div>
-                                        <!--end::Action-->
-                                    </a>
-                                    <!--end::Item-->
-                                </div>
-                                <!--end::Col-->
-                            </div>
-                            <!--end::Row-->
-                        </div>
-                        <!--end::Tab pane-->
+                        @endforeach
+                      
                     </div>
                     <!--end::Tabs content-->
                 </div>
@@ -1840,12 +1603,12 @@
             <div class="card-rounded shadow p-8 p-lg-12 mb-n5 mb-lg-n13 text-center"
                 style="background: linear-gradient(90deg, #20AA3E 0%, #03A588 100%);">
 
-                <span class="fs-1 fs-lg-2qx fw-bold text-white mb-4 ">Subscribe to our newsletter</span>
+                <span class="fs-1 fs-lg-2qx fw-bold text-white mb-4 ">Subscribe for newsletter</span>
 
                 <div class="d-flex flex-row justify-content-center ">
                     <!--begin::Content-->
                     <div class="my-2 me-5">
-                        <input type="text" id="subscriber_email" class="form-control form-control-solid w-500px" name="email" placeholder="example@gmail.com">
+                        <input type="text" id="subscriber_email" class="form-control form-control-solid w-md-300px " name="email" placeholder="example@gmail.com">
                         <div class="text-white help-block with-errors email-error"></div>
                     </div>
                     <!--end::Content-->
@@ -1855,7 +1618,6 @@
                     </div>
                     <!--end::Link-->
                 </div>
-                
             </div>
             <!--end::Highlight-->
         </div>
@@ -1883,27 +1645,37 @@
                     <!--begin::Col-->
                     <div class="col-lg-6 pe-lg-16 mb-10 mb-lg-0">
                         <!--begin::Block-->
-                        <div class="rounded landing-dark-border p-9 mb-10">
-                            <!--begin::Title-->
-                            <h2 class="text-white">Would you need a Custom License?</h2>
-                            <!--end::Title-->
-                            <!--begin::Text-->
-                            <span class="fw-normal fs-4 text-gray-700">Email us to
-                                <a href="https://keenthemes.com/support"
-                                    class="text-white opacity-50 text-hover-primary">support@keenthemes.com</a></span>
-                            <!--end::Text-->
+                        <div class="p-9">
+                            <!--begin::Logo image-->
+                            <a href="" class="d-flex justify-content-start align-content-center">
+                                <img alt="Logo"@isset($setting->logo)
+                                    src="{{ asset($setting->logo) }}"
+                                    @endisset 
+                                    class="logo-default h-35px h-lg-80px h-md-85px" />
+                               
+                            </a>
+                            <p class="mt-5 text-white fs-5">উইকিমিডিয়া ফাউন্ডেশন অনুমোদিত স্থানীয় অলাভজনক সংস্থা। এটি বাংলাদেশে বাংলা উইকিপিডিয়া বা এর সহপ্রকল্পসমূহ এবং 
+                                উইকিমিডিয়া ফাউন্ডেশনের বিভিন্ন শিক্ষামূলক প্রকল্পের প্রচার ও প্রসারের কাজ করে। </p>
+                            <!--end::Logo image-->
                         </div>
                         <!--end::Block-->
                         <!--begin::Block-->
-                        <div class="rounded landing-dark-border p-9">
+                        <div class="rounded landing-dark-border p-5">
                             <!--begin::Title-->
-                            <h2 class="text-white">How About a Custom Project?</h2>
+                            <h2 class="text-white text-center mb-2">আমাদের মোবাইল অ্যাপ ডাউনলোড করুন</h2>
                             <!--end::Title-->
-                            <!--begin::Text-->
-                            <span class="fw-normal fs-4 text-gray-700">Use Our Custom Development Service.
-                                <a href="/metronic8/demo1/../demo1/pages/user-profile/overview.html"
-                                    class="text-white opacity-50 text-hover-primary">Click to Get a Quote</a></span>
-                            <!--end::Text-->
+                            <div class="d-flex justify-content-center align-content-center">
+                                <!--begin::Logo image-->
+                                <a href=" @isset($setting->playstore_link) {{ url($setting->playstore_link) }} @endisset" class="">
+                                    <img alt="Logo" src="{{ asset('assets') }}/media/playstore/google-play-store.png"
+                                    class="logo-default h-25px h-lg-50px h-md-35px me-3" />   
+                                </a>
+                                <!--begin::Logo image-->
+                                <a href="@isset($setting->playstore_link) {{ url($setting->playstore_link) }} @endisset" class="">
+                                    <img alt="Logo" src="{{ asset('assets') }}/media/playstore/app-store.png"
+                                    class="logo-default h-25px h-lg-50px h-md-35px" />
+                                </a>  
+                            </div> 
                         </div>
                         <!--end::Block-->
                     </div>
@@ -1915,32 +1687,19 @@
                             <!--begin::Links-->
                             <div class="d-flex fw-bold flex-column me-20">
                                 <!--begin::Subtitle-->
-                                <h4 class="fw-bolder text-gray-400 mb-6">More for Metronic</h4>
+                                <h4 class="fw-bolder text-gray-400 mb-6">More for Satt academy</h4>
                                 <!--end::Subtitle-->
                                 <!--begin::Link-->
                                 <a href="https://keenthemes.com/faqs"
                                     class="text-white opacity-50 text-hover-primary fs-5 mb-6">FAQ</a>
                                 <!--end::Link-->
-                                <!--begin::Link-->
-                                <a href="/metronic8/demo1/../demo1/documentation/getting-started.html"
-                                    class="text-white opacity-50 text-hover-primary fs-5 mb-6">Documentaions</a>
-                                <!--end::Link-->
-                                <!--begin::Link-->
-                                <a href="https://www.youtube.com/c/KeenThemesTuts/videos"
-                                    class="text-white opacity-50 text-hover-primary fs-5 mb-6">Video Tuts</a>
-                                <!--end::Link-->
-                                <!--begin::Link-->
-                                <a href="/metronic8/demo1/../demo1/documentation/getting-started/changelog.html"
-                                    class="text-white opacity-50 text-hover-primary fs-5 mb-6">Changelog</a>
-                                <!--end::Link-->
-                                <!--begin::Link-->
-                                <a href="https://devs.keenthemes.com/"
-                                    class="text-white opacity-50 text-hover-primary fs-5 mb-6">Support Forum</a>
-                                <!--end::Link-->
-                                <!--begin::Link-->
-                                <a href="https://keenthemes.com/blog"
-                                    class="text-white opacity-50 text-hover-primary fs-5">Blog</a>
-                                <!--end::Link-->
+                                @foreach($pages as $page)
+                                    <!--begin::Link-->
+                                    <a href="{{ route('page', $page->slug) }}"
+                                        class="text-white opacity-50 text-hover-primary fs-5 mb-6">{{ Str::ucfirst($page->page_name) }}</a>
+                                    <!--end::Link-->
+                                @endforeach
+                                
                             </div>
                             <!--end::Links-->
                             <!--begin::Links-->
@@ -1948,41 +1707,51 @@
                                 <!--begin::Subtitle-->
                                 <h4 class="fw-bolder text-gray-400 mb-6">Stay Connected</h4>
                                 <!--end::Subtitle-->
+                                @if($setting->social_link['facebook'] != '')
                                 <!--begin::Link-->
-                                <a href="{{ url($setting->social_link['facebook']) }}" class="mb-6">
+                                <a href=" {{ url($setting->social_link['facebook']) }}" class="mb-6">
                                     <img src="{{ asset('assets') }}/media/svg/brand-logos/facebook-4.svg"
                                         class="h-20px me-2" alt="" />
                                     <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Facebook</span>
                                 </a>
                                 <!--end::Link-->
+                                @endif
+                                @if($setting->social_link['youtube'] != '')
                                 <!--begin::Link-->
-                                <a href="https://github.com/KeenthemesHub" class="mb-6">
-                                    <img src="{{ asset('assets') }}/media/svg/brand-logos/github.svg"
+                                <a href="{{ url($setting->social_link['youtube']) }}" class="mb-6">
+                                    <img src="{{ asset('assets') }}/media/svg/brand-logos/youtube-3.svg"
                                         class="h-20px me-2" alt="" />
-                                    <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Github</span>
+                                    <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Youtube</span>
                                 </a>
                                 <!--end::Link-->
+                                @endif
+                                @if($setting->social_link['twitter'] != '')
                                 <!--begin::Link-->
-                                <a href="https://twitter.com/keenthemes" class="mb-6">
+                                <a href="{{ url($setting->social_link['twitter']) }}" class="mb-6">
                                     <img src="{{ asset('assets') }}/media/svg/brand-logos/twitter.svg"
                                         class="h-20px me-2" alt="" />
                                     <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Twitter</span>
                                 </a>
                                 <!--end::Link-->
+                                @endif
+                                @if($setting->social_link['dribble'] != '')
                                 <!--begin::Link-->
-                                <a href="https://dribbble.com/keenthemes" class="mb-6">
+                                <a href="{{ url($setting->social_link['dribble']) }}" class="mb-6">
                                     <img src="{{ asset('assets') }}/media/svg/brand-logos/dribbble-icon-1.svg"
                                         class="h-20px me-2" alt="" />
                                     <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Dribbble</span>
                                 </a>
                                 <!--end::Link-->
+                                @endif
+                                @if($setting->social_link['instagram'] != '')
                                 <!--begin::Link-->
-                                <a href="https://www.instagram.com/keenthemes" class="mb-6">
+                                <a href="{{ url($setting->social_link['instagram']) }}" class="mb-6">
                                     <img src="{{ asset('assets') }}/media/svg/brand-logos/instagram-2-1.svg"
                                         class="h-20px me-2" alt="" />
                                     <span class="text-white opacity-50 text-hover-primary fs-5 mb-6">Instagram</span>
                                 </a>
                                 <!--end::Link-->
+                                @endif
                             </div>
                             <!--end::Links-->
                         </div>
@@ -2002,29 +1771,31 @@
                 <div class="d-flex flex-column flex-md-row flex-stack py-7 py-lg-10">
                     <!--begin::Copyright-->
                     <div class="d-flex align-items-center order-2 order-md-1">
+                        
                         <!--begin::Logo-->
                         <a href="/metronic8/demo1/../demo1/landing.html">
-                            <img alt="Logo" src="{{ asset('assets') }}/media/logos/logo-landing.svg"
+                            <img alt="Logo" @isset($setting->logo)
+                                src="{{ asset($setting->logo) }}"
+                                @endisset 
                                 class="h-15px h-md-20px" />
+                                
                         </a>
                         <!--end::Logo image-->
                         <!--begin::Logo image-->
-                        <span class="mx-5 fs-6 fw-bold text-gray-600 pt-1" href="https://keenthemes.com">© 2022
-                            Keenthemes Inc.</span>
+                        <span class="mx-5 fs-6 fw-bold text-gray-600 pt-1" href="https://sattacademy.com">
+                            <span> <strong><span style="color: #E87A33">স্যাট</span> <span style="color: #FBC401">একাডেমী</span></strong> </span> © {{date('Y')}} Sattacademy</span>
                         <!--end::Logo image-->
                     </div>
                     <!--end::Copyright-->
                     <!--begin::Menu-->
                     <ul class="menu menu-gray-600 menu-hover-primary fw-bold fs-6 fs-md-5 order-1 mb-5 mb-md-0">
                         <li class="menu-item">
-                            <a href="" target="_blank" class="menu-link px-2">About</a>
+                            <a href="{{ route('page', 'about-us') }}" class="menu-link px-2">About</a>
                         </li>
                         <li class="menu-item mx-5">
-                            <a href="https://devs.keenthemes.com" target="_blank" class="menu-link px-2">Support</a>
+                            <a href="{{ route('contact-us') }}" class="menu-link px-2">Contact</a>
                         </li>
-                        <li class="menu-item">
-                            <a href="" target="_blank" class="menu-link px-2">Purchase</a>
-                        </li>
+                       
                     </ul>
                     <!--end::Menu-->
                 </div>

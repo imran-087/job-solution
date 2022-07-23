@@ -22,6 +22,7 @@ use App\Http\Controllers\QuestionActivityController;
 use App\Http\Controllers\Resume\UserDetailsController;
 use App\Http\Controllers\ModelTest\ModelTestController;
 use App\Http\Controllers\Admin\DependableCategoryController;
+use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\JobMcqQuestionController;
 use App\Http\Controllers\JobsController;
 use App\Http\Controllers\ModelTest\CustomModelTestController;
@@ -48,7 +49,10 @@ use App\Http\Controllers\Resume\ResumeViewController;
 */
 
 Route::get('/', [PageController::class, 'landingPage'])->name('landingpage');
-// Route::get('/{page}', [PageController::class, 'page'])->name('page');
+Route::get('/page/{page}', [PageController::class, 'page'])->name('page');
+Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact-us');
+Route::post('/contact-us/store', [ContactUsController::class, 'contactStore'])->name('contact.store');
+
 
 Route::post('newsletter-subscriber/store', [NewsletterController::class, 'store'])->name('subscriber-store');
 

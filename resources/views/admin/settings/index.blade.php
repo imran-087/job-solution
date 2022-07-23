@@ -72,31 +72,31 @@
                         @csrf
                         <!--begin::Card body-->
                         <div class="card-body border-top p-9">
-                            <div class="row mb-8 offset-4"> 
+                            {{-- <div class="row mb-8 offset-4"> 
                                 @include('includes.session_alert')
-                            </div>
+                            </div> --}}
 
                             {{-- hidden  --}}
                             <input type="hidden" name="id" value="{{ $setting->id ?? null }}">
 
+                          
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label fw-bold fs-6">Company Logo</label>
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">Header Logo</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8">
                                     <!--begin::Image input-->
-                                    <div class="image-input image-input-outline" data-kt-image-input="true" @isset($setting->logo) style="background-image: url({{ asset($setting->logo) }})" @endisset>
+                                    <div class="image-input image-input-outline" data-kt-image-input="true" @isset($setting->header_logo) style="background-image: url({{ asset($setting->header_logo) }})" @endisset>
                                         <!--begin::Preview existing avatar-->
-                                        <div class="image-input-wrapper w-125px h-125px" @isset($setting->logo) style="background-image: url({{ asset($setting->logo) }})" @endisset></div>
+                                        <div class="image-input-wrapper w-125px h-125px" @isset($setting->header_logo) style="background-image: url({{ asset($setting->header_logo) }})" @endisset></div>
                                         <!--end::Preview existing avatar-->
                                         <!--begin::Label-->
                                         <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="Change avatar">
                                             <i class="bi bi-pencil-fill fs-7"></i>
                                             <!--begin::Inputs-->
-                                            <input type="file" name="logo" accept=".png, .jpg, .jpeg">
-                                            <input type="hidden" name="logo_remove">
+                                            <input type="file" name="header_logo" accept=".png, .jpg, .jpeg">
                                             <!--end::Inputs-->
                                         </label>
                                         <!--end::Label-->
@@ -122,19 +122,102 @@
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label required fw-bold fs-6">Company Name</label>
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">Footer Logo</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
-                                <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                                    <input type="text" name="name" class="form-control form-control-lg form-control-solid" placeholder="Company name" value="{{ old('name', $setting->company_name ?? '') }}">
-                                <div class="fv-plugins-message-container invalid-feedback"></div></div>
+                                <div class="col-lg-8">
+                                    <!--begin::Image input-->
+                                    <div class="image-input image-input-outline" data-kt-image-input="true" @isset($setting->footer_logo) style="background-image: url({{ asset($setting->footer_logo) }})" @endisset>
+                                        <!--begin::Preview existing avatar-->
+                                        <div class="image-input-wrapper w-125px h-125px" @isset($setting->footer_logo) style="background-image: url({{ asset($setting->footer_logo) }})" @endisset></div>
+                                        <!--end::Preview existing avatar-->
+                                        <!--begin::Label-->
+                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="Change avatar">
+                                            <i class="bi bi-pencil-fill fs-7"></i>
+                                            <!--begin::Inputs-->
+                                            <input type="file" name="footer_logo" accept=".png, .jpg, .jpeg">
+                                            <!--end::Inputs-->
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Cancel-->
+                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="Cancel avatar">
+                                            <i class="bi bi-x fs-2"></i>
+                                        </span>
+                                        <!--end::Cancel-->
+                                        <!--begin::Remove-->
+                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="Remove avatar">
+                                            <i class="bi bi-x fs-2"></i>
+                                        </span>
+                                        <!--end::Remove-->
+                                    </div>
+                                    <!--end::Image input-->
+                                    <!--begin::Hint-->
+                                    <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+                                    <!--end::Hint-->
+                                </div>
                                 <!--end::Col-->
                             </div>
                             <!--end::Input group-->
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label required fw-bold fs-6">Company Title</label>
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">Company Logo</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8">
+                                    <!--begin::Image input-->
+                                    <div class="image-input image-input-outline" data-kt-image-input="true" @isset($setting->logo) style="background-image: url({{ asset($setting->logo) }})" @endisset>
+                                        <!--begin::Preview existing avatar-->
+                                        <div class="image-input-wrapper w-125px h-125px" @isset($setting->logo) style="background-image: url({{ asset($setting->logo) }})" @endisset></div>
+                                        <!--end::Preview existing avatar-->
+                                        <!--begin::Label-->
+                                        <label class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="change" data-bs-toggle="tooltip" title="" data-bs-original-title="Change avatar">
+                                            <i class="bi bi-pencil-fill fs-7"></i>
+                                            <!--begin::Inputs-->
+                                            <input type="file" name="logo" accept=".png, .jpg, .jpeg">
+                                            <!--end::Inputs-->
+                                        </label>
+                                        <!--end::Label-->
+                                        <!--begin::Cancel-->
+                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="cancel" data-bs-toggle="tooltip" title="" data-bs-original-title="Cancel avatar">
+                                            <i class="bi bi-x fs-2"></i>
+                                        </span>
+                                        <!--end::Cancel-->
+                                        <!--begin::Remove-->
+                                        <span class="btn btn-icon btn-circle btn-active-color-primary w-25px h-25px bg-body shadow" data-kt-image-input-action="remove" data-bs-toggle="tooltip" title="" data-bs-original-title="Remove avatar">
+                                            <i class="bi bi-x fs-2"></i>
+                                        </span>
+                                        <!--end::Remove-->
+                                    </div>
+                                    <!--end::Image input-->
+                                    <!--begin::Hint-->
+                                    <div class="form-text">Allowed file types: png, jpg, jpeg.</div>
+                                    <!--end::Hint-->
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label required fw-bold fs-6">Company Name</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                    <input type="text" name="name" class="form-control form-control-lg form-control-solid @error('name') is-invalid @enderror" placeholder="Company name" value="{{ old('name', $setting->company_name ?? '') }}">
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                    @error('name')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">Company Title</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row fv-plugins-icon-container">
@@ -146,7 +229,7 @@
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label required fw-bold fs-6">Company Motto</label>
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">Company Motto</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row fv-plugins-icon-container">
@@ -158,7 +241,7 @@
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label required fw-bold fs-6">Email</label>
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">Email</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row fv-plugins-icon-container">
@@ -177,7 +260,26 @@
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row fv-plugins-icon-container">
-                                    <input type="tel" name="phone" class="form-control form-control-lg form-control-solid" placeholder="Phone number" value="{{ old('phone', $setting->phone ?? '') }}">
+                                    <input type="tel" name="phone" class="form-control form-control-lg form-control-solid @error('phone') is-invalid @enderror" placeholder="Phone number" value="{{ old('phone', $setting->phone ?? '') }}">
+                                    <div class="fv-plugins-message-container invalid-feedback"></div>
+                                    @error('phone')
+                                        <div class="alert alert-danger">{{ $message }}</div>
+                                    @enderror
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">
+                                    <span class="">Address</span>
+                                    
+                                </label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row fv-plugins-icon-container">
+                                    <input type="text" name="address" class="form-control form-control-lg form-control-solid" placeholder="Enter office address" value="{{ old('address', $setting->address ?? '') }}">
                                 <div class="fv-plugins-message-container invalid-feedback"></div></div>
                                 <!--end::Col-->
                             </div>
@@ -209,11 +311,35 @@
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
-                                <label class="col-lg-4 col-form-label fw-bold fs-6">Website</label>
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">Website 1</label>
                                 <!--end::Label-->
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
-                                    <input type="text" name="website" class="form-control form-control-lg form-control-solid" placeholder="Enter website link" value="{{ old('website', $setting->website ?? '') }}">
+                                    <input type="text" name="website_1" class="form-control form-control-lg form-control-solid" placeholder="Enter website link" value="{{ old('website_1', $setting->website['website_1'] ?? '') }}">
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">Website 2</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row">
+                                    <input type="text" name="website_2" class="form-control form-control-lg form-control-solid" placeholder="Enter website link" value="{{ old('website_2', $setting->website['website_2'] ?? '') }}">
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">Website 3</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row">
+                                    <input type="text" name="website_3" class="form-control form-control-lg form-control-solid" placeholder="Enter website link" value="{{ old('website_3', $setting->website['website_3'] ?? '') }}">
                                 </div>
                                 <!--end::Col-->
                             </div>
@@ -262,6 +388,30 @@
                                 <!--begin::Col-->
                                 <div class="col-lg-8 fv-row">
                                     <input type="text" name="youtube" class="form-control form-control-lg form-control-solid" placeholder="Enter youtube link" value="{{ old('youtube', $setting->social_link['youtube'] ?? '') }}">
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">Twitter</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row">
+                                    <input type="text" name="twitter" class="form-control form-control-lg form-control-solid" placeholder="Enter twitter link" value="{{ old('twitter', $setting->social_link['twitter'] ?? '') }}">
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Input group-->
+                            <!--begin::Input group-->
+                            <div class="row mb-6">
+                                <!--begin::Label-->
+                                <label class="col-lg-4 col-form-label fw-bold fs-6">Dribble</label>
+                                <!--end::Label-->
+                                <!--begin::Col-->
+                                <div class="col-lg-8 fv-row">
+                                    <input type="text" name="dribble" class="form-control form-control-lg form-control-solid" placeholder="Enter dribble link" value="{{ old('dribble', $setting->social_link['dribble'] ?? '') }}">
                                 </div>
                                 <!--end::Col-->
                             </div>

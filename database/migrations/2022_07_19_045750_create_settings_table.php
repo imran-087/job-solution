@@ -17,15 +17,18 @@ class CreateSettingsTable extends Migration
             $table->id(); 
             $table->string('company_name'); 
             $table->string('logo')->nullable(); 
+            $table->string('header_logo')->nullable(); 
+            $table->string('footer_logo')->nullable(); 
             $table->string('title')->nullable(); 
             $table->string('motto')->nullable();
             $table->string('phone'); 
-            $table->string('email'); 
-            $table->string('website')->nullable();
+            $table->string('email')->nullable(); 
+            $table->json('website')->nullable();
             $table->text('description')->nullable();
             $table->string('copyright')->nullable(); 
             $table->string('playstore_link')->nullable(); 
-            $table->json('social_link'); 
+            $table->json('social_link')->nullable(); 
+            $table->string('address')->nullable(); 
             $table->timestamps();
         });
        

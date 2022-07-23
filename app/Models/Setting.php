@@ -10,7 +10,8 @@ class Setting extends Model
     use HasFactory;
 
     protected $casts = [
-        'social_link' => 'json'
+        'social_link' => 'json',
+        'website' => 'json',
     ];
 
     protected $guarded = [];
