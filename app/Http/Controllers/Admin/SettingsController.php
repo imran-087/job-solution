@@ -70,11 +70,11 @@ class SettingsController extends Controller
 
 
                 //unlink old logo
-                $photo_path = \base_path() . '/public' . $setting->logo;
-                //dd($photo_path);
-                if (\File::exists($photo_path)) {
-                    unlink($photo_path);
-                }
+                // $photo_path = \base_path() . '/public' . $setting->logo;
+                // //dd($photo_path);
+                // if (\File::exists($photo_path)) {
+                //     unlink($photo_path);
+                // }
 
                 $setting->logo = '/uploads/company/' . $logo_name;
                 
@@ -96,11 +96,11 @@ class SettingsController extends Controller
                 })->save($destinationPath . $header_logo_name, 80);
 
                 //unlink old logo
-                $photo_path = \base_path() . '/public' . $setting->header_logo;
-                //dd($photo_path);
-                if (\File::exists($photo_path)) {
-                    unlink($photo_path);
-                }
+                // $photo_path = \base_path() . '/public' . $setting->header_logo;
+                // //dd($photo_path);
+                // if (\File::exists($photo_path)) {
+                //     unlink($photo_path);
+                // }
 
                 $setting->header_logo = '/uploads/company/' . $header_logo_name;
                 
@@ -122,11 +122,11 @@ class SettingsController extends Controller
 
 
                 //unlink old logo
-                $photo_path = \base_path() . '/public' . $setting->footer_logo;
-                //dd($photo_path);
-                if (\File::exists($photo_path)) {
-                    unlink($photo_path);
-                }
+                // $photo_path = \base_path() . '/public' . $setting->footer_logo;
+                // //dd($photo_path);
+                // if (\File::exists($photo_path)) {
+                //     unlink($photo_path);
+                // }
 
                 $setting->footer_logo = '/uploads/company/' . $logo_name;
                 
