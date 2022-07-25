@@ -88,7 +88,7 @@
                             <!--end::Mobile menu toggle-->
                             <!--begin::Logo image-->
                             <a href="{{ url('/') }}" class="d-flex justify-content-center align-content-center">
-                                <img alt="Logo" @isset($setting->logo) src="{{ asset($setting->logo)}}"  @endisset 
+                                <img alt="Logo" @isset($setting->logo) src="{{ asset($setting->logo) }}"  @endisset 
                                     class="logo-default h-25px  h-md-40px me-2" />
                                 <h4><strong><span style="color: #E87A33">স্যাট</span> <span style="color: #FBC401">একাডেমী</span></strong> </span></h4>
                             </a>

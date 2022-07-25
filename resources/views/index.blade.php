@@ -1,7 +1,7 @@
 @extends('landing_layout.l_app')
 
 @section('landing_hero')
-<div class="d-flex flex-column flex-center w-100 min-h-md-350px min-h-200px min-h-lg-400px px-9">
+<div class="d-flex flex-column flex-center w-100 min-h-md-350px min-h-300px min-h-lg-400px px-9">
     <!--begin::Heading-->
     <div class="text-center mb-5 mb-lg-10 py-10 py-lg-20">
         <!--begin::Title-->
