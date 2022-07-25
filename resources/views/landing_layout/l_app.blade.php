@@ -316,46 +316,46 @@
                     <!--begin::Links-->
                     <div class="d-flex align-items-center justify-content-center order-1 mb-3 mb-md-0">
     
-                        @if(optional($setting)->social_link['facebook'])
+                        @isset($setting->social_link['facebook'])
                         <!--begin::Link-->
                         <a href=" {{ url($setting->social_link['facebook']) }}" class="">
                             <img src="{{ asset('assets') }}/media/svg/brand-logos/facebook-4.svg"
                                 class="logo-default h-30px me-4" alt="" />
                         </a>
                         <!--end::Link-->
-                        @endif
-                        @if(optional($setting)->social_link['youtube'] )
+                        @endisset
+                        @isset($setting->social_link['youtube'] )
                         <!--begin::Link-->
                         <a href="{{ url($setting->social_link['youtube']) }}" class="">
                             <img src="{{ asset('assets') }}/media/svg/brand-logos/youtube-3.svg"
                                 class="logo-default h-30px me-4" alt="" />
                         </a>
                         <!--end::Link-->
-                        @endif
-                        @if(optional($setting)->social_link['twitter'])
+                        @endisset
+                        @isset($setting->social_link['twitter'] )
                         <!--begin::Link-->
                         <a href="{{ url($setting->social_link['twitter']) }}" class="">
                             <img src="{{ asset('assets') }}/media/svg/brand-logos/twitter.svg"
                                 class=" logo-default h-30px me-4" alt="" />
                         </a>
                         <!--end::Link-->
-                        @endif
-                        @if(optional($setting)->social_link['dribble'] )
+                        @endisset
+                        @isset($setting->social_link['dribble'] )
                         <!--begin::Link-->
                         <a href="{{ url($setting->social_link['dribble']) }}" class="">
                             <img src="{{ asset('assets') }}/media/svg/brand-logos/dribbble-icon-1.svg"
                                 class="logo-default h-30px me-4" alt="" />
                         </a>
                         <!--end::Link-->
-                        @endif
-                        @if(optional($setting)->social_link['instagram'] )
+                        @endisset
+                        @isset($setting->social_link['instagram'])
                         <!--begin::Link-->
                         <a href="{{ url($setting->social_link['instagram']) }}" class="">
                             <img src="{{ asset('assets') }}/media/svg/brand-logos/instagram-2-1.svg"
                                 class="logo-default h-30px " alt="" />
                         </a>
                         <!--end::Link-->
-                        @endif
+                        @endisset
                     </div>
                     <!--end::Links-->
                     <!--end::social link-->
