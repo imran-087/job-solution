@@ -99,7 +99,6 @@ class PagesController extends Controller
 
         $page = Page::where('id', $request->id)->update([
             'page_name' => $request->name,
-            'slug' => Str::slug($request->name),
             'content' => $request->content
         ]);
 

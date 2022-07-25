@@ -23,12 +23,22 @@
 		<link href="{{ asset('assets') }}/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('assets') }}/css/style.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
-
+        
         @stack('styles')
 
 		<!--Begin::Google Tag Manager -->
 		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-5FS8GGP');</script>
 		<!--End::Google Tag Manager -->
+
+        <style>
+            #section2 .text-center.mb-md-0.py-md-15.py-7.py-7.rounded {
+                box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+                
+            }
+            #section2 .text-center.mb-md-0.py-md-15.py-7.py-7.rounded:hover {
+                box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+            }
+        </style>
 	</head>
     
 	<!--end::Head-->
@@ -77,9 +87,9 @@
                             </button>
                             <!--end::Mobile menu toggle-->
                             <!--begin::Logo image-->
-                            <a href="" class="d-flex justify-content-center align-content-center">
-                                <img alt="Logo" src="{{ asset($setting->header_logo)}}"
-                                    class="logo-default h-25px  h-md-40px" />
+                            <a href="{{ url('/') }}" class="d-flex justify-content-center align-content-center">
+                                <img alt="Logo" @isset($setting->logo) src="{{ asset($setting->logo)}}"  @endisset 
+                                    class="logo-default h-25px  h-md-40px me-2" />
                                 <h4><strong><span style="color: #E87A33">স্যাট</span> <span style="color: #FBC401">একাডেমী</span></strong> </span></h4>
                             </a>
                             <!--end::Logo image-->
@@ -152,7 +162,7 @@
                         <!--begin::Toolbar-->
                         <div class="flex-equal text-end ms-1">
                             <a href="{{ route('login') }}"
-                                class="btn btn-success">Sign In</a>
+                                class="btn btn-success btn-sm-sm">Sign In</a>
                         </div>
                         <!--end::Toolbar-->
                     </div>
@@ -201,8 +211,7 @@
                                     class="logo-default h-35px h-lg-80px h-md-85px" />
                                
                             </a>
-                            <p class="mt-5 text-white fs-5">উইকিমিডিয়া ফাউন্ডেশন অনুমোদিত স্থানীয় অলাভজনক সংস্থা। এটি বাংলাদেশে বাংলা উইকিপিডিয়া বা এর সহপ্রকল্পসমূহ এবং 
-                                উইকিমিডিয়া ফাউন্ডেশনের বিভিন্ন শিক্ষামূলক প্রকল্পের প্রচার ও প্রসারের কাজ করে। </p>
+                            <p class="mt-5 text-white fs-5">উইকিমিডিয়া ফাউন্ডেশন অনুমোদিত স্থানীয় অলাভজনক সংস্থা। এটি বাংলাদেশে বাংলা উইকিপিডিয়া । </p>
                             <!--end::Logo image-->
                         </div>
                         <!--end::Block-->
@@ -294,7 +303,7 @@
                             <img alt="Logo" @isset($setting->logo)
                                 src="{{ asset($setting->logo) }}"
                                 @endisset 
-                                class="logo-default h-15px h-md-30px" />
+                                class="logo-default h-20px h-md-30px" />
                                 
                         </a>
                         <!--end::Logo image-->
@@ -305,7 +314,7 @@
                     <!--end::Copyright-->
                     <!--start::social link-->
                     <!--begin::Links-->
-                    <div class="d-flex align-items-center justify-content-center order-1">
+                    <div class="d-flex align-items-center justify-content-center order-1 mb-3 mb-md-0">
     
                         @if($setting->social_link['facebook'] != '')
                         <!--begin::Link-->

@@ -84,11 +84,17 @@
                             </span>
                             <!--end::Svg Icon-->
                             <input type="text" data-kk-product-table-filter="search"
-                                class="form-control form-control-solid w-250px ps-14" placeholder="Search category">
+                                class="form-control form-control-solid w-250px ps-14" placeholder="Search page">
                         </div>
                         <!--end::Search-->
                     </div>
                     <!--begin::Card title-->
+                    <div class="card-toolbar flex-row-fluid justify-content-end gap-5"
+                        data-select2-id="select2-data-123-0tix">
+                        <!--begin::Add product-->
+                        <a href="{{ route('admin.page.create') }}" class="btn btn-sm btn-primary me-3"><i class="fas fa-plus fa-2xl"></i>Add Page</a>
+                        <!--end::Add product-->
+                    </div>
 
                 </div>
                 <!--end::Card header-->

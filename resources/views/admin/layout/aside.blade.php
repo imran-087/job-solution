@@ -7,7 +7,8 @@
         <!--begin::Menu-->
         <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500"
             id="#kt_aside_menu" data-kt-menu="true" data-kt-menu-expand="false">
-            
+
+            <!--begin::dashboard  -->
             <div class="menu-item">
                 <a class="menu-link {{ request()->is('admin/dashboard*') ? 'active' : '' }}" href="{{ route('admin.dashboard') }}"  >
                     <span class="menu-icon">
@@ -23,17 +24,19 @@
                         </span>
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-title">Dashboard</span>
+                    <span class="menu-title fs-6 ">Dashboard</span>
                 </a>
             </div>
-                
+            <!--end::dashboard  -->
             
+            <!--begin::main menu  -->
             <div class="menu-item">
             <div class="menu-content pt-8 pb-2">
-                <span class="menu-section text-muted text-uppercase fs-8 ls-1">Job Solution</span>
+                <span class="menu-section text-muted text-uppercase fs-8 ls-1">Main Menu</span>
             </div>
             </div>
-         
+
+            <!--begin::categories  -->
             <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/category*') ? 'show menu-accordion' : '' }}">
                 <span class="menu-link">
                     <span class="menu-icon">
@@ -78,21 +81,96 @@
                         </a>
                     </div>
                     <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/institutes*') ? 'active' : '' }}" href="{{ route('admin.institute.index') }}" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Institution</span>
+                        </a>
+                    </div>
+                   
+                </div>
+            </div>
+            <!--end::categories  -->
+
+            <!--begin::subject  -->
+            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/category*') ? 'show menu-accordion' : '' }}">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Subject</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion  menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/main-category*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Academy</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/main-category*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Admission</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/main-category*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Job</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/category-index*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Special Skill</span>
+                        </a>
+                    </div>
+                   <div class="menu-item">
                         <a class="menu-link {{ request()->is('admin/category/subject*') ? 'active' : '' }}" href="{{ url('admin/category/subject') }}">
                             <span class="menu-bullet">
                                 <span class="bullet bullet-dot"></span>
                             </span>
-                            <span class="menu-title">Subject</span>
+                            <span class="menu-title">All Subject</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/subject*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Requested Subject</span>
                         </a>
                     </div>
                     
                 </div>
             </div>
+            <!--end::subject  -->
 
-            <div class="menu-item">
-                <a class="menu-link {{ request()->is('admin/institutes*') ? 'active' : '' }}" href="{{ route('admin.institute.index') }}" >
+            <!--begin::MCQ  -->
+            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/category*') ? 'show menu-accordion' : '' }}">
+                <span class="menu-link">
                     <span class="menu-icon">
-                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
                         <span class="svg-icon svg-icon-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none">
@@ -104,14 +182,84 @@
                         </span>
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-title">Institution List</span>
-                </a>
+                    <span class="menu-title">MCQ Question</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion  menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/academy/mcq-question*') ? 'active' : '' }}" href="{{ route('admin.academy.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Academy</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/main-category*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Admission</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/question/mcq-question*') ? 'active' : '' }}" href="{{ route('admin.question.category') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Job</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/category-index*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Special Skill</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/question/create-question*') ? 'active' : '' }}" href="{{ route('admin.question.create') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Add Question</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/question/question-index*') ? 'active' : '' }}" href="{{ route('admin.question.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">All Question</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/subject*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Requested MCQ</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/subject*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Requested Description</span>
+                        </a>
+                    </div>
+                    
+                </div>
             </div>
+            <!--end::MCQ  -->
 
-            <div class="menu-item">
-                <a class="menu-link {{ request()->is('admin/passage*') ? 'active' : '' }}" href="{{ route('admin.passage.index') }}" >
+            <!--begin::Written Question  -->
+            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/category*') ? 'show menu-accordion' : '' }}">
+                <span class="menu-link">
                     <span class="menu-icon">
-                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
                         <span class="svg-icon svg-icon-2">
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
                                 fill="none">
@@ -123,12 +271,1504 @@
                         </span>
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-title">All Passage </span>
-                </a>
+                    <span class="menu-title">Written Question</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion  menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/academy/mcq-question*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Academy</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/main-category*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Admission</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/question/mcq-question*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Job</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/category-index*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Special Skill</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/question/written-question*') ? 'active' : '' }}" href="{{ route('admin.written.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Add Question</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/question/written-question/view*') ? 'active' : '' }}" href="{{ route('admin.written.view.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">All Question</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/subject*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Requested Question</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/subject*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Requested Description</span>
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+            <!--end::Writen Question  -->
+
+            <!--begin::Current Affairs  -->
+            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/samprotik-question*') ? 'show menu-accordion' : '' }}">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Current Affairs</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion  menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/question/samprotik-question/create*') ? 'active' : '' }}" href="{{ route('admin.samprotik.create') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Add Question</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/question/samprotik-question*') ? 'active' : '' }}" href="{{ route('admin.samprotik.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">All Question</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/samprotik-tag*') ? 'active' : '' }}" href="{{ route('admin.samprotik-tag.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Samprotik Tag</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!--end::Current Affairs  -->
+
+            <!--begin::Passage  -->
+            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/category*') ? 'show menu-accordion' : '' }}">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Passage</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion  menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/academy/mcq-question*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Academy</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/main-category*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Admission</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/question/mcq-question*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Job</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/category-index*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Special Skill</span>
+                        </a>
+                    </div>
+                   <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/passage*') ? 'active' : '' }}" href="{{ route('admin.passage.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">All Passage</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/subject*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Requested Passage</span>
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+            <!--end::Passage  -->
+
+            
+            <!--begin::Video Library  -->
+            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/category*') ? 'show menu-accordion' : '' }}">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Video Library</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion  menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/academy/mcq-question*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Academy</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/main-category*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Admission</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/question/mcq-question*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Job</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/category-index*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Special Skill</span>
+                        </a>
+                    </div>
+                   <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/passage*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">All Video</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/subject*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Requested Video</span>
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+            <!--end::video library  -->
+
+            <!--begin::PDF Book Library  -->
+            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/category*') ? 'show menu-accordion' : '' }}">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">PDF Book Library</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion  menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/academy/mcq-question*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Academy</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/main-category*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Admission</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/question/mcq-question*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Job</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/category-index*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Special Skill</span>
+                        </a>
+                    </div>
+                   <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/passage*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">All PDF</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/subject*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Requested pdf</span>
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+            <!--end::PDF Book library  -->
+
+            <!--begin::Description Management  -->
+            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/category*') ? 'show menu-accordion' : '' }}">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Description Management</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion  menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/academy/mcq-question*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Academy</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/main-category*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Admission</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/question/mcq-question*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Job</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/category-index*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Special Skill</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/description/add-question-description*') ? 'active' : '' }}" href="{{ route('admin.question-description.create') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Add Description</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/description/question-description*') ? 'active' : '' }}" href="{{ route('admin.question-description.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">All Description</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/description/pending-question-description*') ? 'active' : '' }}" href="{{ route('admin.question-description.pending') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Requested Description</span>
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+            <!--end::Description  -->
+
+
+            <!--begin::Tag Management  -->
+            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/category*') ? 'show menu-accordion' : '' }}">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Tag Management</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion  menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/academy/mcq-question*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Academy</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/main-category*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Admission</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/question/mcq-question*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Job</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/category-index*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Special Skill</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/question/add-tag-on-question*') ? 'active' : '' }}" href="{{ route('admin.question.tag') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Add Tag</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/question/add-tag-on-question*') ? 'active' : '' }}" href="{{ route('admin.question.tag') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">All Tag</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/description/pending-question-description*') ? 'active' : '' }}" href="{{ route('admin.question-description.pending') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Requested Tag</span>
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+            <!--end::Tag  -->
+
+
+            {{-- Exam Menu Start  --}}
+            <div class="menu-item">
+            <div class="menu-content pt-8 pb-2">
+                <span class="menu-section text-muted text-uppercase fs-8 ls-1">Exam</span>
+            </div>
             </div>
 
-
+            <!--begin::exam management -->
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm007.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M21 9V11C21 11.6 20.6 12 20 12H14V8H20C20.6 8 21 8.4 21 9ZM10 8H4C3.4 8 3 8.4 3 9V11C3 11.6 3.4 12 4 12H10V8Z" fill="currentColor"></path>
+                                <path d="M15 2C13.3 2 12 3.3 12 5V8H15C16.7 8 18 6.7 18 5C18 3.3 16.7 2 15 2Z" fill="currentColor"></path>
+                                <path opacity="0.3" d="M9 2C10.7 2 12 3.3 12 5V8H9C7.3 8 6 6.7 6 5C6 3.3 7.3 2 9 2ZM4 12V21C4 21.6 4.4 22 5 22H10V12H4ZM20 12V21C20 21.6 19.6 22 19 22H14V12H20Z" fill="currentColor"></path>
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Exam Management</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion menu-active-bg" kt-hidden-height="390" style="display: none; overflow: hidden;">
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Academy</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/exam*') ? 'active' : '' }}" href="{{ route('admin.exam.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Exam List</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/exam/create*') ? 'active' : '' }}" href="{{ route('admin.exam.create') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Create Exam</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/exam-details/create*') ? 'active' : '' }}" href="{{ route('admin.exam-details.create') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Add Subject</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/exam-details/add-question*') ? 'active' : '' }}" href="{{ route('admin.exam-details.question') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Add Question</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/exam-result*') ? 'active' : '' }}" href="{{ route('admin.exam-result.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Exam Result</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Admission</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/exam*') ? 'active' : '' }}" href="{{ route('admin.exam.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Exam List</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/exam/create*') ? 'active' : '' }}" href="{{ route('admin.exam.create') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Create Exam</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/exam-details/create*') ? 'active' : '' }}" href="{{ route('admin.exam-details.create') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Add Subject</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/exam-details/add-question*') ? 'active' : '' }}" href="{{ route('admin.exam-details.question') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Add Question</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/exam-result*') ? 'active' : '' }}" href="{{ route('admin.exam-result.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Exam Result</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Job</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/exam*') ? 'active' : '' }}" href="{{ route('admin.exam.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Exam List</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/exam/create*') ? 'active' : '' }}" href="{{ route('admin.exam.create') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Create Exam</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/exam-details/create*') ? 'active' : '' }}" href="{{ route('admin.exam-details.create') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Add Subject</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/exam-details/add-question*') ? 'active' : '' }}" href="{{ route('admin.exam-details.question') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Add Question</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/exam-result*') ? 'active' : '' }}" href="{{ route('admin.exam-result.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Exam Result</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Special Skill</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/exam*') ? 'active' : '' }}" href="{{ route('admin.exam.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Exam List</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/exam/create*') ? 'active' : '' }}" href="{{ route('admin.exam.create') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Create Exam</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/exam-details/create*') ? 'active' : '' }}" href="{{ route('admin.exam-details.create') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Add Subject</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/exam-details/add-question*') ? 'active' : '' }}" href="{{ route('admin.exam-details.question') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Add Question</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/exam-result*') ? 'active' : '' }}" href="{{ route('admin.exam-result.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Exam Result</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/exam*') ? 'active' : '' }}" href="{{ route('admin.exam.index') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">All Exam</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/exam*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Requested Exam</span>
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+            <!-- end::exam management -->
+
+
+            {{-- Exam Menu End  --}}
+
+            {{-- begin::Forum Menu Start  --}}
+            <div class="menu-item">
+                <div class="menu-content pt-8 pb-2">
+                    <span class="menu-section text-muted text-uppercase fs-8 ls-1">Forum</span>
+                </div>
+            </div>
+
+            <!--begin::Forum  -->
+            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/category*') ? 'show menu-accordion' : '' }}">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Forum Question</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion  menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/academy/mcq-question*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Academy</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/main-category*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Admission</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/question/mcq-question*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Job</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/category-index*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Special Skill</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/question/question-index*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">All Question</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/subject*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Requested Question</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/subject*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Requested Description</span>
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+            <!--end::Forurm  -->
+
+            <div class="menu-item">
+                <a class="menu-link {{ request()->is('admin/forum/channel*') ? 'active' : '' }}" href="{{ route('admin.channel.index') }}" >
+                    <span class="menu-icon">
+                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Channel</span>
+                </a>
+            </div>
+
+            <div class="menu-item">
+                <a class="menu-link {{ request()->is('admin/forum/discussion*') ? 'active' : '' }}" href="{{ route('admin.discussion.index') }}" >
+                    <span class="menu-icon">
+                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Discussion</span>
+                </a>
+            </div>
+            {{--end::forum Menu end  --}}
+
+            {{-- begin::blog&notice  --}}
+            <div class="menu-item">
+                <div class="menu-content pt-8 pb-2">
+                    <span class="menu-section text-muted text-uppercase fs-8 ls-1">Blog and Notice</span>
+                </div>
+            </div>
+
+            <!--begin::blog  -->
+            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/category*') ? 'show menu-accordion' : '' }}">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Blog</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion  menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/academy/mcq-question*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Academy</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/main-category*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Admission</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/question/mcq-question*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Job</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/category-index*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Special Skill</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/question/question-index*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">All Blog</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/subject*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Requested Blog</span>
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+            <!--end::blog  -->
+
+            <!--begin::notice  -->
+            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/category*') ? 'show menu-accordion' : '' }}">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Notice</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion  menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/academy/mcq-question*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Academy</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/main-category*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Admission</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/question/mcq-question*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Job</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/category-index*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Special Skill</span>
+                        </a>
+                    </div>
+                    
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/question/question-index*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">All Notice</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/subject*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Requested Notice</span>
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+            <!--end::notice  -->
+
+            <!--begin::news  -->
+            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/category*') ? 'show menu-accordion' : '' }}">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Daily Short news</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion  menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/academy/mcq-question*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">All News</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/category/main-category*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">News Category</span>
+                        </a>
+                    </div>
+                   
+                </div>
+            </div>
+            <!--end::news  -->
+
+            {{--end::blog&notice  --}}
+
+            {{-- begin::role_permision  --}}
+            <div class="menu-item">
+                <div class="menu-content pt-8 pb-2">
+                    <span class="menu-section text-muted text-uppercase fs-8 ls-1">Role & Permission</span>
+                </div>
+            </div>
+
+            <!--begin::user  -->
+            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/category*') ? 'show menu-accordion' : '' }}">
+                
+                <div class="menu-item">
+                    <a class="menu-link {{ request()->is('admin/user-management/user-list*') ? 'active' : '' }}" href="{{ route('admin.user-management.index') }}" >
+                        <span class="menu-bullet">
+                            <span class="bullet bullet-dot"></span>
+                        </span>
+                        <span class="menu-title">Users</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link {{ request()->is('admin/role*') ? 'active' : '' }}" href="{{ route('admin.role.index') }}" >
+                        <span class="menu-bullet">
+                            <span class="bullet bullet-dot"></span>
+                        </span>
+                        <span class="menu-title">Role</span>
+                    </a>
+                </div>
+                <div class="menu-item">
+                    <a class="menu-link {{ request()->is('admin/role*') ? 'active' : '' }}" href="#" >
+                        <span class="menu-bullet">
+                            <span class="bullet bullet-dot"></span>
+                        </span>
+                        <span class="menu-title">Permission</span>
+                    </a>
+                </div>
+            </div>
+            <!--end::blog  -->
+
+            {{-- end::role&permission --}}
+
+            <!--begin::setting menu -->
+            <div class="menu-item">
+                <div class="menu-content pt-8 pb-2">
+                    <span class="menu-section text-muted text-uppercase fs-8 ls-1">Settings</span>
+                </div>
+            </div>
+
+            <!--begin::Settings-->
+            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm007.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                                <path d="M21 9V11C21 11.6 20.6 12 20 12H14V8H20C20.6 8 21 8.4 21 9ZM10 8H4C3.4 8 3 8.4 3 9V11C3 11.6 3.4 12 4 12H10V8Z" fill="currentColor"></path>
+                                <path d="M15 2C13.3 2 12 3.3 12 5V8H15C16.7 8 18 6.7 18 5C18 3.3 16.7 2 15 2Z" fill="currentColor"></path>
+                                <path opacity="0.3" d="M9 2C10.7 2 12 3.3 12 5V8H9C7.3 8 6 6.7 6 5C6 3.3 7.3 2 9 2ZM4 12V21C4 21.6 4.4 22 5 22H10V12H4ZM20 12V21C20 21.6 19.6 22 19 22H14V12H20Z" fill="currentColor"></path>
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Settings</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion menu-active-bg" kt-hidden-height="390" style="display: none; overflow: hidden;">
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Site Setting</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/settings*') ? 'active' : '' }}" href="{{ route('admin.setting.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">General</span>
+                                </a>
+                            </div>
+                            
+                        </div>
+                    </div>
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Page Setting</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/page/create*') ? 'active' : '' }}" href="{{ route('admin.page.create') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">Add Page</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/pages*') ? 'active' : '' }}" href="{{ route('admin.pages') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                    <span class="menu-title">All Pages</span>
+                                </a>
+                            </div> 
+                        </div>
+                    </div>
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Resume Metadata</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/skill/index*') ? 'active' : '' }}" href="{{ route('admin.skill.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                <span class="menu-title ms-2">Skills</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/functional-job-cartegory/index*') ? 'active' : '' }}" href="{{ route('admin.functional-job-category.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                <span class="menu-title ms-2">Functional Job Category</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/industrial-job-cartegory/index*') ? 'active' : '' }}" href="{{ route('admin.industrial-job-category.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                <span class="menu-title ms-2">Industrial Job Category</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/major-subject/index*') ? 'active' : '' }}" href="{{ route('admin.major-subject.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                <span class="menu-title ms-2">Major Subject</span>
+                                </a>
+                            </div>
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/education-degree/index*') ? 'active' : '' }}" href="{{ route('admin.education-degree.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                <span class="menu-title ms-2">Education Degree</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
+                        <span class="menu-link">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Address</span>
+                            <span class="menu-arrow"></span>
+                        </span>
+                        <div class="menu-sub menu-sub-accordion menu-active-bg">
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/country/index*') ? 'active' : '' }}" href="{{ route('admin.country.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                <span class="menu-title ms-2">Country</span>
+                                </a>
+                            </div>
+
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/state/index*') ? 'active' : '' }}" href="{{ route('admin.state.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                <span class="menu-title ms-2">State</span>
+                                </a>
+                            </div>
+
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/city/index*') ? 'active' : '' }}" href="{{ route('admin.city.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                <span class="menu-title ms-2">City</span>
+                                </a>
+                            </div>
+
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/upazila/index*') ? 'active' : '' }}" href="{{ route('admin.upazila.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                <span class="menu-title ms-2">Upazila</span>
+                                </a>
+                            </div>
+
+                            <div class="menu-item">
+                                <a class="menu-link {{ request()->is('admin/post/index*') ? 'active' : '' }}" href="{{ route('admin.post.index') }}">
+                                    <span class="menu-bullet">
+                                        <span class="bullet bullet-dot"></span>
+                                    </span>
+                                <span class="menu-title ms-2">Post Office</span>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                   
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/exam*') ? 'active' : '' }}" href="#">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Payment</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/bookmark-type*') ? 'active' : '' }}" href="{{ route('admin.bookmark-type.index') }}" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Bookmark Type</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/year*') ? 'active' : '' }}" href="{{ route('admin.year.index') }}" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Year</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/points*') ? 'active' : '' }}" href="{{ route('admin.point.index') }}" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Points</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/packages*') ? 'active' : '' }}" href="{{ route('admin.package.index') }}" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Packages</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/packages*') ? 'active' : '' }}" href="#" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Notification</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/packages*') ? 'active' : '' }}" href="#" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Queue</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/packages*') ? 'active' : '' }}" href="#" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Schedule Command</span>
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+            <!-- end::Setting -->
+
+            <!--begin:: Other Menu -->
+            <div class="menu-item">
+                <div class="menu-content pt-8 pb-2">
+                    <span class="menu-section text-muted text-uppercase fs-8 ls-1">Other</span>
+                </div>
+            </div>
+
+            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/exam*') ? 'show menu-accordion' : '' }}">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Others</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion  menu-active-bg">
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/points*') ? 'active' : '' }}" href="{{ route('admin.point.index') }}" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Points</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/packages*') ? 'active' : '' }}" href="{{ route('admin.package.index') }}" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Packages</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/subject/subject-tree*') ? 'active' : '' }}" href="{{ route('admin.subject.tree') }}" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Subject Tree</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!-- end::other menu-->
+
+            
+            {{-- trashed  --}}
+            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/description*') ? 'show menu-accordion' : '' }}">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Trashed</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion  menu-active-bg">
+        
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/trashed/question-trashed*') ? 'active' : '' }}" href="{{ route('admin.trashed.question') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Question Trashed</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/trashed/description-trashed*') ? 'active' : '' }}" href="{{ route('admin.trashed.description') }}">
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Description Trashed</span>
+                        </a>
+                    </div>
+ 
+                </div>
+            </div>
+
+           
+            
+            <div class="menu-item">
+                <div class="menu-content pt-8 pb-2">
+                    <span class="menu-section text-muted text-uppercase fs-8 ls-1">Converter</span>
+                </div>
+            </div>
+
+            <div class="menu-item">
+                <a class="menu-link {{ request()->is('admin/forum/channel*') ? 'active' : '' }}" href="{{ route('admin.image.samprotik') }}" >
+                    <span class="menu-icon">
+                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Samprotik to Image</span>
+                </a>
+            </div>
+
+
+             {{-- old question management --}}
+            {{-- <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                 <span class="menu-link">
                     <span class="menu-icon">
                         <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm007.svg-->
@@ -225,54 +1865,11 @@
                         </a>
                     </div>
                 </div>
-            </div>
+            </div> --}}
 
-            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/samprotik-question*') ? 'show menu-accordion' : '' }}">
-                <span class="menu-link">
-                    <span class="menu-icon">
-                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">সাম্প্রতিক Question</span>
-                    <span class="menu-arrow"></span>
-                </span>
-                <div class="menu-sub menu-sub-accordion  menu-active-bg">
-                    <div class="menu-item">
-                        <a class="menu-link {{ request()->is('admin/question/samprotik-question/create*') ? 'active' : '' }}" href="{{ route('admin.samprotik.create') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Add Question</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link {{ request()->is('admin/question/samprotik-question*') ? 'active' : '' }}" href="{{ route('admin.samprotik.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">All Question</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link {{ request()->is('admin/samprotik-tag*') ? 'active' : '' }}" href="{{ route('admin.samprotik-tag.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Samprotik Tag</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/description*') ? 'show menu-accordion' : '' }}">
+            
+            {{-- old description  --}}
+            {{-- <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/description*') ? 'show menu-accordion' : '' }}">
                 <span class="menu-link">
                     <span class="menu-icon">
                         <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
@@ -320,324 +1917,11 @@
                     
                     
                 </div>
-            </div>
-            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/description*') ? 'show menu-accordion' : '' }}">
-                <span class="menu-link">
-                    <span class="menu-icon">
-                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">User Management</span>
-                    <span class="menu-arrow"></span>
-                </span>
-                <div class="menu-sub menu-sub-accordion  menu-active-bg">
-        
-                    <div class="menu-item">
-                        <a class="menu-link {{ request()->is('admin/user-management/user-list*') ? 'active' : '' }}" href="{{ route('admin.user-management.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Frontend Users</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link {{ request()->is('admin/duser-management/backend-user-list*') ? 'active' : '' }}" href="{{ route('admin.user-management.backend.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Backend Users</span>
-                        </a>
-                    </div>
- 
-                </div>
-            </div>
+            </div> --}}
 
-            <div class="menu-item">
-                <a class="menu-link {{ request()->is('admin/bookmark-type*') ? 'active' : '' }}" href="{{ route('admin.bookmark-type.index') }}" >
-                    <span class="menu-icon">
-                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">Bookmark Type</span>
-                </a>
-            </div>
-
-            <div class="menu-item">
-                <a class="menu-link {{ request()->is('admin/year*') ? 'active' : '' }}" href="{{ route('admin.year.index') }}" >
-                    <span class="menu-icon">
-                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">Year</span>
-                </a>
-            </div>
-
-            <div class="menu-item">
-                <a class="menu-link {{ request()->is('admin/role*') ? 'active' : '' }}" href="{{ route('admin.role.index') }}" >
-                    <span class="menu-icon">
-                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">Role</span>
-                </a>
-            </div>
-
-            <div class="menu-item">
-                <a class="menu-link {{ request()->is('admin/question/add-tag-on-question*') ? 'active' : '' }}" href="{{ route('admin.question.tag') }}" >
-                    <span class="menu-icon">
-                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">Add Tag</span>
-                </a>
-            </div>
-
-            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/description*') ? 'show menu-accordion' : '' }}">
-                <span class="menu-link">
-                    <span class="menu-icon">
-                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">Trashed</span>
-                    <span class="menu-arrow"></span>
-                </span>
-                <div class="menu-sub menu-sub-accordion  menu-active-bg">
-        
-                    <div class="menu-item">
-                        <a class="menu-link {{ request()->is('admin/trashed/question-trashed*') ? 'active' : '' }}" href="{{ route('admin.trashed.question') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Question Trashed</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link {{ request()->is('admin/trashed/description-trashed*') ? 'active' : '' }}" href="{{ route('admin.trashed.description') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Description Trashed</span>
-                        </a>
-                    </div>
- 
-                </div>
-            </div>
-
-            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/description*') ? 'show menu-accordion' : '' }}">
-                <span class="menu-link">
-                    <span class="menu-icon">
-                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">Resume Management</span>
-                    <span class="menu-arrow"></span>
-                </span>
-                <div class="menu-sub menu-sub-accordion  menu-active-bg">
-        
-                    <div class="menu-item">
-                        <a class="menu-link {{ request()->is('admin/skill/index*') ? 'active' : '' }}" href="{{ route('admin.skill.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                           <span class="menu-title ms-2">Skills</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link {{ request()->is('admin/functional-job-cartegory/index*') ? 'active' : '' }}" href="{{ route('admin.functional-job-category.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                           <span class="menu-title ms-2">Functional Job Category</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link {{ request()->is('admin/industrial-job-cartegory/index*') ? 'active' : '' }}" href="{{ route('admin.industrial-job-category.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                           <span class="menu-title ms-2">Industrial Job Category</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link {{ request()->is('admin/major-subject/index*') ? 'active' : '' }}" href="{{ route('admin.major-subject.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                           <span class="menu-title ms-2">Major Subject</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link {{ request()->is('admin/education-degree/index*') ? 'active' : '' }}" href="{{ route('admin.education-degree.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                           <span class="menu-title ms-2">Education Degree</span>
-                        </a>
-                    </div>
-                   
-                  
-                </div>
-            </div>
-
-            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/description*') ? 'show menu-accordion' : '' }}">
-                <span class="menu-link">
-                    <span class="menu-icon">
-                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">Other</span>
-                    <span class="menu-arrow"></span>
-                </span>
-                <div class="menu-sub menu-sub-accordion  menu-active-bg">
-        
-                    <div class="menu-item">
-                        <a class="menu-link {{ request()->is('admin/country/index*') ? 'active' : '' }}" href="{{ route('admin.country.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                           <span class="menu-title ms-2">Country</span>
-                        </a>
-                    </div>
-
-                    <div class="menu-item">
-                        <a class="menu-link {{ request()->is('admin/state/index*') ? 'active' : '' }}" href="{{ route('admin.state.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                           <span class="menu-title ms-2">State</span>
-                        </a>
-                    </div>
-
-                    <div class="menu-item">
-                        <a class="menu-link {{ request()->is('admin/city/index*') ? 'active' : '' }}" href="{{ route('admin.city.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                           <span class="menu-title ms-2">City</span>
-                        </a>
-                    </div>
-
-                    <div class="menu-item">
-                        <a class="menu-link {{ request()->is('admin/upazila/index*') ? 'active' : '' }}" href="{{ route('admin.upazila.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                           <span class="menu-title ms-2">Upazila</span>
-                        </a>
-                    </div>
-
-                    <div class="menu-item">
-                        <a class="menu-link {{ request()->is('admin/post/index*') ? 'active' : '' }}" href="{{ route('admin.post.index') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                           <span class="menu-title ms-2">Post Office</span>
-                        </a>
-                    </div>
-                  
-                </div>
-            </div>
             
-            <div class="menu-item">
-                <a class="menu-link {{ request()->is('admin/subject/subject-tree*') ? 'active' : '' }}" href="{{ route('admin.subject.tree') }}" >
-                    <span class="menu-icon">
-                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">Subject Tree</span>
-                </a>
-            </div>
-
-            {{-- Exam Menu Start  --}}
-
-            <div class="menu-item">
-            <div class="menu-content pt-8 pb-2">
-                <span class="menu-section text-muted text-uppercase fs-8 ls-1">Exam</span>
-            </div>
-            </div>
-
-            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/exam*') ? 'show menu-accordion' : '' }}">
+            {{-- old exam management  --}}
+            {{-- <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/exam*') ? 'show menu-accordion' : '' }}">
                 <span class="menu-link">
                     <span class="menu-icon">
                         <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
@@ -698,188 +1982,9 @@
                     </div>
                    
                 </div>
-            </div>
+            </div> --}}
 
            
-
-            <div class="menu-item">
-                <a class="menu-link {{ request()->is('admin/packages*') ? 'active' : '' }}" href="{{ route('admin.package.index') }}" >
-                    <span class="menu-icon">
-                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">Packages</span>
-                </a>
-            </div>
-
-            <div class="menu-item">
-                <a class="menu-link {{ request()->is('admin/points*') ? 'active' : '' }}" href="{{ route('admin.point.index') }}" >
-                    <span class="menu-icon">
-                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">Point</span>
-                </a>
-            </div>
-            
-            {{-- Exam Menu End  --}}
-
-            {{-- Forum Menu Start  --}}
-            <div class="menu-item">
-                <div class="menu-content pt-8 pb-2">
-                    <span class="menu-section text-muted text-uppercase fs-8 ls-1">Forum</span>
-                </div>
-            </div>
-
-            <div class="menu-item">
-                <a class="menu-link {{ request()->is('admin/forum/channel*') ? 'active' : '' }}" href="{{ route('admin.channel.index') }}" >
-                    <span class="menu-icon">
-                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">Channel</span>
-                </a>
-            </div>
-            <div class="menu-item">
-                <a class="menu-link {{ request()->is('admin/forum/discussion*') ? 'active' : '' }}" href="{{ route('admin.discussion.index') }}" >
-                    <span class="menu-icon">
-                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">Discussion</span>
-                </a>
-            </div>
-            {{-- Exam Menu end  --}}
-
-            <div class="menu-item">
-                <div class="menu-content pt-8 pb-2">
-                    <span class="menu-section text-muted text-uppercase fs-8 ls-1">Settings</span>
-                </div>
-            </div>
-
-            <div class="menu-item">
-                <a class="menu-link {{ request()->is('admin/settings*') ? 'active' : '' }}" href="{{ route('admin.setting.index') }}" >
-                    <span class="menu-icon">
-                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">Settings</span>
-                </a>
-            </div>
-
-            <div class="menu-item">
-                <div class="menu-content pt-8 pb-2">
-                    <span class="menu-section text-muted text-uppercase fs-8 ls-1">Pages</span>
-                </div>
-            </div>
-
-            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('admin/exam*') ? 'show menu-accordion' : '' }}">
-                <span class="menu-link">
-                    <span class="menu-icon">
-                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">Page Management</span>
-                    <span class="menu-arrow"></span>
-                </span>
-                <div class="menu-sub menu-sub-accordion  menu-active-bg">
-                    <div class="menu-item">
-                        <a class="menu-link {{ request()->is('admin/page/create*') ? 'active' : '' }}" href="{{ route('admin.page.create') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">Add New Page</span>
-                        </a>
-                    </div>
-                    <div class="menu-item">
-                        <a class="menu-link {{ request()->is('admin/pages*') ? 'active' : '' }}" href="{{ route('admin.pages') }}">
-                            <span class="menu-bullet">
-                                <span class="bullet bullet-dot"></span>
-                            </span>
-                            <span class="menu-title">All Pages</span>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="menu-item">
-                <div class="menu-content pt-8 pb-2">
-                    <span class="menu-section text-muted text-uppercase fs-8 ls-1">Converter</span>
-                </div>
-            </div>
-
-            <div class="menu-item">
-                <a class="menu-link {{ request()->is('admin/forum/channel*') ? 'active' : '' }}" href="{{ route('admin.image.samprotik') }}" >
-                    <span class="menu-icon">
-                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">Samprotik to Image</span>
-                </a>
-            </div>
             
         </div>
         <!--end::Menu-->

@@ -1,7 +1,7 @@
 @extends('landing_layout.l_app')
 
 @section('landing_hero')
-<div class="d-flex flex-column flex-center w-100 min-h-350px min-h-lg-400px px-9">
+<div class="d-flex flex-column flex-center w-100 min-h-md-350px min-h-200px min-h-lg-400px px-9">
     <!--begin::Heading-->
     <div class="text-center mb-5 mb-lg-10 py-10 py-lg-20">
         <!--begin::Title-->
@@ -13,7 +13,7 @@
             </span></h1>
         <!--end::Title-->
         <!--begin::Action-->
-        <a href="/metronic8/demo1/../demo1/index.html" class="btn btn-primary">ক্লিক</a>
+        <a href="#explore"  data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true" class="btn btn-primary">Explore</a>
         <!--end::Action-->
     </div>
     <!--end::Heading-->
@@ -26,7 +26,7 @@
 
 </div>
 <div class="container">
-    <div class="col-md-8 mx-auto">
+    <div class="col-md-6 mx-auto">
         <div class="tns tns-default">
             <!--begin::Slider-->
             <div
@@ -35,10 +35,11 @@
                 data-tns-swipe-angle="false"
                 data-tns-speed="2000"
                 data-tns-autoplay="true"
-                data-tns-autoplay-timeout="5000"
+                data-tns-autoplay-timeout="3000"
                 data-tns-controls="true"
                 data-tns-nav="false"
-                data-tns-items="4"
+                data-tns-nav-position="bottom"
+                data-tns-items="3"
                 data-tns-center="false"
                 data-tns-dots="false"
                 data-tns-prev-button="#kt_team_slider_prev2"
@@ -55,28 +56,28 @@
                 <!--begin::Item-->
                 <div class="text-center px-5 py-5">
                     <a href="#explore"  data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
-                        <img src="assets/media/stock/600x400/img-1.jpg" class="card-rounded mw-100" alt=""/>
+                        <img src="assets/media/stock/600x400/img-2.jpg" class="card-rounded mw-100" alt=""/>
                     </a>
                 </div>
                 <!--end::Item-->
                 <!--begin::Item-->
                 <div class="text-center px-5 py-5">
                     <a href="#explore"  data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
-                        <img src="assets/media/stock/600x400/img-1.jpg" class="card-rounded mw-100" alt=""/>
+                        <img src="assets/media/stock/600x400/img-3.jpg" class="card-rounded mw-100" alt=""/>
                     </a>
                 </div>
                 <!--end::Item-->
                 <!--begin::Item-->
                 <div class="text-center px-5 py-5">
                    <a href="#explore"  data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
-                        <img src="assets/media/stock/600x400/img-1.jpg" class="card-rounded mw-100" alt=""/>
+                        <img src="assets/media/stock/600x400/img-4.jpg" class="card-rounded mw-100" alt=""/>
                     </a>
                 </div>
                 <!--end::Item-->
                 <!--begin::Item-->
                 <div class="text-center px-5 py-5">
                     <a href="#explore"  data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
-                        <img src="assets/media/stock/600x400/img-1.jpg" class="card-rounded mw-100" alt=""/>
+                        <img src="assets/media/stock/600x400/img-5.jpg" class="card-rounded mw-100" alt=""/>
                     </a>
                 </div>
                 <!--end::Item-->
@@ -85,7 +86,7 @@
             <!--end::Slider-->
 
             <!--begin::Slider button-->
-            <button class="btn btn-icon btn-color-light" id="kt_team_slider_prev2">
+            <button class="btn btn-icon btn-color-light d-none d-md-block" id="kt_team_slider_prev2">
                 <span class="svg-icon svg-icon-3x">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor"></path>
@@ -95,7 +96,7 @@
             <!--end::Slider button-->
 
             <!--begin::Slider button-->
-            <button class="btn btn-icon btn-color-light" id="kt_team_slider_next2">
+            <button class="btn btn-icon btn-color-light d-none d-md-block" id="kt_team_slider_next2">
                 <span class="svg-icon svg-icon-3x">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor"></path>
@@ -122,7 +123,7 @@
 
 @section('main-content')
     <!--begin::How It Works Section-->
-    <div class="mb-n10 mb-lg-n20 z-index-2">
+    <div class="mb-n10 mb-lg-n20 z-index-2" id="section2">
         <!--begin::Container-->
         <div class="container">
             <!--begin::Heading-->
@@ -136,166 +137,179 @@
             </div>
             <!--end::Heading-->
             <!--begin::Row-->
-            <div class="row w-100 gy-10 mb-md-20">
+            <div class="row w-100 gy-10 mb-10 mb-md-20">
+                
                 <!--begin::Col-->
-                <div class="col-md-4 px-5">
-                    <!--begin::Story-->
-                    <div class="text-center mb-10 mb-md-0">
-                        <!--begin::Illustration-->
-                        <img src="{{ asset('assets') }}/media/illustrations/sketchy-1/2.png" class="mh-125px mb-9"
-                            alt="" />
-                        <!--end::Illustration-->
-                        <!--begin::Heading-->
-                        <div class="d-flex flex-center mb-5">
-                            <!--begin::Badge-->
-                            {{-- <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3"></span> --}}
-                            <!--end::Badge-->
-                            <!--begin::Title-->
-                            <div class="fs-5 fs-lg-3 fw-bolder text-dark">চাকুরী প্রস্তুতি</div>
-                            <!--end::Title-->
+                <div class="col-md-4 px-3">
+                    <a href="#explore">
+                        <!--begin::Story-->
+                        <div class="text-center mb-md-0 py-md-15 py-7 py-7 rounded">
+                            <!--begin::Illustration-->
+                            <img src="{{ asset('assets') }}/media/illustrations/sketchy-1/2.png" class="mh-125px mb-9"
+                                alt="" />
+                            <!--end::Illustration-->
+                            <!--begin::Heading-->
+                            <div class="d-flex flex-center mb-5">
+                                <!--begin::Badge-->
+                                {{-- <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3"></span> --}}
+                                <!--end::Badge-->
+                                <!--begin::Title-->
+                                <div class="fs-5 fs-lg-3 fw-bolder text-dark">চাকুরী প্রস্তুতি</div>
+                                <!--end::Title-->
+                            </div>
+                            <!--end::Heading-->
+                            <!--begin::Description-->
+                            <div class="fw-bold fs-6 fs-lg-4 text-muted">শেখো নিজের ইচ্ছেমতো, পেয়ে 
+                                যাও ১ <br> লক্ষেরও বেশি প্রশ্নের সমাহার</div>
+                            <!--end::Description-->
                         </div>
-                        <!--end::Heading-->
-                        <!--begin::Description-->
-                        <div class="fw-bold fs-6 fs-lg-4 text-muted">শেখো নিজের ইচ্ছেমতো, পেয়ে 
-                            যাও ১ <br> লক্ষেরও বেশি প্রশ্নের সমাহার</div>
-                        <!--end::Description-->
-                    </div>
-                    <!--end::Story-->
+                        <!--end::Story-->
+                    </a>
                 </div>
                 <!--end::Col-->
                 <!--begin::Col-->
-                <div class="col-md-4 px-5">
-                    <!--begin::Story-->
-                    <div class="text-center mb-10 mb-md-0">
-                        <!--begin::Illustration-->
-                        <img src="{{ asset('assets') }}/media/illustrations/sketchy-1/8.png" class="mh-125px mb-9"
-                            alt="" />
-                        <!--end::Illustration-->
-                        <!--begin::Heading-->
-                        <div class="d-flex flex-center mb-5">
-                            <!--begin::Badge-->
-                            {{-- <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3">2</span> --}}
-                            <!--end::Badge-->
-                            <!--begin::Title-->
-                            <div class="fs-5 fs-lg-3 fw-bolder text-dark">বিশ্ববিদ্যালয় ভর্তি যুদ্ধের প্রস্তুতি</div>
-                            <!--end::Title-->
+                <div class="col-md-4 px-3 ">
+                    <a href="">
+                        <!--begin::Story-->
+                        <div class="text-center mb-md-0 py-md-15 py-7 rounded">
+                            <!--begin::Illustration-->
+                            <img src="{{ asset('assets') }}/media/illustrations/sketchy-1/8.png" class="mh-125px mb-9"
+                                alt="" />
+                            <!--end::Illustration-->
+                            <!--begin::Heading-->
+                            <div class="d-flex flex-center mb-5">
+                                <!--begin::Badge-->
+                                {{-- <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3">2</span> --}}
+                                <!--end::Badge-->
+                                <!--begin::Title-->
+                                <div class="fs-5 fs-lg-3 fw-bolder text-dark">বিশ্ববিদ্যালয় ভর্তি যুদ্ধের প্রস্তুতি</div>
+                                <!--end::Title-->
+                            </div>
+                            <!--end::Heading-->
+                            <!--begin::Description-->
+                            <div class="fw-bold fs-6 fs-lg-4 text-muted">শেখো নিজের ইচ্ছেমতো, পেয়ে 
+                                যাও ১ <br> লক্ষেরও বেশি প্রশ্নের সমাহার</div>
+                            <!--end::Description-->
                         </div>
-                        <!--end::Heading-->
-                        <!--begin::Description-->
-                        <div class="fw-bold fs-6 fs-lg-4 text-muted">শেখো নিজের ইচ্ছেমতো, পেয়ে 
-                            যাও ১ <br> লক্ষেরও বেশি প্রশ্নের সমাহার</div>
-                        <!--end::Description-->
-                    </div>
-                    <!--end::Story-->
+                        <!--end::Story-->
+                    </a>
                 </div>
                 <!--end::Col-->
                 <!--begin::Col-->
-                <div class="col-md-4 px-5">
-                    <!--begin::Story-->
-                    <div class="text-center mb-10 mb-md-0">
-                        <!--begin::Illustration-->
-                        <img src="{{ asset('assets') }}/media/illustrations/sketchy-1/12.png" class="mh-125px mb-9"
-                            alt="" />
-                        <!--end::Illustration-->
-                        <!--begin::Heading-->
-                        <div class="d-flex flex-center mb-5">
-                            <!--begin::Badge-->
-                            {{-- <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3">3</span> --}}
-                            <!--end::Badge-->
-                            <!--begin::Title-->
-                            <div class="fs-5 fs-lg-3 fw-bolder text-dark">মেডিকেল/ডেন্টাল প্রস্তুতি</div>
-                            <!--end::Title-->
+                <div class="col-md-4 px-3 ">
+                    <a href="">
+                        <!--begin::Story-->
+                        <div class="text-center mb-md-0 py-md-15 py-7 rounded">
+                            <!--begin::Illustration-->
+                            <img src="{{ asset('assets') }}/media/illustrations/sketchy-1/12.png" class="mh-125px mb-9"
+                                alt="" />
+                            <!--end::Illustration-->
+                            <!--begin::Heading-->
+                            <div class="d-flex flex-center mb-5">
+                                <!--begin::Badge-->
+                                {{-- <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3">3</span> --}}
+                                <!--end::Badge-->
+                                <!--begin::Title-->
+                                <div class="fs-5 fs-lg-3 fw-bolder text-dark">মেডিকেল/ডেন্টাল প্রস্তুতি</div>
+                                <!--end::Title-->
+                            </div>
+                            <!--end::Heading-->
+                            <!--begin::Description-->
+                            <div class="fw-bold fs-6 fs-lg-4 text-muted">শেখো নিজের ইচ্ছেমতো, পেয়ে 
+                                যাও ১ <br> লক্ষেরও বেশি প্রশ্নের সমাহার</div>
+                            <!--end::Description-->
                         </div>
-                        <!--end::Heading-->
-                        <!--begin::Description-->
-                        <div class="fw-bold fs-6 fs-lg-4 text-muted">শেখো নিজের ইচ্ছেমতো, পেয়ে 
-                            যাও ১ <br> লক্ষেরও বেশি প্রশ্নের সমাহার</div>
-                        <!--end::Description-->
-                    </div>
-                    <!--end::Story-->
+                        <!--end::Story-->
+                    </a>
                 </div>
                 <!--end::Col-->
             </div>
             <!--end::Row-->
             <!--begin::Row-->
-            <div class="row w-100 gy-10 mb-md-20">
+            <div class="row w-100 gy-10 mb-10 mb-md-20">
                 <!--begin::Col-->
-                <div class="col-md-4 px-5">
-                    <!--begin::Story-->
-                    <div class="text-center mb-10 mb-md-0">
-                        <!--begin::Illustration-->
-                        <img src="{{ asset('assets') }}/media/illustrations/sketchy-1/2.png" class="mh-125px mb-9"
-                            alt="" />
-                        <!--end::Illustration-->
-                        <!--begin::Heading-->
-                        <div class="d-flex flex-center mb-5">
-                            <!--begin::Badge-->
-                            {{-- <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3"></span> --}}
-                            <!--end::Badge-->
-                            <!--begin::Title-->
-                            <div class="fs-5 fs-lg-3 fw-bolder text-dark">অনলাইন এক্সাম</div>
-                            <!--end::Title-->
+                <div class="col-md-4 px-3 ">
+                    <a href="">
+                        <!--begin::Story-->
+                        <div class="text-center mb-md-0 py-md-15 py-7 rounded">
+                            <!--begin::Illustration-->
+                            <img src="{{ asset('assets') }}/media/illustrations/sketchy-1/2.png" class="mh-125px mb-9"
+                                alt="" />
+                            <!--end::Illustration-->
+                            <!--begin::Heading-->
+                            <div class="d-flex flex-center mb-5">
+                                <!--begin::Badge-->
+                                {{-- <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3"></span> --}}
+                                <!--end::Badge-->
+                                <!--begin::Title-->
+                                <div class="fs-5 fs-lg-3 fw-bolder text-dark">অনলাইন এক্সাম</div>
+                                <!--end::Title-->
+                            </div>
+                            <!--end::Heading-->
+                            <!--begin::Description-->
+                            <div class="fw-bold fs-6 fs-lg-4 text-muted">শেখো নিজের ইচ্ছেমতো, পেয়ে 
+                                যাও ১ <br> লক্ষেরও বেশি প্রশ্নের সমাহার</div>
+                            <!--end::Description-->
                         </div>
-                        <!--end::Heading-->
+                        <!--end::Story-->
+                    </a>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-md-4 px-3 ">
+                    <a href="">
+                        <!--begin::Story-->
+                        <div class="text-center mb-md-0 py-md-15 py-7 rounded">
+                            <!--begin::Illustration-->
+                            <img src="{{ asset('assets') }}/media/illustrations/sketchy-1/8.png" class="mh-125px mb-9"
+                                alt="" />
+                            <!--end::Illustration-->
+                            <!--begin::Heading-->
+                            <div class="d-flex flex-center mb-5">
+                                <!--begin::Badge-->
+                                {{-- <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3">2</span> --}}
+                                <!--end::Badge-->
+                                <!--begin::Title-->
+                                <div class="fs-5 fs-lg-3 fw-bolder text-dark">স্কিল ডেভেলপমেন্ট</div>
+                                <!--end::Title-->
+                            </div>
+                            <!--end::Heading-->
+                            <!--begin::Description-->
+                            <div class="fw-bold fs-6 fs-lg-4 text-muted">শেখো নিজের ইচ্ছেমতো, পেয়ে 
+                                যাও ১ <br> লক্ষেরও বেশি প্রশ্নের সমাহার</div>
+                            <!--end::Description-->
+                            <!--end::Description-->
+                        </div>
+                        <!--end::Story-->
+                    </a>
+                </div>
+                <!--end::Col-->
+                <!--begin::Col-->
+                <div class="col-md-4 px-3 ">
+                    <a href="">
+                        <!--begin::Story-->
+                        <div class="text-center mb-md-0 py-md-15 py-7 rounded">
+                            <!--begin::Illustration-->
+                            <img src="{{ asset('assets') }}/media/illustrations/sketchy-1/12.png" class="mh-125px mb-9"
+                                alt="" />
+                            <!--end::Illustration-->
+                            <!--begin::Heading-->
+                            <div class="d-flex flex-center mb-5">
+                                <!--begin::Badge-->
+                                {{-- <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3">3</span> --}}
+                                <!--end::Badge-->
+                                <!--begin::Title-->
+                                <div class="fs-5 fs-lg-3 fw-bolder text-dark">বাংলা কোরআন ও হাদিস</div>
+                                <!--end::Title-->
+                            </div>
+                            <!--end::Heading-->
                         <!--begin::Description-->
-                        <div class="fw-bold fs-6 fs-lg-4 text-muted">শেখো নিজের ইচ্ছেমতো, পেয়ে 
-                            যাও ১ <br> লক্ষেরও বেশি প্রশ্নের সমাহার</div>
-                        <!--end::Description-->
-                    </div>
-                    <!--end::Story-->
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-md-4 px-5">
-                    <!--begin::Story-->
-                    <div class="text-center mb-10 mb-md-0">
-                        <!--begin::Illustration-->
-                        <img src="{{ asset('assets') }}/media/illustrations/sketchy-1/8.png" class="mh-125px mb-9"
-                            alt="" />
-                        <!--end::Illustration-->
-                        <!--begin::Heading-->
-                        <div class="d-flex flex-center mb-5">
-                            <!--begin::Badge-->
-                            {{-- <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3">2</span> --}}
-                            <!--end::Badge-->
-                            <!--begin::Title-->
-                            <div class="fs-5 fs-lg-3 fw-bolder text-dark">স্কিল ডেভেলপমেন্ট</div>
-                            <!--end::Title-->
+                            <div class="fw-bold fs-6 fs-lg-4 text-muted">শেখো নিজের ইচ্ছেমতো, পেয়ে 
+                                যাও ১ <br> লক্ষেরও বেশি প্রশ্নের সমাহার</div>
+                            <!--end::Description-->
                         </div>
-                        <!--end::Heading-->
-                       <!--begin::Description-->
-                        <div class="fw-bold fs-6 fs-lg-4 text-muted">শেখো নিজের ইচ্ছেমতো, পেয়ে 
-                            যাও ১ <br> লক্ষেরও বেশি প্রশ্নের সমাহার</div>
-                        <!--end::Description-->
-                        <!--end::Description-->
-                    </div>
-                    <!--end::Story-->
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-md-4 px-5">
-                    <!--begin::Story-->
-                    <div class="text-center mb-10 mb-md-0">
-                        <!--begin::Illustration-->
-                        <img src="{{ asset('assets') }}/media/illustrations/sketchy-1/12.png" class="mh-125px mb-9"
-                            alt="" />
-                        <!--end::Illustration-->
-                        <!--begin::Heading-->
-                        <div class="d-flex flex-center mb-5">
-                            <!--begin::Badge-->
-                            {{-- <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3">3</span> --}}
-                            <!--end::Badge-->
-                            <!--begin::Title-->
-                            <div class="fs-5 fs-lg-3 fw-bolder text-dark">বাংলা কোরআন ও হাদিস</div>
-                            <!--end::Title-->
-                        </div>
-                        <!--end::Heading-->
-                       <!--begin::Description-->
-                        <div class="fw-bold fs-6 fs-lg-4 text-muted">শেখো নিজের ইচ্ছেমতো, পেয়ে 
-                            যাও ১ <br> লক্ষেরও বেশি প্রশ্নের সমাহার</div>
-                        <!--end::Description-->
-                    </div>
-                    <!--end::Story-->
+                        <!--end::Story-->
+                    </a>
                 </div>
                 <!--end::Col-->
             </div>
@@ -738,14 +752,30 @@
                                 <ul class="nav nav-tabs flex-center flex-nowrap text-nowrap mb-2 fw-bolder fs-5">
                                     <li class="nav-item">
                                         <a class="nav-link text-gray-500 text-active-primary px-3 px-lg-6 active" href="#"
-                                            data-bs-toggle="tab" data-bs-target="#kt_landing_projects_latest">Latest</a>
+                                            data-bs-toggle="tab" data-bs-target="#kt_landing_projects_job">চাকরি প্রস্তুতি</a>
                                     </li>
-                                    @foreach($main_categories as $main_category)
+                                    <li class="nav-item">
+                                        <a class="nav-link text-gray-500 text-active-primary px-3 px-lg-6 " href="#"
+                                            data-bs-toggle="tab" data-bs-target="#kt_landing_projects_admission">ভর্তি পরীক্ষা</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-gray-500 text-active-primary px-3 px-lg-6 " href="#"
+                                            data-bs-toggle="tab" data-bs-target="#kt_landing_projects_programming">স্কিল ডেভেলপমেন্ট</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-gray-500 text-active-primary px-3 px-lg-6 " href="#"
+                                            data-bs-toggle="tab" data-bs-target="#kt_landing_projects_academy">একাডেমী</a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link text-gray-500 text-active-primary px-3 px-lg-6 " href="#"
+                                            data-bs-toggle="tab" data-bs-target="#kt_landing_projects_islamic">ইসলামিক কর্নার</a>
+                                    </li>
+                                    {{-- @foreach($main_categories as $main_category)
                                     <li class="nav-item">
                                         <a class="nav-link text-gray-500 text-active-primary px-3 px-lg-6" href="#"
                                             data-bs-toggle="tab" data-bs-target="#kt_landing_projects_{{$main_category->id}}">{{$main_category->name}}</a>
                                     </li>
-                                    @endforeach
+                                    @endforeach --}}
                                     
                                 </ul>
                             </div>
@@ -757,10 +787,10 @@
                     <!--begin::Tabs content-->
                     <div class="tab-content">
                         <!--begin::Tab pane-->
-                        <div class="tab-pane show active" id="kt_landing_projects_latest">
+                        <div class="tab-pane show active" id="kt_landing_projects_job">
                             <!--begin::Row-->
                             <div class="row g-10 d-flex justify-content-center">
-                                @foreach($categories as $category)
+                                {{-- @foreach($categories as $category) --}}
                                 <!--begin::Col-->
                                 <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
                                     <a href="" class="">
@@ -770,19 +800,535 @@
                                                     <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
                                                 </div>
                                                 <div class="d-flex justify-content-center">
-                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">{{ $category->name }}</a>
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">বিসিএস</a>
                                                 </div>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                                 <!--end::Col-->
-                                @endforeach
+                                {{-- @endforeach --}}
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">ব্যাংক জব</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">পিএসসি</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
                             </div>
                             <!--end::Row-->
                         </div>
                         <!--end::Tab pane-->
-                        @foreach($main_categories as $key => $main_category)
+                        <!--begin::Tab pane-->
+                        <div class="tab-pane fade" id="kt_landing_projects_admission">
+                            <!--begin::Row-->
+                            <div class="row g-10 d-flex justify-content-center">
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">পাবলিক বিশ্ববিদ্যালয়</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">বিজ্ঞান ও প্রযুক্তি বিশ্ববিদ্যালয়</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">প্রকৌশল ও প্রযুক্তি বিশ্ববিদ্যালয়</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">মেডিকেল/ডেন্টাল কলেজ</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">কৃষি বিশ্ববিদ্যালয়</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">জাতীয় বিশ্ববিদ্যালয়</a> 
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                               
+                            </div>
+                            <!--end::Row-->
+                        </div>
+                        <!--end::Tab pane-->
+                        <!--begin::Tab pane-->
+                        <div class="tab-pane fade" id="kt_landing_projects_programming">
+                            <!--begin::Row-->
+                            <div class="row g-10 d-flex justify-content-center">
+                                {{-- @foreach($categories as $category) --}}
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">HTML</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                                {{-- @endforeach --}}
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">CSS</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">JavaScript</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">Bootstrap</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">PHP</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">MySQL</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                            </div>
+                            <!--end::Row-->
+                        </div>
+                        <!--end::Tab pane-->
+                        <!--begin::Tab pane-->
+                        <div class="tab-pane fade" id="kt_landing_projects_academy">
+                            <!--begin::Row-->
+                            <div class="row g-10 d-flex justify-content-center">
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">প্রথম শ্রেণী</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">প্রথম শ্রেণী</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">প্রথম শ্রেণী</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">দ্বিতীয় শ্রেণী</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">তৃতীয় শ্রেণী</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">চতুর্থ শ্রেণী</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">পঞ্চম শ্রেণী</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">ষষ্ঠ শ্রেণী</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">সপ্তম শ্রেণী</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">অষ্টম শ্রেণী</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">নভম শ্রেণী</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">দশম শ্রেণী</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">একাদশ শ্রেণী</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">দ্বাদশ শ্রেণী</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                               
+                            </div>
+                            <!--end::Row-->
+                        </div>
+                        <!--begin::Tab pane-->
+                        <div class="tab-pane fade" id="kt_landing_projects_islamic">
+                            <!--begin::Row-->
+                            <div class="row g-10 d-flex justify-content-center">
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">আল কোরআন</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                                <!--begin::Col-->
+                                <div class="card bg-light card-rounded col-md-3 pt-5 m-3 pb-0" >
+                                    <a href="" class="">
+                                        <div class="d-flex align-items-center px-3 rounded  mb-7">
+                                            <div class="d-flex align-items-center justify-content-center">
+                                                <div class="symbol symbol-50px me-3">
+                                                    <img src="assets/media/stock/600x400/img-10.jpg" class="" alt="">
+                                                </div>
+                                                <div class="d-flex justify-content-center">
+                                                    <a href="" class="fw-bolder text-hover-primary mb-1 fs-4">বাংলা হাদিস</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <!--end::Col-->
+                                
+                            </div>
+                            <!--end::Row-->
+                        </div>
+                        <!--end::Tab pane-->
+                        {{-- @foreach($main_categories as $key => $main_category)
                         <!--begin::Tab pane-->
                         <div class="tab-pane fade" id="kt_landing_projects_{{ $main_category->id  }}">
                             <!--begin::Row-->
@@ -809,7 +1355,7 @@
                             <!--end::Row-->
                         </div>
                         <!--end::Tab pane-->
-                        @endforeach
+                        @endforeach --}}
                       
                     </div>
                     <!--end::Tabs content-->
@@ -1266,210 +1812,75 @@
         <!--end::Curve bottom-->
     </div>
     <!--end::Pricing Section-->
-    <!--begin::Skill Development section-->
-    <div class="mt-20 mb-lg-n20 z-index-2 bg-light py-10 ">
-        <!--begin::Container-->
-        <div class="container">
-            <!--begin::Heading-->
-            <div class="text-center mb-17">
-                <!--begin::Title-->
-                <h3 class="fs-2hx text-dark mb-5" id="how-it-works" data-kt-scroll-offset="{default: 100, lg: 150}">স্কিল ডেভেলপমেন্ট কোর্স সমূহ</h3>
-                <!--end::Title-->
-                <!--begin::Text-->
-                <div class="fs-4 text-dark fw-bold">আজ কোন স্কিলটি শিখতে চান?</div>
-                <!--end::Text-->
-            </div>
-            <!--end::Heading-->
-            <!--begin::Row-->
-            <div class="row">
-                <!--begin::Col-->
-                <div class="tns tns-default">
-                        <!--begin::Slider-->
-                        <div
-                            data-tns="true"
-                            data-tns-loop="true"
-                            data-tns-swipe-angle="false"
-                            data-tns-speed="2000"
-                            data-tns-autoplay="true"
-                            data-tns-autoplay-timeout="5000"
-                            data-tns-controls="true"
-                            data-tns-nav="false"
-                            data-tns-items="4"
-                            data-tns-center="false"
-                            data-tns-dots="false"
-                            data-tns-prev-button="#kt_team_slider_prev4"
-                            data-tns-next-button="#kt_team_slider_next4"
-                        >
-                            @for($i=1; $i<6; $i++)
-                            <!--begin::Item-->
-                           <div class="col-md-3 ">
-                                <!--begin::Engage widget 1-->
-                                <div class="card h-md-100 m-3">
-                                    <!--begin::Body-->
-                                    <div class="card-body d-flex flex-column flex-center">
-                                        <!--begin::Heading-->
-                                        <div class="mb-2">
-                                            <!--begin::Illustration-->
-                                            <div class="text-center">
-                                                <img src="{{ asset('assets') }}/media/illustrations/sketchy-1/2.png" class="theme-light-show w-200px" alt="">
-                                                
-                                            </div>
-                                            <!--end::Illustration-->
-                                            <!--begin::Title-->
-                                            <h1 class="fw-semibold text-gray-800 text-center lh-lg pt-7">HTML</h1>
-                                            <!--end::Title-->
-                                        </div>
-                                        <!--end::Heading-->
-                                        <!--begin::Links-->
-                                        <div class="text-center mb-1">
-                                            <!--begin::Link-->
-                                            <a class="btn btn-sm btn-light btn-active-success" href="/metronic8/demo1/../demo1/apps/user-management/users/view.html">Learn More</a>
-                                            <!--end::Link-->
-                                        </div>
-                                        <!--end::Links-->
-                                    </div>
-                                    <!--end::Body-->
-                                </div>
-                                <!--end::Engage widget 1-->
-                            </div>
-                            <!--end::Item-->
-                            @endfor
-                        </div>
-                        <!--end::Slider-->
-
-                        <!--begin::Slider button-->
-                        <button class="btn btn-icon btn-color-success" id="kt_team_slider_prev4">
-                            <span class="svg-icon svg-icon-3x">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor"></path>
-                                </svg>
-                            </span>
-                        </button>
-                        <!--end::Slider button-->
-
-                        <!--begin::Slider button-->
-                        <button class="btn btn-icon btn-color-success" id="kt_team_slider_next4">
-                            <span class="svg-icon svg-icon-3x">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor"></path>
-                                </svg>
-                            </span>
-                        </button>
-                        <!--end::Slider button-->
-                    </div>
-                
-                <!--end::Col-->
-               
-            </div>
-            <!--end::Row-->
-        </div>
-        <!--end::Container-->
-    </div>
-    <!--end::Skill Development section-->
+    
     <!--begin::Testimonials Section-->
     <div class="mt-20 mb-n20 position-relative z-index-2">
         <!--begin::Container-->
-        <div class="container mt-20">
+        <div class="container">
             <!--begin::Heading-->
-            <div class="text-center mb-17">
+            <div class="text-center mb-md-10 mb-6">
                 <!--begin::Title-->
                 <h3 class="fs-2hx text-dark mb-5" id="clients" data-kt-scroll-offset="{default: 125, lg: 150}">What Our
                     Clients Say</h3>
                 <!--end::Title-->
                 <!--begin::Description-->
-                <div class="fs-5 text-muted fw-bold">Save thousands to millions of bucks by using single tool
-                    <br />for different amazing and great useful admin</div>
+                <div class="fs-5 text-muted fw-bold">Save thousands to millions of bucks by using single tool for different amazing and great useful admin</div>
                 <!--end::Description-->
             </div>
             <!--end::Heading-->
             <!--begin::Row-->
             <div class="row g-lg-10 mb-10 mb-lg-20">
                 <!--begin::Col-->
-                <div class="col-lg-12 mx-auto">
+                <div class="col-lg-10 mx-auto">
                     <!--begin::Testimonial-->
-                    <div class="tns tns-default">
-                        <!--begin::Slider-->
-                        <div
-                            data-tns="true"
-                            data-tns-loop="true"
-                            data-tns-swipe-angle="false"
-                            data-tns-speed="2000"
-                            data-tns-autoplay="true"
-                            data-tns-autoplay-timeout="5000"
-                            data-tns-controls="true"
-                            data-tns-nav="false"
-                            data-tns-items="2"
-                            data-tns-center="false"
-                            data-tns-dots="false"
-                            data-tns-prev-button="#kt_team_slider_prev3"
-                            data-tns-next-button="#kt_team_slider_next3"
-                        >
+                    <div class="tns">
+                        <div data-tns="true" data-tns-nav-position="bottom" data-tns-controls="false">
                             @for($i=1; $i<6; $i++)
                             <!--begin::Item-->
-                            <div class="card bg-light px-7 py-7 m-5">
-                                <!--begin::Testimonial-->
-                                <div class="d-flex flex-column justify-content-center align-content-center h-lg-100 px-10 px-lg-0 pe-lg-10 mb-15 mb-lg-0 ">
-                                    <!--begin::Wrapper-->
-                                    <div class="mb-7">
-                                        <!--begin::Title-->
-                                        <div class="fs-2 fw-bolder text-dark mb-3">This is by far the cleanest template
-                                            <br />and the most well structured</div>
-                                        <!--end::Title-->
-                                        <!--begin::Feedback-->
-                                        <div class="text-gray-500 fw-bold fs-4">The most well thought out design theme I have ever
-                                            used. The codes are up to tandard. The css styles are very clean. In fact the cleanest
-                                            and the most up to standard I have ever seen.</div>
-                                        <!--end::Feedback-->
-                                    </div>
-                                    <!--end::Wrapper-->
-                                    <!--begin::Author-->
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <!--begin::Avatar-->
-                                        <div class="symbol symbol-circle symbol-50px me-5">
-                                            <img src="{{ asset('assets') }}/media/avatars/300-2.jpg" class="" alt="" />
+                            <div class="text-md-center px-5 pt-5 pt-lg-10 px-lg-10">
+                                <!--begin::Item-->
+                                <div class="card bg-light px-2 px-md-7 py-md-15 py-7 m-5">
+                                    <!--begin::Testimonial-->
+                                    <div class="d-flex flex-column align-content-center h-lg-100 px-10 px-lg-0 pe-lg-10 mb-md-15 mb-lg-0 ">
+                                        <!--begin::Wrapper-->
+                                        <div class="mb-7">
+                                            <!--begin::Title-->
+                                            <div class="fs-2 fw-bolder text-dark mb-3">This is by far the cleanest template</div>
+                                            <!--end::Title-->
+                                            <!--begin::Feedback-->
+                                            <div class="text-gray-500 fw-bold fs-4">The most well thought out design theme I have ever
+                                                used. The codes are up to tandard. The css styles are very clean. In fact the cleanest
+                                                and the most up to standard I have ever seen.</div>
+                                            <!--end::Feedback-->
                                         </div>
-                                        <!--end::Avatar-->
-                                        <!--begin::Name-->
-                                        <div class="flex-grow-1">
-                                            <a href="#" class="text-dark fw-bolder text-hover-primary fs-6">Janya Clebert</a>
-                                            <span class="text-muted d-block fw-bold">Development Lead</span>
+                                        <!--end::Wrapper-->
+                                        <!--begin::Author-->
+                                        <div class="d-flex align-items-center justify-content-md-center">
+                                            <!--begin::Avatar-->
+                                            <div class="symbol symbol-circle symbol-50px me-5">
+                                                <img src="{{ asset('assets') }}/media/avatars/300-2.jpg" class="" alt="" />
+                                            </div>
+                                            <!--end::Avatar-->
+                                            <!--begin::Name-->
+                                            <div class="">
+                                                <a href="#" class="text-dark fw-bolder text-hover-primary fs-6">Janya Clebert</a>
+                                                <span class="text-muted d-block fw-bold">Development Lead</span>
+                                            </div>
+                                            <!--end::Name-->
                                         </div>
-                                        <!--end::Name-->
+                                        <!--end::Author-->
                                     </div>
-                                    <!--end::Author-->
+                                    <!--end::Testimonial-->
                                 </div>
-                                <!--end::Testimonial-->
+                                <!--end::Item-->
                             </div>
                             <!--end::Item-->
                             @endfor
-                        
+                            ...
                         </div>
-                        <!--end::Slider-->
-
-                        <!--begin::Slider button-->
-                        <button class="btn btn-icon btn-color-success" id="kt_team_slider_prev3">
-                            <span class="svg-icon svg-icon-3x">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z" fill="currentColor"></path>
-                                </svg>
-                            </span>
-                        </button>
-                        <!--end::Slider button-->
-
-                        <!--begin::Slider button-->
-                        <button class="btn btn-icon btn-color-success" id="kt_team_slider_next3">
-                            <span class="svg-icon svg-icon-3x">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z" fill="currentColor"></path>
-                                </svg>
-                            </span>
-                        </button>
-                        <!--end::Slider button-->
                     </div>
-                   
                 </div>
                 <!--end::Col-->
-                
             </div>
             <!--end::Row-->
             <!--begin::Highlight-->
@@ -1478,7 +1889,7 @@
 
                 <span class="fs-1 fs-lg-2qx fw-bold text-white mb-4 ">Subscribe for newsletter</span>
 
-                <div class="d-flex flex-row justify-content-center ">
+                <div class="d-flex flex-md-row justify-content-center">
                     <!--begin::Content-->
                     <div class="my-2 me-5">
                         <input type="text" id="subscriber_email" class="form-control form-control-solid w-md-300px " name="email" placeholder="example@gmail.com">

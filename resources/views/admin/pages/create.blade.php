@@ -13,7 +13,7 @@
                 data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}"
                 class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
                 <!--begin::Title-->
-                <h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Page Settings</h1>
+                <a href="{{ route('admin.pages') }}"><h1 class="d-flex align-items-center text-dark fw-bolder fs-3 my-1">Pages</h1></a>
                 <!--end::Title-->
                 <!--begin::Separator-->
                 <span class="h-20px border-gray-200 border-start mx-4"></span>
@@ -39,7 +39,7 @@
                     </li>
                     <!--end::Item-->
                     <!--begin::Item-->
-                    <li class="breadcrumb-item text-dark">Page</li>
+                    <li class="breadcrumb-item text-dark">Create new page</li>
                     <!--end::Item-->
                 </ul>
                 <!--end::Breadcrumb-->
@@ -48,7 +48,7 @@
             <!--begin::Actions-->
             <div class="d-flex align-items-center py-1">
                 <!--begin::Button-->
-                <a href="{{ url()->previous() }}" class="btn btn-sm btn-primary">Back</a>
+                <a href="{{ route('admin.pages') }}" class="btn btn-sm btn-primary">Back</a>
                 <!--end::Button-->
             </div>
             <!--end::Actions-->
@@ -69,8 +69,10 @@
                     <!--begin::Card title-->
                     <div class="card-title m-0">
                         <h3 class="fw-bolder m-0">Add New Page</h3>
+                        
                     </div>
                     <!--end::Card title-->
+                    
                 </div>
                 <!--begin::Card header-->
                 <!--begin::Content-->
@@ -80,11 +82,10 @@
                         @csrf
                         <!--begin::Card body-->
                         <div class="card-body border-top p-9">
-                            <div class="row mb-8 offset-4 text-center"> 
+                            {{-- <div class="row mb-8 offset-4 text-center"> 
                                 @include('includes.session_alert')
-                            </div>
+                            </div> --}}
 
-                            
                             <!--begin::Input group-->
                             <div class="row mb-6">
                                 <!--begin::Label-->
