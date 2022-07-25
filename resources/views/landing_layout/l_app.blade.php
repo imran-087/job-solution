@@ -316,7 +316,7 @@
                     <!--begin::Links-->
                     <div class="d-flex align-items-center justify-content-center order-1 mb-3 mb-md-0">
     
-                        @if($setting->social_link['facebook'] != '')
+                        @if(optional($setting)->social_link['facebook'])
                         <!--begin::Link-->
                         <a href=" {{ url($setting->social_link['facebook']) }}" class="">
                             <img src="{{ asset('assets') }}/media/svg/brand-logos/facebook-4.svg"
@@ -324,7 +324,7 @@
                         </a>
                         <!--end::Link-->
                         @endif
-                        @if($setting->social_link['youtube'] != '')
+                        @if(optional($setting)->social_link['youtube'] )
                         <!--begin::Link-->
                         <a href="{{ url($setting->social_link['youtube']) }}" class="">
                             <img src="{{ asset('assets') }}/media/svg/brand-logos/youtube-3.svg"
@@ -332,7 +332,7 @@
                         </a>
                         <!--end::Link-->
                         @endif
-                        @if($setting->social_link['twitter'] != '')
+                        @if(optional($setting)->social_link['twitter'])
                         <!--begin::Link-->
                         <a href="{{ url($setting->social_link['twitter']) }}" class="">
                             <img src="{{ asset('assets') }}/media/svg/brand-logos/twitter.svg"
@@ -340,7 +340,7 @@
                         </a>
                         <!--end::Link-->
                         @endif
-                        @if($setting->social_link['dribble'] != '')
+                        @if(optional($setting)->social_link['dribble'] )
                         <!--begin::Link-->
                         <a href="{{ url($setting->social_link['dribble']) }}" class="">
                             <img src="{{ asset('assets') }}/media/svg/brand-logos/dribbble-icon-1.svg"
@@ -348,7 +348,7 @@
                         </a>
                         <!--end::Link-->
                         @endif
-                        @if($setting->social_link['instagram'] != '')
+                        @if(optional($setting)->social_link['instagram'] )
                         <!--begin::Link-->
                         <a href="{{ url($setting->social_link['instagram']) }}" class="">
                             <img src="{{ asset('assets') }}/media/svg/brand-logos/instagram-2-1.svg"
