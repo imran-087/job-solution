@@ -1,5 +1,5 @@
 <head>
-		<title>SATTAcademy - @yield('title')</title>
+		<title>@yield('title') - Sattacademy</title>
 		<meta charset="utf-8" />
     	<meta name="csrf-token" content="{{ csrf_token() }}">
 		<meta name="description" content="The most advanced Bootstrap Admin Theme on Themeforest trusted by 94,000 beginners and professionals. Multi-demo, Dark Mode, RTL support and complete React, Angular, Vue &amp; Laravel versions. Grab your copy now and get life-time updates for free." />
@@ -23,25 +23,28 @@
 		<link href="{{ asset('assets') }}/plugins/global/plugins.bundle.css" rel="stylesheet" type="text/css" />
 		<link href="{{ asset('assets') }}/css/style.bundle.css" rel="stylesheet" type="text/css" />
 		<!--end::Global Stylesheets Bundle-->
-		<!--Begin::Google Tag Manager -->
-		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-5FS8GGP');</script>
-		<!--End::Google Tag Manager -->
 
 		<!--begin::jsTree Bundle(used by all pages)-->
 		<link href="{{ asset('assets') }}/plugins/custom/jstree/jstree.bundle.css" rel="stylesheet" type="text/css" />
 		<!--End::jsTree  -->
+	
 
 		<!--Toastr Notification -->
 		<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.css">
 
         <!-- Custom css -->
-        <link rel="stylesheet" href="{{ asset('css/custom.css') }}">
+        {{-- <link rel="stylesheet" href="{{ asset('css/custom.css') }}"> --}}
 		<script src="http://code.jquery.com/jquery-1.11.3.min.js"></script>
-		<!-- Swipe Slider  -->
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.css" />
+		
 
 		@stack('css')
 
+
+		<!--Begin::Google Tag Manager -->
+		<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start': new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0], j=d.createElement(s),dl=l!='dataLayer'?'&amp;l='+l:'';j.async=true;j.src= 'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f); })(window,document,'script','dataLayer','GTM-5FS8GGP');</script>
+		<!--End::Google Tag Manager -->
+
+		
 		<!--Custom error style -->
 		<style>
 			.help-block.with-errors {

@@ -26,10 +26,6 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
 	@include('admin.include.toastr')
 
-	<!--swipe slider -->
-	<script src="https://cdn.jsdelivr.net/npm/swiper/swiper-bundle.min.js"></script>
-
-
 	<!---- own js ---->
 	<script src="{{ asset('js/custom.js') }}"></script>
 	

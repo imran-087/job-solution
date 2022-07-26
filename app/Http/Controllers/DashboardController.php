@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\MainCategory;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Validator;
 
-class HomeController extends Controller
+class DashboardController extends Controller
 {
     /**
      * Create a new controller instance.
@@ -25,9 +23,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //dd(MainCategory::with('categories')->get());
-        return view('home');
+        return view('dashboard');
     }
 
-   
 }

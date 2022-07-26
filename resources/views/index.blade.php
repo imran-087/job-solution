@@ -5,7 +5,7 @@
     <!--begin::Heading-->
     <div class="text-center mb-5 mb-lg-10 py-10 py-lg-20">
         <!--begin::Title-->
-        <h1 class="text-white lh-base fw-bolder fs-2x fs-lg-3x mb-15">{{ $setting->title ?? 'Company Title' }}
+        <h1 class="text-white lh-base fw-bolder fs-2x fs-lg-3x mb-15">{{ $setting->title ?? 'Hero Text' }}
             <br />
             <span
                 style="background: linear-gradient(to right, #12CE5D 0%, #FFD80C 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">
@@ -46,13 +46,7 @@
                 data-tns-next-button="#kt_team_slider_next2"
             >
 
-                <!--begin::Item-->
-                <div class="text-center px-5 py-5">
-                    <a href="#explore"  data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
-                        <img src="assets/media/stock/600x400/img-1.jpg" class="card-rounded mw-100" alt=""/>
-                    </a>
-                </div>
-                <!--end::Item-->
+                
                 <!--begin::Item-->
                 <div class="text-center px-5 py-5">
                     <a href="#explore"  data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">

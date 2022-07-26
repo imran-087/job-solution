@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\FeedController;
@@ -23,6 +24,7 @@ use App\Http\Controllers\Resume\UserDetailsController;
 use App\Http\Controllers\ModelTest\ModelTestController;
 use App\Http\Controllers\Admin\DependableCategoryController;
 use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\DashboardController as ControllersDashboardController;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\JobMcqQuestionController;
 use App\Http\Controllers\JobsController;
@@ -49,6 +51,7 @@ use App\Http\Controllers\Resume\ResumeViewController;
 |
 */
 
+#### Landing Route without auth #####
 Route::get('/', [PageController::class, 'landingPage'])->name('landingpage');
 Route::get('/{page_slug}', [PageController::class, 'page'])
   ->where('page_slug', 'about-us|terms-and-conditions|cookie-policy|privacy-policy|refund-policy')
@@ -57,12 +60,18 @@ Route::get('/contact-us', [ContactUsController::class, 'index'])->name('contact-
 Route::post('/contact-us/store', [ContactUsController::class, 'contactStore'])->name('contact.store');
 Route::get('/faqs', [FAQController::class, 'index'])->name('faqs');
 
-
-
 Route::post('newsletter-subscriber/store', [NewsletterController::class, 'store'])->name('subscriber-store');
 
 Auth::routes();
+#### Start::Auth Route ###
 Route::get('/home', [HomeController::class, 'index'])->name('home');
+Route::get('/dashboard', [ControllersDashboardController::class, 'index'])->name('dashboard');
+
+
+
+
+
+##### Start::Old Route #######
 
 ######*********  Discussion ******########
 
