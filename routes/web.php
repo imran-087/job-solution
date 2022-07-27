@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Academy\ClassController as AcademyClassController;
+use App\Http\Controllers\Academy\HomeController as AcademyHomeController;
+use App\Http\Controllers\Academy\SubjectController as AcademySubjectController;
 use App\Http\Controllers\Admin\DashboardController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
@@ -23,9 +26,12 @@ use App\Http\Controllers\QuestionActivityController;
 use App\Http\Controllers\Resume\UserDetailsController;
 use App\Http\Controllers\ModelTest\ModelTestController;
 use App\Http\Controllers\Admin\DependableCategoryController;
+use App\Http\Controllers\Admission\HomeController as AdmissionHomeController;
 use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\DashboardController as ControllersDashboardController;
 use App\Http\Controllers\FAQController;
+use App\Http\Controllers\Job\HomeController as JobHomeController;
+use App\Http\Controllers\Job\SubjectController as JobSubjectController;
 use App\Http\Controllers\JobMcqQuestionController;
 use App\Http\Controllers\JobsController;
 use App\Http\Controllers\ModelTest\CustomModelTestController;
@@ -39,6 +45,7 @@ use App\Http\Controllers\Resume\OtherInformationController;
 use App\Http\Controllers\Resume\PersonalDetailsController;
 use App\Http\Controllers\Resume\PhotographController;
 use App\Http\Controllers\Resume\ResumeViewController;
+use App\Http\Controllers\Skill\HomeController as SkillHomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,11 +70,31 @@ Route::get('/faqs', [FAQController::class, 'index'])->name('faqs');
 Route::post('newsletter-subscriber/store', [NewsletterController::class, 'store'])->name('subscriber-store');
 
 Auth::routes();
-#### Start::Auth Route ###
+#### Start::Auth Route ####
 Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/dashboard', [ControllersDashboardController::class, 'index'])->name('dashboard');
 
 
+######## begin::Job #########
+Route::get('/job', [JobHomeController::class, 'index'])->name('job.home');
+Route::get('/job/subject', [JobSubjectController::class, 'index'])->name('job.subject');
+######## end::Job #########
+
+######## begin::Admission #########
+Route::get('/admission', [AdmissionHomeController::class, 'index'])->name('admission.home');
+######## end::Admission #########
+
+
+######## begin::academy #########
+Route::get('/academy', [AcademyHomeController::class, 'index'])->name('academy.home');
+Route::get('/academy/class', [AcademyClassController::class, 'index'])->name('academy.class');
+Route::get('/academy/subject', [AcademySubjectController::class, 'index'])->name('academy.subject');
+######## end::academy #########
+
+
+######## begin::skill #########
+Route::get('/skill', [SkillHomeController::class, 'index'])->name('skill.home');
+######## end::skill #########
 
 
 

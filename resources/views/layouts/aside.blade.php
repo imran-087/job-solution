@@ -10,8 +10,29 @@
         <div class="menu menu-column menu-title-gray-800 menu-state-title-primary menu-state-icon-primary menu-state-bullet-primary menu-arrow-gray-500"
             id="#kt_aside_menu" data-kt-menu="true" data-kt-menu-expand="false">
             
+            <!--begin::home-->
             <div class="menu-item">
-                <a class="menu-link {{ request()->is('/home*') ? 'active' : '' }}" href="/home"  >
+                <a class="menu-link {{ request()->is('/home*') ? 'active' : '' }}" href="{{ route('home') }}"  >
+                    <span class="menu-icon">
+                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Home</span>
+                </a>
+            </div>
+            <!--end::home-->    
+            <!--begin::dashboard-->
+            <div class="menu-item">
+                <a class="menu-link {{ request()->is('/dashboard*') ? 'active' : '' }}" href="{{route('dashboard')}}"  >
                     <span class="menu-icon">
                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
                         <span class="svg-icon svg-icon-2">
@@ -28,61 +49,98 @@
                     <span class="menu-title">Dashboard</span>
                 </a>
             </div>
-                
+            <!--end::dashboard-->    
+            <!--begin::online exam board-->
+             <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('') ? 'show menu-accordion' : '' }}">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Online Exam Board</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion  menu-active-bg">
+                    <div class="menu-item">
+                    <a class="menu-link {{ request()->is('/model-test') ? 'active' : '' }}" href="{{ route('model-test.index') }}" >
+                        <span class="menu-bullet">
+                            <span class="bullet bullet-dot"></span>
+                        </span>
+                        <span class="menu-title">Exam list</span>
+                    </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('/model-test/result*') ? 'active' : '' }}" href="{{ route('result.index') }}" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Exam Result</span>
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+            <!--end::online exam board-->    
+            <!--begin::latest added-->
+            <div class="menu-item">
+                <a class="menu-link {{ request()->is('/dashboard*') ? 'active' : '' }}" href="#"  >
+                    <span class="menu-icon">
+                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Latest</span>
+                </a>
+            </div>
+            <!--end::latest added-->    
+            <!--begin::forum question-->
+            <div class="menu-item">
+                <a class="menu-link {{ request()->is('/dashboard*') ? 'active' : '' }}" href="#"  >
+                    <span class="menu-icon">
+                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Forum Question</span>
+                </a>
+            </div>
+            <!--end::forum question-->    
             
+            <!--begin::category-->
             <div class="menu-item">
                 <div class="menu-content pt-8 pb-2">
                     <span class="menu-section text-muted text-uppercase fs-8 ls-1">Category</span>
                 </div>
             </div>
-           
-            @php
-                $main_categories = App\Models\MainCategory::where('status', 'active')->get();
-            @endphp
-                  
-            @foreach($main_categories as $main_category)
-            <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
-                <a href="{{ route('job.category') }}">
-                <span class="menu-link">
-                    <span class="menu-icon">
-                        <!--begin::Svg Icon | path: icons/duotune/art/art009.svg-->
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path opacity="0.3" d="M21 18.3V4H20H5C4.4 4 4 4.4 4 5V20C10.9 20 16.7 15.6 19 9.5V18.3C18.4 18.6 18 19.3 18 20C18 21.1 18.9 22 20 22C21.1 22 22 21.1 22 20C22 19.3 21.6 18.6 21 18.3Z" fill="black"></path>
-                                <path d="M22 4C22 2.9 21.1 2 20 2C18.9 2 18 2.9 18 4C18 4.7 18.4 5.29995 18.9 5.69995C18.1 12.6 12.6 18.2 5.70001 18.9C5.30001 18.4 4.7 18 4 18C2.9 18 2 18.9 2 20C2 21.1 2.9 22 4 22C4.8 22 5.39999 21.6 5.79999 20.9C13.8 20.1 20.1 13.7 20.9 5.80005C21.6 5.40005 22 4.8 22 4Z" fill="black"></path>
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">{{$main_category->name}}</span>
-                    {{-- <span class="menu-arrow"></span> --}}
-                </span>
-                </a>
-                
-            </div>
-            @endforeach
 
-            {{-- <div class="menu-item">
-                <a class="menu-link {{ request()->is('/job-solutions/subject/*') ? 'active' : '' }}" href="{{ route('subject.subject') }}"  >
-                    <span class="menu-icon">
-                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">Subject</span>
-                </a>
-            </div>
-
+            <!--begin::academy-->
             <div class="menu-item">
-                <a class="menu-link {{ request()->is('/job-solution/question/recent-question*') ? 'active' : '' }}" href="{{ route('question.recent-question') }}"  >
+                <a class="menu-link {{ request()->is('/dashboard*') ? 'active' : '' }}" href="{{ route('academy.home') }}"  >
                     <span class="menu-icon">
                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
                         <span class="svg-icon svg-icon-2">
@@ -96,59 +154,351 @@
                         </span>
                         <!--end::Svg Icon-->
                     </span>
-                    <span class="menu-title">Recent Question</span>
+                    <span class="menu-title">Academy</span>
                 </a>
-            </div> --}}
+            </div>
+            <!--end::academy-->   
+            <!--begin::admission-->
+            <div class="menu-item">
+                <a class="menu-link {{ request()->is('/dashboard*') ? 'active' : '' }}" href="{{ route('admission.home') }}"  >
+                    <span class="menu-icon">
+                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Addmission</span>
+                </a>
+            </div>
+            <!--end::admission-->   
+
+            <!--begin::job-->
+            <div class="menu-item">
+                <a class="menu-link {{ request()->is('/dashboard*') ? 'active' : '' }}" href="{{ route('job.home') }}"  >
+                    <span class="menu-icon">
+                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Job Solution</span>
+                </a>
+            </div>
+            <!--end::job solution-->   
+
+            <!--begin::skill-->
+            <div class="menu-item">
+                <a class="menu-link {{ request()->is('/dashboard*') ? 'active' : '' }}" href="{{ route('skill.home') }}"  >
+                    <span class="menu-icon">
+                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Skill Development</span>
+                </a>
+            </div>
+            <!--end::skill-->   
+
+            <!--end::category-->
             
-            <div class="menu-item">
-                <div class="menu-content pt-8 pb-2">
-                    <span class="menu-section text-muted text-uppercase fs-8 ls-1">SaTT Model Test</span>
-                </div>
-            </div>
-            
-            <div class="menu-item">
-                <a class="menu-link {{ request()->is('/model-test') ? 'active' : '' }}" href="{{ route('model-test.index') }}">
-                    <span class="menu-icon">
-                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">Exam List</span>
-                </a>
-            </div>
-            <div class="menu-item">
-                <a class="menu-link {{ request()->is('/model-test/result*') ? 'active' : '' }}" href="{{ route('result.index') }}">
-                    <span class="menu-icon">
-                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">Exam Result</span>
-                </a>
-            </div>
-
-
+            <!--begin::other navigation -->
             <div class="menu-item">
                 <div class="menu-content pt-8 pb-2">
                     <span class="menu-section text-muted text-uppercase fs-8 ls-1">Other</span>
                 </div>
             </div>
+
+            <!--begin::general -->
+            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('') ? 'show menu-accordion' : '' }}">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">General</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion  menu-active-bg">
+                    <div class="menu-item">
+                    <a class="menu-link {{ request()->is('admin/user-management/user-list*') ? 'active' : '' }}" href="#" >
+                        <span class="menu-bullet">
+                            <span class="bullet bullet-dot"></span>
+                        </span>
+                        <span class="menu-title">Blog</span>
+                    </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/role*') ? 'active' : '' }}" href="#" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Book</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('admin/role*') ? 'active' : '' }}" href="#" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Video</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('/news-feed') ? 'active' : '' }}" href="{{ route('news-feed') }}" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">News</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!--end::general-->
+            <!--begin::questions -->
+            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('') ? 'show menu-accordion' : '' }}">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Questions</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion  menu-active-bg">
+                    <div class="menu-item">
+                    <a class="menu-link {{ request()->is('') ? 'active' : '' }}" href="#" >
+                        <span class="menu-bullet">
+                            <span class="bullet bullet-dot"></span>
+                        </span>
+                        <span class="menu-title">MCQ Question</span>
+                    </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('') ? 'active' : '' }}" href="#" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Written Question</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('') ? 'active' : '' }}" href="#" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Recent Question</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('') ? 'active' : '' }}" href="#" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Forum Question</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('') ? 'active' : '' }}" href="#" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">All Question</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!--end::questions-->
+            <!--begin::suggestions -->
+            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('') ? 'show menu-accordion' : '' }}">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">Suggestions</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion  menu-active-bg">
+                    <div class="menu-item">
+                    <a class="menu-link {{ request()->is('') ? 'active' : '' }}" href="#" >
+                        <span class="menu-bullet">
+                            <span class="bullet bullet-dot"></span>
+                        </span>
+                        <span class="menu-title">Package</span>
+                    </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('') ? 'active' : '' }}" href="#" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Upload Question</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('') ? 'active' : '' }}" href="#" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">FAQ</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('') ? 'active' : '' }}" href="#" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Notice</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('') ? 'active' : '' }}" href="#" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Points</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('') ? 'active' : '' }}" href="#" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Badges</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('') ? 'active' : '' }}" href="#" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Feedback</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            <!--end::suggestions-->
+            <!--begin::pdf generator -->
+            <div data-kt-menu-trigger="click" class="menu-item {{ request()->is('') ? 'show menu-accordion' : '' }}">
+                <span class="menu-link">
+                    <span class="menu-icon">
+                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                        <span class="svg-icon svg-icon-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                fill="none">
+                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                            </svg>
+                        </span>
+                        <!--end::Svg Icon-->
+                    </span>
+                    <span class="menu-title">PDF Generator</span>
+                    <span class="menu-arrow"></span>
+                </span>
+                <div class="menu-sub menu-sub-accordion  menu-active-bg">
+                    <div class="menu-item">
+                    <a class="menu-link {{ request()->is('') ? 'active' : '' }}" href="#" >
+                        <span class="menu-bullet">
+                            <span class="bullet bullet-dot"></span>
+                        </span>
+                        <span class="menu-title">MCQ Q. to PDF</span>
+                    </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('') ? 'active' : '' }}" href="#" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Written Q. to PDF</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('') ? 'active' : '' }}" href="#" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Recent Q. to PDF</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('') ? 'active' : '' }}" href="#" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Book Generate(PDF)</span>
+                        </a>
+                    </div>
+                    <div class="menu-item">
+                        <a class="menu-link {{ request()->is('') ? 'active' : '' }}" href="#" >
+                            <span class="menu-bullet">
+                                <span class="bullet bullet-dot"></span>
+                            </span>
+                            <span class="menu-title">Generate Q. for Exam</span>
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
+            <!--end::pdf generator-->
+            
+           
+
+            {{-- <div class="menu-item">
+                <div class="menu-content pt-8 pb-2">
+                    <span class="menu-section text-muted text-uppercase fs-8 ls-1">Other</span>
+                </div>
+            </div> --}}
             <div class="menu-item">
                 <a class="menu-link {{ request()->is('/resume') ? 'active' : '' }}" href="{{ route('resume.personal') }}"  >
                     <span class="menu-icon">
@@ -168,26 +518,8 @@
                 </a>
             </div>
 
-            <div class="menu-item">
-                <a class="menu-link {{ request()->is('/news-feed') ? 'active' : '' }}" href="{{ route('news-feed') }}"  >
-                    <span class="menu-icon">
-                       <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-                        <span class="svg-icon svg-icon-2">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                                fill="none">
-                                <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
-                                <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </span>
-                    <span class="menu-title">News Feed</span>
-                </a>
-            </div>
-
-            @auth
+           
+            {{-- @auth
             <div data-kt-menu-trigger="click" class="menu-item menu-accordion">
                 <span class="menu-link">
                     <span class="menu-icon">
@@ -277,9 +609,9 @@
                     
                 </div>
             </div>
-            @endauth
+            @endauth --}}
 
-            <div class="menu-item">
+            {{-- <div class="menu-item">
                 <a class="menu-link {{ request()->is('/feedback') ? 'active' : '' }}" href="{{ route('feedback') }}"  >
                     <span class="menu-icon">
                        <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
@@ -296,11 +628,8 @@
                     </span>
                     <span class="menu-title">Feedback</span>
                 </a>
-            </div>
+            </div> --}}
             
-
-            
- 
         </div>
         <!--end::Menu-->
     </div>
