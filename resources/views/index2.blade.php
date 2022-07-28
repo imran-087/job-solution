@@ -120,7 +120,7 @@
                     <!--begin::Info-->
                     <div class="mb-0">
                         <!--begin::Value-->
-                        <div class="fs-lg-2hx fs-2x fw-bolder text-white d-flex flex-center">
+                        <div class="fs-lg-2hx fs-md-2x fs-x fs-4 fw-bolder text-white d-flex flex-center">
                             <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="700"
                                 data-kt-countup-suffix="+">0</div>
                         </div>
@@ -157,7 +157,7 @@
                     <!--begin::Info-->
                     <div class="mb-0">
                         <!--begin::Value-->
-                        <div class="fs-lg-2hx fs-2x fw-bolder text-white d-flex flex-center">
+                        <div class="fs-lg-2hx fs-x fs-md-2x fw-bolder text-white d-flex flex-center">
                             <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="80"
                                 data-kt-countup-suffix="K+">0</div>
                         </div>
@@ -194,7 +194,7 @@
                     <!--begin::Info-->
                     <div class="mb-0">
                         <!--begin::Value-->
-                        <div class="fs-lg-2hx fs-2x fw-bolder text-white d-flex flex-center">
+                        <div class="fs-lg-2hx fs-md-2x fs-x fw-bolder text-white d-flex flex-center">
                             <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="35"
                                 data-kt-countup-suffix="M+">0</div>
                         </div>
