@@ -59,7 +59,7 @@ use App\Http\Controllers\Skill\HomeController as SkillHomeController;
 */
 
 #### Landing Route without auth #####
-Route::get('/', [PageController::class, 'landingPage'])->name('landingpage');
+Route::get('/', [PageController::class, 'index'])->name('landingpage');
 Route::get('/{page_slug}', [PageController::class, 'page'])
   ->where('page_slug', 'about-us|terms-and-conditions|cookie-policy|privacy-policy|refund-policy')
   ->name('page');

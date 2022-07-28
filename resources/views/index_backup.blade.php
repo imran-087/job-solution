@@ -1,9 +1,9 @@
 @extends('landing_layout.l_app')
 
 @section('landing_hero')
-<div class="d-flex flex-column flex-center w-100  px-9">
+<div class="d-flex flex-column flex-center w-100 min-h-md-350px min-h-300px min-h-lg-400px px-9">
     <!--begin::Heading-->
-    <div class="text-center mb-5 mb-lg-10 py-10 py-lg-10">
+    <div class="text-center mb-5 mb-lg-10 py-10 py-lg-20">
         <!--begin::Title-->
         <h1 class="text-white lh-base fw-bolder fs-2x fs-lg-3x mb-15">{{ $setting->title ?? 'Hero Text' }}
             <br />
@@ -17,7 +17,13 @@
         <!--end::Action-->
     </div>
     <!--end::Heading-->
+    <!--begin::Clients-->
+    {{-- <div class="d-flex flex-center flex-wrap position-relative"> --}}
+        
+    {{-- </div> --}}
+    <!--end::Clients-->
     
+
 </div>
 <div class="container">
     <div class="col-md-6 mx-auto">
@@ -95,126 +101,6 @@
         </div>
     </div>
 </div>
-<div class="pb-md-15 pt-md-15 pt-10 pb-10 landing-dark-bg">
-    <!--begin::Container-->
-    <div class="container">
-        <!--begin::Statistics-->
-        <div class="d-flex flex-center">
-            <!--begin::Items-->
-            <div class="d-flex flex-wrap flex-center justify-content-md-between justify-content-center mx-auto w-xl-900px">
-                <!--begin::Item-->
-                <div class="d-flex flex-center"
-                    {{-- style="background-image: url('{{ asset('assets') }}/media/svg/misc/octagon.svg')" --}}
-                    >
-                    <!--begin::Symbol-->
-                    <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
-                    <span class="svg-icon svg-icon-2tx svg-icon-white me-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none">
-                            <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
-                            <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
-                            <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
-                            <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
-                        </svg>
-                    </span>
-                    <!--end::Svg Icon-->
-                    <!--end::Symbol-->
-                    <!--begin::Info-->
-                    <div class="mb-0">
-                        <!--begin::Value-->
-                        <div class="fs-lg-2hx fs-2x fw-bolder text-white d-flex flex-center">
-                            <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="700"
-                                data-kt-countup-suffix="+">0</div>
-                        </div>
-                        <!--end::Value-->
-                        <!--begin::Label-->
-                        <span class="text-white fw-bolder fs-md-5  lh-0">সর্বমোট প্রশ্ন</span>
-                        <!--end::Label-->
-                    </div>
-                    <!--end::Info-->
-                </div>
-                <!--end::Item-->
-                <!--begin::Item-->
-                <div class="d-flex  flex-center"
-                    {{-- style="background-image: url('{{ asset('assets') }}/media/svg/misc/octagon.svg')" --}}
-                    >
-                    <!--begin::Symbol-->
-                    <!--begin::Svg Icon | path: icons/duotune/graphs/gra008.svg-->
-                    <span class="svg-icon svg-icon-2tx svg-icon-white me-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none">
-                            <path
-                                d="M13 10.9128V3.01281C13 2.41281 13.5 1.91281 14.1 2.01281C16.1 2.21281 17.9 3.11284 19.3 4.61284C20.7 6.01284 21.6 7.91285 21.9 9.81285C22 10.4129 21.5 10.9128 20.9 10.9128H13Z"
-                                fill="black" />
-                            <path opacity="0.3"
-                                d="M13 12.9128V20.8129C13 21.4129 13.5 21.9129 14.1 21.8129C16.1 21.6129 17.9 20.7128 19.3 19.2128C20.7 17.8128 21.6 15.9128 21.9 14.0128C22 13.4128 21.5 12.9128 20.9 12.9128H13Z"
-                                fill="black" />
-                            <path opacity="0.3"
-                                d="M11 19.8129C11 20.4129 10.5 20.9129 9.89999 20.8129C5.49999 20.2129 2 16.5128 2 11.9128C2 7.31283 5.39999 3.51281 9.89999 3.01281C10.5 2.91281 11 3.41281 11 4.01281V19.8129Z"
-                                fill="black" />
-                        </svg>
-                    </span>
-                    <!--end::Svg Icon-->
-                    <!--end::Symbol-->
-                    <!--begin::Info-->
-                    <div class="mb-0">
-                        <!--begin::Value-->
-                        <div class="fs-lg-2hx fs-2x fw-bolder text-white d-flex flex-center">
-                            <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="80"
-                                data-kt-countup-suffix="K+">0</div>
-                        </div>
-                        <!--end::Value-->
-                        <!--begin::Label-->
-                        <span class="text-white fw-bolder fs-5 lh-0">সর্বমোট শিক্ষার্থী</span>
-                        <!--end::Label-->
-                    </div>
-                    <!--end::Info-->
-                </div>
-                <!--end::Item-->
-                <!--begin::Item-->
-                <div class="d-flex flex-center"
-                    {{-- style="background-image: url('{{ asset('assets') }}/media/svg/misc/octagon.svg')" --}}
-                    >
-                    <!--begin::Symbol-->
-                    <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm002.svg-->
-                    <span class="svg-icon svg-icon-2tx svg-icon-white me-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
-                            fill="none">
-                            <path
-                                d="M21 10H13V11C13 11.6 12.6 12 12 12C11.4 12 11 11.6 11 11V10H3C2.4 10 2 10.4 2 11V13H22V11C22 10.4 21.6 10 21 10Z"
-                                fill="black" />
-                            <path opacity="0.3"
-                                d="M12 12C11.4 12 11 11.6 11 11V3C11 2.4 11.4 2 12 2C12.6 2 13 2.4 13 3V11C13 11.6 12.6 12 12 12Z"
-                                fill="black" />
-                            <path opacity="0.3"
-                                d="M18.1 21H5.9C5.4 21 4.9 20.6 4.8 20.1L3 13H21L19.2 20.1C19.1 20.6 18.6 21 18.1 21ZM13 18V15C13 14.4 12.6 14 12 14C11.4 14 11 14.4 11 15V18C11 18.6 11.4 19 12 19C12.6 19 13 18.6 13 18ZM17 18V15C17 14.4 16.6 14 16 14C15.4 14 15 14.4 15 15V18C15 18.6 15.4 19 16 19C16.6 19 17 18.6 17 18ZM9 18V15C9 14.4 8.6 14 8 14C7.4 14 7 14.4 7 15V18C7 18.6 7.4 19 8 19C8.6 19 9 18.6 9 18Z"
-                                fill="black" />
-                        </svg>
-                    </span>
-                    <!--end::Svg Icon-->
-                    <!--end::Symbol-->
-                    <!--begin::Info-->
-                    <div class="mb-0">
-                        <!--begin::Value-->
-                        <div class="fs-lg-2hx fs-2x fw-bolder text-white d-flex flex-center">
-                            <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="35"
-                                data-kt-countup-suffix="M+">0</div>
-                        </div>
-                        <!--end::Value-->
-                        <!--begin::Label-->
-                        <span class="text-white fw-bolder fs-5 lh-0">সাবস্ক্রাইবার</span>
-                        <!--end::Label-->
-                    </div>
-                    <!--end::Info-->
-                </div>
-                <!--end::Item-->
-            </div>
-            <!--end::Items-->
-        </div>
-        <!--end::Statistics-->
-    </div>
-    <!--end::Container-->
-</div>
 @endsection
 
 @section('curve')
@@ -237,7 +123,7 @@
             <!--begin::Heading-->
             <div class="text-center mb-17">
                 <!--begin::Title-->
-                <h3 class="fs-2hx text-dark mb-5" id="how-it-works">নিজের শেখার যাত্রা শুরু হোক এখানেই</h3>
+                <h3 class="fs-2hx text-dark mb-5" id="how-it-works" data-kt-scroll-offset="{default: 100, lg: 150}">নিজের শেখা নিজেই গুছিয়ে <br> নেয়ার যাত্রা শুরু হোক</h3>
                 <!--end::Title-->
                 <!--begin::Text-->
                 <div class="fs-4 text-dark fw-bold">যেকোনো বিষয়ের যেকোনো টপিকে পড়ালেখা করতে চলে যাও তোমার পছন্দের সেকশনে</div>
@@ -248,21 +134,21 @@
             <div class="row w-100 gy-10 mb-10 mb-md-20">
                 
                 <!--begin::Col-->
-                <div class="col-md-3 px-3">
+                <div class="col-md-4 px-3">
                     <a href="#explore">
-                        <!--begin::card-->
-                        <div class="text-center bg-light mb-md-0 py-md-15 py-7 rounded">
+                        <!--begin::Story-->
+                        <div class="text-center mb-md-0 py-md-15 py-7 py-7 rounded">
                             <!--begin::Illustration-->
-                            <img src="{{ asset('assets') }}/media/illustrations/sketchy-1/8.png" class="mh-125px mb-9"
+                            <img src="{{ asset('assets') }}/media/illustrations/sketchy-1/2.png" class="mh-125px mb-9"
                                 alt="" />
                             <!--end::Illustration-->
                             <!--begin::Heading-->
                             <div class="d-flex flex-center mb-5">
                                 <!--begin::Badge-->
-                                {{-- <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3">2</span> --}}
+                                {{-- <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3"></span> --}}
                                 <!--end::Badge-->
                                 <!--begin::Title-->
-                                <div class="fs-5 fs-lg-3 fw-bolder text-dark">চাকরি প্রস্তুতি</div>
+                                <div class="fs-5 fs-lg-3 fw-bolder text-dark">চাকুরী প্রস্তুতি</div>
                                 <!--end::Title-->
                             </div>
                             <!--end::Heading-->
@@ -271,15 +157,15 @@
                                 যাও ১ <br> লক্ষেরও বেশি প্রশ্নের সমাহার</div>
                             <!--end::Description-->
                         </div>
-                        <!--end::card-->
+                        <!--end::Story-->
                     </a>
                 </div>
                 <!--end::Col-->
                 <!--begin::Col-->
-                <div class="col-md-3 px-3 ">
+                <div class="col-md-4 px-3 ">
                     <a href="">
                         <!--begin::Story-->
-                        <div class="text-center bg-light mb-md-0 py-md-15 py-7 rounded">
+                        <div class="text-center mb-md-0 py-md-15 py-7 rounded">
                             <!--begin::Illustration-->
                             <img src="{{ asset('assets') }}/media/illustrations/sketchy-1/8.png" class="mh-125px mb-9"
                                 alt="" />
@@ -304,38 +190,10 @@
                 </div>
                 <!--end::Col-->
                 <!--begin::Col-->
-                <div class="col-md-3 px-3 ">
+                <div class="col-md-4 px-3 ">
                     <a href="">
                         <!--begin::Story-->
-                        <div class="text-center bg-light mb-md-0 py-md-15 py-7 rounded">
-                            <!--begin::Illustration-->
-                            <img src="{{ asset('assets') }}/media/illustrations/sketchy-1/12.png" class="mh-125px mb-9"
-                                alt="" />
-                            <!--end::Illustration-->
-                            <!--begin::Heading-->
-                            <div class="d-flex flex-center mb-5">
-                                <!--begin::Badge-->
-                                {{-- <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3">3</span> --}}
-                                <!--end::Badge-->
-                                <!--begin::Title-->
-                                <div class="fs-5 fs-lg-3 fw-bolder text-dark">মেডিকেল/ডেন্টাল প্রস্তুতি</div>
-                                <!--end::Title-->
-                            </div>
-                            <!--end::Heading-->
-                            <!--begin::Description-->
-                            <div class="fw-bold fs-6 fs-lg-4 text-muted">শেখো নিজের ইচ্ছেমতো, পেয়ে 
-                                যাও ১ <br> লক্ষেরও বেশি প্রশ্নের সমাহার</div>
-                            <!--end::Description-->
-                        </div>
-                        <!--end::Story-->
-                    </a>
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-md-3 px-3 ">
-                    <a href="">
-                        <!--begin::Story-->
-                        <div class="text-center bg-light mb-md-0 py-md-15 py-7 rounded">
+                        <div class="text-center mb-md-0 py-md-15 py-7 rounded">
                             <!--begin::Illustration-->
                             <img src="{{ asset('assets') }}/media/illustrations/sketchy-1/12.png" class="mh-125px mb-9"
                                 alt="" />
@@ -364,10 +222,10 @@
             <!--begin::Row-->
             <div class="row w-100 gy-10 mb-10 mb-md-20">
                 <!--begin::Col-->
-                <div class="col-md-3 px-3 ">
+                <div class="col-md-4 px-3 ">
                     <a href="">
                         <!--begin::Story-->
-                        <div class="text-center bg-light mb-md-0 py-md-15 py-7 rounded">
+                        <div class="text-center mb-md-0 py-md-15 py-7 rounded">
                             <!--begin::Illustration-->
                             <img src="{{ asset('assets') }}/media/illustrations/sketchy-1/2.png" class="mh-125px mb-9"
                                 alt="" />
@@ -392,10 +250,10 @@
                 </div>
                 <!--end::Col-->
                 <!--begin::Col-->
-                <div class="col-md-3 px-3 ">
+                <div class="col-md-4 px-3 ">
                     <a href="">
                         <!--begin::Story-->
-                        <div class="text-center bg-light mb-md-0 py-md-15 py-7 rounded">
+                        <div class="text-center mb-md-0 py-md-15 py-7 rounded">
                             <!--begin::Illustration-->
                             <img src="{{ asset('assets') }}/media/illustrations/sketchy-1/8.png" class="mh-125px mb-9"
                                 alt="" />
@@ -411,48 +269,20 @@
                             </div>
                             <!--end::Heading-->
                             <!--begin::Description-->
-                            <div class="fw-bold bg-light fs-6 fs-lg-4 text-muted">শেখো নিজের ইচ্ছেমতো, পেয়ে 
-                                যাও ১ <br> লক্ষেরও বেশি প্রশ্নের সমাহার</div>
-                            <!--end::Description-->
-                            <!--end::Description-->
-                        </div>
-                        <!--end::Story-->
-                    </a>
-                </div>
-                <!--end::Col-->
-                <!--begin::Col-->
-                <div class="col-md-3 px-3 ">
-                    <a href="">
-                        <!--begin::Story-->
-                        <div class="text-center bg-light mb-md-0 py-md-15 py-7 rounded">
-                            <!--begin::Illustration-->
-                            <img src="{{ asset('assets') }}/media/illustrations/sketchy-1/12.png" class="mh-125px mb-9"
-                                alt="" />
-                            <!--end::Illustration-->
-                            <!--begin::Heading-->
-                            <div class="d-flex flex-center mb-5">
-                                <!--begin::Badge-->
-                                {{-- <span class="badge badge-circle badge-light-success fw-bolder p-5 me-3 fs-3">3</span> --}}
-                                <!--end::Badge-->
-                                <!--begin::Title-->
-                                <div class="fs-5 fs-lg-3 fw-bolder text-dark">বাংলা কোরআন ও হাদিস</div>
-                                <!--end::Title-->
-                            </div>
-                            <!--end::Heading-->
-                        <!--begin::Description-->
                             <div class="fw-bold fs-6 fs-lg-4 text-muted">শেখো নিজের ইচ্ছেমতো, পেয়ে 
                                 যাও ১ <br> লক্ষেরও বেশি প্রশ্নের সমাহার</div>
                             <!--end::Description-->
+                            <!--end::Description-->
                         </div>
                         <!--end::Story-->
                     </a>
                 </div>
                 <!--end::Col-->
                 <!--begin::Col-->
-                <div class="col-md-3 px-3 ">
+                <div class="col-md-4 px-3 ">
                     <a href="">
                         <!--begin::Story-->
-                        <div class="text-center bg-light mb-md-0 py-md-15 py-7 rounded">
+                        <div class="text-center mb-md-0 py-md-15 py-7 rounded">
                             <!--begin::Illustration-->
                             <img src="{{ asset('assets') }}/media/illustrations/sketchy-1/12.png" class="mh-125px mb-9"
                                 alt="" />
@@ -483,7 +313,7 @@
                 <!--begin::Slider-->
                 <div data-tns="true" data-tns-loop="true" data-tns-swipe-angle="false" data-tns-speed="2000"
                     data-tns-autoplay="true" data-tns-autoplay-timeout="18000" data-tns-controls="true"
-                    data-tns-nav="false" data-tns-items="2" data-tns-center="false" data-tns-dots="false"
+                    data-tns-nav="false" data-tns-items="1" data-tns-center="false" data-tns-dots="false"
                     data-tns-prev-button="#kt_team_slider_prev1" data-tns-next-button="#kt_team_slider_next1">
                     <!--begin::Item-->
                     <div class="text-center px-5 pt-5 pt-lg-10 px-lg-10">
@@ -544,7 +374,7 @@
     </div>
     <!--end::How It Works Section-->
     <!--begin::Statistics Section-->
-    <div class="pt-20 py-10 mt-sm-n10">
+    <div class="mt-sm-n10">
         <!--begin::Curve top-->
         <div class="landing-curve landing-dark-color">
             <svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -555,185 +385,144 @@
         </div>
         <!--end::Curve top-->
         <!--begin::Wrapper-->
-        <div class="pb-15 pt-18 landing-dark-bg ">
+        <div class="pb-15 pt-18 landing-dark-bg">
             <!--begin::Container-->
             <div class="container">
                 <!--begin::Heading-->
-                <div class="text-center mb-12">
+                <div class="text-center mt-15 mb-18" id="achievements" data-kt-scroll-offset="{default: 100, lg: 150}">
                     <!--begin::Title-->
-                    <h3 class="fs-2hx text-white mb-5 " id="team" data-kt-scroll-offset="{default: 100, lg: 150}">আমাদের বেস্ট ফিচার সমূহ</h3>
+                    <h2 class="fs-2hx text-white fw-bolder mb-5" style="background: linear-gradient(to right, #12CE5D 0%, #FFD80C 100%);-webkit-background-clip: text;-webkit-text-fill-color: transparent;">স্যাটের অর্জন সমূহ</h2>
                     <!--end::Title-->
-                    <!--begin::Sub-title-->
-                    <div class="fs-5 text-white fw-bold">ওয়েব সার্ভিস হলো ওয়েব সম্পর্কিত সেবাসমূহ অর্থাৎ নেটওয়ার্ক সংযুক্ত বিভিন্ন কম্পিউটারে চালু
-
-                        <br />থাকা বিভিন্ন সফটওয়ারের মধ্যে আন্তক্রিয়ার একটি ব্যবস্থা।</div>
-                    <!--end::Sub-title=-->
+                    <!--begin::Description-->
+                    <div class="fs-4 text-white fw-bold" >ওয়েব সার্ভিস হলো ওয়েব সম্পর্কিত সেবাসমূহ অর্থাৎ নেটওয়ার্ক সংযুক্ত বিভিন্ন কম্পিউটারে চালু <br> থাকা বিভিন্ন সফটওয়ারের মধ্যে আন্তক্রিয়ার একটি ব্যবস্থা। </div>
+                    <!--end::Description-->
                 </div>
                 <!--end::Heading-->
-                <!--begin::Slider-->
-                <div class="tns tns-default">
-                    <!--begin::Wrapper-->
-                    <div data-tns="true" data-tns-loop="true" data-tns-swipe-angle="false" data-tns-speed="2000"
-                        data-tns-autoplay="true" data-tns-autoplay-timeout="18000" data-tns-controls="true"
-                        data-tns-nav="false" data-tns-items="1" data-tns-center="false" data-tns-dots="false"
-                        data-tns-prev-button="#kt_team_slider_prev" data-tns-next-button="#kt_team_slider_next"
-                        data-tns-responsive="{1200: {items: 3}, 992: {items: 2}}">
+                <!--begin::Statistics-->
+                <div class="d-flex flex-center">
+                    <!--begin::Items-->
+                    <div class="d-flex flex-wrap flex-center justify-content-lg-between mb-15 mx-auto w-xl-900px">
                         <!--begin::Item-->
-                        <div class="text-center">
-                            <!--begin::Photo-->
-                            <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center"
-                                style="background-image:url('{{ asset('assets') }}/media/demos/demo8.png')"></div>
-                            <!--end::Photo-->
-                            <!--begin::Person-->
+                        <div class="d-flex flex-column flex-center h-200px w-200px h-lg-250px w-lg-250px m-3 bgi-no-repeat bgi-position-center bgi-size-contain"
+                            style="background-image: url('{{ asset('assets') }}/media/svg/misc/octagon.svg')">
+                            <!--begin::Symbol-->
+                            <!--begin::Svg Icon | path: icons/duotune/general/gen025.svg-->
+                            <span class="svg-icon svg-icon-2tx svg-icon-white mb-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none">
+                                    <rect x="2" y="2" width="9" height="9" rx="2" fill="black" />
+                                    <rect opacity="0.3" x="13" y="2" width="9" height="9" rx="2" fill="black" />
+                                    <rect opacity="0.3" x="13" y="13" width="9" height="9" rx="2" fill="black" />
+                                    <rect opacity="0.3" x="2" y="13" width="9" height="9" rx="2" fill="black" />
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                            <!--end::Symbol-->
+                            <!--begin::Info-->
                             <div class="mb-0">
-                                <!--begin::Name-->
-                                <a href="#" class="text-white fw-bolder text-hover-primary fs-3">অনলাইন এক্সাম</a>
-                                <!--end::Name-->
-                                <!--begin::Position-->
-                                {{-- <div class="text-muted fs-6 fw-bold mt-1">Development Lead</div> --}}
-                                <!--begin::Position-->
+                                <!--begin::Value-->
+                                <div class="fs-lg-2hx fs-2x fw-bolder text-white d-flex flex-center">
+                                    <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="700"
+                                        data-kt-countup-suffix="+">0</div>
+                                </div>
+                                <!--end::Value-->
+                                <!--begin::Label-->
+                                <span class="text-white fw-bolder fs-5 lh-0">সর্বমোট প্রশ্ন</span>
+                                <!--end::Label-->
                             </div>
-                            <!--end::Person-->
+                            <!--end::Info-->
                         </div>
                         <!--end::Item-->
                         <!--begin::Item-->
-                        <div class="text-center">
-                            <!--begin::Photo-->
-                            <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center"
-                                style="background-image:url('{{ asset('assets') }}/media/demos/demo17.png')"></div>
-                            <!--end::Photo-->
-                            <!--begin::Person-->
+                        <div class="d-flex flex-column flex-center h-200px w-200px h-lg-250px w-lg-250px m-3 bgi-no-repeat bgi-position-center bgi-size-contain"
+                            style="background-image: url('{{ asset('assets') }}/media/svg/misc/octagon.svg')">
+                            <!--begin::Symbol-->
+                            <!--begin::Svg Icon | path: icons/duotune/graphs/gra008.svg-->
+                            <span class="svg-icon svg-icon-2tx svg-icon-white mb-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none">
+                                    <path
+                                        d="M13 10.9128V3.01281C13 2.41281 13.5 1.91281 14.1 2.01281C16.1 2.21281 17.9 3.11284 19.3 4.61284C20.7 6.01284 21.6 7.91285 21.9 9.81285C22 10.4129 21.5 10.9128 20.9 10.9128H13Z"
+                                        fill="black" />
+                                    <path opacity="0.3"
+                                        d="M13 12.9128V20.8129C13 21.4129 13.5 21.9129 14.1 21.8129C16.1 21.6129 17.9 20.7128 19.3 19.2128C20.7 17.8128 21.6 15.9128 21.9 14.0128C22 13.4128 21.5 12.9128 20.9 12.9128H13Z"
+                                        fill="black" />
+                                    <path opacity="0.3"
+                                        d="M11 19.8129C11 20.4129 10.5 20.9129 9.89999 20.8129C5.49999 20.2129 2 16.5128 2 11.9128C2 7.31283 5.39999 3.51281 9.89999 3.01281C10.5 2.91281 11 3.41281 11 4.01281V19.8129Z"
+                                        fill="black" />
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                            <!--end::Symbol-->
+                            <!--begin::Info-->
                             <div class="mb-0">
-                                <!--begin::Name-->
-                                <a href="#" class="text-white fw-bolder text-hover-primary fs-3">চাকরি প্রস্তুতি</a>
-                                <!--end::Name-->
-                                <!--begin::Position-->
-                                {{-- <div class="text-muted fs-6 fw-bold mt-1">Creative Director</div> --}}
-                                <!--begin::Position-->
+                                <!--begin::Value-->
+                                <div class="fs-lg-2hx fs-2x fw-bolder text-white d-flex flex-center">
+                                    <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="80"
+                                        data-kt-countup-suffix="K+">0</div>
+                                </div>
+                                <!--end::Value-->
+                                <!--begin::Label-->
+                                <span class="text-white fw-bolder fs-5 lh-0">সর্বমোট শিক্ষার্থী</span>
+                                <!--end::Label-->
                             </div>
-                            <!--end::Person-->
+                            <!--end::Info-->
                         </div>
                         <!--end::Item-->
                         <!--begin::Item-->
-                        <div class="text-center">
-                            <!--begin::Photo-->
-                            <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center"
-                                style="background-image:url('{{ asset('assets') }}/media/demos/demo6.png')"></div>
-                            <!--end::Photo-->
-                            <!--begin::Person-->
+                        <div class="d-flex flex-column flex-center h-200px w-200px h-lg-250px w-lg-250px m-3 bgi-no-repeat bgi-position-center bgi-size-contain"
+                            style="background-image: url('{{ asset('assets') }}/media/svg/misc/octagon.svg')">
+                            <!--begin::Symbol-->
+                            <!--begin::Svg Icon | path: icons/duotune/ecommerce/ecm002.svg-->
+                            <span class="svg-icon svg-icon-2tx svg-icon-white mb-3">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                                    fill="none">
+                                    <path
+                                        d="M21 10H13V11C13 11.6 12.6 12 12 12C11.4 12 11 11.6 11 11V10H3C2.4 10 2 10.4 2 11V13H22V11C22 10.4 21.6 10 21 10Z"
+                                        fill="black" />
+                                    <path opacity="0.3"
+                                        d="M12 12C11.4 12 11 11.6 11 11V3C11 2.4 11.4 2 12 2C12.6 2 13 2.4 13 3V11C13 11.6 12.6 12 12 12Z"
+                                        fill="black" />
+                                    <path opacity="0.3"
+                                        d="M18.1 21H5.9C5.4 21 4.9 20.6 4.8 20.1L3 13H21L19.2 20.1C19.1 20.6 18.6 21 18.1 21ZM13 18V15C13 14.4 12.6 14 12 14C11.4 14 11 14.4 11 15V18C11 18.6 11.4 19 12 19C12.6 19 13 18.6 13 18ZM17 18V15C17 14.4 16.6 14 16 14C15.4 14 15 14.4 15 15V18C15 18.6 15.4 19 16 19C16.6 19 17 18.6 17 18ZM9 18V15C9 14.4 8.6 14 8 14C7.4 14 7 14.4 7 15V18C7 18.6 7.4 19 8 19C8.6 19 9 18.6 9 18Z"
+                                        fill="black" />
+                                </svg>
+                            </span>
+                            <!--end::Svg Icon-->
+                            <!--end::Symbol-->
+                            <!--begin::Info-->
                             <div class="mb-0">
-                                <!--begin::Name-->
-                                <a href="#" class="text-white fw-bolder text-hover-primary fs-3">ভর্তি পরীক্ষা প্রস্তুতি</a>
-                                <!--end::Name-->
-                                <!--begin::Position-->
-                                {{-- <div class="text-muted fs-6 fw-bold mt-1">Python Expert</div> --}}
-                                <!--begin::Position-->
+                                <!--begin::Value-->
+                                <div class="fs-lg-2hx fs-2x fw-bolder text-white d-flex flex-center">
+                                    <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="35"
+                                        data-kt-countup-suffix="M+">0</div>
+                                </div>
+                                <!--end::Value-->
+                                <!--begin::Label-->
+                                <span class="text-white fw-bolder fs-5 lh-0">সাবস্ক্রাইবার</span>
+                                <!--end::Label-->
                             </div>
-                            <!--end::Person-->
-                        </div>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        <div class="text-center">
-                            <!--begin::Photo-->
-                            <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center"
-                                style="background-image:url('{{ asset('assets') }}/media/demos/demo4.png')"></div>
-                            <!--end::Photo-->
-                            <!--begin::Person-->
-                            <div class="mb-0">
-                                <!--begin::Name-->
-                                <a href="#" class="text-white fw-bolder text-hover-primary fs-3">স্কিল ডেভেলপমেন্ট</a>
-                                <!--end::Name-->
-                                <!--begin::Position-->
-                                {{-- <div class="text-muted fs-6 fw-bold mt-1">Project Manager</div> --}}
-                                <!--begin::Position-->
-                            </div>
-                            <!--end::Person-->
-                        </div>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        <div class="text-center">
-                            <!--begin::Photo-->
-                            <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center"
-                                style="background-image:url('{{ asset('assets') }}/media/demos/demo3.png')"></div>
-                            <!--end::Photo-->
-                            <!--begin::Person-->
-                            <div class="mb-0">
-                                <!--begin::Name-->
-                                <a href="#" class="text-white fw-bolder text-hover-primary fs-3">প্রোগ্রামিং</a>
-                                <!--end::Name-->
-                                <!--begin::Position-->
-                                {{-- <div class="text-muted fs-6 fw-bold mt-1">Art Director</div> --}}
-                                <!--begin::Position-->
-                            </div>
-                            <!--end::Person-->
-                        </div>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        <div class="text-center">
-                            <!--begin::Photo-->
-                            <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center"
-                                style="background-image:url('{{ asset('assets') }}/media/demos/demo2.png')"></div>
-                            <!--end::Photo-->
-                            <!--begin::Person-->
-                            <div class="mb-0">
-                                <!--begin::Name-->
-                                <a href="#" class="text-white fw-bolder text-hover-primary fs-3">পিডিএফ জেনারেটর</a>
-                                <!--end::Name-->
-                                <!--begin::Position-->
-                                {{-- <div class="text-muted fs-6 fw-bold mt-1">Marketing Manager</div> --}}
-                                <!--begin::Position-->
-                            </div>
-                            <!--end::Person-->
-                        </div>
-                        <!--end::Item-->
-                        <!--begin::Item-->
-                        <div class="text-center">
-                            <!--begin::Photo-->
-                            <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center"
-                                style="background-image:url('{{ asset('assets') }}/media/demos/demo1.png')"></div>
-                            <!--end::Photo-->
-                            <!--begin::Person-->
-                            <div class="mb-0">
-                                <!--begin::Name-->
-                                <a href="#" class="text-dark fw-bolder text-hover-primary fs-3">এক্সাম জেনারেটর</a>
-                                <!--end::Name-->
-                                <!--begin::Position-->
-                                {{-- <div class="text-muted fs-6 fw-bold mt-1">QA Managers</div> --}}
-                                <!--begin::Position-->
-                            </div>
-                            <!--end::Person-->
+                            <!--end::Info-->
                         </div>
                         <!--end::Item-->
                     </div>
-                    <!--end::Wrapper-->
-                    <!--begin::Button-->
-                    <button class="btn btn-icon btn-active-color-primary" id="kt_team_slider_prev">
-                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr074.svg-->
-                        <span class="svg-icon svg-icon-3x">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path
-                                    d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z"
-                                    fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </button>
-                    <!--end::Button-->
-                    <!--begin::Button-->
-                    <button class="btn btn-icon btn-active-color-primary" id="kt_team_slider_next">
-                        <!--begin::Svg Icon | path: icons/duotune/arrows/arr071.svg-->
-                        <span class="svg-icon svg-icon-3x">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path
-                                    d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z"
-                                    fill="black" />
-                            </svg>
-                        </span>
-                        <!--end::Svg Icon-->
-                    </button>
-                    <!--end::Button-->
+                    <!--end::Items-->
                 </div>
-                <!--end::Slider-->
+                <!--end::Statistics-->
+                <!--begin::Testimonial-->
+                <div class="fs-2 fw-bold text-white text-center mb-3">
+                    <span class="fs-1 lh-1 text-white">“</span>আমাদের হাল ছেড়ে দেয়া উচিত নয় এবং সমস্যা গুলোকে আমাদের 
+                    
+                    <br />
+                    <span class="text-danger me-1">পরাজিত করার </span>,সুযোগ দেয়া উচিত নয়
+                    <span class="fs-1 lh-1 text-white">“</span></div>
+                <!--end::Testimonial-->
+                <!--begin::Author-->
+                <div class="fs-2 fw-bold text-muted text-center">
+                    <a href="https://facebook.com/azizbbl255" class="link-primary fs-4 fw-bolder">আজিজুর রহমান আজিজ </a>
+                    <span class="fs-4 fw-bolder text-white"> &nbsp;স্যাটের প্রতিষ্ঠাতা</span>
+                </div>
+                <!--end::Author-->
             </div>
             <!--end::Container-->
         </div>
@@ -749,9 +538,192 @@
         <!--end::Curve bottom-->
     </div>
     <!--end::Statistics Section-->
-   
+    <!--begin::Team Section-->
+    <div class="py-10 py-lg-20">
+        <!--begin::Container-->
+        <div class="container">
+            <!--begin::Heading-->
+            <div class="text-center mb-12">
+                <!--begin::Title-->
+                <h3 class="fs-2hx text-dark mb-5" id="team" data-kt-scroll-offset="{default: 100, lg: 150}">আমাদের বেস্ট ফিচার সমূহ</h3>
+                <!--end::Title-->
+                <!--begin::Sub-title-->
+                <div class="fs-5 text-muted fw-bold">ওয়েব সার্ভিস হলো ওয়েব সম্পর্কিত সেবাসমূহ অর্থাৎ নেটওয়ার্ক সংযুক্ত বিভিন্ন কম্পিউটারে চালু
+
+                    <br />থাকা বিভিন্ন সফটওয়ারের মধ্যে আন্তক্রিয়ার একটি ব্যবস্থা।</div>
+                <!--end::Sub-title=-->
+            </div>
+            <!--end::Heading-->
+            <!--begin::Slider-->
+            <div class="tns tns-default">
+                <!--begin::Wrapper-->
+                <div data-tns="true" data-tns-loop="true" data-tns-swipe-angle="false" data-tns-speed="2000"
+                    data-tns-autoplay="true" data-tns-autoplay-timeout="18000" data-tns-controls="true"
+                    data-tns-nav="false" data-tns-items="1" data-tns-center="false" data-tns-dots="false"
+                    data-tns-prev-button="#kt_team_slider_prev" data-tns-next-button="#kt_team_slider_next"
+                    data-tns-responsive="{1200: {items: 3}, 992: {items: 2}}">
+                    <!--begin::Item-->
+                    <div class="text-center">
+                        <!--begin::Photo-->
+                        <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center"
+                            style="background-image:url('{{ asset('assets') }}/media/demos/demo8.png')"></div>
+                        <!--end::Photo-->
+                        <!--begin::Person-->
+                        <div class="mb-0">
+                            <!--begin::Name-->
+                            <a href="#" class="text-dark fw-bolder text-hover-primary fs-3">অনলাইন এক্সাম</a>
+                            <!--end::Name-->
+                            <!--begin::Position-->
+                            {{-- <div class="text-muted fs-6 fw-bold mt-1">Development Lead</div> --}}
+                            <!--begin::Position-->
+                        </div>
+                        <!--end::Person-->
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <div class="text-center">
+                        <!--begin::Photo-->
+                        <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center"
+                            style="background-image:url('{{ asset('assets') }}/media/demos/demo17.png')"></div>
+                        <!--end::Photo-->
+                        <!--begin::Person-->
+                        <div class="mb-0">
+                            <!--begin::Name-->
+                            <a href="#" class="text-dark fw-bolder text-hover-primary fs-3">চাকরি প্রস্তুতি</a>
+                            <!--end::Name-->
+                            <!--begin::Position-->
+                            {{-- <div class="text-muted fs-6 fw-bold mt-1">Creative Director</div> --}}
+                            <!--begin::Position-->
+                        </div>
+                        <!--end::Person-->
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <div class="text-center">
+                        <!--begin::Photo-->
+                        <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center"
+                            style="background-image:url('{{ asset('assets') }}/media/demos/demo6.png')"></div>
+                        <!--end::Photo-->
+                        <!--begin::Person-->
+                        <div class="mb-0">
+                            <!--begin::Name-->
+                            <a href="#" class="text-dark fw-bolder text-hover-primary fs-3">ভর্তি পরীক্ষা প্রস্তুতি</a>
+                            <!--end::Name-->
+                            <!--begin::Position-->
+                            <div class="text-muted fs-6 fw-bold mt-1">Python Expert</div>
+                            <!--begin::Position-->
+                        </div>
+                        <!--end::Person-->
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <div class="text-center">
+                        <!--begin::Photo-->
+                        <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center"
+                            style="background-image:url('{{ asset('assets') }}/media/demos/demo4.png')"></div>
+                        <!--end::Photo-->
+                        <!--begin::Person-->
+                        <div class="mb-0">
+                            <!--begin::Name-->
+                            <a href="#" class="text-dark fw-bolder text-hover-primary fs-3">স্কিল ডেভেলপমেন্ট</a>
+                            <!--end::Name-->
+                            <!--begin::Position-->
+                            {{-- <div class="text-muted fs-6 fw-bold mt-1">Project Manager</div> --}}
+                            <!--begin::Position-->
+                        </div>
+                        <!--end::Person-->
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <div class="text-center">
+                        <!--begin::Photo-->
+                        <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center"
+                            style="background-image:url('{{ asset('assets') }}/media/demos/demo3.png')"></div>
+                        <!--end::Photo-->
+                        <!--begin::Person-->
+                        <div class="mb-0">
+                            <!--begin::Name-->
+                            <a href="#" class="text-dark fw-bolder text-hover-primary fs-3">প্রোগ্রামিং</a>
+                            <!--end::Name-->
+                            <!--begin::Position-->
+                            {{-- <div class="text-muted fs-6 fw-bold mt-1">Art Director</div> --}}
+                            <!--begin::Position-->
+                        </div>
+                        <!--end::Person-->
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <div class="text-center">
+                        <!--begin::Photo-->
+                        <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center"
+                            style="background-image:url('{{ asset('assets') }}/media/demos/demo2.png')"></div>
+                        <!--end::Photo-->
+                        <!--begin::Person-->
+                        <div class="mb-0">
+                            <!--begin::Name-->
+                            <a href="#" class="text-dark fw-bolder text-hover-primary fs-3">পিডিএফ জেনারেটর</a>
+                            <!--end::Name-->
+                            <!--begin::Position-->
+                            {{-- <div class="text-muted fs-6 fw-bold mt-1">Marketing Manager</div> --}}
+                            <!--begin::Position-->
+                        </div>
+                        <!--end::Person-->
+                    </div>
+                    <!--end::Item-->
+                    <!--begin::Item-->
+                    <div class="text-center">
+                        <!--begin::Photo-->
+                        <div class="octagon mx-auto mb-5 d-flex w-200px h-200px bgi-no-repeat bgi-size-contain bgi-position-center"
+                            style="background-image:url('{{ asset('assets') }}/media/demos/demo1.png')"></div>
+                        <!--end::Photo-->
+                        <!--begin::Person-->
+                        <div class="mb-0">
+                            <!--begin::Name-->
+                            <a href="#" class="text-dark fw-bolder text-hover-primary fs-3">এক্সাম জেনারেটর</a>
+                            <!--end::Name-->
+                            <!--begin::Position-->
+                            {{-- <div class="text-muted fs-6 fw-bold mt-1">QA Managers</div> --}}
+                            <!--begin::Position-->
+                        </div>
+                        <!--end::Person-->
+                    </div>
+                    <!--end::Item-->
+                </div>
+                <!--end::Wrapper-->
+                <!--begin::Button-->
+                <button class="btn btn-icon btn-active-color-primary" id="kt_team_slider_prev">
+                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr074.svg-->
+                    <span class="svg-icon svg-icon-3x">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M11.2657 11.4343L15.45 7.25C15.8642 6.83579 15.8642 6.16421 15.45 5.75C15.0358 5.33579 14.3642 5.33579 13.95 5.75L8.40712 11.2929C8.01659 11.6834 8.01659 12.3166 8.40712 12.7071L13.95 18.25C14.3642 18.6642 15.0358 18.6642 15.45 18.25C15.8642 17.8358 15.8642 17.1642 15.45 16.75L11.2657 12.5657C10.9533 12.2533 10.9533 11.7467 11.2657 11.4343Z"
+                                fill="black" />
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                </button>
+                <!--end::Button-->
+                <!--begin::Button-->
+                <button class="btn btn-icon btn-active-color-primary" id="kt_team_slider_next">
+                    <!--begin::Svg Icon | path: icons/duotune/arrows/arr071.svg-->
+                    <span class="svg-icon svg-icon-3x">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none">
+                            <path
+                                d="M12.6343 12.5657L8.45001 16.75C8.0358 17.1642 8.0358 17.8358 8.45001 18.25C8.86423 18.6642 9.5358 18.6642 9.95001 18.25L15.4929 12.7071C15.8834 12.3166 15.8834 11.6834 15.4929 11.2929L9.95001 5.75C9.5358 5.33579 8.86423 5.33579 8.45001 5.75C8.0358 6.16421 8.0358 6.83579 8.45001 7.25L12.6343 11.4343C12.9467 11.7467 12.9467 12.2533 12.6343 12.5657Z"
+                                fill="black" />
+                        </svg>
+                    </span>
+                    <!--end::Svg Icon-->
+                </button>
+                <!--end::Button-->
+            </div>
+            <!--end::Slider-->
+        </div>
+        <!--end::Container-->
+    </div>
+    <!--end::Team Section-->
     <!--begin::Projects Section-->
-    <div class="mb-md-10  position-relative z-index-2">
+    <div class="mb-lg-n15 position-relative z-index-2">
         <!--begin::Container-->
         <div class="container">
             <!--begin::Card-->
@@ -1389,9 +1361,8 @@
         <!--end::Container-->
     </div>
     <!--end::Projects Section-->
-
     <!--begin::Pricing Section-->
-    {{-- <div class="mt-sm-n20">
+    <div class="mt-sm-n20">
         <!--begin::Curve top-->
         <div class="landing-curve landing-dark-color">
             <svg viewBox="15 -1 1470 48" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -1833,11 +1804,11 @@
             </svg>
         </div>
         <!--end::Curve bottom-->
-    </div> --}}
+    </div>
     <!--end::Pricing Section-->
     
     <!--begin::Testimonials Section-->
-    <div class="mt-20">
+    <div class="mt-20 mb-n20 position-relative z-index-2">
         <!--begin::Container-->
         <div class="container">
             <!--begin::Heading-->
@@ -1906,78 +1877,9 @@
                 <!--end::Col-->
             </div>
             <!--end::Row-->
-            
-        </div>
-        <!--end::Container-->
-    </div>
-    <!--end::Testimonials Section-->
-
-    <!--begin::Founder Speech-->
-    <div class="mb-n20 position-relative z-index-2">
-        <!--begin::Container-->
-        <div class="container rounded" style="background: linear-gradient(90deg, #20AA3E 0%, #03A588 100%);">
-            {{-- <div class="founder-speech border border-dashed py-5"> --}}
-                <!--begin::Heading-->
-                <div class="text-center mb-6 pt-6">
-                    <!--begin::Title-->
-                    <h3 class="fs-2hx text-white" id="clients" data-kt-scroll-offset="{default: 125, lg: 150}">Founder Speech</h3>
-                    <!--end::Title-->
-                </div>
-                <!--end::Heading-->
-                <!--begin::Row-->
-                <div class="row g-lg-10 mb-10">
-                    <!--begin::Col-->
-                    <div class="col-lg-10 mx-auto">
-                        <!--begin::Testimonial-->
-                        <div class="">
-                            <!--begin::Item-->
-                            <div class="text-start px-5 pt-5 px-lg-10">
-                                <!--begin::Item-->
-                                <div class="card bg-light px-2 px-md-7 py-7 m-5">
-                                    <!--begin::Testimonial-->
-                                    <div class="d-flex flex-column justify-content-start h-lg-100 px-10 px-lg-0 pe-lg-10 mb-md-15 mb-lg-0 ">
-                                        <!--begin::Wrapper-->
-                                        <div class="mb-7">
-                                            <!--begin::Title-->
-                                            <div class="fs-2 fw-bolder text-dark mb-3">This is by far the cleanest template</div>
-                                            <!--end::Title-->
-                                            <!--begin::Feedback-->
-                                            <div class="text-gray-500 fw-bold fs-4">The most well thought out design theme I have ever
-                                                used. The codes are up to tandard. The css styles are very clean. In fact the cleanest
-                                                and the most up to standard I have ever seen.</div>
-                                            <!--end::Feedback-->
-                                        </div>
-                                        <!--end::Wrapper-->
-                                        <!--begin::Author-->
-                                        <div class="d-flex align-items-center justify-content-start">
-                                            <!--begin::Avatar-->
-                                            <div class="symbol symbol-circle symbol-50px me-5">
-                                                <img src="{{ asset('assets') }}/media/avatars/300-2.jpg" class="" alt="" />
-                                            </div>
-                                            <!--end::Avatar-->
-                                            <!--begin::Name-->
-                                            <div class="">
-                                                <a href="#" class="text-dark fw-bolder text-hover-primary fs-6">Janya Clebert</a>
-                                                <span class="text-muted d-block fw-bold">Development Lead</span>
-                                            </div>
-                                            <!--end::Name-->
-                                        </div>
-                                        <!--end::Author-->
-                                    </div>
-                                    <!--end::Testimonial-->
-                                </div>
-                                <!--end::Item-->
-                            </div>
-                            <!--end::Item--> 
-                        </div>
-                    </div>
-                    <!--end::Col-->
-                </div>
-                <!--end::Row-->
-            {{-- </div> --}}
             <!--begin::Highlight-->
-            <div class="card-rounded  p-8 p-lg-12 mb-n5 mb-lg-n13 text-center"
-                >
+            <div class="card-rounded shadow p-8 p-lg-12 mb-n5 mb-lg-n13 text-center"
+                style="background: linear-gradient(90deg, #20AA3E 0%, #03A588 100%);">
 
                 <span class="fs-1 fs-lg-2qx fw-bold text-white mb-4 ">Subscribe for newsletter</span>
 
@@ -1999,9 +1901,7 @@
         </div>
         <!--end::Container-->
     </div>
-    <!--end::Founder Speech-->
-
-    
+    <!--end::Testimonials Section-->
 @endsection
 
 @push('script')

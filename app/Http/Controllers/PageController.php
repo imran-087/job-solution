@@ -10,14 +10,14 @@ use Illuminate\Http\Request;
 
 class PageController extends Controller
 {
-    public function landingPage() 
+    public function index() 
     {
         $setting = Setting::first();
         $main_categories = MainCategory::with('categories')->select('id', 'name')->get();
         $categories = Category::orderBy('created_at', 'desc')->select('id', 'name')->limit(10)->get();
         $pages = Page::all();
        
-        return view('index', compact('setting', 'main_categories', 'categories', 'pages'));
+        return view('index2', compact('setting', 'main_categories', 'categories', 'pages'));
 
     }
 

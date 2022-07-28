@@ -2507,7 +2507,7 @@
                                 {{-- <div class="col-md-8 mx-auto"> --}}
                                 <div class="tns tns-default">
                                     <!--begin::Slider-->
-                                    <div
+                                    <div 
                                         data-tns="true"
                                         data-tns-loop="true"
                                         data-tns-swipe-angle="false"
@@ -2517,16 +2517,17 @@
                                         data-tns-controls="true"
                                         data-tns-nav="false"
                                         data-tns-nav-position="bottom"
-                                        data-tns-items="3"
+                                        data-tns-items="1"
+                                        data-tns-responsive="{1200: {items: 3}, 992: {items: 2}}"
                                         data-tns-center="false"
                                         data-tns-dots="false"
                                         data-tns-prev-button="#kt_team_slider_prev2"
                                         data-tns-next-button="#kt_team_slider_next2"
                                     >
-
+                                    
                                         @for($i=0; $i<5; $i++)
                                         <!--begin::Item-->
-                                        <div class="text-center px-5 py-5">
+                                        {{-- <div class="text-center px-5 py-5">
                                             <a href="#explore"  data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
                                                 <!--begin::Card-->
                                                 <div class="card overlay overlay-block">
@@ -2542,6 +2543,37 @@
                                                 </div>
                                                 <!--end::Card-->
                                             </a>
+                                        </div> --}}
+                                        <div class="col-md-4 m-3 m-md-3">
+                                            <!--begin::Feature post-->
+                                            <div class="card-xl-stretch mx-md-3">
+                                                <!--begin::Image-->
+                                                <a class="d-block bgi-no-repeat bgi-size-cover bgi-position-center card-rounded position-relative min-h-175px mb-5" style="background-image:url({{asset('assets')}}/media/stock/600x400/img-74.jpg)" data-fslightbox="lightbox-video-tutorials" target="_blank" href="https://www.youtube.com/embed/btornGtLwIo">
+                                                    <img src="{{ asset('assets') }}/media/svg/misc/video-play.svg" class="position-absolute top-50 start-50 translate-middle" alt="">
+                                                </a>
+                                                <!--end::Image-->
+                                                <!--begin::Body-->
+                                                <div class="m-0">
+                                                    <!--begin::Title-->
+                                                    <a href="#" class="fs-4 text-dark fw-bold text-hover-primary text-dark lh-base">Admin Panel - How To Started the Dashboard Tutorial</a>
+                                                    <!--end::Title-->
+                                                    <!--begin::Text-->
+                                                    {{-- <div class="fw-semibold fs-5 text-gray-600 text-dark my-4">We’ve been focused on making the from v4 to v5 but we have also not been afraid to step away been focused</div> --}}
+                                                    <!--end::Text-->
+                                                    <!--begin::Content-->
+                                                    <div class="fs-6 fw-bold">
+                                                        <!--begin::Author-->
+                                                        <a href="#" class="text-gray-700 text-hover-primary">Cris Morgan</a>
+                                                        <!--end::Author-->
+                                                        <!--begin::Date-->
+                                                        <span class="text-muted">on Apr 14 2021</span>
+                                                        <!--end::Date-->
+                                                    </div>
+                                                    <!--end::Content-->
+                                                </div>
+                                                <!--end::Body-->
+                                            </div>
+                                            <!--end::Feature post-->
                                         </div>
                                         <!--end::Item-->
                                         @endfor
@@ -2623,7 +2655,6 @@
                                     </a>
                                 </div>
                                 <!--end::Col-->
-                               
                                 @endfor
                             </div>
                             <!--end::Row-->
@@ -2645,15 +2676,15 @@
                 <!--begin::Col-->
                 <div class="col-md-12">
                     <!--begin::Tables widget 13-->
-                    <div class="card card-flush h-xl-100">
+                    <div class="card card-flush h-xl-100" style="background-color: #13263C">
                          <!--begin::Header-->
-                        <div class="card-header pt-7 d-flex justify-content-between align-content-center">
+                        <div class="card-header pt-7 mb-md-9 d-flex justify-content-between align-content-center">
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bolder text-gray-800 fs-2">Offer</span>
+                                <span class="card-label fw-bolder text-white">Offer</span>
                                
                             </h3>
-                            <a href="#"><span class="fs-6 fw-bolder">Sell all</span></a>
+                            <a href="#"><span class="fs-6 fw-bolder text-white">Sell all</span></a>
                             <!--end::Title-->
                         </div>
                         <!--end::Header-->
@@ -2681,36 +2712,36 @@
                                         data-tns-next-button="#kt_team_slider_next2"
                                     >
 
-                                        @for($i=0; $i<4; $i++)
+                                        
                                         <!--begin::Item-->
                                         <div class="text-center px-5 py-5">
                                             <a href="#explore"  data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
-                                                <div class="card card-flush bg-light flex-row-fluid  mw-100">
-                                                    <!--begin::Body-->
-                                                    <div class="card-body text-center">
-                                                        <!--begin::Food img-->
-                                                        <img src="assets/media/stock/600x400/img-3.jpg" class="rounded-3 mb-4 w-150px h-150px w-xxl-200px h-xxl-200px" alt="">
-                                                        <!--end::Food img-->
-                                                        <!--begin::Info-->
-                                                        <div class="mb-2">
-                                                            <!--begin::Title-->
-                                                            <div class="text-center">
-                                                                <span class="fw-bold text-gray-800 cursor-pointer text-hover-primary fs-3 fs-xl-1">Chicken Breast</span>
-                                                                <span class="text-gray-400 fw-semibold d-block fs-6 mt-n1">16 mins to cook</span>
-                                                            </div>
-                                                            <!--end::Title-->
-                                                        </div>
-                                                        <!--end::Info-->
-                                                        <!--begin::Total-->
-                                                        <span class="text-success text-end fw-bold fs-1">$9.00$</span>
-                                                        <!--end::Total-->
-                                                    </div>
-                                                    <!--end::Body-->
-                                                </div>
+                                                <img src="{{ asset('assets')}}/media/stock/600x400/img-2.jpg" class="card-rounded mw-100" alt=""/>
                                             </a>
                                         </div>
                                         <!--end::Item-->
-                                        @endfor
+                                        <!--begin::Item-->
+                                        <div class="text-center px-5 py-5">
+                                            <a href="#explore"  data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
+                                                <img src="{{ asset('assets')}}/media/stock/600x400/img-3.jpg" class="card-rounded mw-100" alt=""/>
+                                            </a>
+                                        </div>
+                                        <!--end::Item-->
+                                        <!--begin::Item-->
+                                        <div class="text-center px-5 py-5">
+                                        <a href="#explore"  data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
+                                                <img src="{{ asset('assets')}}/media/stock/600x400/img-4.jpg" class="card-rounded mw-100" alt=""/>
+                                            </a>
+                                        </div>
+                                        <!--end::Item-->
+                                        <!--begin::Item-->
+                                        <div class="text-center px-5 py-5">
+                                            <a href="#explore"  data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
+                                                <img src="{{ asset('assets')}}/media/stock/600x400/img-5.jpg" class="card-rounded mw-100" alt=""/>
+                                            </a>
+                                        </div>
+                                        <!--end::Item-->
+                                        
                                     </div>
                                     <!--end::Slider-->
 
@@ -2778,10 +2809,51 @@
                                         {{-- <ul class="nav nav-tabs flex-center flex-nowrap text-nowrap mb-2 fw-bolder fs-5"> --}}
                                             
                                             @for($i=0; $i<10; $i++)
-                                            <span class="nav-item">
-                                                <a class="nav-link text-gray-500 text-active-primary px-3 px-lg-6 " href="#"
-                                                    ><img src="assets/media/stock/600x400/img-2.jpg" class="card-rounded h-100px" alt=""/></a>
-                                            </span>
+                                            <div class="col-11 col-md-3 px-3">
+                                                <!--begin::Card widget 14-->
+                                                <div class="card card-flush bg-light h-xl-100">
+                                                    <!--begin::Body-->
+                                                    <div class="card-body text-center pb-5">
+                                                        <!--begin::Overlay-->
+                                                        <a class="d-block overlay" data-fslightbox="lightbox-hot-sales" href="/metronic8/demo1/assets/media/stock/600x600/img-39.jpg">
+                                                            <!--begin::Image-->
+                                                            <div class="overlay-wrapper bgi-no-repeat bgi-position-center bgi-size-cover card-rounded mb-7" style="height: 266px;background-image:url({{ asset('assets')}}/media/stock/600x600/img-27.jpg)"></div>
+                                                            <!--end::Image-->
+                                                            <!--begin::Action-->
+                                                            <div class="overlay-layer card-rounded bg-dark bg-opacity-25">
+                                                                <i class="bi bi-eye-fill fs-2x text-white"></i>
+                                                            </div>
+                                                            <!--end::Action-->
+                                                        </a>
+                                                        <!--end::Overlay-->
+                                                        <!--begin::Info-->
+                                                        <div class="d-flex align-items-end flex-stack mb-1">
+                                                            <!--begin::Title-->
+                                                            <div class="text-start">
+                                                                <span class="fw-bold text-gray-800 cursor-pointer text-hover-primary fs-4 d-block">Wavy Curved Art</span>
+                                                                {{-- <span class="text-gray-400 mt-1 fw-bold fs-6">Last Bid: 1.07 ETH</span> --}}
+                                                            </div>
+                                                            <!--end::Title-->
+                                                            <!--begin::Total-->
+                                                            <span class="text-gray-600 text-end fw-bold fs-6">$2,630</span>
+                                                            <!--end::Total-->
+                                                        </div>
+                                                        <!--end::Info-->
+                                                    </div>
+                                                    <!--end::Body-->
+                                                    <!--begin::Footer-->
+                                                    <div class="card-footer d-flex pt-0">
+                                                        <!--begin::Link-->
+                                                        {{-- <a class="btn btn-sm btn-primary flex-shrink-0 me-2" data-bs-target="#kt_modal_bidding" data-bs-toggle="modal">Place a Bid</a> --}}
+                                                        <!--end::Link-->
+                                                        <!--begin::Link-->
+                                                        <a class="btn btn-sm btn-success flex-shrink-0" href="/metronic8/demo1/../demo1/apps/ecommerce/sales/listing.html">View Item</a>
+                                                        <!--end::Link-->
+                                                    </div>
+                                                    <!--end::Footer-->
+                                                </div>
+                                                <!--end::Card widget 14-->
+										    </div>
                                             @endfor
                                         {{-- </ul> --}}
                                     </div>
@@ -2800,7 +2872,8 @@
             <!--end::Row--> 
         </div>
         <!--end::book-->
-
+        
+        
         <!--begin::latest-update-->
         {{-- <div class="latest-update">
             <!--begin::Row-->  
@@ -2979,3 +3052,7 @@
 <!--end::modal-->
 
 @endsection
+
+
+
+
