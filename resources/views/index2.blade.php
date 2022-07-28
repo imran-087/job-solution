@@ -101,7 +101,7 @@
             <!--begin::Items-->
             <div class="d-flex flex-md-wrap flex-center align-content-center justify-content-md-between  mx-auto w-xl-900px">
                 <!--begin::Item-->
-                <div class="d-flex flex-center"
+                <div class="d-flex flex-center ms-9"
                     {{-- style="background-image: url('{{ asset('assets') }}/media/svg/misc/octagon.svg')" --}}
                     >
                     <!--begin::Symbol-->
@@ -120,13 +120,13 @@
                     <!--begin::Info-->
                     <div class="mb-0">
                         <!--begin::Value-->
-                        <div class="fs-lg-2hx fs-md-2x fs-x fs-4 fw-bolder text-white d-flex flex-center">
+                        <div class="fs-lg-2hx fs-md-2x fs-x fw-bolder text-white d-flex flex-center">
                             <div class="min-w-70px" data-kt-countup="true" data-kt-countup-value="700"
                                 data-kt-countup-suffix="+">0</div>
                         </div>
                         <!--end::Value-->
                         <!--begin::Label-->
-                        <span class="text-white fw-bolder fs-md-4 fs-9  lh-0">প্রশ্ন</span>
+                        <span class="text-white fw-bolder fs-md-4 fs-8  lh-0">প্রশ্ন</span>
                         <!--end::Label-->
                     </div>
                     <!--end::Info-->
@@ -163,7 +163,7 @@
                         </div>
                         <!--end::Value-->
                         <!--begin::Label-->
-                        <span class="text-white fw-bolder fs-md-4 fs-9 lh-0">শিক্ষার্থী</span>
+                        <span class="text-white fw-bolder fs-md-4 fs-8 lh-0">শিক্ষার্থী</span>
                         <!--end::Label-->
                     </div>
                     <!--end::Info-->
@@ -200,7 +200,7 @@
                         </div>
                         <!--end::Value-->
                         <!--begin::Label-->
-                        <span class="text-white fw-bolder fs-md-4 fs-9 lh-0">মডেল</span>
+                        <span class="text-white fw-bolder fs-md-4 fs-8 lh-0">মডেল</span>
                         <!--end::Label-->
                     </div>
                     <!--end::Info-->
