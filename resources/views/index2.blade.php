@@ -99,7 +99,7 @@
         <!--begin::Statistics-->
         <div class="d-flex flex-center">
             <!--begin::Items-->
-            <div class="d-flex flex-wrap flex-center justify-content-md-between  mx-auto w-xl-900px">
+            <div class="d-flex flex-md-wrap flex-center align-content-center justify-content-md-between  mx-auto w-xl-900px">
                 <!--begin::Item-->
                 <div class="d-flex flex-center"
                     {{-- style="background-image: url('{{ asset('assets') }}/media/svg/misc/octagon.svg')" --}}
