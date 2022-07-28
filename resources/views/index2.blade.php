@@ -99,7 +99,7 @@
         <!--begin::Statistics-->
         <div class="d-flex flex-center">
             <!--begin::Items-->
-            <div class="d-flex flex-wrap flex-center justify-content-md-between justify-content-center mx-auto w-xl-900px">
+            <div class="d-flex flex-wrap flex-center justify-content-md-between  mx-auto w-xl-900px">
                 <!--begin::Item-->
                 <div class="d-flex flex-center"
                     {{-- style="background-image: url('{{ asset('assets') }}/media/svg/misc/octagon.svg')" --}}
@@ -200,7 +200,7 @@
                         </div>
                         <!--end::Value-->
                         <!--begin::Label-->
-                        <span class="text-white fw-bolder fs-md-4 fs-9 lh-0">সাবস্ক্রাইবার</span>
+                        <span class="text-white fw-bolder fs-md-4 fs-9 lh-0">মডেল</span>
                         <!--end::Label-->
                     </div>
                     <!--end::Info-->
