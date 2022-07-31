@@ -9,7 +9,7 @@
         <!--begin::Page title-->
         <div data-kt-swapper="true" data-kt-swapper-mode="prepend" data-kt-swapper-parent="{default: '#kt_content_container', 'lg': '#kt_toolbar_container'}" class="page-title d-flex align-items-center flex-wrap me-3 mb-5 mb-lg-0">
             <!--begin::Title-->
-            <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">Job Subject</h1>
+            <h1 class="d-flex text-dark fw-bolder fs-3 align-items-center my-1">Job - {{ $sub_category->category->name }}</h1>
             <!--end::Title-->
             <!--begin::Separator-->
             <span class="h-20px border-gray-300 border-start mx-4"></span>
@@ -50,10 +50,16 @@
                 <li class="breadcrumb-item text-dark">Summary</li>
                 <!--end::Item-->
             </ul>
-            <!--end::Breadcrumb-->
-            
+            <!--end::Breadcrumb--> 
         </div>
         <!--end::Page title-->
+        <!--begin::Action-->
+        <div class="d-flex align-items-center py-1">
+            <!--begin::Button-->
+            <a href="{{ url()->previous() }}" class="btn btn-sm btn-primary">Back</a>
+            <!--end::Button-->
+        </div>
+        <!--end::Action-->
     </div>
     <!--end::Container-->
 </div>
@@ -337,7 +343,7 @@
                         <div class="card-header pt-7 mb-9">
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column">
-                                <span class="card-label fw-bolder text-gray-800 fs-2">All Subject</span>
+                                <span class="card-label fw-bolder text-gray-800 fs-2">All Subject of {{ $sub_category->name }}</span>
                             </h3>
                             <!--end::Title-->
                         </div>
@@ -346,24 +352,24 @@
                         <div class="card-body p-4">
                             <!--begin::Row-->
                             <div class="row g-10 d-flex justify-content-around px-5 px-md-0">
-                                @for($i=0; $i<6; $i++)
+                                @foreach($subjects as $subject)
                                 <!--begin::Col-->
                                 <div class="card card-rounded col-md-3 p-2 m-3" style="background-color: #3DC77D">
-                                    <a href="" class="">
+                                    <a href="{{ route('job.question', ['sub_cat' => $sub_category->id, 'subject' => $subject->subject->id]) }}" class="">
                                         <div class="d-flex align-items-center rounded">
                                             <div class="d-flex align-items-center justify-content-center">
                                                 <div class="symbol symbol-circle symbol-50px me-3">
-                                                    <img src="{{ asset('assets') }}/media/stock/600x400/img-11.jpg" class="" alt="">
+                                                    <img src="{{ asset('assets') }}/media/stock/600x400/img-33.jpg" class="" alt="">
                                                 </div>
-                                                <div class="text-center">
-                                                    <a href="" class="fw-bolder text-white text-hover-success mb-1 fs-4">Math </a>
+                                                <div class="d-flex align-items-center justify-content-center">
+                                                    <a href="{{ route('job.question', ['sub_cat' => $sub_category->id, 'subject' => $subject->subject->id]) }}" class="fw-bolder text-white text-hover-primary mb-1 fs-4">{{ $subject->subject->name }} <span class="badge badge-light ms-1">{{ $subject->total }}</span></a>
                                                 </div>
                                             </div>
                                         </div>
                                     </a>
                                 </div>
                                 <!--end::Col-->
-                                @endfor
+                                @endforeach
                             </div>
                             <!--end::Row-->
                         </div>

@@ -9,11 +9,12 @@ use App\Models\BookmarkType;
 use Illuminate\Http\Request;
 use App\Models\QuestionOption;
 use App\Models\SamprotikBookmark;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class QuestionActivityController extends Controller
 {
-    // view question 
+    // viewcount when click on question 
     public function viewCount($id)
     {
         $question = Question::find($id);
@@ -22,13 +23,13 @@ class QuestionActivityController extends Controller
         $question->save();
     }
 
-    //like question
-    public function vote($id)
+    /*like/vote question*/
+    public function storeVote($id)
     {
         //dd($id);
         $question = Question::find($id);
-
         $vote = Vote::where(['votable_id' => $id, 'votable_type' => 'App\Models\Question', 'user_id' => Auth::user()->id])->first();
+
         if ($vote) {
             return response()->json([
                 'error' => true,
@@ -72,61 +73,12 @@ class QuestionActivityController extends Controller
         }
     }
 
-    //old bookmark
-    // public function bookmark($id, $catid)
-    // {
-    //     dd($id);
-    //     if (!Auth::check()) {
-    //         dd('unauth');
-    //         return response()->json([
-    //             'error' => true,
-    //             'message' => 'Please login to add bookmark.'
-    //         ]);
-    //     } else {
-    //         $bookmark = Bookmark::where('question_id', $id)->first();
-    //         dd($bookmark);
-    //         if ($bookmark) {
-    //             if ($bookmark->user_id == Auth::user()->id) {
-    //                 return response()->json([
-    //                     'error' => true,
-    //                     'message' => 'You alreday bookmarked this question!.'
-    //                 ]);
-    //             } else {
-    //                 dd('ok');
-    //                 $bookmark = new Bookmark();
-    //                 $bookmark->question_id = $id;
-    //                 $bookmark->category_id = $catid;
-    //                 $bookmark->user_id = Auth::user()->id;
-
-    //                 if ($bookmark->save()) {
-    //                     return response()->json([
-    //                         'success' => true,
-    //                         'message' => 'Bookmarked Added!'
-    //                     ], 200);
-    //                 }
-    //             }
-    //         } else {
-    //             dd('here');
-    //             $bookmark = new Bookmark();
-    //             $bookmark->question_id = $id;
-    //             $bookmark->category_id = $catid;
-    //             $bookmark->user_id = Auth::user()->id;
-
-    //             if ($bookmark->save()) {
-    //                 return response()->json([
-    //                     'success' => true,
-    //                     'message' => 'Bookmarked Added!'
-    //                 ], 200);
-    //             }
-    //         }
-    //     }
-    // }
-
-    //store mcq-question bookmark
+   
+    /*store mcq-question bookmark*/
     public function storeBookmark(Request $request)
     {
+        //dd($request->all());
 
-        //dd($request->question_id);
         if (!Auth::check()) {
             //dd('notauth');
             return response()->json([
@@ -135,7 +87,7 @@ class QuestionActivityController extends Controller
             ]);
         } else {
 
-            $bookmark = Bookmark::where(['question_id' => $request->question_id, 'user_id' => Auth::user()->id])->first();
+            $bookmark = Bookmark::where(['bookmarkable_id' => $request->question_id, 'bookmarkable_type' =>'App\Model\Question', 'user_id' => Auth::user()->id])->first();
             //dd('getbookmark');
             if ($bookmark === null) {
                 //dd('null');
@@ -154,12 +106,14 @@ class QuestionActivityController extends Controller
                     ]);
 
                     $bookmark = new Bookmark();
-                    $bookmark->question_id = $request->question_id;
                     $bookmark->category_id = $request->catid;
                     $bookmark->user_id = Auth::user()->id;
                     $bookmark->bookmark_type_id = $bookmark_type->id;
+                    $bookmark->created_at = Carbon::now();
 
-                    if ($bookmark->save()) {
+                    $question = Question::find($request->question);
+
+                    if ($question->bookmarks()->save($bookmark)) {
                         return response()->json([
                             'success' => true,
                             'message' => 'Bookmarked Added!'

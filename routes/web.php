@@ -31,6 +31,8 @@ use App\Http\Controllers\ContactUsController;
 use App\Http\Controllers\DashboardController as ControllersDashboardController;
 use App\Http\Controllers\FAQController;
 use App\Http\Controllers\Job\HomeController as JobHomeController;
+use App\Http\Controllers\Job\QuestionController as JobQuestionController;
+use App\Http\Controllers\Job\SubCategoryController as JobSubcategoryController;
 use App\Http\Controllers\Job\SubjectController as JobSubjectController;
 use App\Http\Controllers\JobMcqQuestionController;
 use App\Http\Controllers\JobsController;
@@ -75,9 +77,15 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 Route::get('/dashboard', [ControllersDashboardController::class, 'index'])->name('dashboard');
 
 
-######## begin::Job #########
-Route::get('/job', [JobHomeController::class, 'index'])->name('job.home');
-Route::get('/job/subject', [JobSubjectController::class, 'index'])->name('job.subject');
+######## begin::Job Route #########
+Route::middleware('auth')->group(function () {
+    Route::get('/job-solution', [JobHomeController::class, 'index'])->name('job.home');
+    Route::get('/job-solution/sub-category', [JobSubcategoryController::class, 'index'])->name('job.sub-category');
+    Route::get('/job-solution/subject', [JobSubjectController::class, 'index'])->name('job.subject');
+    Route::get('/job-solution/question', [JobQuestionController::class, 'index'])->name('job.question');
+    Route::get('/job-solution/single-question', [JobQuestionController::class, 'singleQuestion'])->name('job.single-question');
+});
+
 ######## end::Job #########
 
 ######## begin::Admission #########
@@ -94,6 +102,15 @@ Route::get('/academy/subject', [AcademySubjectController::class, 'index'])->name
 
 ######## begin::skill #########
 Route::get('/skill', [SkillHomeController::class, 'index'])->name('skill.home');
+######## end::skill #########
+
+
+######## begin::Question Activity(vote, bookmark, view-count) #########
+Route::get('/question/view-count/{id}', [QuestionActivityController::class, 'viewCount'])->name('question.view');
+Route::get('/question/vote/{id}',[QuestionActivityController::class, 'storeVote'])->name('question.vote');
+
+/*bookmark*/
+Route::post('/question/bookmark', [QuestionActivityController::class, 'storeBookmark'])->name('question.bookmark-store');
 ######## end::skill #########
 
 
@@ -168,10 +185,10 @@ Route::get('subjects/{subject?}', [SubjectController::class, 'index'])->name('su
    Question Activity
  * *****************/
 Route::get('question/answer-check/{id}/{option}', [QuestionActivityController::class, 'checkAnswer'])->name('question.answer-check');
-Route::get('/question/vote/{id}', [QuestionActivityController::class, 'vote'])->name('question.vote');
-Route::get('/question/view-count/{id}', [QuestionActivityController::class, 'viewCount'])->name('question.view-count');
+
+
 Route::get('/question/bookmark/{id}/{catid}', [QuestionActivityController::class, 'bookmark'])->name('question.bookmark');
-Route::post('/question/bookmark', [QuestionActivityController::class, 'storeBookmark']);
+
 Route::get('/question/bookmark-remove/{id}', [QuestionActivityController::class, 'bookmarkRemove'])->name('question.bookmark-remove');
 Route::get('/samprotik-question/bookmark/{id}/{cat}', [QuestionActivityController::class, 'samprotikBookmark'])->name('samprotik-question.bookmark');
 

@@ -58,7 +58,7 @@ class Question extends Model
 
     /**
      * Get all of the question's votes.
-     */
+    */
     public function votes()
     {
         return $this->morphMany(Vote::class, 'votable');
@@ -66,7 +66,7 @@ class Question extends Model
 
     /**
      * Get all of the question's comments.
-     */
+    */
     public function comments()
     {
         return $this->morphMany(Comment::class, 'commentable');
@@ -74,20 +74,28 @@ class Question extends Model
 
     /**
      * Get all of the question's descriptions.
-     */
+    */
     public function descriptions()
     {
         return $this->morphMany(Description::class, 'descriptionable');
     }
 
     /**
+     * Get all of the question's bookmark.
+    **/
+    public function bookmarks()
+    {
+        return $this->morphMany(Bookmark::class, 'bookmarkable')->withPivot('user_id', 'category_id', 'bookmark_type_id')->withTimestamps();
+    }
+
+    /**
      * Get all of the tags(here tag = subjects) for the question.
-     */
+    */
     public function subjects()
     {
         return $this->morphToMany(Subject::class, 'subjectable')->withPivot('created_user_id', 'deleted_at', 'status')->withTimestamps();
     }
-
+    ####* Polymorphic Relation End *####
 
     //local scope start
     public function scopeQuestion($query, $subcategory, $type)

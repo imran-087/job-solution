@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Job;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
@@ -24,7 +25,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        //dd(MainCategory::with('categories')->get());
-        return view('job.job_home');
+        $categories = Category::where('main_category_id', 1)->select('id', 'name')->get();
+        //dd($categories);
+        return view('job.job_home', compact('categories'));
     }
 }

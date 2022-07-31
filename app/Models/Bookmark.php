@@ -11,6 +11,14 @@ class Bookmark extends Model
 
     protected $guarded = [];
 
+    /**
+     * Get all of the models that own bookmark.
+    */
+    public function bookmarkable()
+    {
+        return $this->morphTo();
+    }
+
     public function question()
     {
         return $this->belongsTo(Question::class);
