@@ -84,6 +84,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/job-solution/subject', [JobSubjectController::class, 'index'])->name('job.subject');
     Route::get('/job-solution/question', [JobQuestionController::class, 'index'])->name('job.question');
     Route::get('/job-solution/single-question', [JobQuestionController::class, 'singleQuestion'])->name('job.single-question');
+
+    /**Edit Question **/
+    Route::get('/question/edit-question/{id}', [JobQuestionController::class, 'edit'])->name('question.edit-question');
+    Route::post('/question/edit-question/update', [JobQuestionController::class, 'update'])->name('question.update-question');
 });
 
 ######## end::Job #########
@@ -173,9 +177,7 @@ Route::get('/jobs/{category}/{sub_category}/{subject}', [QuestionController::cla
 //single question
 Route::get('/single-question', [QuestionController::class, 'singleQuestion'])->name('question.single-question');
 
-//edit question
-Route::get('/question/edit-question/{id}/{type?}', [QuestionController::class, 'edit'])->name('question.edit-question');
-Route::post('/question/edit-question/update', [QuestionController::class, 'update'])->name('question.update-question');
+
 
 //subject wise question
 Route::get('subjects/{subject?}', [SubjectController::class, 'index'])->name('subject.subject');

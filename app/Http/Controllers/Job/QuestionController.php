@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers\Job;
 
+use App\Models\Passage;
 use App\Models\Subject;
 use App\Models\Question;
 use App\Models\SubCategory;
 use Illuminate\Http\Request;
+use App\Models\EditedQuestion;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
-use App\Models\Passage;
+use Illuminate\Support\Facades\Auth;
 
 class QuestionController extends Controller
 {
@@ -79,5 +81,55 @@ class QuestionController extends Controller
         $question->save();
 
         return view('job.job_single_ques', compact('question'));
+    }
+
+    /**Edit Question **/
+    public function edit($id)
+    {
+        $question = Question::where('id', $id)->with('question_option')->first();
+        $view = view('job.job_include.edit_question_modal', compact('question'))->render();
+        return response([
+            'html' => $view
+        ]);
+    }
+
+    /**Store Edit **/
+    public function update(Request $request)
+    {
+        //dd($request->all());
+
+        if (!Auth::check()) {
+            //dd('unthenticate');
+            return response()->json([
+                'error' => true,
+                'message' => __('To edit a question you have to login')
+            ]);
+        } else {
+            //dd($request->all());
+            $question = new EditedQuestion();
+            $question->question_id = $request->question_id;
+            $question->question = $request->question;
+            $question->user_id = Auth::user()->id;
+
+            $question->option_1 = $request->option_1;
+            $question->option_2 = $request->option_2;
+            $question->option_3 = $request->option_3;
+            $question->option_4 = $request->option_4;
+            $question->option_5 = $request->option_5;
+            $question->status = 'pending';
+            $question->answer = $request->answer;
+         
+            if ($question->save()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => __('Question update request has been sent! Thanks for helping us...')
+                ], 200);
+            } else {
+                return response()->json([
+                    'error' => true,
+                    'message' => __('Failed!.')
+                ]);
+            }
+        }
     }
 }

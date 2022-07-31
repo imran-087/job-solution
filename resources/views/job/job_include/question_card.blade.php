@@ -28,9 +28,9 @@
                 <!--end::Menu item-->
                 
                 <!--begin::Menu item-->
-                <div class="menu-item px-3 my-1">
+                {{-- <div class="menu-item px-3 my-1">
                     <a href="{{ route('question.single-question', ['ques_id' => $question->id]) }}" class="menu-link px-3">View Comment</a>
-                </div>
+                </div> --}}
                 <!--end::Menu item-->
             </div>
             <!--end::Menu--> 

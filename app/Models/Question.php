@@ -85,7 +85,7 @@ class Question extends Model
     **/
     public function bookmarks()
     {
-        return $this->morphMany(Bookmark::class, 'bookmarkable')->withPivot('user_id', 'category_id', 'bookmark_type_id')->withTimestamps();
+        return $this->morphMany(Bookmark::class, 'bookmarkable');
     }
 
     /**

@@ -300,6 +300,11 @@
 @include('job.job_include.bookmark_modal');
 <!--end:Bookmark modal -->
 
+<!--begin::Modal - Edit Question-->
+<div class="modal fade" id="kk_edit_question_modal" tabindex="-1" aria-hidden="true">
+    <div id="edit_question_data"></div>
+</div>
+<!--end::Modal - Edit Question-->
 
 @endsection
 
@@ -352,6 +357,7 @@
         var catid = $(this).data('catid');
         // console.log(id);
         // console.log(catid);
+        
         //$(this).children().addClass('svg-icon-primary');
         $('.with-errors').text('');
         $('#kk_modal_new_bookmark_form')[0].reset();
@@ -364,6 +370,7 @@
 
     //cancel button
     $('#kk_modal_new_service_cancel').on('click', function(){
+        $('.messages').html('');
         $('.with-errors').text('');
         $('.indicator-label').show();
         $('.indicator-progress').hide();
@@ -394,22 +401,89 @@
                     $('.'+arr[i]+'-error').text(arr_val[i][0])
                     }
                 }else if(data.error || data.error == 'true'){
-                    var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                    var alertBox = '<div class="alert alert-danger alert-dismissable">' + data.message + '</div>';
                     $('#kk_modal_new_bookmark_form').find('.messages').html(alertBox).show();
                 }else{
                     // empty the form
                     $('#kk_modal_new_bookmark_form')[0].reset();
                     $("#kk_modal_new_bookmark").modal('hide');
-
+                   
+                    toastr.success(data.message);
                 }
 
                 $('.indicator-progress').hide();
-        
+                $('.indicator-label').show();
             }
         });
 
     })
     /**end::Question Bookmark**/
+
+    /**begin::Question Edit**/
+    //edit Question
+    $('.editQuestion').on('click', function() {
+        var id = $(this).data('id');
+        console.log(id);
+
+        $.ajax({
+            type:"GET",
+            url: "{{ url('/question/edit-question')}}"+'/'+id,
+            dataType: 'json',
+            success:function(data){
+                $("#edit_question_data").html(data.html);
+                $("#kk_edit_question_modal").modal('show');
+            }
+        });
+    });
+
+    //edit question cancel button
+    $(document).on('click', '#kk_modal_new_service_cancel', function(){
+        $("#kk_edit_question_modal").modal('hide');
+    })
+
+    //update edited question
+    $(document).on('submit', '#kk_modal_question_update_form', function(e){
+        e.preventDefault()
+        //console.log('here')
+        $('.with-errors').text('');
+        $('.indicator-label').hide();
+        $('.indicator-progress').show();
+
+        var formData = new FormData(this);
+        $.ajax({
+            type:"POST",
+            url: "{{ url('/question/edit-question/update')}}",
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                if(data.success ==  false || data.success ==  "false"){
+                    var arr = Object.keys(data.errors);
+                    var arr_val = Object.values(data.errors);
+                    for(var i= 0;i < arr.length;i++){
+                    $('.'+arr[i]+'-error').text(arr_val[i][0])
+                    }
+                }else if(data.error || data.error == 'true'){
+                    var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                    $('#kk_modal_question_update_form').find('.messages').html(alertBox).show();
+                }else{
+                    // empty the form
+                    $('#kk_modal_question_update_form')[0].reset();
+                    $("#kk_edit_question_modal").modal('hide');
+
+                    toastr.success(data.message);
+                   
+                }
+
+                $('.indicator-label').show()
+                $('.indicator-progress').hide()
+                $('#kk_modal_new_service_submit').removeAttr('disabled')
+
+            }
+        });
+    })
+    /**end::Question Edit**/
 
 </script>
 @endpush

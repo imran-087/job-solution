@@ -142,7 +142,7 @@
 
 <!--begin::Modal - Exam Details modal-->
 <div class="modal fade" id="kk_exam_details_modal" tabindex="-1" aria-hidden="true">
-<div id="exam_details"></div>
+    <div id="exam_details"></div>
 </div>
 <!--end::Modal - Exam Details  modal-->
 

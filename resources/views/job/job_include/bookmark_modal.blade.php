@@ -26,7 +26,7 @@
             <div class="modal-body scroll-y px-10 px-lg-15 pt-0 pb-15">
                 <!--begin:Form-->
                 <form id="kk_modal_new_bookmark_form" class="form" enctype="multipart/form-data">
-                    <div class="messages"></div>
+                    
                     {{-- csrf token  --}}
                     @csrf
                     <input type="hidden" name="question_id">
@@ -43,6 +43,7 @@
                         <!--end::Description-->
                     </div>
                     <!--end::Heading-->
+                    <div class="messages text-center fw-bold"></div>
                     
                     @auth
                     <!--begin::Input group-->

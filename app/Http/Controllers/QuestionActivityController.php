@@ -87,7 +87,7 @@ class QuestionActivityController extends Controller
             ]);
         } else {
 
-            $bookmark = Bookmark::where(['bookmarkable_id' => $request->question_id, 'bookmarkable_type' =>'App\Model\Question', 'user_id' => Auth::user()->id])->first();
+            $bookmark = Bookmark::where(['bookmarkable_id' => $request->question_id, 'bookmarkable_type' =>'App\Models\Question', 'user_id' => Auth::user()->id])->first();
             //dd('getbookmark');
             if ($bookmark === null) {
                 //dd('null');
@@ -111,7 +111,7 @@ class QuestionActivityController extends Controller
                     $bookmark->bookmark_type_id = $bookmark_type->id;
                     $bookmark->created_at = Carbon::now();
 
-                    $question = Question::find($request->question);
+                    $question = Question::find($request->question_id);
 
                     if ($question->bookmarks()->save($bookmark)) {
                         return response()->json([
@@ -121,12 +121,14 @@ class QuestionActivityController extends Controller
                     }
                 } else {
                     $bookmark = new Bookmark();
-                    $bookmark->question_id = $request->question_id;
                     $bookmark->category_id = $request->catid;
                     $bookmark->user_id = Auth::user()->id;
                     $bookmark->bookmark_type_id = $bookmark_type->id;
+                    $bookmark->created_at = Carbon::now();
 
-                    if ($bookmark->save()) {
+                    $question = Question::find($request->question_id);
+
+                    if ($question->bookmarks()->save($bookmark)) {
                         return response()->json([
                             'success' => true,
                             'message' => 'Bookmarked Added!'
