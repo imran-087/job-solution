@@ -115,7 +115,10 @@ Route::get('/question/vote/{id}',[QuestionActivityController::class, 'storeVote'
 
 /*bookmark*/
 Route::post('/question/bookmark', [QuestionActivityController::class, 'storeBookmark'])->name('question.bookmark-store');
-######## end::skill #########
+
+/**Description */
+Route::post('/description/question-description/store', [DescriptionController::class, 'store'])->name('description.store');
+######## end::Question Activity #########
 
 
 
@@ -205,7 +208,7 @@ Route::get('samprotik', [RecentQuestionController::class, 'recentQuestion'])->na
 /*********************
    Question Description
  ****************************/
-Route::post('/description/question-description/store', [DescriptionController::class, 'store'])->name('description.question-description');
+
 Route::post('/description/question-description/resubmit', [DescriptionController::class, 'resubmit'])->name('description.resubmit');
 Route::get('/description/vote/{id}', [DescriptionController::class, 'like'])->name('description.like');
 Route::get('/description/question-des/get/{id}', [DescriptionController::class, 'getdescription'])->name('description.resubmit');
@@ -220,7 +223,7 @@ Route::middleware('auth')->name('user.')->group(function () {
 
     //activity
     Route::get('user-activities', [UserDashboardController::class, 'userActivity'])->name('activity');
-    // activity details 
+    // activity details
     Route::get('user-activity/user={user}/description-details', [UserActivityController::class, 'description'])->name('activity.description');
     Route::get('user-activity/user={user}/edited-question-details', [UserActivityController::class, 'editedQuestion'])->name('activity.edited-question');
     Route::get('user-activity/user={user}/discussion-details', [UserActivityController::class, 'discussion'])->name('activity.discussion');
@@ -306,10 +309,10 @@ Route::middleware('auth')->name('user.')->group(function () {
 
       //edit step_03
       Route::get('/resume/step_03/get-employment-data', [EmploymentController::class, 'getEmploymentHistory'])->name('resume.get_employment_info');
-      
+
       //step_3 delete route
       Route::get('resume/step_3/delete-experience/{id}', [EmploymentController::class, 'deleteExperience'])->name('resume.experience-delete');
-      
+
 
       //otherinformation
       Route::get('/resume/step_04/other-inforamtion', [OtherInformationController::class, 'create'])->name('resume.other_info');

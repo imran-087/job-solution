@@ -71,7 +71,7 @@ class SubCategoryController extends Controller
                         <a href="/admin/question/written-question?sub_category=' . $row->id . '&category=' . $row->category_id . '&main_category=' . $row->category->main_category_id . '" target="_blank" class="btn btn-bg-light btn-active-color-primary btn-sm me-1">
                             Add Written Ques.
                         </a>
-                        
+
                         <a href="javascript:;"  data-main_category="' . $row->category->main_category_id . '" data-id="' . $row->id . '" data-name="' . $row->name . '" class="btn btn-light btn-active-color-primary btn-sm addSubject me-1" title="Add Subject">
                             <i class="fas fa-plus">&nbsp;Subject</i>
                         </a>
@@ -116,7 +116,7 @@ class SubCategoryController extends Controller
     public function store(Request $request)
     {
         //dd($request->all());
-        
+
         $validator = Validator::make($request->all(), [
             'category' => ['required'],
             'status' => ['required'],
@@ -148,8 +148,6 @@ class SubCategoryController extends Controller
                 $sub_category->category_id =  $request->category;
                 $sub_category->institute_id =  $request->institute;
                 $sub_category->question_type =  $request->type;
-                $sub_category->subject_code_1 =  $request->code_1;
-                $sub_category->subject_code_2 =  $request->code_2;
                 $sub_category->total_marks =  $request->mark;
                 $sub_category->exam_date =  $exam_date;
                 $sub_category->exam_duration =  $request->duration;
@@ -188,8 +186,6 @@ class SubCategoryController extends Controller
                 $sub_category->institute_id =  $request->institute;
                 $sub_category->year_id =  $year;
                 $sub_category->question_type =  $request->type;
-                $sub_category->subject_code_1 =  $request->code_1;
-                $sub_category->subject_code_2 =  $request->code_2;
                 $sub_category->total_marks =  $request->mark;
                 $sub_category->exam_date =  $request->date;
                 $sub_category->exam_duration =  $request->duration;

@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use App\Models\Vote;
 use App\Models\Admin;
 use App\Models\Question;
+use App\Models\Description;
 use Illuminate\Http\Request;
 use App\Models\QuestionDescription;
 use Illuminate\Support\Facades\Auth;
@@ -35,29 +36,18 @@ class DescriptionController extends Controller
             } else {
                 //create new description
 
-                $question_des = new QuestionDescription();
+                $description = new Description();
+                $description->description = $request->description;
+                $description->created_user_id =  Auth::user()->id;
+                $description->status =  'pending';
+                $description->created_at = Carbon::now();
 
-                if ($request->samprotik == 'samprotik') {
-                    $question_des->samprotik_ques_id = $request->question_id;
-                } else {
-                    $question_des->question_id = $request->question_id;
-                }
-                $question_des->description = $request->description;
-                $question_des->created_user_id =  Auth::user()->id;
-                $question_des->status =  'pending';
+                $question = Question::find($request->question_id);
 
-                $question_des->created_at = Carbon::now();
-
-
-                if ($question_des->save()) {
-                    //notification
-                    $admin = Admin::where('id', 1)->first();
-                    // dd($admin);
-                    $admin->notify(new AddDescriptionNotification($question_des));
-
+                if ($question->descriptions()->save($description)) {
                     return response()->json([
                         'success' => true,
-                        'message' => 'Description added successfully! Please wait for Admin Approval...'
+                        'message' => 'Description added! Thanks for helping us'
                     ], 200);
                 } else {
                     return response()->json([
@@ -65,6 +55,7 @@ class DescriptionController extends Controller
                         'message' => 'Failed!.'
                     ]);
                 }
+
             }
         }
     }

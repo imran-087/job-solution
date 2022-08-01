@@ -50,7 +50,7 @@
                 <li class="breadcrumb-item text-dark">Questions</li>
                 <!--end::Item-->
             </ul>
-            <!--end::Breadcrumb--> 
+            <!--end::Breadcrumb-->
         </div>
         <!--end::Page title-->
         <!--begin::Action-->
@@ -97,14 +97,14 @@
                                         <ul class="nav nav-tabs flex-center flex-nowrap text-nowrap mb-2 fw-bolder fs-5">
                                             @foreach($subjects as $subject)
                                             <li class="nav-item">
-                                                <a href="{{ route('job.question', ['sub_cat' => $sub_category->id, 'subject' => $subject->subject->id]) }}" 
+                                                <a href="{{ route('job.question', ['sub_cat' => $sub_category->id, 'subject' => $subject->subject->id]) }}"
                                                     class="nav-link text-gray-500 text-active-primary px-3 px-lg-6 {{ request()->get('subject') == $subject->subject->id ? 'active' : '' }} ">
                                                     {{ $subject->subject->name }}
                                                 </a>
                                             </li>
                                             @endforeach
                                             <li class="nav-item">
-                                                <a href="{{ route('job.question', ['sub_cat' => $sub_category->id, 'subject' => 'all']) }}" 
+                                                <a href="{{ route('job.question', ['sub_cat' => $sub_category->id, 'subject' => 'all']) }}"
                                                     class="nav-link text-gray-500 text-active-primary px-3 px-lg-6 {{ request()->get('subject') == 'all' ? 'active' : '' }} ">
                                                     All
                                                 </a>
@@ -115,7 +115,7 @@
                                 <!--end::Tabs-->
                             </div>
                             <!--end::Tabs wrapper-->
-                            
+
                             @php $serial_number = 1; @endphp
                             @if($questions->count() > 0)
                             <div class="row">
@@ -197,7 +197,7 @@
                                         <!--begin::Item-->
                                         <div class="menu-item mb-1">
                                             <!--begin::Link-->
-                                            <a href="{{ route('job.subject', ['sub_category' => $subcategory->id]) }}" class="menu-link text-dark text-hover-primary bg-light py-3 ">{{ $subcategory->name }}</a>
+                                            <a href="{{ route('job.subject', ['sub_category' => $subcategory->id, 'subject' => 'all']) }}" class="menu-link text-dark text-hover-primary bg-light py-3 ">{{ $subcategory->name }}</a>
                                             <!--end::Link-->
                                         </div>
                                         <!--end::Item-->
@@ -290,15 +290,20 @@
             <!--end::col-->
         </div>
         <!--end::row-->
-         
+
     </div>
     <!--end::Container-->
 </div>
 <!--end:Post -->
 
 <!--begin:Bookmark modal -->
-@include('job.job_include.bookmark_modal');
+@include('job.job_include.bookmark_modal')
 <!--end:Bookmark modal -->
+
+<!--begin::Modal - New Description-->
+@include('job.job_include.add_description_modal')
+<!--end::Modal - New Description-->
+
 
 <!--begin::Modal - Edit Question-->
 <div class="modal fade" id="kk_edit_question_modal" tabindex="-1" aria-hidden="true">
@@ -317,7 +322,7 @@
         var click_element = $(this);
         // console.log(id);
         // console.log(val);
-       
+
         $.ajax({
             type:"GET",
             url: "{{ url('question/vote')}}"+'/'+id,
@@ -344,7 +349,7 @@
             url: "{{ url('question/view-count')}}"+'/'+id,
             dataType: 'json',
             success:function(data){
-                
+
             }
         })
     });
@@ -357,7 +362,7 @@
         var catid = $(this).data('catid');
         // console.log(id);
         // console.log(catid);
-        
+
         //$(this).children().addClass('svg-icon-primary');
         $('.with-errors').text('');
         $('#kk_modal_new_bookmark_form')[0].reset();
@@ -370,7 +375,7 @@
 
     //cancel button
     $('#kk_modal_new_service_cancel').on('click', function(){
-        $('.messages').html('');
+        $('.messages').empty();
         $('.with-errors').text('');
         $('.indicator-label').show();
         $('.indicator-progress').hide();
@@ -384,7 +389,7 @@
         $('.with-errors').text('');
         $('.indicator-label').hide();
         $('.indicator-progress').show();
-       
+
         var formData = new FormData(this);
         $.ajax({
             type:"POST",
@@ -407,7 +412,7 @@
                     // empty the form
                     $('#kk_modal_new_bookmark_form')[0].reset();
                     $("#kk_modal_new_bookmark").modal('hide');
-                   
+
                     toastr.success(data.message);
                 }
 
@@ -473,7 +478,7 @@
                     $("#kk_edit_question_modal").modal('hide');
 
                     toastr.success(data.message);
-                   
+
                 }
 
                 $('.indicator-label').show()
@@ -484,6 +489,64 @@
         });
     })
     /**end::Question Edit**/
+
+    /**begin::Description **/
+
+    $('.addDescription').on('click', function() {
+        var id = $(this).data('id');
+        //console.log(id);
+
+        $('.with-errors').text('');
+        $('#kk_modal_new_question_des_form')[0].reset();
+
+        $('input[name="question_id"]').val(id);
+        $('#kk_modal_new_question_des').modal('show');
+    });
+
+
+    //new description save
+    $('#kk_modal_new_question_des_form').on('submit',function(e){
+        e.preventDefault()
+        $('.with-errors').text('');
+        $('.indicator-label').hide();
+        $('.indicator-progress').show();
+
+        var formData = new FormData(this);
+        formData.append('description', myEditor.getData());
+        $.ajax({
+            type:"POST",
+            url: "{{ url('description/question-description/store')}}",
+            data:formData,
+            cache:false,
+            contentType: false,
+            processData: false,
+            success:function(data){
+                if(data.success ==  false || data.success ==  "false"){
+                    var arr = Object.keys(data.errors);
+                    var arr_val = Object.values(data.errors);
+                    for(var i= 0;i < arr.length;i++){
+                    $('.'+arr[i]+'-error').text(arr_val[i][0])
+                    }
+                }else if(data.error || data.error == 'true'){
+                    var alertBox = '<div class="alert alert-danger" alert-dismissable">' + data.message + '</div>';
+                    $('#kk_modal_new_question_des_form').find('.messages').html(alertBox).show();
+                }else{
+                    // empty the form
+                    $('#kk_modal_new_question_des_form')[0].reset();
+                    $("#kk_modal_new_question_des").modal('hide');
+
+                    toastr.success(data.message);
+                }
+
+                $('.indicator-label').show();
+                $('.indicator-progress').hide();
+                $('#kk_modal_new_service_submit').removeAttr('disabled');
+
+            }
+        });
+
+    })
+    /**end::Description**/
 
 </script>
 @endpush

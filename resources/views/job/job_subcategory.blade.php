@@ -282,7 +282,7 @@
                                     <!--end::Items-->
                                 </div>
                                 <!--end::Col-->
-                               
+
                             </div>
                             <!--end::Row-->
                         </div>
@@ -303,7 +303,7 @@
                         <div class="m-0 py-8">
                             <!--begin::Title-->
                             <div class="position-relative fs-2x z-index-2 fw-bold text-white mb-7">
-                            <span class="me-2 py-5"> 
+                            <span class="me-2 py-5">
                             <span class="position-relative d-inline-block text-danger">
                                 <a href="/metronic8/demo1/../demo1/pages/user-profile/overview.html" class="text-danger opacity-75-hover">Any Question ?</a>
                                 <!--begin::Separator-->
@@ -326,7 +326,7 @@
                     <!--end::Body-->
                 </div>
                 <!--end::Engage widget 4-->
-                
+
             </div>
             <!--end::Col-->
         </div>
@@ -334,8 +334,8 @@
 
         <!--begin::Sub Category-->
         <div class="subcategory mb-9">
-            <!--begin::Row-->  
-            <div class="row g-5 g-xl-10 mb-5 mb-xl-10 ">							
+            <!--begin::Row-->
+            <div class="row g-5 g-xl-10 mb-5 mb-xl-10 ">
                 <!--begin::Col-->
                 <div class="col-md-12">
                     <!--begin::Tables widget 13-->
@@ -356,14 +356,15 @@
                                 @foreach($sub_categories as $sub_cat)
                                 <!--begin::Col-->
                                 <div class="card card-rounded col-md-3 p-2 m-3" style="background-color: #3DC77D">
-                                    <a href="{{ route('job.subject', ['sub_category' => $sub_cat->id]) }}" class="">
+                                    <a href="{{ route('job.question', ['sub_cat' => $sub_cat->id, 'subject' => 'all']) }}" class="">
                                         <div class="d-flex align-items-center rounded">
                                             <div class="d-flex align-items-center justify-content-center">
                                                 <div class="symbol symbol-circle symbol-50px me-3">
                                                     <img src="{{ asset('assets') }}/media/stock/600x400/img-55.jpg" class="" alt="">
                                                 </div>
                                                 <div class="text-center">
-                                                    <a href="{{ route('job.subject', ['sub_category' => $sub_cat->id]) }}" class="fw-bolder text-white text-hover-primary mb-1 fs-4">{{ $sub_cat->name }}</a>
+                                                    {{-- <a href="{{ route('job.subject', ['sub_category' => $sub_cat->id]) }}" class="fw-bolder text-white text-hover-primary mb-1 fs-4">{{ $sub_cat->name }}</a> --}}
+                                                    <a href="{{ route('job.question', ['sub_cat' => $sub_cat->id, 'subject' => 'all']) }}" class="fw-bolder text-white text-hover-primary mb-1 fs-4">{{ $sub_cat->name }}</a>
                                                 </div>
                                             </div>
                                         </div>
@@ -380,14 +381,14 @@
                 </div>
                 <!--end::Col-->
             </div>
-            <!--end::Row-->  
+            <!--end::Row-->
         </div>
-        <!--end::Sub Category--> 
+        <!--end::Sub Category-->
 
         <!--begin::Promotional carousel-->
         <div class="promotional-carousel ">
-            <!--begin::Row-->  
-            <div class="row g-5 g-xl-10 mb-5 mb-xl-10 ">							
+            <!--begin::Row-->
+            <div class="row g-5 g-xl-10 mb-5 mb-xl-10 ">
                 <!--begin::Col-->
                 <div class="col-md-12">
                     <!--begin::Tables widget 13-->
@@ -397,7 +398,7 @@
                             <!--begin::Title-->
                             <h3 class="card-title ">
                                 <span class="card-label fw-bolder text-gray-800 fs-2">Promotional (carousel)</span>
-                                
+
                             </h3>
                             <span class="card-label fw-bolder text-gray-800 fs-2">See all</span>
                             <!--end::Title-->
@@ -442,7 +443,7 @@
                                                 </a>
                                             </div>
                                             <!--end::Item-->
-                                            
+
                                         </div>
                                         <!--end::Slider-->
                                     </div>
@@ -462,8 +463,8 @@
 
         <!--begin::categories-->
         <div class="categories">
-            <!--begin::Row-->  
-            <div class="row g-5 g-xl-10 mb-5 mb-xl-10 ">							
+            <!--begin::Row-->
+            <div class="row g-5 g-xl-10 mb-5 mb-xl-10 ">
                 <!--begin::Col-->
                 <div class="col-md-12">
                     <!--begin::Tables widget 13-->
@@ -473,7 +474,7 @@
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column">
                                 <span class="card-label fw-bolder text-white fs-2">Top Category</span>
-                               
+
                             </h3>
                             <!--end::Title-->
                         </div>
@@ -504,14 +505,14 @@
                 </div>
                 <!--end::Col-->
             </div>
-            <!--end::Row--> 
+            <!--end::Row-->
         </div>
         <!--end::categories-->
 
         <!--begin::MySatt-->
         <div class="my-satt">
-            <!--begin::Row-->  
-            <div class="row g-5 g-xl-10 mb-5 mb-xl-10 ">							
+            <!--begin::Row-->
+            <div class="row g-5 g-xl-10 mb-5 mb-xl-10 ">
                 <!--begin::Col-->
                 <div class="col-md-12">
                     <!--begin::Card-->
@@ -568,7 +569,7 @@
                                 <div class="tab-pane show active" id="kt_landing_projects_job">
                                     <!--begin::Row-->
                                     <div class="row g-10 d-flex justify-content-center">
-                                        
+
                                     </div>
                                     <!--end::Row-->
                                 </div>
@@ -577,7 +578,7 @@
                                 <div class="tab-pane fade" id="kt_landing_projects_admission">
                                     <!--begin::Row-->
                                     <div class="row g-10 d-flex justify-content-center">
-                                        
+
                                     </div>
                                     <!--end::Row-->
                                 </div>
@@ -586,8 +587,8 @@
                                 <div class="tab-pane fade" id="kt_landing_projects_programming">
                                     <!--begin::Row-->
                                     <div class="row g-10 d-flex justify-content-center">
-                                    
-                                        
+
+
                                     </div>
                                     <!--end::Row-->
                                 </div>
@@ -596,8 +597,8 @@
                                 <div class="tab-pane fade" id="kt_landing_projects_academy">
                                     <!--begin::Row-->
                                     <div class="row g-10 d-flex justify-content-center">
-                                        
-                                    
+
+
                                     </div>
                                     <!--end::Row-->
                                 </div>
@@ -605,12 +606,12 @@
                                 <div class="tab-pane fade" id="kt_landing_projects_islamic">
                                     <!--begin::Row-->
                                     <div class="row g-10 d-flex justify-content-center">
-                                        
+
                                     </div>
                                     <!--end::Row-->
                                 </div>
                                 <!--end::Tab pane-->
-                            
+
                             </div>
                             <!--end::Tabs content-->
                         </div>
@@ -627,8 +628,8 @@
 
         <!--begin::Online test-->
         <div class="online-test">
-            <!--begin::Row-->  
-            <div class="row g-5 g-xl-10 mb-5 mb-xl-10 " >							
+            <!--begin::Row-->
+            <div class="row g-5 g-xl-10 mb-5 mb-xl-10 " >
                 <!--begin::Col-->
                 <div class="col-md-12">
                     <!--begin::Tables widget 13-->
@@ -1522,7 +1523,7 @@
                                     <!--end::Slider Widget 1-->
                                 </div>
                                 <!--end::Col-->
-                                
+
                             </div>
                             <!--end::Row-->
                         </div>
@@ -1532,15 +1533,15 @@
                 </div>
                 <!--end::Col-->
             </div>
-            <!--end::Row--> 
-            
+            <!--end::Row-->
+
         </div>
         <!--end::Online test-->
 
         <!--begin::video-->
         <div class="video">
-            <!--begin::Row-->  
-            <div class="row g-5 g-xl-10 mb-5 mb-xl-10 ">							
+            <!--begin::Row-->
+            <div class="row g-5 g-xl-10 mb-5 mb-xl-10 ">
                 <!--begin::Col-->
                 <div class="col-md-12">
                     <!--begin::Tables widget 13-->
@@ -1578,7 +1579,7 @@
                                         data-tns-next-button="#kt_team_slider_next2"
                                     >
 
-                                        
+
                                         <!--begin::Item-->
                                         <div class="text-center px-5 py-5">
                                             <a href="#explore"  data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
@@ -1607,7 +1608,7 @@
                                             </a>
                                         </div>
                                         <!--end::Item-->
-                                        
+
                                     </div>
                                     <!--end::Slider-->
 
@@ -1641,14 +1642,14 @@
                 </div>
                 <!--end::Col-->
             </div>
-            <!--end::Row--> 
+            <!--end::Row-->
         </div>
         <!--end::video-->
 
         <!--begin::suggestions-->
         <div class="suggestions">
-            <!--begin::Row-->  
-            <div class="row g-5 g-xl-10 mb-5 mb-xl-10 ">							
+            <!--begin::Row-->
+            <div class="row g-5 g-xl-10 mb-5 mb-xl-10 ">
                 <!--begin::Col-->
                 <div class="col-md-12">
                     <!--begin::Tables widget 13-->
@@ -1658,7 +1659,7 @@
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column">
                                 <span class="card-label fw-bolder text-white fs-2">Suggestions</span>
-                               
+
                             </h3>
                             <a href="#"><span class="fs-6 fw-bolder text-white">Sell all</span></a>
                             <!--end::Title-->
@@ -1695,14 +1696,14 @@
                 </div>
                 <!--end::Col-->
             </div>
-            <!--end::Row--> 
+            <!--end::Row-->
         </div>
         <!--end::suggestions-->
 
         <!--begin::offer-->
         <div class="offer">
-            <!--begin::Row-->  
-            <div class="row g-5 g-xl-10 mb-5 mb-xl-10 ">							
+            <!--begin::Row-->
+            <div class="row g-5 g-xl-10 mb-5 mb-xl-10 ">
                 <!--begin::Col-->
                 <div class="col-md-12">
                     <!--begin::Tables widget 13-->
@@ -1712,7 +1713,7 @@
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column">
                                 <span class="card-label fw-bolder text-gray-800 fs-2">Offer</span>
-                               
+
                             </h3>
                             <a href="#"><span class="fs-6 fw-bolder">Sell all</span></a>
                             <!--end::Title-->
@@ -1747,14 +1748,14 @@
                 </div>
                 <!--end::Col-->
             </div>
-            <!--end::Row--> 
+            <!--end::Row-->
         </div>
         <!--end::offer-->
 
         <!--begin::latest-update-->
         {{-- <div class="latest-update">
-            <!--begin::Row-->  
-            <div class="row g-5 g-xl-10 mb-5 mb-xl-10 ">							
+            <!--begin::Row-->
+            <div class="row g-5 g-xl-10 mb-5 mb-xl-10 ">
                 <!--begin::Col-->
                 <div class="col-md-12">
                     <!--begin::Card-->
@@ -1815,7 +1816,7 @@
                                 <div class="tab-pane show active" id="kt_landing_projects_job">
                                     <!--begin::Row-->
                                     <div class="row g-10 d-flex justify-content-center">
-                                        
+
                                     </div>
                                     <!--end::Row-->
                                 </div>
@@ -1824,7 +1825,7 @@
                                 <div class="tab-pane fade" id="kt_landing_projects_admission">
                                     <!--begin::Row-->
                                     <div class="row g-10 d-flex justify-content-center">
-                                        
+
                                     </div>
                                     <!--end::Row-->
                                 </div>
@@ -1833,8 +1834,8 @@
                                 <div class="tab-pane fade" id="kt_landing_projects_programming">
                                     <!--begin::Row-->
                                     <div class="row g-10 d-flex justify-content-center">
-                                    
-                                        
+
+
                                     </div>
                                     <!--end::Row-->
                                 </div>
@@ -1843,8 +1844,8 @@
                                 <div class="tab-pane fade" id="kt_landing_projects_academy">
                                     <!--begin::Row-->
                                     <div class="row g-10 d-flex justify-content-center">
-                                        
-                                    
+
+
                                     </div>
                                     <!--end::Row-->
                                 </div>
@@ -1852,12 +1853,12 @@
                                 <div class="tab-pane fade" id="kt_landing_projects_islamic">
                                     <!--begin::Row-->
                                     <div class="row g-10 d-flex justify-content-center">
-                                        
+
                                     </div>
                                     <!--end::Row-->
                                 </div>
                                 <!--end::Tab pane-->
-                            
+
                             </div>
                             <!--end::Tabs content-->
                         </div>
@@ -1873,8 +1874,8 @@
 
          <!--begin::book-->
         <div class="book">
-            <!--begin::Row-->  
-            <div class="row g-5 g-xl-10 mb-5 mb-xl-10 ">							
+            <!--begin::Row-->
+            <div class="row g-5 g-xl-10 mb-5 mb-xl-10 ">
                 <!--begin::Col-->
                 <div class="col-md-12">
                     <!--begin::Tables widget 13-->
@@ -1884,7 +1885,7 @@
                             <!--begin::Title-->
                             <h3 class="card-title align-items-start flex-column">
                                 <span class="card-label fw-bolder text-white">Book</span>
-                               
+
                             </h3>
                             <a href="#"><span class="fs-6 fw-bolder text-white">Sell all</span></a>
                             <!--end::Title-->
@@ -1914,7 +1915,7 @@
                                         data-tns-next-button="#kt_team_slider_next2"
                                     >
 
-                                        
+
                                         <!--begin::Item-->
                                         <div class="text-center px-5 py-5">
                                             <a href="#explore"  data-kt-scroll-toggle="true" data-kt-drawer-dismiss="true">
@@ -1943,7 +1944,7 @@
                                             </a>
                                         </div>
                                         <!--end::Item-->
-                                        
+
                                     </div>
                                     <!--end::Slider-->
 
@@ -1977,7 +1978,7 @@
                 </div>
                 <!--end::Col-->
             </div>
-            <!--end::Row--> 
+            <!--end::Row-->
         </div>
         <!--end::book-->
 
